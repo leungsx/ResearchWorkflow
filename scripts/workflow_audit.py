@@ -361,12 +361,11 @@ def markdown_report(day: dt.date, checks: list[Check]) -> str:
             "",
             "## Recommended Daily Order",
             "",
-            "1. `make obsidian-graph`",
-            "2. `make learning-dashboard`",
-            "3. `make workflow-backup` when user-facing or evidence state changed",
-            "4. `make workflow-audit`",
+            "1. Use `make workflow-refresh-git DATE=<YYYY-MM-DD> NOTE=\"daily closeout\"` when remote Git backup is desired.",
+            "2. Use `make workflow-refresh DATE=<YYYY-MM-DD> NOTE=\"daily closeout\"` for local-only refresh.",
+            "3. Use `make workflow-backup-prune KEEP=30` only when you intentionally want to reduce local backup zips.",
             "",
-            "Use `make workflow-refresh` for the sequential no-race version of this closeout.",
+            "Both refresh commands are sequential no-race closeout commands; do not parallelize dashboard generation and audit.",
             "",
         ]
     )
