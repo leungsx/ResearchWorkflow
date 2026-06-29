@@ -37,6 +37,7 @@ library/text/
 *.tiff
 *.mp4
 *.mov
+tools/caj2pdf/
 tools/caj2pdf/lib/bin/
 
 # Project data can be regenerated or backed up separately.

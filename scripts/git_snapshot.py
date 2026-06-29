@@ -82,6 +82,23 @@ def guard_risky_unignored_files(max_file_mb: int, allow_risky: bool) -> None:
         )
 
 
+def guard_embedded_repositories() -> None:
+    embedded: list[str] = []
+    for git_dir in ROOT.rglob(".git"):
+        if git_dir == ROOT / ".git":
+            continue
+        parent = git_dir.parent
+        if not is_ignored(parent):
+            embedded.append(parent.relative_to(ROOT).as_posix())
+    if embedded:
+        sample = "\n".join(f"- {item}" for item in embedded[:20])
+        raise SystemExit(
+            "Refusing to snapshot embedded Git repositories that are not ignored:\n"
+            f"{sample}\n"
+            "Add them to .gitignore or convert them to intentional submodules."
+        )
+
+
 def current_branch() -> str:
     result = run(["git", "branch", "--show-current"], check=False)
     branch = result.stdout.strip()
@@ -117,6 +134,7 @@ def main() -> int:
         raise SystemExit("Not a Git repository. Run `git init -b main` or rerun with --init.")
 
     guard_risky_unignored_files(args.max_file_mb, args.allow_risky)
+    guard_embedded_repositories()
 
     if args.dry_run:
         changes = changed_paths()
