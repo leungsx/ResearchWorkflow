@@ -41,6 +41,7 @@
 - `make learning-dashboard` 承担自动纠偏：扫描每日论文页中的本地 Markdown 链接，生成 HTML 镜像并改链。
 - 今天只归档、记录和刷新入口，不删除用户文件，不迁移用途不确定文件。
 - 日终维护默认使用 `make workflow-refresh DATE=<date> NOTE="<note>"`，不要并行运行 dashboard/audit 以免产生竞态误报。
+- Git/GitHub 接入后，日终维护的远程备份版本是 `make workflow-refresh-git DATE=<date> NOTE="<note>"`；Git 只追踪文本资产和可回溯记录，PDF/CAJ/KDH、zip 备份、缓存、预览图和大型二进制不入 Git。
 
 ## Literature State
 
@@ -72,6 +73,9 @@
 - `make workflow-audit` 最近状态：PASS=7, WARN=2, FAIL=0。
 - `make workflow-backup` 已生成轻量关键状态备份；PDF/CAJ/原始数据/缓存不进入该备份包。
 - 入口页 link audit：主要入口页本地 `.md` 直链为 0。
+- 私有 GitHub 远程已创建：`https://github.com/leungsx/ResearchWorkflow`。
+- 当前 Git 备份策略文件：`docs/GIT_BACKUP_STRATEGY.md`。
+- Git 快照脚本：`scripts/git_snapshot.py`，会阻止未忽略的大文件/二进制和未忽略的嵌套 Git 仓库进入提交。
 
 ## Writing / Figure State
 
@@ -87,6 +91,7 @@
 - 机会节点动作化：`图书馆短视频服务价值框架`、`SICAS-服务转化路径`、`图书馆短视频多平台复测`。
 - 文件归类仅记录，不做删除；后续如果出现孤立 HTML 或旧日志节点，再单独处理。
 - 体检 WARN=2：旧复习项到期、工作区存在 `.DS_Store`/`__pycache__`。这两项不是系统阻断问题。
+- 如果本地备份包逐渐变多，用 `make workflow-backup-prune KEEP=30` 显式保留最近 30 份；默认不静默删除。
 
 ## User Preferences
 

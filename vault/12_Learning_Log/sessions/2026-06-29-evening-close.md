@@ -149,3 +149,25 @@ make lit-workbench PROJECT=library_short_video
 ```bash
 make workflow-refresh DATE=2026-06-29 NOTE="daily closeout"
 ```
+
+## 23:08-归档补记：Git/GitHub 双层备份接入
+
+用户追问“当前不是 Git 仓库”的含义，并要求按最优方案接入 Git 备份。本轮已完成：
+
+- 初始化 `/Users/leung/ResearchWorkflow` 为本地 Git 仓库。
+- 使用已登录的 GitHub CLI 创建私有远程仓库：`https://github.com/leungsx/ResearchWorkflow`。
+- 新增 `scripts/git_snapshot.py`：用于安全提交和推送研究工作流文本资产；提交前会阻止未忽略的大文件/二进制和未忽略的嵌套 Git 仓库。
+- 新增 `docs/GIT_BACKUP_STRATEGY.md`：明确双层备份策略，即 Git/GitHub 管文本历史和异地回溯，本地 zip 管关键状态快照，大文件不进 Git。
+- 更新 `.gitignore`：排除 PDF、CAJ/KDH、zip 备份、缓存、生成预览图、Office 导出和外部工具仓库。
+- 新增 `make workflow-refresh-git`：在 `workflow-refresh` 基础上完成 Git 提交/推送，并二次刷新体检页记录 Git 状态。
+- 新增 `make workflow-backup-prune KEEP=30`：以后可显式保留最近 N 份本地 zip 备份；默认不静默删除。
+
+本轮还修正了一个 Git 化前容易忽略的问题：`tools/caj2pdf` 本身是嵌套 Git 仓库，第一次提交时被 Git 识别为 gitlink。已用 `git rm --cached -r tools/caj2pdf` 从主仓库索引移除，本地文件未删除，并将该目录加入忽略规则。
+
+后续日终推荐命令：
+
+```bash
+make workflow-refresh-git DATE=2026-06-29 NOTE="daily closeout"
+```
+
+原则确认：Git 不会显著减少本地占用；它主要提供版本历史、差异回溯和远程备份。减少本地空间要靠大文件不入 Git、zip 备份保留策略、以及 PDF/CAJ/原始数据转移到网盘或外置存储。

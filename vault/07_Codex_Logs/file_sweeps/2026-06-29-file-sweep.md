@@ -1,20 +1,20 @@
 # File Sweep - 2026-06-29
 
 Root: `/Users/leung/ResearchWorkflow`
-Files modified: 97
+Files modified: 99
 
 
 ## .gitignore
 
-- `.gitignore` (327 bytes)
+- `.gitignore` (911 bytes)
 
 ## Makefile
 
-- `Makefile` (9669 bytes)
+- `Makefile` (10454 bytes)
 
 ## README.md
 
-- `README.md` (11583 bytes)
+- `README.md` (12221 bytes)
 
 ## automation
 
@@ -23,20 +23,22 @@ Files modified: 97
 - `scripts/cnki_click_download_titles.py` (20680 bytes)
 - `scripts/cnki_restock_learning_papers.py` (9904 bytes)
 - `scripts/codex_file_sweep.py` (2772 bytes)
+- `scripts/git_snapshot.py` (5745 bytes)
 - `scripts/obsidian_graph_export.py` (2802 bytes)
-- `scripts/workflow_audit.py` (17424 bytes)
-- `scripts/workflow_backup.py` (5652 bytes)
+- `scripts/workflow_audit.py` (20001 bytes)
+- `scripts/workflow_backup.py` (6711 bytes)
 
 ## codex
 
 - `codex/state/context_index.md` (1761 bytes)
-- `codex/state/current_context.md` (31533 bytes)
-- `codex/state/user_model.md` (5278 bytes)
+- `codex/state/current_context.md` (32562 bytes)
+- `codex/state/user_model.md` (5700 bytes)
 
 ## docs
 
 - `docs/CNKI_WORKFLOW.md` (7430 bytes)
-- `docs/INTEGRATED_RESEARCH_LEARNING_WORKFLOW.md` (6530 bytes)
+- `docs/GIT_BACKUP_STRATEGY.md` (3302 bytes)
+- `docs/INTEGRATED_RESEARCH_LEARNING_WORKFLOW.md` (7192 bytes)
 - `docs/OBSIDIAN_KNOWLEDGE_GRAPH.md` (1683 bytes)
 - `docs/PAPER_READING_OUTPUT_STANDARD.md` (5476 bytes)
 
@@ -87,7 +89,7 @@ Files modified: 97
 - `logs/index.html` (7813 bytes)
 - `logs/views/2026-06-18-knowledge-edc7455a.html` (7355 bytes)
 - `logs/views/2026-06-20-hook-model-132c5c65.html` (8515 bytes)
-- `logs/views/2026-06-29-evening-close-631a6a14.html` (20253 bytes)
+- `logs/views/2026-06-29-evening-close-631a6a14.html` (22222 bytes)
 - `logs/views/2026-06-29-sicas-paper-a3d0cfd2.html` (9685 bytes)
 
 ## obsidian
@@ -100,13 +102,13 @@ Files modified: 97
 - `vault/03_Methods/DCI传播力指数.md` (1834 bytes)
 - `vault/03_Methods/描述性账号调查.md` (1820 bytes)
 - `vault/06_Protocols/科研工作流.md` (2140 bytes)
-- `vault/07_Codex_Logs/compact_daily/2026-06-29-summary.md` (5159 bytes)
-- `vault/07_Codex_Logs/daily/2026-06-29.md` (7739 bytes)
-- `vault/07_Codex_Logs/file_sweeps/2026-06-29-file-sweep.md` (6784 bytes)
+- `vault/07_Codex_Logs/compact_daily/2026-06-29-summary.md` (5362 bytes)
+- `vault/07_Codex_Logs/daily/2026-06-29.md` (8933 bytes)
+- `vault/07_Codex_Logs/file_sweeps/2026-06-29-file-sweep.md` (6877 bytes)
 - `vault/07_Codex_Logs/workflow_audits/2026-06-29-workflow-audit.md` (1436 bytes)
 - `vault/08_Weekly_Reviews/2026-W27.md` (3299 bytes)
-- `vault/09_Context_Packs/2026-06-29-context-pack.md` (5072 bytes)
-- `vault/12_Learning_Log/sessions/2026-06-29-evening-close.md` (10239 bytes)
+- `vault/09_Context_Packs/2026-06-29-context-pack.md` (5732 bytes)
+- `vault/12_Learning_Log/sessions/2026-06-29-evening-close.md` (11967 bytes)
 - `vault/12_Learning_Log/sessions/2026-06-29-sicas-paper.md` (1942 bytes)
 - `vault/13_Knowledge_Graph/knowledge_index.csv` (1414 bytes)
 - `vault/13_Knowledge_Graph/obsidian_edges.csv` (6389 bytes)

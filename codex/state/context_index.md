@@ -1,6 +1,6 @@
 # Context Index
 
-Last updated: 2026-06-29T22:43:30
+Last updated: 2026-06-29T23:03:17
 
 ## Default Startup Read Order
 
@@ -27,7 +27,7 @@ Read hot state first. Do not scan old raw logs unless the current task needs exa
 
 ## Recent Context Packs
 
-- `2026-06-29-context-pack.md` (320 words)
+- `2026-06-29-context-pack.md` (351 words)
 - `2026-06-28-context-pack.md` (253 words)
 - `2026-06-27-context-pack.md` (41 words)
 - `2026-06-21-context-pack.md` (1034 words)
@@ -45,7 +45,7 @@ Read hot state first. Do not scan old raw logs unless the current task needs exa
 
 These are preserved for audit and exact reconstruction, but are not default startup context.
 
-- `2026-06-29.md` (458 words, summary)
+- `2026-06-29.md` (526 words, summary)
 - `2026-06-28.md` (198 words, summary)
 - `2026-06-27.md` (115 words, no-summary)
 - `2026-06-21.md` (1351 words, summary)
