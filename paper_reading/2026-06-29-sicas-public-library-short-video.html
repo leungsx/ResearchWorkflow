@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026-06-29 精读：基于SICAS模型的公共图书馆短视频营销策略研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #12212f;
+      --muted: #5e7183;
+      --line: #d8e1e8;
+      --paper: #ffffff;
+      --mist: #f5f8fb;
+      --brand: #0f766e;
+      --brand-2: #155e75;
+      --gold: #b7791f;
+      --rose: #a61b45;
+      --slate: #203040;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      line-height: 1.65;
+      background:
+        radial-gradient(circle at top right, rgba(21, 94, 117, 0.12), transparent 28%),
+        linear-gradient(180deg, #f7fafc 0%, #edf3f7 100%);
+    }
+    a { color: var(--brand-2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 24px; }
+    header {
+      background: linear-gradient(135deg, #163247 0%, #155e75 55%, #0f766e 100%);
+      color: #f8fbff;
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.08);
+    }
+    h1 { margin: 16px 0 10px; font-size: 38px; line-height: 1.15; }
+    h2 { margin: 0 0 14px; font-size: 22px; }
+    h3 { margin: 0 0 10px; font-size: 17px; }
+    p { margin: 0 0 12px; }
+    .sub { max-width: 860px; color: rgba(248, 251, 255, 0.88); }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .nav a {
+      color: #f8fbff;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 14px;
+    }
+    .hero-grid, .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .hero {
+      margin-top: -28px;
+      position: relative;
+    }
+    .panel, .metric {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 12px 28px rgba(20, 38, 55, 0.06);
+    }
+    .panel { padding: 20px; }
+    .metric { padding: 18px; }
+    .span-8 { grid-column: span 8; }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .span-12 { grid-column: 1 / -1; }
+    .metric b { display: block; font-size: 29px; line-height: 1.05; color: var(--slate); }
+    .metric span { display: block; margin-top: 6px; font-size: 13px; color: var(--muted); }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 18px;
+      font-size: 14px;
+    }
+    .meta div {
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .label {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .tag {
+      display: inline-block;
+      margin: 0 8px 8px 0;
+      padding: 6px 10px;
+      background: #ebf7f5;
+      color: var(--brand);
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .route {
+      display: grid;
+      gap: 10px;
+    }
+    .route-item {
+      padding: 14px 14px 14px 16px;
+      border-left: 4px solid var(--brand);
+      background: var(--mist);
+      border-radius: 0 12px 12px 0;
+    }
+    .route-item strong { display: block; margin-bottom: 6px; }
+    .evidence-table, .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .evidence-table th, .evidence-table td,
+    .compare-table th, .compare-table td {
+      text-align: left;
+      vertical-align: top;
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    .evidence-table th, .compare-table th {
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .step {
+      position: relative;
+      padding: 16px 14px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #f7fbfd 0%, #edf6f8 100%);
+      border: 1px solid #cfe0e7;
+      min-height: 174px;
+    }
+    .step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--brand-2);
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .step .num {
+      display: inline-flex;
+      width: 30px;
+      height: 30px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--brand-2);
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .callout {
+      padding: 15px 16px;
+      border-radius: 14px;
+      background: #fff9ed;
+      border: 1px solid #f0ddb0;
+    }
+    .callout.warn {
+      background: #fff3f5;
+      border-color: #f2c3cf;
+    }
+    ul, ol { margin: 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    .glossary {
+      display: grid;
+      gap: 10px;
+    }
+    .glossary div {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--mist);
+      border: 1px solid var(--line);
+    }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--mist);
+      padding: 12px 14px;
+    }
+    details + details { margin-top: 10px; }
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .actions label {
+      display: block;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--line);
+    }
+    .actions input { margin-right: 8px; }
+    .foot {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 920px) {
+      .span-8, .span-6, .span-4, .span-12, .metric { grid-column: 1 / -1; }
+      .flow { grid-template-columns: 1fr; }
+      .step:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -20px; transform: translateX(-50%); }
+      h1 { font-size: 30px; }
+      .meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <span class="eyebrow">Daily Deep Read · 2026-06-29</span>
+      <h1>基于SICAS模型的公共图书馆短视频营销策略研究</h1>
+      <p class="sub">今天这篇不只是“又一篇策略文”。它补上了当前项目里缺的 SICAS 行为路径，把图书馆短视频从“发什么内容”往“如何让感知、兴趣、连接、行动、分享形成服务转化链条”推进了一步。</p>
+      <nav class="nav">
+        <a href="../study_dashboard.html">学习仪表盘</a>
+        <a href="views/cnki_2023_34348faa1e-note.html">Obsidian 论文笔记</a>
+        <a href="views/cnki_2023_34348faa1e-reader.html">Reader</a>
+        <a href="views/literature_review_workbench.html">文献综述工作台</a>
+        <a href="../knowledge_cards/index.html">知识卡入口</a>
+        <a href="../knowledge_graph/index.html">知识图谱</a>
+        <a href="../logs/2026-06-29.html">今日学习日志</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap hero">
+    <section class="hero-grid">
+      <section class="panel span-8">
+        <h2>题目与推荐理由</h2>
+        <div class="meta">
+          <div><span class="label">作者</span>刘青；郭嘉如</div>
+          <div><span class="label">年份 / 来源</span>2023 / 《图书馆工作与研究》</div>
+          <div><span class="label">DOI</span><a href="https://doi.org/10.16384/j.cnki.lwas.2023.01.004">10.16384/j.cnki.lwas.2023.01.004</a></div>
+          <div><span class="label">链接</span><a href="https://kns.cnki.net/kcms2/article/abstract?v=zcrJ0BckwPMpHL63zubRfc2Nm2i4qr7YPB62y0ROOfVU6QX7lwoL1ElPLTrKLnnKS1g9ivI5HCaaUujoAnYT7HSX_yGOHD29GgLC_RVZa5UfbILupmHHycHJ5W_HX4xUCx4diglhdblUnJ6gYnpivbsSkhXddyzdW7RNQhynTdfGmInLmuRdxA==&uniplatform=NZKPT&language=CHS">CNKI 摘要页</a></div>
+          <div><span class="label">当前项目角色</span>理论框架补位文献；把互动策略推进到服务转化路径</div>
+          <div><span class="label">证据状态</span>source-grounded skim；页码待回原 PDF 核验</div>
+        </div>
+        <p style="margin-top:14px;">推荐它，不是因为它“最新”，而是因为它刚好补在你现有 Hook Model、ELM、AARRR 之间的空档：它不再只盯单个内容变量，而是把图书馆用户从看到短视频到发生行动和分享的链条整体画出来。</p>
+        <div style="margin-top:14px;">
+          <span class="tag">SICAS 模型</span>
+          <span class="tag">公共图书馆</span>
+          <span class="tag">短视频营销策略</span>
+          <span class="tag">服务转化</span>
+          <span class="tag">DCI 传播力指数</span>
+        </div>
+      </section>
+      <section class="grid span-4">
+        <div class="metric"><b>11</b><span>样本账号：粉丝过万公共图书馆抖音号</span></div>
+        <div class="metric"><b>5</b><span>SICAS 阶段：感知、兴趣互动、连接沟通、行动、分享</span></div>
+        <div class="metric"><b>3</b><span>最有用输出：路径框架、诊断维度、策略转译</span></div>
+        <div class="metric"><b>1</b><span>核心提醒：互动指标不等于服务价值</span></div>
+      </section>
+    </section>
+
+    <section class="grid" style="margin-top:16px;">
+      <section class="panel span-6">
+        <h2>30 秒定位</h2>
+        <div class="route">
+          <div class="route-item"><strong>它在项目里是什么角色？</strong>这是“理论框架补位”文献，不是强因果实证。它最适合拿来搭服务路径图，而不是直接证明某种内容一定有效。</div>
+          <div class="route-item"><strong>今天为什么读它？</strong>项目看板已经把它列为还没沉淀的 Reader 缺口。读完后，现有 8 篇学习集就能从 7/8 变成完整 8/8。</div>
+          <div class="route-item"><strong>它提供什么新东西？</strong>相比 Hook Model 的“微观互动机制”和 AARRR 的“生命周期框架”，SICAS 更强调多触点感知、连接沟通和分享回流。</div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>核心内容</h2>
+        <ul>
+          <li>研究问题：公共图书馆短视频账号为什么整体传播力弱，应该怎样沿着 SICAS 五阶段改善运营与服务转化。</li>
+          <li>理论/概念：SICAS 模型、沉浸式内容、软营销、精神/物质激励。</li>
+          <li>方法与数据：抖音平台搜索“图书馆”，人工筛选 11 个粉丝过万公共图书馆账号；结合飞瓜数据与手工收集；用 DCI 指数描述传播影响力。</li>
+          <li>主要发现：高粉账号占比低，用户留存弱，私域引流和平台外导流不足，热门内容依赖短平优、情绪共鸣、即时互动和可行动链接。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-12">
+        <h2>证据逻辑</h2>
+        <table class="evidence-table">
+          <thead>
+            <tr>
+              <th>作者主张</th>
+              <th>它靠什么证据站住</th>
+              <th>你现在能怎么用</th>
+              <th>边界</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>公共图书馆短视频整体传播影响力偏弱</td>
+              <td>11 个账号近 30 日新增作品、点赞、评论、分享、粉丝与总粉丝，折算 DCI；仅 3 个账号 DCI 超过 400。Reader blocks: B0007</td>
+              <td>可作为 2021 年末公共馆抖音运营的历史诊断基线</td>
+              <td>样本只含头部公共馆；不是全体图书馆，也不是当前平台状态</td>
+            </tr>
+            <tr>
+              <td>问题不只在内容，还在感知渠道、连接路径和行动触发</td>
+              <td>作者按 SICAS 五阶段逐项诊断：粉丝总量低、私域布局弱、热门视频占比低、评论互动弱、主页链接不全、分享意愿弱。Reader blocks: B0008-B0011</td>
+              <td>适合转成你的“平台互动-服务触达-阅读转化”变量框架</td>
+              <td>仍是描述性诊断，不是效果检验</td>
+            </tr>
+            <tr>
+              <td>运营建议应从硬推广转向软营销和服务体验嵌入</td>
+              <td>作者把策略落到融媒体引流、沉浸式内容、提问互动、软营销、精神激励。Reader blocks: B0011-B0016</td>
+              <td>可作为研究假设来源和实践访谈提纲来源</td>
+              <td>建议来自案例观察与框架转译，不能直接写成“已验证有效”</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel span-12">
+        <h2>方法流程图</h2>
+        <div class="flow">
+          <div class="step">
+            <div class="num">1</div>
+            <h3>样本搜集</h3>
+            <p>在抖音以“图书馆”为关键词搜用户名，人工筛 11 个粉丝过万公共图书馆账号。</p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h3>传播诊断</h3>
+            <p>收集近 30 日新增作品、点赞、评论、分享、粉丝及总粉丝等数据。</p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h3>指数计算</h3>
+            <p>借用 DCI 的发布指数、互动指数、覆盖指数做整体传播力描述。</p>
+          </div>
+          <div class="step">
+            <div class="num">4</div>
+            <h3>SICAS 归因</h3>
+            <p>把现状问题分别放回 Sense、Interest, Connect, Action, Share 五阶段。</p>
+          </div>
+          <div class="step">
+            <div class="num">5</div>
+            <h3>策略转译</h3>
+            <p>输出融媒体引流、沉浸式内容、互动提问、软营销和激励传播五类改进路径。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>创新、局限、机会</h2>
+        <ul>
+          <li><strong>创新：</strong>把 SICAS 从一般营销行为模型转译到公共图书馆短视频服务场景，形成完整五阶段路径。</li>
+          <li><strong>创新：</strong>不是只谈内容技巧，而是把感知渠道、连接沟通、行动触发和分享回流一起纳入。</li>
+          <li><strong>局限：</strong>结果变量仍偏平台传播力与案例观察，没有验证阅读推广、到馆、借阅或活动参与是否真正提高。</li>
+          <li><strong>局限：</strong>样本是 2021 年末的头部公共馆抖音号，时间和馆型外推都有限。</li>
+          <li><strong>机会：</strong>把 SICAS 与 Hook Model、ELM、AARRR 结合，构造“线索-互动-转化-分享”的综合模型。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-6">
+        <h2>与已读文献的关系</h2>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>已读文献</th>
+              <th>关系</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hook Model 论文</td>
+              <td>Hook 更适合解释单条视频的触发-酬赏循环；SICAS 更适合解释多触点服务路径和分享回流。</td>
+            </tr>
+            <tr>
+              <td>ELM 论文</td>
+              <td>ELM 偏线索说服；SICAS 偏路径设计。两者可在“内容线索如何激活兴趣与行动”上对接。</td>
+            </tr>
+            <tr>
+              <td>AARRR 比较论文</td>
+              <td>AARRR 更像生命周期指标框架；SICAS 更像用户过程逻辑框架。前者便于衡量，后者便于解释。</td>
+            </tr>
+            <tr>
+              <td>张承 2021</td>
+              <td>张承把短视频转成数字阅读推广服务设计；这篇则补上“为什么用户会从感知走向行动与分享”的路径逻辑。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel span-6">
+        <h2>术语表</h2>
+        <div class="glossary">
+          <div><strong>SICAS 模型</strong><br>Sense、Interest & Interactive、Connect & Communicate、Action、Share 五阶段行为路径。</div>
+          <div><strong>DCI 传播力指数</strong><br>用发布、互动、覆盖三个维度综合描述账号传播影响力。</div>
+          <div><strong>软营销</strong><br>不硬推服务信息，而是把服务价值嵌进用户更愿意看的内容和体验里。</div>
+          <div><strong>沉浸式内容</strong><br>能让用户低成本进入、持续停留，并感到“有用或有感”的内容组织方式。</div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>延伸阅读</h2>
+        <ul>
+          <li><a href="views/cnki_2023_34348faa1e-note.html">本论文 Obsidian 笔记</a></li>
+          <li><a href="views/cnki_2023_34348faa1e-reader.html">Source-Grounded Reader</a></li>
+          <li><a href="../knowledge_cards/index.html">今日知识卡入口</a></li>
+          <li><a href="views/sicas-model-concept.html">知识卡：SICAS 模型</a></li>
+          <li><a href="views/dci-index-method.html">方法卡：DCI 传播力指数</a></li>
+          <li><a href="views/innovation_limitation_bank.html">创新-局限-机会台账</a></li>
+          <li><a href="views/literature_synthesis.html">跨文献综述</a></li>
+          <li><a href="../logs/2026-06-29.html">今日晚间闭环日志</a></li>
+        </ul>
+        <div class="callout" style="margin-top:14px;">
+          <strong>今天先别做的事</strong>
+          <p>不要把这篇写成“证明了某类策略能提升图书馆服务转化”。它提供的是结构化假设和诊断框架，不是严格因果证据。</p>
+        </div>
+      </section>
+
+      <section class="panel span-12">
+        <h2>互动精读问题</h2>
+        <details>
+          <summary>1. 如果把你的项目主线从“短视频运营”改写为“服务转化路径”，SICAS 五阶段里你最缺哪一段证据？</summary>
+          <p>提示：当前最缺的是 Action 和 Share 与真实服务结果的连接证据，而不是 Sense 或 Interest 的内容技巧。</p>
+        </details>
+        <details>
+          <summary>2. Hook Model、ELM、SICAS、AARRR 四个框架里，哪个最适合写研究设计，哪个最适合写指标体系？</summary>
+          <p>可先试：ELM 与 Hook 用于机制假设，SICAS 用于过程结构，AARRR 用于指标组织。</p>
+        </details>
+        <details>
+          <summary>3. 这篇文章最值得你复用的，不是它的“建议”，而是哪一个变量或路径？</summary>
+          <p>优先考虑“多渠道感知 -> 兴趣互动 -> 行动链接 -> 分享回流”这条路径，而不是单条策略口号。</p>
+        </details>
+      </section>
+
+      <section class="panel span-12">
+        <h2>今日行动清单</h2>
+        <div class="actions">
+          <label><input type="checkbox"> 先读本页的“证据逻辑”表，再回到 Reader 核对 B0007-B0016 关键 blocks。</label>
+          <label><input type="checkbox"> 对照 [[Hook Model 上瘾模型]]、[[ELM 精细加工可能性模型]]、[[AARRR 漏斗模型]]，写下一个你要保留、一个你要舍弃的框架用法。</label>
+          <label><input type="checkbox"> 用这篇和张承 2021，起草你的“平台互动-服务触达-阅读转化”三层指标草图。</label>
+        </div>
+        <p class="foot" style="margin-top:12px;">证据边界说明：本页基于本地 Reader 的 source-grounded skim 生成。页码、图表编号和部分统计细节仍需回原 PDF 做人工核验后，才能升级为 manuscript-level 证据。</p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

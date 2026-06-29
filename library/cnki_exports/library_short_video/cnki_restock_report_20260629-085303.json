@@ -1,0 +1,37 @@
+{
+  "project": "library_short_video",
+  "date": "2026-06-29",
+  "threshold": 20,
+  "refill_count": 1,
+  "current_fulltext_count": 8,
+  "triggered": true,
+  "profile": "/Users/leung/ResearchWorkflow/projects/library_short_video/literature/recommendation_profile.json",
+  "profile_topic": "图书馆短视频相关研究",
+  "stage": "foundation_high_impact",
+  "selected_candidates": [
+    {
+      "citekey": "cnki_2021_645f03f388",
+      "title": "图书馆短视频账号传播力研究——以省级公共图书馆为例",
+      "score": 72.73,
+      "reasons": [
+        "CNKI 被引 74，下载 2082",
+        "领域词命中: 图书馆短视频、公共图书馆、图书馆、短视频、视频",
+        "核心主题组覆盖: 图书馆短视频、图书馆短视频",
+        "图情领域来源"
+      ],
+      "detail_url": "https://kns.cnki.net/kcms2/article/abstract?v=zcrJ0BckwPMhkMJsKjGRSL2EEmNykAuMPWeJtnMK5ZaQhPvltIGFAnAlzH8FCjF15fbopX0_vv2s6saQ8-FQjOWlxVtEjMF2NB9kba1IRmyx07L6EGljnE0K2sG6dd11nXw9U80l4tIZ3DaYv4JIeRTr1rrf1bJvvwbUO8DWNfNMXnSMb2Xs3Q==&uniplatform=NZKPT&language=CHS"
+    }
+  ],
+  "selected_json": "/Users/leung/ResearchWorkflow/library/cnki_exports/library_short_video/cnki_restock_candidates_20260629-085256.json",
+  "status": "download_run_needs_attention",
+  "downloader_exit_code": 1,
+  "batch_summary": {
+    "attempts": 1,
+    "starting_fulltext_count": 8,
+    "ending_fulltext_count": 8,
+    "starting_pdf_count": 8,
+    "ending_pdf_count": 8,
+    "report": "/Users/leung/ResearchWorkflow/library/cnki_exports/library_short_video/cnki_pdf_download_report_20260629-085303.json"
+  },
+  "ending_fulltext_count": 8
+}

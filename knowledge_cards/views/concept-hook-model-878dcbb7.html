@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>概念卡：Hook Model 上瘾模型</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>概念卡：Hook Model 上瘾模型</h1>
+      <p class="sub">可直接在浏览器阅读的知识卡镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../../paper_reading/today.html">今日精读</a>
+<a href="../../paper_reading/index.html">论文归档</a>
+<a href="../index.html" aria-current="page">知识卡</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="../../paper_reading/views/vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../index.html">返回知识卡入口</a>
+          <a href="../../paper_reading/today.html">返回今日精读</a>
+          <a href="../../vault/02_Concepts/Hook%20Model%20%E4%B8%8A%E7%98%BE%E6%A8%A1%E5%9E%8B.md">打开原始 Markdown</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：vault/02_Concepts/Hook Model 上瘾模型.md</div>
+        <article class="md-view">
+<section class="frontmatter"><h2>元数据</h2><table><tbody><tr><th>type</th><td>concept</td></tr><tr><th>id</th><td>concept-hook-model</td></tr><tr><th>title</th><td>&quot;Hook Model 上瘾模型&quot;</td></tr><tr><th>domain</th><td>&quot;传播学 / 用户行为 / 图书馆短视频&quot;</td></tr><tr><th>level</th><td>&quot;beginner&quot;</td></tr><tr><th>status</th><td>learning</td></tr><tr><th>review_stage</th><td>1</td></tr><tr><th>next_review</th><td>2026-06-21</td></tr></tbody></table></section>
+<h1>Hook Model 上瘾模型</h1>
+<h2>一句话解释</h2>
+<p>Hook Model 是一个解释“用户为什么会一次又一次回来使用某个产品或内容”的行为循环模型。</p>
+<h2>通俗解释</h2>
+<p>它可以理解成一个四步循环：</p>
+<ol>
+<li>触发：什么东西提醒用户开始行动。</li>
+<li>行动：用户做了一个很容易完成的小动作。</li>
+<li>多变酬赏：用户得到一点有用、有趣、惊喜或情绪满足的回报。</li>
+<li>投入：用户留下了一点成本或关系，使下一次更可能回来。</li>
+</ol>
+<p>这个循环如果不断重复，就会让用户形成习惯。</p>
+<h2>四个环节</h2>
+<table><thead><tr><th>环节</th><th>简单说法</th><th>图书馆短视频例子</th></tr></thead><tbody><tr><td>Trigger 触发</td><td>让我注意到它</td><td>标题、封面、推送、热点、馆内活动提醒</td></tr><tr><td>Action 行动</td><td>我点一下就能做</td><td>点开视频、看完 30 秒、点赞、评论、收藏</td></tr><tr><td>Variable Reward 多变酬赏</td><td>我得到了点什么，而且每次不完全一样</td><td>学到一个冷知识、发现一本书、被故事打动、看到有趣馆员</td></tr><tr><td>Investment 投入</td><td>我留下了一点关系或成本</td><td>关注账号、收藏书单、评论提问、报名活动、转发给同学</td></tr></tbody></table>
+<h2>生活例子</h2>
+<p>短视频平台就是典型例子：</p>
+<ul>
+<li>触发：你看到一个标题“这个冷知识你肯定不知道”。</li>
+<li>行动：你点进去看。</li>
+<li>多变酬赏：有时真的有用，有时很好笑，有时情绪被打动。</li>
+<li>投入：你点赞、收藏、关注账号。</li>
+</ul>
+<p>下次平台再推类似内容，你就更容易继续点开。</p>
+<h2>图书馆短视频研究例子</h2>
+<p>如果图书馆发布一条短视频：</p>
+<blockquote>“3 分钟带你找到毕业论文最需要的数据库”</blockquote>
+<p>可以用 Hook Model 这样分析：</p>
+<ul>
+<li>触发：标题直接击中毕业论文需求。</li>
+<li>行动：用户点开并看完短视频。</li>
+<li>多变酬赏：用户发现一个以前不知道的数据库检索技巧。</li>
+<li>投入：用户收藏视频、关注图书馆账号，甚至预约数据库培训。</li>
+</ul>
+<p>如果后续图书馆持续发布“论文选题、数据库检索、文献管理、引用规范”系列内容，用户就可能形成稳定关注。</p>
+<h2>为什么它对我的研究重要</h2>
+<p>在 <code>library_short_video</code> 项目中，Hook Model 可以帮助解释：</p>
+<ul>
+<li>为什么有些图书馆短视频能触发用户观看。</li>
+<li>为什么有些内容能带来点赞、评论、转发。</li>
+<li>为什么“服务型内容”可能比单纯娱乐内容更适合图书馆。</li>
+<li>如何从平台互动进一步思考服务转化。</li>
+</ul>
+<p>它适合连接 <span class="wikilink">图书馆短视频相关研究</span>、<span class="wikilink">阅读推广</span>、<span class="wikilink">服务价值</span> 和 <span class="wikilink">平台互动指标</span>。</p>
+<h2>容易误解的地方</h2>
+<ul>
+<li>Hook Model 不是简单教人“让用户上瘾”，在图书馆研究里更应理解为“形成有价值的使用习惯”。</li>
+<li>高互动不一定等于高服务价值。用户点赞了，不代表真的使用了图书馆服务。</li>
+<li>Hook Model 解释的是行为循环，不自动证明因果关系。</li>
+<li>图书馆不能只追求流量，还要考虑公共文化服务、阅读推广和知识服务使命。</li>
+</ul>
+<h2>和哪些概念相关</h2>
+<ul>
+<li><span class="wikilink">ELM 精细加工可能性模型</span></li>
+<li><span class="wikilink">平台互动指标</span></li>
+<li><span class="wikilink">服务价值</span></li>
+<li><span class="wikilink">阅读推广</span></li>
+<li><span class="wikilink">图书馆短视频相关研究</span></li>
+</ul>
+<h2>我自己的理解</h2>
+<p>Hook Model 适合问：图书馆短视频怎样让用户从“看一眼”走向“持续关注和使用服务”。</p>
+<h2>复习问题</h2>
+<ol>
+<li>Hook Model 的四个环节是什么？</li>
+<li>为什么“点赞”只能算 Action 或 Reward 的结果之一，不能直接等于服务价值？</li>
+<li>如果设计一条图书馆数据库推广短视频，四个环节可以分别是什么？</li>
+</ol>
+<h2>研究灵感</h2>
+<ul>
+<li>比较图书馆短视频中的“流量型 Hook”和“服务型 Hook”。</li>
+<li>把 Hook Model 和 ELM 结合，分析用户是被标题/封面触发，还是被内容质量说服。</li>
+<li>构造“触发-行动-酬赏-投入-服务转化”的图书馆短视频评价框架。</li>
+</ul>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-29 22:43.</footer>
+</body>
+</html>

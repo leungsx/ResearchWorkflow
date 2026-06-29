@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>创新-局限-机会台账</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>创新-局限-机会台账</h1>
+      <p class="sub">当前项目创新、局限与后续机会的浏览版。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../projects/library_short_video/literature/innovation_limitation_bank.md">打开原始 Markdown</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/literature/innovation_limitation_bank.md</div>
+        <article class="md-view">
+<h1>图书馆短视频研究：创新点、局限性与机会台账</h1>
+<p>Project: <code>library_short_video</code> Created: 2026-06-20 Purpose: 把每天主读论文中的创新点、局限性和可转化研究机会持续沉淀下来，后续用于选题、研究设计、论文讨论和改进方案生成。</p>
+<h2>使用规则</h2>
+<ul>
+<li>只记录已经 source-grounded 阅读过的论文；未读元数据不得写成稳定判断。</li>
+<li>每条创新点和局限性都要保留证据定位，优先使用 reader block ID；后续人工核页后再补页码。</li>
+<li>“机会”不是直接等于选题，必须写清它从哪类创新或局限转化而来。</li>
+<li>每次主读结束后至少补三类内容：可复用创新、关键局限、可转化研究问题。</li>
+<li>写论文时仍需回到原文和 evidence gate，不把本台账当作最终证据来源。</li>
+</ul>
+<h2>分类体系</h2>
+<h3>创新点类型</h3>
+<table><thead><tr><th>类型</th><th>含义</th><th>后续用途</th></tr></thead><tbody><tr><td>理论/模型引入</td><td>把外部理论或传播模型用于图书馆短视频/阅读推广问题</td><td>构建研究框架、提出变量路径</td></tr><tr><td>对象/场景拓展</td><td>研究对象从一般短视频、政务号、社交号转入图书馆或阅读推广场景</td><td>判断研究边界和可迁移性</td></tr><tr><td>数据/样本建设</td><td>形成可复用的平台样本、账号样本或时段样本</td><td>设计复现、扩展或比较研究</td></tr><tr><td>变量/测量设计</td><td>把内容、标题、封面、时长、音乐等转成可分析指标</td><td>形成编码表、变量字典、指标体系</td></tr><tr><td>方法/技术路径</td><td>使用统计检验、回归、文本挖掘、图像识别等方法</td><td>提升方法严谨性和可自动化程度</td></tr><tr><td>实践策略转译</td><td>把实证结果转成图书馆运营建议</td><td>对接实践贡献与应用场景</td></tr></tbody></table>
+<h3>局限性类型</h3>
+<table><thead><tr><th>类型</th><th>含义</th><th>后续可转化方向</th></tr></thead><tbody><tr><td>指标替代问题</td><td>点赞、评论、分享等平台互动不能直接代表图书馆服务价值</td><td>构造“传播效果 + 服务价值”复合指标</td></tr><tr><td>样本外推问题</td><td>样本平台、账号类型、时间窗口有限</td><td>做跨平台、跨馆型、跨时段比较</td></tr><tr><td>因果识别问题</td><td>观察性数据只能说明相关或差异，不能直接证明因果</td><td>加入准实验、时间序列、A/B 或匹配设计</td></tr><tr><td>变量遗漏问题</td><td>音乐、剪辑、主持人、主题、算法推荐等变量未充分量化</td><td>引入多模态特征和更细编码</td></tr><tr><td>平台时代漂移</td><td>早期抖音规则、内容生态与当前平台环境不同</td><td>更新到 2024-2026 数据重新检验</td></tr><tr><td>图书馆转化不足</td><td>外部社交号或商业号经验不能直接等同于图书馆实践</td><td>建立图书馆专属样本和实践验证</td></tr></tbody></table>
+<h2>跨文献机会地图</h2>
+<table><thead><tr><th>机会编号</th><th>来源局限/创新</th><th>可转化研究方向</th><th>当前优先级</th><th>需要补的证据</th></tr></thead><tbody><tr><td>O-001</td><td>两篇 2021 年文献都以点赞、评论、分享衡量传播效果</td><td>构建图书馆短视频“平台互动-服务触达-阅读转化”复合评价指标</td><td>高</td><td>找到图书馆服务转化、阅读推广效果评价、社媒影响力评价相关文献</td></tr><tr><td>O-002</td><td>Hook Model 与 ELM 分别解释触发/酬赏和中心/边缘线索</td><td>比较或整合“上瘾模型 + ELM”，形成图书馆短视频内容说服与互动机制框架</td><td>高</td><td>补 ELM、Hook Model 在图情/政务/健康传播中的应用文献</td></tr><tr><td>O-003</td><td>官方图书馆账号样本与社会化阅读账号样本结论不完全一致</td><td>做图书馆账号与社会化阅读推广账号的对照研究，识别哪些机制可迁移</td><td>高</td><td>收集同一时期或新时期的两类账号数据</td></tr><tr><td>O-004</td><td>早期样本集中于 2020-2021 年抖音生态</td><td>使用 2024-2026 数据复测，判断短视频平台成熟后影响因素是否变化</td><td>中高</td><td>补当前平台规则、账号活跃度、短视频样本</td></tr><tr><td>O-005</td><td>变量主要是人工编码或文本/图像单项提取</td><td>建立多模态变量表：文本、画面、音频、人物、剪辑节奏、主题和评论语义</td><td>中高</td><td>补多模态传播效果、短视频内容分析方法文献</td></tr><tr><td>O-006</td><td>研究多停留在运营建议，缺少图书馆实际服务改进验证</td><td>设计面向图书馆账号的内容优化实验或行动研究</td><td>中</td><td>需要馆方数据、发布权限或历史运营数据</td></tr><tr><td>O-007</td><td>伴读文献显示图书馆账号存在开通、规划、团队、内容、互动等成熟度差异</td><td>构建图书馆短视频服务成熟度或运营能力评价框架</td><td>中高</td><td>补数字图书馆服务成熟度、新媒体运营能力评价文献</td></tr><tr><td>O-008</td><td>热门视频规律强调热点/情绪/名人效应，公共图书馆服务文献警惕内容宽泛和过度娱乐化</td><td>区分“流量有效”与“图书馆使命一致”的短视频内容机制</td><td>高</td><td>补公共文化服务价值、阅读推广质量和短视频伦理/形象治理文献</td></tr><tr><td>O-009</td><td>张承 2021 将短视频营销转译为情感、渠道、互动三条数字阅读推广策略，但缺少效果检验</td><td>构建“情感共鸣-渠道触达-互动参与-服务转化”的公共图书馆短视频服务路径模型</td><td>高</td><td>补数字阅读推广评价、服务触达、用户参与和线上线下转化指标文献</td></tr></tbody></table>
+<h2>已读论文卡片</h2>
+<h3><code>cnki_2021_d35f8e895a</code> - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索</h3>
+<ul>
+<li>Source: 图书情报工作, 2021</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2021_d35f8e895a/paper.md</code></li>
+<li>证据边界: reader 为文本抽取，暂无页码；写入论文前需回原文核页。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>理论/模型引入</td><td>将“上瘾模型”引入图书馆短视频传播及互动效果研究，把触发、行动、酬赏、投入映射到标题、音乐、制作、内容、信息类型、时长和连续性等变量</td><td><code>B0006</code>, <code>B0009</code></td><td>可作为图书馆短视频研究的行为机制框架，也可与 ELM/SOR 等模型对话</td><td>O-002</td></tr><tr><td>对象/场景拓展</td><td>直接研究图书馆官方抖音号，而不是一般短视频或社会化阅读账号</td><td><code>B0007</code>, <code>B0010</code></td><td>适合作为本项目的领域基础文献和直接场景证据</td><td>O-003</td></tr><tr><td>数据/样本建设</td><td>以粉丝量排名前 10 的图书馆官方抖音号为样本，采集 879 个短视频</td><td><code>B0010</code></td><td>可复用其账号筛选、视频样本和变量编码思路，并在新时期扩展</td><td>O-004</td></tr><tr><td>变量/测量设计</td><td>把标题句型、标题长度、背景音乐情感类型、制作类别、内容主题、信息类型、时长、连续性 8 个因素编码为自变量</td><td><code>B0010</code>, <code>B0011</code></td><td>可形成后续内容分析编码表的基础版本</td><td>O-005</td></tr><tr><td>实践策略转译</td><td>将显著因素转译成疑问式标题、轻快/庄重音乐、情景剧或视频再加工、资源/知识/服务信息、低门槛高密度内容等策略</td><td><code>B0014</code>, <code>B0015</code>, <code>B0016</code></td><td>适合写进实践启示，但需要避免夸大因果</td><td>O-006</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>指标替代问题</td><td>因变量是点赞、评论、转发构成的 C 指数，主要衡量平台互动，不能直接代表图书馆服务触达、阅读行为或公共文化价值</td><td><code>B0010</code></td><td>建立传播效果与服务价值并列的评价指标，例如阅读参与、资源访问、活动报名、馆藏使用或用户认知变化</td><td>高</td></tr><tr><td>因果识别问题</td><td>研究使用观察性平台数据和非参数检验，能说明不同类别的互动差异，但不能直接证明某个因素导致传播效果提高</td><td><code>B0011</code>-<code>B0014</code></td><td>后续可加入准实验、分层回归、匹配样本或发布时间控制变量</td><td>高</td></tr><tr><td>平台时代漂移</td><td>数据来自 2020 年前后抖音图书馆账号生态，平台规则、用户习惯和机构运营成熟度可能已经变化</td><td><code>B0007</code>, <code>B0010</code></td><td>使用 2024-2026 新样本做复测，检验早期结论是否仍成立</td><td>中高</td></tr><tr><td>样本外推问题</td><td>样本聚焦粉丝量排名靠前的官方图书馆账号，可能高估头部馆经验，难以代表中小馆、高校馆或科研型图书馆</td><td><code>B0007</code>, <code>B0010</code></td><td>分公共馆、高校馆、科研型图书馆、区域层级做比较</td><td>中高</td></tr><tr><td>变量遗漏问题</td><td>未充分量化推荐算法、发布时间、评论内容、主持人风格、剪辑节奏、账号定位等因素</td><td>从模型变量反推；<code>B0010</code>, <code>B0011</code></td><td>扩展为多模态与运营变量联合模型</td><td>中</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-001: 图书馆短视频的“互动效果”是否能与实际阅读推广或服务使用产生可观测关联？</li>
+<li>RQ-002: Hook Model 中的触发、行动、酬赏、投入四类机制，在公共馆、高校馆和科研型图书馆中是否存在差异？</li>
+<li>RQ-003: 早期研究发现的标题句型、音乐、制作类别、内容主题、信息类型等显著因素，在 2024-2026 年抖音/视频号/B站环境下是否仍然显著？</li>
+<li>RQ-004: 图书馆短视频中“有用信息酬赏”是否比情绪触发更能解释服务转化，而不仅是点赞转发？</li>
+</ul>
+<h3><code>cnki_2021_dfab60236e</code> - 抖音阅读推广短视频传播效果影响因素研究</h3>
+<ul>
+<li>Source: 图书馆学研究, 2021</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2021_dfab60236e/paper.md</code></li>
+<li>证据边界: 样本为社会化阅读推广账号，不是图书馆官方账号；对图书馆实践的推论属于间接迁移。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>理论/模型引入</td><td>使用精细加工可能性模型（ELM）区分中心线索和边缘线索，将短视频内容视为中心线索，将标题、封面、信源、时长视为边缘线索</td><td><code>B0003</code>, <code>B0004</code>, <code>B0005</code>-<code>B0007</code></td><td>可用于解释用户是被内容质量说服，还是被标题/封面/时长等外部线索吸引</td><td>O-002</td></tr><tr><td>对象/场景拓展</td><td>研究粉丝量超过 100 万的社会化阅读推广抖音号，为图书馆账号提供外部参照</td><td><code>B0003</code>, <code>B0004</code>, <code>B0008</code></td><td>可作为图书馆向外部成熟阅读账号学习的比较基准</td><td>O-003</td></tr><tr><td>数据/样本建设</td><td>采集 30 个社会化账号、10294 个阅读推广短视频，时间跨度为 2018-05 至 2021-05</td><td><code>B0008</code></td><td>样本量明显大于多数图书馆短视频研究，可支持方法借鉴和比较设计</td><td>O-003</td></tr><tr><td>方法/技术路径</td><td>结合爬虫、语音转文字、OpenCV 图像帧提取、文本特征计算、图像识别和 SPSS 多元线性回归</td><td><code>B0008</code>-<code>B0014</code></td><td>给后续自动化、多模态内容分析提供技术路线</td><td>O-005</td></tr><tr><td>变量/测量设计</td><td>用中文可读性、情感、代词、网络热词、标题长度、标题互文性、封面角色/字幕、企业认证、时长等变量测量传播线索</td><td><code>B0004</code>-<code>B0007</code>, <code>B0010</code>, <code>B0016</code></td><td>可拓展本项目的变量库，尤其是可读性和标题互文性</td><td>O-005</td></tr><tr><td>方法/技术路径</td><td>用余弦相似度测量标题互文性，并报告其对传播效果的正向作用</td><td><code>B0016</code></td><td>可用于系列化图书推荐、馆藏故事栏目、活动连续内容研究</td><td>O-005</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>图书馆转化不足</td><td>样本为企业或个人运营的社会化阅读推广账号，不是图书馆官方账号；因此结论对图书馆的适用性需要再检验</td><td><code>B0002</code>, <code>B0003</code>, <code>B0004</code>, <code>B0008</code></td><td>用图书馆官方账号复测 ELM 变量，比较社会化账号和图书馆账号的机制差异</td><td>高</td></tr><tr><td>指标替代问题</td><td>传播效果只纳入点赞、评论、分享，作者明确承认可获取数据限制导致未考虑播放数和下载数</td><td><code>B0018</code></td><td>增加播放、完播、收藏、主页访问、关注转化、借阅/活动转化等指标</td><td>高</td></tr><tr><td>变量遗漏问题</td><td>作者承认删减了内容主题、剪辑方式、背景音乐、主持人风格等可能影响传播效果的因素</td><td><code>B0018</code></td><td>与 Hook Model 论文的变量互补，构建更完整的多模态变量体系</td><td>高</td></tr><tr><td>证据解释边界</td><td>文章策略中提到优化封面，但总传播效果层面的核心显著因素主要是内容/标题可读性、网络热词、标题互文性和 15-60 秒时长；封面作用更多体现在部分子指标</td><td><code>B0016</code>, <code>B0017</code></td><td>后续讨论要区分“总传播效果显著”和“点赞/评论/分享子指标显著”</td><td>中高</td></tr><tr><td>样本外推问题</td><td>高粉丝社会化账号可能具有团队化、商业化、品牌化运营特征，与图书馆公益服务账号不同</td><td><code>B0003</code>, <code>B0016</code></td><td>对账号主体、粉丝基数、认证类型、商业化程度进行分层控制</td><td>中高</td></tr><tr><td>平台时代漂移</td><td>数据截止 2021 年 5 月，不能自动代表当前抖音、视频号、小红书、B站等平台的阅读推广生态</td><td><code>B0008</code></td><td>用近年多平台样本复测 ELM 变量</td><td>中</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-005: 社会化阅读推广账号中有效的内容可读性、网络热词、标题互文性和 15-60 秒时长，在图书馆官方账号中是否同样有效？</li>
+<li>RQ-006: 图书馆阅读推广短视频的中心线索（内容质量、可读性、主题）与边缘线索（标题、封面、时长、信源）哪一类更能解释服务价值指标？</li>
+<li>RQ-007: 标题互文性是否能提升图书馆系列短视频的连续观看、收藏和服务转化，而不只是点赞评论分享？</li>
+<li>RQ-008: 当加入内容主题、剪辑方式、背景音乐和主持人风格后，ELM 模型的解释力是否显著提升？</li>
+</ul>
+<h3><code>cnki_2020_64b4f881c9</code> - 图书馆短视频发展现状、问题与对策分析——以抖音平台为例</h3>
+<ul>
+<li>Source: 图书馆工作与研究, 2020</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2020_64b4f881c9/paper.md</code></li>
+<li>证据边界: 伴读级 source-grounded skim；暂无页码；时间窗口主要是 2019 年抖音生态。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>对象/场景拓展</td><td>用实体图书馆官方抖音账号作为观察对象，排除非实体“图书馆”账号</td><td><code>B0003</code></td><td>账号识别规则可作为后续样本筛选起点</td><td>O-003</td></tr><tr><td>数据/样本建设</td><td>识别 76 家官方实体图书馆账号，并列出粉丝量前 10 的账号数据</td><td><code>B0003</code>, <code>B0004</code></td><td>可作为 2019 年历史基线，与 2024-2026 数据做纵向比较</td><td>O-004</td></tr><tr><td>实践策略转译</td><td>将问题拆成入驻、运营、原创内容、线上线下互动四类，并提出对应策略</td><td><code>B0005</code>-<code>B0009</code></td><td>可支撑服务设计框架，不只是内容技巧</td><td>O-007</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>平台时代漂移</td><td>研究主要反映 2019 年图书馆抖音账号状态</td><td><code>B0003</code>, <code>B0004</code></td><td>复测当前账号数量、粉丝、作品和互动，构造纵向变化图</td><td>高</td></tr><tr><td>因果识别问题</td><td>描述账号问题与对策，未检验哪些策略真正提高传播或服务效果</td><td><code>B0005</code>-<code>B0009</code></td><td>后续用平台数据或案例追踪检验策略效果</td><td>中高</td></tr><tr><td>指标替代问题</td><td>主要关注粉丝、获赞、评论等平台可见指标</td><td><code>B0003</code>-<code>B0005</code></td><td>将服务触达、活动参与、资源使用纳入评估</td><td>高</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-009: 2019 年以来图书馆抖音账号开通率、作品数量和互动指标是否发生结构性变化？</li>
+<li>RQ-010: 图书馆短视频账号的“持续运营能力”能否预测其服务触达，而不只是粉丝/点赞？</li>
+</ul>
+<h3><code>cnki_2021_7556aafa99</code> - 公共图书馆“抖音”短视频服务现状及发展策略研究</h3>
+<ul>
+<li>Source: 图书馆工作与研究, 2021</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2021_7556aafa99/paper.md</code></li>
+<li>证据边界: 伴读级 source-grounded skim；暂无页码；官方账号搜索规则可能遗漏非标准命名账号。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>对象/场景拓展</td><td>将对象限定为国家级、省级、省会及副省级城市公共图书馆，形成公共图书馆服务场景图</td><td><code>B0003</code>, <code>B0004</code></td><td>可用于公共图书馆与高校馆/科研馆比较</td><td>O-003</td></tr><tr><td>数据/样本建设</td><td>采集 63 家公共图书馆账号开通、获赞、粉丝、作品、动态、首发时间等指标</td><td><code>B0003</code>-<code>B0008</code></td><td>可作为公共图书馆短视频服务成熟度评价的数据字段来源</td><td>O-007</td></tr><tr><td>变量/测量设计</td><td>对原创内容进行图书馆宣传、图书推荐、阅读推广、工作日常、讲座慕课、通知公告等分类</td><td><code>B0010</code>, <code>B0011</code></td><td>可扩展内容主题分类表，连接服务功能</td><td>O-005</td></tr><tr><td>实践策略转译</td><td>提出规划目标、特色原创、PUGC、融媒体、线上线下融合、跨地域跨行业合作</td><td><code>B0015</code>-<code>B0019</code></td><td>有助于把短视频研究提升到服务体系设计层面</td><td>O-006</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>样本外推问题</td><td>以馆名搜索和官方认证账号为准，可能漏掉非标准命名或未认证但实际运营账号</td><td><code>B0004</code></td><td>后续结合多关键词、平台认证、人工核验建立更完整账号名录</td><td>中高</td></tr><tr><td>因果识别问题</td><td>调查和策略归纳为主，没有检验具体策略对互动或服务转化的效果</td><td><code>B0013</code>-<code>B0019</code></td><td>将策略变量转成可检验指标，做对照或纵向研究</td><td>高</td></tr><tr><td>指标替代问题</td><td>获赞、粉丝、作品数不能直接说明公共文化服务效果</td><td><code>B0005</code>-<code>B0008</code></td><td>加入活动报名、资源访问、到馆行为、用户反馈等服务指标</td><td>高</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-011: 公共图书馆短视频服务成熟度能否由规划、团队、原创内容、互动和融媒体协同五个维度构成？</li>
+<li>RQ-012: PUGC 与专业团队建设是否能提高图书馆短视频的用户黏性和服务转化？</li>
+</ul>
+<h3><code>cnki_2020_2a150c6df8</code> - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究</h3>
+<ul>
+<li>Source: 图书馆, 2020</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2020_2a150c6df8/paper.md</code></li>
+<li>证据边界: 伴读级 source-grounded skim；热门视频样本不能直接证明因果；暂无页码。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>对象/场景拓展</td><td>从全部账号状态转向“热门图书馆短视频”内容规律</td><td><code>B0001</code>, <code>B0003</code>-<code>B0005</code></td><td>可用于解释为什么少数内容突破图书馆账号低传播困境</td><td>O-008</td></tr><tr><td>数据/样本建设</td><td>从 328 个账号、8069 条视频中筛选 103 条点赞超过 1000 的非转发热门视频</td><td><code>B0003</code>-<code>B0005</code></td><td>可作为热门/非热门对照研究的历史样本设计参考</td><td>O-004</td></tr><tr><td>变量/测量设计</td><td>编码标题长度、话题引导、时长、字幕、种类、主题、情绪、人物角色</td><td><code>B0006</code>, <code>B0007</code>, <code>B0008</code>, <code>B0009</code></td><td>可纳入后续多模态变量表</td><td>O-005</td></tr><tr><td>实践策略转译</td><td>归纳详尽标题、话题、字幕、实拍/采访、知识/社会文化、名人、强情绪等内容规律</td><td><code>B0009</code>-<code>B0013</code></td><td>可为短视频内容优化提供可操作变量</td><td>O-006</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>因果识别问题</td><td>只分析热门视频，缺少完整非热门对照组，不能证明这些因素导致热门</td><td><code>B0004</code>, <code>B0014</code></td><td>构建全样本或匹配样本，比较热门/非热门视频</td><td>高</td></tr><tr><td>指标替代问题</td><td>以点赞超过 1000 作为热门门槛，未纳入播放、完播、收藏、服务转化</td><td><code>B0004</code></td><td>用多指标评估传播效果和服务效果</td><td>高</td></tr><tr><td>变量遗漏问题</td><td>作者承认账号粉丝数、视频总数、视频质量、视频分类等外部因素可能影响传播</td><td><code>B0014</code></td><td>控制账号规模、发布时间、粉丝基数和推荐曝光</td><td>高</td></tr><tr><td>图书馆转化不足</td><td>热点、名人和情绪可能带来流量，但不一定服务图书馆使命</td><td><code>B0010</code>, <code>B0011</code>, <code>B0014</code></td><td>区分流量型热门与服务价值型热门</td><td>高</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-013: 图书馆热门短视频的内容特征，在控制账号粉丝和作品数量后是否仍然显著？</li>
+<li>RQ-014: 热点/情绪/名人驱动的高互动，是否能转化为图书馆服务认知、到馆或资源使用？</li>
+<li>RQ-015: 图书馆短视频能否建立“流量型热门”和“服务型热门”的双重评价框架？</li>
+</ul>
+<h3><code>cnki_2021_5530e86157</code> - 基于短视频营销的公共图书馆数字阅读推广策略研究</h3>
+<ul>
+<li>Source: 图书馆工作与研究, 2021</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2021_5530e86157/paper.md</code></li>
+<li>证据边界: source-grounded guided skim；暂无页码；文章是策略归纳和实践提炼，不是因果检验。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>对象/场景拓展</td><td>将短视频营销直接嵌入公共图书馆数字阅读推广问题，而不只是一般图书馆宣传或平台流量</td><td><code>B0001</code>, <code>B0003</code></td><td>有助于把研究问题从“短视频是否热门”推进到“短视频如何服务数字阅读推广”</td><td>O-001</td></tr><tr><td>数据/样本建设</td><td>选取 90 个粉丝长期超过 1 万的公共图书馆抖音头部账号，观察 2020-05-01 至 2020-11-30 的 27,455 条短视频</td><td><code>B0003</code>, <code>B0004</code></td><td>可作为 2020 年公共图书馆头部账号实践样本和后续纵向比较基线</td><td>O-004</td></tr><tr><td>实践策略转译</td><td>将头部账号经验归纳为内容 IP 与场景融合、双矩阵营销、用户标签和社区化情境互动</td><td><code>B0005</code>-<code>B0007</code></td><td>可转化为服务设计、账号运营能力和平台协同变量</td><td>O-007</td></tr><tr><td>实践策略转译</td><td>提出情感营销、渠道营销、互动营销三条数字阅读推广短视频策略</td><td><code>B0008</code>-<code>B0013</code></td><td>可形成“情感共鸣-渠道触达-互动参与-服务转化”的研究路径</td><td>O-009</td></tr><tr><td>对象/场景拓展</td><td>强调线上交互、线下数字阅读场景、POI、积分激励和真实阅读体验的连接</td><td><code>B0011</code>-<code>B0013</code></td><td>有助于突破单一平台互动指标，连接图书馆服务场景</td><td>O-001</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>样本外推问题</td><td>头部账号样本可能高估公共图书馆整体短视频能力，不能代表普通馆、小馆、高校馆或科研型图书馆</td><td><code>B0003</code>, <code>B0004</code></td><td>将账号按馆型、粉丝规模、地区和运营成熟度分层比较</td><td>高</td></tr><tr><td>因果识别问题</td><td>文章是经验总结和策略归纳，没有检验情感、渠道、互动策略是否实际提升传播、服务触达或阅读转化</td><td><code>B0005</code>-<code>B0013</code></td><td>把三类策略转为可编码变量，做回归、准实验或纵向追踪</td><td>高</td></tr><tr><td>指标替代问题</td><td>文章强调关注度、参与力和营销效果，但缺少清晰服务价值指标</td><td><code>B0001</code>, <code>B0011</code>-<code>B0013</code></td><td>建立数字阅读资源访问、活动报名、借阅转化、用户满意度等指标</td><td>高</td></tr><tr><td>平台时代漂移</td><td>数据来自 2020 年抖音生态，平台算法、用户习惯和馆方运营成熟度可能已经变化</td><td><code>B0003</code>, <code>B0004</code></td><td>使用 2024-2026 数据复测头部账号实践路径</td><td>中高</td></tr><tr><td>变量遗漏问题</td><td>情感营销、渠道营销、互动营销仍偏概念性，缺少可直接复现的编码口径</td><td><code>B0008</code>-<code>B0013</code></td><td>将策略拆为具体变量：情绪类型、IP角色、矩阵结构、导流链接、评论互动、直播、POI、线下转化等</td><td>中高</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-016: 公共图书馆短视频的情感营销、渠道营销、互动营销三类策略，哪一类更能解释服务触达和数字阅读参与？</li>
+<li>RQ-017: 头部公共图书馆账号的短视频运营经验能否迁移到普通公共图书馆、高校图书馆或科研型图书馆？</li>
+<li>RQ-018: “线上关注-评论互动-线下/数字资源服务使用”的转化链条能否被平台数据与馆方服务数据共同测量？</li>
+<li>RQ-019: 公共图书馆短视频营销中的“营销”语言如何与公共文化服务使命保持一致，避免过度娱乐化或商业化？</li>
+</ul>
+<h3><code>cnki_2021_3771e58987</code> - 公共图书馆和高校图书馆短视频营销比较研究</h3>
+<ul>
+<li>Source: 大学图书馆学报, 2021</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2021_3771e58987/paper.md</code></li>
+<li>证据边界: source-grounded guided skim；暂无页码；文章是比较性现状分析和策略归纳，不是因果检验。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>对象/场景拓展</td><td>同时比较公共图书馆与高校图书馆短视频营销，弥补单一馆型研究的外推不足</td><td><code>B0001</code>, <code>B0007</code></td><td>可用于后续构建馆型差异变量，避免把公共馆经验直接套到高校馆</td><td>O-010</td></tr><tr><td>平台比较</td><td>同时纳入抖音、快手、B站，指出不同平台用户结构和内容形态差异</td><td><code>B0003</code>, <code>B0004</code>, <code>B0012</code>, <code>B0013</code></td><td>可将研究从单一抖音账号扩展到多平台服务矩阵</td><td>O-011</td></tr><tr><td>理论/框架转译</td><td>将 AARRR 漏斗模型转译为图书馆短视频营销的拉新、促活、留存、收益、传播框架</td><td><code>B0005</code>, <code>B0006</code>, <code>B0013</code>-<code>B0015</code></td><td>可作为图书馆短视频服务路径或运营成熟度的框架来源</td><td>O-012</td></tr><tr><td>服务价值转译</td><td>将非营利图书馆的“收益”解释为品牌活动、精准服务、文化影响力和服务推广</td><td><code>B0014</code>, <code>B0015</code></td><td>有助于突破商业营销语言，转向公共文化服务价值测量</td><td>O-001</td></tr><tr><td>实践策略转译</td><td>提出情感价值、平台定位、系列活动、线上线下结合、版权合规等策略</td><td><code>B0015</code>, <code>B0016</code></td><td>可转化为内容质量、平台适配、组织治理和合规变量</td><td>O-007</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>因果识别问题</td><td>以网络调查、内容分析和策略归纳为主，不能证明某项策略导致互动或服务效果提升</td><td><code>B0005</code>, <code>B0013</code>-<code>B0016</code></td><td>将 AARRR 阶段变量编码后做纵向模型、准实验或分层回归</td><td>高</td></tr><tr><td>样本不均衡</td><td>公共图书馆认证账号 161 个，高校图书馆认证账号 18 个，馆型比较可能受样本规模影响</td><td><code>B0007</code></td><td>后续按馆型扩大样本，并分层比较公共馆、高校馆和专业馆</td><td>中高</td></tr><tr><td>指标替代问题</td><td>主要观察账号、作品、粉丝、点赞、评论、分享，尚未测量阅读推广或服务使用结果</td><td><code>B0007</code>, <code>B0009</code>-<code>B0011</code>, <code>B0014</code></td><td>接入活动报名、资源访问、到馆、借阅、用户反馈等服务价值指标</td><td>高</td></tr><tr><td>平台时代漂移</td><td>数据统计在 2020-2021 年，平台算法、用户结构和馆方运营能力可能已变化</td><td><code>B0007</code>, <code>B0009</code></td><td>用 2024-2026 多平台数据复测平台定位和 AARRR 阶段差异</td><td>中高</td></tr><tr><td>账号发现偏差</td><td>依赖平台关键词和机构认证账号，可能遗漏非标准命名或未认证但实际运营账号</td><td><code>B0007</code></td><td>建立多关键词、机构官网反查、平台认证和人工核验结合的账号名录</td><td>中</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-020: 图书馆短视频 AARRR 各阶段指标，能否预测服务触达和阅读推广效果，而不只是平台互动？</li>
+<li>RQ-021: 公共图书馆与高校图书馆在抖音、快手、B站上的平台适配策略是否存在稳定差异？</li>
+<li>RQ-022: 图书馆短视频的“收益”能否被操作化为文化影响力、资源使用、活动参与和用户关系维护的复合服务价值指标？</li>
+</ul>
+<h3><code>cnki_2023_34348faa1e</code> - 基于SICAS模型的公共图书馆短视频营销策略研究</h3>
+<ul>
+<li>Source: 图书馆工作与研究, 2023</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2023_34348faa1e/paper.md</code></li>
+<li>证据边界: source-grounded skim；暂无页码；描述性账号调查与策略转译，不是因果检验。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>理论/模型引入</td><td>将 SICAS 模型直接转译到公共图书馆短视频服务场景，把感知、兴趣互动、连接沟通、行动、分享组织成完整路径</td><td><code>B0005</code>, <code>B0006</code></td><td>可作为当前项目里连接内容线索、互动行为和服务转化的中观框架</td><td>O-009</td></tr><tr><td>对象/场景拓展</td><td>不是只研究单条视频内容，而是把馆方账号的私域、公域、主页信息、评论互动、分享回流一起纳入</td><td><code>B0008</code>-<code>B0015</code></td><td>有助于把研究问题从“内容技巧”推进到“服务路径设计”</td><td>O-001</td></tr><tr><td>数据/样本建设</td><td>以 11 个粉丝总量过万的公共图书馆抖音账号为样本，结合飞瓜与手工收集数据做 DCI 诊断</td><td><code>B0007</code></td><td>可作为 2021 年末头部公共馆短视频传播力与运营现状的历史基线</td><td>O-004</td></tr><tr><td>变量/测量设计</td><td>把问题拆到感知渠道、沉浸式内容、互动链接、行动触发、分享激励五类环节</td><td><code>B0011</code>-<code>B0016</code></td><td>可转成编码维度或访谈提纲，而不只停留在经验建议</td><td>O-005</td></tr><tr><td>实践策略转译</td><td>将融媒体引流、沉浸式内容、提问互动、软营销、精神/物质激励整合成策略框架</td><td><code>B0011</code>-<code>B0016</code></td><td>适合作为后续行动研究或策略效果检验的假设来源</td><td>O-006</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>指标替代问题</td><td>DCI 与近 30 日点赞、评论、分享、粉丝变化只能描述传播影响力，不能直接代表阅读推广或服务价值</td><td><code>B0007</code>, <code>B0011</code></td><td>建立“传播表现 + 服务触达 + 阅读转化”复合指标体系</td><td>高</td></tr><tr><td>因果识别问题</td><td>研究用描述性账号调查和策略转译说明问题与路径，不能证明某类策略实际提升效果</td><td><code>B0011</code>-<code>B0016</code></td><td>把 SICAS 各阶段变量化，后续做准实验、纵向研究或回归检验</td><td>高</td></tr><tr><td>样本外推问题</td><td>样本集中在粉丝过万公共图书馆头部账号，难代表普通馆、高校馆、科研馆或新平台生态</td><td><code>B0007</code>, <code>B0008</code></td><td>分馆型、分平台、分账号成熟度扩样复测</td><td>中高</td></tr><tr><td>平台时代漂移</td><td>数据统计截至 2021-12-02，不能自动代表 2024-2026 平台算法和用户行为</td><td><code>B0007</code></td><td>用近年抖音/视频号/B站样本复测 SICAS 路径</td><td>中高</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-023: SICAS 五阶段变量，哪一阶段最能解释图书馆短视频的服务触达与阅读推广结果？</li>
+<li>RQ-024: 软营销在图书馆短视频中，是否能比硬推广更有效地触发 Action，而不牺牲公共文化服务边界？</li>
+<li>RQ-025: 公共馆、高校馆和科研型图书馆在 Sense、Connect、Share 三个阶段的短板是否存在结构性差异？</li>
+</ul>
+<h2>后续维护模板</h2>
+<h3><code>&lt;citekey&gt;</code> - <code>&lt;title&gt;</code></h3>
+<ul>
+<li>Source:</li>
+<li>Read status:</li>
+<li>Reader:</li>
+<li>证据边界:</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-:</li>
+</ul>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-29 22:43.</footer>
+</body>
+</html>

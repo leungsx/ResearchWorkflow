@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026-06-29 学习日志</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #16202b;
+      --muted: #667685;
+      --line: #d7e0e7;
+      --paper: #ffffff;
+      --soft: #f4f7fa;
+      --blue: #1f5bd8;
+      --teal: #0d7a6f;
+      --amber: #9a5a05;
+      --rose: #b42449;
+      --slate: #0f172a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(31, 91, 216, 0.10), transparent 28%),
+        linear-gradient(180deg, #f7fafc 0%, #edf3f7 100%);
+      line-height: 1.6;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: linear-gradient(135deg, #102033 0%, #14344d 55%, #0d7a6f 100%);
+      color: #f8fbff;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 26px 22px; }
+    h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.18; }
+    h2 { margin: 0 0 14px; font-size: 21px; }
+    h3 { margin: 0 0 8px; font-size: 16px; }
+    p { margin: 0 0 12px; }
+    .sub { max-width: 860px; color: rgba(248, 251, 255, 0.86); }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .nav a {
+      color: #f8fbff;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .panel, .metric {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 10px 28px rgba(16, 24, 40, 0.05);
+    }
+    .panel { padding: 18px; }
+    .metric { padding: 16px; }
+    .metric b {
+      display: block;
+      font-size: 28px;
+      line-height: 1.08;
+      color: var(--slate);
+    }
+    .metric span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .col-8 { grid-column: span 8; }
+    .col-12 { grid-column: 1 / -1; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 4px solid var(--blue);
+      background: var(--soft);
+      padding: 12px 12px 12px 14px;
+      border-radius: 0 10px 10px 0;
+    }
+    .item.teal { border-left-color: var(--teal); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      padding: 9px 6px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .callout {
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid #bfdaf4;
+      background: linear-gradient(135deg, #eef5ff 0%, #f7fbff 100%);
+    }
+    .tags, .keywords, .steps {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .tags li, .keywords li, .steps li { margin: 6px 0; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: #eef2f7;
+      padding: 1px 5px;
+      border-radius: 6px;
+    }
+    footer {
+      color: var(--muted);
+      font-size: 12px;
+      padding: 12px 0 24px;
+    }
+    @media (max-width: 920px) {
+      .hero, .meta-grid, .grid { grid-template-columns: 1fr; }
+      .col-4, .col-6, .col-8, .col-12 { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>2026-06-29 学习日志</h1>
+      <p class="sub">晚间闭环实际执行于 2026-06-29 20:59 CST。今天的重点不是补空白目录，而是把已经生成的 SICAS 论文精读、文献笔记、知识卡、复习队列、知识图谱和仪表盘入口校准成一条完整可回看的链路。</p>
+      <nav class="nav">
+        <a href="../study_dashboard.html">总览</a>
+        <a href="../paper_reading/2026-06-29-sicas-public-library-short-video.html">今日精读</a>
+        <a href="../knowledge_cards/index.html">知识卡</a>
+        <a href="../knowledge_graph/index.html">知识图谱</a>
+        <a href="index.html" aria-current="page">学习日志</a>
+        <a href="views/2026-06-29-evening-close-631a6a14.html">晚间会话浏览版</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <section class="panel">
+        <h2>今日概览</h2>
+        <p>今天的主读资产已经完整落地：<a href="../paper_reading/2026-06-29-sicas-public-library-short-video.html">SICAS 论文精读页</a>、<a href="../paper_reading/views/cnki_2023_34348faa1e-note.html">Obsidian 论文笔记</a>、6 张概念/方法卡、2 条学习会话和对应的 HTML 索引入口都已经可直接打开。</p>
+        <p>今晚补做的关键闭环，是把论文笔记回链到学习日志，让论文页直达知识卡与当日日志，并把 <code>2026-06-28-context-pack</code> 和 <code>2026-06-22-library_short_video</code> 接回图谱，避免“推荐、主读、晚间总结”各自孤立。</p>
+        <div class="callout">
+          <strong>核心判断：</strong> 今天已经不是“没有产出”的状态，而是已经具备了 <code>论文 -&gt; 知识卡 -&gt; 图谱 -&gt; 复习 -&gt; 项目行动</code> 的最小闭环；明早最值得做的是补证据核验，而不是重新找入口。
+        </div>
+      </section>
+      <section class="meta-grid">
+        <div class="metric"><b>29</b><span>今日新增/修改研究相关文件</span></div>
+        <div class="metric"><b>6</b><span>今日新增/更新概念与方法卡</span></div>
+        <div class="metric"><b>90 / 170</b><span>知识图谱节点 / 关系边</span></div>
+        <div class="metric"><b>52</b><span>剩余孤立节点</span></div>
+      </section>
+    </section>
+
+    <section class="grid">
+      <section class="panel col-8">
+        <h2>时间线</h2>
+        <table>
+          <thead>
+            <tr><th>时间</th><th>动作</th><th>结果</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>20:35-20:41</td><td>读取流程协议与扫描今日变更</td><td>确认今天真实产物已覆盖论文页、文献笔记、知识卡、学习会话、图谱 CSV 和各入口页。</td></tr>
+            <tr><td>20:41-20:48</td><td>做交叉链接审计</td><td>发现晚间会话和 HTML 日志沿用了旧判断，需要从“无产出”改成“已有闭环资产”。</td></tr>
+            <tr><td>20:48-20:54</td><td>补 Markdown 回链</td><td>论文笔记新增学习日志入口；主读会话与晚间闭环互链；晚间闭环接回前序上下文包和明早推荐。</td></tr>
+            <tr><td>20:54-20:57</td><td>修浏览器入口</td><td>论文精读页新增知识卡入口与当日日志入口，晚间 HTML 日志改写为真实状态摘要。</td></tr>
+            <tr><td>20:57-20:59</td><td>刷新图谱与仪表盘</td><td><code>make obsidian-graph</code> 输出 90 个节点、170 条边；<code>make learning-dashboard</code> 刷新总览、论文、知识卡、图谱和日志入口。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel col-4">
+        <h2>论文精读入口</h2>
+        <div class="list">
+          <div class="item teal">
+            <a href="../paper_reading/2026-06-29-sicas-public-library-short-video.html">今日 SICAS 精读页</a>
+            <div class="meta">论文页现在可直达文献笔记、知识卡入口、知识图谱与学习日志。</div>
+          </div>
+          <div class="item">
+            <a href="../paper_reading/views/cnki_2023_34348faa1e-note.html">Obsidian 论文笔记</a>
+            <div class="meta">已含 Knowledge Links，并新增主读会话与晚间闭环回链。</div>
+          </div>
+          <div class="item amber">
+            <a href="../paper_reading/views/cnki_2023_34348faa1e-reader.html">Reader</a>
+            <div class="meta">明早优先回核 <code>B0007-B0016</code> 的页码、表述和变量边界。</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel col-6">
+        <h2>知识卡入口</h2>
+        <div class="list">
+          <div class="item rose">
+            <a href="../knowledge_cards/views/concept-sicas-e14df8c7.html">SICAS模型</a>
+            <div class="meta">当前最密集的新中心节点，已连接项目、论文、方法和对照框架。</div>
+          </div>
+          <div class="item rose">
+            <a href="../knowledge_cards/views/concept-841db0d5.html">软营销</a>
+            <div class="meta">帮助把 Action 阶段从“硬推链接”改写为“服务体验嵌入”。</div>
+          </div>
+          <div class="item teal">
+            <a href="../knowledge_cards/views/method-dci-48f2a84e.html">DCI传播力指数</a>
+            <div class="meta">适合作为传播表现基线，但不能替代服务价值指标。</div>
+          </div>
+          <div class="item amber">
+            <a href="../vault/14_Review_Queue/review_queue.csv">review_queue.csv</a>
+            <div class="meta">队列现有 8 条复习项；其中 Hook Model 上瘾模型 和 方向链 仍需优先清欠。</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel col-6">
+        <h2>知识图谱入口</h2>
+        <table>
+          <thead>
+            <tr><th>项目</th><th>结果</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>图谱刷新</td><td><a href="../knowledge_graph/index.html">knowledge_graph/index.html</a> 已按最新 Markdown 重新生成。</td></tr>
+            <tr><td>节点 / 边</td><td><code>90 / 170</code>，较刷新前边数增加 48，节点数不变。</td></tr>
+            <tr><td>新增高价值关系</td><td><code>cnki_2023_34348faa1e -&gt; 2026-06-29-sicas-paper</code>、<code>cnki_2023_34348faa1e -&gt; 2026-06-29-evening-close</code>、<code>2026-06-29-evening-close -&gt; 2026-06-28-context-pack</code>、<code>2026-06-29-evening-close -&gt; 2026-06-22-library_short_video</code>。</td></tr>
+            <tr><td>孤立节点</td><td>剩余 52 个，优先值得明天处理的是旧 context pack、旧 CNKI 推荐记录和 <code>starter_project</code>。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel col-12">
+        <h2>文件归档摘要</h2>
+        <table>
+          <thead>
+            <tr><th>动作</th><th>文件</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>更新</td><td><a href="../paper_reading/2026-06-29-sicas-public-library-short-video.html">paper_reading/2026-06-29-sicas-public-library-short-video.html</a></td><td>补知识卡入口与当日日志入口，完成浏览器侧闭环。</td></tr>
+            <tr><td>更新</td><td><a href="../paper_reading/views/cnki_2023_34348faa1e-note.html">Obsidian 论文笔记浏览版</a></td><td>新增学习日志回链，连接主读会话与晚间闭环。</td></tr>
+            <tr><td>更新</td><td><a href="views/2026-06-29-sicas-paper-a3d0cfd2.html">2026-06-29-sicas-paper</a> / <a href="views/2026-06-29-evening-close-631a6a14.html">2026-06-29-evening-close</a></td><td>修正同日学习链，并把上下文包和明早推荐接回图谱。</td></tr>
+            <tr><td>刷新</td><td><a href="../vault/13_Knowledge_Graph/obsidian_nodes.csv">obsidian_nodes.csv</a> / <a href="../vault/13_Knowledge_Graph/obsidian_edges.csv">obsidian_edges.csv</a></td><td>图谱导出更新为 90 节点、170 边。</td></tr>
+            <tr><td>刷新</td><td><a href="../study_dashboard.html">study_dashboard.html</a>、<a href="../paper_reading/index.html">paper_reading/index.html</a>、<a href="../paper_reading/today.html">paper_reading/today.html</a>、<a href="../knowledge_cards/index.html">knowledge_cards/index.html</a>、<a href="../knowledge_graph/index.html">knowledge_graph/index.html</a>、<a href="index.html">logs/index.html</a></td><td>统一更新可视化入口。</td></tr>
+            <tr><td>待判断</td><td>无新增待判断文件</td><td>本轮未移动也未删除用户文件；旧孤立节点仅记录，不做破坏性整理。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel col-12">
+        <h2>21:18 归档补记：HTML 呈现标准固定</h2>
+        <table>
+          <thead>
+            <tr><th>归类</th><th>文件/入口</th><th>归档说明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>固定入口</td><td><a href="../paper_reading/today.html">paper_reading/today.html</a></td><td>以后每日直接从这里进入最新主读页，不再手动找当天 HTML。</td></tr>
+            <tr><td>二级材料镜像</td><td><a href="../paper_reading/views/cnki_2023_34348faa1e-reader.html">Reader</a>、<a href="../paper_reading/views/cnki_2023_34348faa1e-note.html">论文笔记</a>、<a href="../paper_reading/views/literature_review_workbench.html">文献综述工作台</a></td><td>用户侧默认打开 HTML 浏览版；源 Markdown 只保留在镜像页的“打开原始 Markdown”按钮。</td></tr>
+            <tr><td>知识卡镜像</td><td><a href="../knowledge_cards/index.html">knowledge_cards/index.html</a></td><td>概念卡和方法卡入口已跳转到 <code>knowledge_cards/views/</code> 下的 HTML 页面。</td></tr>
+            <tr><td>图谱入口</td><td><a href="../knowledge_graph/index.html">knowledge_graph/index.html</a></td><td>默认是可搜索、可筛选、可点节点的 SVG 关系图；CSV 仅作为源数据。</td></tr>
+            <tr><td>规范固化</td><td><code>docs/INTEGRATED_RESEARCH_LEARNING_WORKFLOW.md</code>、<code>docs/PAPER_READING_OUTPUT_STANDARD.md</code>、<code>docs/OBSIDIAN_KNOWLEDGE_GRAPH.md</code></td><td>已写明 HTML-first、镜像页和可视化图谱是以后每日默认呈现形式。</td></tr>
+            <tr><td>自动纠偏</td><td><a href="../scripts/build_learning_dashboard.py">scripts/build_learning_dashboard.py</a></td><td>构建时会扫描每日精读页里的本地 Markdown 链接，自动生成 HTML 镜像并改链。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel col-4">
+        <h2>主题标签</h2>
+        <ul class="tags">
+          <li>#library_short_video</li>
+          <li>#SICAS模型</li>
+          <li>#知识图谱闭环</li>
+          <li>#paper-to-cards</li>
+          <li>#evening-close</li>
+        </ul>
+      </section>
+
+      <section class="panel col-4">
+        <h2>待办事项</h2>
+        <ol class="steps">
+          <li>回 Reader 核验 <code>B0007-B0016</code> 的页码、表格和变量表述。</li>
+          <li>把 精神激励 补成正式知识卡，避免继续停留在 linked 节点。</li>
+          <li>把“平台互动 -&gt; 服务触达 -&gt; 阅读转化”写成变量草图，接进项目工作台。</li>
+        </ol>
+      </section>
+
+      <section class="panel col-4">
+        <h2>未解决问题</h2>
+        <ol class="steps">
+          <li>今天的 SICAS 精读仍是 <code>source-grounded skim</code>，尚未升级成写作级证据。</li>
+          <li>旧 context pack 和旧 CNKI 推荐节点仍有一批未回链，图谱历史层还偏稀疏。</li>
+          <li>旧复习欠账没有随新知识一起清理，明早若不先处理，队列会继续积压。</li>
+        </ol>
+      </section>
+
+      <section class="panel col-6">
+        <h2>明日计划</h2>
+        <ol class="steps">
+          <li>先复习 Hook Model 上瘾模型 和 方向链，把旧队列清掉。</li>
+          <li>再打开 <a href="../paper_reading/views/cnki_2023_34348faa1e-reader.html">Reader</a>，把 SICAS 论文的关键 blocks 核成可引用证据。</li>
+          <li>随后用 SICAS模型 对照 Hook / ELM / AARRR，明确机制框架与指标框架的分工。</li>
+          <li>最后把变量草图写进 <a href="../paper_reading/views/literature_review_workbench.html">文献综述工作台</a>，让项目行动真正接上今天的阅读。</li>
+        </ol>
+      </section>
+
+      <section class="panel col-6">
+        <h2>可检索关键词</h2>
+        <ul class="keywords">
+          <li>SICAS</li>
+          <li>公共图书馆短视频</li>
+          <li>服务转化路径</li>
+          <li>DCI传播力指数</li>
+          <li>描述性账号调查</li>
+          <li>沉浸式内容</li>
+          <li>软营销</li>
+          <li>用户感知价值</li>
+          <li>2026-06-28-context-pack</li>
+          <li>2026-06-22-library_short_video</li>
+        </ul>
+      </section>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    本页为晚间闭环浏览器入口；详细会话请查看 <a href="views/2026-06-29-evening-close-631a6a14.html">2026-06-29-evening-close 浏览版</a>。
+  </footer>
+</body>
+</html>

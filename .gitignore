@@ -1,0 +1,49 @@
+# macOS / Python / notebook caches
+.DS_Store
+**/.DS_Store
+__pycache__/
+**/__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Local runtime and temporary files
+codex/runtime/
+.Rhistory
+.RData
+*.log
+*.tmp
+
+# Lightweight snapshot zips stay local or go to external storage, not Git history.
+backups/
+*.zip
+
+# Raw literature files and generated extraction outputs are managed outside Git.
+library/pdfs/
+library/papers/
+library/text/
+*.pdf
+*.caj
+*.kdh
+
+# Binary/export artifacts that should not inflate the repository.
+*.docx
+*.xlsx
+*.xls
+*.pptx
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+*.mp4
+*.mov
+tools/caj2pdf/lib/bin/
+
+# Project data can be regenerated or backed up separately.
+projects/*/data/raw/*
+projects/*/data/interim/*
+projects/*/data/processed/*
+projects/*/literature/caj_conversion/
+!projects/_template/data/raw/.gitkeep
+!projects/_template/data/interim/.gitkeep
+!projects/_template/data/processed/.gitkeep

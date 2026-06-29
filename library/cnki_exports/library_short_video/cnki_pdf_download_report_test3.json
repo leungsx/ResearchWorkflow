@@ -1,0 +1,53 @@
+[
+  {
+    "title": "大学生手机短视频过度使用行为影响因素研究",
+    "citekey": "cnki_2020_62aa02b5b0",
+    "status": "download_not_found",
+    "detail": {
+      "ok": true,
+      "page_title": "高级检索-中国知网",
+      "page_url": "https://kns.cnki.net/kns8s/AdvSearch",
+      "href": "https://a.cnki.net/gw/api/get/pdf/ads/v1/pdf/2025/12/94e4dc01a89b45b8bd9bbb3ca35baecb.pdf",
+      "text": "but-ad-item-click https://a.cnki.net/gw/api/get/pdf/ads/v1/pdf/2025/12/94e4dc01a89b45b8bd9bbb3ca35baecb.pdf",
+      "score": 65
+    }
+  },
+  {
+    "title": "短视频APP在图书馆推广中的应用及发展策略——基于平台数据的统计分析",
+    "citekey": "cnki_2019_94a1721837",
+    "status": "click_failed",
+    "nav": {
+      "title": "",
+      "url": "https://a.cnki.net/gw/api/get/pdf/ads/v1/pdf/2025/12/94e4dc01a89b45b8bd9bbb3ca35baecb.pdf",
+      "ready_state": "complete",
+      "body": "",
+      "ok": true
+    },
+    "detail": {
+      "ok": false,
+      "reason": "pdf_download_link_not_found",
+      "title": "",
+      "url": "https://a.cnki.net/gw/api/get/pdf/ads/v1/pdf/2025/12/94e4dc01a89b45b8bd9bbb3ca35baecb.pdf",
+      "candidates": []
+    }
+  },
+  {
+    "title": "图书馆热门短视频内容规律探究——基于抖音平台的实证研究",
+    "citekey": "cnki_2020_2a150c6df8",
+    "status": "click_failed",
+    "nav": {
+      "title": "",
+      "url": "https://a.cnki.net/gw/api/get/pdf/ads/v1/pdf/2025/12/94e4dc01a89b45b8bd9bbb3ca35baecb.pdf",
+      "ready_state": "complete",
+      "body": "",
+      "ok": true
+    },
+    "detail": {
+      "ok": false,
+      "reason": "pdf_download_link_not_found",
+      "title": "图书馆热门短视频内容规律探究——基于抖音平台的实证研究 - 中国知网",
+      "url": "https://kns.cnki.net/kcms2/article/abstract?v=lcJiu7QxtGPXAcauu5u1eWOps_GPmF7mJGo2A-Waq3KuLJ9FBTaPIW-hhPuRRWnfleV8Tt3sFf28h9-7Se6zNALegGcgfoYXjgWocWvf47L4mG4PVipHmAYaNDbxzxjbNNMYW3SDvIcHMDyH9Fx_c1popDt8DLPmUWJ-4GAQHrBDhrzQ2iq9qg==&uniplatform=NZKPT&language=CHS",
+      "candidates": []
+    }
+  }
+]

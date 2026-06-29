@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>方法卡：DCI传播力指数</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>方法卡：DCI传播力指数</h1>
+      <p class="sub">可直接在浏览器阅读的知识卡镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../../paper_reading/today.html">今日精读</a>
+<a href="../../paper_reading/index.html">论文归档</a>
+<a href="../index.html" aria-current="page">知识卡</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="../../paper_reading/views/vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../index.html">返回知识卡入口</a>
+          <a href="../../paper_reading/today.html">返回今日精读</a>
+          <a href="../../vault/03_Methods/DCI%E4%BC%A0%E6%92%AD%E5%8A%9B%E6%8C%87%E6%95%B0.md">打开原始 Markdown</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：vault/03_Methods/DCI传播力指数.md</div>
+        <article class="md-view">
+<section class="frontmatter"><h2>元数据</h2><table><tbody><tr><th>type</th><td>method</td></tr><tr><th>id</th><td>method-dci-index</td></tr><tr><th>title</th><td>&quot;DCI传播力指数&quot;</td></tr><tr><th>domain</th><td>&quot;平台指标 / 传播评价&quot;</td></tr><tr><th>level</th><td>&quot;beginner&quot;</td></tr><tr><th>status</th><td>learning</td></tr><tr><th>review_stage</th><td>1</td></tr><tr><th>next_review</th><td>2026-06-30</td></tr></tbody></table></section>
+<h1>DCI传播力指数</h1>
+<h2>一句话用途</h2>
+<p>DCI 传播力指数用于把账号的发布、互动和覆盖表现合并成一个传播影响力描述指标。</p>
+<h2>它解决什么科研问题</h2>
+<p>当你不想只看单一点赞数或粉丝数，而想比较多个账号在一段时间内的整体传播表现时，DCI 这类综合指数会更方便。</p>
+<h2>通俗解释</h2>
+<p>它像一个“账号近期传播体检分”。不是只看一个指标，而是把发了多少、互动怎样、触达到多少人合起来看。</p>
+<h2>科研例子</h2>
+<p>在 <span class="wikilink">cnki_2023_34348faa1e</span> 中，作者用近 30 日新增作品、点赞、评论、分享、新增粉丝和总粉丝等数据，组合出发布指数、互动指数、覆盖指数，再形成 DCI，用来比较 11 个公共图书馆抖音号的传播力。</p>
+<h2>常见误区</h2>
+<ul>
+<li>DCI 反映的是传播表现，不等于服务价值。</li>
+<li>综合指数便于比较，但会遮蔽单一维度的具体问题。</li>
+<li>如果原始数据口径不一致，综合后的比较也会失真。</li>
+</ul>
+<h2>如何用于我的研究</h2>
+<ul>
+<li>可作为 <span class="wikilink">图书馆短视频相关研究</span> 里的历史基线指标。</li>
+<li>适合与借阅、资源访问、活动报名等服务指标并列，而不是替代它们。</li>
+<li>可帮助我比较不同馆型、不同平台或不同时间窗口的账号传播差异。</li>
+</ul>
+<h2>来源论文</h2>
+<ul>
+<li><span class="wikilink">cnki_2023_34348faa1e</span></li>
+</ul>
+<h2>和哪些概念相关</h2>
+<ul>
+<li><span class="wikilink">SICAS模型</span></li>
+<li><span class="wikilink">用户感知价值</span></li>
+</ul>
+<h2>复习问题</h2>
+<ol>
+<li>为什么 DCI 比单看粉丝数更适合比较账号表现？</li>
+<li>为什么 DCI 不能直接代表阅读推广效果？</li>
+<li>如果你要扩展 DCI 到服务研究，你还想补什么指标？</li>
+</ol>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-29 22:43.</footer>
+</body>
+</html>

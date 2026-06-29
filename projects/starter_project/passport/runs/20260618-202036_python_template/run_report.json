@@ -1,0 +1,16 @@
+{
+  "project": "starter_project",
+  "name": "python_template",
+  "command": [
+    "python3",
+    "analysis/python/analysis.py"
+  ],
+  "cwd": "/Users/leung/ResearchWorkflow/projects/starter_project",
+  "started_at": "2026-06-18T20:20:36",
+  "timeout_min": null,
+  "finished_at": "2026-06-18T20:20:36",
+  "return_code": 0,
+  "status": "completed",
+  "stdout": "/Users/leung/ResearchWorkflow/projects/starter_project/passport/runs/20260618-202036_python_template/stdout.log",
+  "stderr": "/Users/leung/ResearchWorkflow/projects/starter_project/passport/runs/20260618-202036_python_template/stderr.log"
+}

@@ -1,0 +1,62 @@
+{
+  "project": "library_short_video",
+  "date": "2026-06-29",
+  "threshold": 20,
+  "refill_count": 3,
+  "current_fulltext_count": 8,
+  "triggered": true,
+  "profile": "/Users/leung/ResearchWorkflow/projects/library_short_video/literature/recommendation_profile.json",
+  "profile_topic": "图书馆短视频相关研究",
+  "stage": "foundation_high_impact",
+  "selected_candidates": [
+    {
+      "citekey": "cnki_2021_645f03f388",
+      "title": "图书馆短视频账号传播力研究——以省级公共图书馆为例",
+      "score": 72.73,
+      "reasons": [
+        "CNKI 被引 74，下载 2082",
+        "领域词命中: 图书馆短视频、公共图书馆、图书馆、短视频、视频",
+        "核心主题组覆盖: 图书馆短视频、图书馆短视频",
+        "图情领域来源"
+      ],
+      "detail_url": "https://kns.cnki.net/kcms2/article/abstract?v=zcrJ0BckwPMhkMJsKjGRSL2EEmNykAuMPWeJtnMK5ZaQhPvltIGFAnAlzH8FCjF15fbopX0_vv2s6saQ8-FQjOWlxVtEjMF2NB9kba1IRmyx07L6EGljnE0K2sG6dd11nXw9U80l4tIZ3DaYv4JIeRTr1rrf1bJvvwbUO8DWNfNMXnSMb2Xs3Q==&uniplatform=NZKPT&language=CHS"
+    },
+    {
+      "citekey": "cnki_2021_2bcdca1cf9",
+      "title": "短视频社会化阅读推广效果分析——以抖音短视频为例",
+      "score": 72.01,
+      "reasons": [
+        "CNKI 被引 74，下载 4127",
+        "领域词命中: 阅读推广、短视频、抖音、视频",
+        "核心主题组覆盖: 阅读推广、短视频",
+        "图情领域来源"
+      ],
+      "detail_url": "https://kns.cnki.net/kcms2/article/abstract?v=zcrJ0BckwPNpXwO7ZmeQPqgsp492yscq2fkr9YnovUVEkM2Vtd5vX_3W5xx078hOuZy7rGZI1tLUHt-FZqND22czMtWQEVSscPX0u-IcOsspnA2AqLtax6fsAjHoSdiEUc2BiEMyaII3HU85c5WO6Ed_KyXZtBQ0eqeMcIFleLazKgeYiU3p_w==&uniplatform=NZKPT&language=CHS"
+    },
+    {
+      "citekey": "cnki_2021_c7cfb20665",
+      "title": "我国省级公共图书馆抖音短视频运营现状调查分析",
+      "score": 71.91,
+      "reasons": [
+        "CNKI 被引 67，下载 2064",
+        "领域词命中: 公共图书馆、图书馆、短视频、抖音、视频",
+        "核心主题组覆盖: 公共图书馆、短视频",
+        "图情领域来源",
+        "可用于现状/问题/策略地图"
+      ],
+      "detail_url": "https://kns.cnki.net/kcms2/article/abstract?v=lcJiu7QxtGPPJEzD3142ECm-yV93adu0qL0wytw3pZevqfTEV_DtR6TgZfu8PBHru-DLGnUmH-LO7NLuPc8MVLCKqjDpyXpwfCM4Ksolii6bSyOp-PIkwYOz9KxVqtHJE0Z6Z7nNbgO8bUAuav8Dvd-vQuL9smCCEt80EsUpCA5vD1k9OhHBSg==&uniplatform=NZKPT&language=CHS"
+    }
+  ],
+  "selected_json": "/Users/leung/ResearchWorkflow/library/cnki_exports/library_short_video/cnki_restock_candidates_20260629-084601.json",
+  "status": "download_run_needs_attention",
+  "downloader_exit_code": 1,
+  "batch_summary": {
+    "attempts": 3,
+    "starting_fulltext_count": 8,
+    "ending_fulltext_count": 8,
+    "starting_pdf_count": 8,
+    "ending_pdf_count": 8,
+    "report": "/Users/leung/ResearchWorkflow/library/cnki_exports/library_short_video/cnki_pdf_download_report_20260629-084713.json"
+  },
+  "ending_fulltext_count": 8
+}

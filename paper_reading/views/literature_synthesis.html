@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>跨文献综述</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>跨文献综述</h1>
+      <p class="sub">当前项目跨文献综合与证据边界浏览版。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../projects/library_short_video/03_literature_synthesis.md">打开原始 Markdown</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/03_literature_synthesis.md</div>
+        <article class="md-view">
+<h1>Literature Synthesis</h1>
+<p>Updated: 2026-06-21</p>
+<h2>Search Strings</h2>
+<ul>
+<li>CNKI search used on 2026-06-21: <code>主题：图书馆 * 短视频</code></li>
+<li>Date range: <code>2019-01-01</code> to <code>2026-06-21</code></li>
+<li>Current pilot corpus: CNKI learning set for <code>library_short_video</code>; 8 authorized originals, 8 discussion cards/readers, 8 source-grounded skimmed papers.</li>
+</ul>
+<h2>Inclusion Criteria</h2>
+<ul>
+<li>Chinese LIS / information resource management studies about library short videos.</li>
+<li>Studies focused on library service communication, reading promotion, user interaction, knowledge dissemination, or new-media operation.</li>
+<li>CNKI-indexed journal articles, with priority to papers from or relevant to <code>图书情报工作</code>.</li>
+<li>For evidence use in manuscript writing: at minimum source-grounded reader or full-text note is required; metadata-only papers may be used only for search mapping, not claim support.</li>
+</ul>
+<h2>Exclusion Criteria</h2>
+<ul>
+<li>Pure marketing or general short-video studies with no direct library-service relevance.</li>
+<li>Metadata-only or abstract-only records used as evidence for substantive claims.</li>
+<li>Materials obtained outside the user&#x27;s authorized CNKI / library / institutional access boundary.</li>
+</ul>
+<h2>Literature Clusters</h2>
+<ul>
+<li><strong>Influencing-factor / empirical effect studies</strong></li>
+<li><code>cnki_2021_d35f8e895a</code> 高晓晶等, 2021, <code>图书情报工作</code>: uses the Hook Model and 879 Douyin samples from top library accounts to test content/design factors associated with communication and interaction effect. Evidence status: source-grounded reader exists, pending human confirmation.</li>
+<li><code>cnki_2021_dfab60236e</code> 杨达森等, 2021, <code>图书馆学研究</code>: uses ELM and 10,294 short videos from 30 socialized reading-promotion Douyin accounts with more than 1 million followers to model factors associated with transmission effect. Evidence status: source-grounded reader exists, pending human confirmation.</li>
+<li><strong>Operation status / problem diagnosis</strong></li>
+<li>Current evidence from <code>cnki_2021_d35f8e895a</code> identifies low adoption, low output, and uneven content quality in library Douyin operation, especially for academic/research-oriented libraries.</li>
+<li><code>cnki_2020_64b4f881c9</code> 王海燕, 2020, <code>图书馆工作与研究</code>: provides an early 2019-era status baseline for physical-library Douyin accounts, emphasizing low adoption, weak influence, irregular management, limited original high-quality content, and insufficient user interaction.</li>
+<li><code>cnki_2021_7556aafa99</code> 孙雨、陈凤娟, 2021, <code>图书馆工作与研究</code>: surveys 63 national/provincial/provincial-capital/sub-provincial public libraries and maps public-library Douyin adoption, follower/like indicators, original-content categories, service problems, and development strategies.</li>
+<li><strong>Popular-content / content-rule studies</strong></li>
+<li><code>cnki_2020_2a150c6df8</code> 沈丽红, 2020, <code>图书馆</code>: analyzes 103 popular non-forwarded library Douyin videos from 328 accounts and 8,069 videos, identifying detailed titles, topic guidance, subtitles, real-shot/interview forms, knowledge popularization, social-cultural themes, celebrity appearance, and emotional color as prominent features in popular videos.</li>
+<li><strong>Strategy / service design</strong></li>
+<li>Current evidence points toward question-style titles, emotionally engaging music, scenario/script or edited-video forms, and useful information rewards as operational design levers.</li>
+<li><code>cnki_2021_dfab60236e</code> suggests a second, external benchmark line: readable content, concise readable titles, title intertextuality, and 15-60 second duration are associated with better transmission effect in socialized reading-promotion accounts.</li>
+<li><code>cnki_2021_7556aafa99</code> expands the strategy frame from content tips to public-library service design: planning and goals, distinctive original content, PUGC, professional teams, integrated media operation, online-offline conversion, and cross-regional/cross-industry cooperation.</li>
+<li><code>cnki_2020_2a150c6df8</code> adds content-production details: title/topic/subtitle design, real-shot and interview formats, knowledge and social-cultural themes, celebrity resources, emotion, music, text, and真人出镜.</li>
+<li><code>cnki_2021_5530e86157</code> links short-video marketing directly to public-library digital reading promotion. It frames the strategy path as emotional marketing, channel marketing, and interactive marketing, and emphasizes content-IP/scenario integration, dual-matrix operation, user tags, community interaction, and online-offline conversion.</li>
+<li><code>cnki_2023_34348faa1e</code> adds a SICAS-based path view: the key issue is not only what content to post, but how sense, interest, connect, action, and share are chained into service conversion.</li>
+<li><strong>Comparative platform / lifecycle marketing</strong></li>
+<li><code>cnki_2021_3771e58987</code> compares public libraries and university libraries across Douyin, Kuaishou, and Bilibili, using AARRR as a lifecycle framework. It is useful for moving the project from single-platform operation tips toward library-type and platform-fit analysis.</li>
+<li>Its most valuable conceptual move is translating &quot;revenue&quot; in a non-profit library setting into brand activity, cultural influence, precise service promotion, and broader institutional support rather than commercial profit.</li>
+<li><strong>Pending clusters</strong></li>
+<li>Public-library service cases, short-video platform governance, and post-2023 multi-platform evidence still need cross-paper synthesis beyond the current 8-paper learning set.</li>
+</ul>
+<h2>Theory Map</h2>
+<ul>
+<li><strong>Hook Model / 上瘾模型</strong></li>
+<li>In <code>cnki_2021_d35f8e895a</code>, trigger maps to title sentence pattern, title length, and background music; action maps to production category and content theme; reward maps mainly to information type; investment maps to duration and relation/continuity with neighboring videos.</li>
+<li>Project implication: this model can be treated as a candidate framework for analyzing how library short videos turn service information into user attention and interaction. It should not be treated as proven causal theory without additional evidence.</li>
+<li><strong>ELM / 精细加工可能性模型</strong></li>
+<li>In <code>cnki_2021_dfab60236e</code>, central-route cues are mainly content features, while peripheral-route cues include title, cover, source, and duration. The paper treats interaction behavior as a persuasion-like outcome on a short-video platform.</li>
+<li>Project implication: ELM is useful when the research question is about how users process library short-video information under attention constraints, but it still operationalizes outcome as platform interaction rather than service value.</li>
+<li><strong>Service communication / knowledge dissemination</strong></li>
+<li>The current paper suggests library short-video value lies in making cultural knowledge, resources, and services more visible and usable in fragmented mobile-media contexts.</li>
+<li><strong>AARRR / 用户生命周期漏斗</strong></li>
+<li>In <code>cnki_2021_3771e58987</code>, acquisition maps to account exposure and platform discovery, activation to useful first experience and interaction, retention to continued attention and serial content, revenue to cultural influence/service promotion rather than money, and referral to user sharing and platform diffusion.</li>
+<li>Project implication: AARRR is a promising bridge from &quot;short-video operations&quot; to &quot;service pathway&quot;, but it needs stronger outcome indicators before becoming manuscript-level evidence for service value.</li>
+<li><strong>SICAS / 多触点服务路径</strong></li>
+<li>In <code>cnki_2023_34348faa1e</code>, Sense maps to multi-channel perception, Interest &amp; Interactive to immersive content and active interaction, Connect &amp; Communicate to comment/live/community links, Action to soft-marketing-driven conversion points, and Share to spiritually or materially motivated diffusion.</li>
+<li>Project implication: SICAS is useful for organizing the full user path from exposure to service action and sharing. It is a structure-building framework, not yet a proven causal explanation.</li>
+</ul>
+<h2>Method Map</h2>
+<ul>
+<li><strong>Descriptive account survey / service landscape mapping</strong></li>
+<li><code>cnki_2020_64b4f881c9</code>: searches Douyin with <code>图书馆</code>, excludes private/non-entity accounts, identifies 76 official physical-library accounts, and describes the top 10 by followers as of 2019-08-01.</li>
+<li><code>cnki_2021_7556aafa99</code>: uses Douyin Android v11.3.0 search and official verified accounts to survey 63 public libraries as of 2020-05-30, collecting opening, likes, followers, works, posts, and first-work time; then uses content analysis for original-work categories.</li>
+<li><code>cnki_2023_34348faa1e</code>: searches Douyin usernames with <code>图书馆</code>, manually retains 11 public-library accounts with more than 10,000 followers, combines Feigua metrics with manual observation, and diagnoses problems through a SICAS stage lens.</li>
+<li>Reusable design idea: these studies are useful for building a historical adoption baseline and a public-library service matrix, but their search and official-account rules should be updated if reused.</li>
+<li><strong>Composite communication index / DCI diagnosis</strong></li>
+<li><code>cnki_2023_34348faa1e</code> uses DCI-style publishing, interaction, and coverage dimensions to describe the communication influence of public-library Douyin accounts.</li>
+<li>Reusable design idea: DCI is useful for comparative baseline description, but future work should place it beside service-value metrics rather than treating it as the end outcome.</li>
+<li><strong>Head-account practice extraction / strategy induction</strong></li>
+<li><code>cnki_2021_5530e86157</code>: searches Douyin with <code>公共图书馆</code>, <code>阅读推广</code>, and <code>数字阅读</code>; after half-year dynamic tracking from 2020-05-01 to 2020-11-30, selects 90 public-library Douyin head accounts whose follower counts remained above 10,000 and analyzes 27,455 short videos.</li>
+<li>Analysis dimensions include image scenes, IP marketing, brand planning, copywriting, interaction strategy, content, mode, and path. The method is descriptive practice extraction and strategy induction, not regression or causal identification.</li>
+<li>Reusable design idea: useful for turning short-video operation into a service-design variable framework, especially emotional marketing, channel marketing, interactive marketing, and online-offline conversion.</li>
+<li><strong>Multi-platform comparative account survey + lifecycle interpretation</strong></li>
+<li><code>cnki_2021_3771e58987</code>: searches Douyin, Kuaishou, and Bilibili with <code>图书馆</code>, screens official public-library and university-library accounts against public-library assessment lists and the Ministry of Education university list, and retains 161 public-library accounts plus 18 university-library accounts.</li>
+<li>It compares account opening, video volume, follower volume, account growth, 90-day Douyin metrics for top public-library accounts, and platform-specific content themes, then organizes strategies through AARRR.</li>
+<li>Reusable design idea: this is a good template for library-type/platform-fit comparison, but future work should rebalance samples, update platform data, and connect metrics to service outcomes.</li>
+<li><strong>Popular-video content analysis</strong></li>
+<li><code>cnki_2020_2a150c6df8</code>: searches library-related Douyin accounts in 2020-06, identifies 328 accounts and 8,069 videos, selects 103 non-forwarded videos with more than 1,000 likes, and codes duration, title length, topic guidance, subtitles, video type, theme, emotion, and appearing roles.</li>
+<li>Reusable design idea: the coding dimensions are useful for a variable dictionary, but future work needs a full popular/non-popular comparison and controls for account size, maturity, and recommendation exposure.</li>
+<li><strong>Content analysis + platform metric modeling</strong></li>
+<li><code>cnki_2021_d35f8e895a</code>: 879 Douyin videos from the top 10 official library accounts by follower count; dependent variable is a composite communication-interaction <code>C指数</code> derived from likes, comments, and shares; independent variables are 8 coded content/design features.</li>
+<li>Statistical route: one-sample K-S test found the dependent variable non-normal; Kruskal-Wallis tests were used for 7 multi-category factors, and Mann-Whitney was used for the binary relation/continuity factor.</li>
+<li>Reusable design idea: if this project later develops an empirical article, it can replicate or adapt the &quot;platform sample + coded content variables + interaction metric&quot; design, but should improve transparency around sampling time, coding reliability, and causal caution.</li>
+<li><strong>Text mining + image recognition + regression on socialized accounts</strong></li>
+<li><code>cnki_2021_dfab60236e</code>: 30 socialized reading-promotion accounts with more than 1 million followers, 10,294 usable short videos from 2018-05 to 2021-05; outcome is <code>CE = 0.3L + 0.3C + 0.4S</code>; features are extracted from text, title, cover, source verification, and duration.</li>
+<li>Method details include <code>requests_html</code> scraping, Alibaba Cloud speech-to-text, OpenCV frame extraction, Chinese readability formula, sentiment classification, hot-word/pronoun dictionaries, cosine similarity for title intertextuality, and SPSS multiple linear regression.</li>
+<li>Reusable design idea: this paper offers a stronger large-sample comparative template than many descriptive library short-video papers, but direct transfer to library accounts requires explicit scene adaptation.</li>
+</ul>
+<h2>Gaps</h2>
+<ul>
+<li><strong>Causal limitation</strong>: Current evidence links content/design categories to engagement differences, but does not prove that changing one feature alone causes higher communication effect.</li>
+<li><strong>Platform/time limitation</strong>: The first reviewed empirical paper reflects 2020-era Douyin accounts; short-video platform affordances, recommendation logic, and library account practices may have shifted by 2026.</li>
+<li><strong>Library-type limitation</strong>: Public libraries dominate visible high-follower accounts, while academic/research library accounts appear underrepresented and need separate analysis.</li>
+<li><strong>Measurement limitation</strong>: Likes, comments, shares, and composite indices measure visible interaction, but not reading-promotion quality, learning outcomes, service uptake, user satisfaction, or long-term knowledge dissemination.</li>
+<li><strong>External-validity limitation</strong>: <code>cnki_2021_dfab60236e</code> studies socialized reading-promotion accounts rather than library-operated accounts, so its findings are best treated as an external benchmark, not a direct library conclusion.</li>
+<li><strong>Traffic-service tension</strong>: The popular-video paper shows that social hot events and strong emotion can drive high traffic, while the public-library survey warns against broad, vague, or over-entertaining content. Later research should distinguish traffic-effective content from library-mission-aligned service communication.</li>
+<li><strong>Historical-baseline limitation</strong>: The three companion papers are mainly 2019-2020 Douyin snapshots. They are excellent for field history and baseline diagnosis, but current claims require updated platform data.</li>
+<li><strong>Reading coverage gap</strong>: The project&#x27;s current 8-paper learning set now has complete Codex-assisted source-grounded reading notes. The next gap is no longer within the set itself, but in extending coverage to the next candidate line such as <code>cnki_2021_645f03f388</code> and newer multi-platform or post-2023 studies.</li>
+</ul>
+<h2>Evidence Table</h2>
+<table><thead><tr><th>Claim</th><th>Evidence</th><th>Citation</th><th>Verification</th></tr></thead><tbody><tr><td>图书馆短视频研究可从“平台运营策略”推进到“内容/设计因素与互动效果的实证分析”。</td><td>879 个图书馆抖音短视频样本；Hook Model 框架；SPSS 非参数检验。</td><td>高晓晶等, 2021, <code>cnki_2021_d35f8e895a</code>; reader blocks <code>B0006</code>, <code>B0009</code>, <code>B0010</code>, <code>B0011</code></td><td>Source-grounded reader; not yet human-read or verified; no page numbers.</td></tr><tr><td>阅读推广短视频影响因素研究可以走“大样本社会化账号 + 文本挖掘/图像识别 + 回归”的方法路线。</td><td>30 个粉丝量超过 100 万的社会化抖音号，10,294 条短视频，<code>requests_html</code> 抓取、阿里云语音转文本、OpenCV 抽帧、多元线性回归。</td><td>杨达森等, 2021, <code>cnki_2021_dfab60236e</code>; reader blocks <code>B0004</code>, <code>B0008</code>, <code>B0010</code>, <code>B0013</code></td><td>Source-grounded reader; not yet human-read or verified; no page numbers.</td></tr><tr><td>在该社会化账号样本中，内容可读性、内容网络热词、标题可读性、标题互文性、15-60 秒时长与传播效果正相关；标题长度、标题标签、企业认证与传播效果负相关。</td><td>回归结果及作者解释。</td><td>杨达森等, 2021, <code>cnki_2021_dfab60236e</code>; reader blocks <code>B0013</code>, <code>B0014</code>, <code>B0015</code>, <code>B0016</code></td><td>Source-grounded reader; statistical claims need page/table check against original PDF.</td></tr><tr><td>在该研究中，标题句型、背景音乐情感类型、制作类别、内容主题、信息类型与传播互动指数存在显著差异。</td><td>Kruskal-Wallis results report p values below 0.01 for these factors.</td><td>高晓晶等, 2021, <code>cnki_2021_d35f8e895a</code>; reader blocks <code>B0011</code>, <code>B0012</code>, <code>B0013</code></td><td>Source-grounded reader; statistical claims need table/page check against original.</td></tr><tr><td>标题长度、视频时长、与邻近视频的相关或连续性在该研究中未表现出显著影响。</td><td>Reported p values: title length p=0.482, duration p=0.610, relation/continuity p=0.345.</td><td>高晓晶等, 2021, <code>cnki_2021_d35f8e895a</code>; reader blocks <code>B0012</code>, <code>B0013</code>, <code>B0014</code></td><td>Source-grounded reader; statistical claims need table/page check against original.</td></tr><tr><td>图书馆短视频运营的实践问题包括开通比例低、作品数量少、优质内容少。</td><td>Paper reports only about 1% of public libraries and about 0.1% of university libraries had Douyin accounts in its sampled context; many accounts produced fewer than 100 works.</td><td>高晓晶等, 2021, <code>cnki_2021_d35f8e895a</code>; reader block <code>B0008</code></td><td>Source-grounded reader; time-bound 2020-era claim.</td></tr><tr><td>该文对本项目的启发是：后续选题应同时处理“服务/知识价值”和“平台互动机制”，不能只写泛泛运营建议。</td><td>Strategy sections emphasize knowledge anxiety, low-threshold high-density content, and information reward design.</td><td>高晓晶等, 2021, <code>cnki_2021_d35f8e895a</code>; reader blocks <code>B0014</code>, <code>B0015</code>, <code>B0016</code></td><td>Interpretive synthesis based on one reviewed paper; needs cross-paper confirmation.</td></tr><tr><td>早期图书馆抖音账号存在低开通、弱影响、运营不规范、互动不足和原创优质内容不足等问题。</td><td>2019-era Douyin search identified 76 official physical-library accounts and reported weak top-account metrics, irregular posting, limited interaction, and low-quality original content.</td><td>王海燕, 2020, <code>cnki_2020_64b4f881c9</code>; reader blocks <code>B0003</code>-<code>B0006</code></td><td>Source-grounded companion read; historical baseline only, no current-platform inference.</td></tr><tr><td>公共图书馆短视频服务问题不只在内容技巧，也在规划、团队、定位、线上线下转化和合作机制。</td><td>63 public libraries surveyed; problems include low opening rate, irregular management, broad/over-entertaining content, lack of professional teams, and weak online-offline interaction; strategies include planning,特色原创, PUGC, media convergence, and cross-regional cooperation.</td><td>孙雨、陈凤娟, 2021, <code>cnki_2021_7556aafa99</code>; reader blocks <code>B0003</code>-<code>B0004</code>, <code>B0013</code>-<code>B0019</code></td><td>Source-grounded companion read; descriptive survey, no causal effect model.</td></tr><tr><td>热门图书馆短视频常见特征包括标题详尽、话题引导、字幕、实拍/采访、知识普及、社会文化主题、名人角色和强情绪色彩。</td><td>328 accounts, 8,069 videos, 103 popular non-forwarded videos above 1,000 likes; content coding and descriptive analysis.</td><td>沈丽红, 2020, <code>cnki_2020_2a150c6df8</code>; reader blocks <code>B0003</code>-<code>B0014</code></td><td>Source-grounded companion read; popular-only sample and manual coding limit causal interpretation.</td></tr><tr><td>公共图书馆短视频营销可被转译为数字阅读推广服务设计，重点包括情感营销、渠道营销、互动营销和线上线下转化。</td><td>90 个粉丝长期超过 1 万的公共图书馆抖音头部账号，2020-05-01 至 2020-11-30，27,455 条短视频；文章从内容、方式和路径提炼实践经验并提出策略。</td><td>张承, 2021, <code>cnki_2021_5530e86157</code>; reader blocks <code>B0001</code>, <code>B0003</code>-<code>B0007</code>, <code>B0008</code>-<code>B0013</code></td><td>Source-grounded guided skim; descriptive strategy induction, not causal evidence.</td></tr><tr><td>公共图书馆与高校图书馆短视频营销可以通过馆型差异、平台差异和 AARRR 用户生命周期共同分析。</td><td>文章保留 161 个公共图书馆机构认证账号和 18 个高校图书馆机构认证账号，比较抖音、快手、B站上的账号开设、视频/粉丝、增量、内容主题和拉新/促活/留存/收益策略。</td><td>龚雪竹, 2021, <code>cnki_2021_3771e58987</code>; reader blocks <code>B0005</code>, <code>B0007</code>, <code>B0009</code>-<code>B0016</code></td><td>Source-grounded guided skim; descriptive comparison and strategy framework, not causal evidence.</td></tr><tr><td>SICAS 可以作为图书馆短视频从感知到服务行动再到分享回流的过程组织框架。</td><td>11 个粉丝过万公共图书馆抖音账号的 DCI 与运营现状诊断，按 Sense、Interest &amp; Interactive、Connect &amp; Communicate、Action、Share 五阶段转译为策略。</td><td>刘青、郭嘉如, 2023, <code>cnki_2023_34348faa1e</code>; reader blocks <code>B0005-B0016</code></td><td>Source-grounded skim; page numbers and figure/table details still need original-PDF verification.</td></tr></tbody></table>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-29 22:43.</footer>
+</body>
+</html>

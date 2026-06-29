@@ -1,0 +1,80 @@
+{
+  "topic": "图书馆短视频相关研究",
+  "include_terms": [
+    "图书馆短视频",
+    "高校图书馆",
+    "公共图书馆",
+    "阅读推广",
+    "新媒体服务",
+    "用户互动",
+    "平台运营",
+    "知识传播",
+    "图书馆",
+    "短视频",
+    "抖音",
+    "快手",
+    "视频号",
+    "B站",
+    "哔哩哔哩",
+    "新媒体",
+    "融媒体",
+    "社交媒体",
+    "视频"
+  ],
+  "required_term_groups": [
+    [
+      "图书馆短视频",
+      "高校图书馆",
+      "公共图书馆",
+      "阅读推广",
+      "知识传播",
+      "图书馆"
+    ],
+    [
+      "图书馆短视频",
+      "短视频",
+      "抖音",
+      "快手",
+      "视频号",
+      "视频"
+    ]
+  ],
+  "exclude_terms": [
+    "BOP",
+    "中华元素",
+    "非物质文化遗产",
+    "著作权",
+    "共青团",
+    "趣缘群体"
+  ],
+  "target_sources": [
+    "图书情报工作"
+  ],
+  "strong_sources": [
+    "大学图书馆学报",
+    "图书情报知识",
+    "图书馆论坛",
+    "国家图书馆学刊",
+    "情报资料工作",
+    "图书馆建设"
+  ],
+  "field_sources": [
+    "图书馆学研究",
+    "图书馆",
+    "图书馆工作与研究",
+    "图书馆理论与实践",
+    "图书与情报"
+  ],
+  "learning_sequence": [
+    "foundation_high_impact",
+    "review_and_map",
+    "recent_important",
+    "method_model"
+  ],
+  "foundation_days": 5,
+  "review_days": 3,
+  "recent_days": 4,
+  "recommendation_preference": "先从领域内高被引、高下载、目标刊/图情核心来源、与图书馆短视频高度贴合的基础论文开始；再读综述、现状、问题、对策和比较研究；随后跟进近年重要研究；最后拆解模型、变量、数据和方法。",
+  "notes": "Daily recommendations start from high-impact field papers, then review/map papers, then recent important studies, then method/model papers. Exclude generic short-video papers unless Codex explicitly frames them as external comparison rather than primary field reading.",
+  "project": "library_short_video"
+}

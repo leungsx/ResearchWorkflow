@@ -1,0 +1,8 @@
+Command: /usr/local/bin/pandoc /Users/leung/ResearchWorkflow/projects/starter_project/manuscript/paper.md -o /Users/leung/ResearchWorkflow/projects/starter_project/submission_package/verify-docx-20260619/main_manuscript.docx
+Return code: 0
+
+STDOUT:
+
+
+STDERR:
+

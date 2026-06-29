@@ -1,0 +1,170 @@
+{
+  "schema": "ResearchWorkflow.MaterialPassport.v1",
+  "root": "/Users/leung/ResearchWorkflow/projects/starter_project",
+  "generated_at": "2026-06-18T21:16:47",
+  "file_count": 27,
+  "files": [
+    {
+      "path": "00_project_dashboard.md",
+      "bytes": 767,
+      "modified_at": "2026-06-18T20:37:22",
+      "sha256": "d7cbbbdf4a9f511b56f222a85235060c725e10cdba44c8ee7e6a1114f157fc4b"
+    },
+    {
+      "path": "01_research_question.md",
+      "bytes": 239,
+      "modified_at": "2026-06-18T20:20:10",
+      "sha256": "f46c02d11d13971a1478adaf6c735b833bbc78d4c78ec4d1b54990acb6335927"
+    },
+    {
+      "path": "02_methodology.md",
+      "bytes": 262,
+      "modified_at": "2026-06-18T20:20:10",
+      "sha256": "304d9aa5cd8518bae8933b0066e74f2a10e94067c33843f43d2735d6b73225b2"
+    },
+    {
+      "path": "03_literature_synthesis.md",
+      "bytes": 237,
+      "modified_at": "2026-06-18T20:20:10",
+      "sha256": "e6f70b6fce8507ebd421a0f909e3279d90019a235c2102514f73ddc0416cc2c6"
+    },
+    {
+      "path": "04_experiment_plan.md",
+      "bytes": 340,
+      "modified_at": "2026-06-18T20:38:09",
+      "sha256": "81e40d021d0edb45259b602bd987ed8e014757964bf9e65bb28fabb8e8eebdfb"
+    },
+    {
+      "path": "05_hypothesis_registry.md",
+      "bytes": 290,
+      "modified_at": "2026-06-18T21:14:09",
+      "sha256": "d9214dba9929dfdc215bb72f55d49dc4f6b1771af527bd0de7ba6544a2bd2d77"
+    },
+    {
+      "path": "06_result_interpretation.md",
+      "bytes": 530,
+      "modified_at": "2026-06-18T21:14:09",
+      "sha256": "cb9a0b2a73b5f07e997854d8c1a5d653b44613e8b70f68b99798b87463150161"
+    },
+    {
+      "path": "07_claim_evidence_map.md",
+      "bytes": 307,
+      "modified_at": "2026-06-18T21:14:09",
+      "sha256": "ac441038dc4ce3ba4d253024dd2714e422ba26eb33819bae89fe8d323da7d183"
+    },
+    {
+      "path": "README.md",
+      "bytes": 723,
+      "modified_at": "2026-06-18T20:37:22",
+      "sha256": "0cf5d1c80e5003cc1218ea44f489cc47f340e3babf37916942af76c5c51acafc"
+    },
+    {
+      "path": "analysis/R/analysis.R",
+      "bytes": 546,
+      "modified_at": "2026-06-18T20:20:31",
+      "sha256": "84ba639a349337a08a214117fdf515a11bd59633fd0f9b270f8b2823ca5a4bdd"
+    },
+    {
+      "path": "analysis/matlab/simulation.m",
+      "bytes": 295,
+      "modified_at": "2026-06-18T20:20:10",
+      "sha256": "4b19ba41493567f51bb85cadccb1fadc4a840a2decb42d52fddf6b003c6f1727"
+    },
+    {
+      "path": "analysis/python/analysis.py",
+      "bytes": 362,
+      "modified_at": "2026-06-18T20:20:10",
+      "sha256": "aeb79e95c1a077a3e62906a1058530dd01e9e2a27e01bbe0427a902ab7d1f1f7"
+    },
+    {
+      "path": "data/interim/.gitkeep",
+      "bytes": 1,
+      "modified_at": "2026-06-18T20:19:45",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "data/processed/.gitkeep",
+      "bytes": 1,
+      "modified_at": "2026-06-18T20:19:45",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "data/raw/.gitkeep",
+      "bytes": 1,
+      "modified_at": "2026-06-18T20:19:45",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "figures/final/.gitkeep",
+      "bytes": 1,
+      "modified_at": "2026-06-18T20:19:45",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "figures/raw/.gitkeep",
+      "bytes": 1,
+      "modified_at": "2026-06-18T20:19:45",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "figures/specs/figure_spec.md",
+      "bytes": 298,
+      "modified_at": "2026-06-18T20:20:10",
+      "sha256": "477ddac6fbdd4ec6dad7f9270862db8163d6b08268683be40c4a9d40b627849e"
+    },
+    {
+      "path": "manuscript/paper.md",
+      "bytes": 200,
+      "modified_at": "2026-06-18T20:20:10",
+      "sha256": "c92c4d9f58b1239f3dd36a20d62e8d73d1fab86b6e6a4cb78435cbffdf5766bd"
+    },
+    {
+      "path": "manuscript/references.bib",
+      "bytes": 1,
+      "modified_at": "2026-06-18T20:20:10",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "passport/material_passport.md",
+      "bytes": 187,
+      "modified_at": "2026-06-18T20:20:10",
+      "sha256": "1495e5321841d7e8c989e3e7900d729defc17c96d0580132d02c2167cc184f71"
+    },
+    {
+      "path": "passport/runs/20260618-202036_python_template/command.json",
+      "bytes": 261,
+      "modified_at": "2026-06-18T20:20:36",
+      "sha256": "533308d6c0c3f475301e01ccf8bafb78809fc6106da585be3c7ea2c801e5154d"
+    },
+    {
+      "path": "passport/runs/20260618-202036_python_template/run_report.json",
+      "bytes": 600,
+      "modified_at": "2026-06-18T20:20:36",
+      "sha256": "f7becef39da4434513d08a042125a9661c5eae63abe481e0bb7761ac19ab5301"
+    },
+    {
+      "path": "passport/runs/20260618-202036_python_template/run_report.md",
+      "bytes": 473,
+      "modified_at": "2026-06-18T20:20:36",
+      "sha256": "61b94bff001d9f07fa1627b346dbde24572cc07e354ef3f537e3dd22e7371ccc"
+    },
+    {
+      "path": "passport/runs/20260618-202036_python_template/stderr.log",
+      "bytes": 0,
+      "modified_at": "2026-06-18T20:20:36",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "passport/runs/20260618-202036_python_template/stdout.log",
+      "bytes": 130,
+      "modified_at": "2026-06-18T20:20:36",
+      "sha256": "bf50eb5c66afab62717c071284f013c7803bfb561ae6994dc49c61fd1a2ae2d2"
+    },
+    {
+      "path": "project.yaml",
+      "bytes": 100,
+      "modified_at": "2026-06-18T20:20:10",
+      "sha256": "3cdde58cd53064cce076a0b38d6b9fe642ced7f3b3f3242a83a18b6a02820439"
+    }
+  ]
+}

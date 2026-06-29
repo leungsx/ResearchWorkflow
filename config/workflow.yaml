@@ -1,0 +1,30 @@
+workflow_name: ResearchWorkflow
+created_for: leung
+language: zh-CN
+default_target_journal: 图书情报工作
+default_journal_profile: docs/journal_profiles/tushuqingbaogongzuo.md
+
+stages:
+  - id: research_question
+    output: projects/<slug>/01_research_question.md
+  - id: literature_search
+    output: library/search_results/*.csv
+  - id: literature_matrix
+    output: library/literature_matrix.csv
+  - id: experiment_plan
+    output: projects/<slug>/04_experiment_plan.md
+  - id: analysis
+    output: projects/<slug>/analysis
+  - id: figures
+    output: projects/<slug>/figures/final
+  - id: manuscript
+    output: projects/<slug>/manuscript/paper.md
+  - id: integrity_gate
+    output: projects/<slug>/passport/material_passport.json
+
+rules:
+  download_policy: open_access_or_authorized_only
+  raw_data_policy: never_overwrite_raw_data
+  figure_policy: every_final_figure_requires_data_script_and_spec
+  manuscript_policy: every_core_claim_requires_traceable_evidence
+  ai_policy: ai_outputs_require_human_verification_before_publication

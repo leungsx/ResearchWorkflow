@@ -1,0 +1,544 @@
+# Source-Grounded Reader - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索
+
+Generated: 2026-06-20T10:22:05
+Citekey: `cnki_2021_d35f8e895a`
+Source file: `library/text/library_short_video/cnki_2021_d35f8e895a.txt`
+Source type: `text`
+Current read_status: `skimmed`
+
+## Use Boundary
+
+- This file is source-grounded extraction, not a claim that the paper has been human-read.
+- Do not use it as manuscript evidence until the relevant block has been read and checked.
+- After real reading, update `read_status` in `library/literature_matrix.csv` to `human-read` or `verified`.
+
+## Metadata
+
+- Title: 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索
+- Authors: 高晓晶;喻梦倩;杨家燕;张毓晗
+- Year: 2021
+- Source: 图书情报工作
+- Database: CNKI
+- DOI: 未记录
+
+## Extracted Blocks
+
+### B0001
+
+- Source ID: `cnki_2021_d35f8e895a:B0001`
+- Page: unknown from current extractor
+
+图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索 (期刊) 图书情报工作 2021 (10) 目录图表
+
+1 引言
+
+2 研究综述
+
+3 图书馆短视频运营现状
+
+3.1 图书馆短视频运营的数据情况
+
+3.2 图书馆短视频运营的主要问题
+
+4 基于“上瘾模型”的图书馆短视频传播及互动效果影响因素模型的构建
+
+(1)触发用户的因素。
+
+(2)促使用户行动的因素。
+
+(3)短视频中的酬赏。
+
+(4)吸引用户投入的因素。
+
+5 基于SPSS数据分析的实证研究
+
+5.1 研究方法
+
+5.2 因变量的计算
+
+5.3 自变量的分类与编码
+
+6 研究结果与分析
+
+6.1 研究结果
+
+(1)标题句型。
+
+(2)标题长度。
+
+(3)背景音乐情感类型。
+
+(4)制作类别。
+
+(5)内容主题。
+
+(6)信息类型。
+
+(7)时长。
+
+(8)相关或连续性。
+
+6.2 结果分析
+
+7 策略建议
+
+7.1 基于用户知识焦虑的标题触发
+
+7.2 低门槛高密度的内容输出
+
+7.3 以猎物酬赏为主，多变的酬赏设计
+
+8 结语
+
+参考文献
+
+图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索 高晓晶喻梦倩杨家燕张毓晗 电子科技大学图书馆
+
+摘要:[目的/意义]研究图书馆短视频的传播及互动效果影响因素对于其内容创作和科学运营具有一定的指导意义，可使图书馆在用户规模迅猛增长的短视频平台赢得更多关注，有利于提升图书馆服务的宣传和推广效果。[方法/过程]以国内活跃用户规模最大的抖音平台为例，根据“上瘾模型”的4个主要环节，构建图书馆短视频传播及互动效果的影响因素模型，并基于粉丝量排名前10的图书馆官方抖音号的879个短视频样本数据，应用SPSS非参数检验方法对影响因素模型进行实证分析。[结果/结论]研究结果表明，图书馆短视频的标题句型、背景音乐情感类型、制作类别、内容主题以及信息类型5个因素对其传播及互动效果有显著的影响。根据研究结果提出基于用户知识焦虑的标题触发、低门槛高密度的内容输出以及多变的酬赏设计等图书馆短视频运营策略。
+
+关键词:短视频传播及互动上瘾模型抖音平台SPSS运营策略
+
+作者简介:高晓晶,(ORCID:0000-0001-9407-9001),馆员，硕士，E-mail:gaoxj@uestc.edu.cn;喻梦倩,(ORCID:0000-0001-6409-3531),馆员，硕士;杨家燕,(ORCID:0000-0003-4652-9527),副研究馆员，硕士;张毓晗,(ORCID:0000-0003-4625-5749),副研究馆员，硕士。
+
+收稿日期:2020-12-16
+
+### B0002
+
+- Source ID: `cnki_2021_d35f8e895a:B0002`
+- Page: unknown from current extractor
+
+Model and Empirical Analysis on the Influencing Factors of Library Short Video Transmission and Interaction Effect ——Exploration Based on “the Hook Model” Gao XiaojingYu MengqianYang JiayanZhang Yuhan University of Electronic Science and Technology Library
+
+### B0003
+
+- Source ID: `cnki_2021_d35f8e895a:B0003`
+- Page: unknown from current extractor
+
+Abstract:[Purpose/significance] The research on the influencing factors of library short video transmission and interaction effect has guided significance for the content creation and scientific operation of library short video, so as to help the library win more attention in the short video platform with the rapid growth of users, and promote the effect of publicity and promotion of library services. [Method/process] Taking the Tiktok platform with the most domestic active users as an example, according to the four main links of “the Hook Model”, this paper built the influencing factors' model of library's short video transmission and interaction effect, and applied SPSS's non parametric analysis method to analyze the factors based on the 879 short video samples of top 10 libraries with most fans. [Result/conclusion] The results show that the sentence pattern of title, the emotion type of background music, the production category, the subject of content and the information type have significant influence on the transmission and interaction effect of library short video. According to the research results, puts forward some strategies for library short video operation, such as title
+
+### B0004
+
+- Source ID: `cnki_2021_d35f8e895a:B0004`
+- Page: unknown from current extractor
+
+ triggering based on the knowledge anxiety of users, low threshold and high-density content output, and variable reward design.
+
+### B0005
+
+- Source ID: `cnki_2021_d35f8e895a:B0005`
+- Page: unknown from current extractor
+
+Keyword:short videotransmission and interactionthe hook modelthe Tiktok platformSPSSoperation strategy
+
+Received:2020-12-16
+
+1 引言
+
+图书馆作为公共文化教育机构，是公众获取各类信息、培育文化自信的重要场所，也是建设社会主义文化强国的重要基地。在短视频等新媒体浪潮的冲击下，图书馆事业的宣传推广面临着重大的变革和挑战。据统计，2020年春节期间，短视频平台的日活跃用户数已达5.71亿[1],仅抖音平台的国内日活跃用户数截至2020年8月就已突破6亿[2]。相对于传统媒体平台，短视频的内容不但更加多维立体，视觉冲击力强，而且单个内容短小精悍，充分利用了受众的碎片化时间，因此越来越多的人热衷于制作、分享及观看短视频。2019年起，全行业加速入局短视频营销[1],越来越多的高校、博物馆、非遗项目等文化类账号入驻短视频平台，为短视频平台带来文化与艺术方面优质内容的同时，也为自身赢得了更多的关注，从而使抖音成为目前中国最大的知识、艺术和非遗传播平台[2]。图书馆作为知识传播和文化传承的重要基地，也应顺势而为，尝试利用短视频平台扩大自身影响力。研究短视频传播及互动效果的影响因素，对于图书馆短视频的内容创作和科学运营具有一定的指导意义，从而可帮助图书馆在用户规模迅猛增长的短视频平台赢得更多关注，提升图书馆服务的宣传和推广效果。
+
+2 研究综述
+
+### B0006
+
+- Source ID: `cnki_2021_d35f8e895a:B0006`
+- Page: unknown from current extractor
+
+近几年来，国内外学者对短视频的发展和应用展开了一系列的研究，主要集中在以下3个方面：①短视频平台的内容及推荐机制研究。例如，国外学者S. Wilk等提出了一种针对用户产生视频内容的质量评估算法[3];T. Tang等针对基于用户历史行为的视频推荐机制，提出了一个非传统模型的集合，包括基于压缩交互网络(CIN)的定制神经网络结构和基于经典SVD特征的梯度提升决策树(GDBTs)[4];Y. Liu等通过预测短视频的完播率和点赞率构建了一个通用的短视频推荐框架[5]。②短视频平台的用户研究。例如，国内学者X. Zhang等结合社会技术方法和依恋理论构建了一个整体框架来研究影响短视频应用成瘾的因素[6];龚艳萍等基于刺激-有机体-反应(SOR)模型，以用户为研究对象，探究短视频应用的享乐属性和社交属性对用户参与行为的影响及作用机制[7]。③短视频平台运营的现状、问题及策略研究。例如，张文亮等通过短视频平台的账号数量和主页作品等数据的统计分析，研究图书馆短视频的推广现状和存在的问题[8];朱鲲鹏等从身体社会学的角度研究多角度多层面介入虚拟社区治理、促进虚拟社区健康发展的策略和方法[9];曾一昕等利用拉斯韦尔5W传播模型，为公共图书馆短视频平台运营提出五大建议[10]。由以上综述可见，目前国内外关于短视频发展和应用的研究主要集中在推荐算法、用户研究以及短视频平台运营的现状、问题和策略等方面，而关于图书馆短视频传播及互动效果影响因素的研究非常少，且欠缺理论支撑和实证分析。
+
+针对互联网产品设计的底层逻辑，曾任教于斯坦福大学商学院的N. Eyal等通过对上千家公司的观察和测评记录，借鉴消费者心理学、人机交互和行为经济学研究，最终提出了“the Hook Model”(译作：上瘾模型)[11]理论，深层次、多维度地概括了让用户养成使用习惯的互联网产品逻辑。本文以深入探索影响图书馆短视频传播及互动效果的因素为目的，在理论层面，首次引入“上瘾模型”,并据此推导出图书馆短视频的传播及互动影响因素模型；在实践层面，基于国内活跃用户规模最大的抖音平台，采集了粉丝量排名前10的图书馆官方抖音号的879个短视频样本数据，应用SPSS非参数检验方法对各个影响因素进行实证分析，并提出图书馆短视频运营的具体策略建议。
+
+3 图书馆短视频运营现状 3.1 图书馆短视频运营的数据情况
+
+### B0007
+
+- Source ID: `cnki_2021_d35f8e895a:B0007`
+- Page: unknown from current extractor
+
+目前，除个人账号以外，政府单位、媒体机构、高等院校、企事业单位等纷纷入驻短视频平台，并且取得了较好的传播效果。如人民日报在抖音平台上已有超过九千万的粉丝。图书馆作为传承知识与文化的重要阵地，同样可以通过短视频进行馆藏揭示、阅读推广、讲座预告等宣传。笔者以“图书馆”为关键词在抖音平台进行用户搜索，经过删选和剔除，共获得48家经过官方认证的公共图书馆和高校图书馆。其中，抖音账号粉丝数排名前10的图书馆及其相关数据如表1所示：
+
+表1 粉丝数排名前10的图书馆官方抖音账号概况
+
+序号 抖音账号 粉丝数/万 作品数/个 获赞数/万 特色内容
+
+1 浙江图书馆-大咖来了 23.2 68 189.00 专注于专家讲座精华
+
+2 临沂市图书馆 9.40 559 125.80 图书馆相关的美景美图；城市宣传
+
+3 江西省图书馆 5.90 94 179.80 疫情地图动态图
+
+4 国家图书馆 4.30 96 5.00 科普知识点“百草园里识百草”;国图公开课精华；展览精华
+
+5 上海图书馆 1.70 330 6.20 “谁是主编”游戏直播；“旅行推荐官”真人主题荐书
+
+6 温州市图书馆 1.70 72 0.41 抗疫配音社的热门影视配音
+
+7 朔州市图书馆 1.20 671 11.70 朔图快闪；城市宣传
+
+8 重庆图书馆 1.20 156 9.70 结合地方文化的城市宣传
+
+9 陕西省图书馆 1.10 342 29.40 “乱翻书”图书推荐；“阅读图鉴”展示阅读群像
+
+10 绍兴图书馆 0.69 50 10.20 古籍修复技艺；地方文化揭示
+
+注：数据截止日期为2020年12月6日
+
+由数据可见，在目前如火如荼的短视频平台上，相对于拥有九千余万粉丝的人民日报和一百七十余万粉丝的中国国家博物馆等媒体、文化类抖音账号，图书馆账号显得非常冷清。虽然个别图书馆也在尝试内容创新，如账号“浙江图书馆——大咖来了”专注于将专家讲座的精华知识点在短视频中进行包装和呈现，获得了较高的点赞量；“国家图书馆”打造的科普知识点小视频“百草园里识百草”可以让用户填补知识空白，但是大部分图书馆的短视频内容仍然缺乏创新，并未展现出与微信公众号等图文新媒体平台内容的明显差异化，因此缺少“爆款”内容，曝光量小，粉丝量和点赞量都较低。一些学术性、科研型的图书馆，比如中国科学院文献情报中心、中国科学院武汉文献情报中心、清华大学图书馆、哈尔滨工业大学威海分校图书馆等已经开通抖音账号，发布的内容涉及到特藏展览、学者风采、科普宣传、活动推广等，获得了一定的关注。但是，一方面这类图书馆短视频账号开通比例还比较低，另一方面，在作品数量、粉丝数、点赞量等方面与公共图书馆还有较大的差距。
+
+3.2 图书馆短视频运营的主要问题
+
+### B0008
+
+- Source ID: `cnki_2021_d35f8e895a:B0008`
+- Page: unknown from current extractor
+
+根据数据统计和对图书馆短视频内容的调研，可以总结出图书馆短视频平台的运营状况存在以下3个主要问题：①开通比例低。在全国超过3 000个公共图书馆和超过2 600个高校图书馆中，分别只有1%左右和1‰左右开通了抖音短视频账号。②作品数量少。在目前已开通的图书馆抖音账号中，超过半数已运营超过一年，但是作品数量不足100。③优质内容少。大部分图书馆账号的短视频内容较为传统和分散，视频创作的专业化水准不足，导致点赞量低、传播效果不佳。
+
+目前，图书馆的短视频内容主要集中在作为公共文化服务机构的公共图书馆对其基础服务、科普讲座的宣传以及文化传播等，而学术性、科研型图书馆的短视频账号开通比例较低，作品数量相对较少。研究图书馆短视频的传播及互动效果的影响因素，对图书馆短视频的内容创作和科学运营具有一定的指导意义，也可以为学术性、科研型图书馆的短视频账号运营提供借鉴。此类图书馆还可以尝试聚焦PGC(专业生产内容)的内容制作和垂直化、差异化运营，但将专业化的内容处理得雅俗共赏，同时提升短视频的摄制水平等工作也存在一定的挑战。
+
+短视频制作及运营所需的人力成本较高可能是图书馆短视频账号开通比例低、作品少的原因之一。因此在有限的人力资源条件下，如何更好地适应平台特点、制作优质的短视频，如何提升其传播及互动效果，进而提高图书馆的社会服务效益，成为当下图书馆短视频运营的关键问题。
+
+4 基于“上瘾模型”的图书馆短视频传播及互动效果影响因素模型的构建
+
+“上瘾模型”是N. Eyal和R. Hoover在Hooked——How to Build Habit-forming Products一书中总结出的互联网产品设计逻辑，意为培养用户的使用习惯，将用户“勾住”[11]。“上瘾模型”分为4个阶段[11]:①触发，即吸引用户的注意力。触发又分为外部触发和内部触发，外部触发通过将信息渗透在用户周围引导他们采取下一步行动；内部触发则通过与用户的思想、情感或内心情绪发生关联来吸引用户使用。②行动，即用户在期待得到产品酬赏时做出的行动。要促成某种行为，需要兼具触发显而易见、动机合乎常理、行为易于实施3个条件。③产品要为用户设计多变的酬赏，主要可分为社交酬赏、猎物酬赏和自我酬赏。其中，社交酬赏是指用户在产品中通过与他人的互动而获取的人际奖励。猎物酬赏是指用户从产品中获得的具体资源或信息。自我酬赏，是指用户从产品中体验到的操控感、成就感和终结感。④投入，指用户在得到产品的酬赏之后，对产品投入时间、精力甚至一些有具体价值的东西。用户对产品的投入可以增加用户粘性。最后，在用户投入的阶段加载下一个触发，可以增加用户进入“触发——行动——酬赏——投入——触发”上瘾循环的几率[11]。如图1所示：
+
+图1“上瘾模型”图示
+
+### B0009
+
+- Source ID: `cnki_2021_d35f8e895a:B0009`
+- Page: unknown from current extractor
+
+本文基于互联网产品用户行为模型——“上瘾模型”,以抖音平台为例，总结出影响短视频传播及互动效果的8个因素，并结合图书馆的实际情况建立图书馆短视频传播及互动效果的影响因素模型，见图2。
+
+以下从上瘾模型的4个环节分别阐释图书馆短视频传播及互动效果影响因素模型：
+
+(1)触发用户的因素。
+
+抖音平台短视频的标题是用户观看短视频时获取的第一个完整信息，可以让用户最快地了解短视频的主要内容，从而做出是否观看的决定，因此本文将标题作为外部触发因素，具体包括标题句型和标题长度。图书馆短视频的标题句型包括陈述句、感叹句和疑问句；标题长度包括一句话、二句话和三句话及以上。短视频的背景音乐可以在第一时间触发用户的内心情感、调动用户的情绪[12],从而增强代入感，因此将其设定为内部触发因素。图书馆短视频的背景音乐情感类型包括无背景音乐、活泼轻快、昂扬向上、庄严肃穆、温柔感性、古风婉转、悲伤凝重以及其他。
+
+(2)促使用户行动的因素。
+
+短视频的制作类别和内容主题是促成用户行动的两个最主要因素。制作类别决定了短视频的呈现方式，也在很大程度上决定了短视频最终的视觉效果，因此在一定程度上与用户的观看意愿(即行为动机)相关。图书馆短视频的制作类别主要包括实景拍摄、图片动画、宣传片、情景剧、现场录像、网络视频加工及其他。内容主题是短视频的核心，内容主题的复杂程度及其与用户的相关性决定了用户是否有能力或兴趣观看短视频[13]。图书馆短视频的内容主题主要包括宣传介绍、新闻动态或回顾、资源推荐、文化知识科普、人物故事、活动或服务预告、社会事件、城市宣传、活动或参赛视频、节日或日常问候及其他。
+
+图2 基于“上瘾模型”的图书馆短视频传播及互动效果影响因素模型 (3)短视频中的酬赏。
+
+由于短视频的SNS(社交网络服务)功能较弱，本文主要考虑猎物酬赏，即用户在短视频中可获得的具体且有用的信息。图书馆短视频中的信息类型主要包括无具体信息、资源类信息、服务类信息、社会信息及其他。
+
+(4)吸引用户投入的因素。
+
+短视频的时长与用户投入的时间密切相关，本研究将图书馆短视频的时长分为1分钟以下、2-3分钟和3分钟以上。相关或连续性是指图书馆的单个短视频是否与其临近的短视频具有相关或连续的关系，这与用户是否会继续投入精力有关。
+
+5 基于SPSS数据分析的实证研究
+
+为探究图2所示的模型中各因素是否对图书馆短视频的传播及互动效果有显著性影响，本文将使用SPSS中的非参数检验方法验证其影响的显著性。
+
+5.1 研究方法
+
+### B0010
+
+- Source ID: `cnki_2021_d35f8e895a:B0010`
+- Page: unknown from current extractor
+
+如表1所示，目前粉丝数量排名前10的图书馆官方抖音号的作品量和粉丝量相对较大，涵盖了国家图书馆、上海图书馆等具有一定代表性、影响力较大的图书馆。本文选取此10个图书馆的抖音短视频作品作为研究对象，收集每个抖音号最新发布的100个短视频作品(作品数量不足100的取全部作品),共879个作品作为研究样本。然后收集样本的点赞数、评论数和转发数作为体现传播及互动效果的数据；并对样本的标题句型、标题长度、背景音乐情感类型、制作类别、内容主题、信息类型、时长及其与邻近视频是否具有相关或连续性共8个影响因素进行编码和统计，最后采取SPSS非参数检验方法验证和分析各因素对传播及互动效果是否具有显著的影响。
+
+5.2 因变量的计算
+
+抖音平台可收集的反映传播及互动效果的数据包括点赞数、评论数和转发数。为了综合反映传播及互动效果，本文的因变量借鉴“清博指数”中抖音号互动指数[14]的计算方法，通过对点赞数、评论数和转发数进行取对数和加权等运算，得出图书馆短视频传播及互动指数(下文简称为“C指数”),如公式(1)所示。“清博指数”为北京清博大数据有限公司的一款用于新媒体评估的数据产品。团中央等部委，新华社、解放军报等媒体，腾讯、新浪、今日头条等互联网公司的部分新媒体运营均以“清博指数”为评价标准。
+
+其中，C为传播及互动指数，X为点赞数，Y为评论数，Z为转发数，m为样本序号。
+
+5.3 自变量的分类与编码
+
+各影响因素为本研究的自变量，包括图书馆短视频的标题句型、标题长度、背景音乐情感类型、制作类别、内容主题、信息类型、时长以及是否具有相关或连续性，编码方式如表2所示：
+
+表2 自变量分类编码及样本描述性统计结果(N=879)
+
+自变量 自变量分类 编码 个案数 百分比/%
+
+标题句型 陈述句 1 639 72.7
+
+感叹句 2 138 15.7
+
+疑问句 3 102 11.6
+
+标题长度 一句 1 698 79.4
+
+二句 2 164 18.7
+
+三句及以上 3 17 1.9
+
+背景音乐 无 0 167 19
+
+情感类型 活泼轻快 1 275 31.3
+
+昂扬向上 2 102 11.6
+
+庄严肃穆 3 50 5.7
+
+温柔感性 4 160 18.2
+
+古风婉转 5 114 13
+
+悲伤凝重 6 11 1.3
+
+其他 7 0 0
+
+制作类别 实景拍摄 1 376 42.8
+
+图片动画 2 197 22.4
+
+宣传片 3 104 11.8
+
+情景剧 4 4 0.5
+
+现场录像 5 30 3.4
+
+网络视频加工 6 168 19.1
+
+其他 7 0 0
+
+内容主题 宣传介绍 1 129 14.7
+
+新闻动态与回顾 2 75 8.5
+
+资源推荐 3 122 13.9
+
+文化知识科普 4 248 28.2
+
+人物故事 5 21 2.4
+
+活动或服务预告 6 65 7.4
+
+### B0011
+
+- Source ID: `cnki_2021_d35f8e895a:B0011`
+- Page: unknown from current extractor
+
+社会事件 7 59 6.7
+
+城市宣传 8 20 2.3
+
+活动或参赛视频 9 73 8.3
+
+节日或日常问候 10 67 7.6
+
+其他 11 0 0
+
+信息类型 无 0 295 33.6
+
+资源类 1 113 12.9
+
+服务类 2 134 15.2
+
+知识点 3 283 32.2
+
+社会信息 4 54 6.1
+
+其他 5 0 0
+
+时长(分钟) 1分钟以内 1 702 79.9
+
+2-3分钟 2 99 11.3
+
+3分钟以上 3 78 8.9
+
+相关或连续性 无 0 622 70.8
+
+有 1 257 29.2
+
+团队成员对自变量编码规则进行讨论后，由两名成员分别对前100个短视频样本的相关数据进行编码，然后对不一致的编码结果进行小组讨论并细化编码规则，最后得出最终的编码结果。
+
+由表2中的描述性统计结果可见，图书馆短视频标题多为一句话(79.4%)的陈述句(72.7%)标题；背景音乐情感类型以活泼轻快(31.3%)和温柔感性(18.2%)为主；内容主题较为分散，文化知识科普(28.2%)类最为多见；制作类别以实景拍摄(42.8%)和图片动画(22.4)为主；大部分短视频传递了以知识点为主的具体信息(66.4%);79.9%的短视频样本时长在1分钟以内；70.8%的短视频样本与邻近短视频并无相关或连续性。
+
+6 研究结果与分析 6.1 研究结果
+
+首先对因变量C指数样本进行正态分布检验。基于SPSS单个样本K-S检验得出该样本不符合正态分布，因此采用SPSS非参数检验方法验证各个自变量对于因变量是否有显著性影响。根据独立样本个数，除相关或连续性因素采用两个独立样本的Mann-Whitney检验之外，其余7个因素均采用多个独立样本的Kruskal-Wallis检验。具体结果如下：
+
+(1)标题句型。
+
+标题句型与C指数的分参数检验结果如表3所示：
+
+表3 标题句型与C指数的非参数检验结果
+
+标题句型(中位数) Kruskal-Wallis 检验统计量H 值 P**
+
+1.0(n=639)* 2.0(n=138) 3.0(n=102)
+
+C指数 145.182 153.510 194.231 15.274 0.000
+
+*n表示样本数量(下同)**p表示显著性水平，如P<0.05,则表明呈现出0.05水平的显著性；如P<0.01,则表明呈现出0.01水平的显著性；如P>0.05,则表明无显著性差异(下同)
+
+由表3可见，标题句型呈现出0.01水平显著性(p=0.000<0.01),不同标题句型样本对于C指数呈现出显著性差异。通过对比中位数可了解具体差异情况如图3所示，根据对应的编码可知，传播及互动效果的优劣顺序为：疑问句标题>感叹句标题>陈述句标题。
+
+(2)标题长度。
+
+标题长度与C指数的非参数检验结果见表4。
+
+### B0012
+
+- Source ID: `cnki_2021_d35f8e895a:B0012`
+- Page: unknown from current extractor
+
+由表4可见，不同标题长度样本的C指数没有表现出显著性差异(p=0.482>0.05),因此不同标题长度对于C指数并无显著影响。
+
+图3 标题句型与C指数的非参数检验分析对比 表4 标题长度与C指数的非参数检验结果
+
+标题长度(中位数) Kruskal-Wallis 检验统计量H值 p
+
+1.0(n=698) 2.0(n=164) 3.0(n=17)
+
+C指数 150.509 166.671 136.996 1.459 0.482 (3)背景音乐情感类型。
+
+背景音乐类型与C指数的非参数检验结果见表5。
+
+由表5可见，背景音乐情感类型对于C指数呈现出0.01水平显著性(p=0.004<0.01),不同背景音乐情感类型的样本对于C指数呈现出显著性差异。通过对比中位数可了解具体差异情况如图4所示。根据对应的编码可知，传播及互动效果的优劣顺序为：活泼轻快>庄严肃穆>昂扬向上>温柔感性>无背景音乐>古风婉转>悲伤凝重。
+
+表5 背景音乐情感类型与C指数的非参数检验结果
+
+背景音乐情感类型(中位数) Kruskal-Wallis 检验统计量H值 p
+
+0.0(n=167) 1.0(n=275) 2.0(n=102) 3.0(n=50) 4.0(n=160) 5.0(n=114) 6.0(n=11)
+
+C指数 142.217 184.149 163.042 165.144 152.105 117.383 92.805 19.102 0.004 图4 背景音乐情感类型与C指数的非参数检验分析对比 (4)制作类别。
+
+制作类别与C指数的非参数检验结果见表6。
+
+由表6可见，制作类别对于C指数呈现出0.01水平显著性(p=0.000<0.01),不同制作类别样本对于C指数呈现出显著性差异。通过对比中位数可了解具体差异情况如图5所示。根据对应的编码可知，传播及互动效果的优劣顺序为：情景剧>网络视频加工>实景拍摄>有设计元素的宣传视频> 图片动画>活动录像。
+
+图5 制作类别与C指数的非参数检验分析对比 (5)内容主题。
+
+内容主题与C指数的非参数检验结果见表7。
+
+由表7可见，内容主题对于C指数呈现出0.01水平显著性(p=0.001<0.01) ,不同内容主题样本对于C指数呈现出显著性差异。通过对比中位数可了解具体差异情况如图6所示。根据对应的编码可知，传播及互动效果的优劣顺序为：人物故事>宣传与介绍>城市宣传>资源推荐>文化知识科普>活动或服务预告>活动或参赛视频>节日或日常问候>社会事件>新闻动态与回顾。
+
+图6 内容主题与C指数的非参数检验分析对比 (6)信息类型。
+
+信息类型与C指数的非参数检验结果见表8。
+
+表6 制作类别与C指数的非参数检验结果
+
+制作类别(中位数) Kruskal-Wallis 检验统计量H值 p
+
+### B0013
+
+- Source ID: `cnki_2021_d35f8e895a:B0013`
+- Page: unknown from current extractor
+
+1.0(n=376) 2.0(n=197) 3.0(n=104) 4.0(n=4) 5.0(n=30) 6.0(n=168)
+
+C指数 155.555 127.681 141.205 218.601 84.000 209.781 51.022 0.000 表7 内容主题与C指数的非参数检验结果
+
+内容主题(中位数) Kruskal-Wallis 检验统计量H 值 p
+
+1.0 (n=129) 2.0 (n=75) 3.0 (n=122) 4.0 (n=248) 5.0 (n=21) 6.0 (n=65) 7.0 (n=59) 8.0 (n=20) 9.0 (n=73) 10.0 (n=67)
+
+C指数 186.0 119.8 174.8 158.3 203.2 151.0 120.4 175.1 143.3 139.5 28.285 0.001 表8 信息类型与C指数的非参数检验结果
+
+信息类型(中位数) Kruskal-Wallis 检验统计量H 值 p
+
+0.0(n=295) 1.0(n=113) 2.0(n=134) 3.0(n=283) 4.0(n=54)
+
+指数 149.769 178.476 153.127 155.346 111.954 19.941 0.001
+
+由表8可见，信息类型对于C指数呈现出0.01水平显著性(p=0.001<0.01),不同信息类型样本对于C指数呈现出显著性差异。通过对比中位数可了解具体差异情况如图7所示。根据对应的编码可知，传播及互动效果的优劣顺序为：资源类>知识点类>服务类>无具体信息点>社会信息类。
+
+图7 信息类型与C指数的非参数检验分析对比 (7)时长。
+
+时长与C指数的非参数检验结果如表9所示：
+
+表9 时长与C指数的非参数检验结果
+
+时长(中位数) Kruskal-Wallis 检验统计量H值 p
+
+1.0(n=702) 2.0(n=99) 3.0(n=78)
+
+C指数 152.116 148.958 153.036 0.987 0.610
+
+由表9可见，不同时长样本的C指数没有表现出显著性差异(p=0.610>0.05),因此不同时长对于C指数并无显著影响。
+
+(8)相关或连续性。
+
+相关或连续性与C指数的非参数检验结果如表10所示：
+
+表10 相关或连续性与C指数的非参数检验结果
+
+相关或连续性(中位数) MannWhitney 检验统计量 U值 MannWhitney 检验统计量 z值 p
+
+0.0(n=622) 1.0(n=257) C指数 154.614 144.614 76691.000 -0.945 0.345
+
+由表10可见，相关或连续性对于C指数没有表现出显著性差异(p=0.345>0.05),因此，与邻近短视频是否具有相关或连续性对于C指数并无显著影响。
+
+6.2 结果分析
+
+### B0014
+
+- Source ID: `cnki_2021_d35f8e895a:B0014`
+- Page: unknown from current extractor
+
+根据上文的统计和验证结果可知，在本文设计的短视频传播及互动效果的8个影响因素中，图书馆短视频的标题长度、视频时长及其与临近视频的相关或连续性3个因素对于C指数并没有显著的影响。原因分析为：抖音平台短视频的标题一般只显示前40个字，超出部分会被折叠隐藏。而40字以内的标题基本可以一目了然，与句子数量关系不大，且由于短视频富媒体的呈现方式，标题本身信息表达的作用已被弱化，因此不同标题长度短视频的C指数无显著差异。由于短视频的传播及互动效果更多地取决于视频内容信息本身而不是时间因素[13],因此视频时长对于C指数无显著影响。因为短视频短小、精简、信息密度大的特点，高度碎片化阅读的短视频用户并不关注短视频之间的相关性和连续性，所以，与邻近短视频是否具有相关或连续性对于C指数并无显著影响。
+
+上文的验证结果表明，图书馆短视频的标题句型、背景音乐情感类型、制作类别、内容主题以及信息类型5个因素对于C指数有着显著的影响。
+
+(1)疑问句型标题的短视频效果明显优于感叹句和陈述句。疑问句型的标题通过询问或反诘，引起用户注意，激发用户思考，从而吸引用户。例如，陕西图书馆的“鳌拜府邸到底叫什么?”和“靖安司位于唐长安城的光德坊，陕西省图书馆在哪个坊呢?”等短视频使用疑问句标题吸引用户，引发浏览兴趣。
+
+(2)活泼轻快、昂扬向上或庄严肃穆的背景音乐对短视频的传播及互动效果有积极的影响。此类音乐节奏明快或听觉冲击力强，可有效触发用户的情感共鸣，增强代入感。而古风婉转、悲伤凝重的音乐大多节奏较慢，难于在第一时间吸引用户。
+
+(3)情景剧、网络视频加工的短视频能够得到较好的传播及互动效果。在国家图书馆的短视频样本中，情景剧是由工作人员自编自导，是个性化、趣味化的短剧；浙江图书馆——大咖来了的文化知识科普类短视频选取制作精良的网络视频进行再加工后发布。这两类视频非常符合抖音平台内容娱乐化、视觉化的特点和抖音用户的心理预期。而有设计元素的宣传视频虽然画面更精美，语言更优雅，但往往节奏较慢，信息不够密集；部分图片动画和活动录像的信息密度小，画面缺乏美感，因此这两类视频并不适合在抖音之类的短视频平台播放使用。
+
+(4)不同内容主题的短视频传播及互动效果差异显著。这与以往的相关研究结果具有一致性。比如，政务B站号不同主题的视频在整体传播效果上有不同的表现，科技类视频深受欢迎[15];中国省级卫生健康部门抖音号的数据表明，医务人员相关主题的视频最受欢迎[16]等。本研究显示，基于目前抖音平台粉丝量最大的10个图书馆的短视频样本数据，内容主题为人物故事、图书馆宣传介绍、城市宣传、资源推荐和文化知识科普类的短视频传播及互动效果较好，而预告类、问候类、社会及图书馆动态类内容主题相对较差。
+
+### B0015
+
+- Source ID: `cnki_2021_d35f8e895a:B0015`
+- Page: unknown from current extractor
+
+(5)本文认为“上瘾模型”中的酬赏在短视频中体现为具体且有用的信息包括资源信息、服务信息、知识点和社会信息等。研究结果表明，有酬赏的短视频传播及互动效果明显好于无酬赏的短视频。可见，关注或观看图书馆类短视频账号的用户有获取知识、文化方面具体信息的需求，如何更好地将此类酬赏融入到短视频的内容创作中，创作有趣更“有料”的短视频也成为运营工作成败的关键。
+
+7 策略建议 7.1 基于用户知识焦虑的标题触发
+
+触发需要设计者揣摩用户的心理，明确用户在情感层面的软肋或困扰。负面情绪如知识焦虑等，往往可以充当内部触发[11]。在当今知识快速迭代更新的信息时代，每一个个体，无论是从纵向还是横向，都无法全面地把握所有知识要点，为此引发了不同程度的知识焦虑[17]。图书馆作为一个文化知识的聚合地，短视频内容可以聚焦于将知识点艺术化地阐释和呈现，而高度的碎片化阅读习惯下，短视频用户往往需要在第一时间获取更多、更重要的信息。因此，图书馆短视频的标题或封面文字应善用句型、语体等，配合感染力强的背景音乐，触发读者心理层面的特定情绪如知识焦虑，这也将成为吸引用户浏览的关键。
+
+7.2 低门槛高密度的内容输出
+
+用户的能力水平和媒介习惯是在内容创作时必须考虑的问题。首先，重视内容主题，优选阐述方式。知识文化类短视频必须避免内容太过专业化或晦涩难懂，以免曲高和寡，使用户因畏难而放弃。应将知识和文化通俗化、娱乐化，尽量“接地气”地呈现给读者。其次，创新制作类别，高密度输出内容。大胆创新具有个性化和亲和力的制作类别，如情景剧扮演，可以有效提升用户参与。此外，视频剪辑的节奏应符合短视频平台的特点和用户的媒介习惯，高密度地输出内容，以免拖沓冗长，让用户因失去耐心而放弃。
+
+7.3 以猎物酬赏为主，多变的酬赏设计
+
+想要收获好的用户反馈，就需要让用户的实际期待和潜在期待在开始行动后得到满足，也就是获得“上瘾模型”中的酬赏。在图书馆短视频中，酬赏主要体现为猎物酬赏，即用户从产品中获得具体资源和信息，因此，图书馆短视频内容可以聚焦于艺术化地呈现自身的资源与服务等有用信息以及科技、文化、艺术等具体知识点。当读者从内容中获得知识点或其他有用信息之后，才有可能对其他酬赏感兴趣，因此可以尝试设计以猎物酬赏为基础的多变的酬赏。例如针对读者的互动激励，图书馆账号可以在经典书籍导读或馆藏资源介绍时，通过制造相关话题促进评论与互动，并为参与评论和互动的用户提供部分免费的电子资源等；社交酬赏和猎物酬赏也可以通过一定的方式转化为读者获得知识信息满足感与成就感的自我酬赏。见图8。
+
+8 结语
+
+### B0016
+
+- Source ID: `cnki_2021_d35f8e895a:B0016`
+- Page: unknown from current extractor
+
+短视频是符合当下互联网用户群体碎片化、移动化生活习惯的内容形式[18],在为用户提供新内容、新体验、新模式的同时，也在潜移默化中改变着人们的认知和思维习惯，并在更广泛的层面上影响和重塑新媒体环境下的信息传播生态[19]。图书馆行业应充分认识到短视频平台的巨大传播价值，积极开通，强力运营，借势扩大图书馆的影响力。同时，在短视频平台海量User Generated Content(用户生产内容，简称UGC)的娱乐内容中，图书馆的Professional Generated Content(专业生产内容，简称PGC)短视频内容作为一股清流，对于短视频新生态的构建具有积极的意义。这也要求图书馆相关人员深耕垂直细分领域，为用户提供专业化的优质内容，同时把握用户需求和媒体逻辑，持续创新，从而使图书馆在用户规模迅猛增长的短视频平台赢得更多关注，更好地发挥文化阵地作用和公益服务价值。
+
+### B0017
+
+- Source ID: `cnki_2021_d35f8e895a:B0017`
+- Page: unknown from current extractor
+
+图8 设计多变的酬赏策略示意 参考文献 [1] 卡思数据.2020短视频内容营销趋势白皮书[EB/OL].[2020-03-05].http://www.woshipm.com/marketing/3462722.html. [2] 抖音.2020抖音大数据报告(完整版)[EB/OL].[2021-01-05].http://www.199it.com/archives/1184841.html. [3] WILK S,BAEHR T,EFFELSBERG W.Scalable mobile quality assessment for user-generated video[C]// 2016 IEEE international conference on multimedia&expo workshops.New York:IEEE,2016:1-6. [4] TANG T,CHEN K,CHEN H.Truncated SVD-based feature engineering for short video understanding and recommendation[C]// 2019 IEEE international conference on multimedia&expo workshops.New York:IEEE,2019:695-700. [5] LIU Y,LYU C,LIU Z,et al.Building effective short video recommendation[C]//2019 IEEE international conference on multimedia&expo workshops.New York:IEEE,2019:651-656. [6] ZHANG X,WU Y,LIU S.Exploring short-form video application addiction:socio-technical and attachment perspectives [J].Telematics and informatics,2019,42:1-15. [7] 龚艳萍，曹玉，李见.短视频应用的特性对用户参与行为的影响：心理参与的中介作用 [J].情报科学，2020,38(7):77-84. [8] 张文亮，刘培旺.短视频APP在图书馆推广中的应用及发展策略——基于平台数据的统计分析[J].图书馆学研究，2019(14):34-39. [9] 朱鲲鹏，周静.身体社会学视角下虚拟社区治理研究——以短视频为例[J].广西社会科学，2020(2):74-77. [10] 曾一昕，张齐婕.公共图书馆短视频公众平台建设现状分析[J].图书馆学研究，2020(4):13-18. [11] EYAL N
+
+### B0018
+
+- Source ID: `cnki_2021_d35f8e895a:B0018`
+- Page: unknown from current extractor
+
+,HOOVER R.Hooked:how to build habit-forming products[M].London:Penguin Books Ltd,2014. [12] 陈强，高幸兴，陈爽，等.政务短视频公众参与的影响因素研究——以“共青团中央”政务抖音号为例[J].电子政务，2019(10):13-22. [13] 王海燕.图书馆短视频发展现状、问题与对策分析——以抖音平台为例[J].图书馆工作与研究，2020(5):76-80. [14] 清博指数，抖音号传播力指数DCI(V1.0)[EB/OL].[2021-01-05].http://www.gsdata.cn/site/usage-16. [15] 陈强，张扬一，马晓悦，等.政务B站号信息传播效果影响因素与实证研究[J/OL].图书情报工作，2020,64(22):126-134. [16] ZHU C,XU X,ZHANG W,et al.How health communication via Tik Tok makes a difference:a content analysis of Tik Tok accounts run by Chinese provincial health committees[J].International journal of environmental research and public health,2020,17(1):192-205. [17] 黄冰毅.基于上瘾模型的移动学术虚拟社区知识共享动力激发策略研究[J].情报探索，2019(2):72-75. [18] 陈奇妍.传播学视域下短视频生态研究——以抖音为例[J].中国传媒科技，2019(6):86-88. [19] 王晓红，郭海威.短视频新生态的建构与创新研究[J].中国编辑，2019(7):4-8.作者贡献说明：高晓晶：提出论文的核心研究思路，拟写提纲，撰写并修改论文；喻梦倩：数据统计分析与讨论；杨家燕：数据统计，论文校对；张毓晗：数据统计分析与讨论。 参考文献 引证文献 注释
+
+## Reading Notes
+
+- Summary after human reading: 2026-06-20 Codex-assisted source-grounded reading note, pending user confirmation. This paper studies library short-video communication and interaction effects on Douyin. It introduces the Hook Model to organize factors into trigger, action, reward, and investment, then tests 8 coded content/design factors against a composite communication-interaction index built from likes, comments, and shares.
+- Innovation / value after human reading: The main value for this project is that the article is not only a general operation-strategy paper; it connects a behavioral product framework with an empirical library short-video dataset. It is especially useful as an example of how a Chinese LIS article in `图书情报工作` turns platform operation into measurable variables and practical strategy recommendations.
+- Method details after human reading: The study selects the top 10 official library Douyin accounts by follower count, collects 879 short-video samples, records likes/comments/shares, computes a `C指数` based on a Qingbo-style Douyin interaction index, and codes 8 independent variables: title sentence pattern, title length, background-music emotion type, production category, content theme, information type, video duration, and relation/continuity with neighboring videos. Because the dependent variable failed a one-sample K-S normality test, the authors use Kruskal-Wallis tests for 7 multi-category factors and Mann-Whitney tests for the binary relation/continuity factor.
+- Usable evidence block IDs:
+  - `cnki_2021_d35f8e895a:B0006`: claims the prior short-video literature focused on recommendation algorithms, user studies, and platform operation, while library short-video influence-factor research lacked theoretical support and empirical analysis.
+  - `cnki_2021_d35f8e895a:B0008`: reports low opening rates, limited output, and weak content quality as major library Douyin operation problems.
+  - `cnki_2021_d35f8e895a:B0009`: maps Hook Model stages to title/music, production/content, information reward, duration, and continuity variables.
+  - `cnki_2021_d35f8e895a:B0010` and `B0011`: describe the 879-sample dataset, dependent variable, 8 coded independent variables, and nonparametric-test choice.
+  - `cnki_2021_d35f8e895a:B0011` to `B0013`: report significant effects for title sentence pattern, background-music emotion type, production category, content theme, and information type; no significant effect for title length, duration, or relation/continuity.
+  - `cnki_2021_d35f8e895a:B0014` to `B0016`: provide interpretation and operation strategies: question titles, emotionally engaging music, scenario/script or edited-video formats, useful resource/knowledge/service information, low-threshold high-density content, and variable reward design.
+- Limitations and uncertainty: Reader extraction is text-based with no page numbers, figures/tables are not separately extracted, and this note is not yet a human-read or verified status. The study is observational and platform-specific to 2020-era Douyin library accounts. It uses engagement metrics as outcome proxies, so later writing should not overstate causal effects without additional evidence.

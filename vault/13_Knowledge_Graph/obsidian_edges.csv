@@ -1,0 +1,99 @@
+Source,Target,Type,Weight,Label
+2026-06-20-hook-model,Hook Model 上瘾模型,Directed,1,obsidian_link
+2026-06-29-evening-close,2026-06-22-library_short_video,Directed,2,obsidian_link
+2026-06-29-evening-close,2026-06-28-context-pack,Directed,2,obsidian_link
+2026-06-29-evening-close,2026-06-29-sicas-paper,Directed,5,obsidian_link
+2026-06-29-evening-close,AARRR 漏斗模型,Directed,1,obsidian_link
+2026-06-29-evening-close,DCI传播力指数,Directed,3,obsidian_link
+2026-06-29-evening-close,ELM 精细加工可能性模型,Directed,1,obsidian_link
+2026-06-29-evening-close,Hook Model 上瘾模型,Directed,5,obsidian_link
+2026-06-29-evening-close,SICAS-服务转化路径,Directed,1,obsidian_link
+2026-06-29-evening-close,SICAS模型,Directed,5,obsidian_link
+2026-06-29-evening-close,cnki_2023_34348faa1e,Directed,8,obsidian_link
+2026-06-29-evening-close,library_short_video,Directed,4,obsidian_link
+2026-06-29-evening-close,图书馆短视频多平台复测,Directed,1,obsidian_link
+2026-06-29-evening-close,图书馆短视频服务价值框架,Directed,1,obsidian_link
+2026-06-29-evening-close,描述性账号调查,Directed,2,obsidian_link
+2026-06-29-evening-close,方向链,Directed,4,obsidian_link
+2026-06-29-evening-close,沉浸式内容,Directed,2,obsidian_link
+2026-06-29-evening-close,用户感知价值,Directed,2,obsidian_link
+2026-06-29-evening-close,精神激励,Directed,1,obsidian_link
+2026-06-29-evening-close,软营销,Directed,2,obsidian_link
+2026-06-29-sicas-paper,2026-06-29-evening-close,Directed,1,obsidian_link
+2026-06-29-sicas-paper,DCI传播力指数,Directed,2,obsidian_link
+2026-06-29-sicas-paper,ELM 精细加工可能性模型,Directed,1,obsidian_link
+2026-06-29-sicas-paper,Hook Model 上瘾模型,Directed,1,obsidian_link
+2026-06-29-sicas-paper,SICAS模型,Directed,5,obsidian_link
+2026-06-29-sicas-paper,cnki_2023_34348faa1e,Directed,5,obsidian_link
+2026-06-29-sicas-paper,library_short_video,Directed,2,obsidian_link
+2026-06-29-sicas-paper,描述性账号调查,Directed,1,obsidian_link
+2026-06-29-sicas-paper,沉浸式内容,Directed,2,obsidian_link
+2026-06-29-sicas-paper,用户感知价值,Directed,1,obsidian_link
+2026-06-29-sicas-paper,软营销,Directed,2,obsidian_link
+DCI传播力指数,SICAS模型,Directed,1,obsidian_link
+DCI传播力指数,cnki_2023_34348faa1e,Directed,2,obsidian_link
+DCI传播力指数,library_short_video,Directed,1,obsidian_link
+DCI传播力指数,用户感知价值,Directed,1,obsidian_link
+Home,11_Idea_Lab/README,Directed,1,obsidian_link
+Home,可视化使用指南,Directed,1,obsidian_link
+Home,图表规范,Directed,1,obsidian_link
+Home,文献阅读规范,Directed,1,obsidian_link
+Home,科研工作流,Directed,1,obsidian_link
+Hook Model 上瘾模型,ELM 精细加工可能性模型,Directed,1,obsidian_link
+Hook Model 上瘾模型,图书馆短视频相关研究,Directed,2,obsidian_link
+Hook Model 上瘾模型,平台互动指标,Directed,2,obsidian_link
+Hook Model 上瘾模型,服务价值,Directed,2,obsidian_link
+Hook Model 上瘾模型,阅读推广,Directed,2,obsidian_link
+README,双链,Directed,1,obsidian_link
+SICAS模型,AARRR 漏斗模型,Directed,2,obsidian_link
+SICAS模型,DCI传播力指数,Directed,1,obsidian_link
+SICAS模型,ELM 精细加工可能性模型,Directed,2,obsidian_link
+SICAS模型,Hook Model 上瘾模型,Directed,2,obsidian_link
+SICAS模型,cnki_2023_34348faa1e,Directed,1,obsidian_link
+SICAS模型,library_short_video,Directed,1,obsidian_link
+SICAS模型,描述性账号调查,Directed,1,obsidian_link
+SICAS模型,用户感知价值,Directed,1,obsidian_link
+SICAS模型,软营销,Directed,1,obsidian_link
+cnki_2023_34348faa1e,2026-06-29-evening-close,Directed,1,obsidian_link
+cnki_2023_34348faa1e,2026-06-29-sicas-paper,Directed,1,obsidian_link
+cnki_2023_34348faa1e,AARRR 漏斗模型,Directed,2,obsidian_link
+cnki_2023_34348faa1e,DCI传播力指数,Directed,2,obsidian_link
+cnki_2023_34348faa1e,ELM 精细加工可能性模型,Directed,3,obsidian_link
+cnki_2023_34348faa1e,Hook Model 上瘾模型,Directed,3,obsidian_link
+cnki_2023_34348faa1e,SICAS-服务转化路径,Directed,2,obsidian_link
+cnki_2023_34348faa1e,SICAS模型,Directed,3,obsidian_link
+cnki_2023_34348faa1e,cnki_2021_3771e58987,Directed,1,obsidian_link
+cnki_2023_34348faa1e,cnki_2021_5530e86157,Directed,1,obsidian_link
+cnki_2023_34348faa1e,library_short_video,Directed,2,obsidian_link
+cnki_2023_34348faa1e,图书馆短视频多平台复测,Directed,2,obsidian_link
+cnki_2023_34348faa1e,图书馆短视频服务价值框架,Directed,2,obsidian_link
+cnki_2023_34348faa1e,描述性账号调查,Directed,1,obsidian_link
+cnki_2023_34348faa1e,沉浸式内容,Directed,2,obsidian_link
+cnki_2023_34348faa1e,用户感知价值,Directed,2,obsidian_link
+cnki_2023_34348faa1e,精神激励,Directed,1,obsidian_link
+cnki_2023_34348faa1e,软营销,Directed,2,obsidian_link
+描述性账号调查,SICAS模型,Directed,1,obsidian_link
+描述性账号调查,cnki_2023_34348faa1e,Directed,2,obsidian_link
+描述性账号调查,library_short_video,Directed,1,obsidian_link
+描述性账号调查,用户感知价值,Directed,1,obsidian_link
+描述性账号调查,软营销,Directed,1,obsidian_link
+方向链,Idea Lab,Directed,1,obsidian_link
+方向链,Obsidian 知识图谱,Directed,1,obsidian_link
+方向链,快乐科研闭环,Directed,1,obsidian_link
+沉浸式内容,Hook Model 上瘾模型,Directed,2,obsidian_link
+沉浸式内容,SICAS模型,Directed,2,obsidian_link
+沉浸式内容,cnki_2023_34348faa1e,Directed,1,obsidian_link
+沉浸式内容,描述性账号调查,Directed,1,obsidian_link
+沉浸式内容,用户感知价值,Directed,2,obsidian_link
+用户感知价值,SICAS模型,Directed,2,obsidian_link
+用户感知价值,cnki_2023_34348faa1e,Directed,1,obsidian_link
+用户感知价值,library_short_video,Directed,1,obsidian_link
+用户感知价值,描述性账号调查,Directed,1,obsidian_link
+用户感知价值,沉浸式内容,Directed,1,obsidian_link
+用户感知价值,软营销,Directed,1,obsidian_link
+软营销,SICAS模型,Directed,2,obsidian_link
+软营销,cnki_2023_34348faa1e,Directed,1,obsidian_link
+软营销,library_short_video,Directed,1,obsidian_link
+软营销,描述性账号调查,Directed,1,obsidian_link
+软营销,沉浸式内容,Directed,1,obsidian_link
+软营销,用户感知价值,Directed,1,obsidian_link

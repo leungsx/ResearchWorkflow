@@ -1,0 +1,179 @@
+PYTHON ?= /Users/leung/anaconda3/bin/python
+
+.PHONY: check new status fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
+
+check:
+	$(PYTHON) scripts/check_environment.py
+
+new:
+	$(PYTHON) scripts/new_project.py "$(SLUG)" "$(TITLE)"
+
+status:
+	$(PYTHON) scripts/project_status.py --project "$(PROJECT)"
+
+fast-status:
+	$(PYTHON) scripts/research_fastlane.py snapshot --project "$(PROJECT)" $(if $(TOPIC),--topic "$(TOPIC)",) $(if $(DATE),--date "$(DATE)",) $(if $(PRINT),--print,)
+
+workflow-policy:
+	$(PYTHON) scripts/research_fastlane.py policy
+
+workflow-audit:
+	$(PYTHON) scripts/workflow_audit.py $(if $(DATE),--date "$(DATE)",) $(if $(STRICT),--strict,)
+
+workflow-backup:
+	$(PYTHON) scripts/workflow_backup.py $(if $(DATE),--date "$(DATE)",) $(if $(NOTE),--note "$(NOTE)",) $(if $(KEEP),--keep "$(KEEP)",)
+
+workflow-backup-prune:
+	$(PYTHON) scripts/workflow_backup.py --prune-only --keep "$(KEEP)"
+
+workflow-refresh:
+	$(MAKE) obsidian-graph
+	$(MAKE) learning-dashboard
+	$(MAKE) workflow-backup $(if $(DATE),DATE="$(DATE)",) $(if $(NOTE),NOTE="$(NOTE)",)
+	$(MAKE) codex-sweep $(if $(DATE),DATE="$(DATE)",)
+	$(MAKE) codex-compact $(if $(DATE),DATE="$(DATE)",)
+	$(MAKE) codex-context-index
+	$(MAKE) workflow-audit $(if $(DATE),DATE="$(DATE)",)
+	$(MAKE) learning-dashboard
+
+workflow-refresh-git:
+	$(MAKE) workflow-refresh $(if $(DATE),DATE="$(DATE)",) $(if $(NOTE),NOTE="$(NOTE)",)
+	$(MAKE) git-snapshot $(if $(DATE),DATE="$(DATE)",) $(if $(NOTE),NOTE="$(NOTE) pre-audit snapshot",) PUSH=1
+	$(MAKE) workflow-audit $(if $(DATE),DATE="$(DATE)",)
+	$(MAKE) learning-dashboard
+	$(MAKE) git-snapshot $(if $(DATE),DATE="$(DATE)",) $(if $(NOTE),NOTE="$(NOTE) audit refresh",) PUSH=1
+
+git-snapshot:
+	$(PYTHON) scripts/git_snapshot.py --init $(if $(DATE),--date "$(DATE)",) $(if $(NOTE),--note "$(NOTE)",) $(if $(PUSH),--push,) $(if $(DRY),--dry-run,) $(if $(ALLOW_RISKY),--allow-risky,)
+
+backfill:
+	$(PYTHON) scripts/backfill_project.py --project "$(PROJECT)" $(if $(APPLY),--apply,)
+
+backfill-all:
+	$(PYTHON) scripts/backfill_project.py --all $(if $(APPLY),--apply,)
+
+evidence-gate:
+	$(PYTHON) scripts/evidence_gate.py --project "$(PROJECT)" $(if $(STRICT),--fail-on-errors,)
+
+citation-audit:
+	$(PYTHON) scripts/audit_references_gbt7714.py --project "$(PROJECT)" $(if $(STRICT),--fail-on-errors,)
+
+submission-package:
+	$(PYTHON) scripts/make_submission_package.py --project "$(PROJECT)" $(if $(NO_DOCX),--no-docx,) $(if $(STRICT),--strict,)
+
+search:
+	$(PYTHON) scripts/literature_search.py "$(Q)" --limit 30
+
+import-matrix:
+	$(PYTHON) scripts/import_search_to_matrix.py --csv "$(CSV)"
+
+import-cnki:
+	$(PYTHON) scripts/import_cnki_to_matrix.py --input $(INPUT) $(if $(TAG),--tag "$(TAG)",) $(if $(DRY),--dry-run,)
+
+cnki-frontier:
+	$(PYTHON) scripts/cnki_frontier_digest.py $(if $(TAG),--tag "$(TAG)",) $(if $(TOPIC),--topic "$(TOPIC)",) $(if $(KEYWORDS),--keywords "$(KEYWORDS)",) $(if $(LIMIT),--limit "$(LIMIT)",) $(if $(SINCE),--since-year "$(SINCE)",)
+
+cnki-daily:
+	$(PYTHON) scripts/cnki_daily_recommend.py --project "$(PROJECT)" $(if $(TOPIC),--topic "$(TOPIC)",) $(if $(DATE),--date "$(DATE)",) $(if $(STAGE),--stage "$(STAGE)",) $(if $(COMPANIONS),--companions "$(COMPANIONS)",) $(if $(OUTPUT),--output "$(OUTPUT)",) $(if $(PROFILE),--profile "$(PROFILE)",) $(if $(NO_STATE),--no-update-state,)
+
+cnki-download:
+	$(PYTHON) scripts/cnki_click_download_titles.py $(if $(TITLE),--title "$(TITLE)",) $(if $(TITLES),--titles-file "$(TITLES)",) $(if $(PROJECT),--target-dir "library/pdfs/$(PROJECT)",) $(if $(MODE),--download-mode "$(MODE)",) $(if $(TIMEOUT),--timeout "$(TIMEOUT)",) $(if $(DETAIL_TIMEOUT),--detail-timeout "$(DETAIL_TIMEOUT)",) $(if $(DELAY_MIN),--delay-min "$(DELAY_MIN)",) $(if $(DELAY_MAX),--delay-max "$(DELAY_MAX)",) $(if $(CONFIRM_SAVE),--confirm-save-dialog,) $(if $(SAVE_DIALOG_DELAY),--save-dialog-delay "$(SAVE_DIALOG_DELAY)",) $(if $(NO_STOP_ON_BARRIER),--no-stop-on-barrier,) --update-matrix
+
+cnki-batch-download:
+	$(PYTHON) scripts/cnki_batch_pdf_download.py $(if $(METADATA),--metadata-json "$(METADATA)",) $(if $(PROJECT),--project "$(PROJECT)" --target-dir "library/pdfs/$(PROJECT)",) $(if $(TARGET_TOTAL),--target-total "$(TARGET_TOTAL)",) $(if $(LIMIT),--limit "$(LIMIT)",) $(if $(TIMEOUT),--timeout "$(TIMEOUT)",) $(if $(NAV_TIMEOUT),--nav-timeout "$(NAV_TIMEOUT)",) $(if $(DELAY_MIN),--delay-min "$(DELAY_MIN)",) $(if $(DELAY_MAX),--delay-max "$(DELAY_MAX)",) $(if $(CONFIRM_SAVE),--confirm-save-dialog,) $(if $(SAVE_DIALOG_DELAY),--save-dialog-delay "$(SAVE_DIALOG_DELAY)",) $(if $(PROFILE_FILTER),--profile-filter,) $(if $(NO_STOP_ON_BARRIER),--no-stop-on-barrier,) --update-matrix
+
+cnki-restock:
+	$(PYTHON) scripts/cnki_restock_learning_papers.py $(if $(PROJECT),--project "$(PROJECT)",) $(if $(TOPIC),--topic "$(TOPIC)",) $(if $(DATE),--date "$(DATE)",) $(if $(STAGE),--stage "$(STAGE)",) $(if $(MIN_STORED),--min-stored "$(MIN_STORED)",) $(if $(REFILL_COUNT),--refill-count "$(REFILL_COUNT)",) $(if $(PROFILE),--profile "$(PROFILE)",) $(if $(TIMEOUT),--timeout "$(TIMEOUT)",) $(if $(NAV_TIMEOUT),--nav-timeout "$(NAV_TIMEOUT)",) $(if $(DELAY_MIN),--delay-min "$(DELAY_MIN)",) $(if $(DELAY_MAX),--delay-max "$(DELAY_MAX)",) $(if $(CONFIRM_SAVE),--confirm-save-dialog,) $(if $(SAVE_DIALOG_DELAY),--save-dialog-delay "$(SAVE_DIALOG_DELAY)",) $(if $(NO_STOP_ON_BARRIER),--no-stop-on-barrier,) $(if $(ALLOW_NON_PDF),--allow-non-pdf-fallback,) $(if $(DRY),--dry-run,)
+
+insight-bank:
+	$(PYTHON) scripts/insight_bank.py --project "$(PROJECT)" $(if $(CITEKEY),--citekey "$(CITEKEY)",) $(if $(DRY),--dry-run,)
+
+paper-brief:
+	$(PYTHON) scripts/paper_brief.py $(if $(CITEKEY),--citekey "$(CITEKEY)",) $(if $(TITLE),--title "$(TITLE)",) $(if $(PDF),--pdf "$(PDF)",)
+
+paper-reader:
+	$(PYTHON) scripts/paper_reader.py $(if $(PROJECT),--project "$(PROJECT)",) $(if $(CITEKEY),--citekey "$(CITEKEY)",) $(if $(TITLE),--title "$(TITLE)",) $(if $(PDF),--pdf "$(PDF)",) $(if $(TEXT),--text "$(TEXT)",) $(if $(OUTPUT),--output-dir "$(OUTPUT)",) $(if $(UPDATE),--update-matrix,)
+
+paper-context:
+	$(PYTHON) scripts/paper_context_pack.py --project "$(PROJECT)" $(if $(CITEKEY),--citekey "$(CITEKEY)",) $(if $(ALL),--all-skimmed,) $(if $(OUTPUT),--output "$(OUTPUT)",) $(if $(MAX_BLOCKS),--max-blocks "$(MAX_BLOCKS)",) $(if $(SNIPPET_CHARS),--snippet-chars "$(SNIPPET_CHARS)",)
+
+caj-convert:
+	$(PYTHON) scripts/caj_convert.py --project "$(PROJECT)" $(if $(CITEKEY),--citekey "$(CITEKEY)",) $(if $(INPUT),--input "$(INPUT)",) $(if $(OUTPUT),--output "$(OUTPUT)",) $(if $(CONVERTER),--converter "$(CONVERTER)",) $(if $(SCAN),--scan,) $(if $(ALL),--all,) $(if $(OVERWRITE),--overwrite,) $(if $(UPDATE),--update-matrix,) $(if $(RUN_READER),--run-reader,)
+
+download:
+	$(PYTHON) scripts/download_oa_pdfs.py
+
+extract:
+	$(PYTHON) scripts/extract_pdf_text.py
+
+gephi:
+	$(PYTHON) scripts/export_gephi.py
+
+passport:
+	$(PYTHON) scripts/make_passport.py --project "$(PROJECT)"
+
+home:
+	$(PYTHON) scripts/open_in_typora.py
+
+reading-board:
+	$(PYTHON) scripts/open_in_typora.py --project "$(PROJECT)" --doc reading
+
+lit-workbench:
+	$(PYTHON) scripts/open_in_typora.py --project "$(PROJECT)" --doc litworkbench
+
+typora:
+	$(PYTHON) scripts/open_in_typora.py "$(FILE)"
+
+typora-project:
+	$(PYTHON) scripts/open_in_typora.py --project "$(PROJECT)" --doc "$(DOC)"
+
+codex-start:
+	$(PYTHON) scripts/codex_archive.py start $(if $(DATE),--date "$(DATE)",)
+
+codex-event:
+	$(PYTHON) scripts/research_fastlane.py event $(if $(PROJECT),--project "$(PROJECT)",) $(if $(KIND),--kind "$(KIND)",) $(if $(SUMMARY),--summary "$(SUMMARY)",) $(if $(FILE),--file "$(FILE)",) $(if $(DECISION),--decision "$(DECISION)",) $(if $(OPEN_LOOP),--open-loop "$(OPEN_LOOP)",) $(if $(NEXT_ACTION),--next-action "$(NEXT_ACTION)",) $(if $(DATE),--date "$(DATE)",)
+
+codex-close-fast:
+	$(PYTHON) scripts/research_fastlane.py close --mode fast $(if $(PROJECT),--project "$(PROJECT)",) $(if $(TOPIC),--topic "$(TOPIC)",) --summary "$(SUMMARY)" $(if $(FILE),--file "$(FILE)",) $(if $(DECISION),--decision "$(DECISION)",) $(if $(OPEN_LOOP),--open-loop "$(OPEN_LOOP)",) $(if $(NEXT_ACTION),--next-action "$(NEXT_ACTION)",) --snapshot
+
+codex-close-standard:
+	$(PYTHON) scripts/research_fastlane.py close --mode standard $(if $(PROJECT),--project "$(PROJECT)",) $(if $(TOPIC),--topic "$(TOPIC)",) --summary "$(SUMMARY)" $(if $(FILE),--file "$(FILE)",) $(if $(DECISION),--decision "$(DECISION)",) $(if $(OPEN_LOOP),--open-loop "$(OPEN_LOOP)",) $(if $(NEXT_ACTION),--next-action "$(NEXT_ACTION)",) --snapshot
+
+codex-close-deep:
+	$(PYTHON) scripts/research_fastlane.py close --mode deep $(if $(PROJECT),--project "$(PROJECT)",) $(if $(TOPIC),--topic "$(TOPIC)",) --summary "$(SUMMARY)" $(if $(FILE),--file "$(FILE)",) $(if $(DECISION),--decision "$(DECISION)",) $(if $(OPEN_LOOP),--open-loop "$(OPEN_LOOP)",) $(if $(NEXT_ACTION),--next-action "$(NEXT_ACTION)",) --snapshot
+
+codex-weekly:
+	$(PYTHON) scripts/codex_archive.py weekly $(if $(DATE),--date "$(DATE)",)
+
+codex-sweep:
+	$(PYTHON) scripts/codex_file_sweep.py $(if $(DATE),--date "$(DATE)",)
+
+codex-compact:
+	$(PYTHON) scripts/codex_compact.py compact $(if $(DATE),--date "$(DATE)",)
+
+codex-compact-all:
+	$(PYTHON) scripts/codex_compact.py compact-all $(if $(BEFORE),--before "$(BEFORE)",)
+
+codex-context-index:
+	$(PYTHON) scripts/codex_compact.py index
+
+codex-context-audit:
+	$(PYTHON) scripts/codex_compact.py audit
+
+idea-start:
+	$(PYTHON) scripts/idea_lab.py start --topic "$(TOPIC)" $(if $(MODE),--mode "$(MODE)",)
+
+idea-status:
+	$(PYTHON) scripts/idea_lab.py status
+
+compare-results:
+	$(PYTHON) scripts/compare_results.py --expected "$(EXPECTED)" --actual "$(ACTUAL)" --output "$(OUTPUT)"
+
+knowledge-status:
+	$(PYTHON) scripts/knowledge_coach.py status
+
+obsidian-graph:
+	$(PYTHON) scripts/obsidian_graph_export.py
+
+learning-dashboard:
+	$(PYTHON) scripts/build_learning_dashboard.py

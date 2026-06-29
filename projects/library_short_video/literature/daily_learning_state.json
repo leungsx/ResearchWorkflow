@@ -1,0 +1,42 @@
+{
+  "project": "library_short_video",
+  "history": [
+    {
+      "date": "2026-06-20",
+      "stage": "foundation_high_impact",
+      "primary": "cnki_2021_dfab60236e",
+      "companions": [
+        "cnki_2020_64b4f881c9",
+        "cnki_2021_7556aafa99",
+        "cnki_2020_2a150c6df8"
+      ],
+      "output": "vault/15_CNKI_Frontier/daily_recommendations/2026-06-20-library_short_video.md",
+      "updated_at": "2026-06-20T15:48:21"
+    },
+    {
+      "date": "2026-06-21",
+      "stage": "foundation_high_impact",
+      "primary": "cnki_2021_5530e86157",
+      "companions": [
+        "cnki_2021_3771e58987",
+        "cnki_2021_d35f8e895a",
+        "cnki_2020_5ca581e54f"
+      ],
+      "output": "vault/15_CNKI_Frontier/daily_recommendations/2026-06-21-library_short_video.md",
+      "updated_at": "2026-06-21T18:16:57"
+    },
+    {
+      "date": "2026-06-22",
+      "stage": "foundation_high_impact",
+      "primary": "cnki_2019_94a1721837",
+      "companions": [
+        "cnki_2021_2ba9195a8a",
+        "cnki_2023_34348faa1e",
+        "cnki_2021_262e161fba"
+      ],
+      "output": "vault/15_CNKI_Frontier/daily_recommendations/2026-06-22-library_short_video.md",
+      "updated_at": "2026-06-22T10:42:34"
+    }
+  ],
+  "last_updated": "2026-06-22T10:42:34"
+}

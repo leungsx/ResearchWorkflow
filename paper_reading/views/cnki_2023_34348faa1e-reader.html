@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Source-Grounded Reader</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Source-Grounded Reader</h1>
+      <p class="sub">按证据块组织的 Reader 浏览版。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../projects/library_short_video/literature/readers/cnki_2023_34348faa1e/paper.md">打开原始 Markdown</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/literature/readers/cnki_2023_34348faa1e/paper.md</div>
+        <article class="md-view">
+<h1>Source-Grounded Reader - 基于SICAS模型的公共图书馆短视频营销策略研究</h1>
+<p>Generated: 2026-06-20T15:30:14 Citekey: <code>cnki_2023_34348faa1e</code> Source file: <code>/Users/leung/ResearchWorkflow/library/pdfs/library_short_video/converted/cnki_2023_34348faa1e.pdf</code> Source type: <code>pdf</code> Current read_status: <code>metadata-only</code></p>
+<h2>Use Boundary</h2>
+<ul>
+<li>This file is source-grounded extraction, not a claim that the paper has been human-read.</li>
+<li>Do not use it as manuscript evidence until the relevant block has been read and checked.</li>
+<li>After real reading, update <code>read_status</code> in <code>library/literature_matrix.csv</code> to <code>human-read</code> or <code>verified</code>.</li>
+</ul>
+<h2>Metadata</h2>
+<ul>
+<li>Title: 基于SICAS模型的公共图书馆短视频营销策略研究</li>
+<li>Authors: 刘青;郭嘉如</li>
+<li>Year: 2023</li>
+<li>Source: 图书馆工作与研究</li>
+<li>Database: CNKI</li>
+<li>DOI: 未记录</li>
+</ul>
+<h2>Extracted Blocks</h2>
+<h3>B0001</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0001</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>学术论坛 2023年1月 January,2023 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 *本文系国家社会科学基金项目“基于成熟度模型的图书馆组织文化建设与创新机制研究”(项目编号:16BTQ019)研究成果之一。 基于SICAS模型的公共图书馆短视频营销策略研究* 􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀 刘青 郭嘉如 􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀􀤀 摘 要 短视频平台在用户信息获取与知识传播中发挥着日益重要的作用。对公共图书馆短视 频营销策略的探索有助于提高其公共数字文化服务供给质量。本文以SICAS模型为理论框架,结 合图书馆自身及第三方平台运营数据的统计,对粉丝总数过万的公共图书馆抖音账号从感知、兴 趣与互动、连接与沟通、行动、分享5个角度探讨账号运营现状,并基于SICAS模型提出公共图书 馆短视频营销策略,包括融媒体渠道拓宽用户感知渠道、沉浸式内容吸引用户兴趣、提问与互动与 用户建立连接、软营销触发用户行动、精神或物质激励促进内容传播等。 关键词 公共图书馆;阅读推广;短视频;SICAS模型 分类号 G252 本文引用格式 刘青,郭嘉如.基于SICAS模型的公共图书馆短视频营销策略研究[J].图书馆工作与研究,2023 (1):5-13. 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 1 引言 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 随着互联网技术和移动智能终端的广泛 应用和发展,以略读、跳读、扫读等碎片化阅读 方式为主要特征的短视频媒介日益受到用户 的追捧。短视频以自助餐式遴选、多渠道推 送、深度交互等优势成为向用户传播信息的重 要工具和媒介[1]。为进一步提升公众对图书馆 的认知度与使用率,图书馆也开始以抖音等社 交平台为推广媒介,融入营销学的理念,将特 色馆藏与服务最大程度地推送至读者。截至 2021年12月,已有59个区级或以上的公共图 书馆在抖音短视频平台上开设官方账号进行 阅读推广[2]。然而,大多图书馆仍受困于传统 媒体下的运营思维,未能结合短视频平台特点 发布作品,对移动互联时代下的用户行为逻辑 认识不清,短视频推广效果不佳。面对网络环 境下新的营销生态,中国互联网数据中心(简 称DCCI)在《2011 中国社会化营销蓝皮书》 [3] 中首次提出了“2.0+ 移动互联时代用户消费 行为模型———SICAS 模型”,指出用户从接触 相关信息到实际作出购买行动,需要经过 Sense(用户与品牌互相感知)、Interest &amp; Interactive(产生兴趣并</p>
+<h3>B0002</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0002</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>形成互动)、Connect&amp; Communicate(建立连接并交互沟通)、Action (行动并产生购买)、Share(体验与分享)5个非 线性的、多点互动的阶段。在该信息传播生态 下,用户消费行为可在任意环节实现相互转 化。本文以SICAS用户消费行为模型为框架, 调查粉丝过万的公共图书馆抖音账号运营现 状,分析其推广效果及存在的问题,并提出公 共图书馆短视频营销策略,为我国图书馆更好 地利用短视频平台进行营销推广提供相关理 论指导。 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 2 相关研究进展 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 我国短视频平台于2012 年初步形成,在 2016-2018年以抖音与快手平台为代表实现 005 DOI:10.16384/j.cnki.lwas.2023.01.004</p>
+<h3>B0003</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0003</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>LibraryWorkAndStudy 总第323期 Serial323 用户爆发,并于2018年后在政府规制下逐渐步 入高质量发展阶段。目前,公共图书馆抖音账 号运营仍存在更新频率低、主题杂而不精、定 位不清晰、缺乏宣传意识等问题[4]。部分读者 表示,公共图书馆抖音服务与自身喜好不符且 视频质量较差,缺乏关注动机[5]。对于公共图 书馆短视频服务相关研究,单骅、洪烁[6]提出图 书馆短视频运营应明确定位、组建专业团队、 重视内容品质、了解平台算法与积极留言互动 等建议。伍德嫦[7]分析广东省立中山图书馆抖 音运营数据后,提出基于自身馆藏挖掘原创内 容、深耕特定垂直领域等策略。也有学者提出 通过视频创意剪辑与塑造网红等标签化人设 以实现短视频情感营销,打造前、中、末端相互 配合的短视频营销网络与多平台联动的营销 格局以实现渠道营销,畅通评论、话题与直播 等交流区以实现互动营销的策略[8]。容海萍[9] 基于用户技术接受模型(TAM)提出辨识用户 需求,培育用户兴趣,推动用户关注转化为用 户实践的策略。薛欢雪、郭山[10]结合传染病模 型(SIR),提出强化用户服务意识以奠定服务 基础,强化线上线下渠道融合以赋予传播动 力,融合各类微视频平台与功能以扩充传播途 径,完善人才队伍建设以提供服务保障的策 略。台钰莹[11]以省级公共图书馆抖音账号开 通天数、作品数等作为投入指标,以粉丝数、总 点赞数等为产出指标,利用数据包络分析法 (DEA)对抖音账号的运营效率进行评价。王 兴兰、夏晓红[12]围绕抖音账号的用户、网络、视 频与传播特征4个方面,结合熵权法确定指标 权重,构建并验证了公共图书馆短视频平台传 播力评价模型的有效性。华东杰[13]通过调查 浙江省公共图书馆抖音账号推行的疫情服务 的实施情况,提出短视频疫情服务应及时且准 确,并尽量选择诙谐有趣的视频形式。 SICAS模型近年也被跨界应用于图书馆 界的营销实践中。李璐[14]最早结合SICAS模 型,提出建立图书馆服务营销传播模型需分别 对应SICAS模型提出的5个用户消费行为,包 括全媒体发布信息、组织基于网络的图书营销 活动、积极参与社会化网络互动、进行口碑传 播与促进用户分享情感体验5 个步骤。于姝 等[15]尝试构建基于SICAS模型的高校图书馆 移动阅读推广模型,并以四川大学图书馆的移 动推广实践为例,从全方位的信息推广与感 知、多维度激活兴趣、建立常态化的交互通路, 搭建多平台用户行为转化体系,促进用户生成 内容转发分享五方面具体解析建立的模型。 罗秀娟[16]依据SICAS 模型,提出图书馆可通 过定位目标用户并分级策划活动、塑造个性化 品牌形象、以趣味活动促进用户互动,鼓励用 户体验分享4个阶段有效实施数字阅读推广。 邵迪、贾永超[17]根据SICAS的5个阶段,提出 可从品牌塑造、互动</p>
+<h3>B0004</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0004</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>沟通、开展品牌活动、分享 用户体验四方面有效建设高校图书馆品牌。 综上所述,我国虽已有相关的短视频营销 策略研究,但大多仍局限于短视频用户使用行 为的特定环节,少有研究从用户行为的全过程 出发,系统地探讨并构建公共图书馆营销策 略。因此,本文试图引入描述移动互联时代下 用户消费行为逻辑的SICAS模型,通过分析粉 丝过万的公共图书馆抖音账号运营现状,尝试 构建一个较为系统的短视频营销策略框架,为 我国公共图书馆的品牌推广与发展提供借鉴。 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 3 SICAS模型及其在图书馆短视频营销 中的应用 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 3.1 SICAS模型概述 2011年,中国互联网数据中心将美国广告 学家刘易斯于1898年提出的AIDMA 模型与 日本电通株式会社于2005年提出的AISAS模 型[18]结合起来并作进一步改进,提出了“2.0+ 移动互联时代用户消费行为模型———SICAS 模型”。传统的AIDMA 模型与AISAS模型是 以广告为驱动的线性单向的营销传播与消费 过程,而SICAS模型在各阶段均实现了双向的 实时连接,旨在描述数字营销新生态下的用户 消费轨迹。用户行为和消费轨迹在该模型中 006</p>
+<h3>B0005</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0005</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>刘青 郭嘉如:基于SICAS模型的公共图书馆短视频营销策略研究* LiuQing,GuoJiaru:ResearchonShortVideoMarketingStrategiesofPublicLibraryBasedonSICASModel 2023年1月 January,2023 是多维互动的,而非单向递进的过程。SICAS 模型如图1所示。 社会化网络、 分享连接、 位置互联 基于Open API-LBS- Ad Network 的连接对话 全网触点 社区-搜索- 门户-垂直- 视频等 Sense 互相 感知 Interest &amp; Interactive 产生兴趣 形成互动 Connect &amp; Communicate 建立连接 互动沟通 Action 行动购买 Share 体验分享 SNS-微博- 电商- 线下 店等 图1 SICAS用户消费行为模型 3.2 基于SICAS的公共图书馆短视频营销模型 依据SICAS模型所述用户消费行为逻辑, 本文拟构建公共图书馆短视频营销模型,如图 2所示。具体内容包括: (1)基础阶段:图书馆- 用户全方位相互 感知。图书馆与用户对信息的感知贯穿于 SICAS信息生态的全领域。大数据技术、智能 语义技术等技术手段作为交互感知网络的基 础,根据关注、订制等用户信息从主观心理与 客观行为两个维度建立用户标签,围绕用户需 求进行差异化的实时信息推送。 (2)关键阶段:动态响应需求以激活兴趣。 在兴趣匹配的基础上,及时理解并动态响应读 者的需求成为后续用户消费行为转化的关键。 在这一阶段,可利用大数据技术提取用户的兴 趣与行为特征,建立用户画像并分别聚类,分 类制定个性化的内容以提高用户粘性。 (3)核心阶段:多层次建立连接以激发交 流意愿。连接与沟通是SICAS模型每个阶段 的核心命题。在开放应用编程接口、定位服务 等技术支持下,图书馆与用户之间建立了多层 次的互动通路,打破了不同的运营系统与用户 层级的壁垒,从而实现无障碍、全方位、畅通无 阻的交流和沟通。 (4)转化阶段:多渠道联合以促进用户转 化。以短视频平台为核心,任意的线上或线下 渠道都有可能发生用户行为的转化。微信、微 博等其他线上渠道,平台上链接的第三方服务 应用,线下活动等都有可能成为用户转化行为 的发生点。 (5)拓展阶段:鼓励图书馆相关体验分享。 用户消费行为流程末端的体验分享行为,很可 能转化为下一轮用户消费行为的开端,从而形 成更大的用户规模。用户发布图书馆体验感 想或分享相关链接、场馆定位等内容后,短视 频平台将对用户分享碎片进行自动分发与动 态聚合,促使大量用户产生从众行为与转化 行为。 线下渠道 借阅/咨询服务、讲座、活动、 展览、实体场馆、智能设备 短视频平台 其他线上渠道 微信、微博、QQ、哔哩哔哩、 官方网站、移动APP 基础阶段 关键阶</p>
+<h3>B0006</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0006</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>段 核心阶段 转化阶段 拓展阶段 Sense 图书馆-用户 全方位相互感知 Connect &amp; Communicate 多层次建立连接 以激发交流意愿 Interest &amp; Interactive 动态响应需求 以激活兴趣 Action 多渠道联合 以促进用户转化 Share 鼓励图书馆 相关体验分享 图2 基于SICAS的公共图书馆短视频营销模型 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 4 公共图书馆短视频营销现状 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 本研究在抖音平台以“图书馆”为关键词进行 用户名搜索,人工筛选11个抖音粉丝总量超过一 万的热门公共图书馆账号。统计数据采集时间截 007</p>
+<h3>B0007</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0007</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>LibraryWorkAndStudy 总第323期 Serial323 至2021年12月2日,表1、表2中近30日内新增 作品、新增点赞、新增评论、新增分享、新增粉丝、 总粉丝、总点赞与总作品数据均来自飞瓜数据分 析平台[19],其余数据由笔者手动收集。 本研究基于清博大数据平台发布的抖音 号传播力指数V1.0(DCI),对近30日内新增 作品、新增点赞、新增评论、新增分享、新增粉 丝与总粉丝共6项数据进行标准化处理及加权 计算,通过发布指数、互动指数与覆盖指数3个 维度综合量化公共图书馆抖音账号的传播影 响力[20]。因DCI计算公式中包含对数函数 In(x+1),其定义域为(-1,+∞),近30日内 新增粉丝小于-1的账号无法求得DCI,故表1 存在部分数据缺失。 表1 11家公共图书馆抖音号传播力指数相关数据 公共图书馆 新增 作品 新增 点赞 新增 评论 新增 分享 新增 粉丝 总粉丝 发布 指数 互动 指数 覆盖 指数 DCI 广东省立中山图书馆 32 6218 198 182 20000 149000 34.97 443.83 163.67 642.47 重庆图书馆 16 259 37 18 507 21000 28.33 277.07 133.60 439.00 六安市图书馆 17 247 76 7 173 12000 28.90 266.08 124.98 419.96 湖北省图书馆 9 92 11 3 323 15000 23.03 176.90 128.72 328.64 国家图书馆 2 27 2 3 766 49000 10.99 122.41 144.79 278.19 上海图书馆 42 30 0 1 1165 31000 37.61 68.60 139.73 245.94 朔州市图书馆 7 5 0 3 13 12000 20.79 71.61 121.10 213.51 江西省图书馆 6 28 2 5 -4928 441000 19.46 137.04 / / 浙江图书馆 9 2080 64 30 -578 276000 23.03 336.15 / / 临沂市图书馆 1 4 0 0 -258 90000 6.93 20.79 / / 陕西省图书馆 13 15 4 1 -12 14000 26.39 105.31 / / 如表1所示,11个热门公共图书馆抖音号 中有4个账号的粉丝量呈下跌趋势,其中江西 省图书馆下降趋势明显,表明其短期用户留存 能力较为欠缺。仅广东省立中山图书馆、重庆 图书馆与六安市图书馆抖音号的DCI指数大 于400,整体传播影响力较弱。 4.1 感知———用户感知情况 用户的“购买”行为源于用户对图书馆资 源与服务的感受及认知。热门公共图书馆抖 音号在用户感知上主要存在以下问题:(1)粉 丝总量少,信息感知量</p>
+<h3>B0008</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0008</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>低。经抖音用户名搜 索结果可得,目前共59个区级及以上公共图 书馆开设了账号,其中粉丝量超一万的图书 馆数量仅11 个,占比仅为18.6%。(2)用户 粘性低,感知效果差。粉丝量最高的江西省 图书馆前期的引流主力为旺宝与图图智能机 器人的趣味对话,在粉丝量快速上涨后没有 根据用户需求形成自身的内容风格,后期视 频发布内容缺乏创新,近30天减少了4928名 粉丝,留存用户能力低。(3)缺少私域渠道布 局意识。私域流量指可在任意时间与频次直 接触达用户的渠道。用户群、微信公众号等 作为优秀的私域流量渠道,不仅能节约大量 的平台运营成本,而且也能通过直接的对话 与用户建立深度好友关系。虽然广东省立中 山图书馆、江西省图书馆、陕西省图书馆与重 庆图书馆都开设了1 个抖音粉丝群,但是粉 丝群并不活跃,基本只用于发布最新视频动 态。(4)缺乏平台外引流措施。经网络调研 发现,仅广东省立中山图书馆在部分微信推 文中有接入抖音账号的视频,并显示官方抖 音及微博账号的详细提示信息。 4.2 兴趣与互动———用户感兴趣程度 点赞反映了用户对特定视频的偏好及认 可程度,为判断用户感兴趣程度的重要依据。 本节主要研究点赞数过一万的热门视频。由 表2可知,仅6个热门公共图书馆抖音账号成 功打造热门视频,热门视频百分比普遍较低。 008</p>
+<h3>B0009</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0009</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>刘青 郭嘉如:基于SICAS模型的公共图书馆短视频营销策略研究* LiuQing,GuoJiaru:ResearchonShortVideoMarketingStrategiesofPublicLibraryBasedonSICASModel 2023年1月 January,2023 热门视频点赞数占比最高的浙江图书馆短视 频时长大多在15秒以内,平均更新频率为每周 2至3条,均配以统一的封面、富有感召力的标 题与趣味的表情包图片,因而受到用户欢迎。 其余热门公共图书馆抖音账号运营问题大多 表现为:(1)视频过长,完播率低。江西省图书 馆抖音视频大部分为60秒至120秒,视频完整 播放率低,少有用户参与互动。(2)内容缺乏 深度,重复率高。自开通起,临沂市图书馆发 布了数条完全相同或内容重复的视频,对一次 图书馆活动多次剪辑并发布,内容较为贫乏。 图书馆发布的短视频缺乏整体规划,只是把最 近发生的图书馆通知、讲座活动、采访等进行 简单的剪辑与发布。(3)视频剪辑创新性不 足。多数公共图书馆仍停留在面向传统用户 的广播式视频剪辑方式,没有配乐或仅配以舒 缓的轻音乐,没有切合抖音平台视频快节奏、 风格多变的特性。 表2 11家公共图书馆抖音号热门视频相关数据 公共图书馆 总点赞 热门视频 点赞数 热门视频点赞数/ 总点赞(%) 热门 视频数 总作 品数 热门视频 占比(%) 浙江图书馆 3109000 2720000 87.49 23 139 16.55 广东省立中山图书馆 1502000 970000 64.58 19 423 4.49 江西省图书馆 8968000 5411000 60.34 23 115 20.00 临沂市图书馆 1270000 648000 51.02 5 582 0.86 重庆图书馆 139000 49000 35.25 1 245 0.41 湖北省图书馆 56000 21000 37.50 2 303 0.66 上海图书馆 85000 0 0.00 0 633 0.00 国家图书馆 58000 0 0.00 0 106 0.00 陕西省图书馆 327000 0 0.00 0 493 0.00 六安市图书馆 197000 0 0.00 0 153 0.00 朔州市图书馆 122000 0 0.00 0 780 0.00 4.3 连接与沟通———用户互动意愿 用户互动意愿反映用户与图书馆建立连 接与沟通的积极性,可通过互动指数反映。由 表1可知,广东省立中山图书馆以443.83互动 指数居于首位;浙江图书馆居次;其他图书馆 表现均不太理想,表明用户在公共图书馆抖音 账号视频下表现的整体互动意愿不高。 浏览分析广东省立中山图书馆与浙江图 书馆的视频风格及评论互动,发现有以下特 点:(1)具有明晰的封面或富情感张力的标题。 浙江图书馆视频有统</p>
+<h3>B0010</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0010</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>一的封面与标题形式,结 合网络语言、表情包配图及流行的社会议题, 能以2-3 秒的趣味封面迅速吸引用户关注。 (2)积极参与评论区互动。广东省立中山图书 馆在评论区常结合视频内容推荐相关书籍,如 在标题为“宋徽宗:一生做什么都很出色,唯独 做不好皇帝”抖音视频评论区中,置顶推荐了 宋徽宗关于茶的专论《大观茶论》,并积极参与 下方热评的回复与互动,展现了较好的亲和 力。(3)内容结合民族、爱国主题或争议性的 社会热点问题。针对爱国及民族历史相关的 视频,用户通常会表达较强烈的情感;而对于 社会问题,用户倾向以自己的生活体验佐证自 己的观点。 4.4 行动———触发用户行动的链接 用户行动的转化可以发生在SICAS模型 的任意阶段,有意识地在账号中布局相关链接 有助于触发用户对图书馆资源与服务的使用 行为。通过调研发现:(1)大部分公共图书馆 主页信息不够完善。在11个热门抖音账号中, 只有广东省立中山图书馆在首页处有明显的 联系电话与地址链接;六安市图书馆有详细的 开闭馆时间及地址介绍;上海图书馆提供官方 电话链接;其余公共图书馆的账号主页并未有 009</p>
+<h3>B0011</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0011</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>LibraryWorkAndStudy 总第323期 Serial323 任何联系方式,主页信息亟待完善。(2)大部 分公共图书馆有意识地在文案中添加话题或 拓展阅读的链接。广东省立中山图书馆在短 视频下方提供图书馆地址的定位链接,发布场 馆环境、设备、活动相关视频等激发读者访问 图书馆的兴趣和欲望,同时还在文案处提供各 类话题的链接,帮助用户拓展阅读。 4.5 分享———用户分享意愿 体验分享可促使用户发现自身潜在需 求,使本轮用户消费行为的末端转化成下一 轮用户消费的开端,形成良性循环。如表1 数据所示,除广东省立中山图书馆、浙江图书 馆与重庆图书馆外,公共图书馆抖音账号30 天内视频分享数均小于10人,总体用户分享 意愿较弱。 经调研发现以下内容更易被用户分享: (1)稀缺且有趣的主题。江西省图书馆AI机 器人旺宝和图图的日常合集下以“机器人吵 架了,脾气都不好”为题的短视频分享数高达 17.7万,深受读者欢迎。视频主题结合抖音 平台流行的科技、动漫等元素,丰富的娱乐性 有效促进了用户的转发与分享。(2)人生经 历与感悟。湖北省图书馆的“重回唱片时代” 视频通过晒图书馆内的周杰伦等唱片馆藏, 唤起中青年读者的青春记忆,引起情感共鸣, 从而促进大量用户转发。(3)争议性话题。 湖北省图书馆发布的以“周一中午湖北省图 书馆门口”为题的视频通过对周一用户排长 队入馆的情景进行了拍摄记录,唤起用户表 达增加图书馆数量或建设面积的愿望。 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 5 基于SICAS 的公共图书馆短视频营销 策略 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 基于SICAS的公共图书馆短视频营销策 略框架以用户需求为核心,分为引入流量、短 视频平台与辐射流量三大部分,如图3 所示。 平台流量的成功引入关键在于用户对图书馆 短视频服务价值的充分感知,因而需要利用用 户熟悉的线上与线下渠道推介短视频平台。 短视频平台的运营应遵循SICAS模型阐述的 用户行为逻辑,在细分用户群体的基础上,对 线上发布的内容与拟开通的细分账号作整体 规划,使视频内容与发布形式更具靶向性以激 发兴趣;通过话题和即时对话与读者建立互 动;通过第三方链接、话题等信息布局用户转 化链接;通过问答、赠品等促进用户分享。辐 射流量能进一步扩大公共图书馆的社会影响 力,从而对短视频营销产生正向影响。短视频 平台可配合进行线下活动的导播、直播或回 放,也可发布相关馆藏导览以提高图书馆使用 人次。另外,可在短视频平台中提示其他线上 平台的账号信息或内容,以配合公共图书馆其 他账号的运营。大数据技术贯穿于短视频营 销生态的全过程,以平台算法动态聚合与分发 个性化信息。下文将重点阐述营销框架中的 短视频平台部分。 5.1 以“线下+线上”融媒体拓宽用户感知渠道 公共图书馆短视频营销始于</p>
+<h3>B0012</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0012</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>用户对图书 馆信息的全方位感知。在线下感知拓宽方面, 公共图书馆可利用实体场馆人流量较大的位 置、智能设备、讲座、展览等积极宣传短视频账 号,引导用户现场进行短视频录制,将线下用 户转化为活跃于线上的用户体验分享者,以用 户生成内容(UCG)带动口碑传播,为公共图书 馆进行“线下—线上—线下”的联动推广。在 线上感知拓宽方面,对于同一短视频平台,面 向不同的社会人群如儿童、青少年、社会公众 等,可分别建立对应的账号,根据不同的人群 需求与兴趣特征实施差异化经营。而对于同 一机构微信、微博等其他线上平台账号以及对 总馆与分馆间的不同社交平台账号,可在平台 菜单链接、视频内容或直播间背景中进行信息 提示,相互配合,实现多层次引流。公共图书 馆可以把推送文字内容为主的微信平台与专 注于短视频内容推荐的抖音平台作为新媒体 矩阵核心,提前做好顶层设计,实现账号间优 劣势互补,实现全方位、多触点的公共图书馆 品牌感知。 010</p>
+<h3>B0013</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0013</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>刘青 郭嘉如:基于SICAS模型的公共图书馆短视频营销策略研究* LiuQing,GuoJiaru:ResearchonShortVideoMarketingStrategiesofPublicLibraryBasedonSICASModel 2023年1月 January,2023 用户行为反馈 推荐或屏蔽 大数据技术 其他线上渠道：在短视频 平台介绍或链接中提示 其他平台账号或内容 线下渠道：利用短视频配 合图书馆线下活动导播、 发布通知、馆藏导览等以 提高访馆人次 运 营 改 善 其他线上渠道：在微信公众 号/视频号/小程序、微博等 提示短视频账号或内容 大数据技术 线下渠道：利用借阅或咨询 服务、讲座、课程、展览、场 景、智能设备等推介短视频 平台 辐射流量 引入流量 短视频平台 数 据 反 馈 运 营 改 善 数 据 反 馈 用户行为反馈 推荐或屏蔽 全方位感知 精神激励为主 物质激励为辅 重视读者体验 化被动为主动阅读 影响扩大 内容素材 全方位感知 内容素材 影响扩大 全方位感知 全方位感知 短 视 频 平 台 短 视 频 平 台 生成短平优内容 提升感知价值 引起情感共鸣 结合社会热点 添加图书馆要素 提高回评率 促进分享 行动链接 连接互动 激发兴趣 细分读者 大众 儿童 青少年 图3 基于SICAS的公共图书馆短视频营销策略框架 5.2 以沉浸式内容吸引读者兴趣 沉浸式体验也被称作“心流体验”。心流 理论认为,当一个人高度专注于某项活动且获 得愉悦的内心体验时,会忽略客观时间的流 逝,形成一种沉浸式体验。沉浸式内容对用户 粘性具有显著的正向影响[21],能更好地吸引并 保持读者兴趣。对短视频平台而言,用户使用 成本和用户价值期望是影响“心流体验”产生 的关键因素[22]。因此,受用户欢迎的短视频在 内容上应做到:(1)生成短、平、优的碎片化内 容。优秀的短视频内容需要在开头短短数秒 内吸引用户注意。清晰且富有吸引力的标题、 具有冲击力的封面与配音,配以趣味而富有争 议性的文案有助于及时留存用户。短视频的 内容应具有一定深度,以平实易懂的形式进行 表达,与封面标题形成适度反转,进一步强化 用户印象。恰当的背景音乐搭配、独特的视频 剪辑风格,有助于用户稳定形成公共图书馆的 品牌印象。(2)提升内容的感知价值。用户感 知价值是多维度的,包括理论解析、实用技能、 热点追踪、机构信息、情感共鸣与休闲娱乐等 功能,其关键在于提高用户对公共图书馆馆藏 与服务价值的感知。以内容价值为核心,打造 统一的视频风格,对娱乐内容与深度知识内容 进行合理搭配,有助于提升用户对图书馆的感 知价值,从而形成更高的用户黏性。(3)引起 情感共鸣。公共图书馆应选择贴近用户生活、 能唤起用户情感共鸣主题的视频,如人生经历 或感悟、社会性议题等主题。同时,可在视频 配音或标题</p>
+<h3>B0014</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0014</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>中增加反问句式或正确情感倾向 引导,营造轻松且安全的社交氛围,促进用户 表达意见。 5.3 以提问与互动同用户建立连接 在短视频选题方面,应在趣味与严肃中保 持平衡,通过提出具有争议性的论题,增强社 交互动的引导。(1)结合社会热点。因社会热 点影响的受众广泛,具有较强的话题争议性, 短视频平台也将产生相应的流量倾斜,因此, 可以选择与公共图书馆相关的热点问题,能有 效激发用户间的观点碰撞。(2)适当添加图书 馆场馆要素。关注公共图书馆账号的用户多 为曾有图书馆线下体验的读者,以公共图书馆 本身作为话题,能促进用户分享图书馆使用体 验,也能为公共图书馆改善自身运营提供宝贵 意见。(3)提高即时回评率。公共图书馆应在 抖音评论区或直播间积极回复用户评论,尤其 011</p>
+<h3>B0015</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0015</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>LibraryWorkAndStudy 总第323期 Serial323 是热评。除了单纯地对用户意见表示赞同外, 账号运营者还可以融入自身对问题的思考,适 时解决用户疑惑,促进双方知识交流,与大众 建立有温度、更亲和的“好友链接”。短视频平 台上的即时评论交互功能,让用户与公共图书 馆不受时间区域的限制,实现“点对点”交流, 打破了传统服务方式的疏离感,能更好培养用 户对公共图书馆的信任感。 5.4 以软营销触发用户转化行为 短视频账号运营过程中,需以软营销触发 用户转化行为。软营销是通过强化企业与用 户之间的文化及情感交流,淡化推广意图,间 接服务于企业的经营目标的营销手段[23]。与 软营销相对的硬推广,指直接在抖音平台上推 送与公共图书馆直接相关的信息,如场馆服务 信息告知、近期讲座或活动时间安排、场馆环 境与设备、场馆位置、办公电话及其他社交平 台账号信息等。据上述对多个公共图书馆抖 音账号的调研发现,纯粹的硬推广视频虽然能 直接对公共图书馆服务进行宣传,但却很难获 得用户的响应。可见,以品牌方为主动方、用 户为被动方的传统“广播式”硬推广,并不符合 抖音用户的浏览需求。因此,公共图书馆应做 到:(1)重视读者体验。公共图书馆可以将推 广的内容融入发布的内容中,如在视频底部插 入场所位置链接,对冷门书籍或少有人问津的 非书籍馆藏结合时兴热点议题进行荐阅,以公 共图书馆近期讲座或活动视频的精彩片段为 内容素材制作趣味视频或播放用户体验图书 馆服务或参与相关活动的采访等,以加深公众 对图书馆的印象并产生兴趣或好感。(2)化被 动为主动阅读。公共图书馆账号应善于融合 自身资源,结合场馆、馆藏、设备等要素推送内 容,借鉴广东省立中山图书馆在评论区置顶推 荐与内容高度相关的书籍或直接在视频底部 提供深度知识文章链接的做法,以浅阅读带动 深阅读。 5.5 以精神或物质激励促进内容传播 用户体验分享行为的发生需要基于一定 的精神或物质激励。精神激励是基于信念、情 感等精神载体为用户赋予精神价值,激发用户 积极性,促进用户实现预期目标的过程[24]。物 质激励是基于金钱、赠品等直接或间接的物质 奖励激发用户积极行为的动机,从而完成激励 者预期目标的行为[25]。因此,公共图书馆应做 到:(1)以精神激励为主。短视频平台用户往 往具有寻求观点认同、地位显示以及情感发泄 的精神需求,在视频内容中适度表达公共图书 馆的观点或情感倾向,有利于激发用户的转发 分享与评论反驳的精神动机,促进视频内容传 播。历史爱国、人生经历与科技热点主题通常 能对用户起较明显的精神激励作用。(2)以物 质激励为辅。账号运营应以精神激励为主,以 物质激励为辅。在线下与线上活动中以礼品 赠送为激励条件,吸引用户关注、评论、转发或 拍摄视频参与话题,以一部分用户的体验分享 带动另一部分用户的体验分</p>
+<h3>B0016</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0016</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>享,在共生式、交 互式的社交生态中扩大账号影响力。 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 6 结语 􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈􀥈 总体而言,我国公共图书馆短视频营销的 整体水平不高,运营内容与方式比较单一。本 文基于SICAS模型提出以全媒体渠道拓宽感 知、以沉浸式内容吸引兴趣、以提问与互动建 立连接、以软营销触发转化和以激励促进传播 的公共图书馆短视频营销策略,有助于为我国 图书馆阅读推广提供新的思路与启迪。 参考文献: [1]曾一昕,张齐婕.公共图书馆短视频公众平台建设现状分析 [J].图书馆学研究,2020(4):13-18. [2]钟海欧,罗华容.我国公共图书馆短视频平台营销策略研 究———以抖音平台为例[J].内蒙古科技与经济,2021(13): 87-90. [3]DCCI互联网数据中心:社会化营销蓝皮书[EB/OL].[2022- 04-09].http:∥www.doc88.com/p-899110568875.html. [4]左昊明,李亚设,杜保国.省级及以上公共图书馆短视频微服 务应用现状分析[J].图书馆学研究,2021(20):45-54. [5]甘春梅,张梦金.我国副省级及以上公共图书馆的短视频应用 012</p>
+<h3>B0017</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0017</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>刘青 郭嘉如:基于SICAS模型的公共图书馆短视频营销策略研究* LiuQing,GuoJiaru:ResearchonShortVideoMarketingStrategiesofPublicLibraryBasedonSICASModel 2023年1月 January,2023 现状———以抖音为中心的调查[J].图书馆论坛,2021,41 (10):83-89. [6]单骅,洪烁.探索公共图书馆阅读推广新模式———以浙江图书 馆官方抖音号“大咖来了”为例[J].图书馆杂志,2021,40 (10):119-123. [7]伍德嫦.公共图书馆抖音号运营实践与思考———以广东省立 中山图书馆抖音官方账号为例[J].河北科技图苑,2021,34 (3):62-67,77. [8]张承.基于短视频营销的公共图书馆数字阅读推广策略研究 [J].图书馆工作与研究,2021(5):85-91. [9]容海萍.基于TAM 模型的公共图书馆短视频阅读推广策略 研究[J].图书馆工作与研究,2021(10):110-118. [10]薛欢雪,郭山.基于SIR 模型的公共图书馆“三微一端”营销 策略研究[J].图书馆学研究,2021(18):57-65. [11]台钰莹.我国省级公共图书馆抖音运营效率研究[J].图书馆 学研究,2021(7):44-50. [12]王兴兰,夏晓红.图书馆短视频账号传播力研究———以省级 公共图书馆为例[J].图书馆学研究,2021(5):45-52. [13]华东杰.疫情危机下浙江省公共图书馆短视频服务发展研究 [J].江苏科技信息,2021,38(14):21-23. [14]李璐.基于SICAS 的图书馆服务营销传播新模型的研究 [J].图书馆界,2013(6):10-13. [15]于姝,姜晓,李桂华,等.基于SICAS模型的图书馆移动阅读 推广模式探索与实践———以四川大学图书馆为例[J].国家 图书馆学刊,2017,26(6):34-42. [16]罗秀娟.基于SICAS的高校图书馆分级数字阅读推广研究 [J].新世纪图书馆,2019(6):63-66. [17]邵迪,贾永超.SICAS模式下的高校图书馆品牌建设[J].内 蒙古科技与经济,2020(18):134-136. [18]李贵云.基于AISAS模型的公共图书馆少儿分级数字阅读 推广路径研究[J].图书馆工作与研究,2021(12):112-120. [19]飞瓜数据:品牌直播与短视频分析系统[EB/OL].[2022-04- 09].https:∥www.gsdata.cn/site/usage-16. [20]清博指数:抖音号传播力指数DCI(V1.0)[EB/OL].[2022- 04-09].https:∥www.gsdata.cn/site/usage-16.</p>
+<h3>B0018</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0018</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>[21]王曼,卢明欣,石进,等.基于ECT 理论和FLOW 理论的视 频网站用户粘性影响因素研究———以哔哩哔哩为例[J].情 报工程,2021,7(1):80-92. [22]熊开容,刘超,甘子美.刷抖音会上瘾吗? ———短视频App 用户沉浸式体验影响因素与形成机制[J].新闻记者,2021 (5):83-96. [23]李艳华.软营销论[J].经济与管理研究,1998(6):38-40. [24]王琴,王良燕.激励类型对促销效果影响的实证研究:基于生 命史理论的研究视角[J].系统管理学报,2018,27(4):601- 607. [25]申来津.精神激励的权变理论[D].南京:南京师范大学, 2002. 作者简介: 刘 青(1972-),女,教授,武汉大学图书馆学专业博士,华南师 范大学经济与管理学院,广东,广州,510006; 郭嘉如(1997-),女,华南师范大学经济与管理学院2021级图书 馆学专业硕士研究生,华南师范大学经济与管理学院,广 东,广州,510006。 ResearchonShortVideoMarketingStrategiesofPublicLibrary BasedonSICASModel LiuQing,GuoJiaru Abstract Shortvideo platform is playing anincreasinglyimportantrolein userinformation acquisition and knowledge dissemination.Theexplorationoftheshortvideomarketingstrategiesofthepubliclibraryishelpfultoenhancethequalityofpublic culturalservicesupply.BasedontheSICASmodelasitstheoreticalframeworkandcombinedwiththestatisticsofoperationdataof DouYinandthird-partyplatforms,thispaperanalysesthepresenteffectandexistingproblemsofpubliclibrary&#x27;sDouYinaccount withmorethanonethousandfansfromtheaspectofsense,interestandinteractive,connectandcommunicate,action,share,and putsforwardthecorrespondingpubliclibraryshortvideomarketingstrategiesbasedontheSICASmodel,includi</p>
+<h3>B0019</h3>
+<ul>
+<li>Source ID: <code>cnki_2023_34348faa1e:B0019</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>ngexpandinguser perceptionthroughbroadeningthemediachannels,attractingusers&#x27;interestwithimmersivecontent,closingthedistancebetween usersandpubliclibrarieswithquestionsandinteractions,triggeringusers&#x27;actionswithsoftmarketingandpromotingcontent disseminationwithspiritualormaterialincentives. Keywords Publiclibrary;Readingpromotion;Shortvideo;SICASmodel ClassNumber G252 013</p>
+<h2>Reading Notes</h2>
+<ul>
+<li>Summary after human reading: 本文以 SICAS 模型为框架，对 11 个粉丝总量过万的公共图书馆抖音账号做描述性诊断，指出问题集中在感知渠道、兴趣激活、连接互动、行动链接和分享回流五个阶段，并据此提出融媒体引流、沉浸式内容、互动提问、软营销和激励传播五类策略。</li>
+<li>Innovation / value after human reading: 这篇的主要价值不在统计强度，而在于把图书馆短视频研究从“单条内容技巧”推进到“完整服务路径”。它可与 Hook Model、ELM、AARRR 形成互补：SICAS 更适合组织多触点服务转化逻辑。</li>
+<li>Method details after human reading: 样本来自抖音平台用户名搜索“图书馆”后人工筛选的 11 个粉丝过万公共图书馆账号；近30日新增作品、点赞、评论、分享、粉丝与总粉丝数据来自飞瓜数据，其余信息为手工收集；传播影响力借助 DCI 的发布、互动、覆盖三维度综合描述。</li>
+<li>Usable evidence block IDs: <code>B0005-B0006</code> (SICAS 与图书馆短视频营销模型), <code>B0007-B0011</code> (11 个账号现状与五阶段问题), <code>B0011-B0016</code> (策略框架与作者结论)</li>
+<li>Limitations and uncertainty: 当前 reader 仍无页码与图表抽取，写作前必须回原 PDF 核页；研究是描述性诊断和策略转译，不是因果检验；样本为 2021 年末头部公共图书馆抖音账号，外推到当前平台环境时需谨慎。</li>
+</ul>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-29 22:43.</footer>
+</body>
+</html>

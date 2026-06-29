@@ -1,0 +1,11 @@
+{
+  "project": "starter_project",
+  "name": "python_template",
+  "command": [
+    "python3",
+    "analysis/python/analysis.py"
+  ],
+  "cwd": "/Users/leung/ResearchWorkflow/projects/starter_project",
+  "started_at": "2026-06-18T20:20:36",
+  "timeout_min": null
+}

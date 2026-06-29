@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>文献综述工作台</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>文献综述工作台</h1>
+      <p class="sub">图书馆短视频项目的文献综述工作台浏览版。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../projects/library_short_video/literature/literature_review_workbench.md">打开原始 Markdown</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/literature/literature_review_workbench.md</div>
+        <article class="md-view">
+<h1>文献综述工作台 - 图书馆短视频相关研究</h1>
+<p>Project: <code>library_short_video</code> Last updated: 2026-06-28</p>
+<h2>用途</h2>
+<p>这个文件把截图里的提示词方法落到当前项目：先完成逐篇结论、逻辑分类、综述线索和阶段性论文工作总结，再决定是否进入正式写作。它不是正式论文正文。</p>
+<h2>输入范围</h2>
+<table><thead><tr><th>材料</th><th>当前状态</th><th>能否作为综述证据</th><th>备注</th></tr></thead><tbody><tr><td>CNKI 文献矩阵</td><td>60 条项目相关记录</td><td>仅作候选池和检索地图</td><td>metadata-only 不得直接支撑论文主张</td></tr><tr><td>授权全文/Reader</td><td>8 篇</td><td>可供 source-grounded 阅读</td><td>8 篇已完成 Codex 带读</td></tr><tr><td>上下文包</td><td>7 个</td><td>可用于复盘和跨文献比较</td><td>写作前仍需回 Reader/原文核页码</td></tr><tr><td>创新-局限-机会台账</td><td>8 张已读论文卡片</td><td>可用于选题和 gap 提炼</td><td>不替代 evidence gate</td></tr><tr><td><code>cnki_2023_34348faa1e</code></td><td>今日已完成带读并更新为 <code>skimmed</code></td><td>可纳入稳定综述判断</td><td>页码与图表仍需回原 PDF 核验</td></tr></tbody></table>
+<h2>逐篇文献主要结论汇总</h2>
+<table><thead><tr><th>文献</th><th>研究主题</th><th>研究对象/数据</th><th>理论/方法</th><th>主要结论</th><th>与本研究主题的关系</th><th>可放入哪一类文献</th><th>证据状态</th></tr></thead><tbody><tr><td>高晓晶等, 2021, <code>cnki_2021_d35f8e895a</code></td><td>图书馆短视频传播及互动效果影响因素</td><td>粉丝量靠前的图书馆官方抖音号，879 条短视频</td><td>Hook Model + 内容编码 + 非参数检验</td><td>文章把触发、行动、酬赏、投入映射到标题、音乐、制作类别、内容主题、信息类型、时长和连续性等因素。标题句型、背景音乐情感类型、制作类别、内容主题和信息类型与传播互动指数存在显著差异，但这仍主要说明平台互动差异，不等于服务价值。</td><td>直接研究图书馆官方账号，是当前项目最重要的基础机制文献。</td><td>官方账号影响因素 / Hook Model 机制实证</td><td><code>skimmed</code>; 写作前需补页码</td></tr><tr><td>杨达森等, 2021, <code>cnki_2021_dfab60236e</code></td><td>阅读推广短视频传播效果影响因素</td><td>30 个百万粉丝社会化阅读推广抖音号，10294 条视频</td><td>ELM + 文本/图像特征 + 多元回归</td><td>文章区分中心线索和边缘线索，认为内容可读性、网络热词、标题可读性、标题互文性和 15-60 秒时长等因素与传播效果相关。样本不是图书馆官方账号，因此只能作为外部方法模板和参照，不宜直接转成图书馆结论。</td><td>间接相关，提供大样本方法和外部 benchmark。</td><td>社会化阅读账号参照 / ELM 方法模板</td><td><code>skimmed</code>; 写作前需补页码</td></tr><tr><td>王海燕, 2020, <code>cnki_2020_64b4f881c9</code></td><td>图书馆短视频发展现状、问题与对策</td><td>2019 年抖音平台实体图书馆官方账号</td><td>账号调查 + 问题归纳</td><td>文章提供早期图书馆抖音账号的历史基线，指出开通比例低、影响力弱、运营不规范、原创优质内容不足和互动不足等问题。它适合说明领域起点和问题背景，但不能代表 2024-2026 的平台状态。</td><td>直接相关，作为历史背景和现状诊断基线。</td><td>早期现状诊断 / 问题对策</td><td><code>skimmed</code>; 写作前需补页码</td></tr><tr><td>孙雨、陈凤娟, 2021, <code>cnki_2021_7556aafa99</code></td><td>公共图书馆抖音短视频服务现状与发展策略</td><td>63 家公共图书馆官方抖音账号</td><td>账号调查 + 内容分类 + 策略归纳</td><td>文章把公共图书馆短视频问题从单纯内容技巧扩展到规划、团队、定位、原创内容、PUGC、融媒体、线上线下转化和合作机制。它对构建服务成熟度或运营能力框架有价值，但仍缺少策略效果检验。</td><td>直接相关，补充公共图书馆服务场景。</td><td>公共馆服务地图 / 运营成熟度</td><td><code>skimmed</code>; 写作前需补页码</td></tr><tr><td>沈丽红, 2020, <code>cnki_2020_2a150c6df8</code></td><td>图书馆热门短视频内容规律</td><td>328 个图书馆相关账号、8069 条视频中的 103 条热门非转发视频</td><td>内容分析</td><td>文章归纳热门图书馆短视频常见特征，如详尽标题、话题引导、字幕、实拍/采访、知识普及、社会文化主题、名人角色和强情绪色彩。但它只分析热门样本，不能证明这些因素导致热门，也不能说明热门是否带来服务价值。</td><td>直接相关，但更适合作为内容变量来源和反面提醒。</td><td>热门内容规律 / 流量与使命张力</td><td><code>skimmed</code>; 写作前需补页码</td></tr><tr><td>张承, 2021, <code>cnki_2021_5530e86157</code></td><td>公共图书馆数字阅读推广中的短视频营销策略</td><td>90 个粉丝长期超过 1 万的公共图书馆抖音头部账号，27455 条视频</td><td>头部账号实践提炼 + 策略归纳</td><td>文章把短视频营销转译为公共图书馆数字阅读推广服务设计，强调情感营销、渠道营销、互动营销、内容 IP、场景融合、用户标签和线上线下转化。价值在于把研究从“如何涨互动”推进到“如何服务数字阅读推广”，但缺少效果检验。</td><td>直接相关，是服务转化线索的重要文献。</td><td>数字阅读推广 / 服务路径策略</td><td><code>skimmed</code>; 写作前需补页码</td></tr><tr><td>龚雪竹, 2021, <code>cnki_2021_3771e58987</code></td><td>公共图书馆和高校图书馆短视频营销比较</td><td>161 个公共图书馆账号和 18 个高校图书馆账号，覆盖抖音、快手、B站</td><td>多平台比较 + AARRR 框架</td><td>文章比较馆型差异和平台差异，并把 AARRR 转译为图书馆短视频营销的拉新、促活、留存、收益和传播。其关键价值是把非营利图书馆的“收益”解释为品牌活跃、文化影响、精准服务推广和制度支持，但仍是描述性策略框架。</td><td>直接相关，补充馆型与平台适配视角。</td><td>馆型/平台比较 / AARRR 生命周期框架</td><td><code>skimmed</code>; 写作前需补页码</td></tr><tr><td>刘青、郭嘉如, 2023, <code>cnki_2023_34348faa1e</code></td><td>公共图书馆短视频营销路径与策略</td><td>11 个粉丝总量过万的公共图书馆抖音账号；近 30 日平台数据与人工观察</td><td>描述性账号调查 + DCI 传播力指数 + SICAS 模型</td><td>文章把问题按感知、兴趣互动、连接沟通、行动、分享五阶段拆开，指出引流、互动、行动链接和分享回流的系统性薄弱点，并提出融媒体感知、沉浸式内容、提问互动、软营销和激励传播五类策略。其核心价值是提供“平台互动到服务转化”的过程框架，而不是单一内容变量。</td><td>直接相关，是当前项目里最适合补位理论路径的文献。</td><td>理论框架补位 / SICAS 服务路径</td><td><code>skimmed</code>; 页码待核验</td></tr></tbody></table>
+<h2>文献逻辑分类</h2>
+<table><thead><tr><th>类别</th><th>包含文献</th><th>这一类主要讨论</th><th>共同结论</th><th>关键差异</th><th>这一类文献的不足</th><th>可自然引出的后续问题</th></tr></thead><tbody><tr><td>现状诊断与服务基础</td><td>王海燕 2020；孙雨、陈凤娟 2021；龚雪竹 2021</td><td>图书馆短视频账号开通、运营、内容供给、馆型和平台分布</td><td>图书馆短视频运营存在开通、定位、团队、内容和互动方面的不均衡，公共馆与高校馆、不同平台之间也存在差异。</td><td>王海燕偏早期问题基线；孙雨、陈凤娟偏公共馆服务地图；龚雪竹加入高校馆和多平台比较。</td><td>多数是 2019-2021 年平台状态，偏描述性，缺少当前数据和效果检验。</td><td>2024-2026 年图书馆短视频服务成熟度是否已经发生变化？</td></tr><tr><td>内容特征与互动机制</td><td>高晓晶等 2021；沈丽红 2020；杨达森等 2021</td><td>标题、音乐、主题、信息类型、可读性、时长、热门内容特征如何影响平台互动</td><td>内容与呈现方式会影响短视频的可见互动，单纯发布数量不足以解释传播效果。</td><td>高晓晶研究图书馆官方账号；沈丽红聚焦热门视频；杨达森研究社会化阅读账号并提供大样本方法。</td><td>多数用点赞、评论、分享等平台指标替代效果，因果识别不足，服务价值未被充分测量。</td><td>哪些内容机制既能提升互动，又能促进图书馆服务触达或阅读推广结果？</td></tr><tr><td>数字阅读推广与服务转化</td><td>张承 2021；孙雨、陈凤娟 2021；龚雪竹 2021；刘青、郭嘉如 2023</td><td>短视频如何进入公共图书馆服务、数字阅读推广和线上线下转化</td><td>短视频不应只被看作流量工具，也可以成为公共文化服务、数字阅读推广和用户参与的入口。</td><td>张承强调情感/渠道/互动营销；孙雨、陈凤娟强调公共馆服务机制；龚雪竹强调 AARRR 生命周期和馆型平台适配；刘青、郭嘉如补上 SICAS 五阶段服务路径。</td><td>服务转化指标不清晰，尚未充分连接平台互动数据与馆方服务数据。</td><td>能否构建“平台互动-服务触达-阅读转化”的复合评价框架？</td></tr><tr><td>理论与方法框架</td><td>高晓晶等 2021；杨达森等 2021；龚雪竹 2021；刘青、郭嘉如 2023</td><td>Hook Model、ELM、AARRR、SICAS 等模型如何解释短视频传播和营销路径</td><td>外部传播/营销模型可以帮助图书馆短视频研究从经验建议走向机制分析。</td><td>Hook Model 偏触发-行动-酬赏-投入；ELM 偏中心/边缘线索；AARRR 偏用户生命周期；SICAS 偏多触点服务路径与回流。</td><td>模型之间尚未整合，且多数模型仍围绕互动或营销，未充分接入图书馆使命和服务价值。</td><td>是否可以构建适合图书馆短视频的“内容线索-互动行为-服务价值”综合框架？</td></tr></tbody></table>
+<h2>适合写进文献综述的逻辑线索</h2>
+<pre><code class="language-text">已有图书馆短视频研究大致形成三条线索。
+
+第一类研究关注图书馆短视频账号的开通、运营和服务现状，说明图书馆短视频实践已经从早期探索进入多馆型、多平台运营阶段，但仍存在规划、团队、原创内容和互动机制不足等问题。
+
+第二类研究转向内容特征与传播互动机制，尝试用 Hook Model、ELM、内容分析和平台数据解释标题、音乐、主题、信息类型、可读性、时长等因素与传播效果之间的关系。这类研究提升了问题的机制化程度，但多数仍以点赞、评论、分享等平台互动作为结果变量。
+
+第三类研究尝试把短视频纳入公共图书馆数字阅读推广和服务转化框架，强调情感营销、渠道触达、互动参与、馆型差异和平台适配。这一线索推动研究从“如何获得流量”转向“如何服务图书馆使命”，但目前仍缺少可验证的服务价值指标。
+
+总体来看，现有研究已经说明图书馆短视频的运营基础、内容机制和服务策略具有研究价值，但在当前平台环境、服务价值测量、因果识别和馆型/平台比较方面仍有不足。因此，后续研究可以进一步关注平台互动如何转化为公共文化服务、数字阅读推广或用户参与价值。</code></pre>
+<h2>阶段性论文工作总结</h2>
+<h3>已完成</h3>
+<ul>
+<li>文献检索：已围绕 <code>图书馆 * 短视频</code> 建立 CNKI 项目矩阵，当前项目相关记录 60 条。</li>
+<li>全文获取与 Reader：已组织 8 篇授权全文/Reader。</li>
+<li>已完成 source-grounded 阅读：8 篇已完成 Codex 带读，并写入 Reader notes、研讨卡、文献综述和创新-局限台账。</li>
+<li>已形成的综述分类：现状诊断与服务基础、内容特征与互动机制、数字阅读推广与服务转化、理论与方法框架。</li>
+<li>已沉淀的创新/局限/机会：创新-局限-机会台账已有 8 张卡片，重点机会包括服务价值指标、Hook Model 与 ELM 整合、官方馆与社会化账号比较、2024-2026 数据复测、多模态变量和流量/使命张力。</li>
+</ul>
+<h3>当前已能支撑的判断</h3>
+<ol>
+<li>当前文献已经能够支持“图书馆短视频研究不能停留在运营技巧，需要同时处理互动机制与服务价值”的问题判断。</li>
+<li>现有研究在内容/标题/音乐/主题/时长等变量上已有初步积累，但多数结果变量仍偏平台互动。</li>
+<li>公共图书馆、高校图书馆和社会化阅读账号之间存在明显场景差异，外部账号结论需要明确迁移边界。</li>
+</ol>
+<h3>仍不能直接写成论文强主张的内容</h3>
+<ul>
+<li>不能说某一内容特征“导致”服务价值提升；现有材料多为描述、相关或非参数差异。</li>
+<li>不能把 2019-2021 年抖音生态直接代表当前平台环境。</li>
+<li>不能把未读的 metadata-only 文献写成已读证据；<code>cnki_2023_34348faa1e</code> 已完成带读，但页码和图表仍需回原 PDF 核验。</li>
+<li>不能把点赞、评论、分享直接等同于阅读推广质量、服务触达或公共文化价值。</li>
+</ul>
+<h3>下一步</h3>
+<ol>
+<li>继续下载/生成下一篇候选 <code>cnki_2021_645f03f388</code> 或高价值基础文献的 Reader。</li>
+<li>把今天补齐的 SICAS 线索继续折叠进 <code>01_research_question.md</code> 和指标草图。</li>
+<li>基于本工作台把 <code>01_research_question.md</code> 收敛为 2-3 个候选研究问题。</li>
+<li>若进入写作，先建立 claim-evidence map，再写正式文献综述正文。</li>
+</ol>
+<h2>可直接对 Codex 说</h2>
+<pre><code class="language-text">打开文献综述工作台，基于 7 篇已读文献帮我收敛 3 个研究问题。</code></pre>
+<pre><code class="language-text">根据文献综述工作台，帮我写一份阶段性论文工作总结，区分已完成、可支撑判断、证据缺口和下一步。</code></pre>
+<pre><code class="language-text">用文献综述工作台检查我的综述逻辑，看看是不是还在罗列作者。</code></pre>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-29 22:43.</footer>
+</body>
+</html>

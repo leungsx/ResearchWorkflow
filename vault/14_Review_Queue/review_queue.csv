@@ -1,0 +1,9 @@
+id,title,type,stage,next_review,prompt,note_path
+concept-方向链,方向链,concept,1,2026-06-19,用自己的话解释 方向链，并举一个科研例子。,/Users/leung/ResearchWorkflow/vault/02_Concepts/方向链.md
+concept-hook-model,Hook Model 上瘾模型,concept,1,2026-06-21,用自己的话解释 Hook Model 的四个环节，并举一个图书馆短视频例子。,/Users/leung/ResearchWorkflow/vault/02_Concepts/Hook Model 上瘾模型.md
+concept-sicas-model,SICAS模型,concept,1,2026-06-30,用自己的话说出 SICAS 五个阶段，并给一个图书馆短视频例子。,/Users/leung/ResearchWorkflow/vault/02_Concepts/SICAS模型.md
+concept-soft-marketing,软营销,concept,1,2026-06-30,解释软营销和硬推广的差别，并说说它为什么重要。,/Users/leung/ResearchWorkflow/vault/02_Concepts/软营销.md
+concept-immersive-content,沉浸式内容,concept,1,2026-06-30,说明什么叫沉浸式内容，以及它为什么不等于单纯娱乐化。,/Users/leung/ResearchWorkflow/vault/02_Concepts/沉浸式内容.md
+concept-perceived-value,用户感知价值,concept,1,2026-06-30,用户感知价值是什么？它和点赞数有什么区别？,/Users/leung/ResearchWorkflow/vault/02_Concepts/用户感知价值.md
+method-dci-index,DCI传播力指数,method,1,2026-06-30,说明 DCI 为什么比单一粉丝数更适合比较账号传播表现。,/Users/leung/ResearchWorkflow/vault/03_Methods/DCI传播力指数.md
+method-descriptive-account-survey,描述性账号调查,method,1,2026-06-30,描述性账号调查最适合回答什么问题？为什么不等于因果研究？,/Users/leung/ResearchWorkflow/vault/03_Methods/描述性账号调查.md

@@ -1,0 +1,13 @@
+python: /Users/leung/anaconda3/bin/python
+rscript: /usr/local/bin/Rscript
+pandoc: /usr/local/bin/pandoc
+matlab: null
+tectonic: null
+gephi: /Applications/Gephi.app/Contents/MacOS/gephi
+typora: /Applications/Typora.app
+
+notes:
+  matlab: "如果 MATLAB 已安装但不在 PATH，可把 matlab 可执行文件路径填在这里。"
+  gephi: "Gephi 通常是 GUI 软件；本工作流导出 nodes.csv 和 edges.csv 后手动导入。"
+  tectonic: "用于从 LaTeX 编译 PDF；也可以使用 MacTeX/TeX Live。"
+  typora: "用于本地阅读和人工编辑 Markdown；Codex 负责生成与归档，Typora 负责预览。"

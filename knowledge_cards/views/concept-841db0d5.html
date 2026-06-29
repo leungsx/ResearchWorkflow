@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>概念卡：软营销</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>概念卡：软营销</h1>
+      <p class="sub">可直接在浏览器阅读的知识卡镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../../paper_reading/today.html">今日精读</a>
+<a href="../../paper_reading/index.html">论文归档</a>
+<a href="../index.html" aria-current="page">知识卡</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="../../paper_reading/views/vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../index.html">返回知识卡入口</a>
+          <a href="../../paper_reading/today.html">返回今日精读</a>
+          <a href="../../vault/02_Concepts/%E8%BD%AF%E8%90%A5%E9%94%80.md">打开原始 Markdown</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：vault/02_Concepts/软营销.md</div>
+        <article class="md-view">
+<section class="frontmatter"><h2>元数据</h2><table><tbody><tr><th>type</th><td>concept</td></tr><tr><th>id</th><td>concept-soft-marketing</td></tr><tr><th>title</th><td>&quot;软营销&quot;</td></tr><tr><th>domain</th><td>&quot;营销传播 / 图书馆服务&quot;</td></tr><tr><th>level</th><td>&quot;beginner&quot;</td></tr><tr><th>status</th><td>learning</td></tr><tr><th>review_stage</th><td>1</td></tr><tr><th>next_review</th><td>2026-06-30</td></tr></tbody></table></section>
+<h1>软营销</h1>
+<h2>一句话解释</h2>
+<p>软营销不是硬塞服务信息，而是把服务价值嵌进用户更愿意接受的内容、情境和情感体验里。</p>
+<h2>通俗解释</h2>
+<p>硬推广像直接喊“快来办活动、快来借书”；软营销更像先让用户看到一个有意思、有关联、有情绪或有帮助的内容，再顺势把服务入口放进去。</p>
+<h2>科研例子</h2>
+<p>图书馆如果直接发布“下周讲座安排”，可能只有低互动；但如果先用热点切入、馆藏故事或用户真实体验做短视频，再把讲座链接或馆藏入口放进评论区、定位或文案，用户更可能点进去。</p>
+<h2>常见误区</h2>
+<ul>
+<li>软营销不是“包装得更像广告”，而是减少用户的抵触感。</li>
+<li>软营销不等于娱乐化；图书馆仍要守住公共文化服务边界。</li>
+<li>软营销提高兴趣，不自动证明提高了服务结果。</li>
+</ul>
+<h2>如何用于我的研究</h2>
+<ul>
+<li>可作为 <span class="wikilink">图书馆短视频相关研究</span> 里区分“硬告知型内容”和“体验嵌入型内容”的变量。</li>
+<li>可以连接 <span class="wikilink">SICAS模型</span> 的 Action 阶段，解释用户为什么愿意从看视频走向使用服务。</li>
+<li>可帮助我提出“流量有效”和“使命一致”之间的比较问题。</li>
+</ul>
+<h2>来源论文</h2>
+<ul>
+<li><span class="wikilink">cnki_2023_34348faa1e</span></li>
+</ul>
+<h2>和哪些概念相关</h2>
+<ul>
+<li><span class="wikilink">SICAS模型</span></li>
+<li><span class="wikilink">用户感知价值</span></li>
+<li><span class="wikilink">沉浸式内容</span></li>
+</ul>
+<h2>和哪些方法相关</h2>
+<ul>
+<li><span class="wikilink">描述性账号调查</span></li>
+</ul>
+<h2>复习问题</h2>
+<ol>
+<li>软营销和硬推广在图书馆短视频里最关键的差别是什么？</li>
+<li>为什么软营销更适合解释 Action，而不是只解释 Sense？</li>
+<li>你会怎么把软营销编码成可比较的内容变量？</li>
+</ol>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-29 22:43.</footer>
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>知识图谱入口</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>知识图谱入口</h1>
+      <p class="sub">查看知识节点、关系边和高连接主题。</p>
+      <nav class="nav"><a href="../study_dashboard.html">总览</a>
+<a href="../paper_reading/today.html">今日精读</a>
+<a href="../paper_reading/index.html">论文归档</a>
+<a href="../knowledge_cards/index.html">知识卡</a>
+<a href="index.html" aria-current="page">知识图谱</a>
+<a href="../logs/index.html">学习日志</a>
+<a href="../workflow_health.html">工作流体检</a>
+<a href="../paper_reading/views/vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <style>
+      .graph-panel { padding: 0; overflow: hidden; }
+      .graph-intro {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+      .graph-intro p { max-width: 760px; margin: 0; color: var(--muted); }
+      .graph-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--line);
+        background: #fbfcfd;
+      }
+      .graph-toolbar input {
+        flex: 1 1 240px;
+        min-height: 38px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 8px 10px;
+        font: inherit;
+      }
+      .graph-toolbar button {
+        min-height: 36px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 6px 12px;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+        cursor: pointer;
+      }
+      .graph-toolbar button.active {
+        color: var(--blue);
+        border-color: var(--blue);
+        background: #eef4ff;
+      }
+      .graph-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 310px;
+        min-height: 660px;
+      }
+      .graph-canvas {
+        border-right: 1px solid var(--line);
+        background:
+          radial-gradient(circle at 50% 48%, rgba(36, 99, 235, 0.09), transparent 30%),
+          radial-gradient(circle at 16% 18%, rgba(22, 128, 93, 0.11), transparent 24%),
+          linear-gradient(180deg, #ffffff 0%, #f5f8fb 100%);
+      }
+      #graphSvg {
+        width: 100%;
+        height: 660px;
+        display: block;
+      }
+      .edge-line {
+        stroke: #9aacbd;
+        stroke-opacity: 0.38;
+        stroke-width: 1.2;
+      }
+      .node-circle {
+        cursor: pointer;
+        stroke: #fff;
+        stroke-width: 2.2;
+        filter: drop-shadow(0 2px 3px rgba(20, 32, 44, 0.16));
+      }
+      .node-circle.selected {
+        stroke: #182026;
+        stroke-width: 3;
+      }
+      .node-label {
+        fill: #182026;
+        font-size: 12px;
+        paint-order: stroke;
+        stroke: #fff;
+        stroke-width: 4px;
+        stroke-linejoin: round;
+        pointer-events: none;
+      }
+      .graph-side {
+        padding: 18px;
+        background: #fff;
+      }
+      .graph-side h2 { margin-bottom: 8px; }
+      .node-pill {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 3px 8px;
+        background: #eef4ff;
+        color: var(--blue);
+        font-size: 12px;
+      }
+      .neighbor-list {
+        margin: 10px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .legend i {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      @media (max-width: 900px) {
+        .graph-layout { grid-template-columns: 1fr; }
+        .graph-canvas { border-right: 0; border-bottom: 1px solid var(--line); }
+        #graphSvg { height: 540px; }
+      }
+    </style>
+    <section class="grid">
+      <div class="metric"><b>96</b><span>节点</span></div>
+      <div class="metric"><b>98</b><span>关系边</span></div>
+      <div class="metric"><b>6</b><span>概念节点</span></div>
+      <div class="metric"><b>2</b><span>方法节点</span></div>
+
+      <section class="panel wide graph-panel">
+        <div class="graph-intro">
+          <div>
+            <h2>关系图谱</h2>
+            <p>节点越靠近中心，连接越密。优先看主读论文、核心概念、方法和项目之间的路径，而不是逐行查 CSV。</p>
+          </div>
+          <div class="legend">
+            <span><i style="background:#2463eb"></i>文献</span>
+            <span><i style="background:#16805d"></i>概念</span>
+            <span><i style="background:#a15c07"></i>方法</span>
+            <span><i style="background:#b4234b"></i>项目</span>
+            <span><i style="background:#607086"></i>关联节点</span>
+          </div>
+        </div>
+        <div class="graph-toolbar">
+          <input id="graphSearch" type="search" placeholder="搜索论文、概念、方法或项目节点">
+          <button type="button" data-kind="all" class="active">全部</button>
+          <button type="button" data-kind="literature">文献</button>
+          <button type="button" data-kind="concept">概念</button>
+          <button type="button" data-kind="method">方法</button>
+          <button type="button" data-kind="project">项目</button>
+          <button type="button" data-kind="linked">其他关联</button>
+        </div>
+        <div class="graph-layout">
+          <div class="graph-canvas">
+            <svg id="graphSvg" viewBox="0 0 1200 720" role="img" aria-label="知识图谱可视化"></svg>
+          </div>
+          <aside class="graph-side">
+            <p id="graphStats" class="meta"></p>
+            <div id="nodeInfo">
+              <h2>点击一个节点</h2>
+              <p class="meta">查看它连接了哪些论文、概念、方法或项目。</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>图谱源文件</h2>
+        <div class="list">
+          <div class="item"><a href="../vault/13_Knowledge_Graph/obsidian_nodes.csv">obsidian_nodes.csv</a><div class="meta">节点源数据，供核对或导出。</div></div>
+          <div class="item"><a href="../vault/13_Knowledge_Graph/obsidian_edges.csv">obsidian_edges.csv</a><div class="meta">关系边源数据，供核对或导出。</div></div>
+          <div class="item"><a href="../vault/13_Knowledge_Graph/knowledge_index.csv">knowledge_index.csv</a><div class="meta">知识卡索引。</div></div>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>读图顺序</h2>
+        <ol class="steps">
+          <li>先搜索今天论文或当前项目，看它连接到哪些概念与方法。</li>
+          <li>再点核心概念，看它同时服务哪些论文和研究问题。</li>
+          <li>最后把薄弱路径转成下一轮阅读或写作问题。</li>
+        </ol>
+      </section>
+    </section>
+    <script>
+      const graphData = {"nodes": [{"id": "cnki_2023_34348faa1e", "label": "cnki_2023_34348faa1e", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 26}, {"id": "2026-06-29-evening-close", "label": "2026-06-29-evening-close", "type": "learning", "kind": "learning", "degree": 21}, {"id": "SICAS模型", "label": "SICAS模型", "type": "concept", "kind": "concept", "degree": 17}, {"id": "用户感知价值", "label": "用户感知价值", "type": "concept", "kind": "concept", "degree": 14}, {"id": "2026-06-29-sicas-paper", "label": "2026-06-29-sicas-paper", "type": "learning", "kind": "learning", "degree": 13}, {"id": "描述性账号调查", "label": "描述性账号调查", "type": "method", "kind": "method", "degree": 12}, {"id": "软营销", "label": "软营销", "type": "concept", "kind": "concept", "degree": 12}, {"id": "Hook Model 上瘾模型", "label": "Hook Model 上瘾模型", "type": "concept", "kind": "concept", "degree": 11}, {"id": "沉浸式内容", "label": "沉浸式内容", "type": "concept", "kind": "concept", "degree": 10}, {"id": "DCI传播力指数", "label": "DCI传播力指数", "type": "method", "kind": "method", "degree": 8}, {"id": "library_short_video", "label": "library_short_video", "type": "project", "kind": "project", "degree": 8}, {"id": "ELM 精细加工可能性模型", "label": "ELM 精细加工可能性模型", "type": "linked", "kind": "linked", "degree": 5}, {"id": "Home", "label": "Home", "type": "Home.md", "kind": "linked", "degree": 5}, {"id": "方向链", "label": "方向链", "type": "concept", "kind": "concept", "degree": 4}, {"id": "AARRR 漏斗模型", "label": "AARRR 漏斗模型", "type": "linked", "kind": "linked", "degree": 3}, {"id": "SICAS-服务转化路径", "label": "SICAS-服务转化路径", "type": "linked", "kind": "linked", "degree": 2}, {"id": "图书馆短视频多平台复测", "label": "图书馆短视频多平台复测", "type": "linked", "kind": "linked", "degree": 2}, {"id": "图书馆短视频服务价值框架", "label": "图书馆短视频服务价值框架", "type": "linked", "kind": "linked", "degree": 2}, {"id": "精神激励", "label": "精神激励", "type": "linked", "kind": "linked", "degree": 2}, {"id": "11_Idea_Lab/README", "label": "11_Idea_Lab/README", "type": "linked", "kind": "linked", "degree": 1}, {"id": "2026-06-20-hook-model", "label": "2026-06-20-hook-model", "type": "learning", "kind": "learning", "degree": 1}, {"id": "2026-06-22-library_short_video", "label": "2026-06-22-library_short_video", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 1}, {"id": "2026-06-28-context-pack", "label": "2026-06-28-context-pack", "type": "09_Context_Packs", "kind": "linked", "degree": 1}, {"id": "Idea Lab", "label": "Idea Lab", "type": "linked", "kind": "linked", "degree": 1}, {"id": "Obsidian 知识图谱", "label": "Obsidian 知识图谱", "type": "linked", "kind": "linked", "degree": 1}, {"id": "README", "label": "README", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 1}, {"id": "cnki_2021_3771e58987", "label": "cnki_2021_3771e58987", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 1}, {"id": "cnki_2021_5530e86157", "label": "cnki_2021_5530e86157", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 1}, {"id": "双链", "label": "双链", "type": "linked", "kind": "linked", "degree": 1}, {"id": "可视化使用指南", "label": "可视化使用指南", "type": "06_Protocols", "kind": "linked", "degree": 1}, {"id": "图书馆短视频相关研究", "label": "图书馆短视频相关研究", "type": "linked", "kind": "linked", "degree": 1}, {"id": "图表规范", "label": "图表规范", "type": "06_Protocols", "kind": "linked", "degree": 1}, {"id": "平台互动指标", "label": "平台互动指标", "type": "linked", "kind": "linked", "degree": 1}, {"id": "快乐科研闭环", "label": "快乐科研闭环", "type": "linked", "kind": "linked", "degree": 1}, {"id": "文献阅读规范", "label": "文献阅读规范", "type": "06_Protocols", "kind": "linked", "degree": 1}, {"id": "服务价值", "label": "服务价值", "type": "linked", "kind": "linked", "degree": 1}, {"id": "科研工作流", "label": "科研工作流", "type": "06_Protocols", "kind": "linked", "degree": 1}, {"id": "阅读推广", "label": "阅读推广", "type": "linked", "kind": "linked", "degree": 1}, {"id": "2026-06-18", "label": "2026-06-18", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-18-210527-codex-first-research-idea-generation", "label": "2026-06-18-210527-codex-first-research-idea-generation", "type": "idea", "kind": "linked", "degree": 0}, {"id": "2026-06-18-context-pack", "label": "2026-06-18-context-pack", "type": "09_Context_Packs", "kind": "linked", "degree": 0}, {"id": "2026-06-18-file-sweep", "label": "2026-06-18-file-sweep", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-18-knowledge", "label": "2026-06-18-knowledge", "type": "learning", "kind": "learning", "degree": 0}, {"id": "2026-06-18-summary", "label": "2026-06-18-summary", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-19", "label": "2026-06-19", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-19-context-pack", "label": "2026-06-19-context-pack", "type": "09_Context_Packs", "kind": "linked", "degree": 0}, {"id": "2026-06-19-file-sweep", "label": "2026-06-19-file-sweep", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-19-summary", "label": "2026-06-19-summary", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-20", "label": "2026-06-20", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-20-cnki-frontier", "label": "2026-06-20-cnki-frontier", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "2026-06-20-context-pack", "label": "2026-06-20-context-pack", "type": "09_Context_Packs", "kind": "linked", "degree": 0}, {"id": "2026-06-20-file-sweep", "label": "2026-06-20-file-sweep", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-20-library_short_video", "label": "2026-06-20-library_short_video", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "2026-06-20-summary", "label": "2026-06-20-summary", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-21", "label": "2026-06-21", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-21-context-pack", "label": "2026-06-21-context-pack", "type": "09_Context_Packs", "kind": "linked", "degree": 0}, {"id": "2026-06-21-file-sweep", "label": "2026-06-21-file-sweep", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-21-library_short_video", "label": "2026-06-21-library_short_video", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "2026-06-21-library_short_video-after-refresh", "label": "2026-06-21-library_short_video-after-refresh", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "2026-06-21-library_short_video-next-after-main", "label": "2026-06-21-library_short_video-next-after-main", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "2026-06-21-summary", "label": "2026-06-21-summary", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-27", "label": "2026-06-27", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-27-context-pack", "label": "2026-06-27-context-pack", "type": "09_Context_Packs", "kind": "linked", "degree": 0}, {"id": "2026-06-27-file-sweep", "label": "2026-06-27-file-sweep", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-28", "label": "2026-06-28", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-28-file-sweep", "label": "2026-06-28-file-sweep", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-28-summary", "label": "2026-06-28-summary", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-29", "label": "2026-06-29", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-29-context-pack", "label": "2026-06-29-context-pack", "type": "09_Context_Packs", "kind": "linked", "degree": 0}, {"id": "2026-06-29-file-sweep", "label": "2026-06-29-file-sweep", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-29-summary", "label": "2026-06-29-summary", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-06-29-workflow-audit", "label": "2026-06-29-workflow-audit", "type": "07_Codex_Logs", "kind": "learning", "degree": 0}, {"id": "2026-W25", "label": "2026-W25", "type": "08_Weekly_Reviews", "kind": "linked", "degree": 0}, {"id": "2026-W26", "label": "2026-W26", "type": "08_Weekly_Reviews", "kind": "linked", "degree": 0}, {"id": "2026-W27", "label": "2026-W27", "type": "08_Weekly_Reviews", "kind": "linked", "degree": 0}, {"id": "20260618-codex-first-research-idea-incubation", "label": "20260618-codex-first-research-idea-incubation", "type": "idea", "kind": "linked", "degree": 0}, {"id": "Claim Evidence Card", "label": "Claim Evidence Card", "type": "99_Templates", "kind": "linked", "degree": 0}, {"id": "Concept Note", "label": "Concept Note", "type": "99_Templates", "kind": "linked", "degree": 0}, {"id": "Figure Note", "label": "Figure Note", "type": "99_Templates", "kind": "linked", "degree": 0}, {"id": "Hypothesis Card", "label": "Hypothesis Card", "type": "99_Templates", "kind": "linked", "degree": 0}, {"id": "Idea Card", "label": "Idea Card", "type": "99_Templates", "kind": "linked", "degree": 0}, {"id": "Inbox", "label": "Inbox", "type": "00_Inbox", "kind": "linked", "degree": 0}, {"id": "Knowledge Point", "label": "Knowledge Point", "type": "99_Templates", "kind": "linked", "degree": 0}, {"id": "Method Note", "label": "Method Note", "type": "99_Templates", "kind": "linked", "degree": 0}, {"id": "Paper Note", "label": "Paper Note", "type": "99_Templates", "kind": "linked", "degree": 0}, {"id": "Research Method Card", "label": "Research Method Card", "type": "99_Templates", "kind": "linked", "degree": 0}, {"id": "Result Card", "label": "Result Card", "type": "99_Templates", "kind": "linked", "degree": 0}, {"id": "User Model", "label": "User Model", "type": "10_User_Model", "kind": "linked", "degree": 0}, {"id": "cnki_2020_2a150c6df8", "label": "cnki_2020_2a150c6df8", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "cnki_2020_64b4f881c9", "label": "cnki_2020_64b4f881c9", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "cnki_2021_7556aafa99", "label": "cnki_2021_7556aafa99", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "cnki_2021_d35f8e895a", "label": "cnki_2021_d35f8e895a", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "cnki_2021_dddc719517", "label": "cnki_2021_dddc719517", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "cnki_2021_dfab60236e", "label": "cnki_2021_dfab60236e", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "cnki_2022_efd2209e07", "label": "cnki_2022_efd2209e07", "type": "15_CNKI_Frontier", "kind": "literature", "degree": 0}, {"id": "starter_project", "label": "starter_project", "type": "project", "kind": "project", "degree": 0}], "edges": [{"source": "2026-06-20-hook-model", "target": "Hook Model 上瘾模型", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "2026-06-22-library_short_video", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "2026-06-28-context-pack", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "2026-06-29-sicas-paper", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "AARRR 漏斗模型", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "DCI传播力指数", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "ELM 精细加工可能性模型", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "Hook Model 上瘾模型", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "SICAS-服务转化路径", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "SICAS模型", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "cnki_2023_34348faa1e", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "library_short_video", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "图书馆短视频多平台复测", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "图书馆短视频服务价值框架", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "描述性账号调查", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "方向链", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "沉浸式内容", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "用户感知价值", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "精神激励", "label": "obsidian_link"}, {"source": "2026-06-29-evening-close", "target": "软营销", "label": "obsidian_link"}, {"source": "2026-06-29-sicas-paper", "target": "2026-06-29-evening-close", "label": "obsidian_link"}, {"source": "2026-06-29-sicas-paper", "target": "DCI传播力指数", "label": "obsidian_link"}, {"source": "2026-06-29-sicas-paper", "target": "ELM 精细加工可能性模型", "label": "obsidian_link"}, {"source": "2026-06-29-sicas-paper", "target": "Hook Model 上瘾模型", "label": "obsidian_link"}, {"source": "2026-06-29-sicas-paper", "target": "SICAS模型", "label": "obsidian_link"}, {"source": "2026-06-29-sicas-paper", "target": "cnki_2023_34348faa1e", "label": "obsidian_link"}, {"source": "2026-06-29-sicas-paper", "target": "library_short_video", "label": "obsidian_link"}, {"source": "2026-06-29-sicas-paper", "target": "描述性账号调查", "label": "obsidian_link"}, {"source": "2026-06-29-sicas-paper", "target": "沉浸式内容", "label": "obsidian_link"}, {"source": "2026-06-29-sicas-paper", "target": "用户感知价值", "label": "obsidian_link"}, {"source": "2026-06-29-sicas-paper", "target": "软营销", "label": "obsidian_link"}, {"source": "DCI传播力指数", "target": "SICAS模型", "label": "obsidian_link"}, {"source": "DCI传播力指数", "target": "cnki_2023_34348faa1e", "label": "obsidian_link"}, {"source": "DCI传播力指数", "target": "library_short_video", "label": "obsidian_link"}, {"source": "DCI传播力指数", "target": "用户感知价值", "label": "obsidian_link"}, {"source": "Home", "target": "11_Idea_Lab/README", "label": "obsidian_link"}, {"source": "Home", "target": "可视化使用指南", "label": "obsidian_link"}, {"source": "Home", "target": "图表规范", "label": "obsidian_link"}, {"source": "Home", "target": "文献阅读规范", "label": "obsidian_link"}, {"source": "Home", "target": "科研工作流", "label": "obsidian_link"}, {"source": "Hook Model 上瘾模型", "target": "ELM 精细加工可能性模型", "label": "obsidian_link"}, {"source": "Hook Model 上瘾模型", "target": "图书馆短视频相关研究", "label": "obsidian_link"}, {"source": "Hook Model 上瘾模型", "target": "平台互动指标", "label": "obsidian_link"}, {"source": "Hook Model 上瘾模型", "target": "服务价值", "label": "obsidian_link"}, {"source": "Hook Model 上瘾模型", "target": "阅读推广", "label": "obsidian_link"}, {"source": "README", "target": "双链", "label": "obsidian_link"}, {"source": "SICAS模型", "target": "AARRR 漏斗模型", "label": "obsidian_link"}, {"source": "SICAS模型", "target": "DCI传播力指数", "label": "obsidian_link"}, {"source": "SICAS模型", "target": "ELM 精细加工可能性模型", "label": "obsidian_link"}, {"source": "SICAS模型", "target": "Hook Model 上瘾模型", "label": "obsidian_link"}, {"source": "SICAS模型", "target": "cnki_2023_34348faa1e", "label": "obsidian_link"}, {"source": "SICAS模型", "target": "library_short_video", "label": "obsidian_link"}, {"source": "SICAS模型", "target": "描述性账号调查", "label": "obsidian_link"}, {"source": "SICAS模型", "target": "用户感知价值", "label": "obsidian_link"}, {"source": "SICAS模型", "target": "软营销", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "2026-06-29-evening-close", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "2026-06-29-sicas-paper", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "AARRR 漏斗模型", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "DCI传播力指数", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "ELM 精细加工可能性模型", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "Hook Model 上瘾模型", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "SICAS-服务转化路径", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "SICAS模型", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "cnki_2021_3771e58987", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "cnki_2021_5530e86157", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "library_short_video", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "图书馆短视频多平台复测", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "图书馆短视频服务价值框架", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "描述性账号调查", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "沉浸式内容", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "用户感知价值", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "精神激励", "label": "obsidian_link"}, {"source": "cnki_2023_34348faa1e", "target": "软营销", "label": "obsidian_link"}, {"source": "描述性账号调查", "target": "SICAS模型", "label": "obsidian_link"}, {"source": "描述性账号调查", "target": "cnki_2023_34348faa1e", "label": "obsidian_link"}, {"source": "描述性账号调查", "target": "library_short_video", "label": "obsidian_link"}, {"source": "描述性账号调查", "target": "用户感知价值", "label": "obsidian_link"}, {"source": "描述性账号调查", "target": "软营销", "label": "obsidian_link"}, {"source": "方向链", "target": "Idea Lab", "label": "obsidian_link"}, {"source": "方向链", "target": "Obsidian 知识图谱", "label": "obsidian_link"}, {"source": "方向链", "target": "快乐科研闭环", "label": "obsidian_link"}, {"source": "沉浸式内容", "target": "Hook Model 上瘾模型", "label": "obsidian_link"}, {"source": "沉浸式内容", "target": "SICAS模型", "label": "obsidian_link"}, {"source": "沉浸式内容", "target": "cnki_2023_34348faa1e", "label": "obsidian_link"}, {"source": "沉浸式内容", "target": "描述性账号调查", "label": "obsidian_link"}, {"source": "沉浸式内容", "target": "用户感知价值", "label": "obsidian_link"}, {"source": "用户感知价值", "target": "SICAS模型", "label": "obsidian_link"}, {"source": "用户感知价值", "target": "cnki_2023_34348faa1e", "label": "obsidian_link"}, {"source": "用户感知价值", "target": "library_short_video", "label": "obsidian_link"}, {"source": "用户感知价值", "target": "描述性账号调查", "label": "obsidian_link"}, {"source": "用户感知价值", "target": "沉浸式内容", "label": "obsidian_link"}, {"source": "用户感知价值", "target": "软营销", "label": "obsidian_link"}, {"source": "软营销", "target": "SICAS模型", "label": "obsidian_link"}, {"source": "软营销", "target": "cnki_2023_34348faa1e", "label": "obsidian_link"}, {"source": "软营销", "target": "library_short_video", "label": "obsidian_link"}, {"source": "软营销", "target": "描述性账号调查", "label": "obsidian_link"}, {"source": "软营销", "target": "沉浸式内容", "label": "obsidian_link"}, {"source": "软营销", "target": "用户感知价值", "label": "obsidian_link"}]};
+      const svg = document.getElementById("graphSvg");
+      const search = document.getElementById("graphSearch");
+      const info = document.getElementById("nodeInfo");
+      const stats = document.getElementById("graphStats");
+      const buttons = Array.from(document.querySelectorAll("[data-kind]"));
+      const nodeMap = new Map(graphData.nodes.map((node) => [node.id, node]));
+      const palette = {
+        literature: "#2463eb",
+        concept: "#16805d",
+        method: "#a15c07",
+        project: "#b4234b",
+        learning: "#7c3aed",
+        linked: "#607086"
+      };
+      const kindLabel = {
+        literature: "文献",
+        concept: "概念",
+        method: "方法",
+        project: "项目",
+        learning: "学习记录",
+        linked: "关联节点"
+      };
+      let activeKind = "all";
+      let selectedId = null;
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (char) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        }[char]));
+      }
+
+      function svgElement(name, attrs) {
+        const element = document.createElementNS("http://www.w3.org/2000/svg", name);
+        Object.entries(attrs).forEach(([key, value]) => element.setAttribute(key, value));
+        return element;
+      }
+
+      function visibleNodes() {
+        const query = search.value.trim().toLowerCase();
+        const base = graphData.nodes.filter((node) => activeKind === "all" || node.kind === activeKind);
+        if (!query) return base;
+        const direct = base.filter((node) => `${node.label} ${node.id} ${node.type}`.toLowerCase().includes(query));
+        const keep = new Set(direct.map((node) => node.id));
+        graphData.edges.forEach((edge) => {
+          if (keep.has(edge.source)) keep.add(edge.target);
+          if (keep.has(edge.target)) keep.add(edge.source);
+        });
+        return base.filter((node) => keep.has(node.id));
+      }
+
+      function layout(nodes) {
+        const sorted = [...nodes].sort((a, b) => (b.degree || 0) - (a.degree || 0));
+        const rings = [sorted.slice(0, 1), sorted.slice(1, 12), sorted.slice(12, 38), sorted.slice(38)];
+        const radii = [0, 170, 305, 435];
+        const positions = new Map();
+        rings.forEach((ring, ringIndex) => {
+          const radius = radii[ringIndex];
+          ring.forEach((node, index) => {
+            const angle = ring.length === 1
+              ? -Math.PI / 2
+              : -Math.PI / 2 + (index * Math.PI * 2 / ring.length) + ringIndex * 0.2;
+            positions.set(node.id, {
+              x: 600 + Math.cos(angle) * radius,
+              y: 360 + Math.sin(angle) * radius * 0.72
+            });
+          });
+        });
+        return positions;
+      }
+
+      function showNode(nodeId) {
+        const node = nodeMap.get(nodeId);
+        if (!node) return;
+        selectedId = nodeId;
+        const relatedEdges = graphData.edges.filter((edge) => edge.source === nodeId || edge.target === nodeId);
+        const neighbors = relatedEdges
+          .map((edge) => nodeMap.get(edge.source === nodeId ? edge.target : edge.source))
+          .filter(Boolean)
+          .sort((a, b) => (b.degree || 0) - (a.degree || 0));
+        const neighborList = neighbors.slice(0, 14).map((neighbor) =>
+          `<li>${escapeHtml(neighbor.label)} <span class="meta">(${escapeHtml(kindLabel[neighbor.kind] || neighbor.kind)})</span></li>`
+        ).join("");
+        info.innerHTML = `
+          <h2>${escapeHtml(node.label)}</h2>
+          <p><span class="node-pill">${escapeHtml(kindLabel[node.kind] || node.kind)}</span></p>
+          <p class="meta">源类型：${escapeHtml(node.type)} · 连接数：${escapeHtml(node.degree || 0)}</p>
+          <h3>相邻节点</h3>
+          ${neighborList ? `<ol class="neighbor-list">${neighborList}</ol>` : '<p class="meta">暂无相邻节点。</p>'}
+        `;
+        render();
+      }
+
+      function render() {
+        const nodes = visibleNodes();
+        const visible = new Set(nodes.map((node) => node.id));
+        const edges = graphData.edges.filter((edge) => visible.has(edge.source) && visible.has(edge.target));
+        const positions = layout(nodes);
+        svg.innerHTML = "";
+        stats.textContent = `${nodes.length} 个可见节点 · ${edges.length} 条可见关系`;
+
+        edges.forEach((edge) => {
+          const source = positions.get(edge.source);
+          const target = positions.get(edge.target);
+          if (!source || !target) return;
+          const line = svgElement("line", {
+            x1: source.x,
+            y1: source.y,
+            x2: target.x,
+            y2: target.y,
+            class: "edge-line"
+          });
+          svg.appendChild(line);
+        });
+
+        nodes.forEach((node, index) => {
+          const pos = positions.get(node.id);
+          if (!pos) return;
+          const radius = Math.max(8, Math.min(26, 7 + Math.sqrt(node.degree || 1) * 3));
+          const group = svgElement("g", { tabindex: "0", role: "button", "aria-label": node.label });
+          const circle = svgElement("circle", {
+            cx: pos.x,
+            cy: pos.y,
+            r: radius,
+            fill: palette[node.kind] || palette.linked,
+            class: `node-circle${node.id === selectedId ? " selected" : ""}`
+          });
+          const title = svgElement("title", {});
+          title.textContent = `${node.label} · ${kindLabel[node.kind] || node.kind} · ${node.degree || 0} links`;
+          group.appendChild(circle);
+          group.appendChild(title);
+
+          const query = search.value.trim();
+          if (index < 32 || node.degree >= 6 || query) {
+            const label = svgElement("text", {
+              x: pos.x,
+              y: pos.y + radius + 14,
+              "text-anchor": "middle",
+              class: "node-label"
+            });
+            label.textContent = node.label.length > 18 ? `${node.label.slice(0, 18)}…` : node.label;
+            group.appendChild(label);
+          }
+
+          group.addEventListener("click", () => showNode(node.id));
+          group.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") showNode(node.id);
+          });
+          svg.appendChild(group);
+        });
+      }
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activeKind = button.dataset.kind || "all";
+          buttons.forEach((item) => item.classList.toggle("active", item === button));
+          render();
+        });
+      });
+      search.addEventListener("input", () => render());
+      if (graphData.nodes.length) {
+        selectedId = graphData.nodes[0].id;
+        showNode(selectedId);
+      } else {
+        render();
+      }
+    </script>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-29 22:43.</footer>
+</body>
+</html>

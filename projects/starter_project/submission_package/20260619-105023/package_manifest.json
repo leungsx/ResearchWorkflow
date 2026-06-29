@@ -1,0 +1,81 @@
+{
+  "schema": "ResearchWorkflow.SubmissionPackage.v1",
+  "project": "starter_project",
+  "target_journal": "图书情报工作",
+  "generated_at": "2026-06-19T10:50:23",
+  "package_dir": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023",
+  "copied_files": [
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/manuscript/paper.md",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/main_manuscript.md",
+      "bytes": 200
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/manuscript/references.bib",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/references.bib",
+      "bytes": 1
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/manuscript/target_journal.md",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/target_journal.md",
+      "bytes": 962
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/manuscript/submission_checklist_tushuqingbaogongzuo.md",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/submission_checklist_tushuqingbaogongzuo.md",
+      "bytes": 3229
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/manuscript/ai_usage_disclosure.md",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/ai_usage_disclosure.md",
+      "bytes": 803
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/manuscript/citation_audit_gbt7714.md",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/citation_audit_gbt7714.md",
+      "bytes": 1513
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/data/data_dictionary.md",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/data/data_dictionary.md",
+      "bytes": 602
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/data/data_governance.md",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/data/data_governance.md",
+      "bytes": 838
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/07_claim_evidence_map.md",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/integrity/claim_evidence_map.md",
+      "bytes": 307
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/08_publication_readiness.md",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/integrity/publication_readiness.md",
+      "bytes": 2599
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/passport/material_passport.json",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/integrity/material_passport.json",
+      "bytes": 5769
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/passport/checksums.csv",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/integrity/project_checksums.csv",
+      "bytes": 3251
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/figures/specs/README.md",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/figures/specs/README.md",
+      "bytes": 1195
+    },
+    {
+      "source": "/Users/leung/ResearchWorkflow/projects/starter_project/figures/specs/figure_spec.md",
+      "dest": "/Users/leung/ResearchWorkflow/projects/starter_project/submission_package/20260619-105023/figures/specs/figure_spec.md",
+      "bytes": 966
+    }
+  ],
+  "missing_inputs": [],
+  "docx_status": "DOCX generation skipped by --no-docx."
+}

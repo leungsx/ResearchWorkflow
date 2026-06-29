@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Obsidian 论文笔记</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Obsidian 论文笔记</h1>
+      <p class="sub">今日主读论文的 Obsidian 源笔记浏览版。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../vault/01_Literature/cnki_2023_34348faa1e.md">打开原始 Markdown</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：vault/01_Literature/cnki_2023_34348faa1e.md</div>
+        <article class="md-view">
+<section class="frontmatter"><h2>元数据</h2><table><tbody><tr><th>type</th><td>literature</td></tr><tr><th>id</th><td>cnki_2023_34348faa1e</td></tr><tr><th>title</th><td>&quot;基于SICAS模型的公共图书馆短视频营销策略研究&quot;</td></tr><tr><th>authors</th><td>&quot;刘青;郭嘉如&quot;</td></tr><tr><th>year</th><td>2023</td></tr><tr><th>source</th><td>&quot;图书馆工作与研究&quot;</td></tr><tr><th>doi</th><td>&quot;10.16384/j.cnki.lwas.2023.01.004&quot;</td></tr><tr><th>status</th><td>skimmed</td></tr><tr><th>project</th><td>library_short_video</td></tr></tbody></table></section>
+<h1>基于SICAS模型的公共图书馆短视频营销策略研究</h1>
+<h2>元数据</h2>
+<ul>
+<li>Citekey: <code>cnki_2023_34348faa1e</code></li>
+<li>作者：刘青；郭嘉如</li>
+<li>年份：2023</li>
+<li>来源：图书馆工作与研究</li>
+<li>DOI：10.16384/j.cnki.lwas.2023.01.004</li>
+<li>CNKI 链接：https://kns.cnki.net/kcms2/article/abstract?v=zcrJ0BckwPMpHL63zubRfc2Nm2i4qr7YPB62y0ROOfVU6QX7lwoL1ElPLTrKLnnKS1g9ivI5HCaaUujoAnYT7HSX_yGOHD29GgLC_RVZa5UfbILupmHHycHJ5W_HX4xUCx4diglhdblUnJ6gYnpivbsSkhXddyzdW7RNQhynTdfGmInLmuRdxA==&amp;uniplatform=NZKPT&amp;language=CHS</li>
+<li>Reader：<code>projects/library_short_video/literature/readers/cnki_2023_34348faa1e/paper.md</code></li>
+<li>HTML 精读页：<code>paper_reading/2026-06-29-sicas-public-library-short-video.html</code></li>
+</ul>
+<h2>30 秒定位</h2>
+<ul>
+<li>本项目角色：<span class="wikilink">图书馆短视频相关研究</span> 的理论框架补位文献。</li>
+<li>为什么今天读：它是现有 8 篇学习集里最后一个还没稳定沉淀进综述和知识图谱的 Reader。</li>
+<li>它补的不是“内容技巧”，而是用户从感知到行动、再到分享的完整路径。</li>
+</ul>
+<h2>核心内容</h2>
+<ul>
+<li>研究问题：公共图书馆短视频账号为什么整体传播力偏弱，以及如何沿着 SICAS 五阶段改进营销与服务转化。</li>
+<li>理论/概念：<span class="wikilink">SICAS模型</span>、<span class="wikilink">沉浸式内容</span>、<span class="wikilink">软营销</span>、<span class="wikilink">用户感知价值</span>、<span class="wikilink">精神激励</span>。</li>
+<li>方法与数据：</li>
+<li>在抖音以“图书馆”为关键词搜用户名，人工筛选 11 个粉丝总量过万的公共图书馆账号。</li>
+<li>结合飞瓜数据与手工收集数据。</li>
+<li>用 <span class="wikilink">DCI传播力指数</span> 从发布、互动、覆盖三维度描述传播影响力。</li>
+<li>主要发现：</li>
+<li>头部公共图书馆账号整体传播影响力仍偏弱。</li>
+<li>问题不只在内容，也在私域布局、平台外引流、主页链接、评论互动和分享意愿。</li>
+<li>作者据此提出“融媒体感知 -&gt; 沉浸式兴趣 -&gt; 互动连接 -&gt; 软营销行动 -&gt; 激励分享”的策略链条。</li>
+</ul>
+<h2>证据和边界</h2>
+<ul>
+<li>可用证据 blocks：</li>
+<li><code>B0005-B0006</code>：SICAS 模型与公共图书馆短视频营销模型。</li>
+<li><code>B0007-B0011</code>：11 个账号的 DCI、传播诊断与五阶段问题。</li>
+<li><code>B0011-B0016</code>：五类策略建议与结语。</li>
+<li>证据边界：</li>
+<li>当前为 source-grounded skim，页码待核原 PDF。</li>
+<li>样本是 2021 年末的头部公共图书馆抖音号，不代表全部图书馆，也不代表 2026 平台状态。</li>
+<li>DCI 与互动表现不能直接等于阅读推广质量、服务触达或公共文化价值。</li>
+</ul>
+<h2>创新 / 局限 / 机会</h2>
+<h3>创新</h3>
+<ul>
+<li>把 <span class="wikilink">SICAS模型</span> 从一般营销行为路径转译到公共图书馆短视频服务场景。</li>
+<li>把“感知渠道、互动连接、行动触发、分享回流”一起纳入，而不是只讨论内容特征。</li>
+<li>为 <span class="wikilink">Hook Model 上瘾模型</span>、<span class="wikilink">ELM 精细加工可能性模型</span>、<span class="wikilink">AARRR 漏斗模型</span> 之间提供一条更完整的过程框架。</li>
+</ul>
+<h3>局限</h3>
+<ul>
+<li>偏描述性诊断和框架转译，缺少严格效果检验。</li>
+<li>互动与传播指标仍然替代了真实服务结果。</li>
+<li>样本和时间窗口都较窄，外推边界清楚。</li>
+</ul>
+<h3>机会</h3>
+<ul>
+<li><span class="wikilink">图书馆短视频服务价值框架</span>：把平台互动、服务触达、阅读转化纳入同一评价体系。</li>
+<li><span class="wikilink">SICAS-服务转化路径</span>：比较 SICAS 与 Hook/ELM/AARRR 在图书馆场景下的互补关系。</li>
+<li><span class="wikilink">图书馆短视频多平台复测</span>：用 2024-2026 数据检验这套路径是否仍成立。</li>
+</ul>
+<h2>与已读文献的关系</h2>
+<ul>
+<li>与 <span class="wikilink">Hook Model 上瘾模型</span>：Hook 更适合解释单条视频的微观循环；SICAS 更适合解释多触点路径与回流。</li>
+<li>与 <span class="wikilink">ELM 精细加工可能性模型</span>：ELM 强在解释线索加工；SICAS 强在解释从感知到行动的阶段连接。</li>
+<li>与 <span class="wikilink">基于短视频营销的公共图书馆数字阅读推广策略研究</span>：张承 2021 给服务设计方向，这篇给过程结构。</li>
+<li>与 <span class="wikilink">公共图书馆和高校图书馆短视频营销比较研究</span>：AARRR 更适合指标组织，SICAS 更适合过程建模。</li>
+</ul>
+<h2>我对这篇的稳定判断</h2>
+<ul>
+<li>这篇值得保留，不是因为它“证据更强”，而是因为它为项目提供了一个比单纯内容变量更接近研究问题的结构。</li>
+<li>如果后续写论文，它最适合出现在“理论框架 / 研究设计启发”位置，而不是“强结果证据”位置。</li>
+</ul>
+<h2>Knowledge Links</h2>
+<ul>
+<li>Concepts: <span class="wikilink">SICAS模型</span>, <span class="wikilink">沉浸式内容</span>, <span class="wikilink">软营销</span>, <span class="wikilink">用户感知价值</span></li>
+<li>Methods: <span class="wikilink">DCI传播力指数</span>, <span class="wikilink">描述性账号调查</span></li>
+<li>Project: <span class="wikilink">图书馆短视频相关研究</span></li>
+<li>Opportunities: <span class="wikilink">图书馆短视频服务价值框架</span>, <span class="wikilink">SICAS-服务转化路径</span>, <span class="wikilink">图书馆短视频多平台复测</span></li>
+</ul>
+<h2>学习日志</h2>
+<ul>
+<li>主读会话：<span class="wikilink">2026-06-29-sicas-paper</span></li>
+<li>晚间闭环：<span class="wikilink">2026-06-29-evening-close</span></li>
+</ul>
+<h2>下一步</h2>
+<ol>
+<li>用这篇与 <span class="wikilink">Hook Model 上瘾模型</span>、<span class="wikilink">ELM 精细加工可能性模型</span>、<span class="wikilink">AARRR 漏斗模型</span> 对齐，决定哪一个框架用于研究问题，哪一个用于指标体系。</li>
+<li>在项目里继续补读 <code>cnki_2021_645f03f388</code>，把“传播力评价”线也接进来。</li>
+<li>如果要写综述，先把这篇的路径逻辑转成变量草图，再谈假设。</li>
+</ol>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-29 22:43.</footer>
+</body>
+</html>
