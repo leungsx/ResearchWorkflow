@@ -112,7 +112,7 @@ def project_summaries() -> list[dict[str, Any]]:
     return projects
 
 
-def build_workflow_state(audit_checks: list[Any] | None = None) -> dict[str, Any]:
+def build_workflow_state(audit_checks: list[Any] | None = None, git_dirty_paths: int | None = None) -> dict[str, Any]:
     manifest_rows = csv_rows(ARTIFACT_MANIFEST)
     search = read_json(SEARCH_INDEX_JSON, {"entry_count": 0, "entries": []})
     review = read_json(REVIEW_STATE, {"summary": {}, "focus_items": []})
@@ -164,7 +164,7 @@ def build_workflow_state(audit_checks: list[Any] | None = None) -> dict[str, Any
             "manifest_rows": len(manifest_rows),
             "search_entries": search.get("entry_count", 0) if isinstance(search, dict) else 0,
             "project_count": len(projects),
-            "git_dirty_paths": git_dirty_count(),
+            "git_dirty_paths": git_dirty_count() if git_dirty_paths is None else git_dirty_paths,
         },
         "audit": {
             "counts": audit_counts,
@@ -297,9 +297,9 @@ def write_workflow_state_html(state: dict[str, Any]) -> None:
     WORKFLOW_STATE_HTML.write_text(html_text, encoding="utf-8")
 
 
-def write_workflow_state(audit_checks: list[Any] | None = None) -> tuple[Path, Path]:
+def write_workflow_state(audit_checks: list[Any] | None = None, git_dirty_paths: int | None = None) -> tuple[Path, Path]:
     WORKFLOW_STATE_JSON.parent.mkdir(parents=True, exist_ok=True)
-    state = build_workflow_state(audit_checks)
+    state = build_workflow_state(audit_checks, git_dirty_paths=git_dirty_paths)
     WORKFLOW_STATE_JSON.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     write_workflow_state_html(state)
     return WORKFLOW_STATE_JSON, WORKFLOW_STATE_HTML

@@ -747,21 +747,22 @@ def html_report(day: dt.date, checks: list[Check]) -> str:
 def write_reports(day: dt.date, checks: list[Check]) -> tuple[Path, Path, Path]:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     md_path = AUDIT_DIR / f"{day.isoformat()}-workflow-audit.md"
+    baseline_dirty_paths = len([line for line in git_command(["status", "--porcelain"]).stdout.splitlines() if line.strip()])
 
     # Produce a preliminary machine report so schema validation can validate
     # the unified audit JSON location during the same run.
-    write_workflow_state(checks)
+    write_workflow_state(checks, git_dirty_paths=baseline_dirty_paths)
     write_action_queue()
     md_path.write_text(markdown_report(day, checks) + "\n", encoding="utf-8")
     HEALTH_HTML.write_text(html_report(day, checks), encoding="utf-8")
     write_audit_json(day, checks, md_path, HEALTH_HTML)
 
     check_schema_validation(checks)
-    write_workflow_state(checks)
+    write_workflow_state(checks, git_dirty_paths=baseline_dirty_paths)
     write_action_queue()
 
     check_action_queue(checks)
-    write_workflow_state(checks)
+    write_workflow_state(checks, git_dirty_paths=baseline_dirty_paths)
     write_action_queue()
 
     md_path.write_text(markdown_report(day, checks) + "\n", encoding="utf-8")
