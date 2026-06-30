@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>工作流总状态</title>
+  <style>
+    :root { --ink:#182026; --muted:#61707d; --line:#d9e0e6; --paper:#fff; --soft:#f6f8fa; --blue:#2463eb; --green:#16805d; --amber:#a15c07; --rose:#b4234b; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",Arial,sans-serif; color:var(--ink); background:#f4f6f8; line-height:1.55; }
+    header { background:var(--paper); border-bottom:1px solid var(--line); }
+    .wrap { max-width:1160px; margin:0 auto; padding:28px 22px; }
+    h1 { margin:0 0 8px; font-size:34px; }
+    h2 { margin:0 0 10px; font-size:18px; }
+    a { color:var(--blue); text-decoration:none; }
+    .sub,.meta { color:var(--muted); }
+    .nav { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+    .nav a { min-height:34px; padding:6px 10px; border:1px solid var(--line); border-radius:7px; background:#fff; color:var(--ink); }
+    .grid { display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }
+    .metric,.panel,.item { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .metric { grid-column:span 3; }
+    .metric b { display:block; font-size:28px; line-height:1.1; }
+    .panel { grid-column:span 6; }
+    .panel.wide { grid-column:1/-1; }
+    .list { display:grid; gap:10px; }
+    .item { border-left:3px solid var(--blue); background:var(--soft); }
+    .status { display:inline-flex; border-radius:999px; padding:2px 8px; background:#eef3f8; color:var(--muted); font-size:12px; }
+    .pass { color:var(--green); } .warn { color:var(--amber); } .fail { color:var(--rose); }
+    @media (max-width:840px) { .metric,.panel { grid-column:1/-1; } h1 { font-size:28px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>工作流总状态</h1>
+      <p class="sub">Generated 2026-06-30T22:11:08 · 聚合项目、复习、搜索、图谱和审计状态。</p>
+      <nav class="nav">
+        <a href="study_dashboard.html">总览</a>
+        <a href="paper_reading/today.html">今日精读</a>
+        <a href="knowledge_cards/review_today.html">今日复习</a>
+        <a href="search/index.html">全局搜索</a>
+        <a href="knowledge_graph/index.html">知识图谱</a>
+        <a href="action_queue.html">行动队列</a>
+        <a href="workflow_health.html">工作流体检</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="grid">
+      <div class="metric"><b>104</b><span class="meta">manifest 条目</span></div>
+      <div class="metric"><b>104</b><span class="meta">搜索条目</span></div>
+      <div class="metric"><b>8</b><span class="meta">到期复习</span></div>
+      <div class="metric"><b>0/3</b><span class="meta">FAIL/WARN</span></div>
+
+      <section class="panel wide">
+        <h2>下一步</h2>
+        <ol><li>先处理 8 个到期复习项。</li><li>先处理 evidence gate 的 WARN/ERROR，避免 metadata-only 文献进入论文主张。</li><li>把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。</li><li>先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。</li><li>如果这是占位项目，保持 project_state.json 作为结构模板即可。</li><li>择机处理 workflow-audit 的 WARN 项，尤其是 Git 快照和到期复习。</li></ol>
+      </section>
+      <section class="panel">
+        <h2>核心入口</h2>
+        <div class="list">
+          <div class="item"><a href="paper_reading/today.html">今日精读入口</a><div class="meta">每天主读论文。</div></div>
+          <div class="item"><a href="knowledge_cards/review_today.html">今日复习入口</a><div class="meta">主动回忆到期知识卡。</div></div>
+          <div class="item"><a href="action_queue.html">行动队列</a><div class="meta">按优先级处理今天最该做的事。</div></div>
+          <div class="item"><a href="search/index.html">全局搜索入口</a><div class="meta">查论文、概念、方法和项目材料。</div></div>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>审计状态</h2>
+        <p><span class="status pass">PASS 12</span> <span class="status warn">WARN 3</span> <span class="status fail">FAIL 0</span></p>
+        <p class="meta"><a href="workflow_health.html">打开工作流体检页</a></p>
+      </section>
+      <section class="panel wide">
+        <h2>项目状态</h2>
+        <div class="list">
+        <article class="item">
+          <h2>图书馆短视频相关研究</h2>
+          <p class="meta">library_short_video · 文献 60 · Reader 8</p>
+          <ul><li>先处理 evidence gate 的 WARN/ERROR，避免 metadata-only 文献进入论文主张。</li><li>把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。</li><li>围绕最近主读 `cnki_2021_3771e58987`，补齐与既有概念/方法的关系和证据边界。</li></ul>
+        </article>
+        
+
+        <article class="item">
+          <h2>Starter Research Project</h2>
+          <p class="meta">starter_project · 文献 0 · Reader 0</p>
+          <ul><li>先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。</li><li>如果这是占位项目，保持 project_state.json 作为结构模板即可。</li></ul>
+        </article>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

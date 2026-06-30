@@ -1,6 +1,6 @@
 # Project Dashboard - 图书馆短视频相关研究
 
-Last updated: 2026-06-28
+Last updated: 2026-06-30
 
 ## 一句话进度
 
@@ -17,7 +17,7 @@ Last updated: 2026-06-28
 | CAJ 转 PDF | 当前学习集已跑通 | [CAJ 转换记录](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/caj_conversion/) |
 | Reader | 8/8 已生成 | [readers](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/README.md) |
 | 论文上下文包 | 已读 7 篇已生成，用于省 token 带读 | [context_packs](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/context_packs/) |
-| 今日推荐 | 更新后主读已完成，下一篇候选已生成 | [下一篇推荐报告](/Users/leung/ResearchWorkflow/vault/15_CNKI_Frontier/daily_recommendations/2026-06-21-library_short_video-next-after-main.md) |
+| 今日推荐 | 2026-06-30 主读已完成 AARRR 比较论文精读，下一步继续补传播力评价候选 | [今日精读入口](/Users/leung/ResearchWorkflow/paper_reading/today.html) |
 | 今日阅读看板 | 已建立 | [reading_board.md](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/reading_board.md) |
 | 5 篇快速复盘 | 已生成 | [2026-06-20-five-paper-quick-recap.md](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/recaps/2026-06-20-five-paper-quick-recap.md) |
 | 创新/局限/机会台账 | 8 张卡片 | [innovation_limitation_bank.md](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/innovation_limitation_bank.md) |
@@ -55,7 +55,7 @@ flowchart TD
 
 ## 下一步建议
 
-1. 先用 [文献综述工作台](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/literature_review_workbench.md) 把 7 篇已读文献收敛成研究问题和阶段性论文工作总结。
+1. 先把 [[AARRR 漏斗模型]] 与 [[SICAS模型]] 对齐成“用户路径 + 阶段指标”草图。
 2. 若继续阅读，优先补读 `cnki_2021_645f03f388`《图书馆短视频账号传播力研究——以省级公共图书馆为例》。
 3. 或者把当前 8 篇已读文献继续收敛成 2-3 个候选研究问题与指标草图。
 4. 如果准备写论文，先不要直接写正文；先把文献综述工作台、`01_research_question.md` 和 `03_literature_synthesis.md` 对齐。

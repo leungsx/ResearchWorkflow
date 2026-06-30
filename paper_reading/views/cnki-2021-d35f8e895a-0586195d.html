@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>论文带读上下文包 - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>论文带读上下文包 - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索</h1>
+      <p class="sub">projects/library_short_video/literature/context_packs/cnki_2021_d35f8e895a.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/literature/context_packs/cnki_2021_d35f8e895a.md</div>
+        <article class="md-view">
+<h1>论文带读上下文包 - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索</h1>
+<p>Generated: 2026-06-20T23:33:31 Project: <code>library_short_video</code> Citekey: <code>cnki_2021_d35f8e895a</code> Read status: <code>skimmed</code></p>
+<h2>用途</h2>
+<p>这是共读时优先加载的小上下文包，用来节省 token。它只保留带读所需的压缩信息、证据 block 索引和少量原文片段。</p>
+<ul>
+<li>先用本文件带读论文核心内容。</li>
+<li>需要核验证据、补页码或处理细节时，再打开完整 Reader。</li>
+<li>本文件不替代原文，也不把论文自动标记为 <code>human-read</code> 或 <code>verified</code>。</li>
+</ul>
+<h2>元数据</h2>
+<ul>
+<li>题名: 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索</li>
+<li>作者: 高晓晶;喻梦倩;杨家燕;张毓晗</li>
+<li>年份: 2021</li>
+<li>来源: 图书情报工作</li>
+<li>数据库: CNKI</li>
+<li>Reader: <code>/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/cnki_2021_d35f8e895a/paper.md</code></li>
+<li>原文: <code>/Users/leung/ResearchWorkflow/library/pdfs/library_short_video/converted/cnki_2021_d35f8e895a.pdf</code></li>
+</ul>
+<h2>Reader Reading Notes</h2>
+<ul>
+<li>Summary after human reading: 2026-06-20 Codex-assisted source-grounded reading note, pending user confirmation. This paper studies library short-video communication and interaction effects on Douyin. It introduces the Hook Model to organize factors into trigger, action, reward, and investment, then tests 8 coded content/design factors against a composite communication-interaction index built from likes, comments, and shares.</li>
+<li>Innovation / value after human reading: The main value for this project is that the article is not only a general operation-strategy paper; it connects a behavioral product framework with an empirical library short-video dataset. It is especially useful as an example of how a Chinese LIS article in <code>图书情报工作</code> turns platform operation into measurable variables and practical strategy recommendations.</li>
+<li>Method details after human reading: The study selects the top 10 official library Douyin accounts by follower count, collects 879 short-video samples, records likes/comments/shares, computes a <code>C指数</code> based on a Qingbo-style Douyin interaction index, and codes 8 independent variables: title sentence pattern, title length, background-music emotion type, production category, content theme, information type, video duration, and relation/continuity with neighboring videos. Because the dependent variable failed a one-sample K-S normality test, the authors use Kruskal-Wallis tests for 7 multi-category factors and Mann-Whitney tests for the binary relation/continuity factor.</li>
+<li>Usable evidence block IDs:</li>
+<li><code>cnki_2021_d35f8e895a:B0006</code>: claims the prior short-video literature focused on recommendation algorithms, user studies, and platform operation, while library short-video influence-factor research lacked theoretical support and empirical analysis.</li>
+<li>`</li>
+<p>...</p>
+</ul>
+<h2>研讨卡核心理解</h2>
+<ul>
+<li>一句话概括：这篇文章用“上瘾模型”组织图书馆短视频传播互动的影响因素，并用 879 个图书馆抖音短视频样本进行非参数检验，是当前学习集中最适合先讨论“理论框架 + 平台数据 + 运营策略”如何结合的一篇。</li>
+<li>研究对象：粉丝量排名前 10 的图书馆官方抖音号，最新 100 个短视频作品，不足 100 个则取全部，共 879 个样本。</li>
+<li>方法线索：内容编码 + 平台互动指标建模 + SPSS 非参数检验。因变量为基于点赞、评论、转发计算的传播及互动 <code>C指数</code>；自变量包括标题句型、标题长度、背景音乐情感类型、制作类别、内容主题、信息类型、时长、相关或连续性。</li>
+<li>主要发现：标题句型、背景音乐情感类型、制作类别、内容主题、信息类型对 <code>C指数</code> 有显著影响；标题长度、时长、相关或连续性未表现出显著影响。</li>
+<li>方法价值：它提供了一个可复用的中文 LIS 经验研究模板，但后续研究不能直接把相关性写成因果关系。</li>
+</ul>
+<h2>研讨问题</h2>
+<ul>
+<li>它解决的主要是“图书馆短视频如何提高互动效果”的方法/实践问题，还是“图书馆知识传播机制如何被平台逻辑重塑”的理论问题？</li>
+<li>如果后续要投《图书情报工作》，我们是复用它的变量体系，还是用它作为对比对象，提出更强的服务质量/用户价值指标？</li>
+<li>该文将“互动效果”主要操作化为点赞、评论、转发。这个指标是否足以支持“阅读推广”或“知识传播”层面的主张？</li>
+<li>2020 年左右的抖音图书馆账号状态是否已经过时？是否需要 2024-2026 的平台数据作更新研究？</li>
+</ul>
+<h2>创新-局限-机会摘录</h2>
+<h3><code>cnki_2021_d35f8e895a</code> - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索</h3>
+<ul>
+<li>Source: 图书情报工作, 2021</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2021_d35f8e895a/paper.md</code></li>
+<li>证据边界: reader 为文本抽取，暂无页码；写入论文前需回原文核页。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>理论/模型引入</td><td>将“上瘾模型”引入图书馆短视频传播及互动效果研究，把触发、行动、酬赏、投入映射到标题、音乐、制作、内容、信息类型、时长和连续性等变量</td><td><code>B0006</code>, <code>B0009</code></td><td>可作为图书馆短视频研究的行为机制框架，也可与 ELM/SOR 等模型对话</td><td>O-002</td></tr><tr><td>对象/场景拓展</td><td>直接研究图书馆官方抖音号，而不是一般短视频或社会化阅读账号</td><td><code>B0007</code>, <code>B0010</code></td><td>适合作为本项目的领域基础文献和直接场景证据</td><td>O-003</td></tr><tr><td>数据/样本建设</td><td>以粉丝量排名前 10 的图书馆官方抖音号为样本，采集 879 个短视频</td><td><code>B0010</code></td><td>可复用其账号筛选、视频样本和变量编码思路，并在新时期扩展</td><td>O-004</td></tr><tr><td>变量/测量设计</td><td>把标题句型、标题长度、背景音乐情感类型、制作类别、内容主题、信息类型、时长、连续性 8 个因素编码为自变量</td><td><code>B0010</code>, <code>B0011</code></td><td>可形成后续内容分析编码表的基础版本</td><td>O-005</td></tr><tr><td>实践策略转译</td><td>将显著因素转译成疑问式标题、轻快/庄重音乐、情景剧或视频再加工、资源/知识/服务信息、低门槛高密度内容等策略</td><td><code>B0014</code>, <code>B0015</code>, <code>B0016</code></td><td>适合写进实践启示，但需要避免夸大因果</td><td>O-006</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>指标替代问题</td><td>因变量是点赞、评论、转发构成的 C 指数，主要衡量平台互动，不能直接代表图书馆服务触达、阅读行为或公共文化价值</td><td><code>B0010</code></td><td>建立传播效果与服务价值并列的评价指标，例如阅读参与、资源访问、活动报名、馆藏使用或用户认知变化</td><td>高</td></tr><tr><td>因果识别问题</td><td>研究使用观察性平台数据和非参数检验，能说明不同类别的互动差异，但不能直接证明某个因素导致传播效果提高</td><td><code>B0011</code>-<code>B0014</code></td><td>后续可加入准实验、分层回归、匹配样本或发布时间控制变量</td><td>高</td></tr><tr><td>平台时代漂移</td><td>数据来自 2020 年前后抖音图书馆账号生态，平台规则、用户习惯和机构运营成熟度可能已经变化</td><td><code>B0007</code>, <code>B0010</code></td><td>使用 2024-2026 新样本做复测，检验早期结论是否仍成立</td><td>中高</td></tr><tr><td>样本外推问题</td><td>样本聚焦粉丝量排名靠前的官方图书馆账号，可能高估头部馆经验，难以代表中小馆、高校馆或科研型图书馆</td><td><code>B0007</code>, <code>B0010</code></td><td>分公共馆、高校馆、科研型图书馆、区域层级做比较</td><td>中高</td></tr><tr><td>变量遗漏问题</td><td>未充分量化推荐算法、发布时间、评论内容、主持人风格、剪辑节奏、账号定位等因素</td><td>从模型变量反推；<code>B0010</code>, <code>B0011</code></td><td>扩展为多模态与运营变量联合模型</td><td>中</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-001: 图书馆短视频的“互动效果”是否能与实际阅读推广或服务使用产生可观测关联？</li>
+<li>RQ-002: Hook Model 中的触发、行动、酬赏、投入四类机制，在公共馆、高校馆和科研型图书馆中是否存在差异？</li>
+<li>RQ-003: 早期研究发现的标题句型、音乐、制作类别、内容主题、信息类型等显著因素，在 2024-2026 年抖音/视频号/B站环境下是否仍然显著？</li>
+<li>RQ-004: 图书馆短视频中“有用信息酬赏”是否比情绪触发更能解释服务转化，而不仅是点赞转发？</li>
+</ul>
+<h2>核心证据 block 快照</h2>
+<h3>B0006</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_d35f8e895a:B0006</code></li>
+<li>Snapshot: 近几年来，国内外学者对短视频的发展和应用展开了一系列的研究，主要集中在以下3个方面：①短视频平台的内容及推荐机制研究。例如，国外学者S. Wilk等提出了一种针对用户产生视频内容的质量评估算法[3];T. Tang等针对基于用户历史行为的视频推荐机制，提出了一个非传统模型的集合，包括基于压缩交互网络(CIN)的定制神经网络结构和基于经典SVD特征的梯度提升决策树(GDBTs)[4];Y. Liu等通过预测短视频的完播率和点赞率构建了一个通用的短视频推荐框架[5]。②短视频平台的用户研究。例如，国内学者X. Z...</li>
+</ul>
+<h3>B0008</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_d35f8e895a:B0008</code></li>
+<li>Snapshot: 根据数据统计和对图书馆短视频内容的调研，可以总结出图书馆短视频平台的运营状况存在以下3个主要问题：①开通比例低。在全国超过3 000个公共图书馆和超过2 600个高校图书馆中，分别只有1%左右和1‰左右开通了抖音短视频账号。②作品数量少。在目前已开通的图书馆抖音账号中，超过半数已运营超过一年，但是作品数量不足100。③优质内容少。大部分图书馆账号的短视频内容较为传统和分散，视频创作的专业化水准不足，导致点赞量低、传播效果不佳。 目前，图书馆的短视频内容主要集中在作为公共文化服务机构的公共图书馆对其基础服务、科...</li>
+</ul>
+<h3>B0009</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_d35f8e895a:B0009</code></li>
+<li>Snapshot: 本文基于互联网产品用户行为模型——“上瘾模型”,以抖音平台为例，总结出影响短视频传播及互动效果的8个因素，并结合图书馆的实际情况建立图书馆短视频传播及互动效果的影响因素模型，见图2。 以下从上瘾模型的4个环节分别阐释图书馆短视频传播及互动效果影响因素模型： (1)触发用户的因素。 抖音平台短视频的标题是用户观看短视频时获取的第一个完整信息，可以让用户最快地了解短视频的主要内容，从而做出是否观看的决定，因此本文将标题作为外部触发因素，具体包括标题句型和标题长度。图书馆短视频的标题句型包括陈述句、感叹句和疑问句；...</li>
+</ul>
+<h3>B0010</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_d35f8e895a:B0010</code></li>
+<li>Snapshot: 如表1所示，目前粉丝数量排名前10的图书馆官方抖音号的作品量和粉丝量相对较大，涵盖了国家图书馆、上海图书馆等具有一定代表性、影响力较大的图书馆。本文选取此10个图书馆的抖音短视频作品作为研究对象，收集每个抖音号最新发布的100个短视频作品(作品数量不足100的取全部作品),共879个作品作为研究样本。然后收集样本的点赞数、评论数和转发数作为体现传播及互动效果的数据；并对样本的标题句型、标题长度、背景音乐情感类型、制作类别、内容主题、信息类型、时长及其与邻近视频是否具有相关或连续性共8个影响因素进行编码和统计，...</li>
+</ul>
+<h3>B0011</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_d35f8e895a:B0011</code></li>
+<li>Snapshot: 社会事件 7 59 6.7 城市宣传 8 20 2.3 活动或参赛视频 9 73 8.3 节日或日常问候 10 67 7.6 其他 11 0 0 信息类型 无 0 295 33.6 资源类 1 113 12.9 服务类 2 134 15.2 知识点 3 283 32.2 社会信息 4 54 6.1 其他 5 0 0 时长(分钟) 1分钟以内 1 702 79.9 2-3分钟 2 99 11.3 3分钟以上 3 78 8.9 相关或连续性 无 0 622 70.8 有 1 257 29.2 团队成员对自变量编码...</li>
+</ul>
+<h3>B0013</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_d35f8e895a:B0013</code></li>
+<li>Snapshot: 1.0(n=376) 2.0(n=197) 3.0(n=104) 4.0(n=4) 5.0(n=30) 6.0(n=168) C指数 155.555 127.681 141.205 218.601 84.000 209.781 51.022 0.000 表7 内容主题与C指数的非参数检验结果 内容主题(中位数) Kruskal-Wallis 检验统计量H 值 p 1.0 (n=129) 2.0 (n=75) 3.0 (n=122) 4.0 (n=248) 5.0 (n=21) 6.0 (n=65) 7.0 (...</li>
+</ul>
+<h3>B0014</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_d35f8e895a:B0014</code></li>
+<li>Snapshot: 根据上文的统计和验证结果可知，在本文设计的短视频传播及互动效果的8个影响因素中，图书馆短视频的标题长度、视频时长及其与临近视频的相关或连续性3个因素对于C指数并没有显著的影响。原因分析为：抖音平台短视频的标题一般只显示前40个字，超出部分会被折叠隐藏。而40字以内的标题基本可以一目了然，与句子数量关系不大，且由于短视频富媒体的呈现方式，标题本身信息表达的作用已被弱化，因此不同标题长度短视频的C指数无显著差异。由于短视频的传播及互动效果更多地取决于视频内容信息本身而不是时间因素[13],因此视频时长对于C指数无...</li>
+</ul>
+<h3>B0016</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_d35f8e895a:B0016</code></li>
+<li>Snapshot: 短视频是符合当下互联网用户群体碎片化、移动化生活习惯的内容形式[18],在为用户提供新内容、新体验、新模式的同时，也在潜移默化中改变着人们的认知和思维习惯，并在更广泛的层面上影响和重塑新媒体环境下的信息传播生态[19]。图书馆行业应充分认识到短视频平台的巨大传播价值，积极开通，强力运营，借势扩大图书馆的影响力。同时，在短视频平台海量User Generated Content(用户生产内容，简称UGC)的娱乐内容中，图书馆的Professional Generated Content(专业生产内容，简称PGC...</li>
+</ul>
+<h2>带读顺序</h2>
+<ol>
+<li>先用一句话判断它在本项目里的角色。</li>
+<li>解释研究问题、对象、方法和核心结论。</li>
+<li>只打开与核心结论有关的 block，避免全文漫游。</li>
+<li>归纳创新点、关键局限和可转化研究问题。</li>
+<li>和已读文献对比，更新综述或创新-局限台账。</li>
+</ol>
+<h2>下次对 Codex 说</h2>
+<p><code>基于 cnki_2021_d35f8e895a 的上下文包带我复盘这篇论文，并指出它对我的研究有什么用。</code></p>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>分层架构契约</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>分层架构契约</h1>
+      <p class="sub">ResearchWorkflow 的源资产、加工层、知识层、展示层和质检层边界。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：docs/WORKFLOW_LAYERED_ARCHITECTURE.md</div>
+        <article class="md-view">
+<h1>ResearchWorkflow 分层架构契约</h1>
+<p>Last updated: 2026-06-30</p>
+<p>本文档定义 ResearchWorkflow 的系统边界。目标不是把本地工作流改造成复杂平台，而是让“源材料、加工逻辑、知识资产、浏览界面、质量检查”各司其职，避免链接混乱、重复生成、证据边界不清和长期维护困难。</p>
+<h2>架构原则</h2>
+<ol>
+<li>Markdown 是长期知识源，HTML 是默认阅读界面。</li>
+<li>源资产可以人工编辑，生成资产只能由脚本刷新。</li>
+<li>用户侧所有可点击本地入口默认打开 HTML，不直接打开裸 Markdown。</li>
+<li>每个重要源资产应有可追踪的展示页或明确的不展示理由。</li>
+<li>每次自动化运行后必须能通过审计发现断链、裸 Markdown 链接、证据越界和状态不一致。</li>
+</ol>
+<h2>五层边界</h2>
+<table><thead><tr><th>层级</th><th>职责</th><th>典型路径</th><th>允许人工编辑</th><th>主要消费者</th></tr></thead><tbody><tr><td>Source 源材料层</td><td>保存事实来源、原文、原始导入和可追溯材料</td><td><code>library/</code>, <code>projects/*/literature/readers/</code>, <code>vault/01_Literature/</code></td><td>是</td><td>Codex、写作、证据核验</td></tr><tr><td>Processing 加工层</td><td>导入、抽取、推荐、生成上下文包和知识资产</td><td><code>scripts/*.py</code>, <code>Makefile</code></td><td>是</td><td>自动化任务</td></tr><tr><td>Knowledge 知识资产层</td><td>保存长期论文笔记、概念、方法、项目状态、复习队列和图谱数据</td><td><code>vault/02_Concepts/</code>, <code>vault/03_Methods/</code>, <code>vault/13_Knowledge_Graph/</code>, <code>vault/14_Review_Queue/</code>, <code>projects/*/*.md</code></td><td>是</td><td>Obsidian、Codex、后续写作</td></tr><tr><td>Presentation 展示层</td><td>提供浏览器优先的阅读、复习、导航、搜索和图谱入口</td><td><code>study_dashboard.html</code>, <code>paper_reading/</code>, <code>knowledge_cards/</code>, <code>knowledge_graph/</code>, <code>search/</code>, <code>logs/</code></td><td>否</td><td>用户</td></tr><tr><td>Orchestration / QA 编排质检层</td><td>串联刷新、备份、审计、归档和远程快照</td><td><code>make workflow-refresh</code>, <code>workflow_health.html</code>, <code>backups/</code>, <code>codex/</code></td><td>部分</td><td>用户、Codex、自动化</td></tr></tbody></table>
+<h2>资产分类</h2>
+<h3>Canonical Assets</h3>
+<p>Canonical assets 是可以长期维护和引用的源文件：</p>
+<ul>
+<li><code>vault/**/*.md</code></li>
+<li><code>projects/**/*.md</code></li>
+<li><code>projects/**/*.yaml</code></li>
+<li><code>projects/*/project_state.json</code></li>
+<li><code>library/literature_matrix.csv</code></li>
+<li><code>vault/13_Knowledge_Graph/*.csv</code></li>
+<li><code>vault/13_Knowledge_Graph/search_index.json</code></li>
+<li><code>vault/13_Knowledge_Graph/workflow_state.json</code></li>
+<li><code>vault/13_Knowledge_Graph/action_queue.json</code></li>
+<li><code>vault/14_Review_Queue/review_queue.csv</code></li>
+<li><code>vault/14_Review_Queue/review_state.json</code></li>
+</ul>
+<p>这些文件可以人工编辑，也可以由脚本追加或更新。它们是研究记忆和证据状态的来源。</p>
+<h3>Generated Assets</h3>
+<p>Generated assets 是脚本生成的浏览和索引文件：</p>
+<ul>
+<li><code>study_dashboard.html</code></li>
+<li><code>paper_reading/*.html</code></li>
+<li><code>paper_reading/views/*.html</code></li>
+<li><code>paper_reading/views/directories/*.html</code></li>
+<li><code>knowledge_cards/index.html</code></li>
+<li><code>knowledge_cards/review_today.html</code></li>
+<li><code>knowledge_cards/views/*.html</code></li>
+<li><code>knowledge_graph/index.html</code></li>
+<li><code>search/index.html</code></li>
+<li><code>logs/index.html</code></li>
+<li><code>logs/views/*.html</code></li>
+<li><code>workflow_health.html</code></li>
+<li><code>workflow_state.html</code></li>
+<li><code>action_queue.html</code></li>
+<li><code>backups/index.html</code></li>
+</ul>
+<p>这些文件不应手工维护。发现错误时应修生成脚本或源文件，然后重新运行生成命令。</p>
+<h2>链接契约</h2>
+<p>所有生成 HTML 页面中的本地链接必须遵守：</p>
+<ol>
+<li>指向 Markdown 的链接必须转换为对应 HTML 镜像页。</li>
+<li>指向概念卡或方法卡的链接必须转换为 <code>knowledge_cards/views/*.html</code>。</li>
+<li>指向学习日志的链接必须转换为 <code>logs/views/*.html</code>。</li>
+<li>指向普通 Markdown 或项目 Markdown 的链接必须转换为 <code>paper_reading/views/*.html</code>。</li>
+<li>指向文件夹的链接必须转换为 <code>paper_reading/views/directories/*.html</code>，除非该文件夹有 <code>README.md</code>，则优先展示 README 镜像。</li>
+<li>生成页可以显示源文件路径，但不提供裸 Markdown 点击入口。</li>
+</ol>
+<h2>资产清单契约</h2>
+<p><code>vault/13_Knowledge_Graph/artifact_manifest.csv</code> 是源资产与展示资产之间的索引表，由 <code>make learning-dashboard</code> 生成。</p>
+<p>推荐字段：</p>
+<table><thead><tr><th>字段</th><th>含义</th></tr></thead><tbody><tr><td><code>source_path</code></td><td>源文件或源文件夹相对路径</td></tr><tr><td><code>source_type</code></td><td><code>markdown</code>, <code>directory</code>, <code>html</code>, <code>csv</code>, <code>generated_entry</code> 等</td></tr><tr><td><code>display_path</code></td><td>用户默认打开的 HTML 或可浏览入口</td></tr><tr><td><code>display_type</code></td><td><code>paper_page</code>, <code>markdown_view</code>, <code>card_view</code>, <code>log_view</code>, <code>directory_view</code>, <code>index</code>, <code>graph</code> 等</td></tr><tr><td><code>title</code></td><td>浏览标题</td></tr><tr><td><code>layer</code></td><td>所属架构层</td></tr><tr><td><code>generated_by</code></td><td>生成命令或脚本</td></tr></tbody></table>
+<p>这个清单的用途：</p>
+<ul>
+<li>让首页、图谱、日志、项目看板共享同一套展示路径。</li>
+<li>支持审计脚本检查“源文件是否有展示页”。</li>
+<li>支持后续搜索、推荐、复习和项目状态判断。</li>
+</ul>
+<h2>命令契约</h2>
+<p>常用命令职责如下：</p>
+<table><thead><tr><th>命令</th><th>职责</th></tr></thead><tbody><tr><td><code>make obsidian-graph</code></td><td>从 Obsidian 双链导出图谱 CSV</td></tr><tr><td><code>make learning-dashboard</code></td><td>生成 HTML 展示层和 artifact manifest</td></tr><tr><td><code>make search-index</code></td><td>单独刷新 <code>search_index.json</code>，通常由 <code>make learning-dashboard</code> 自动包含</td></tr><tr><td><code>make workflow-state</code></td><td>单独刷新 <code>workflow_state.json</code> 和 <code>workflow_state.html</code></td></tr><tr><td><code>make action-queue</code></td><td>单独刷新 <code>action_queue.json</code> 和 <code>action_queue.html</code></td></tr><tr><td><code>make workflow-audit</code></td><td>检查入口、链接、证据边界、备份和生成资产健康</td></tr><tr><td><code>make workflow-refresh</code></td><td>顺序运行图谱、展示、备份、归档和审计</td></tr><tr><td><code>make workflow-refresh-git</code></td><td>在 refresh 基础上提交并推送文本资产</td></tr></tbody></table>
+<h2>渲染模块边界</h2>
+<p><code>make learning-dashboard</code> 的实现应保持如下职责拆分：</p>
+<table><thead><tr><th>模块</th><th>职责</th></tr></thead><tbody><tr><td><code>scripts/build_learning_dashboard.py</code></td><td>页面布局、HTML 外壳、各入口页生成顺序</td></tr><tr><td><code>scripts/rendering/paths.py</code></td><td>全局路径常量、标题读取、CSV/Markdown/HTML 基础列表工具</td></tr><tr><td><code>scripts/rendering/routes.py</code></td><td>本地源文件、目录和 Markdown 链接到默认 HTML 展示页的路由规则</td></tr><tr><td><code>scripts/rendering/manifest.py</code></td><td><code>artifact_manifest.csv</code> 行生成与写入</td></tr><tr><td><code>scripts/rendering/review.py</code></td><td>从 <code>review_queue.csv</code> 生成今日复习状态和复习项展示路径</td></tr><tr><td><code>scripts/rendering/search.py</code></td><td>从 <code>artifact_manifest.csv</code> 生成全局搜索索引</td></tr><tr><td><code>scripts/rendering/workflow_state.py</code></td><td>聚合项目、复习、搜索、图谱和审计状态</td></tr><tr><td><code>scripts/rendering/action_queue.py</code></td><td>从总状态生成按优先级排序的开放行动</td></tr></tbody></table>
+<p>新增展示入口时，先扩展 <code>routes.py</code> 或 <code>manifest.py</code>，再由页面生成器调用；不要在页面模板里临时拼接 Markdown 直链。</p>
+<h2>项目状态契约</h2>
+<p><code>projects/&lt;project&gt;/project_state.json</code> 是给脚本和自动化读取的机器可读项目状态，不替代 <code>00_project_dashboard.md</code>、<code>reading_board.md</code> 或文献综述工作台。</p>
+<p>它应由 <code>make project-state PROJECT=&lt;project&gt;</code> 或 <code>make learning-dashboard</code> 自动刷新，至少包含：</p>
+<ul>
+<li>项目元数据：slug、title、status、路径。</li>
+<li>固定入口：学习仪表盘、今日精读、项目看板、阅读看板、文献综述工作台、artifact manifest。</li>
+<li>文献状态：矩阵条数、阅读状态计数、全文记录数、Reader 数、上下文包数、最近推荐、最近主读、下一篇候选。</li>
+<li>质量状态：evidence gate、到期复习数。</li>
+<li>复习状态：到期数量、逾期数量、7 天内复习数量、今日重点复习项和 HTML 展示路径。</li>
+<li>展示资产：与项目相关的 manifest 条目摘要。</li>
+<li>搜索资产：全局搜索页和搜索索引路径，供仪表盘、项目状态和自动化复用。</li>
+<li>下一步建议：供 fast-lane、每日推荐和仪表盘引用。</li>
+</ul>
+<h2>复习状态契约</h2>
+<p><code>vault/14_Review_Queue/review_queue.csv</code> 是人工和脚本共同维护的长期复习源表；<code>vault/14_Review_Queue/review_state.json</code> 是由脚本生成的今日状态快照。</p>
+<p><code>review_state.json</code> 至少包含：</p>
+<ul>
+<li>今日日期、生成时间和源队列路径。</li>
+<li>总数、今日到期、逾期、未来 7 天和未排期数量。</li>
+<li><code>focus_items</code>：今天最应该主动回忆的知识卡。</li>
+<li>每个复习项的源卡片路径和默认 HTML 展示路径。</li>
+</ul>
+<p>用户侧默认打开 <code>knowledge_cards/review_today.html</code>，不直接打开 CSV 或 Markdown 卡片。</p>
+<h2>搜索索引契约</h2>
+<p><code>vault/13_Knowledge_Graph/search_index.json</code> 是由 <code>artifact_manifest.csv</code> 派生的机器可读搜索索引；<code>search/index.html</code> 是用户侧默认搜索入口。</p>
+<p>搜索索引至少包含：</p>
+<ul>
+<li>标题、源路径、展示路径、架构层和展示类型。</li>
+<li>每个条目的短摘要和用于前端搜索的规范化文本。</li>
+<li>所有结果的点击目标必须是 HTML 展示页，不直接打开 Markdown 源文件。</li>
+</ul>
+<p>搜索层只负责发现和导航，不替代图谱、复习队列、项目状态或证据门禁。</p>
+<h2>工作流总状态契约</h2>
+<p><code>vault/13_Knowledge_Graph/workflow_state.json</code> 是给自动化读取的总状态快照；<code>workflow_state.html</code> 是用户侧浏览入口。</p>
+<p>它聚合：</p>
+<ul>
+<li>核心入口：今日精读、今日复习、知识图谱、全局搜索、工作流体检。</li>
+<li>计数状态：manifest 条目数、搜索条目数、项目数、Git 待提交路径数。</li>
+<li>审计状态：最近一次 <code>workflow-audit</code> 的 PASS/WARN/FAIL。</li>
+<li>复习状态：到期数量和重点复习项。</li>
+<li>项目状态：每个项目的文献矩阵规模、Reader 数、最近主读和下一步动作。</li>
+<li>下一步建议：按审计失败、到期复习和项目动作排序。</li>
+</ul>
+<h2>行动队列契约</h2>
+<p><code>vault/13_Knowledge_Graph/action_queue.json</code> 是结构化开放行动队列；<code>action_queue.html</code> 是用户侧默认入口。</p>
+<p>行动队列应满足：</p>
+<ul>
+<li>每个行动包含 <code>kind</code>、<code>priority</code>、<code>title</code>、<code>reason</code>、<code>entrypoint</code>、<code>source</code> 和 <code>status</code>。</li>
+<li><code>entrypoint</code> 必须指向存在的 HTML 展示页。</li>
+<li>优先级顺序：审计 FAIL、到期复习、重点知识卡、审计 WARN、项目下一步建议。</li>
+<li>行动队列从 <code>workflow_state.json</code> 派生，不替代项目状态、复习状态或审计报告。</li>
+</ul>
+<h2>改造优先级</h2>
+<ol>
+<li>先保证链接路由和 artifact manifest 稳定。</li>
+<li>再拆分大型生成脚本，减少单文件职责。</li>
+<li>再结构化项目状态，供每日推荐和综述更新使用。</li>
+<li>先用 manifest 派生的轻量搜索页解决发现问题。</li>
+<li>只有当本地 JSON 搜索明显不够用时，再考虑交互式浏览器应用或数据库。</li>
+</ol>
+<h2>验收标准</h2>
+<p>一次合格的刷新应满足：</p>
+<ul>
+<li>打开 <code>study_dashboard.html</code> 后可以进入所有核心功能。</li>
+<li>用户侧 HTML 页面没有本地 <code>.md</code> 直链。</li>
+<li>新增论文、知识卡、日志和目录入口都出现在 artifact manifest。</li>
+<li><code>search/index.html</code> 和 <code>search_index.json</code> 已刷新，搜索结果只打开 HTML 展示页。</li>
+<li>知识图谱 CSV 与 HTML 图谱都能刷新。</li>
+<li>复习队列包含新增知识点或明确标注无需复习，且 <code>review_state.json</code>、<code>knowledge_cards/review_today.html</code> 已刷新。</li>
+<li><code>workflow-audit</code> 没有 FAIL；如有 WARN，必须说明证据边界或待处理事项。</li>
+</ul>
+<h2>审计覆盖范围</h2>
+<p><code>make workflow-audit</code> 不只检查入口是否存在，还应检查这些契约是否仍然成立：</p>
+<ul>
+<li>用户侧 HTML 页面没有裸 Markdown 直链，且本地链接可解析。</li>
+<li>Markdown 镜像页未落后于源文件。</li>
+<li><code>artifact_manifest.csv</code> 字段完整、展示页存在、核心展示类型齐全。</li>
+<li><code>search_index.json</code> 条目计数正确，所有搜索结果都指向存在的 HTML 页面。</li>
+<li><code>review_state.json</code> 与 <code>review_queue.csv</code> 的总数和到期数一致，重点复习项有 HTML 展示页。</li>
+<li><code>projects/*/project_state.json</code> 存在，并包含今日精读、今日复习、搜索、manifest 和 search index 等关键入口。</li>
+<li><code>workflow_state.json</code> 与 <code>workflow_state.html</code> 已刷新，能聚合当前项目、复习、搜索、图谱和审计状态。</li>
+<li><code>action_queue.json</code> 与 <code>action_queue.html</code> 已刷新，所有行动入口都指向存在的 HTML 页面。</li>
+<li>图谱 CSV 和图谱 HTML 均可用。</li>
+</ul>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CNKI Search Plan - 图书馆短视频相关研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>CNKI Search Plan - 图书馆短视频相关研究</h1>
+      <p class="sub">projects/library_short_video/literature/cnki_search_plan.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/literature/cnki_search_plan.md</div>
+        <article class="md-view">
+<h1>CNKI Search Plan - 图书馆短视频相关研究</h1>
+<p>Date: 2026-06-20 Project: <code>library_short_video</code></p>
+<h2>Goal</h2>
+<p>Use CNKI metadata and legally obtained full texts to select 5-7 relevant papers on library short-video research for learning and discussion. The first output should be a metadata-level frontier radar. After authorized PDFs are available, selected papers can be upgraded to source-grounded readers.</p>
+<h2>Access Boundary</h2>
+<ul>
+<li>The user logs in to CNKI through their own browser, institution VPN, or library portal.</li>
+<li>Codex must not receive passwords or bypass CAPTCHA, paywalls, download limits, or access controls.</li>
+<li>CNKI abstracts and metadata are treated as <code>metadata-only</code> until the user reads/validates full text.</li>
+</ul>
+<h2>Core Search Queries</h2>
+<p>Use CNKI advanced search. Prefer <code>主题</code> first; if too many irrelevant results, switch to <code>篇名</code>.</p>
+<h3>Query A: Core Topic</h3>
+<pre><code class="language-text">主题 = 图书馆 AND 主题 = 短视频</code></pre>
+<h3>Query B: University Libraries</h3>
+<pre><code class="language-text">主题 = 高校图书馆 AND 主题 = 短视频</code></pre>
+<h3>Query C: Public Libraries</h3>
+<pre><code class="language-text">主题 = 公共图书馆 AND 主题 = 短视频</code></pre>
+<h3>Query D: Reading Promotion</h3>
+<pre><code class="language-text">主题 = 阅读推广 AND 主题 = 短视频</code></pre>
+<h3>Query E: Platform-Specific Expansion</h3>
+<pre><code class="language-text">主题 = 图书馆 AND (主题 = 抖音 OR 主题 = 快手 OR 主题 = 视频号 OR 主题 = B站 OR 主题 = 哔哩哔哩)</code></pre>
+<h3>Query F: Broader New-Media Boundary</h3>
+<p>Use only if A-E return too few high-quality records.</p>
+<pre><code class="language-text">主题 = 图书馆 AND (主题 = 新媒体 OR 主题 = 融媒体 OR 主题 = 社交媒体) AND (主题 = 视频 OR 主题 = 短视频)</code></pre>
+<h2>Recommended Filters</h2>
+<ul>
+<li>Time range: 2019-2026 first. If too few results, extend to 2016-2026.</li>
+<li>Literature type: journal articles first; optionally include dissertations and conference papers as background.</li>
+<li>Disciplines: library and information science / information resource management / journalism and communication if CNKI categories are available.</li>
+<li>Sort twice and export both if possible:</li>
+<li>newest first for frontier radar</li>
+<li>citation/download count for influence</li>
+</ul>
+<h2>Export Requirements</h2>
+<p>Export metadata to:</p>
+<pre><code class="language-text">library/cnki_exports/library_short_video/</code></pre>
+<p>Preferred formats:</p>
+<ol>
+<li><code>.xlsx</code></li>
+<li><code>.csv</code></li>
+<li>RIS or EndNote text</li>
+</ol>
+<p>Fields to include when CNKI allows field selection:</p>
+<ul>
+<li>title</li>
+<li>authors</li>
+<li>author affiliation</li>
+<li>source/journal</li>
+<li>year</li>
+<li>issue</li>
+<li>abstract</li>
+<li>keywords</li>
+<li>DOI</li>
+<li>fund</li>
+<li>citation count</li>
+<li>download count</li>
+<li>URL or CNKI identifier</li>
+</ul>
+<p>Recommended filenames:</p>
+<pre><code class="language-text">library_short_video_core_2019_2026.xlsx
+library_short_video_platform_2019_2026.xlsx
+library_short_video_reading_promotion_2019_2026.xlsx</code></pre>
+<h2>人工下载交接流程</h2>
+<p>当需要补充全文库存时，不再默认让 Codex 直接批量下载。推荐使用人机交接清单：</p>
+<pre><code class="language-bash">make cnki-handoff PROJECT=library_short_video TOPIC=&quot;图书馆短视频相关研究&quot; COUNT=12 OPEN=1</code></pre>
+<p>Codex 会生成：</p>
+<ul>
+<li>HTML 下载清单：<code>vault/15_CNKI_Frontier/download_requests/library_short_video/&lt;date&gt;-library_short_video-cnki-download-request.html</code></li>
+<li>CSV 下载清单：<code>vault/15_CNKI_Frontier/download_requests/library_short_video/&lt;date&gt;-library_short_video-cnki-download-request.csv</code></li>
+<li>指定下载文件夹：<code>library/pdfs/library_short_video/incoming/&lt;date&gt;/</code></li>
+</ul>
+<p>用户在 CNKI 中按清单合法下载 PDF/CAJ/KDH/NH 到指定文件夹后，运行：</p>
+<pre><code class="language-bash">make cnki-intake PROJECT=library_short_video</code></pre>
+<p>如果下载到的是 PDF 且希望马上生成 Reader：</p>
+<pre><code class="language-bash">make cnki-intake PROJECT=library_short_video BUILD_READERS=1</code></pre>
+<p>如果下载到 CAJ/KDH/NH：</p>
+<pre><code class="language-bash">make caj-convert PROJECT=library_short_video SCAN=1</code></pre>
+<h2>Import Commands</h2>
+<p>Dry-run first:</p>
+<pre><code class="language-bash">make import-cnki INPUT=library/cnki_exports/library_short_video/&lt;file&gt; TAG=library_short_video DRY=1</code></pre>
+<p>Then import:</p>
+<pre><code class="language-bash">make import-cnki INPUT=library/cnki_exports/library_short_video/&lt;file&gt; TAG=library_short_video</code></pre>
+<p>Generate 5-7 paper frontier radar:</p>
+<pre><code class="language-bash">make cnki-frontier TAG=library_short_video TOPIC=&quot;图书馆短视频相关研究&quot; LIMIT=7 SINCE=2019</code></pre>
+<p>Create one-paper discussion card:</p>
+<pre><code class="language-bash">make paper-brief CITEKEY=&lt;citekey&gt;</code></pre>
+<p>Upgrade to full reader after legal PDF access:</p>
+<pre><code class="language-bash">make paper-reader PROJECT=library_short_video CITEKEY=&lt;citekey&gt; PDF=library/pdfs/library_short_video/&lt;paper&gt;.pdf
+make evidence-gate PROJECT=library_short_video</code></pre>
+<h2>Selection Criteria For 5-7 Papers</h2>
+<p>Select papers with a balanced mix:</p>
+<ol>
+<li>Directly about <code>图书馆 + 短视频</code>.</li>
+<li>At least one university-library case.</li>
+<li>At least one public-library or public-cultural-service case if available.</li>
+<li>At least one reading-promotion / user-service / knowledge-service angle.</li>
+<li>At least one platform-operation angle such as Douyin, WeChat Channels, Bilibili, or Kuaishou.</li>
+<li>Prefer recent papers, but keep one older or highly cited paper if it shaped the discussion.</li>
+<li>Mark every selected paper as <code>metadata-only</code> until full text is obtained and read.</li>
+</ol>
+<h2>Learning Questions</h2>
+<p>For each selected paper, answer:</p>
+<ol>
+<li>What library problem does short video solve or claim to solve?</li>
+<li>Is the paper mainly conceptual, case-based, survey-based, platform-data-based, or empirical?</li>
+<li>What does it count as &quot;effectiveness&quot;: views, likes, interaction, reading promotion, user satisfaction, service reach, or knowledge dissemination?</li>
+<li>What is the actual evidence, and what remains speculative?</li>
+<li>What can be borrowed for a Chinese LIS paper targeting 《图书情报工作》?</li>
+</ol>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

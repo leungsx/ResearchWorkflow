@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026-06-30 精读：公共图书馆和高校图书馆短视频营销比较研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18222d;
+      --muted: #61707d;
+      --line: #d7e0e6;
+      --paper: #ffffff;
+      --soft: #f5f8fa;
+      --green: #19735a;
+      --blue: #2458a6;
+      --amber: #9a650b;
+      --rose: #a3294a;
+      --slate: #223344;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      line-height: 1.64;
+      background: linear-gradient(180deg, #f7f9fb 0%, #eef3f6 100%);
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 24px; }
+    header {
+      color: #f8fbff;
+      background: linear-gradient(135deg, #23394c 0%, #2d6b65 58%, #7a5b18 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.16);
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 9px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+    h1 { margin: 14px 0 10px; font-size: 37px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin: 0 0 9px; font-size: 17px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    .sub { max-width: 880px; color: rgba(248,251,255,0.9); }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      color: #f8fbff;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.09);
+      border-radius: 8px;
+      padding: 7px 11px;
+      font-size: 14px;
+    }
+    main.wrap { margin-top: -24px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel, .metric {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 10px 24px rgba(24, 34, 45, 0.06);
+    }
+    .panel { padding: 18px; }
+    .metric { padding: 16px; }
+    .span-12 { grid-column: 1 / -1; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; color: var(--slate); }
+    .metric span { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px 18px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .meta div { padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
+    .label {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+    .tag {
+      display: inline-block;
+      margin: 0 7px 8px 0;
+      padding: 5px 9px;
+      background: #edf7f4;
+      color: var(--green);
+      border: 1px solid #cfe5dd;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .route { display: grid; gap: 10px; }
+    .route-item {
+      padding: 13px 14px;
+      border-left: 4px solid var(--green);
+      background: var(--soft);
+      border-radius: 0 8px 8px 0;
+    }
+    .route-item strong { display: block; margin-bottom: 5px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 600; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .step {
+      position: relative;
+      min-height: 164px;
+      padding: 14px;
+      border: 1px solid #cfe0e2;
+      border-radius: 8px;
+      background: #f8fbfb;
+    }
+    .step:not(:last-child)::after {
+      content: ">";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--green);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .num {
+      display: inline-flex;
+      width: 28px;
+      height: 28px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+    .callout {
+      padding: 14px;
+      border: 1px solid #ead8a8;
+      border-radius: 8px;
+      background: #fff9eb;
+    }
+    .callout.warn {
+      border-color: #efc2ce;
+      background: #fff4f6;
+    }
+    .glossary { display: grid; gap: 10px; }
+    .glossary div {
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+    }
+    ul, ol { margin: 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      padding: 12px 14px;
+    }
+    details + details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 600; }
+    .actions label {
+      display: block;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--line);
+    }
+    .actions input { margin-right: 8px; }
+    .foot { color: var(--muted); font-size: 13px; }
+    @media (max-width: 920px) {
+      .span-8, .span-6, .span-4, .span-12, .metric { grid-column: 1 / -1; }
+      .flow { grid-template-columns: 1fr; }
+      .step:not(:last-child)::after { content: "v"; right: auto; left: 50%; top: auto; bottom: -19px; transform: translateX(-50%); }
+      h1 { font-size: 29px; }
+      .meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <span class="eyebrow">Daily Deep Read · 2026-06-30</span>
+      <h1>公共图书馆和高校图书馆短视频营销比较研究</h1>
+      <p class="sub">今天读这篇，是为了把昨天的 SICAS 服务路径继续往前推进：从单一公共馆抖音账号，扩展到公共馆/高校馆、抖音/快手/B站和 AARRR 用户生命周期。</p>
+      <nav class="nav">
+        <a href="../study_dashboard.html">学习仪表盘</a>
+        <a href="views/cnki-2021-3771e58987-6c1b15ea.html">Obsidian 论文笔记</a>
+        <a href="views/paper-21739661.html">Reader</a>
+        <a href="views/literature_review_workbench.html">文献综述工作台</a>
+        <a href="../knowledge_cards/index.html">知识卡入口</a>
+        <a href="../knowledge_graph/index.html">知识图谱</a>
+        <a href="../logs/2026-06-30.html">今日日报</a>
+        <a href="../logs/views/2026-06-30-aarrr-paper-f11d92b3.html">主读会话</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+      <section class="panel span-8">
+        <h2>题目与推荐理由</h2>
+        <div class="meta">
+          <div><span class="label">作者</span>龚雪竹</div>
+          <div><span class="label">年份 / 来源</span>2021 / 《大学图书馆学报》</div>
+          <div><span class="label">DOI</span><a href="https://doi.org/10.16603/j.issn1002-1027.2021.04.007">10.16603/j.issn1002-1027.2021.04.007</a></div>
+          <div><span class="label">当前项目角色</span>馆型比较、平台适配、AARRR 指标框架</div>
+          <div><span class="label">来源</span>CNKI 授权全文 Reader；本地 PDF 已入库</div>
+          <div><span class="label">证据状态</span>source-grounded skim；页码待回原 PDF 核验</div>
+        </div>
+        <p style="margin-top:14px;">推荐它，是因为当前项目已经有 Hook、ELM、SICAS 三条机制/路径线，但还缺一个能把不同馆型、不同平台和用户生命周期放在一起的比较框架。这篇正好补上 AARRR 和平台组合视角。</p>
+        <div style="margin-top:14px;">
+          <span class="tag">AARRR 漏斗模型</span>
+          <span class="tag">馆型差异</span>
+          <span class="tag">平台适配</span>
+          <span class="tag">网络调查法</span>
+          <span class="tag">内容分析法</span>
+        </div>
+      </section>
+
+      <section class="grid span-4">
+        <div class="metric"><b>161</b><span>公共图书馆机构认证账号</span></div>
+        <div class="metric"><b>18</b><span>高校图书馆机构认证账号</span></div>
+        <div class="metric"><b>3</b><span>平台：抖音、快手、B站</span></div>
+        <div class="metric"><b>5</b><span>AARRR 阶段：拉新、激活、留存、收益、传播</span></div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>30 秒定位</h2>
+        <div class="route">
+          <div class="route-item"><strong>它在项目里是什么角色？</strong>它是比较框架和指标组织文献，适合帮助你从“单平台运营建议”走向“馆型-平台-生命周期”的研究设计。</div>
+          <div class="route-item"><strong>今天为什么读它？</strong>昨天 SICAS 强调用户路径，但没有解决不同馆型和平台是否应采用不同策略；这篇刚好补上差异化视角。</div>
+          <div class="route-item"><strong>先抓什么？</strong>抓住 AARRR 的非营利转译：图书馆的 Revenue 不是卖货收入，而是文化影响力、服务推广、资源使用和机构支持。</div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>核心内容</h2>
+        <ul>
+          <li>研究问题：公共图书馆与高校图书馆如何在抖音、快手、B站开展短视频营销，平台和馆型差异如何影响策略。</li>
+          <li>理论/概念：AARRR 漏斗模型、平台适配、馆型差异、非营利服务收益。</li>
+          <li>方法与数据：网络调查法 + 内容分析法；筛选 161 个公共馆机构认证账号、18 个高校馆机构认证账号。</li>
+          <li>主要发现：公共馆更集中于抖音，高校馆对 B站更有适配空间；平台差异会影响内容定位、用户激活和留存策略。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-12">
+        <h2>证据逻辑</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>作者主张</th>
+              <th>它靠什么证据站住</th>
+              <th>你现在能怎么用</th>
+              <th>边界</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>图书馆短视频研究需要比较公共馆、高校馆和多平台差异</td>
+              <td>以“图书馆”为关键词检索抖音、快手、B站，并筛选公共馆 161 个、高校馆 18 个机构认证账号。Reader blocks: B0007</td>
+              <td>作为样本分层和平台选择的研究设计依据</td>
+              <td>关键词和认证规则可能遗漏非标准命名账号；高校馆样本偏少</td>
+            </tr>
+            <tr>
+              <td>AARRR 可以用于组织图书馆短视频营销阶段</td>
+              <td>作者解释 Acquisition、Activation、Retention、Revenue、Referral，并将其转译为图书馆短视频营销漏斗。Reader blocks: B0005-B0006</td>
+              <td>把“平台互动-服务触达-阅读转化”拆成阶段指标</td>
+              <td>AARRR 是框架，不自动证明各阶段之间存在因果转化</td>
+            </tr>
+            <tr>
+              <td>图书馆的收益应被理解为服务价值，而非商业收入</td>
+              <td>作者将 Revenue 解释为文化影响力、服务推广效果和政府/职能部门支持。Reader blocks: B0005-B0006, B0014-B0015</td>
+              <td>可作为服务价值指标设计的概念支点</td>
+              <td>文章仍缺少到馆、借阅、活动报名、资源访问等真实服务数据</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel span-12">
+        <h2>方法流程图</h2>
+        <div class="flow">
+          <div class="step">
+            <div class="num">1</div>
+            <h3>选平台</h3>
+            <p>选取抖音、快手、B站，覆盖短视频与学习型视频社区。</p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h3>搜账号</h3>
+            <p>以“图书馆”为关键词检索平台账号。</p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h3>筛样本</h3>
+            <p>参照公共馆评估名单和高校名单，保留机构认证账号。</p>
+          </div>
+          <div class="step">
+            <div class="num">4</div>
+            <h3>做比较</h3>
+            <p>比较账号开设、视频数量、粉丝、增量、主题和互动。</p>
+          </div>
+          <div class="step">
+            <div class="num">5</div>
+            <h3>回到 AARRR</h3>
+            <p>用拉新、激活、留存、收益、传播组织策略和指标。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>创新、局限、机会</h2>
+        <ul>
+          <li><strong>创新：</strong>同时比较公共馆与高校馆，避免把一种馆型的经验直接泛化。</li>
+          <li><strong>创新：</strong>同时纳入抖音、快手、B站，把短视频研究从单平台推进到平台适配。</li>
+          <li><strong>创新：</strong>把 AARRR 的 Revenue 非营利化，转译为文化影响力和服务推广价值。</li>
+          <li><strong>局限：</strong>描述性比较为主，不能证明平台策略带来服务结果。</li>
+          <li><strong>机会：</strong>用 2024-2026 多平台数据复测“馆型-平台-AARRR”框架，并加入服务价值指标。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-6">
+        <h2>与已读文献的关系</h2>
+        <table>
+          <thead><tr><th>已读文献/框架</th><th>关系</th></tr></thead>
+          <tbody>
+            <tr><td>SICAS 模型</td><td>SICAS 管用户路径，AARRR 管阶段指标。两者可组成“路径解释 + 指标体系”。</td></tr>
+            <tr><td>Hook Model</td><td>Hook 解释用户为什么持续回来；AARRR 组织这种持续关系如何进入留存和推荐传播。</td></tr>
+            <tr><td>ELM</td><td>ELM 解释内容线索如何被处理；AARRR 解释用户关系如何逐步加深。</td></tr>
+            <tr><td>张承 2021</td><td>张承强调数字阅读推广服务设计；这篇提供跨馆型和跨平台的生命周期组织方式。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel span-6">
+        <h2>术语表</h2>
+        <div class="glossary">
+          <div><strong>AARRR 漏斗模型</strong><br>Acquisition、Activation、Retention、Revenue、Referral 五阶段用户生命周期框架。</div>
+          <div><strong>平台适配</strong><br>根据不同平台用户、内容形态和互动方式调整图书馆短视频策略。</div>
+          <div><strong>馆型差异</strong><br>公共馆、高校馆、科研馆因使命和用户不同，短视频目标和服务指标也不同。</div>
+          <div><strong>网络调查法</strong><br>按固定平台、检索词、时间点和筛选规则收集线上账号与作品数据。</div>
+          <div><strong>内容分析法</strong><br>把视频主题、形式、互动引导和服务入口编码为可比较变量。</div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>延伸阅读</h2>
+        <ul>
+          <li><a href="views/cnki-2021-3771e58987-6c1b15ea.html">本论文 Obsidian 笔记</a></li>
+          <li><a href="views/paper-21739661.html">Source-Grounded Reader</a></li>
+          <li><a href="../knowledge_cards/views/concept-aarrr-bf76ae6c.html">知识卡：AARRR 漏斗模型</a></li>
+          <li><a href="../knowledge_cards/views/concept-53b320d5.html">知识卡：平台适配</a></li>
+          <li><a href="../knowledge_cards/views/concept-1c7d1e51.html">知识卡：馆型差异</a></li>
+          <li><a href="../knowledge_cards/views/method-afcfecce.html">方法卡：网络调查法</a></li>
+          <li><a href="../knowledge_cards/views/method-4dc0db40.html">方法卡：内容分析法</a></li>
+          <li><a href="views/innovation_limitation_bank.html">创新-局限-机会台账</a></li>
+        </ul>
+        <div class="callout" style="margin-top:14px;">
+          <strong>今天先别做的事</strong>
+          <p>不要把这篇当作“证明 AARRR 各阶段会导致服务价值提升”的因果研究。它提供的是比较框架和指标启发。</p>
+        </div>
+      </section>
+
+      <section class="panel span-12">
+        <h2>互动精读问题</h2>
+        <details>
+          <summary>1. 如果用 AARRR 组织你的研究指标，Revenue 应该怎样图书馆化？</summary>
+          <p>优先把 Revenue 理解为服务触达、资源使用、活动参与、阅读推广效果、文化影响力和用户关系维护，而不是商业收入。</p>
+        </details>
+        <details>
+          <summary>2. SICAS 和 AARRR 哪个更适合写研究框架，哪个更适合写指标表？</summary>
+          <p>一个可行分工是：SICAS 写用户路径和机制解释，AARRR 写阶段指标和运营生命周期。</p>
+        </details>
+        <details>
+          <summary>3. 这篇最容易被误用的地方是什么？</summary>
+          <p>把 2020-2021 年的描述性平台差异直接写成当前平台结论，或把点赞评论当成服务价值。</p>
+        </details>
+      </section>
+
+      <section class="panel span-12">
+        <h2>今日行动清单</h2>
+        <div class="actions">
+          <label><input type="checkbox"> 先读本页“证据逻辑”表，再回到 Reader 核对 B0005-B0007 和 B0012-B0016。</label>
+          <label><input type="checkbox"> 用 AARRR 写一个五行指标草图：每阶段一个平台指标、一个服务指标、一个证据缺口。</label>
+          <label><input type="checkbox"> 把“公共馆 vs 高校馆”“抖音 vs B站”写成后续复测的两个分层变量。</label>
+        </div>
+        <p class="foot" style="margin-top:12px;">证据边界说明：本页基于本地 Reader 的 source-grounded skim 生成。页码、图表编号和统计细节仍需回原 PDF 做人工核验后，才能升级为 manuscript-level 证据。</p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

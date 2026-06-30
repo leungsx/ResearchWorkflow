@@ -1,12 +1,14 @@
 # 论文阅读产出标准
 
-Last updated: 2026-06-29
+Last updated: 2026-06-30
 
 本标准用于解决三个问题：
 
 1. 用户不知道论文该从哪里读。
 2. Codex 带读时容易重复加载完整 Reader，浪费 token。
 3. 研讨卡、Reader、创新台账职责混在一起，后续复用困难。
+
+系统分层边界见 `docs/WORKFLOW_LAYERED_ARCHITECTURE.md`。论文阅读产物必须服从该文档的 Source / Processing / Knowledge / Presentation / QA 分层约束。
 
 ## 默认阅读顺序
 
@@ -26,10 +28,11 @@ flowchart LR
 
 - 固定入口是 `paper_reading/today.html`，它自动打开最新主读论文页。
 - 主读论文页必须是完整 HTML 精读页，包含阅读路线、证据逻辑、方法流程、知识卡、复习问题和今日行动。
-- 主读页上的 Reader、Obsidian 论文笔记、文献综述工作台、知识卡、日志和项目台账链接，默认都应指向 HTML 镜像页。
-- Markdown 是知识库源文件，不是默认浏览入口；只有镜像页里的“打开原始 Markdown”按钮可以直连源文件。
-- 每次沉淀完成后必须运行 `make obsidian-graph && make learning-dashboard`，让脚本生成/刷新 `paper_reading/views/`、`knowledge_cards/views/`、`logs/views/` 和各入口页。
-- 如果当天主读页误留了本地 `.md` 链接，`make learning-dashboard` 会自动生成对应 HTML 镜像并把链接改过去；不要把裸 Markdown 链接留作用户侧入口。
+- 主读页、Vault 首页镜像、Reader、Obsidian 论文笔记、文献综述工作台、知识卡、日志和项目台账里的本地链接，默认都应指向 HTML 镜像页。
+- Markdown 是知识库源文件，不是默认浏览入口；生成页可以显示源文件路径，但不要提供可点击的裸 Markdown 链接。
+- 每次沉淀完成后必须运行 `make obsidian-graph && make learning-dashboard`，让脚本生成/刷新 `paper_reading/views/`、`paper_reading/views/directories/`、`knowledge_cards/views/`、`logs/views/` 和各入口页。
+- `make learning-dashboard` 必须同步刷新 `vault/13_Knowledge_Graph/artifact_manifest.csv`，记录源文件和默认 HTML 展示页的对应关系。
+- 如果任一用户侧 HTML 页面误留了本地 `.md` 链接，`make learning-dashboard` 会自动生成对应 HTML 镜像并把链接改过去；不要把裸 Markdown 链接留作用户侧入口。
 - 知识图谱入口必须默认显示可视化图谱；CSV 或表格只能作为核对用的源数据入口。
 
 ## 四类文件的职责

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Dashboard - 图书馆短视频相关研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Project Dashboard - 图书馆短视频相关研究</h1>
+      <p class="sub">projects/library_short_video/00_project_dashboard.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/00_project_dashboard.md</div>
+        <article class="md-view">
+<h1>Project Dashboard - 图书馆短视频相关研究</h1>
+<p>Last updated: 2026-06-30</p>
+<h2>一句话进度</h2>
+<p>这个项目已经从“准备检索”推进到“真实 CNKI 检索 + 授权全文组织 + 每日推荐 + 8 篇文献带读”。现在最重要的不是再堆功能，而是把已读文献通过文献综述工作台收敛成清晰研究问题和论文工作总结。</p>
+<h2>当前状态</h2>
+<table><thead><tr><th>模块</th><th>状态</th><th>位置</th></tr></thead><tbody><tr><td>CNKI 检索计划</td><td>已有</td><td><a href="cnki-search-plan-81b24ea3.html">cnki_search_plan.md</a></td></tr><tr><td>CNKI 检索结果/入库</td><td>项目矩阵 60 条；CNKI 检索结果曾刷新到 914 条</td><td><a href="../../library/literature_matrix.csv">literature_matrix.csv</a></td></tr><tr><td>Fast-lane 快速快照</td><td>已建立；用于下一篇推荐/状态查询，减少小任务联动修改</td><td><a href="library-short-video-fast-snapshot-d2e5e287.html">library_short_video_fast_snapshot.md</a></td></tr><tr><td>授权全文</td><td>8 篇已组织</td><td><a href="directories/library-short-video-8b015fe8.html">PDF 文件夹</a></td></tr><tr><td>CAJ 转 PDF</td><td>当前学习集已跑通</td><td><a href="directories/caj-conversion-db8913e9.html">CAJ 转换记录</a></td></tr><tr><td>Reader</td><td>8/8 已生成</td><td><a href="readme-184a812b.html">readers</a></td></tr><tr><td>论文上下文包</td><td>已读 7 篇已生成，用于省 token 带读</td><td><a href="directories/context-packs-4b4dd996.html">context_packs</a></td></tr><tr><td>今日推荐</td><td>2026-06-30 主读已完成 AARRR 比较论文精读，下一步继续补传播力评价候选</td><td><a href="../today.html">今日精读入口</a></td></tr><tr><td>今日阅读看板</td><td>已建立</td><td><a href="reading-board-026f6ec8.html">reading_board.md</a></td></tr><tr><td>5 篇快速复盘</td><td>已生成</td><td><a href="2026-06-20-five-paper-quick-recap-8b992799.html">2026-06-20-five-paper-quick-recap.md</a></td></tr><tr><td>创新/局限/机会台账</td><td>8 张卡片</td><td><a href="innovation_limitation_bank.html">innovation_limitation_bank.md</a></td></tr><tr><td>文献综述工作台</td><td>已建立；用于逐篇结论、逻辑分类、综述线索和阶段性论文工作总结</td><td><a href="literature_review_workbench.html">literature_review_workbench.md</a></td></tr><tr><td>文献综述</td><td>已开始形成主线</td><td><a href="literature_synthesis.html">03_literature_synthesis.md</a></td></tr><tr><td>证据门禁</td><td>ERROR=0, WARN=1</td><td><a href="evidence-gate-report-7607e392.html">evidence_gate_report.md</a></td></tr></tbody></table>
+<h2>当前阅读进度</h2>
+<table><thead><tr><th>状态</th><th>篇数</th><th>含义</th></tr></thead><tbody><tr><td><code>skimmed</code></td><td>8</td><td>Codex 已带读并写入 reader notes/研讨卡/综述/台账，但还不是人工逐页核验</td></tr><tr><td><code>metadata-only</code></td><td>52</td><td>只在候选池或尚未读完，不能作为论文主张证据</td></tr><tr><td><code>human-read</code></td><td>0</td><td>需要你确认已经认真读过</td></tr><tr><td><code>verified</code></td><td>0</td><td>需要原文页码/证据完全核验后才能标</td></tr></tbody></table>
+<h2>项目流程图</h2>
+<pre><code class="language-mermaid">flowchart TD
+    A[CNKI 检索: 图书馆 * 短视频] --&gt; B[文献矩阵 60 条]
+    B --&gt; C[每日推荐 1+3]
+    C --&gt; D[研讨卡: 快速判断]
+    C --&gt; K[上下文包: 省 token 带读]
+    C --&gt; E[Reader: 证据块精读]
+    K --&gt; F[Reading Notes]
+    E --&gt; F[Reading Notes]
+    F --&gt; G[文献综述]
+    F --&gt; H[创新-局限-机会台账]
+    G --&gt; L[文献综述工作台]
+    H --&gt; L
+    L --&gt; I[候选研究方向]
+    I --&gt; J[研究问题/方法设计]</code></pre>
+<h2>下一步建议</h2>
+<ol>
+<li>先把 <span class="wikilink">AARRR 漏斗模型</span> 与 <span class="wikilink">SICAS模型</span> 对齐成“用户路径 + 阶段指标”草图。</li>
+<li>若继续阅读，优先补读 <code>cnki_2021_645f03f388</code>《图书馆短视频账号传播力研究——以省级公共图书馆为例》。</li>
+<li>或者把当前 8 篇已读文献继续收敛成 2-3 个候选研究问题与指标草图。</li>
+<li>如果准备写论文，先不要直接写正文；先把文献综述工作台、<code>01_research_question.md</code> 和 <code>03_literature_synthesis.md</code> 对齐。</li>
+</ol>
+<h2>你可以直接说</h2>
+<ul>
+<li><code>打开今日阅读看板，告诉我这 7 篇已经读出了什么。</code></li>
+<li><code>基于上下文包，帮我快速复盘 7 篇已读论文。</code></li>
+<li><code>打开 5 篇快速复盘，再结合今天新增 2 篇帮我判断最值得做的研究方向。</code></li>
+<li><code>打开文献综述工作台，帮我整理阶段性论文工作总结。</code></li>
+<li><code>用 7 篇已读文献帮我收敛 3 个研究问题。</code></li>
+<li><code>继续读剩下两篇 reader。</code></li>
+<li><code>打开创新局限台账，帮我找最值得做的改进点。</code></li>
+<li><code>检查这个项目距离写论文还缺什么。</code></li>
+</ul>
+<h2>快捷命令</h2>
+<pre><code class="language-bash">make status PROJECT=library_short_video
+make fast-status PROJECT=library_short_video TOPIC=&quot;图书馆短视频相关研究&quot; PRINT=1
+make typora-project PROJECT=library_short_video DOC=reading
+make lit-workbench PROJECT=library_short_video
+make typora-project PROJECT=library_short_video DOC=contextpacks
+make paper-context PROJECT=library_short_video ALL=1
+make typora-project PROJECT=library_short_video DOC=insights
+make evidence-gate PROJECT=library_short_video</code></pre>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

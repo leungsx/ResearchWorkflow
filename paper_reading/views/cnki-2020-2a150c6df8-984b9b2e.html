@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>论文带读上下文包 - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>论文带读上下文包 - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究</h1>
+      <p class="sub">projects/library_short_video/literature/context_packs/cnki_2020_2a150c6df8.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/literature/context_packs/cnki_2020_2a150c6df8.md</div>
+        <article class="md-view">
+<h1>论文带读上下文包 - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究</h1>
+<p>Generated: 2026-06-20T23:33:31 Project: <code>library_short_video</code> Citekey: <code>cnki_2020_2a150c6df8</code> Read status: <code>skimmed</code></p>
+<h2>用途</h2>
+<p>这是共读时优先加载的小上下文包，用来节省 token。它只保留带读所需的压缩信息、证据 block 索引和少量原文片段。</p>
+<ul>
+<li>先用本文件带读论文核心内容。</li>
+<li>需要核验证据、补页码或处理细节时，再打开完整 Reader。</li>
+<li>本文件不替代原文，也不把论文自动标记为 <code>human-read</code> 或 <code>verified</code>。</li>
+</ul>
+<h2>元数据</h2>
+<ul>
+<li>题名: 图书馆热门短视频内容规律探究——基于抖音平台的实证研究</li>
+<li>作者: 沈丽红</li>
+<li>年份: 2020</li>
+<li>来源: 图书馆</li>
+<li>数据库: CNKI</li>
+<li>Reader: <code>/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/cnki_2020_2a150c6df8/paper.md</code></li>
+<li>原文: <code>/Users/leung/ResearchWorkflow/library/pdfs/library_short_video/cnki_2020_2a150c6df8.caj</code></li>
+</ul>
+<h2>Reader Reading Notes</h2>
+<ul>
+<li>Summary after guided companion reading: This paper studies why some library Douyin videos become popular. It searches Douyin for library-related accounts, obtains 328 accounts from 320 libraries and 8,069 videos, then selects 103 non-forwarded videos with more than 1,000 likes for content analysis. It finds that more detailed titles, topic hashtags, subtitles, real-shot/interview formats, knowledge popularization and social-cultural content, celebrity/star appearance, and strong emotional color are associated with popular library short videos.</li>
+<li>Innovation / value after guided companion reading: Its key value is a content-rule lens. Unlike broad status/problem papers, it narrows the object to &quot;hot&quot; library videos and codes their content characteristics. This makes it a useful bridge between descriptive operation studies and later influencing-factor models: it tells us which content features practitioners believed were visible in high-like cases before more formal regression/model papers appeared.</li>
+<li>Method details after guided companion reading: The author searched Douyin in 2020-06 with keywords such as <code>图书馆</code>, <code>省图书馆</code>, <code>市图书馆</code>, and <code>大学图书馆</code>, recorded 328 library accounts and 8,069 videos, then used likes as the popularity gate. Videos with more than 1,000 likes were selected, forwarded videos from other creators were removed, and 103 videos were coded by duration, title length, hashtag/topic guidance, subtitles, video type, theme, emotion, and appearing roles.</li>
+<li>Usable evidence block IDs: <code>B0001</code> for abstract findings; <code>B0003</code>-<code>B0005</code> for research gap, sample, popularity threshold, and 103-video dataset; <code>B0005</code>-<code>B0009</code> for descriptive feature distributions; <code>B0009</code>-<code>B0011</code> for content-rule interpretations; <code>B0012</code>-<code>B0013</code> for content-construction suggestions; <code>B0014</code></li>
+<p>...</p>
+</ul>
+<h2>研讨卡核心理解</h2>
+<p>未找到。</p>
+<h2>研讨问题</h2>
+<p>未找到。</p>
+<h2>创新-局限-机会摘录</h2>
+<h3><code>cnki_2020_2a150c6df8</code> - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究</h3>
+<ul>
+<li>Source: 图书馆, 2020</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2020_2a150c6df8/paper.md</code></li>
+<li>证据边界: 伴读级 source-grounded skim；热门视频样本不能直接证明因果；暂无页码。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>对象/场景拓展</td><td>从全部账号状态转向“热门图书馆短视频”内容规律</td><td><code>B0001</code>, <code>B0003</code>-<code>B0005</code></td><td>可用于解释为什么少数内容突破图书馆账号低传播困境</td><td>O-008</td></tr><tr><td>数据/样本建设</td><td>从 328 个账号、8069 条视频中筛选 103 条点赞超过 1000 的非转发热门视频</td><td><code>B0003</code>-<code>B0005</code></td><td>可作为热门/非热门对照研究的历史样本设计参考</td><td>O-004</td></tr><tr><td>变量/测量设计</td><td>编码标题长度、话题引导、时长、字幕、种类、主题、情绪、人物角色</td><td><code>B0006</code>, <code>B0007</code>, <code>B0008</code>, <code>B0009</code></td><td>可纳入后续多模态变量表</td><td>O-005</td></tr><tr><td>实践策略转译</td><td>归纳详尽标题、话题、字幕、实拍/采访、知识/社会文化、名人、强情绪等内容规律</td><td><code>B0009</code>-<code>B0013</code></td><td>可为短视频内容优化提供可操作变量</td><td>O-006</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>因果识别问题</td><td>只分析热门视频，缺少完整非热门对照组，不能证明这些因素导致热门</td><td><code>B0004</code>, <code>B0014</code></td><td>构建全样本或匹配样本，比较热门/非热门视频</td><td>高</td></tr><tr><td>指标替代问题</td><td>以点赞超过 1000 作为热门门槛，未纳入播放、完播、收藏、服务转化</td><td><code>B0004</code></td><td>用多指标评估传播效果和服务效果</td><td>高</td></tr><tr><td>变量遗漏问题</td><td>作者承认账号粉丝数、视频总数、视频质量、视频分类等外部因素可能影响传播</td><td><code>B0014</code></td><td>控制账号规模、发布时间、粉丝基数和推荐曝光</td><td>高</td></tr><tr><td>图书馆转化不足</td><td>热点、名人和情绪可能带来流量，但不一定服务图书馆使命</td><td><code>B0010</code>, <code>B0011</code>, <code>B0014</code></td><td>区分流量型热门与服务价值型热门</td><td>高</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-013: 图书馆热门短视频的内容特征，在控制账号粉丝和作品数量后是否仍然显著？</li>
+<li>RQ-014: 热点/情绪/名人驱动的高互动，是否能转化为图书馆服务认知、到馆或资源使用？</li>
+<li>RQ-015: 图书馆短视频能否建立“流量型热门”和“服务型热门”的双重评价框架？</li>
+</ul>
+<h2>后续维护模板</h2>
+<h2>核心证据 block 快照</h2>
+<h3>B0001</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_2a150c6df8:B0001</code></li>
+<li>Snapshot: 2020 年第12 期（No. 12. 2020） 075 工作研究 图书馆热门短视频内容规律探究 ——基于抖音平台的实证研究 沈丽红 （杭州市拱墅区图书馆 杭州 310015） 〔摘 要〕 图书馆如何利用短视频提升影响力是图书馆推广需要思考的问题。文章采用内 容分析法，对图书馆抖音号发布的短视频中的热门视频的内容特征进行研究，研究结果表明，标 题详尽，有话题引导，配有字幕的视频更易成为热门；实拍和采访视频易受用户青睐；知识普及和 有关社会文化方面内容的图书馆短视频易成爆款；有名人明星出镜的短视频更受欢迎；带...</li>
+</ul>
+<h3>B0003</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_2a150c6df8:B0003</code></li>
+<li>Snapshot: (Library) 2020 年第12 期（No. 12. 2020） 076 而短视频的外部特征指的是那些与内容无关的特征，例如 短视频上传到网络上的日期和时间 [6]707、短视频所在的平台 特征 [11]、短视频发布者的特征 [6, 12]713-714, 1193、短视频所在频道 的社交网络 [12-13]1193, 113 等等，根据相关研究，视频浏览量的 增长与推荐系统 [12]1186 和渠道社交网络的“越来越富”效应 有关 [12]1190，视频所在频道的社交网络是影响视频和频道人 气的主要外...</li>
+</ul>
+<h3>B0005</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_2a150c6df8:B0005</code></li>
+<li>Snapshot: 2020 年第12 期（No. 12. 2020） 077 图书馆短视频整体的传播力并不高，有待于进一步提升。 这103 条短视频共来自于24 家图书馆，占全部图书馆总 数的7.5%，体现出一定的聚集效应，说明部分图书馆在抖 音平台上已表现出一定的运营能力，图书馆热门短视频分 布数量见表2 所示： 表2 图书馆热门短视频账号分布情况表 用户名 热门视 频数 用户名 热门视 频数 用户名 热门视 频数 临沂市图书馆 26 宁波图书馆 3 合肥市 图书馆 1 朔州市图书馆 16 广东省立中山 图书馆 3 湖南 图...</li>
+</ul>
+<h3>B0009</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_2a150c6df8:B0009</code></li>
+<li>Snapshot: 2020 年第12 期（No. 12. 2020） 079 表8 图书馆热门短视频情绪和角色分布情况表 特征 描述 样本量 百分比 （%） 平均点赞数平均评论数平均分享数 表达 情绪 正面 45 43.7 25417 494 350 中性 45 43.7 9421 246 477 负面 13 12.6 58984 1869 1497 人物 角色 名人 16 15.5 56467 1148 841 馆员 22 21.4 3276 64 211 专家 8 7.8 18154 615 891 图书馆 用户 6 5....</li>
+</ul>
+<h3>B0011</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_2a150c6df8:B0011</code></li>
+<li>Snapshot: (Library) 2020 年第12 期（No. 12. 2020） 080 4.2.4 名人明星具备强大的宣传效应 文化名人或者明星具有强大的社会聚合和示范引领 效应，有名人出镜的视频更易获得更多的关注，例如首都 图书馆邀请了一系列名人参与图书馆阅读推广活动，包括 颜丹晨、李光复、吕中等人，视频内容简单，由多位名人 在镜头前号召大家参与阅读，时长仅15 秒以内，但这几 个视频仍然获得了用户上万次的点赞，显示出名人强大的 号召力。在图书馆倡导的活动中，利用名人效应可以引人 关注、扩大影响，相当于形成一种品牌...</li>
+</ul>
+<h3>B0012</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_2a150c6df8:B0012</code></li>
+<li>Snapshot: 质量的内容是短视频促使用户形成深刻记 忆并广泛传播的起点，只有让观众通过观看视频产生共 鸣，获得知识，才能实现广泛传播。因此前期的精心策划 是短视频内容生产的重要环节，图书馆在策划阶段需要 打破陈规，有所创新，从本地和本馆发展的实际出发，结 合观众喜好有针对性地进行内容创新，选题内容尽量多 元化，同时注重内容之间的内在联系，形成整体主题策划 风格。图书馆可以将图书馆的活动、图书馆日常工作等 用实拍视频的形式展现，也可以将图书馆有价值的知识 资料集合起来，经过内容构建和深度解读之后，以记录的 形式挖掘文化内涵，...</li>
+</ul>
+<h3>B0013</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_2a150c6df8:B0013</code></li>
+<li>Snapshot: 2020 年第12 期（No. 12. 2020） 081 视频，或者邀请名人明星进行采访并参与视频录制可以获 得更高的关注度。因此图书馆需要结合公众关注度，做针 对性的内容生产，图书馆首先可以利用社交媒体的舆论 监控功能，参考社交媒体的舆论关键词，基于舆论关键词 进行相关的短视频制作；其次是对即将产生的热点进行预 估，针对重大节日、重大社会政治时事等预判选题，组织 有深度的内容产出，例如湖南图书馆在中秋节前推出的图 书馆中秋节系列活动；再次是了解用户当下的关注点，例 如在图书馆日常服务中经常遇到用户关注的问...</li>
+</ul>
+<h3>B0014</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_2a150c6df8:B0014</code></li>
+<li>Snapshot: 然有一定的局限 性，首先成为热门短视频的影响因素较多，与短视频的外 部特征如账号的视频总数、账号的粉丝数也存在联系，其 次人为的分类也会造成一定的误差。 鉴于影响短视频是否热门的因素较多，短视频账号 的视频总数、粉丝数量、视频质量、视频分类等都会对短 视频的传播造成一定影响，文章对其内在关联的研究尚 待进一步深化。因此，期待未来有更多学者进行相关研 究，为图书馆有效利用短视频进行推广提供借鉴。 （来稿时间：2020 年8 月） 参考文献： 1. 前瞻产业研究院.2019 年短视频行业研究报告[EB/ OL]....</li>
+</ul>
+<h2>带读顺序</h2>
+<ol>
+<li>先用一句话判断它在本项目里的角色。</li>
+<li>解释研究问题、对象、方法和核心结论。</li>
+<li>只打开与核心结论有关的 block，避免全文漫游。</li>
+<li>归纳创新点、关键局限和可转化研究问题。</li>
+<li>和已读文献对比，更新综述或创新-局限台账。</li>
+</ol>
+<h2>下次对 Codex 说</h2>
+<p><code>基于 cnki_2020_2a150c6df8 的上下文包带我复盘这篇论文，并指出它对我的研究有什么用。</code></p>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

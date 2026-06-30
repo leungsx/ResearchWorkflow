@@ -1,8 +1,10 @@
 # Integrated Research Learning Workflow
 
-Last updated: 2026-06-29
+Last updated: 2026-06-30
 
 This document defines how daily paper reading, knowledge cards, the knowledge graph, learning logs, and project work should connect. It is the contract that scheduled Codex tasks should follow.
+
+System-level layer boundaries are defined in `docs/WORKFLOW_LAYERED_ARCHITECTURE.md`. When workflow-specific rules conflict with display or asset-boundary questions, follow that architecture contract first.
 
 ## Design Goal
 
@@ -42,15 +44,25 @@ Required outputs for every new deep-read paper:
 |---|---|---|
 | Paper today entry | `paper_reading/today.html` | Stable daily entry that always opens the latest recommended deep-read page. |
 | Paper visual page | `paper_reading/YYYY-MM-DD-short-title.html` | Browser-first reading page. |
-| Browser mirror pages | `paper_reading/views/*.html`, `knowledge_cards/views/*.html`, `logs/views/*.html` | User-facing HTML mirrors for Markdown sources linked from daily pages, cards, and logs. |
+| Browser mirror pages | `paper_reading/views/*.html`, `paper_reading/views/directories/*.html`, `knowledge_cards/views/*.html`, `logs/views/*.html` | User-facing HTML mirrors for Markdown sources and folders linked from daily pages, cards, logs, dashboards, and other mirrors. |
 | Paper index | `paper_reading/index.html` | Timeline of daily papers. |
 | Paper note | `vault/01_Literature/<citekey-or-slug>.md` | Obsidian/source-grounded literature note. |
+| Project state | `projects/<project>/project_state.json` | Machine-readable project state for recommendation, dashboard, and audit logic. |
 | Concept cards | `vault/02_Concepts/*.md` | Key theories, constructs, and ideas. |
 | Method cards | `vault/03_Methods/*.md` | Research designs, models, metrics, and analyses. |
 | Knowledge index | `vault/13_Knowledge_Graph/knowledge_index.csv` | Searchable card registry. |
 | Graph CSV | `vault/13_Knowledge_Graph/obsidian_nodes.csv`, `obsidian_edges.csv` | Exported relation data. |
+| Artifact manifest | `vault/13_Knowledge_Graph/artifact_manifest.csv` | Source-to-HTML display registry for generated navigation and audits. |
 | Graph HTML | `knowledge_graph/index.html` | Human-friendly relationship view. |
 | Review queue | `vault/14_Review_Queue/review_queue.csv` | Spaced review prompts. |
+| Review state | `vault/14_Review_Queue/review_state.json` | Machine-readable due/overdue/upcoming review snapshot. |
+| Review HTML | `knowledge_cards/review_today.html` | Browser-first active recall page. |
+| Search index | `vault/13_Knowledge_Graph/search_index.json` | Machine-readable search index generated from artifact manifest. |
+| Search HTML | `search/index.html` | Browser-first global search entry. |
+| Workflow state | `vault/13_Knowledge_Graph/workflow_state.json` | Machine-readable rollup of project, review, search, graph, and audit state. |
+| Workflow state HTML | `workflow_state.html` | Browser-first current-state and next-action page. |
+| Action queue | `vault/13_Knowledge_Graph/action_queue.json` | Prioritized open-action queue generated from workflow state. |
+| Action queue HTML | `action_queue.html` | Browser-first prioritized action page. |
 | Dashboard | `study_dashboard.html` | Daily visual entry point. |
 
 ## Artifact Contract
@@ -119,9 +131,14 @@ The evening task should verify:
 - Daily reading should also keep a stable direct entry: `paper_reading/today.html`.
 - Keep daily pages self-contained with inline CSS so they open directly in a browser.
 - Markdown remains the canonical research memory; HTML is the reading and review surface.
-- User-facing links from daily pages, dashboards, cards, logs, and graph pages should point to HTML mirror pages, not raw local Markdown.
-- Raw Markdown links are allowed only as explicit "open source/raw Markdown" controls inside mirror pages for editing or verification.
-- `make learning-dashboard` should generate HTML mirrors for linked Markdown files and rewrite local Markdown links in daily paper pages to those mirrors.
+- User-facing links from daily pages, dashboards, cards, logs, graph pages, Vault mirrors, and generated directory indexes should point to HTML mirror pages, not raw local Markdown.
+- Generated browser pages should not include clickable raw Markdown links. Show the source Markdown path as text when provenance is useful, but keep the clickable surface HTML-first.
+- `make learning-dashboard` should generate HTML mirrors for linked Markdown files and linked folders, rewrite local Markdown links to those mirrors, and remove stale generated mirror pages.
+- `make learning-dashboard` should also refresh `projects/*/project_state.json`; Markdown dashboards remain human-facing, while JSON state is for automation.
+- `make learning-dashboard` should also refresh `vault/14_Review_Queue/review_state.json` and `knowledge_cards/review_today.html`;复习入口应链接到知识卡 HTML 展示页。
+- `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/search_index.json` and `search/index.html`; search results should open HTML display pages only.
+- `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/workflow_state.json` and `workflow_state.html`; workflow audit should refresh them again with final audit counts.
+- `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/action_queue.json` and `action_queue.html`; each action should link to an HTML entrypoint.
 - `knowledge_graph/index.html` should default to a visual, interactive graph view. CSV/table links are secondary source-data links, not the primary interface.
 - `workflow_health.html` is the browser-first workflow health page. It should be refreshed by `make workflow-audit`.
 - `backups/index.html` is the browser-first backup index. It should be refreshed by `make workflow-backup`.

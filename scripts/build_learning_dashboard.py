@@ -1,177 +1,70 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import csv
 import datetime as dt
-import hashlib
-import html
 import json
-import os
 import re
 from collections import Counter
 from pathlib import Path
-from urllib.parse import quote, unquote
 
-
-ROOT = Path(__file__).resolve().parents[1]
-VAULT = ROOT / "vault"
-PAPER_READING = ROOT / "paper_reading"
-HTML_LOGS = ROOT / "logs"
-KNOWLEDGE_CARDS = ROOT / "knowledge_cards"
-KNOWLEDGE_GRAPH = ROOT / "knowledge_graph"
-PAPER_VIEWS = PAPER_READING / "views"
-KNOWLEDGE_CARD_VIEWS = KNOWLEDGE_CARDS / "views"
-LOG_VIEWS = HTML_LOGS / "views"
-WORKFLOW_HEALTH = ROOT / "workflow_health.html"
-BACKUP_INDEX = ROOT / "backups" / "index.html"
-PAPER_RESERVED = {"index.html", "today.html"}
-
-CONCEPTS = VAULT / "02_Concepts"
-METHODS = VAULT / "03_Methods"
-LEARNING_SESSIONS = VAULT / "12_Learning_Log" / "sessions"
-GRAPH_DIR = VAULT / "13_Knowledge_Graph"
-REVIEW_QUEUE = VAULT / "14_Review_Queue" / "review_queue.csv"
-
-MARKDOWN_VIEW_SOURCES = [
-    (
-        "vault-home",
-        "Vault 首页",
-        VAULT / "Home.md",
-        "Obsidian Home 的浏览器友好镜像页。",
-    ),
-    (
-        "cnki_2023_34348faa1e-note",
-        "Obsidian 论文笔记",
-        VAULT / "01_Literature" / "cnki_2023_34348faa1e.md",
-        "今日主读论文的 Obsidian 源笔记浏览版。",
-    ),
-    (
-        "cnki_2023_34348faa1e-reader",
-        "Source-Grounded Reader",
-        ROOT / "projects" / "library_short_video" / "literature" / "readers" / "cnki_2023_34348faa1e" / "paper.md",
-        "按证据块组织的 Reader 浏览版。",
-    ),
-    (
-        "literature_review_workbench",
-        "文献综述工作台",
-        ROOT / "projects" / "library_short_video" / "literature" / "literature_review_workbench.md",
-        "图书馆短视频项目的文献综述工作台浏览版。",
-    ),
-    (
-        "literature_synthesis",
-        "跨文献综述",
-        ROOT / "projects" / "library_short_video" / "03_literature_synthesis.md",
-        "当前项目跨文献综合与证据边界浏览版。",
-    ),
-    (
-        "sicas-model-concept",
-        "知识卡：SICAS 模型",
-        VAULT / "02_Concepts" / "SICAS模型.md",
-        "今日主读论文沉淀出的核心概念卡浏览版。",
-    ),
-    (
-        "dci-index-method",
-        "方法卡：DCI 传播力指数",
-        VAULT / "03_Methods" / "DCI传播力指数.md",
-        "今日主读论文沉淀出的传播力指标方法卡浏览版。",
-    ),
-    (
-        "innovation_limitation_bank",
-        "创新-局限-机会台账",
-        ROOT / "projects" / "library_short_video" / "literature" / "innovation_limitation_bank.md",
-        "当前项目创新、局限与后续机会的浏览版。",
-    ),
-]
-
-
-def esc(value: object) -> str:
-    return html.escape(str(value), quote=True)
-
-
-def href(target: Path, from_file: Path) -> str:
-    rel = os.path.relpath(target, from_file.parent).replace(os.sep, "/")
-    return quote(rel, safe="/#:.?=&%-_")
-
-
-def read_text(path: Path, limit: int = 20000) -> str:
-    try:
-        return path.read_text(encoding="utf-8", errors="ignore")[:limit]
-    except FileNotFoundError:
-        return ""
-
-
-def md_title(path: Path) -> str:
-    text = read_text(path, limit=8000)
-    frontmatter_title = re.search(r"(?m)^title:\s*\"?(.+?)\"?\s*$", text)
-    if frontmatter_title:
-        return frontmatter_title.group(1).strip().strip('"')
-    heading = re.search(r"(?m)^#\s+(.+)$", text)
-    if heading:
-        return heading.group(1).strip()
-    return path.stem
-
-
-def html_title(path: Path) -> str:
-    text = read_text(path, limit=4000)
-    title = re.search(r"(?is)<title[^>]*>(.*?)</title>", text)
-    if title:
-        return re.sub(r"\s+", " ", title.group(1)).strip()
-    heading = re.search(r"(?is)<h1[^>]*>(.*?)</h1>", text)
-    if heading:
-        return re.sub(r"<[^>]+>", "", heading.group(1)).strip()
-    return path.stem
-
-
-def list_html(directory: Path, exclude: set[str] | None = None) -> list[Path]:
-    if not directory.exists():
-        return []
-    excluded = {"index.html"}
-    if exclude:
-        excluded |= exclude
-    return sorted(
-        [p for p in directory.glob("*.html") if p.name not in excluded],
-        key=lambda p: (p.stat().st_mtime, p.name),
-        reverse=True,
-    )
-
-
-def list_md(directory: Path) -> list[Path]:
-    if not directory.exists():
-        return []
-    return sorted(
-        [p for p in directory.glob("*.md") if p.is_file()],
-        key=lambda p: (p.stat().st_mtime, p.name),
-        reverse=True,
-    )
-
-
-def latest_file(directory: Path, pattern: str) -> Path | None:
-    if not directory.exists():
-        return None
-    files = sorted(directory.glob(pattern), key=lambda path: (path.stat().st_mtime, path.name), reverse=True)
-    return files[0] if files else None
-
-
-def paper_pages() -> list[Path]:
-    return list_html(PAPER_READING, exclude=PAPER_RESERVED)
-
-
-def csv_rows(path: Path) -> list[dict[str, str]]:
-    if not path.exists():
-        return []
-    with path.open(encoding="utf-8", newline="") as handle:
-        return list(csv.DictReader(handle))
+from rendering.manifest import artifact_manifest_rows, build_artifact_manifest
+from rendering.paths import (
+    ARTIFACT_MANIFEST,
+    ACTION_QUEUE_HTML,
+    BACKUP_INDEX,
+    CONCEPTS,
+    DIR_VIEWS,
+    GRAPH_DIR,
+    HTML_LOGS,
+    KNOWLEDGE_CARD_VIEWS,
+    KNOWLEDGE_CARDS,
+    KNOWLEDGE_GRAPH,
+    LEARNING_SESSIONS,
+    LOG_VIEWS,
+    METHODS,
+    PAPER_READING,
+    PAPER_VIEWS,
+    REVIEW_QUEUE,
+    REVIEW_STATE,
+    REVIEW_TODAY,
+    ROOT,
+    SEARCH_INDEX_HTML,
+    SEARCH_INDEX_JSON,
+    VAULT,
+    WORKFLOW_HEALTH,
+    WORKFLOW_STATE_HTML,
+    csv_rows,
+    esc,
+    href,
+    html_title,
+    latest_file,
+    list_html,
+    list_md,
+    md_title,
+    paper_pages,
+)
+from rendering.routes import (
+    card_view_path,
+    directory_sources_from_markdown,
+    directory_view_path,
+    display_href,
+    display_link_target,
+    html_view_for_local_path,
+    local_markdown_source,
+    log_view_path,
+    markdown_sources_from_paper_pages,
+    paper_markdown_view_path,
+    paper_markdown_view_subtitle,
+    paper_markdown_view_title,
+    relative_label,
+)
+from rendering.review import build_review_state as build_review_state_payload
+from rendering.review import write_review_state
+from rendering.search import build_search_index, write_search_index
 
 
 def due_reviews() -> list[dict[str, str]]:
-    today = dt.date.today().isoformat()
-    rows = csv_rows(REVIEW_QUEUE)
-    due: list[dict[str, str]] = []
-    for row in rows:
-        next_review = row.get("next_review", "")
-        if next_review and next_review <= today:
-            due.append(row)
-    return due
+    return build_review_state_payload()["due_items"]
 
 
 def graph_counts() -> tuple[int, int, list[tuple[str, int]]]:
@@ -377,8 +270,12 @@ def shell(title: str, subtitle: str, current: str, body: str, output: Path) -> s
         ("今日精读", PAPER_READING / "today.html"),
         ("论文归档", PAPER_READING / "index.html"),
         ("知识卡", KNOWLEDGE_CARDS / "index.html"),
+        ("复习", REVIEW_TODAY),
         ("知识图谱", KNOWLEDGE_GRAPH / "index.html"),
+        ("搜索", SEARCH_INDEX_HTML),
         ("学习日志", HTML_LOGS / "index.html"),
+        ("总状态", WORKFLOW_STATE_HTML),
+        ("行动队列", ACTION_QUEUE_HTML),
         ("工作流体检", WORKFLOW_HEALTH),
         ("Vault 首页", PAPER_VIEWS / "vault-home.html"),
     ]
@@ -410,31 +307,6 @@ def shell(title: str, subtitle: str, current: str, body: str, output: Path) -> s
 </body>
 </html>
 """
-
-
-def card_view_path(source: Path) -> Path:
-    rel = source.relative_to(ROOT)
-    prefix = "concept" if source.parent == CONCEPTS else "method" if source.parent == METHODS else "card"
-    ascii_stem = re.sub(r"[^a-z0-9]+", "-", source.stem.lower()).strip("-")
-    digest = hashlib.sha1(str(rel).encode("utf-8")).hexdigest()[:8]
-    slug = f"{ascii_stem}-{digest}" if ascii_stem else digest
-    return KNOWLEDGE_CARD_VIEWS / f"{prefix}-{slug}.html"
-
-
-def log_view_path(source: Path) -> Path:
-    rel = source.relative_to(ROOT)
-    ascii_stem = re.sub(r"[^a-z0-9]+", "-", source.stem.lower()).strip("-")
-    digest = hashlib.sha1(str(rel).encode("utf-8")).hexdigest()[:8]
-    slug = f"{ascii_stem}-{digest}" if ascii_stem else digest
-    return LOG_VIEWS / f"{slug}.html"
-
-
-def display_href(path: Path, output: Path) -> str:
-    if path.suffix == ".md" and path.parent in {CONCEPTS, METHODS}:
-        return href(card_view_path(path), output)
-    if path.suffix == ".md" and path.parent == LEARNING_SESSIONS:
-        return href(log_view_path(path), output)
-    return href(path, output)
 
 
 def item_list(paths: list[Path], output: Path, color: str = "") -> str:
@@ -492,7 +364,11 @@ def build_dashboard() -> None:
       <section class="panel wide">
         <h2>系统健康与备份</h2>
         <div class="list">
+          <div class="item"><a href="{href(SEARCH_INDEX_HTML, out)}">全局搜索入口</a><div class="meta">搜索论文、知识卡、项目文件、日志和图谱相关资产。</div></div>
+          <div class="item green"><a href="{href(WORKFLOW_STATE_HTML, out)}">工作流总状态</a><div class="meta">聚合项目、复习、搜索、图谱和审计状态。</div></div>
+          <div class="item amber"><a href="{href(ACTION_QUEUE_HTML, out)}">行动队列</a><div class="meta">按优先级排列今天最该处理的事项。</div></div>
           <div class="item"><a href="{href(WORKFLOW_HEALTH, out)}">工作流体检页</a><div class="meta">检查入口、链接、镜像页、图谱、归档、复习队列和备份。</div></div>
+          <div class="item rose"><a href="{href(REVIEW_TODAY, out)}">今日复习入口</a><div class="meta">{len(due)} 个知识点今天需要主动回忆。</div></div>
           <div class="item green">{f'<a href="{href(BACKUP_INDEX, out)}">备份索引</a>' if BACKUP_INDEX.exists() else '备份索引'}<div class="meta">{esc(latest_backup.name if latest_backup else '尚未生成备份；运行 make workflow-backup。')}</div></div>
           <div class="item amber"><a href="{href(WORKFLOW_HEALTH, out)}">最近审计概览</a><div class="meta">{esc(str(latest_audit.relative_to(ROOT)) if latest_audit else '运行 make workflow-audit 后生成。')}</div></div>
           <div class="item rose">最近文件归类清单<div class="meta">{esc(str(latest_sweep.relative_to(ROOT)) if latest_sweep else '运行 make codex-sweep 后生成。')}</div></div>
@@ -504,6 +380,7 @@ def build_dashboard() -> None:
         <ol class="steps">
           <li>早上从固定入口 <code>paper_reading/today.html</code> 进入，直接打开当天主读页。</li>
           <li>顺着页面进入新建/更新的概念卡、方法卡和来源论文笔记。</li>
+          <li>打开今日复习入口，先主动回忆到期知识卡。</li>
           <li>打开知识图谱入口，查看这篇论文带来的新关系。</li>
           <li>晚上查看学习日志入口，确认归档、复习问题和明日行动。</li>
         </ol>
@@ -537,13 +414,17 @@ def top_nodes_table(top_nodes: list[tuple[str, int]]) -> str:
     return f"<table><thead><tr><th>节点</th><th>连接数</th></tr></thead><tbody>{rows}</tbody></table>"
 
 
-def render_inline_markdown(text: str) -> str:
+def render_inline_markdown(text: str, source: Path | None = None, output: Path | None = None) -> str:
     value = esc(text)
     value = re.sub(r"`([^`]+)`", lambda m: f"<code>{m.group(1)}</code>", value)
     value = re.sub(r"\*\*([^*]+)\*\*", lambda m: f"<strong>{m.group(1)}</strong>", value)
     value = re.sub(r"\[\[([^\]|]+)\|([^\]]+)\]\]", lambda m: f'<span class="wikilink">{m.group(2)}</span>', value)
     value = re.sub(r"\[\[([^\]]+)\]\]", lambda m: f'<span class="wikilink">{m.group(1)}</span>', value)
-    value = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", lambda m: f'<a href="{m.group(2)}">{m.group(1)}</a>', value)
+    value = re.sub(
+        r"\[([^\]]+)\]\(([^)]+)\)",
+        lambda m: f'<a href="{display_link_target(m.group(2), source, output)}">{m.group(1)}</a>',
+        value,
+    )
     return value
 
 
@@ -554,7 +435,7 @@ def strip_frontmatter(text: str) -> tuple[str, str]:
     return match.group(1).strip(), text[match.end() :]
 
 
-def frontmatter_table(frontmatter: str) -> str:
+def frontmatter_table(frontmatter: str, source: Path | None = None, output: Path | None = None) -> str:
     if not frontmatter:
         return ""
     rows: list[str] = []
@@ -562,7 +443,7 @@ def frontmatter_table(frontmatter: str) -> str:
         if ":" not in line:
             continue
         key, value = line.split(":", 1)
-        rows.append(f"<tr><th>{esc(key.strip())}</th><td>{render_inline_markdown(value.strip())}</td></tr>")
+        rows.append(f"<tr><th>{esc(key.strip())}</th><td>{render_inline_markdown(value.strip(), source, output)}</td></tr>")
     if not rows:
         return ""
     return f'<section class="frontmatter"><h2>元数据</h2><table><tbody>{"".join(rows)}</tbody></table></section>'
@@ -584,23 +465,23 @@ def is_table_separator(line: str) -> bool:
     return all(re.fullmatch(r":?-{3,}:?", cell.strip()) for cell in cells)
 
 
-def table_to_html(lines: list[str]) -> str:
+def table_to_html(lines: list[str], source: Path | None = None, output: Path | None = None) -> str:
     if len(lines) < 2:
         return ""
     headers = split_table_row(lines[0])
     body_rows = [split_table_row(line) for line in lines[2:]]
-    head = "".join(f"<th>{render_inline_markdown(cell)}</th>" for cell in headers)
+    head = "".join(f"<th>{render_inline_markdown(cell, source, output)}</th>" for cell in headers)
     body = []
     for row in body_rows:
         padded = row + [""] * max(0, len(headers) - len(row))
-        body.append("<tr>" + "".join(f"<td>{render_inline_markdown(cell)}</td>" for cell in padded[: len(headers)]) + "</tr>")
+        body.append("<tr>" + "".join(f"<td>{render_inline_markdown(cell, source, output)}</td>" for cell in padded[: len(headers)]) + "</tr>")
     return f"<table><thead><tr>{head}</tr></thead><tbody>{''.join(body)}</tbody></table>"
 
 
-def render_markdown(text: str) -> str:
+def render_markdown(text: str, source: Path | None = None, output: Path | None = None) -> str:
     frontmatter, body = strip_frontmatter(text)
     lines = body.splitlines()
-    parts: list[str] = [frontmatter_table(frontmatter)] if frontmatter else []
+    parts: list[str] = [frontmatter_table(frontmatter, source, output)] if frontmatter else []
     paragraph: list[str] = []
     list_kind: str | None = None
     i = 0
@@ -608,7 +489,7 @@ def render_markdown(text: str) -> str:
     def flush_paragraph() -> None:
         nonlocal paragraph
         if paragraph:
-            parts.append(f"<p>{render_inline_markdown(' '.join(paragraph))}</p>")
+            parts.append(f"<p>{render_inline_markdown(' '.join(paragraph), source, output)}</p>")
             paragraph = []
 
     def flush_list() -> None:
@@ -650,7 +531,7 @@ def render_markdown(text: str) -> str:
             while i < len(lines) and "|" in lines[i] and lines[i].strip():
                 table_lines.append(lines[i])
                 i += 1
-            parts.append(table_to_html(table_lines))
+            parts.append(table_to_html(table_lines, source, output))
             continue
 
         heading = re.match(r"^(#{1,6})\s+(.+)$", stripped)
@@ -658,7 +539,7 @@ def render_markdown(text: str) -> str:
             flush_paragraph()
             flush_list()
             level = min(len(heading.group(1)), 6)
-            parts.append(f"<h{level}>{render_inline_markdown(heading.group(2))}</h{level}>")
+            parts.append(f"<h{level}>{render_inline_markdown(heading.group(2), source, output)}</h{level}>")
             i += 1
             continue
 
@@ -666,7 +547,7 @@ def render_markdown(text: str) -> str:
         if quote:
             flush_paragraph()
             flush_list()
-            parts.append(f"<blockquote>{render_inline_markdown(quote.group(1))}</blockquote>")
+            parts.append(f"<blockquote>{render_inline_markdown(quote.group(1), source, output)}</blockquote>")
             i += 1
             continue
 
@@ -677,7 +558,7 @@ def render_markdown(text: str) -> str:
                 flush_list()
                 parts.append("<ul>")
                 list_kind = "ul"
-            parts.append(f"<li>{render_inline_markdown(unordered.group(1))}</li>")
+            parts.append(f"<li>{render_inline_markdown(unordered.group(1), source, output)}</li>")
             i += 1
             continue
 
@@ -688,7 +569,7 @@ def render_markdown(text: str) -> str:
                 flush_list()
                 parts.append("<ol>")
                 list_kind = "ol"
-            parts.append(f"<li>{render_inline_markdown(ordered.group(1))}</li>")
+            parts.append(f"<li>{render_inline_markdown(ordered.group(1), source, output)}</li>")
             i += 1
             continue
 
@@ -700,86 +581,17 @@ def render_markdown(text: str) -> str:
     return "\n".join(part for part in parts if part)
 
 
-def relative_label(path: Path) -> str:
-    try:
-        return str(path.relative_to(ROOT))
-    except ValueError:
-        return str(path)
-
-
-def configured_paper_view(source: Path) -> tuple[str, str, str] | None:
-    resolved = source.resolve()
-    for slug, title, configured_source, subtitle in MARKDOWN_VIEW_SOURCES:
-        if configured_source.resolve() == resolved:
-            return slug, title, subtitle
-    return None
-
-
-def generic_markdown_slug(source: Path) -> str:
-    rel = relative_label(source)
-    ascii_stem = re.sub(r"[^a-z0-9]+", "-", source.stem.lower()).strip("-")
-    digest = hashlib.sha1(rel.encode("utf-8")).hexdigest()[:8]
-    return f"{ascii_stem}-{digest}" if ascii_stem else f"markdown-{digest}"
-
-
-def paper_markdown_view_path(source: Path) -> Path:
-    configured = configured_paper_view(source)
-    slug = configured[0] if configured else generic_markdown_slug(source)
-    return PAPER_VIEWS / f"{slug}.html"
-
-
-def paper_markdown_view_title(source: Path) -> str:
-    configured = configured_paper_view(source)
-    if configured:
-        return configured[1]
-    return md_title(source) if source.exists() else source.stem
-
-
-def paper_markdown_view_subtitle(source: Path) -> str:
-    configured = configured_paper_view(source)
-    if configured:
-        return configured[2]
-    return f"{relative_label(source)} 的浏览器友好镜像页。"
-
-
-def local_markdown_source(page: Path, link: str) -> Path | None:
-    base = link.split("#", 1)[0].split("?", 1)[0]
-    if not base or "://" in base or base.startswith(("mailto:", "obsidian:")) or not base.endswith(".md"):
-        return None
-    source = (page.parent / unquote(base)).resolve()
-    try:
-        source.relative_to(ROOT.resolve())
-    except ValueError:
-        return None
-    return source
-
-
-def markdown_sources_from_paper_pages() -> list[Path]:
-    sources: dict[Path, Path] = {source.resolve(): source for _, _, source, _ in MARKDOWN_VIEW_SOURCES}
-    href_pattern = re.compile(r'href=(["\'])([^"\']+?\.md(?:#[^"\']*)?)\1')
-    for page in paper_pages():
-        text = read_text(page, limit=1_000_000)
-        for match in href_pattern.finditer(text):
-            source = local_markdown_source(page, html.unescape(match.group(2)))
-            if source:
-                sources[source.resolve()] = source
-    return sorted(sources.values(), key=relative_label)
-
-
 def rewrite_paper_markdown_links() -> None:
-    sources = {source.resolve(): paper_markdown_view_path(source) for source in markdown_sources_from_paper_pages()}
     href_pattern = re.compile(r'href=(["\'])([^"\']+?\.md(?:#[^"\']*)?)\1')
     for page in paper_pages():
         text = page.read_text(encoding="utf-8", errors="ignore")
 
         def replace(match: re.Match[str]) -> str:
             quote_char = match.group(1)
-            source = local_markdown_source(page, html.unescape(match.group(2)))
+            source = local_markdown_source(page, match.group(2))
             if not source:
                 return match.group(0)
-            view = sources.get(source.resolve())
-            if not view:
-                return match.group(0)
+            view = html_view_for_local_path(source)
             return f"href={quote_char}{href(view, page)}{quote_char}"
 
         rewritten = href_pattern.sub(replace, text)
@@ -787,20 +599,17 @@ def rewrite_paper_markdown_links() -> None:
             page.write_text(rewritten, encoding="utf-8")
 
 
-def build_markdown_views() -> None:
-    PAPER_VIEWS.mkdir(parents=True, exist_ok=True)
-    for source in markdown_sources_from_paper_pages():
-        out = paper_markdown_view_path(source)
-        title = paper_markdown_view_title(source)
-        subtitle = paper_markdown_view_subtitle(source)
-        if source.exists():
-            article = render_markdown(source.read_text(encoding="utf-8", errors="ignore"))
-            body = f"""
+def write_paper_markdown_view(source: Path) -> Path:
+    out = paper_markdown_view_path(source)
+    title = paper_markdown_view_title(source)
+    subtitle = paper_markdown_view_subtitle(source)
+    if source.exists():
+        article = render_markdown(source.read_text(encoding="utf-8", errors="ignore"), source, out)
+        body = f"""
     <section class="grid">
       <section class="panel wide">
         <div class="toolbar">
           <a href="{href(PAPER_READING / 'today.html', out)}">返回今日精读</a>
-          <a href="{href(source, out)}">打开原始 Markdown</a>
           <a href="{href(KNOWLEDGE_GRAPH / 'index.html', out)}">查看知识图谱</a>
         </div>
         <div class="source-path">源文件：{esc(relative_label(source))}</div>
@@ -810,8 +619,8 @@ def build_markdown_views() -> None:
       </section>
     </section>
 """
-        else:
-            body = f"""
+    else:
+        body = f"""
     <section class="grid">
       <section class="panel wide">
         <div class="toolbar"><a href="{href(PAPER_READING / 'today.html', out)}">返回今日精读</a></div>
@@ -819,7 +628,19 @@ def build_markdown_views() -> None:
       </section>
     </section>
 """
-        out.write_text(shell(title, subtitle, "今日精读", body, out), encoding="utf-8")
+    out.write_text(shell(title, subtitle, "今日精读", body, out), encoding="utf-8")
+    return out
+
+
+def build_markdown_views() -> None:
+    PAPER_VIEWS.mkdir(parents=True, exist_ok=True)
+    sources = markdown_sources_from_paper_pages(paper_pages())
+    expected_outputs = {paper_markdown_view_path(source).resolve() for source in sources}
+    for stale in PAPER_VIEWS.glob("*.html"):
+        if stale.resolve() not in expected_outputs:
+            stale.unlink()
+    for source in sources:
+        write_paper_markdown_view(source)
 
 
 def build_knowledge_card_views() -> None:
@@ -827,14 +648,13 @@ def build_knowledge_card_views() -> None:
     for source in [*list_md(CONCEPTS), *list_md(METHODS)]:
         out = card_view_path(source)
         card_type = "概念卡" if source.parent == CONCEPTS else "方法卡"
-        article = render_markdown(source.read_text(encoding="utf-8", errors="ignore"))
+        article = render_markdown(source.read_text(encoding="utf-8", errors="ignore"), source, out)
         body = f"""
     <section class="grid">
       <section class="panel wide">
         <div class="toolbar">
           <a href="{href(KNOWLEDGE_CARDS / 'index.html', out)}">返回知识卡入口</a>
           <a href="{href(PAPER_READING / 'today.html', out)}">返回今日精读</a>
-          <a href="{href(source, out)}">打开原始 Markdown</a>
           <a href="{href(KNOWLEDGE_GRAPH / 'index.html', out)}">查看知识图谱</a>
         </div>
         <div class="source-path">源文件：{esc(source.relative_to(ROOT))}</div>
@@ -851,14 +671,13 @@ def build_log_views() -> None:
     LOG_VIEWS.mkdir(parents=True, exist_ok=True)
     for source in list_md(LEARNING_SESSIONS):
         out = log_view_path(source)
-        article = render_markdown(source.read_text(encoding="utf-8", errors="ignore"))
+        article = render_markdown(source.read_text(encoding="utf-8", errors="ignore"), source, out)
         body = f"""
     <section class="grid">
       <section class="panel wide">
         <div class="toolbar">
           <a href="{href(HTML_LOGS / 'index.html', out)}">返回学习日志入口</a>
           <a href="{href(PAPER_READING / 'today.html', out)}">返回今日精读</a>
-          <a href="{href(source, out)}">打开原始 Markdown</a>
           <a href="{href(KNOWLEDGE_GRAPH / 'index.html', out)}">查看知识图谱</a>
         </div>
         <div class="source-path">源文件：{esc(source.relative_to(ROOT))}</div>
@@ -869,6 +688,68 @@ def build_log_views() -> None:
     </section>
 """
         out.write_text(shell(f"学习日志：{md_title(source)}", "可直接在浏览器阅读的学习会话镜像页。", "学习日志", body, out), encoding="utf-8")
+
+
+def directory_item_link(path: Path, output: Path) -> str:
+    target = html_view_for_local_path(path)
+    title = md_title(path) if path.suffix == ".md" else html_title(path) if path.suffix == ".html" else path.name
+    return (
+        f'<div class="item"><a href="{href(target, output)}">{esc(title)}</a>'
+        f'<div class="meta">{esc(relative_label(path))}</div></div>'
+    )
+
+
+def collect_directory_sources(seeds: list[Path]) -> list[Path]:
+    directories: dict[Path, Path] = {}
+    queue = [source for source in seeds if source.exists() and source.is_dir()]
+    while queue:
+        current = queue.pop(0)
+        resolved = current.resolve()
+        if resolved in directories:
+            continue
+        directories[resolved] = current
+        for child in sorted(current.iterdir(), key=lambda path: path.name.lower()):
+            if child.name.startswith(".") or not child.is_dir():
+                continue
+            queue.append(child)
+    return sorted(directories.values(), key=relative_label)
+
+
+def build_directory_views() -> None:
+    DIR_VIEWS.mkdir(parents=True, exist_ok=True)
+    seeds = directory_sources_from_markdown(markdown_sources_from_paper_pages(paper_pages()))
+    sources = collect_directory_sources(seeds)
+    expected_outputs = {directory_view_path(source).resolve() for source in sources}
+    for stale in DIR_VIEWS.glob("*.html"):
+        if stale.resolve() not in expected_outputs:
+            stale.unlink()
+    for source in sources:
+        out = directory_view_path(source)
+        children: list[str] = []
+        if source.exists():
+            for child in sorted(source.iterdir(), key=lambda path: (path.is_file(), path.name.lower())):
+                if child.name.startswith("."):
+                    continue
+                if child.is_dir() or child.suffix in {".md", ".html"}:
+                    if child.suffix == ".md":
+                        write_paper_markdown_view(child)
+                    children.append(directory_item_link(child, out))
+        items = "\n".join(children) if children else '<div class="empty">这个文件夹暂时没有可浏览的 Markdown/HTML 条目。</div>'
+        body = f"""
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="{href(PAPER_READING / 'today.html', out)}">返回今日精读</a>
+          <a href="{href(KNOWLEDGE_GRAPH / 'index.html', out)}">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件夹：{esc(relative_label(source))}</div>
+        <div class="list">
+{items}
+        </div>
+      </section>
+    </section>
+"""
+        out.write_text(shell(f"文件夹入口：{source.name}", "本地文件夹的浏览器友好索引页。", "今日精读", body, out), encoding="utf-8")
 
 
 def graph_kind(raw_type: str) -> str:
@@ -1100,11 +981,264 @@ def build_cards_index() -> None:
       </section>
       <section class="panel wide">
         <h2>今日复习队列</h2>
+        <p><a href="{href(REVIEW_TODAY, out)}">打开独立复习页</a></p>
         {due_table}
       </section>
     </section>
 """
     out.write_text(shell("知识卡入口", "概念、方法、复习问题和与论文的连接。", "知识卡", body, out), encoding="utf-8")
+
+
+def review_items_table(items: list[dict[str, object]], output: Path, limit: int = 20) -> str:
+    if not items:
+        return '<div class="empty">暂无条目。</div>'
+    rows: list[str] = []
+    for item in items[:limit]:
+        display_path = str(item.get("display_path", ""))
+        title = esc(item.get("title", ""))
+        title_html = f'<a href="{href(ROOT / display_path, output)}">{title}</a>' if display_path else title
+        delta = item.get("days_delta")
+        if isinstance(delta, int):
+            delta_text = "今天" if delta == 0 else f"{abs(delta)} 天前" if delta < 0 else f"{delta} 天后"
+        else:
+            delta_text = ""
+        rows.append(
+            "<tr>"
+            f"<td>{title_html}</td>"
+            f"<td>{esc(item.get('type', ''))}</td>"
+            f"<td>{esc(item.get('stage', ''))}</td>"
+            f"<td>{esc(item.get('next_review', ''))}</td>"
+            f"<td>{esc(delta_text)}</td>"
+            f"<td>{esc(item.get('prompt', ''))}</td>"
+            "</tr>"
+        )
+    return (
+        "<table><thead><tr><th>知识卡</th><th>类型</th><th>阶段</th><th>复习日</th><th>状态</th><th>主动回忆问题</th></tr></thead>"
+        f"<tbody>{''.join(rows)}</tbody></table>"
+    )
+
+
+def build_review_today() -> None:
+    write_review_state()
+    out = REVIEW_TODAY
+    state = build_review_state_payload()
+    summary = state["summary"]
+    focus_items = state["focus_items"]
+    due_items = state["due_items"]
+    upcoming_items = state["upcoming_7_items"]
+    focus_label = "到期知识卡" if due_items else "未来 7 天知识卡"
+    body = f"""
+    <section class="grid">
+      <div class="metric"><b>{summary['due_count']}</b><span>今日到期</span></div>
+      <div class="metric"><b>{summary['overdue_count']}</b><span>已经逾期</span></div>
+      <div class="metric"><b>{summary['upcoming_7_count']}</b><span>7 天内复习</span></div>
+      <div class="metric"><b>{summary['total_items']}</b><span>队列总数</span></div>
+
+      <section class="panel wide">
+        <h2>{focus_label}</h2>
+        {review_items_table(focus_items, out, 12)}
+      </section>
+
+      <section class="panel">
+        <h2>复习节奏</h2>
+        <ol class="steps">
+          <li>先遮住知识卡正文，只回答表格里的主动回忆问题。</li>
+          <li>再打开知识卡，核对一句话解释、误区和研究用法。</li>
+          <li>最后把仍然模糊的点转成下一次论文阅读或写作问题。</li>
+        </ol>
+      </section>
+      <section class="panel">
+        <h2>源数据</h2>
+        <div class="list">
+          <div class="item"><a href="{href(REVIEW_QUEUE, out)}">review_queue.csv</a><div class="meta">长期复习队列源表。</div></div>
+          <div class="item"><a href="{href(REVIEW_STATE, out)}">review_state.json</a><div class="meta">今日复习状态，供仪表盘和项目状态读取。</div></div>
+        </div>
+      </section>
+
+      <section class="panel wide">
+        <h2>未来 7 天</h2>
+        {review_items_table(upcoming_items, out, 20)}
+      </section>
+    </section>
+"""
+    out.write_text(shell("今日复习入口", "主动回忆、知识卡核对和下一轮阅读问题。", "复习", body, out), encoding="utf-8")
+
+
+def build_search_page() -> None:
+    SEARCH_INDEX_HTML.parent.mkdir(parents=True, exist_ok=True)
+    rows = artifact_manifest_rows()
+    write_search_index(rows)
+    state = build_search_index(rows)
+    out = SEARCH_INDEX_HTML
+    data_json = json.dumps(state, ensure_ascii=False).replace("</", "<\\/")
+    layer_options = sorted({entry["layer"] for entry in state["entries"] if entry.get("layer")})
+    type_options = sorted({entry["display_type"] for entry in state["entries"] if entry.get("display_type")})
+    layer_buttons = "".join(f'<button type="button" data-layer="{esc(layer)}">{esc(layer)}</button>' for layer in layer_options)
+    type_options_html = "".join(f'<option value="{esc(kind)}">{esc(kind)}</option>' for kind in type_options)
+    body = f"""
+    <style>
+      .search-box {{
+        display: grid;
+        gap: 12px;
+      }}
+      .search-box input, .search-box select {{
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 8px 10px;
+        font: inherit;
+        background: #fff;
+      }}
+      .filter-row {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }}
+      .filter-row button {{
+        min-height: 34px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        padding: 6px 12px;
+        font: inherit;
+        cursor: pointer;
+      }}
+      .filter-row button.active {{
+        border-color: var(--blue);
+        color: var(--blue);
+        background: #eef4ff;
+      }}
+      .result-row {{
+        border-left: 3px solid var(--blue);
+        background: var(--soft);
+        border-radius: 0 8px 8px 0;
+        padding: 12px 14px;
+      }}
+      .result-title {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: baseline;
+      }}
+      .badge {{
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        background: #eef3f8;
+        border: 1px solid #d8e2ec;
+        padding: 1px 7px;
+        color: var(--muted);
+        font-size: 12px;
+      }}
+    </style>
+    <section class="grid">
+      <div class="metric"><b>{state['entry_count']}</b><span>可搜索入口</span></div>
+      <div class="metric"><b>{len(layer_options)}</b><span>架构层</span></div>
+      <div class="metric"><b>{len(type_options)}</b><span>展示类型</span></div>
+      <div class="metric"><b id="visibleCount">0</b><span>当前结果</span></div>
+
+      <section class="panel wide">
+        <h2>全局搜索</h2>
+        <div class="search-box">
+          <input id="searchInput" type="search" placeholder="搜索论文题名、概念、方法、项目、日志、证据边界或文件路径">
+          <div class="filter-row">
+            <button type="button" data-layer="all" class="active">全部层</button>
+            {layer_buttons}
+            <select id="typeFilter" aria-label="展示类型">
+              <option value="all">全部类型</option>
+              {type_options_html}
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel wide">
+        <h2>搜索结果</h2>
+        <div id="searchResults" class="list"></div>
+      </section>
+
+      <section class="panel">
+        <h2>使用方式</h2>
+        <ol class="steps">
+          <li>用中文关键词搜主题、论文、方法或项目文件。</li>
+          <li>用架构层筛选源材料、知识资产或展示入口。</li>
+          <li>点击结果进入 HTML 展示页，再回到图谱或复习页继续连接。</li>
+        </ol>
+      </section>
+      <section class="panel">
+        <h2>源数据</h2>
+        <div class="list">
+          <div class="item"><a href="{href(SEARCH_INDEX_JSON, out)}">search_index.json</a><div class="meta">由 artifact manifest 生成的搜索索引。</div></div>
+          <div class="item"><a href="{href(ARTIFACT_MANIFEST, out)}">artifact_manifest.csv</a><div class="meta">搜索结果的展示路径来源。</div></div>
+        </div>
+      </section>
+    </section>
+    <script>
+      const searchState = __SEARCH_JSON__;
+      const rootPrefix = "../";
+      const input = document.getElementById("searchInput");
+      const results = document.getElementById("searchResults");
+      const visibleCount = document.getElementById("visibleCount");
+      const typeFilter = document.getElementById("typeFilter");
+      const layerButtons = Array.from(document.querySelectorAll("[data-layer]"));
+      let activeLayer = "all";
+
+      function escapeHtml(value) {{
+        return String(value).replace(/[&<>"']/g, (char) => ({{
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        }}[char]));
+      }}
+
+      function hrefFor(displayPath) {{
+        return rootPrefix + String(displayPath).split("/").map(encodeURIComponent).join("/");
+      }}
+
+      function matches(entry, tokens) {{
+        if (activeLayer !== "all" && entry.layer !== activeLayer) return false;
+        if (typeFilter.value !== "all" && entry.display_type !== typeFilter.value) return false;
+        return tokens.every((token) => entry.search_text.includes(token));
+      }}
+
+      function render() {{
+        const tokens = input.value.trim().toLowerCase().split(/\\s+/).filter(Boolean);
+        const visible = searchState.entries.filter((entry) => matches(entry, tokens)).slice(0, 80);
+        visibleCount.textContent = visible.length;
+        if (!visible.length) {{
+          results.innerHTML = '<div class="empty">没有匹配结果。换一个论文题名、概念、方法或项目关键词。</div>';
+          return;
+        }}
+        results.innerHTML = visible.map((entry) => `
+          <div class="result-row">
+            <div class="result-title">
+              <a href="${{hrefFor(entry.display_path)}}">${{escapeHtml(entry.title)}}</a>
+              <span class="badge">${{escapeHtml(entry.layer || "Unknown")}}</span>
+              <span class="badge">${{escapeHtml(entry.display_type)}}</span>
+            </div>
+            <div class="meta">${{escapeHtml(entry.summary || entry.source_path)}}</div>
+            <div class="meta">源：${{escapeHtml(entry.source_path)}} · 展示：${{escapeHtml(entry.display_path)}}</div>
+          </div>
+        `).join("");
+      }}
+
+      layerButtons.forEach((button) => {{
+        button.addEventListener("click", () => {{
+          activeLayer = button.dataset.layer || "all";
+          layerButtons.forEach((item) => item.classList.toggle("active", item === button));
+          render();
+        }});
+      }});
+      input.addEventListener("input", render);
+      typeFilter.addEventListener("change", render);
+      render();
+    </script>
+"""
+    body = body.replace("__SEARCH_JSON__", data_json)
+    out.write_text(shell("全局搜索入口", "搜索论文、知识卡、项目状态、日志和图谱展示资产。", "搜索", body, out), encoding="utf-8")
 
 
 def build_graph_index() -> None:
@@ -1292,6 +1426,7 @@ def build_graph_index() -> None:
           <div class="item"><a href="{nodes_href}">obsidian_nodes.csv</a><div class="meta">节点源数据，供核对或导出。</div></div>
           <div class="item"><a href="{edges_href}">obsidian_edges.csv</a><div class="meta">关系边源数据，供核对或导出。</div></div>
           <div class="item"><a href="{index_href}">knowledge_index.csv</a><div class="meta">知识卡索引。</div></div>
+          <div class="item"><a href="{manifest_href}">artifact_manifest.csv</a><div class="meta">源资产到 HTML 展示页的映射清单。</div></div>
         </div>
       </section>
       <section class="panel">
@@ -1484,6 +1619,7 @@ def build_graph_index() -> None:
         .replace("{nodes_href}", href(GRAPH_DIR / "obsidian_nodes.csv", out))
         .replace("{edges_href}", href(GRAPH_DIR / "obsidian_edges.csv", out))
         .replace("{index_href}", href(GRAPH_DIR / "knowledge_index.csv", out))
+        .replace("{manifest_href}", href(ARTIFACT_MANIFEST, out))
         .replace("__GRAPH_JSON__", graph_json)
     )
     out.write_text(shell("知识图谱入口", "查看知识节点、关系边和高连接主题。", "知识图谱", body, out), encoding="utf-8")
@@ -1492,28 +1628,41 @@ def build_graph_index() -> None:
 def main() -> int:
     PAPER_READING.mkdir(parents=True, exist_ok=True)
     PAPER_VIEWS.mkdir(parents=True, exist_ok=True)
+    DIR_VIEWS.mkdir(parents=True, exist_ok=True)
     HTML_LOGS.mkdir(parents=True, exist_ok=True)
     LOG_VIEWS.mkdir(parents=True, exist_ok=True)
     KNOWLEDGE_CARDS.mkdir(parents=True, exist_ok=True)
     KNOWLEDGE_CARD_VIEWS.mkdir(parents=True, exist_ok=True)
     KNOWLEDGE_GRAPH.mkdir(parents=True, exist_ok=True)
+    SEARCH_INDEX_HTML.parent.mkdir(parents=True, exist_ok=True)
     build_markdown_views()
     rewrite_paper_markdown_links()
     build_knowledge_card_views()
     build_log_views()
+    build_directory_views()
     build_paper_today()
     build_paper_index()
     build_logs_index()
+    build_review_today()
     build_cards_index()
     build_graph_index()
     build_dashboard()
+    build_artifact_manifest()
+    build_search_page()
+    build_artifact_manifest()
     print(f"Wrote {ROOT / 'study_dashboard.html'}")
     print(f"Wrote {PAPER_READING / 'today.html'}")
     print(f"Wrote {PAPER_READING / 'index.html'}")
     print(f"Wrote {PAPER_VIEWS}")
+    print(f"Wrote {DIR_VIEWS}")
     print(f"Wrote {KNOWLEDGE_CARDS / 'index.html'}")
+    print(f"Wrote {REVIEW_TODAY}")
+    print(f"Wrote {REVIEW_STATE}")
     print(f"Wrote {KNOWLEDGE_CARD_VIEWS}")
     print(f"Wrote {KNOWLEDGE_GRAPH / 'index.html'}")
+    print(f"Wrote {SEARCH_INDEX_HTML}")
+    print(f"Wrote {SEARCH_INDEX_JSON}")
+    print(f"Wrote {ARTIFACT_MANIFEST}")
     print(f"Wrote {HTML_LOGS / 'index.html'}")
     print(f"Wrote {LOG_VIEWS}")
     return 0

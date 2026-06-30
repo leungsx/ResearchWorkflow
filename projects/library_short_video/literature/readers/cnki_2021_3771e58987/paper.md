@@ -4,7 +4,7 @@ Generated: 2026-06-21T18:56:31
 Citekey: `cnki_2021_3771e58987`
 Source file: `library/pdfs/library_short_video/cnki_2021_3771e58987.pdf`
 Source type: `pdf`
-Current read_status: `metadata-only`
+Current read_status: `skimmed`
 
 ## Use Boundary
 

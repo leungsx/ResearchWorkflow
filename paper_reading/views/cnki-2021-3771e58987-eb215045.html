@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>论文带读上下文包 - 公共图书馆和高校图书馆短视频营销比较研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>论文带读上下文包 - 公共图书馆和高校图书馆短视频营销比较研究</h1>
+      <p class="sub">projects/library_short_video/literature/context_packs/cnki_2021_3771e58987.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/literature/context_packs/cnki_2021_3771e58987.md</div>
+        <article class="md-view">
+<h1>论文带读上下文包 - 公共图书馆和高校图书馆短视频营销比较研究</h1>
+<p>Generated: 2026-06-21T19:00:24 Project: <code>library_short_video</code> Citekey: <code>cnki_2021_3771e58987</code> Read status: <code>skimmed</code></p>
+<h2>用途</h2>
+<p>这是共读时优先加载的小上下文包，用来节省 token。它只保留带读所需的压缩信息、证据 block 索引和少量原文片段。</p>
+<ul>
+<li>先用本文件带读论文核心内容。</li>
+<li>需要核验证据、补页码或处理细节时，再打开完整 Reader。</li>
+<li>本文件不替代原文，也不把论文自动标记为 <code>human-read</code> 或 <code>verified</code>。</li>
+</ul>
+<h2>元数据</h2>
+<ul>
+<li>题名: 公共图书馆和高校图书馆短视频营销比较研究</li>
+<li>作者: 龚雪竹</li>
+<li>年份: 2021</li>
+<li>来源: 大学图书馆学报</li>
+<li>数据库: CNKI</li>
+<li>Reader: <code>/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/cnki_2021_3771e58987/paper.md</code></li>
+<li>原文: <code>library/pdfs/library_short_video/cnki_2021_3771e58987.pdf</code></li>
+</ul>
+<h2>Reader Reading Notes</h2>
+<ul>
+<li>Summary after source-grounded skim: 这篇文章用 AARRR 漏斗模型比较公共图书馆和高校图书馆在抖音、快手、B站三类平台上的短视频运营。它的核心贡献不是证明某个变量能提升互动，而是把“平台选择-账号开设-内容主题-拉新/促活/留存/收益/传播策略”串成一个可迁移的比较框架。对本项目而言，它可以帮助我们从单一抖音运营研究，转向公共馆/高校馆、短视频/长视频平台、流量/服务价值之间的系统比较。</li>
+<li>Innovation / value after source-grounded skim:</li>
+<li>场景比较：同时纳入公共图书馆与高校图书馆，而不是只分析公共馆或只分析头部抖音账号。</li>
+<li>平台比较：同时考察抖音、快手、B站，指出公共馆更集中于抖音，高校馆对 B站 的偏好更明显，平台用户结构会影响图书馆内容定位。</li>
+<li>理论转译：把 AARRR 的用户获取、用户激活、用户留存、获得收入、推荐传播转译为图书馆短视频营销框架；其中“收益”被解释为文化影响力、服务推广效果和职能部门支持，而非商业收入。</li>
+<li>实践启示：提出平台差异化表达、系列活动、线上线下结合、情感价值、账号定位、版权合规等策略，为后续构建运营成熟度或服务价值指标提供变量来源。</li>
+<li>Method details after source-grounded skim:</li>
+<li>方法：网络调查法 + 内容分析法 + AARRR 框架解释。</li>
+<li>平台：抖音、快手、B站。</li>
+<li>样本获取：以“图书馆”为关键词检索平台账号，并参考公共图书馆评估定级名单和高校名单，剔除机构图书馆账号、个人账号及业务无关账号。</li>
+<li>样本规模：保留公共图书馆机构认证用户 161 个、高校图书馆机构认证用户 18 个；数据统计节点包括 2020-09-03 和 2021-01-02。</li>
+<li>关键分析：账号开设数量、视频总量、粉丝量、账号增量；对抖音平台粉丝最高的 10 家公共图书馆统计 90 天新增作品、粉丝、点赞、评论、分享并计算相关系数；随后按平台和 AARRR 阶段归纳内容和策略。</li>
+<li>Usable evidence block IDs:</li>
+<li><code>B0001</code>: 摘要、研究目的和短视频营销的服务推广背景。</li>
+<li><code>B0003</code>-<code>B0005</code>: 研究空白、平台选择、研究方法与 AARRR 模型。</li>
+<li><code>B0007</code>: 样本筛选规则、公共馆/高校馆样本规模、三平台账号分布和视频/粉丝概况。</li>
+<li><code>B0009</code>-<code>B0011</code>: 账号增量、90 天互动指标相关关系、爆款视频节点。</li>
+<li><code>B0012</code>-<code>B0015</code>: 抖音、快手、B站的内容差异，以及拉新、促活、留存、收益策略。</li>
+<li><code>B0016</code>: 版权、情感价值、平台定位和结论。</li>
+<li>Limitations and uncertainty:</li>
+<li>证据类型偏描述与策略归纳，不能证明某一运营策略对传播效果或服务转化有因果影响。</li>
+<li>样本为 2020-2021 年平台生态，算法、用户结构、馆方运营能力到 2026 年可能已经变化。</li>
+<li>高校图书馆样本只有 18 个，公共馆与高校馆比较存在样本不均衡。</li>
+<li>账号检索以平台关键词和机构认证为主，可能遗漏非标准命名、未认证但实际运营的账号。</li>
+<li>“收益”被有价值地转译为文化影响力和服务推广，但仍缺少到馆、资源访问、活动参与、阅读推广成效等服务指标。</li>
+</ul>
+<h2>研讨卡核心理解</h2>
+<p>未找到。</p>
+<h2>研讨问题</h2>
+<ul>
+<li>它把“图书馆短视频成功”理解为账号运营成功，还是服务延伸成功？</li>
+<li>AARRR 模型的五个阶段中，哪一段最适合转化为你的研究变量？</li>
+<li>公共馆和高校馆的差异，是由用户群决定、平台生态决定，还是馆方任务不同决定？</li>
+<li>如果我们继续做 2024-2026 数据，应该如何把“平台互动”升级为“服务价值”？</li>
+<li>这篇适合作为你的论文背景、变量框架，还是方法模板？我的判断：更适合作为<strong>框架和变量来源</strong>，不是强因果证据。</li>
+</ul>
+<h2>创新-局限-机会摘录</h2>
+<h3><code>cnki_2021_3771e58987</code> - 公共图书馆和高校图书馆短视频营销比较研究</h3>
+<ul>
+<li>Source: 大学图书馆学报, 2021</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2021_3771e58987/paper.md</code></li>
+<li>证据边界: source-grounded guided skim；暂无页码；文章是比较性现状分析和策略归纳，不是因果检验。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>对象/场景拓展</td><td>同时比较公共图书馆与高校图书馆短视频营销，弥补单一馆型研究的外推不足</td><td><code>B0001</code>, <code>B0007</code></td><td>可用于后续构建馆型差异变量，避免把公共馆经验直接套到高校馆</td><td>O-010</td></tr><tr><td>平台比较</td><td>同时纳入抖音、快手、B站，指出不同平台用户结构和内容形态差异</td><td><code>B0003</code>, <code>B0004</code>, <code>B0012</code>, <code>B0013</code></td><td>可将研究从单一抖音账号扩展到多平台服务矩阵</td><td>O-011</td></tr><tr><td>理论/框架转译</td><td>将 AARRR 漏斗模型转译为图书馆短视频营销的拉新、促活、留存、收益、传播框架</td><td><code>B0005</code>, <code>B0006</code>, <code>B0013</code>-<code>B0015</code></td><td>可作为图书馆短视频服务路径或运营成熟度的框架来源</td><td>O-012</td></tr><tr><td>服务价值转译</td><td>将非营利图书馆的“收益”解释为品牌活动、精准服务、文化影响力和服务推广</td><td><code>B0014</code>, <code>B0015</code></td><td>有助于突破商业营销语言，转向公共文化服务价值测量</td><td>O-001</td></tr><tr><td>实践策略转译</td><td>提出情感价值、平台定位、系列活动、线上线下结合、版权合规等策略</td><td><code>B0015</code>, <code>B0016</code></td><td>可转化为内容质量、平台适配、组织治理和合规变量</td><td>O-007</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>因果识别问题</td><td>以网络调查、内容分析和策略归纳为主，不能证明某项策略导致互动或服务效果提升</td><td><code>B0005</code>, <code>B0013</code>-<code>B0016</code></td><td>将 AARRR 阶段变量编码后做纵向模型、准实验或分层回归</td><td>高</td></tr><tr><td>样本不均衡</td><td>公共图书馆认证账号 161 个，高校图书馆认证账号 18 个，馆型比较可能受样本规模影响</td><td><code>B0007</code></td><td>后续按馆型扩大样本，并分层比较公共馆、高校馆和专业馆</td><td>中高</td></tr><tr><td>指标替代问题</td><td>主要观察账号、作品、粉丝、点赞、评论、分享，尚未测量阅读推广或服务使用结果</td><td><code>B0007</code>, <code>B0009</code>-<code>B0011</code>, <code>B0014</code></td><td>接入活动报名、资源访问、到馆、借阅、用户反馈等服务价值指标</td><td>高</td></tr><tr><td>平台时代漂移</td><td>数据统计在 2020-2021 年，平台算法、用户结构和馆方运营能力可能已变化</td><td><code>B0007</code>, <code>B0009</code></td><td>用 2024-2026 多平台数据复测平台定位和 AARRR 阶段差异</td><td>中高</td></tr><tr><td>账号发现偏差</td><td>依赖平台关键词和机构认证账号，可能遗漏非标准命名或未认证但实际运营账号</td><td><code>B0007</code></td><td>建立多关键词、机构官网反查、平台认证和人工核验结合的账号名录</td><td>中</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-020: 图书馆短视频 AARRR 各阶段指标，能否预测服务触达和阅读推广效果，而不只是平台互动？</li>
+<li>RQ-021: 公共图书馆与高校图书馆在抖音、快手、B站上的平台适配策略是否存在稳定差异？</li>
+<li>RQ-022: 图书馆短视频的“收益”能否被操作化为文化影响力、资源使用、活动参与和用户关系维护的复合服务价值指标？</li>
+</ul>
+<h2>后续维护模板</h2>
+<h2>核心证据 block 快照</h2>
+<h3>B0001</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_3771e58987:B0001</code></li>
+<li>Snapshot: 2021 年 第 4 期 公共图书馆和高校图书馆短视频营销比较研究 ＊ □龚雪竹 摘要 采用ＡＡＲＲＲ（Ａｃｑｕｉｓｉｔｉｏｎ，Ａｃｔｉｖａｔｉｏｎ，Ｒｅｔｅｎｔｉｏｎ，Ｒｅｖｅｎｕｅ，Ｒｅｆｅｒｒａｌ）漏斗模型，借 助用户获取、用户激活、用户留存、获得收入、推荐传播五个指标，对公共图书馆、高校图书馆在抖 音、快手、哔哩哔哩三个平台的短视频运营体系和营销策略进行分析，探讨新型媒体平台给图书 馆服务延伸带来的启示。 关键词 阅读推广 服务推广 营销策略 运营策略 短视频 分类号 Ｇ２５２ ＤＯＩ １０． １６６...</li>
+</ul>
+<h3>B0003</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_3771e58987:B0003</code></li>
+<li>Snapshot: 2021 年 第 4 期 的应用。如琼斯（Ｊｏｎｅｓ Ｍ Ｊ）和哈维（Ｈａｒｖｅｙ Ｍ）以 问卷的形式调查Ｔｗｉｔｔｅｒ上图书馆账号活动现状， 调查发现，图书馆应该把社交媒体嵌入到活动中进 行营销，而不是期待学生自己发现账号，同时要重视 与大学中其他部门的合作 ［８］。朱（Ｊｏｏ Ｓ）等人以公 共图书馆的Ｆａｃｅｂｏｏｋ账号所发布的内容为研究对 象，调查社交媒体内容与用户参与度之间的关系 ［９］。 阿拉瓦迪（ＡｌＡｗａｄｈｉ Ｓ）等人分析在高校图书馆资 源和服务营销中社交媒体使用的案例，并探讨在高 校图书馆的...</li>
+</ul>
+<h3>B0005</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_3771e58987:B0005</code></li>
+<li>Snapshot: 2021 年 第 4 期 究，根据图书馆短视频传播现状分析图书馆阅读推 广及服务推广营销。研究过程共有三个阶段，首先 选定数据平台，对数据进行统计和分析；其次运用 ＡＡＲＲＲ（Ａｃｑｕｉｓｉｔｉｏｎ，Ａｃｔｉｖａｔｉｏｎ，Ｒｅｔｅｎｔｉｏｎ，Ｒｅｖｅ－ ｎｕｅ，Ｒｅｆｅｒｒａｌ）漏斗模型对公共图书馆和高校图书馆 发布的短视频进行梳理及内容分析，对图书馆短视 频运营现状及成效进行比较研究；最后分析营销策 略，探讨新媒体平台给图书馆推广带来的启示。 ２． ２ ＡＡＲＲＲ漏斗模型 ＡＡＲＲＲ漏斗模型是Ｄａｖｅ Ｍｃ...</li>
+</ul>
+<h3>B0007</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_3771e58987:B0007</code></li>
+<li>Snapshot: 2021 年 第 4 期 ３ 图书馆短视频营销现状 ３． １ 样本数据分析 本文采用网络调查法，在抖音、快手、Ｂ站三个 ＡＰＰ平台上以“图书馆”为关键词进行检索，并对检 索结果进行筛选，参考《第六次全国县级以上公共图 书馆评估定级上等级图书馆名单》 ［４２］及教育部网站 《２０１９年全国高等学校名单》 ［４３］删除机构图书馆账 号、个人图书馆账号及内容与图书馆业务无关的账 号，只保留公共图书馆机构认证用户１６１个、高校图 书馆机构认证用户１８个作为研究对象，进行比较分 析，最终选取的研究对象如下图所示（数据统...</li>
+</ul>
+<h3>B0009</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_3771e58987:B0009</code></li>
+<li>Snapshot: 2021 年 第 4 期 ３． １． ２ 图书馆账号开设的成效分析 ３． １． ２． １ 账号增量 ２０２０年９月３日—２０２１年１月２日期间，各平 台图书馆认证账号增量情况如表２所示。括号中的 平台表示２０２０年９月３日之前该机构已在其他平 台开设账号（数据统计截至２０２１年１月２日）。 表２ 视频账号增量情况 公共图书馆 高校图书馆 抖音平台 账号增量 承德市图书馆、宁夏回 族自治区图书馆、读享 福州、北京市顺义区图 书馆 南开大学图书馆（Ｂ站）、郑 州商学院图书馆、湖北经济 学院图书馆、惠州学院图书 馆...</li>
+</ul>
+<h3>B0011</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_3771e58987:B0011</code></li>
+<li>Snapshot: 2021 年 第 4 期 分享数激增的背后有爆款视频的存在。发布于 ２０２０年１２月３０日的《机器人吵架了，脾气都不好》 获得１９７． ３万点赞、１２． １万留言、１６． ２万分享，粉丝 量开始大幅上涨，在２０２１年１月１日达到近９０天 内最高峰，单日增量１３１４０６，此外新增分享数、新增 点赞数都在两天内达到９０天内最高值。江西省图 书馆抖音账号在此后四天内更新了１０个机器人“旺 宝”和“图图”的视频，获得持续关注。可见爆款视频 成为一个关键节点，不仅带动新增粉丝数量的增加， 也带动新增分享、新增点赞、新增...</li>
+</ul>
+<h3>B0012</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_3771e58987:B0012</code></li>
+<li>Snapshot: 在快手的认证账号较三个平台而言 最少，发布的视频和抖音、Ｂ站有一定的相似性，时 长较短，内容涉及迎新、阅读推广，为抖音、快手、Ｂ 站多渠道共同推送。 ３． ２． １． ３ Ｂ站 一些公共图书馆同时在抖音和Ｂ站开设了账 号，但运营模式却有所不同。因为Ｂ站视频时长不 受１５分钟的限制，所以在Ｂ站发布的视频较长，单 集时长在２—１２０分钟不等，和抖音运营方式区别 较大。 长视频资源有讲座完整版频、各类宣传片等，如 上海图书馆“上海书屋”讲座视频，首都图书馆“首图 讲坛”，广西图书馆《品味传奇———历代名人与广西 美...</li>
+</ul>
+<h3>B0015</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_3771e58987:B0015</code></li>
+<li>Snapshot: 2021 年 第 4 期 动、展览、直播带来更多关注。（３）扩大图书馆文化 影响力。通过短视频平台聚集的大量用户，将图书 馆的工作内容、文化知识科普传达给用户，达到图书 馆文化宣传的效果。同时在短视频平台上聚集着大 量省外、省内馆外的用户，他们在线上可以通过图书 馆发布的短视频、直播等，了解更多书籍、文化、名师 等信息。 ４ 图书馆视频服务拓展带来的启示 ４． １ 短视频营销是拓展图书馆服务的必然选择 在信息时代，图书馆拥有大量的高质量信息资 源，同时用户获取信息的能力越来越强，挖掘用户的 需要并向他们提供精...</li>
+</ul>
+<h2>带读顺序</h2>
+<ol>
+<li>先用一句话判断它在本项目里的角色。</li>
+<li>解释研究问题、对象、方法和核心结论。</li>
+<li>只打开与核心结论有关的 block，避免全文漫游。</li>
+<li>归纳创新点、关键局限和可转化研究问题。</li>
+<li>和已读文献对比，更新综述或创新-局限台账。</li>
+</ol>
+<h2>下次对 Codex 说</h2>
+<p><code>基于 cnki_2021_3771e58987 的上下文包带我复盘这篇论文，并指出它对我的研究有什么用。</code></p>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

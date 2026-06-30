@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>论文研讨卡 - 公共图书馆“抖音”短视频服务现状及发展策略研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>论文研讨卡 - 公共图书馆“抖音”短视频服务现状及发展策略研究</h1>
+      <p class="sub">vault/15_CNKI_Frontier/paper_briefs/cnki_2021_7556aafa99.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：vault/15_CNKI_Frontier/paper_briefs/cnki_2021_7556aafa99.md</div>
+        <article class="md-view">
+<h1>论文研讨卡 - 公共图书馆“抖音”短视频服务现状及发展策略研究</h1>
+<p>Generated: 2026-06-20T10:09:53 Updated: 2026-06-20T22:59:06 Citekey: <code>cnki_2021_7556aafa99</code> Source level: source-grounded reader / companion-read</p>
+<h2>元数据</h2>
+<ul>
+<li>题名：公共图书馆“抖音”短视频服务现状及发展策略研究</li>
+<li>作者：孙雨;陈凤娟</li>
+<li>年份：2021</li>
+<li>来源：图书馆工作与研究</li>
+<li>数据库：CNKI</li>
+<li>CSSCI/核心状态：未标注</li>
+<li>DOI：未记录</li>
+<li>阅读状态：skimmed</li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2021_7556aafa99/paper.md</code></li>
+</ul>
+<h2>核心摘要</h2>
+<p>这篇文章是公共图书馆抖音服务的较系统调查。作者选取国家图书馆、省级公共图书馆、省会城市及副省级城市公共图书馆共 63 家，以官方认证账号为对象，统计账号开通、获赞、粉丝、作品、动态和首发时间，并用内容分析法梳理原创作品类型。文章指出公共图书馆抖音服务存在开通率不高、运营管理不规范、内容定位模糊、专业人才缺乏、线上线下互动不足等问题，并提出服务规划、特色原创、PUGC、融媒体传播、跨区域跨行业合作等策略。</p>
+<h2>主要观点</h2>
+<ul>
+<li>63 家调研对象中有 38 家开通官方抖音账号，占比约 60.3%；省级及以上馆开通比例高于省会/副省级城市馆。</li>
+<li>账号关注度与点赞情况总体不理想，头部公共图书馆账号与文博大号差距明显。</li>
+<li>原创内容主要集中在图书馆宣传、图书推荐、阅读推广、通知公告、工作日常、讲座慕课等。</li>
+<li>问题的核心不是单一内容技巧，而是短视频服务尚未进入稳定规划、专业团队和线上线下转化机制。</li>
+</ul>
+<h2>创新点 / 价值</h2>
+<ul>
+<li>以公共图书馆服务体系为对象，比一般“图书馆账号现状”更具体。</li>
+<li>同时记录账号层面指标和原创内容类型，能连接“服务供给结构”和“平台表现”。</li>
+<li>提出 PUGC 和融媒体矩阵，对后续从“账号运营”走向“服务体系设计”有参考价值。</li>
+</ul>
+<h2>局限性</h2>
+<ul>
+<li>以馆名搜索和官方认证账号为准，可能遗漏非标准命名或未认证但实际运营的账号。</li>
+<li>是 2020-05-30 截止的横截面调查，无法反映后续演化。</li>
+<li>没有建立内容类型与传播效果之间的统计关系，策略建议主要来自描述性分析和案例归纳。</li>
+</ul>
+<h2>可用证据</h2>
+<ul>
+<li><code>B0001</code>: 研究目的和摘要。</li>
+<li><code>B0003</code>-<code>B0004</code>: 63 家公共图书馆样本、搜索方式和数据字段。</li>
+<li><code>B0005</code>-<code>B0008</code>: 开通情况、粉丝/获赞指标和头部账号表现。</li>
+<li><code>B0010</code>-<code>B0011</code>: 原创内容分类。</li>
+<li><code>B0013</code>-<code>B0014</code>: 开通率、运营管理、内容定位、人才、互动问题。</li>
+<li><code>B0015</code>-<code>B0019</code>: 发展规划、特色原创、PUGC、融媒体和跨区域合作策略。</li>
+</ul>
+<h2>与本项目的关系</h2>
+<p>这篇是今天三篇伴读中最适合补“公共图书馆服务场景”的文献。它提醒我们：如果以后写文章，不能只谈视频内容技巧，还要把账号规划、资源优势、团队建设、融媒体联动和线上线下转化纳入图书馆服务逻辑。</p>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

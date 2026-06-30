@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>论文带读上下文包 - 抖音阅读推广短视频传播效果影响因素研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>论文带读上下文包 - 抖音阅读推广短视频传播效果影响因素研究</h1>
+      <p class="sub">projects/library_short_video/literature/context_packs/cnki_2021_dfab60236e.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/literature/context_packs/cnki_2021_dfab60236e.md</div>
+        <article class="md-view">
+<h1>论文带读上下文包 - 抖音阅读推广短视频传播效果影响因素研究</h1>
+<p>Generated: 2026-06-20T23:38:00 Project: <code>library_short_video</code> Citekey: <code>cnki_2021_dfab60236e</code> Read status: <code>skimmed</code></p>
+<h2>用途</h2>
+<p>这是共读时优先加载的小上下文包，用来节省 token。它只保留带读所需的压缩信息、证据 block 索引和少量原文片段。</p>
+<ul>
+<li>先用本文件带读论文核心内容。</li>
+<li>需要核验证据、补页码或处理细节时，再打开完整 Reader。</li>
+<li>本文件不替代原文，也不把论文自动标记为 <code>human-read</code> 或 <code>verified</code>。</li>
+</ul>
+<h2>元数据</h2>
+<ul>
+<li>题名: 抖音阅读推广短视频传播效果影响因素研究</li>
+<li>作者: 杨达森;李诗轩;丛颖男</li>
+<li>年份: 2021</li>
+<li>来源: 图书馆学研究</li>
+<li>数据库: CNKI</li>
+<li>Reader: <code>/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/cnki_2021_dfab60236e/paper.md</code></li>
+<li>原文: <code>/Users/leung/ResearchWorkflow/library/pdfs/library_short_video/converted/cnki_2021_dfab60236e.pdf</code></li>
+</ul>
+<h2>Reader Reading Notes</h2>
+<ul>
+<li>Summary after human reading: This paper studies how reading-promotion short videos from high-follower socialized Douyin accounts spread, not library-operated accounts directly. It uses the Elaboration Likelihood Model (ELM), 30 socialized accounts with more than 1 million followers, and 10,294 short videos from 2018-05 to 2021-05 to test which content, title, source, cover, and duration factors are associated with transmission effect.</li>
+<li>Innovation / value after human reading: The paper&#x27;s main value for this project is not that it proves what libraries should do directly, but that it offers a relatively strong benchmark outside the library system. It pushes the discussion from descriptive strategy writing toward measurable variables, text/video feature extraction, and regression-based comparison. The paper also claims an innovation in building a general technical-term dictionary for Chinese readability measurement and in operationalizing title intertextuality with cosine similarity.</li>
+<li>Method details after human reading: Data were collected by searching Douyin with keywords such as <code>读书</code>, <code>阅读</code>, and <code>书单</code>, manually screening socialized accounts with more than 1 million followers, and scraping video-level data with <code>requests_html</code>. MP4 audio was converted to text via Alibaba Cloud speech interaction, and video was converted to single-frame images with OpenCV. The dependent variable is communication effect <code>CE = 0.3L + 0.3C + 0.4S</code>. Independent variables include content/title readability, sentiment, pronouns, hot words, title length, title intertextuality, punctuation, tags, cover face, cover subtitles, enterprise verification, and duration. The paper uses SPSS multiple linear regression; reported VIF values are all below 10.</li>
+<li>Usable evidence block IDs: <code>B0001</code> for abstr</li>
+<p>...</p>
+</ul>
+<h2>研讨卡核心理解</h2>
+<ul>
+<li>一句话概括：这篇文章不是直接研究图书馆抖音号，而是用 30 个高粉社会化阅读推广抖音号、10 294 条短视频数据和 ELM 框架，做了一篇更像“外部标杆”的传播效果影响因素实证研究。</li>
+<li>研究对象：粉丝量超过 100 万的社会化抖音号，而非图书馆官方账号；时间范围为 2018-05 至 2021-05，共 10 294 条可用数据。</li>
+<li>方法线索：<code>requests_html</code> 抓取 + 阿里云语音转文本 + OpenCV 抽帧 + 文本挖掘/图像识别 + SPSS 多元线性回归。因变量为 <code>CE = 0.3L + 0.3C + 0.4S</code>。</li>
+<li>主要发现：短视频内容可读性、内容中网络热词、标题可读性、标题互文性、15-60 秒时长对传播效果有促进作用；标题过长、标题加标签、企业认证与传播效果负相关。</li>
+<li>研究价值：它把阅读推广短视频研究从“经验性运营建议”推进到了“变量操作化 + 大样本回归”的层面，对我们后续做图书馆短视频研究很有借鉴价值。</li>
+<li>关键边界：这篇论文的样本来自社会化阅读推广账号，所以更适合作为图书馆账号研究的参照系，而不是直接替代图书馆场景结论。</li>
+</ul>
+<h2>研讨问题</h2>
+<ul>
+<li>它解决的首先是方法与传播机制问题，还是图书馆阅读推广实践问题？</li>
+<li>既然样本来自社会化账号，我们在借鉴时应保留哪些变量，舍弃哪些不适合图书馆场景的假设？</li>
+<li>它把传播效果主要操作化为点赞、评论、分享。这个指标体系能否支撑“阅读推广效果”而不仅是“平台互动效果”？</li>
+<li>与 <code>cnki_2021_d35f8e895a</code> 相比，这篇更强的是方法、数据规模，还是结论外推力？</li>
+</ul>
+<h2>创新-局限-机会摘录</h2>
+<h3><code>cnki_2021_dfab60236e</code> - 抖音阅读推广短视频传播效果影响因素研究</h3>
+<ul>
+<li>Source: 图书馆学研究, 2021</li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2021_dfab60236e/paper.md</code></li>
+<li>证据边界: 样本为社会化阅读推广账号，不是图书馆官方账号；对图书馆实践的推论属于间接迁移。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>理论/模型引入</td><td>使用精细加工可能性模型（ELM）区分中心线索和边缘线索，将短视频内容视为中心线索，将标题、封面、信源、时长视为边缘线索</td><td><code>B0003</code>, <code>B0004</code>, <code>B0005</code>-<code>B0007</code></td><td>可用于解释用户是被内容质量说服，还是被标题/封面/时长等外部线索吸引</td><td>O-002</td></tr><tr><td>对象/场景拓展</td><td>研究粉丝量超过 100 万的社会化阅读推广抖音号，为图书馆账号提供外部参照</td><td><code>B0003</code>, <code>B0004</code>, <code>B0008</code></td><td>可作为图书馆向外部成熟阅读账号学习的比较基准</td><td>O-003</td></tr><tr><td>数据/样本建设</td><td>采集 30 个社会化账号、10294 个阅读推广短视频，时间跨度为 2018-05 至 2021-05</td><td><code>B0008</code></td><td>样本量明显大于多数图书馆短视频研究，可支持方法借鉴和比较设计</td><td>O-003</td></tr><tr><td>方法/技术路径</td><td>结合爬虫、语音转文字、OpenCV 图像帧提取、文本特征计算、图像识别和 SPSS 多元线性回归</td><td><code>B0008</code>-<code>B0014</code></td><td>给后续自动化、多模态内容分析提供技术路线</td><td>O-005</td></tr><tr><td>变量/测量设计</td><td>用中文可读性、情感、代词、网络热词、标题长度、标题互文性、封面角色/字幕、企业认证、时长等变量测量传播线索</td><td><code>B0004</code>-<code>B0007</code>, <code>B0010</code>, <code>B0016</code></td><td>可拓展本项目的变量库，尤其是可读性和标题互文性</td><td>O-005</td></tr><tr><td>方法/技术路径</td><td>用余弦相似度测量标题互文性，并报告其对传播效果的正向作用</td><td><code>B0016</code></td><td>可用于系列化图书推荐、馆藏故事栏目、活动连续内容研究</td><td>O-005</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>图书馆转化不足</td><td>样本为企业或个人运营的社会化阅读推广账号，不是图书馆官方账号；因此结论对图书馆的适用性需要再检验</td><td><code>B0002</code>, <code>B0003</code>, <code>B0004</code>, <code>B0008</code></td><td>用图书馆官方账号复测 ELM 变量，比较社会化账号和图书馆账号的机制差异</td><td>高</td></tr><tr><td>指标替代问题</td><td>传播效果只纳入点赞、评论、分享，作者明确承认可获取数据限制导致未考虑播放数和下载数</td><td><code>B0018</code></td><td>增加播放、完播、收藏、主页访问、关注转化、借阅/活动转化等指标</td><td>高</td></tr><tr><td>变量遗漏问题</td><td>作者承认删减了内容主题、剪辑方式、背景音乐、主持人风格等可能影响传播效果的因素</td><td><code>B0018</code></td><td>与 Hook Model 论文的变量互补，构建更完整的多模态变量体系</td><td>高</td></tr><tr><td>证据解释边界</td><td>文章策略中提到优化封面，但总传播效果层面的核心显著因素主要是内容/标题可读性、网络热词、标题互文性和 15-60 秒时长；封面作用更多体现在部分子指标</td><td><code>B0016</code>, <code>B0017</code></td><td>后续讨论要区分“总传播效果显著”和“点赞/评论/分享子指标显著”</td><td>中高</td></tr><tr><td>样本外推问题</td><td>高粉丝社会化账号可能具有团队化、商业化、品牌化运营特征，与图书馆公益服务账号不同</td><td><code>B0003</code>, <code>B0016</code></td><td>对账号主体、粉丝基数、认证类型、商业化程度进行分层控制</td><td>中高</td></tr><tr><td>平台时代漂移</td><td>数据截止 2021 年 5 月，不能自动代表当前抖音、视频号、小红书、B站等平台的阅读推广生态</td><td><code>B0008</code></td><td>用近年多平台样本复测 ELM 变量</td><td>中</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-005: 社会化阅读推广账号中有效的内容可读性、网络热词、标题互文性和 15-60 秒时长，在图书馆官方账号中是否同样有效？</li>
+<li>RQ-006: 图书馆阅读推广短视频的中心线索（内容质量、可读性、主题）与边缘线索（标题、封面、时长、信源）哪一类更能解释服务价值指标？</li>
+<li>RQ-007: 标题互文性是否能提升图书馆系列短视频的连续观看、收藏和服务转化，而不只是点赞评论分享？</li>
+<li>RQ-008: 当加入内容主题、剪辑方式、背景音乐和主持人风格后，ELM 模型的解释力是否显著提升？</li>
+</ul>
+<h2>核心证据 block 快照</h2>
+<h3>B0001</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_dfab60236e:B0001</code></li>
+<li>Snapshot: 抖音阅读推广短视频传播效果影响因素研究 * 杨达森 李诗轩 丛颖男 【摘 要】探究社会化抖音号阅读推广短视频传播效果的影响因素，有利于图书馆向其学习与借鉴，对提高图书 馆抖音号的运营效果具有重要意义。根据精细加工可能性模型，构建抖音阅读推广短视频传播效果影响因素模型， 并基于30 个社会化抖音号的10 294 个阅读推广短视频数据，应用SPSS 多元线性回归对影响因素模型进行实证分 析。研究结果表明，短视频内容的可读性和网络热词，短视频标题的可读性、长度和互文性，短视频时长对抖音 阅读推广短视频传播效果有显著...</li>
+</ul>
+<h3>B0003</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_dfab60236e:B0003</code></li>
+<li>Snapshot: 书馆抖音号有23 个，其中43. 5%的抖音号近30 天发布的作品数小于等于1，活跃度较低，73. 9%的抖音号粉丝总 数小于1 万，点赞、评论、分享等互动指标数据普遍不理想 ［3］。而反观社会化抖音号，如“樊登读书”“都靓读 书”等，其粉丝量早已突破百万。选取社会化抖音号进行实证分析，探究阅读推广短视频传播效果的影响因素， 有利于图书馆等信息机构向其学习、借鉴运营经验，为图书馆抖音号发布高质量的阅读推广短视频提供实践指导， 对提高图书馆抖音号的运营效果具有重要意义。 1 研究综述 目前，针对在抖音发布阅读推...</li>
+</ul>
+<h3>B0004</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_dfab60236e:B0004</code></li>
+<li>Snapshot: 释用户处理视频信息的过程和机制。如谢泽杭利用ELM 和结构方程 模型探究了政务短视频用户采纳意愿的影响因素，发现有用性、趣味性、易理解性、易用性、信源可信度和社会 影响对政务短视频用户采纳意愿有正向影响 ［8］。陈强以共青团中央政务Bilibili 账号为例，基于ELM，围绕中心线 索和边缘线索构建理论模型，发现中心线索中的内容主题对传播效果有影响，边缘线索中的视频类别、视频剪辑 率、屏幕形式、字幕使用和组织形式对传播效果有影响 ［10］。这些研究主要集中在政务视频领域，缺乏对阅读推广 短视频的研究。 针对现...</li>
+</ul>
+<h3>B0008</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_dfab60236e:B0008</code></li>
+<li>Snapshot: 示的每个抖音号，人工审查其粉丝数量与发布的短视频，剔除粉丝数量少于100 万和没有发布过阅读推广短视频 的抖音号，最终筛选出30 个社会化抖音号，结果如表1 所示。之后，本研究利用requests_ html 包，获取表1 中 抖音号发布的所有短视频数据，包括点赞数、评论数、转发数、企业认证情况、短视频标题文本、短视频时长、 短视频MP4 格式文件等。 3. 1. 2 数据转换 短视频MP4 格式文件同时包含音频信息和视频信息，维度较高。为了便于研究和量化，本研究将短视频 MP4 格式文件进行降维处理，利用阿...</li>
+</ul>
+<h3>B0010</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_dfab60236e:B0010</code></li>
+<li>Snapshot: 银 ［42］、荆溪昱 ［43］、郭望皓 ［44］、李萍 ［45］、秦琴 ［46］等学者提出的计算公式。其中，荆溪昱提出的计算公式效度较 高，但其对常用字的测量来源于台湾常用繁体字表，对简体中文适用性较差。李萍和秦琴分别将会计专业术语和 医学专业术语作为衡量常用字的指标引入荆溪昱的计算公式中，取得了良好的效果。本研究借鉴以上学者的研究 成果，使用如下可读性计算公式来测量短视频内容和标题的可读性: R = 17. 5255+0. 0024×w+0. 04415× w s －18. 3344× ( 1－p w )...</li>
+</ul>
+<h3>B0013</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_dfab60236e:B0013</code></li>
+<li>Snapshot: 量做多元线性回归分析以验证假设，结果如表4 所示。所有自变量的方差 膨胀因素( Variance Inflation Vactor，VIF) 值均小于10，不存在多重共线性问题。 表4 抖音阅读推广短视频传播效果影响因素回归结果( N= 10 294) 自变量 传播效果 点赞数 评论数 分享数 Beta VIF Beta VIF Beta VIF Beta VIF 短视频内容的可读性 －0. 072＊＊＊ 1. 213 －0. 072＊＊＊ 1. 213 －0. 087＊＊＊ 1. 213 －0. 034＊＊...</li>
+</ul>
+<h3>B0014</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_dfab60236e:B0014</code></li>
+<li>Snapshot: 自变量 传播效果 点赞数 评论数 分享数 Beta VIF Beta VIF Beta VIF Beta VIF 短视频标题的可读性 －0. 041＊＊＊ 1. 142 －0. 042＊＊＊ 1. 142 －0. 034＊＊ 1. 142 －0. 019 1. 142 短视频标题的积极倾向 0. 039 1. 354 0. 041 1. 354 0. 001 1. 354 0. 014 1. 354 短视频标题中有第一人称代词 0. 035 1. 057 0. 039 1. 057 0. 070* 1. 05...</li>
+</ul>
+<h3>B0015</h3>
+<ul>
+<li>Source ID: <code>cnki_2021_dfab60236e:B0015</code></li>
+<li>Snapshot: 001 从中心路径来看，可读性的值越小，代表文本的可读性越高，因此，短视频内容的可读性对抖音阅读推广短 视频传播效果有显著正向影响。与不使用网络热词相比，在短视频内容中使用网络热词对传播效果有促进作用。 此外，短视频内容的情感倾向和是否在短视频内容中使用第一、二人称代词对抖音阅读推广短视频传播效果的影 响不显著。 从边缘路径来看，短视频标题的可读性对抖音阅读推广短视频传播效果有显著正向影响。短视频标题的长度 显著负向影响传播效果。与不具有互文性的短视频标题相比，具有互文性的标题对传播效果有促进作用。与无标 签...</li>
+</ul>
+<h2>带读顺序</h2>
+<ol>
+<li>先用一句话判断它在本项目里的角色。</li>
+<li>解释研究问题、对象、方法和核心结论。</li>
+<li>只打开与核心结论有关的 block，避免全文漫游。</li>
+<li>归纳创新点、关键局限和可转化研究问题。</li>
+<li>和已读文献对比，更新综述或创新-局限台账。</li>
+</ol>
+<h2>下次对 Codex 说</h2>
+<p><code>基于 cnki_2021_dfab60236e 的上下文包带我复盘这篇论文，并指出它对我的研究有什么用。</code></p>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

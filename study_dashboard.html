@@ -195,8 +195,12 @@
 <a href="paper_reading/today.html">今日精读</a>
 <a href="paper_reading/index.html">论文归档</a>
 <a href="knowledge_cards/index.html">知识卡</a>
+<a href="knowledge_cards/review_today.html">复习</a>
 <a href="knowledge_graph/index.html">知识图谱</a>
+<a href="search/index.html">搜索</a>
 <a href="logs/index.html">学习日志</a>
+<a href="workflow_state.html">总状态</a>
+<a href="action_queue.html">行动队列</a>
 <a href="workflow_health.html">工作流体检</a>
 <a href="paper_reading/views/vault-home.html">Vault 首页</a></nav>
     </div>
@@ -204,24 +208,28 @@
   <main class="wrap">
 
     <section class="grid">
-      <div class="metric"><b>1</b><span>论文精读 HTML</span></div>
-      <div class="metric"><b>8</b><span>概念/方法知识卡</span></div>
-      <div class="metric"><b>100/98</b><span>图谱节点/关系边</span></div>
+      <div class="metric"><b>2</b><span>论文精读 HTML</span></div>
+      <div class="metric"><b>13</b><span>概念/方法知识卡</span></div>
+      <div class="metric"><b>113/193</b><span>图谱节点/关系边</span></div>
       <div class="metric"><b>8</b><span>今日应复习</span></div>
 
       
       <section class="panel wide">
         <h2>固定入口</h2>
         <p>以后每天只点同一个入口即可：<a href="paper_reading/today.html">今日精读入口</a>。</p>
-        <p>当前会打开：<strong>2026-06-29 精读：基于SICAS模型的公共图书馆短视频营销策略研究</strong></p>
+        <p>当前会打开：<strong>2026-06-30 精读：公共图书馆和高校图书馆短视频营销比较研究</strong></p>
       </section>
 
 
       <section class="panel wide">
         <h2>系统健康与备份</h2>
         <div class="list">
+          <div class="item"><a href="search/index.html">全局搜索入口</a><div class="meta">搜索论文、知识卡、项目文件、日志和图谱相关资产。</div></div>
+          <div class="item green"><a href="workflow_state.html">工作流总状态</a><div class="meta">聚合项目、复习、搜索、图谱和审计状态。</div></div>
+          <div class="item amber"><a href="action_queue.html">行动队列</a><div class="meta">按优先级排列今天最该处理的事项。</div></div>
           <div class="item"><a href="workflow_health.html">工作流体检页</a><div class="meta">检查入口、链接、镜像页、图谱、归档、复习队列和备份。</div></div>
-          <div class="item green"><a href="backups/index.html">备份索引</a><div class="meta">researchworkflow-critical-20260630-085025.zip</div></div>
+          <div class="item rose"><a href="knowledge_cards/review_today.html">今日复习入口</a><div class="meta">8 个知识点今天需要主动回忆。</div></div>
+          <div class="item green"><a href="backups/index.html">备份索引</a><div class="meta">researchworkflow-critical-20260630-200857.zip</div></div>
           <div class="item amber"><a href="workflow_health.html">最近审计概览</a><div class="meta">vault/07_Codex_Logs/workflow_audits/2026-06-30-workflow-audit.md</div></div>
           <div class="item rose">最近文件归类清单<div class="meta">vault/07_Codex_Logs/file_sweeps/2026-06-30-file-sweep.md</div></div>
         </div>
@@ -232,6 +240,7 @@
         <ol class="steps">
           <li>早上从固定入口 <code>paper_reading/today.html</code> 进入，直接打开当天主读页。</li>
           <li>顺着页面进入新建/更新的概念卡、方法卡和来源论文笔记。</li>
+          <li>打开今日复习入口，先主动回忆到期知识卡。</li>
           <li>打开知识图谱入口，查看这篇论文带来的新关系。</li>
           <li>晚上查看学习日志入口，确认归档、复习问题和明日行动。</li>
         </ol>
@@ -239,39 +248,45 @@
 
       <section class="panel">
         <h2>最近论文精读</h2>
-        <div class="list"><div class="item green"><a href="paper_reading/2026-06-29-sicas-public-library-short-video.html">2026-06-29 精读：基于SICAS模型的公共图书馆短视频营销策略研究</a><div class="meta">paper_reading/2026-06-29-sicas-public-library-short-video.html</div></div></div>
+        <div class="list"><div class="item green"><a href="paper_reading/2026-06-30-aarrr-library-short-video.html">2026-06-30 精读：公共图书馆和高校图书馆短视频营销比较研究</a><div class="meta">paper_reading/2026-06-30-aarrr-library-short-video.html</div></div>
+<div class="item green"><a href="paper_reading/2026-06-29-sicas-public-library-short-video.html">2026-06-29 精读：基于SICAS模型的公共图书馆短视频营销策略研究</a><div class="meta">paper_reading/2026-06-29-sicas-public-library-short-video.html</div></div></div>
       </section>
       <section class="panel">
         <h2>最近学习日志</h2>
-        <div class="list"><div class="item amber"><a href="logs/2026-06-29.html">2026-06-29 学习日志</a><div class="meta">logs/2026-06-29.html</div></div></div>
+        <div class="list"><div class="item amber"><a href="logs/2026-06-30.html">2026-06-30 学习日志</a><div class="meta">logs/2026-06-30.html</div></div>
+<div class="item amber"><a href="logs/2026-06-29.html">2026-06-29 学习日志</a><div class="meta">logs/2026-06-29.html</div></div></div>
       </section>
       <section class="panel">
         <h2>最近知识卡</h2>
-        <div class="list"><div class="item rose"><a href="knowledge_cards/views/concept-824dc24b.html">用户感知价值</a><div class="meta">vault/02_Concepts/用户感知价值.md</div></div>
+        <div class="list"><div class="item rose"><a href="knowledge_cards/views/concept-1c7d1e51.html">馆型差异</a><div class="meta">vault/02_Concepts/馆型差异.md</div></div>
+<div class="item rose"><a href="knowledge_cards/views/concept-53b320d5.html">平台适配</a><div class="meta">vault/02_Concepts/平台适配.md</div></div>
+<div class="item rose"><a href="knowledge_cards/views/concept-aarrr-bf76ae6c.html">AARRR 漏斗模型</a><div class="meta">vault/02_Concepts/AARRR 漏斗模型.md</div></div>
+<div class="item rose"><a href="knowledge_cards/views/concept-824dc24b.html">用户感知价值</a><div class="meta">vault/02_Concepts/用户感知价值.md</div></div>
 <div class="item rose"><a href="knowledge_cards/views/concept-7f8a8bb3.html">沉浸式内容</a><div class="meta">vault/02_Concepts/沉浸式内容.md</div></div>
 <div class="item rose"><a href="knowledge_cards/views/concept-841db0d5.html">软营销</a><div class="meta">vault/02_Concepts/软营销.md</div></div>
 <div class="item rose"><a href="knowledge_cards/views/concept-sicas-e14df8c7.html">SICAS模型</a><div class="meta">vault/02_Concepts/SICAS模型.md</div></div>
 <div class="item rose"><a href="knowledge_cards/views/concept-hook-model-878dcbb7.html">Hook Model 上瘾模型</a><div class="meta">vault/02_Concepts/Hook Model 上瘾模型.md</div></div>
 <div class="item rose"><a href="knowledge_cards/views/concept-e068f0fc.html">方向链</a><div class="meta">vault/02_Concepts/方向链.md</div></div>
-<div class="item rose"><a href="knowledge_cards/views/method-86d250ef.html">描述性账号调查</a><div class="meta">vault/03_Methods/描述性账号调查.md</div></div>
-<div class="item rose"><a href="knowledge_cards/views/method-dci-48f2a84e.html">DCI传播力指数</a><div class="meta">vault/03_Methods/DCI传播力指数.md</div></div></div>
+<div class="item rose"><a href="knowledge_cards/views/method-4dc0db40.html">内容分析法</a><div class="meta">vault/03_Methods/内容分析法.md</div></div>
+<div class="item rose"><a href="knowledge_cards/views/method-afcfecce.html">网络调查法</a><div class="meta">vault/03_Methods/网络调查法.md</div></div>
+<div class="item rose"><a href="knowledge_cards/views/method-86d250ef.html">描述性账号调查</a><div class="meta">vault/03_Methods/描述性账号调查.md</div></div></div>
       </section>
       <section class="panel">
         <h2>图谱高连接节点</h2>
-        <table><thead><tr><th>节点</th><th>连接数</th></tr></thead><tbody><tr><td>cnki_2023_34348faa1e</td><td>26</td></tr>
+        <table><thead><tr><th>节点</th><th>连接数</th></tr></thead><tbody><tr><td>cnki_2021_3771e58987</td><td>28</td></tr>
+<tr><td>cnki_2023_34348faa1e</td><td>27</td></tr>
+<tr><td>AARRR 漏斗模型</td><td>23</td></tr>
+<tr><td>SICAS模型</td><td>23</td></tr>
 <tr><td>2026-06-29-evening-close</td><td>21</td></tr>
-<tr><td>SICAS模型</td><td>17</td></tr>
-<tr><td>用户感知价值</td><td>14</td></tr>
-<tr><td>2026-06-29-sicas-paper</td><td>13</td></tr>
-<tr><td>描述性账号调查</td><td>12</td></tr>
-<tr><td>软营销</td><td>12</td></tr>
-<tr><td>Hook Model 上瘾模型</td><td>11</td></tr>
-<tr><td>沉浸式内容</td><td>10</td></tr>
-<tr><td>DCI传播力指数</td><td>8</td></tr></tbody></table>
+<tr><td>2026-06-30-evening-close</td><td>21</td></tr>
+<tr><td>描述性账号调查</td><td>18</td></tr>
+<tr><td>library_short_video</td><td>16</td></tr>
+<tr><td>平台适配</td><td>16</td></tr>
+<tr><td>用户感知价值</td><td>15</td></tr></tbody></table>
       </section>
     </section>
 
   </main>
-  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 08:50.</footer>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
 </body>
 </html>

@@ -40,19 +40,23 @@
   <header>
     <div class="wrap">
       <h1>ResearchWorkflow 体检</h1>
-      <p class="sub">Generated 2026-06-30 08:50 · PASS=8 WARN=2 FAIL=0</p>
+      <p class="sub">Generated 2026-06-30 22:11 · PASS=12 WARN=3 FAIL=0</p>
       <nav class="nav">
         <a href="study_dashboard.html">总览</a>
         <a href="paper_reading/today.html">今日精读</a>
+        <a href="knowledge_cards/review_today.html">今日复习</a>
         <a href="knowledge_graph/index.html">知识图谱</a>
+        <a href="search/index.html">全局搜索</a>
+        <a href="workflow_state.html">总状态</a>
+        <a href="action_queue.html">行动队列</a>
         <a href="logs/index.html">学习日志</a>
       </nav>
     </div>
   </header>
   <main class="wrap">
     <section class="metrics">
-      <div class="metric"><b>8</b><span>通过</span></div>
-      <div class="metric"><b>2</b><span>提醒</span></div>
+      <div class="metric"><b>12</b><span>通过</span></div>
+      <div class="metric"><b>3</b><span>提醒</span></div>
       <div class="metric"><b>0</b><span>失败</span></div>
     </section>
     <section class="checks">
@@ -60,7 +64,7 @@
           <div class="status">PASS</div>
           <h2>必需入口和今日归档齐全</h2>
           <p class="area">入口/归档</p>
-          <p>10 个关键文件存在。</p>
+          <p>12 个关键文件存在。</p>
         </article>
         
 
@@ -68,7 +72,7 @@
           <div class="status">PASS</div>
           <h2>用户入口没有裸 Markdown 直链</h2>
           <p class="area">易用性</p>
-          <p>主入口、今日页、知识卡、图谱和日志入口都指向可浏览页面。</p>
+          <p>主入口、今日页、知识卡、复习、图谱、搜索和日志入口都指向可浏览页面。</p>
         </article>
         
 
@@ -76,7 +80,7 @@
           <div class="status">PASS</div>
           <h2>HTML 本地链接均可解析</h2>
           <p class="area">链接健康</p>
-          <p>检查 29 个 HTML 页面。</p>
+          <p>检查 96 个 HTML 页面。</p>
         </article>
         
 
@@ -84,7 +88,7 @@
           <div class="status">PASS</div>
           <h2>HTML 镜像与源文件同步</h2>
           <p class="area">镜像页</p>
-          <p>检查 20 个镜像页。</p>
+          <p>检查 70 个镜像页。</p>
         </article>
         
 
@@ -92,7 +96,39 @@
           <div class="status">PASS</div>
           <h2>图谱入口是可视化关系图</h2>
           <p class="area">知识图谱</p>
-          <p>nodes=100, unique_edges=98</p>
+          <p>nodes=113, unique_edges=193</p>
+        </article>
+        
+
+        <article class="check pass">
+          <div class="status">PASS</div>
+          <h2>artifact manifest 覆盖核心展示资产</h2>
+          <p class="area">资产清单</p>
+          <p>104 条；display_types=23</p>
+        </article>
+        
+
+        <article class="check pass">
+          <div class="status">PASS</div>
+          <h2>搜索索引和搜索页可用</h2>
+          <p class="area">搜索索引</p>
+          <p>104 条；layers=4</p>
+        </article>
+        
+
+        <article class="check pass">
+          <div class="status">PASS</div>
+          <h2>复习状态快照与队列一致</h2>
+          <p class="area">复习状态</p>
+          <p>total=13, due=8, focus=8</p>
+        </article>
+        
+
+        <article class="check pass">
+          <div class="status">PASS</div>
+          <h2>项目状态文件可供自动化读取</h2>
+          <p class="area">项目状态</p>
+          <p>2 个项目。</p>
         </article>
         
 
@@ -108,15 +144,15 @@
           <div class="status">PASS</div>
           <h2>最近备份可用</h2>
           <p class="area">备份</p>
-          <p>backups/researchworkflow-critical-20260630-085025.zip，约 0.0 小时前。</p>
+          <p>backups/researchworkflow-critical-20260630-200857.zip，约 2.0 小时前。</p>
         </article>
         
 
-        <article class="check pass">
-          <div class="status">PASS</div>
-          <h2>Git 本地和远程快照状态正常</h2>
+        <article class="check warn">
+          <div class="status">WARN</div>
+          <h2>存在尚未提交的 Git 改动</h2>
           <p class="area">Git/异地备份</p>
-          <p>upstream=origin/main；last commit: 668f901 2026-06-30 08:50:30 +0800 workflow snapshot 2026-06-30</p>
+          <p>127 个路径待快照： M Makefile； M codex/state/context_index.md； M docs/INTEGRATED_RESEARCH_LEARNING_WORKFLOW.md； M docs/PAPER_READING_OUTPUT_STANDARD.md； M knowledge_cards/index.html； M knowledge_cards/views/concept-7f8a8bb3.html； M knowledge_cards/views/concept-824dc24b.html； M knowledge_cards/views/concept-841db0d5.html</p>
         </article>
         
 
@@ -132,7 +168,15 @@
           <div class="status">WARN</div>
           <h2>工作区存在系统/缓存文件</h2>
           <p class="area">文件卫生</p>
-          <p>.DS_Store=21；__pycache__=2；这些不会进入 file sweep，但可择机清理。</p>
+          <p>.DS_Store=21；__pycache__=3；这些不会进入 file sweep，但可择机清理。</p>
+        </article>
+        
+
+        <article class="check pass">
+          <div class="status">PASS</div>
+          <h2>行动队列可用且入口有效</h2>
+          <p class="area">行动队列</p>
+          <p>13 个开放行动。</p>
         </article>
         </section>
   </main>

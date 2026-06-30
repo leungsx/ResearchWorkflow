@@ -1,0 +1,325 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-06-30T22:11:08",
+  "entrypoints": {
+    "study_dashboard": "study_dashboard.html",
+    "today": "paper_reading/today.html",
+    "review_today": "knowledge_cards/review_today.html",
+    "knowledge_graph": "knowledge_graph/index.html",
+    "search": "search/index.html",
+    "workflow_health": "workflow_health.html",
+    "workflow_state": "workflow_state.html",
+    "action_queue": "action_queue.html"
+  },
+  "counts": {
+    "manifest_rows": 104,
+    "search_entries": 104,
+    "project_count": 2,
+    "git_dirty_paths": 127
+  },
+  "audit": {
+    "counts": {
+      "PASS": 12,
+      "WARN": 3,
+      "FAIL": 0
+    },
+    "checks": [
+      {
+        "area": "入口/归档",
+        "status": "PASS",
+        "title": "必需入口和今日归档齐全",
+        "detail": "12 个关键文件存在。"
+      },
+      {
+        "area": "易用性",
+        "status": "PASS",
+        "title": "用户入口没有裸 Markdown 直链",
+        "detail": "主入口、今日页、知识卡、复习、图谱、搜索和日志入口都指向可浏览页面。"
+      },
+      {
+        "area": "链接健康",
+        "status": "PASS",
+        "title": "HTML 本地链接均可解析",
+        "detail": "检查 96 个 HTML 页面。"
+      },
+      {
+        "area": "镜像页",
+        "status": "PASS",
+        "title": "HTML 镜像与源文件同步",
+        "detail": "检查 70 个镜像页。"
+      },
+      {
+        "area": "知识图谱",
+        "status": "PASS",
+        "title": "图谱入口是可视化关系图",
+        "detail": "nodes=113, unique_edges=193"
+      },
+      {
+        "area": "资产清单",
+        "status": "PASS",
+        "title": "artifact manifest 覆盖核心展示资产",
+        "detail": "104 条；display_types=23"
+      },
+      {
+        "area": "搜索索引",
+        "status": "PASS",
+        "title": "搜索索引和搜索页可用",
+        "detail": "104 条；layers=4"
+      },
+      {
+        "area": "复习状态",
+        "status": "PASS",
+        "title": "复习状态快照与队列一致",
+        "detail": "total=13, due=8, focus=8"
+      },
+      {
+        "area": "项目状态",
+        "status": "PASS",
+        "title": "项目状态文件可供自动化读取",
+        "detail": "2 个项目。"
+      },
+      {
+        "area": "复习队列",
+        "status": "WARN",
+        "title": "存在到期复习项",
+        "detail": "8 项到期：方向链；Hook Model 上瘾模型；SICAS模型；软营销；沉浸式内容；用户感知价值；DCI传播力指数；描述性账号调查"
+      },
+      {
+        "area": "备份",
+        "status": "PASS",
+        "title": "最近备份可用",
+        "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 2.0 小时前。"
+      },
+      {
+        "area": "Git/异地备份",
+        "status": "WARN",
+        "title": "存在尚未提交的 Git 改动",
+        "detail": "127 个路径待快照： M Makefile； M codex/state/context_index.md； M docs/INTEGRATED_RESEARCH_LEARNING_WORKFLOW.md； M docs/PAPER_READING_OUTPUT_STANDARD.md； M knowledge_cards/index.html； M knowledge_cards/views/concept-7f8a8bb3.html； M knowledge_cards/views/concept-824dc24b.html； M knowledge_cards/views/concept-841db0d5.html"
+      },
+      {
+        "area": "Token/记忆",
+        "status": "PASS",
+        "title": "今日 compact summary 可作为默认启动上下文",
+        "detail": "vault/07_Codex_Logs/compact_daily/2026-06-30-summary.md，约 319 words。"
+      },
+      {
+        "area": "文件卫生",
+        "status": "WARN",
+        "title": "工作区存在系统/缓存文件",
+        "detail": ".DS_Store=21；__pycache__=3；这些不会进入 file sweep，但可择机清理。"
+      },
+      {
+        "area": "行动队列",
+        "status": "PASS",
+        "title": "行动队列可用且入口有效",
+        "detail": "13 个开放行动。"
+      }
+    ],
+    "health_html": "workflow_health.html"
+  },
+  "review": {
+    "summary": {
+      "total_items": 13,
+      "due_count": 8,
+      "overdue_count": 2,
+      "upcoming_7_count": 5,
+      "future_count": 0,
+      "unscheduled_count": 0,
+      "by_type": {
+        "concept": 9,
+        "method": 4
+      },
+      "by_stage": {
+        "1": 13
+      }
+    },
+    "focus_items": [
+      {
+        "id": "concept-方向链",
+        "title": "方向链",
+        "type": "concept",
+        "stage": "1",
+        "next_review": "2026-06-19",
+        "days_delta": -11,
+        "status": "overdue",
+        "prompt": "用自己的话解释 方向链，并举一个科研例子。",
+        "source_path": "vault/02_Concepts/方向链.md",
+        "display_path": "knowledge_cards/views/concept-e068f0fc.html"
+      },
+      {
+        "id": "concept-hook-model",
+        "title": "Hook Model 上瘾模型",
+        "type": "concept",
+        "stage": "1",
+        "next_review": "2026-06-21",
+        "days_delta": -9,
+        "status": "overdue",
+        "prompt": "用自己的话解释 Hook Model 的四个环节，并举一个图书馆短视频例子。",
+        "source_path": "vault/02_Concepts/Hook Model 上瘾模型.md",
+        "display_path": "knowledge_cards/views/concept-hook-model-878dcbb7.html"
+      },
+      {
+        "id": "method-dci-index",
+        "title": "DCI传播力指数",
+        "type": "method",
+        "stage": "1",
+        "next_review": "2026-06-30",
+        "days_delta": 0,
+        "status": "due",
+        "prompt": "说明 DCI 为什么比单一粉丝数更适合比较账号传播表现。",
+        "source_path": "vault/03_Methods/DCI传播力指数.md",
+        "display_path": "knowledge_cards/views/method-dci-48f2a84e.html"
+      },
+      {
+        "id": "concept-sicas-model",
+        "title": "SICAS模型",
+        "type": "concept",
+        "stage": "1",
+        "next_review": "2026-06-30",
+        "days_delta": 0,
+        "status": "due",
+        "prompt": "用自己的话说出 SICAS 五个阶段，并给一个图书馆短视频例子。",
+        "source_path": "vault/02_Concepts/SICAS模型.md",
+        "display_path": "knowledge_cards/views/concept-sicas-e14df8c7.html"
+      },
+      {
+        "id": "method-descriptive-account-survey",
+        "title": "描述性账号调查",
+        "type": "method",
+        "stage": "1",
+        "next_review": "2026-06-30",
+        "days_delta": 0,
+        "status": "due",
+        "prompt": "描述性账号调查最适合回答什么问题？为什么不等于因果研究？",
+        "source_path": "vault/03_Methods/描述性账号调查.md",
+        "display_path": "knowledge_cards/views/method-86d250ef.html"
+      },
+      {
+        "id": "concept-immersive-content",
+        "title": "沉浸式内容",
+        "type": "concept",
+        "stage": "1",
+        "next_review": "2026-06-30",
+        "days_delta": 0,
+        "status": "due",
+        "prompt": "说明什么叫沉浸式内容，以及它为什么不等于单纯娱乐化。",
+        "source_path": "vault/02_Concepts/沉浸式内容.md",
+        "display_path": "knowledge_cards/views/concept-7f8a8bb3.html"
+      },
+      {
+        "id": "concept-perceived-value",
+        "title": "用户感知价值",
+        "type": "concept",
+        "stage": "1",
+        "next_review": "2026-06-30",
+        "days_delta": 0,
+        "status": "due",
+        "prompt": "用户感知价值是什么？它和点赞数有什么区别？",
+        "source_path": "vault/02_Concepts/用户感知价值.md",
+        "display_path": "knowledge_cards/views/concept-824dc24b.html"
+      },
+      {
+        "id": "concept-soft-marketing",
+        "title": "软营销",
+        "type": "concept",
+        "stage": "1",
+        "next_review": "2026-06-30",
+        "days_delta": 0,
+        "status": "due",
+        "prompt": "解释软营销和硬推广的差别，并说说它为什么重要。",
+        "source_path": "vault/02_Concepts/软营销.md",
+        "display_path": "knowledge_cards/views/concept-841db0d5.html"
+      }
+    ],
+    "state_path": "vault/14_Review_Queue/review_state.json",
+    "html": "knowledge_cards/review_today.html"
+  },
+  "graph": {
+    "nodes": 113,
+    "edges": 193,
+    "html": "knowledge_graph/index.html"
+  },
+  "projects": [
+    {
+      "slug": "library_short_video",
+      "title": "图书馆短视频相关研究",
+      "status": "draft",
+      "matrix_rows": 60,
+      "reader_packages": 8,
+      "latest_deep_read": {
+        "title": "2026-06-30 精读：公共图书馆和高校图书馆短视频营销比较研究",
+        "path": "paper_reading/2026-06-30-aarrr-library-short-video.html",
+        "updated_at": "2026-06-30T20:06:44"
+      },
+      "next_reading_candidates": [
+        {
+          "citekey": "cnki_2020_2a150c6df8",
+          "title": "图书馆热门短视频内容规律探究——基于抖音平台的实证研究",
+          "year": "2020",
+          "source": "图书馆",
+          "read_status": "skimmed",
+          "reader_path": "projects/library_short_video/literature/readers/cnki_2020_2a150c6df8/paper.md",
+          "pdf_path": "library/pdfs/library_short_video/cnki_2020_2a150c6df8.caj"
+        },
+        {
+          "citekey": "cnki_2020_64b4f881c9",
+          "title": "图书馆短视频发展现状、问题与对策分析——以抖音平台为例",
+          "year": "2020",
+          "source": "图书馆工作与研究",
+          "read_status": "skimmed",
+          "reader_path": "projects/library_short_video/literature/readers/cnki_2020_64b4f881c9/paper.md",
+          "pdf_path": "library/pdfs/library_short_video/converted/cnki_2020_64b4f881c9.pdf"
+        },
+        {
+          "citekey": "cnki_2021_3771e58987",
+          "title": "公共图书馆和高校图书馆短视频营销比较研究",
+          "year": "2021",
+          "source": "大学图书馆学报",
+          "read_status": "skimmed",
+          "reader_path": "projects/library_short_video/literature/readers/cnki_2021_3771e58987/paper.md",
+          "pdf_path": "library/pdfs/library_short_video/cnki_2021_3771e58987.pdf"
+        }
+      ],
+      "review_due_count": 8,
+      "next_actions": [
+        "先处理 evidence gate 的 WARN/ERROR，避免 metadata-only 文献进入论文主张。",
+        "把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。",
+        "围绕最近主读 `cnki_2021_3771e58987`，补齐与既有概念/方法的关系和证据边界。",
+        "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。"
+      ],
+      "state_path": "projects/library_short_video/project_state.json",
+      "dashboard_html": "paper_reading/views/00-project-dashboard-dd8418ad.html"
+    },
+    {
+      "slug": "starter_project",
+      "title": "Starter Research Project",
+      "status": "draft",
+      "matrix_rows": 0,
+      "reader_packages": 0,
+      "latest_deep_read": {},
+      "next_reading_candidates": [],
+      "review_due_count": 8,
+      "next_actions": [
+        "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
+        "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
+      ],
+      "state_path": "projects/starter_project/project_state.json",
+      "dashboard_html": "paper_reading/views/00-project-dashboard-b90a4a93.html"
+    }
+  ],
+  "artifacts": {
+    "manifest": "vault/13_Knowledge_Graph/artifact_manifest.csv",
+    "search_index": "vault/13_Knowledge_Graph/search_index.json",
+    "backup_index": "backups/index.html",
+    "latest_backup": "backups/researchworkflow-critical-20260630-200857.zip",
+    "action_queue": "vault/13_Knowledge_Graph/action_queue.json"
+  },
+  "next_actions": [
+    "先处理 8 个到期复习项。",
+    "先处理 evidence gate 的 WARN/ERROR，避免 metadata-only 文献进入论文主张。",
+    "把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。",
+    "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
+    "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
+    "择机处理 workflow-audit 的 WARN 项，尤其是 Git 快照和到期复习。"
+  ]
+}

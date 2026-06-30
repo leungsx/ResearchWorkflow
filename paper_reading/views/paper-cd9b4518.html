@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Source-Grounded Reader - 图书馆短视频发展现状、问题与对策分析——以抖音平台为例</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Source-Grounded Reader - 图书馆短视频发展现状、问题与对策分析——以抖音平台为例</h1>
+      <p class="sub">projects/library_short_video/literature/readers/cnki_2020_64b4f881c9/paper.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/literature/readers/cnki_2020_64b4f881c9/paper.md</div>
+        <article class="md-view">
+<h1>Source-Grounded Reader - 图书馆短视频发展现状、问题与对策分析——以抖音平台为例</h1>
+<p>Generated: 2026-06-20T15:30:13 Citekey: <code>cnki_2020_64b4f881c9</code> Source file: <code>/Users/leung/ResearchWorkflow/library/pdfs/library_short_video/converted/cnki_2020_64b4f881c9.pdf</code> Source type: <code>pdf</code> Current read_status: <code>metadata-only</code></p>
+<h2>Use Boundary</h2>
+<ul>
+<li>This file is source-grounded extraction, not a claim that the paper has been human-read.</li>
+<li>Do not use it as manuscript evidence until the relevant block has been read and checked.</li>
+<li>After real reading, update <code>read_status</code> in <code>library/literature_matrix.csv</code> to <code>human-read</code> or <code>verified</code>.</li>
+</ul>
+<h2>Metadata</h2>
+<ul>
+<li>Title: 图书馆短视频发展现状、问题与对策分析——以抖音平台为例</li>
+<li>Authors: 王海燕</li>
+<li>Year: 2020</li>
+<li>Source: 图书馆工作与研究</li>
+<li>Database: CNKI</li>
+<li>DOI: 未记录</li>
+</ul>
+<h2>Extracted Blocks</h2>
+<h3>B0001</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_64b4f881c9:B0001</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>Ｌｉｂｒａｒｙ Ｗｏｒｋ Ａｎｄ Ｓｔｕｄｙ 总第２９１期 Ｓｅｒｉａｌ ２９１ 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 ＊本文系教育部人文社会科学青年基金项目“社交媒体新闻供给失灵与政府规制”（项目编号：１７ＹＪＣ８６００１４）阶段性研究成果之一。 图书馆短视频发展现状、问题与对策分析＊ ——— 檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧 以抖音平台为例 檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧檧 王海燕 摘 要 短视频平台已经成为移动互联网重要的流量入口，具有良好的传播效果。目前，图书馆 抖音账号的开通率较低，基本没有影响力较大的账号，运营管理不规范，缺乏原创优质内容。本文 认为，今后各级各类图书馆要积极入驻短视频平台，重视短视频账号的运营管理，利用图书馆优势 进行专业化原创，通过策划线上线下活动吸引用户关注并参与互动。 关键词 图书馆；短视频；抖音 分类号 Ｇ２５０．７ 本文引用格式 王海燕．图书馆短视频发展现状、问题与对策分析———以抖音平台为例［Ｊ］．图书馆工作与研究， ２０２０（５）： 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 ７６－８０． １ 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 引言 从早期的秒拍、微视到后来的美拍、小影， 再到如今风靡一时的快手、抖音，近年来短视 频应用的用户规模和使用时长都呈现爆发式 增长，同时也成为移动互联网重要的流量入 口，各大互联网公司和移动互联网创业者都在 布局或者进军短视频领域。从２０１７年４月到 ２０１９年４月，中国短视频ＡＰＰ日均使用时长 从不到１亿小时，增长到了６亿小时 ［１］。其中 抖音、快手、好看视频占据短视频前三位，引领 用户数量和时长增长。用户在哪个平台汇聚， 人群的注意力就在哪儿，在该平台发布信息就 会取得较好的传播效果。这是互联网传播的 重要原则之一。随着短视频平台影响力的扩 大，各类团体机构对短视频的重视程度也不断 上升。统计显示，截至２０１８年１２月，认证的媒 体抖音号、政务抖音号超过６８００个。这也意味 着，在微博、微信之外，短视频平台成为公共性 传播的另一个重要平台 ［２］ 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 。 ２ 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 图书馆短视频发展现状 短视频市场的火山喷发，与新媒体的转型 动力以及资本等力量的推动有关，也折射着用 户本身需求的变化 ［２］３５。短视频内容的生活 化、场景化和社交化，有效激发了用户的表达 欲望和情感共鸣，视频拍摄发布的简单化也降 低了用户参与的技术门槛</p>
+<h3>B0002</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_64b4f881c9:B0002</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>，使其快速成为用户 碎片化时间的刚需。抖音自２０１６年９月份上 线以来，以其优质的产品功能和良好的用户体 验受到短视频用户的青睐，快速占领各大应用 商店下载量榜首。２０１９年１月２９日抖音发布 的《２０１８抖音大数据报告》显示：截至２０１８年 １２月，抖音国内日活跃用户数突破２．５亿，国 内月活跃用户数突破５亿 ［３］。毋庸置疑，抖音 已经成为短视频行业的翘楚，除了大量的个人 账号以外，政府单位、媒体机构、高等院校、企 事业单位等纷纷入驻抖音平台，并且取得了较 好的传播效果。如＠四平警事、＠人民日报、 ＠央视新闻、＠浙有正能量等政务和媒体抖音 ０７６ DOI:10.16384/j.cnki.lwas.2020.05.012</p>
+<h3>B0003</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_64b4f881c9:B0003</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>王海燕：图书馆短视频发展现状、问题与对策分析＊———以抖音平台为例 Ｗａｎｇ Ｈａｉｙａｎ：Ａｎａｌｙｓｉｓ ｏｎ ｔｈｅ Ｃｕｒｒｅｎｔ Ｓｉｔｕａｔｉｏｎ，Ｐｒｏｂｌｅｍｓ ａｎｄ Ｃｏｕｎｔｅｒｍｅａｓｕｒｅｓ ｏｆ Ｌｉｂｒａｒｙ Ｓｈｏｒｔ Ｖｉｄｅｏ ———Ｔａｋｉｎｇ ｔｈｅ Ｐｌａｔｆｏｒｍ ｏｆ Ｔｉｋ Ｔｏｋ ａｓ ａｎ Ｅｘａｍｐｌｅ ２０２０年５月 Ｍａｙ，２０２０ 号都有上千万的粉丝和上亿的获赞量。 文化、旅游、教育、体育、科技等团体机构也 纷纷借助抖音平台通过短视频宣传理念、传播思 想、普及知识和提升影响力。图书馆作为文献存 储、文化宣传和教育科普的重要阵地，同样可以 通过短视频开展阅读推广、讲座预告和藏书介绍 等业务。目前，已经有部分图书馆入驻抖音平 台。笔者以“图书馆”为关键词在抖音平台进行 搜索，共获得相关用户１４７个，去除一些私人账 号和无效用户，共有７６家实体图书馆注册有官 方抖音账号，其中６９家通过官方认证，７家未认 证。需要说明的是，以下抖音账号如＠知更图书 馆、＠气味图书馆、＠亲子图书馆、＠恋爱图书 馆、＠十点图书馆、＠和＋共享图书馆等虽粉丝 量已达上万甚至十几万，但是这些账号不属于实 体图书馆的范畴，因此本文没有将其列入排名。 现将粉丝量排名前１０的实体图书馆抖音账号相 关数据进行统计，如下表所示。 粉丝量排名前１０的图书馆抖音账号统计表 序号 抖音账号 是否认证 粉丝数量 作品数量 获赞数量 有无今日头条链接 １ ＠临沂市图书馆 已认证 ９９０００ ５１０ １２７５０００ 有 ２ ＠国家图书馆 已认证 ２８０００ ２６ ３３０００ 无 ３ ＠朔州市图书馆 已认证 ９６２６ ４６６ ６９０００ 无 ４ ＠杭州图书馆 已认证 ２７８６ ４５ ２２３９ 有 ５ ＠合肥市图书馆 已认证 ２４８３ ２１１ ８２９６ 有 ６ ＠上海图书馆 已认证 ２１０２ ３５ ２７６ 有 ７ ＠山东商务职业学院图书馆 已认证 １４３２ ６０ ２５５８ 无 ８ ＠陕西省图书馆 已认证 １３３４ １００ １２０００ 无 ９ ＠长沙图书馆 已认证 １２４８ ３５ ８６６ 有 １０ ＠营口理工学院图书馆官方抖音号 已认证 １２２０ １８ ２５７ 无 注：数据统计截至２０１９年８月１日 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 。 ３ 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 图书馆短视频存在的问题 ３．１ 账号开通率低 按照有关部门的统计，截至２０１７年，全国 共有公共图书馆３１６６个 ［４］，全国高等学校共计 ２９１４所 ［５］，按照每个学校至少一个图书馆计 算，我国图书馆总量至少有６０８０个。而目前开 通官方抖音账号的图书馆只有７６家，仅占图书 馆总数的１％，在快手和好看平台进行搜索，也 几乎没有官方认证的图书馆账号，也就是说大 部</p>
+<h3>B0004</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_64b4f881c9:B0004</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>分公共图书馆和高等院校图书馆都没有入 驻短视频平台。在已经开通官方抖音账号的 ７６家图书馆中，粉丝量上万的只有＠临沂市图 书馆和＠国家图书馆两家，排名第三的＠朔州 市图书馆粉丝量将近１万，其他７家的粉丝量 都在１０００－３０００之间。发布作品数量过百的 图书馆仅有＠临沂市图书馆、＠朔州市图书 馆、＠合肥市图书馆和＠陕西省图书馆４家，大 部分图书馆发布作品数量只有两位数。截至 ２０１９年８月１日，发布作品数量最多的＠临沂 市图书馆共有作品５１０个，其次是＠朔州市图 书馆发布作品４６６个。 由于庞大的用户基数，抖音平台上评论和 获赞数量达到几十万甚至上百万的账号比比 皆是，像＠人民日报、＠央视新闻等媒体账号 的获赞量都已经过亿。图书馆抖音账号目前 在互动方面还处于劣势，粉丝量排名前１０的图 书馆抖音号总获赞量过万的只有４家，过千的 ３家，还有３家只有几百个获赞。优质的视频 内容加上平台的算法推荐，抖音平台单个短视 频获赞量和评论量达到几十万甚至上百万的 也比比皆是，但是图书馆抖音账号单个视频获 赞量或者评论量过万的寥寥无几。＠临沂市 图书馆发布的５１０个短视频作品中，获赞量过 万的只有８个，其中获赞最多的是“沂蒙好儿 女，王成龙烈士遗体送别仪式在临沂市莒南举 行”的短视频，获赞达到３６．８万个，评论１．６万 ０７７</p>
+<h3>B0005</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_64b4f881c9:B0005</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>Ｌｉｂｒａｒｙ Ｗｏｒｋ Ａｎｄ Ｓｔｕｄｙ 总第２９１期 Ｓｅｒｉａｌ ２９１ 条，转发８８７１次，其他账号基本没有单个作品 点赞和评论过万的。另外，像＠厦门市图书 馆、＠成都理工大学图书馆、＠东莞图书馆等 虽然已经开通官方认证的抖音账号，但是没有 发布过任何作品。 ３．２ 运营管理不规范 从目前已经开通并认证的图书馆官方抖 音账号的运营情况来看，大部分图书馆没有专 业的短视频运营管理人员。有的账号已经开 通一年多，有的开通大半年或者几个月，但是 大部分账号的作品数量都是两位数，也就是说 账号的运营管理比较随意，没有固定的内容发 布时间，有的账号隔三差五发一次，有的账号 一天发布几次，然后连续几天甚至几个月都没 有内容更新。如＠临沂市图书馆、＠朔州市图 书馆虽然发布作品较多，但很多都是与图书馆 主题无关的内容，并且从内容、画面以及清晰 度来看，大多是小编的随手拍，达不到专业短 视频的制作和发布水准。 以抖音、快手为代表的短视频平台的重要 特征就是其显著的社交属性，用户在观看作品 的同时，可以进行点赞、跟帖、私信、转发等互 动行为，双向互动交流是短视频平台保持用户 黏性的重要特征之一。以发布作品较多的图 书馆抖音账号为例，比如＠临沂市图书馆、＠ 合肥市图书馆、＠陕西省图书馆、＠杭州图书 馆在互动方面做得相对较好，经常在评论区回 复网友提问。这样不但可以了解网友的关注 点和需求，而且也可以激发网友参与的热情。 但是，大部分图书馆抖音账号基本不与网友互 动，像＠国家图书馆、＠上海图书馆就从来不 与网友互动，很多网友在评论区提问题，也没 有任何回复。＠重庆图书馆在抖音账号上发 布了一条邀请华中师范大学网红教授戴建业 讲座的预告，很多网友在评论区询问参与途 径，作者未进行及时回复。 ３．３ 缺乏原创优质内容 从目前图书馆抖音账号发布的内容来看， 原创内容和转发内容数量基本相当，但是原创 内容中存在以下几个问题：首先，视频内容主 题分散，随意性较强。以＠临沂市图书馆为 例，到目前为止发布的５１０个作品中近半数跟 图书馆主题没有任何关系，以重大节日纪念、 本地重要事件、街景随手拍等为主。原创作品 中与图书馆主题相关的内容多为小编随手拍 的借书、阅读和活动场景，没有经过认真策划、 精心选题、专业制作以及有效推广，因此转评、 点赞数量都不多。其次，原创作品的数量太 少，制作简单粗糙。除了开通抖音账号没有发 布过任何作品的图书馆外，还有很多知名度比 较高的城市图书馆发布作品数量为个位数，如 ＠首都图书馆仅发布了５个作品，＠深圳图书 馆和＠武汉图书馆分别发布了６个作品。粉丝 量排名第二的＠国家图书馆截至目前也只发 布了２６个作品，不过作品主题基本都与图书馆 相关，尤其是其策划的“好书推荐官”系列活 动，邀请佟大为、刘涛、杨紫、杨幂、潘长江等众 多明星推介图书，取得了良好的效果，</p>
+<h3>B0006</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_64b4f881c9:B0006</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>但是此 类活动相对较少。最后，图书馆短视频原创内 容目前大都缺乏后期制作，在画面、音效、清晰 度等感官体验方面欠佳 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 。 ４ 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 图书馆短视频发展策略 ４．１ 积极入驻短视频平台，重视短视频账号 的运营管理 图书馆作为信息存储和知识服务的重要 场所，一直紧跟互联网步伐，不断进行数字化、 智能化和网络化建设。在“两微一端”为代表 的移动互联网时期，图书馆转型脚步有所滞 后，在微博、微信、今日头条等平台上还没有影 响力较大的账号。目前，短视频成为移动互联 网的流量洼地，快手ＣＥＯ宿华表示，视频可以 称之为新时代文本，视频会改变一切，这种改 变不是简单的一个补充和增量 ［６］。以快手、抖 音为代表的短视频平台具有用户基数庞大、入 驻门槛较低、制作发布简单等众多优势，非常 适合图书馆进行场馆介绍、书籍推荐、活动推 ０７８</p>
+<h3>B0007</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_64b4f881c9:B0007</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>王海燕：图书馆短视频发展现状、问题与对策分析＊———以抖音平台为例 Ｗａｎｇ Ｈａｉｙａｎ：Ａｎａｌｙｓｉｓ ｏｎ ｔｈｅ Ｃｕｒｒｅｎｔ Ｓｉｔｕａｔｉｏｎ，Ｐｒｏｂｌｅｍｓ ａｎｄ Ｃｏｕｎｔｅｒｍｅａｓｕｒｅｓ ｏｆ Ｌｉｂｒａｒｙ Ｓｈｏｒｔ Ｖｉｄｅｏ ———Ｔａｋｉｎｇ ｔｈｅ Ｐｌａｔｆｏｒｍ ｏｆ Ｔｉｋ Ｔｏｋ ａｓ ａｎ Ｅｘａｍｐｌｅ ２０２０年５月 Ｍａｙ，２０２０ 介和讲座预告等文化传播活动。因此，各级各 类图书馆的领导和管理人员必须强化新媒体 意识，充分认识短视频平台的重要作用，号召 并组织图书馆的相关部门和人员积极开通短 视频账号。入驻短视频平台以后，要善于学习 短视频运营较好的同级图书馆或者其他单位 的运营经验，依据图书馆的级别、规模、定位、 特色等制作发布短视频内容。 图书馆短视频想要做好做强做大，必须拥 有专业的运营管理人员，部分政务、媒体、高校 和企事业单位短视频账号影响力较大主要原 因在于其拥有专业的运营团队。与运营官方 微博、微信公众号相比，短视频运营人员还需 具备视频拍摄、剪辑发布等简单技能。图书馆 可以在运营官方微博、微信公众号的人员中遴 选或者招聘一到两个专业的短视频运营人员， 也可以考虑在技术部、信息部或者宣传部门中 遴选人员试运行。高等院校图书馆可以招募 有短视频技能的实习生参与运营管理。只有 专业人员负责运营短视频平台，才能保证短视 频账号持续生产优质原创内容，不断吸引粉丝 关注和增强用户黏性。另外，短视频账号作为 图书馆的新媒体平台之一，也要纳入图书馆的 日常管理活动当中，建立相关的管理制度和激 励机制，不断激发运营人员的积极性，保证短 视频账号的健康可持续发展。 ４．２ 发挥图书馆优势，做专业化原创内容 由于图书馆的地域、规模、历史和性质等 方面的不同，每个图书馆都有自己的特色和优 势。公共图书馆作为公益事业单位，遍布祖国 的大江南北，有的历史悠久，馆藏丰富；有的设 施先进，特色鲜明。图书馆的历史文化、藏书 情况、管理制度、借书流程、讲座活动等都可以 制作成不同系列的短视频内容。高校图书馆 作为高等院校的重要组成部分，很多也是高校 的名片或者地标性建筑，藏书内容根据高校的 学科优势各具专业特色，在数字化、智能化、移 动化方面也在进行不断探索。高校图书馆的 受众———在校大学生是短视频平台的活跃用 户群体，如在抖音平台上已经有部分高校、社 团、教师和学生账号有较大影响力，因此高校 图书馆短视频账号有着众多的潜在受众。高 校图书馆可以在广播电视编导专业或者短视 频社团以及短视频爱好者当中招募学生助理 岗位，专门负责运营和管理短视频平台。 图书馆抖音号的运营之道，说到底还在于 内容质量，能够源源不断地为用户提供优质的 视频作品，才是图书馆抖音号生存的根本 ［７］。 事实上，图书馆作为公共服务机构拥有较多的</p>
+<h3>B0008</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_64b4f881c9:B0008</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>专业内容素材，首先，图书馆可以对本馆的馆 藏图书和新购图书等进行系列推介，可以邀请 对此书有研究的学者或者读者进行简单解读， 画面、声音、文字要简短清晰，短小精悍，此类 短视频可以长期制作发布。其次，可结合世界 读书日、城市阅读周（月）、各类图书期刊展、签 名售书活动等策划拍摄相关短视频，最好形成 系列作品和话题效应，吸引更多的用户参与其 中。再次，图书馆要通过短视频账号及时发布 本馆的公告通知、活动宣传、讲座预告、便民服 务等，以便为读者提供更优质的服务。最后， 图书馆可以把精彩讲座内容以连续短视频的 方式发出，让没有到场的用户了解更多讲座内 容，为后续讲座活动聚集人气。 ４．３ 策划线上线下活动，吸引用户参与互动 图书馆短视频账号上线以后，除了靠优质 的原创内容吸引粉丝外，还要策划一些线上线 下活动，让更多用户了解、参与和喜欢图书馆 短视频账号。如“第七届陕西省阅读文化节” 期间，陕西公共图书馆服务联盟在全省范围内 开展“图书馆抖起来”短视频征集活动，主办方 的新媒体运营团队负责审核所有的视频作品， 对视频进行处理，优秀作品将在陕图官方抖音 号发布，并且对入选作品和点赞数达到一定级 别的作品予以物质奖励 ［８］。此类活动不但可以 鼓励喜欢短视频的图书爱好者参与短视频拍 摄，为图书馆短视频平台提供原创内容素材， 而且也激发了用户与图书馆短视频账号互动 的积极性，有利于提高图书馆短视频平台的传 ０７９</p>
+<h3>B0009</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_64b4f881c9:B0009</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>Ｌｉｂｒａｒｙ Ｗｏｒｋ Ａｎｄ Ｓｔｕｄｙ 总第２９１期 Ｓｅｒｉａｌ ２９１ 播影响力。 在产品功能上，抖音社交属性的优势体现 在：以内容为载体，受众可以在平台里进行高 频次互动 ［９］。账号运营者只有经常与用户进行 互动，回答网友提问，才能保持用户黏性，提升 账号活跃度。因此，图书馆短视频运营人员在 发布完作品以后要及时关注用户的点赞、评论 和私信，对用户的留言和问题要及时回复，只 有真诚的沟通和满意的服务才能带来良好的 口碑和持续的关注。同时，图书馆抖音账号也 要与同级别或者上下级图书馆抖音账号进行 互动，不但可以沟通交流图书馆抖音账号的运 营经验，而且可以吸引更多用户关注图书馆短 视频。如２０１９年４月２３日在“第２４个世界读 书日”期间，国家图书馆联手抖音短视频发起 了“抖音图书馆”系列活动，国家图书馆向全国 多地的公共图书馆发起活动号召，用户可通过 抖音短视频拍下当地图书馆内的情景，发布视 频并添加图书馆的地理位置后，抖音平台将评 选出全国最受欢迎图书馆 ［１０］ 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 。 ５ 櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲櫲 结语 各级各类图书馆管理人员必须充分认识 新媒体平台的巨大传播价值，积极开通、运营 和管理好图书馆短视频账号，提升图书馆短视 频平台的传播影响力；让更多用户通过图书馆 优秀短视频作品了解图书馆并且喜爱读书活 动，让图书馆通过短视频平台更好地服务读者 和用户，更好地发挥图书馆的文化阵地作用和 公益服务价值。 参考文献： ［１］陈莹．从《２０１９互联网趋势报告》看传媒行业趋势［Ｎ］．中国出 版传媒商报，２０１９－０６－１４（７）． ［２］彭兰．短视频：视频生产力的“转基因”与再培育［Ｊ］．新闻界， ２０１９（１）：３４－４３． ［３］字节跳动算数中心．《２０１８抖音大数据报告》完整版［ＥＢ／ ＯＬ］．［２０１９－０２－１８］．ｈｔｔｐ：∥ｗｗｗ．ｍｅｉｈｕａ． ｉｎｆｏ／ａ／７３２９６． ［４］中国经济网．中华人民共和国文化和旅游部２０１７年文化发展 统计公报［ＥＢ／ＯＬ］．（２０１８－０６－０１）．ｈｔｔｐ：∥ｗｗｗ．ｃｅ．ｃｎ／ｃｕｌ－ ｔｕｒｅ／ｇｄ／２０１８０６／０１／ｔ２０１８０６０１＿２９３１１７８８．ｓｈｔｍｌ． ［５］中国教育报．教育部发布最新高校名单全国高等学校共计 ２９１４所［ＥＢ／ＯＬ］．（２０１７－０６－１６）．ｈｔｔｐ：∥ｗｗｗ．ｍｏｅ．ｇｏｖ．ｃｎ／ ｊｙｂ＿ｘｗｆｂ／ｓ５１４７／２０１７０６／ｔ２０１７０６１６＿３０７０７５．ｈｔｍｌ． ［６］中国网．快手宿华：视频传播或将替代文字未来蕴含巨大商 机［ＥＢ／ＯＬ］．（２０１６－１２－０７）．ｈｔｔｐ：∥ｆｉｎａｎｃｅ．ｓｉｎａ．ｃｏｍ．ｃｎ／ ｒｏｌｌ／２０１６－１２－０７／ｄｏｃ－ｉｆｘｙｐｃｑａ８９７１４５</p>
+<h3>B0010</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_64b4f881c9:B0010</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>１．ｓｈｔｍｌ． ［７］白禄，郭宝华．我国图书馆抖音号的运营现状与优化策略［Ｊ］． 图书馆研究，２０１９（１）：８０－８５． ［８］陕西省图书馆．“图书馆抖起来”短视频征集活动［ＥＢ／ＯＬ］． ［２０１９－０８－０１］．ｈｔｔｐ：∥ｗａｐ．ｓｘｌｉｂ．ｏｒｇ．ｃｎ／ｈｄ／ｈｄｙｇ／２０１９０８／ ｔ２０１９０８０２＿１０１８７９６．ｈｔｍｌ． ［９］刘波维．短视频社交平台传播力探析———以“抖音”ＡＰＰ为例 ［Ｊ］．传媒，２０１８（１０）：５３－５４． ［１０］中国日报网．世界读书日国家图书馆联合抖音上线“抖音图 书馆”［ＥＢ／ＯＬ］．［２０１９－０４－２４］．ｈｔｔｐｓ：∥ｂａｉｊｉａｈａｏ．ｂａｉｄｕ． ｃｏｍ／ｓ？ｉｄ＝１６３１６７５１７４４７２８８２９３９＆ｗｆｒ＝ｓｐｉｄｅｒ＆ｆｏｒ＝ｐｃ． 作者简介： 王海燕（１９７９－），男，武汉大学信息管理学院出版发行学专业博 士，副教授，河南大学新闻与传播学院，河南，开封， ４７５００１。 Ａｎａｌｙｓｉｓ ｏｎ ｔｈｅ Ｃｕｒｒｅｎｔ Ｓｉｔｕａｔｉｏｎ，Ｐｒｏｂｌｅｍｓ ａｎｄ Ｃｏｕｎｔｅｒｍｅａｓｕｒｅｓ ｏｆ Ｌｉｂｒａｒｙ Ｓｈｏｒｔ Ｖｉｄｅｏ ———Ｔａｋｉｎｇ ｔｈｅ Ｐｌａｔｆｏｒｍ ｏｆ Ｔｉｋ Ｔｏｋ ａｓ ａｎ Ｅｘａｍｐｌｅ Ｗａｎｇ Ｈａｉｙａｎ Ａｂｓｔｒａｃｔ Ｓｈｏｒｔ ｖｉｄｅｏ ｐｌａｔｆｏｒｍ ｈａｓ ｂｅｃｏｍｅ ａｎ ｉｍｐｏｒｔａｎｔ ｔｒａｆｆｉｃ ｅｎｔｒｙ ｆｏｒ ｍｏｂｉｌｅ ｉｎｔｅｒｎｅｔ，ａｎｄ ａｃｈｉｅｖｅｓ ｇｏｏｄ ｃｏｍｍｕｎｉｃａｔｉｏｎ ｒｅｓｕｌｔｓ． Ａｔ ｐｒｅｓｅｎｔ，ｔｈｅ ｏｐｅｎｉｎｇ ｒａｔｅ ｏｆ ｔｈｅ ｌｉｂｒａｒｙ＇ｓ Ｔｉｋ Ｔｏｋ ａｃｃｏｕｎｔｓ ｉｓ ｌｏｗ，ａｎｄ ｔｈｅｒｅ ａｒｅ ｂａｓｉｃａｌｌｙ ｎｏ ｉｎｆｌｕｅｎｔｉａｌ ａｃｃｏｕｎｔｓ，ｔｈｅ ｏｐｅｒａｔｉｏｎ ａｎｄ ｍａｎａｇｅｍｅｎｔ ａｒｅ ｎｏｔ ｓｔａｎｄａｒｄｉｚｅｄ ａｎｄ ｌａｃｋ ｏｆ ｏｒｉｇｉｎａｌ ｑｕａｌｉｔｙ ｃｏｎｔｅｎｔ．Ｔｈｉｓ ｐａｐｅｒ ｔｈｉｎｋｓ，ｉｎ ｔｈｅ ｆｕｔｕｒｅ，ａｌｌ ｋｉｎｄｓ ｏｆ ｌｉｂｒａｒｉｅｓ ａｔ ａｌｌ ｌｅｖｅｌｓ ｓｈｏｕｌｄ ａｃｔｉｖｅｌｙ ｅｎｔｅｒ ｔｈｅ ｓｈｏｒｔ ｖｉｄｅｏ ｐｌａｔｆｏｒｍ，ｐａｙ ａｔｔｅｎｔｉｏｎ ｔｏ ｔｈｅ ｏｐｅｒａｔｉｏｎ ａｎｄ ｍａｎａｇｅｍｅｎｔ ｏｆ ｓｈｏｒｔ ｖｉｄｅｏ ａｃｃｏｕｎｔｓ，ｍａｋｉｎｇ ｕｓｅ ｏｆ ｔｈｅ ａｄｖａｎｔａｇｅｓ ｏｆ ｌｉｂｒａｒｉｅｓ ｔｏ ｃｒｅａｔｅ ｓｐｅｃｉａｌｉｚｅｄ ｏｒｉｇｉｎａｌ ｃｏｎｔｅｎｔ，ａｔｔｒａｃｔｉｎｇ ｕｓｅｒｓ＇ａｔｔｅｎｔｉｏｎ</p>
+<h3>B0011</h3>
+<ul>
+<li>Source ID: <code>cnki_2020_64b4f881c9:B0011</code></li>
+<li>Page: unknown from current extractor</li>
+</ul>
+<p>ａｎｄ ｐａｒｔｉｃｉｐａｔｉｏｎ ｉｎ ｉｎｔｅｒａｃｔｉｏｎ ｂｙ ｐｌａｎｎｉｎｇ ｏｎｌｉｎｅ ａｎｄ ｏｆｆｌｉｎｅ ａｃｔｉｖｉｔｉｅｓ． Ｋｅｙｗｏｒｄｓ Ｌｉｂｒａｒｙ；Ｓｈｏｒｔ ｖｉｄｅｏ；Ｔｉｋ Ｔｏｋ Ｃｌａｓｓ Ｎｕｍｂｅｒ Ｇ２５０．７ ０８０</p>
+<h2>Reading Notes</h2>
+<ul>
+<li>Summary after guided companion reading: This is an early status-problem-countermeasure paper on library Douyin accounts. It frames short-video platforms as important mobile-Internet traffic entrances, then uses a 2019 Douyin search for official physical-library accounts to describe low account adoption, weak influence, irregular operation, and lack of original high-quality content. It proposes platform entry, professional account management, library-resource-based original content, and online-offline interaction as core countermeasures.</li>
+<li>Innovation / value after guided companion reading: Its value is mainly baseline diagnosis rather than theory testing. Compared with later empirical-factor papers, it gives an early field snapshot: official library Douyin accounts were still sparse and weak in 2019, and library short videos were understood primarily as a new publicity/service channel. This helps explain why later studies shifted toward content factors, interaction indices, and service-effect evaluation.</li>
+<li>Method details after guided companion reading: The paper searches Douyin with <code>图书馆</code>, excludes private/non-entity accounts, identifies 76 official physical-library accounts, and reports the top 10 accounts by followers as of 2019-08-01. It then organizes observed problems into account adoption, operation management, original content, and interaction/service strategy.</li>
+<li>Usable evidence block IDs: <code>B0001</code> for abstract-level claims and short-video traffic-platform background; <code>B0003</code>-<code>B0004</code> for the 76-account search result and top-10 account data; <code>B0005</code>-<code>B0006</code> for irregular operation, weak interaction, and lack of original content; <code>B0006</code>-<code>B0009</code> for strategy suggestions on account entry, professional management, library-resource-based original content, and online/offline interaction; <code>B0009</code> for the conclusion that short videos should serve library cultural and public-service value.</li>
+<li>Limitations and uncertainty: The current reader has no page-level source locators, and the paper is descriptive rather than causal or statistical. Its evidence is strongly time-bound to 2019 Douyin and focuses on visible account metrics, so it should be used as historical baseline/background rather than proof of current platform conditions.</li>
+</ul>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

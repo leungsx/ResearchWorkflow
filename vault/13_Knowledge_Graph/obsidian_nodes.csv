@@ -1,28 +1,37 @@
 Id,Label,Type
 Inbox,Inbox,00_Inbox
-cnki_2023_34348faa1e,cnki_2023_34348faa1e,15_CNKI_Frontier
+cnki_2021_3771e58987,cnki_2021_3771e58987,15_CNKI_Frontier
 library_short_video,library_short_video,project
+AARRR 漏斗模型,AARRR 漏斗模型,concept
+平台适配,平台适配,concept
+馆型差异,馆型差异,concept
+网络调查法,网络调查法,method
+内容分析法,内容分析法,method
+图书馆短视频AARRR服务价值指标,图书馆短视频AARRR服务价值指标,linked
+馆型平台适配复测,馆型平台适配复测,linked
+SICAS-AARRR整合框架,SICAS-AARRR整合框架,linked
 SICAS模型,SICAS模型,concept
+Hook Model 上瘾模型,Hook Model 上瘾模型,concept
+ELM 精细加工可能性模型,ELM 精细加工可能性模型,linked
+cnki_2023_34348faa1e,cnki_2023_34348faa1e,15_CNKI_Frontier
+cnki_2021_5530e86157,cnki_2021_5530e86157,15_CNKI_Frontier
+服务价值,服务价值,linked
+描述性账号调查,描述性账号调查,method
+平台互动指标,平台互动指标,linked
+2026-06-30-aarrr-paper,2026-06-30-aarrr-paper,learning
+2026-06-30-evening-close,2026-06-30-evening-close,learning
 沉浸式内容,沉浸式内容,concept
 软营销,软营销,concept
 用户感知价值,用户感知价值,concept
 精神激励,精神激励,linked
 DCI传播力指数,DCI传播力指数,method
-Hook Model 上瘾模型,Hook Model 上瘾模型,concept
-ELM 精细加工可能性模型,ELM 精细加工可能性模型,linked
-AARRR 漏斗模型,AARRR 漏斗模型,linked
 图书馆短视频服务价值框架,图书馆短视频服务价值框架,linked
 SICAS-服务转化路径,SICAS-服务转化路径,linked
 图书馆短视频多平台复测,图书馆短视频多平台复测,linked
-cnki_2021_5530e86157,cnki_2021_5530e86157,15_CNKI_Frontier
-cnki_2021_3771e58987,cnki_2021_3771e58987,15_CNKI_Frontier
-描述性账号调查,描述性账号调查,method
 2026-06-29-sicas-paper,2026-06-29-sicas-paper,learning
 2026-06-29-evening-close,2026-06-29-evening-close,learning
 图书馆短视频相关研究,图书馆短视频相关研究,linked
 阅读推广,阅读推广,linked
-服务价值,服务价值,linked
-平台互动指标,平台互动指标,linked
 方向链,方向链,concept
 Idea Lab,Idea Lab,linked
 快乐科研闭环,快乐科研闭环,linked
@@ -39,6 +48,7 @@ README,README,15_CNKI_Frontier
 2026-06-21-summary,2026-06-21-summary,07_Codex_Logs
 2026-06-28-summary,2026-06-28-summary,07_Codex_Logs
 2026-06-29-summary,2026-06-29-summary,07_Codex_Logs
+2026-06-30-summary,2026-06-30-summary,07_Codex_Logs
 2026-06-18,2026-06-18,07_Codex_Logs
 2026-06-19,2026-06-19,07_Codex_Logs
 2026-06-20,2026-06-20,07_Codex_Logs
@@ -54,7 +64,9 @@ README,README,15_CNKI_Frontier
 2026-06-27-file-sweep,2026-06-27-file-sweep,07_Codex_Logs
 2026-06-28-file-sweep,2026-06-28-file-sweep,07_Codex_Logs
 2026-06-29-file-sweep,2026-06-29-file-sweep,07_Codex_Logs
+2026-06-30-file-sweep,2026-06-30-file-sweep,07_Codex_Logs
 2026-06-29-workflow-audit,2026-06-29-workflow-audit,07_Codex_Logs
+2026-06-30-workflow-audit,2026-06-30-workflow-audit,07_Codex_Logs
 2026-W25,2026-W25,08_Weekly_Reviews
 2026-W26,2026-W26,08_Weekly_Reviews
 2026-W27,2026-W27,08_Weekly_Reviews
@@ -72,6 +84,7 @@ User Model,User Model,10_User_Model
 2026-06-18-knowledge,2026-06-18-knowledge,learning
 2026-06-20-hook-model,2026-06-20-hook-model,learning
 2026-06-22-library_short_video,2026-06-22-library_short_video,15_CNKI_Frontier
+cnki_2023_82f69af538,cnki_2023_82f69af538,linked
 双链,双链,linked
 2026-06-20-library_short_video,2026-06-20-library_short_video,15_CNKI_Frontier
 2026-06-21-library_short_video-after-refresh,2026-06-21-library_short_video-after-refresh,15_CNKI_Frontier

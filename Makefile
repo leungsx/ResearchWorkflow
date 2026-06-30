@@ -1,6 +1,6 @@
 PYTHON ?= /Users/leung/anaconda3/bin/python
 
-.PHONY: check new status fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
+.PHONY: check new status project-state review-state search-index workflow-state action-queue fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
 
 check:
 	$(PYTHON) scripts/check_environment.py
@@ -10,6 +10,21 @@ new:
 
 status:
 	$(PYTHON) scripts/project_status.py --project "$(PROJECT)"
+
+project-state:
+	$(PYTHON) scripts/build_project_state.py $(if $(PROJECT),--project "$(PROJECT)",--all)
+
+review-state:
+	$(PYTHON) scripts/build_review_state.py $(if $(DATE),--date "$(DATE)",)
+
+search-index:
+	$(PYTHON) scripts/build_search_index.py
+
+workflow-state:
+	$(PYTHON) scripts/build_workflow_state.py
+
+action-queue:
+	$(PYTHON) scripts/build_action_queue.py
 
 fast-status:
 	$(PYTHON) scripts/research_fastlane.py snapshot --project "$(PROJECT)" $(if $(TOPIC),--topic "$(TOPIC)",) $(if $(DATE),--date "$(DATE)",) $(if $(PRINT),--print,)
@@ -182,4 +197,10 @@ obsidian-graph:
 	$(PYTHON) scripts/obsidian_graph_export.py
 
 learning-dashboard:
+	$(PYTHON) scripts/build_project_state.py --all
+	$(PYTHON) scripts/build_workflow_state.py
+	$(PYTHON) scripts/build_action_queue.py
 	$(PYTHON) scripts/build_learning_dashboard.py
+	$(PYTHON) scripts/build_project_state.py --all
+	$(PYTHON) scripts/build_workflow_state.py
+	$(PYTHON) scripts/build_action_queue.py

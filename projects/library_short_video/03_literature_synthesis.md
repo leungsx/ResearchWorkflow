@@ -1,6 +1,6 @@
 # Literature Synthesis
 
-Updated: 2026-06-21
+Updated: 2026-06-30
 
 ## Search Strings
 
@@ -58,6 +58,7 @@ Updated: 2026-06-21
 - **AARRR / 用户生命周期漏斗**
   - In `cnki_2021_3771e58987`, acquisition maps to account exposure and platform discovery, activation to useful first experience and interaction, retention to continued attention and serial content, revenue to cultural influence/service promotion rather than money, and referral to user sharing and platform diffusion.
   - Project implication: AARRR is a promising bridge from "short-video operations" to "service pathway", but it needs stronger outcome indicators before becoming manuscript-level evidence for service value.
+  - 2026-06-30 reading update: AARRR should be treated as the project's stage-indicator scaffold, while SICAS remains the more useful user-path explanation. This pairing prevents the project from mixing "process logic" and "measurement logic" too loosely.
 - **SICAS / 多触点服务路径**
   - In `cnki_2023_34348faa1e`, Sense maps to multi-channel perception, Interest & Interactive to immersive content and active interaction, Connect & Communicate to comment/live/community links, Action to soft-marketing-driven conversion points, and Share to spiritually or materially motivated diffusion.
   - Project implication: SICAS is useful for organizing the full user path from exposure to service action and sharing. It is a structure-building framework, not yet a proven causal explanation.

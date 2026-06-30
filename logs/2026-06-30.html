@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026-06-30 学习日志</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #16202a;
+      --muted: #5f6f7c;
+      --line: #d7e0e5;
+      --paper: #ffffff;
+      --soft: #f5f8fa;
+      --blue: #2458a6;
+      --green: #17715e;
+      --amber: #94630c;
+      --rose: #a8324b;
+      --slate: #243241;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f8fafb 0%, #eef3f6 100%);
+      line-height: 1.62;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      color: #f8fbff;
+      background: linear-gradient(135deg, #203246 0%, #24635c 58%, #7a5b18 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 26px 22px; }
+    h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 21px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    .sub { max-width: 900px; color: rgba(248,251,255,0.9); }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      color: #f8fbff;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 7px 11px;
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .hero, .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel, .metric {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 10px 24px rgba(24, 34, 45, 0.05);
+    }
+    .panel { padding: 18px; }
+    .metric { padding: 16px; }
+    .col-3 { grid-column: span 3; }
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .col-8 { grid-column: span 8; }
+    .col-12 { grid-column: 1 / -1; }
+    .metric b { display: block; font-size: 29px; line-height: 1.08; color: var(--slate); }
+    .metric span { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; }
+    .callout {
+      border: 1px solid #cfe2dc;
+      border-left: 4px solid var(--green);
+      background: #f2faf7;
+      border-radius: 0 8px 8px 0;
+      padding: 13px 14px;
+      margin-top: 12px;
+    }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 4px solid var(--blue);
+      background: var(--soft);
+      padding: 11px 12px;
+      border-radius: 0 8px 8px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; vertical-align: top; padding: 9px 6px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 600; }
+    ul, ol { margin: 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; padding: 0; margin: 0; list-style: none; }
+    .tags li {
+      border: 1px solid #cfe0dc;
+      background: #eef8f4;
+      color: var(--green);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 13px;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: #eef2f7;
+      border: 1px solid #dce5ee;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 10px 0 24px; }
+    @media (max-width: 920px) {
+      .hero, .grid { grid-template-columns: 1fr; }
+      .col-3, .col-4, .col-6, .col-8, .col-12 { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>2026-06-30 学习日志</h1>
+      <p class="sub">晚间闭环执行于 2026-06-30 20:04 CST 左右。今天的重点是把 AARRR 比较论文、5 张知识卡、复习队列、图谱关系、CNKI 补全文交接和明日阅读任务接成一条可回看的研究链路。</p>
+      <nav class="nav">
+        <a href="../study_dashboard.html">总览</a>
+        <a href="../paper_reading/2026-06-30-aarrr-library-short-video.html">今日精读</a>
+        <a href="../knowledge_cards/index.html">知识卡</a>
+        <a href="../knowledge_graph/index.html">知识图谱</a>
+        <a href="index.html" aria-current="page">学习日志</a>
+        <a href="views/2026-06-30-evening-close-07814ed3.html">晚间会话浏览版</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <section class="panel col-8">
+        <h2>今日概览</h2>
+        <p>今天主读 <a href="../paper_reading/2026-06-30-aarrr-library-short-video.html">《公共图书馆和高校图书馆短视频营销比较研究》</a>，把昨天的 SICAS 用户路径推进到 AARRR 用户生命周期、馆型比较和平台适配。它适合作为比较框架和指标体系来源，不适合作为因果证据。</p>
+        <p>源资产已经落在 Obsidian：论文笔记、5 张概念/方法卡、主读 session、晚间闭环 session 和复习队列均已更新；展示入口将在刷新后由仪表盘、论文归档、知识卡入口、图谱入口和日志索引统一指向 HTML 页面。</p>
+        <div class="callout">
+          <strong>核心判断：</strong> 今天的闭环已经从“读一篇论文”推进到“路径框架 + 阶段指标 + 平台/馆型分层”的项目行动。明早最值得做的是把 SICAS 与 AARRR 对齐成三层指标草图。
+        </div>
+      </section>
+      <section class="grid col-4">
+        <div class="metric col-6"><b>5</b><span>新增知识卡与方法卡</span></div>
+        <div class="metric col-6"><b>5</b><span>新增复习项，2026-07-01 首复习</span></div>
+        <div class="metric col-6"><b>113</b><span>知识图谱节点</span></div>
+        <div class="metric col-6"><b>193</b><span>知识图谱关系边</span></div>
+      </section>
+    </section>
+
+    <section class="grid">
+      <section class="panel col-8">
+        <h2>时间线</h2>
+        <table>
+          <thead><tr><th>时间</th><th>动作</th><th>结果</th></tr></thead>
+          <tbody>
+            <tr><td>09:00 左右</td><td>生成/沉淀今日主读</td><td>形成 AARRR 精读页、论文笔记、Reader 上下文、5 张知识卡和主读 session。</td></tr>
+            <tr><td>白天</td><td>补 CNKI 人工下载交接</td><td>生成 12 篇候选下载清单、CSV、HTML 请求页和 incoming 文件夹；空目录 intake 验收通过。</td></tr>
+            <tr><td>20:04</td><td>读取闭环规范并检查今日资产</td><td>确认 HTML 展示入口、Obsidian 源文件、项目 literature 工作台、复习队列和图谱 CSV 均有今日变化。</td></tr>
+            <tr><td>20:08</td><td>补晚间会话与交叉回链</td><td>论文页新增 HTML 日报入口；论文笔记和主读 session 回链到晚间闭环。</td></tr>
+            <tr><td>20:10</td><td>导出知识图谱</td><td><code>make obsidian-graph</code> 输出 113 个节点、193 条边；孤立节点仍为 64 个。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel col-4">
+        <h2>主题标签</h2>
+        <ul class="tags">
+          <li>AARRR</li>
+          <li>SICAS</li>
+          <li>平台适配</li>
+          <li>馆型差异</li>
+          <li>网络调查法</li>
+          <li>内容分析法</li>
+          <li>图书馆短视频</li>
+          <li>服务价值</li>
+          <li>CNKI 补全文</li>
+        </ul>
+      </section>
+
+      <section class="panel col-4">
+        <h2>论文精读入口</h2>
+        <div class="list">
+          <div class="item green"><a href="../paper_reading/2026-06-30-aarrr-library-short-video.html">AARRR 今日精读页</a><div class="meta">完整阅读路线、证据逻辑、知识提取和下一步行动。</div></div>
+          <div class="item"><a href="../paper_reading/views/cnki-2021-3771e58987-6c1b15ea.html">Obsidian 论文笔记浏览版</a><div class="meta">已含 Knowledge Links 和学习日志回链。</div></div>
+          <div class="item amber"><a href="../paper_reading/views/paper-21739661.html">Source-Grounded Reader</a><div class="meta">页码和图表仍需回原 PDF 复核。</div></div>
+        </div>
+      </section>
+
+      <section class="panel col-4">
+        <h2>知识卡入口</h2>
+        <div class="list">
+          <div class="item rose"><a href="../knowledge_cards/views/concept-aarrr-bf76ae6c.html">AARRR 漏斗模型</a><div class="meta">阶段指标框架；Revenue 需非营利化。</div></div>
+          <div class="item rose"><a href="../knowledge_cards/views/concept-53b320d5.html">平台适配</a><div class="meta">平台不是中性背景，而是研究变量。</div></div>
+          <div class="item rose"><a href="../knowledge_cards/views/concept-1c7d1e51.html">馆型差异</a><div class="meta">公共馆与高校馆不能直接混证据。</div></div>
+          <div class="item green"><a href="../knowledge_cards/views/method-afcfecce.html">网络调查法</a><div class="meta">用于建立多平台账号样本地图。</div></div>
+          <div class="item green"><a href="../knowledge_cards/views/method-4dc0db40.html">内容分析法</a><div class="meta">把视频主题、形式、互动入口转成编码变量。</div></div>
+        </div>
+      </section>
+
+      <section class="panel col-4">
+        <h2>知识图谱入口</h2>
+        <table>
+          <tbody>
+            <tr><td>入口</td><td><a href="../knowledge_graph/index.html">knowledge_graph/index.html</a></td></tr>
+            <tr><td>节点 / 边</td><td><code>113 / 193</code></td></tr>
+            <tr><td>孤立节点</td><td><code>64</code>，主要是旧日期日志、旧 context pack、旧 CNKI 推荐记录和模板节点。</td></tr>
+            <tr><td>新增高价值关系</td><td><code>AARRR 漏斗模型 -> SICAS模型</code>、<code>平台适配 -> 馆型差异</code>、<code>cnki_2021_3771e58987 -> 内容分析法</code>。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel col-6">
+        <h2>文件归档摘要</h2>
+        <ul>
+          <li>论文 HTML：<code>paper_reading/2026-06-30-aarrr-library-short-video.html</code></li>
+          <li>论文笔记：<code>vault/01_Literature/cnki_2021_3771e58987.md</code></li>
+          <li>知识卡：<code>vault/02_Concepts/</code> 与 <code>vault/03_Methods/</code></li>
+          <li>学习日志：<code>vault/12_Learning_Log/sessions/2026-06-30-aarrr-paper.md</code> 和 <code>2026-06-30-evening-close.md</code></li>
+          <li>CNKI 交接：<a href="../vault/15_CNKI_Frontier/download_requests/library_short_video/2026-06-30-library_short_video-cnki-download-request.html">今日下载请求页</a>，incoming 目录保留等待用户下载。</li>
+          <li>生成入口：<code>study_dashboard.html</code>、<code>paper_reading/index.html</code>、<code>knowledge_cards/index.html</code>、<code>knowledge_graph/index.html</code>、<code>logs/index.html</code> 将通过刷新命令统一更新。</li>
+        </ul>
+      </section>
+
+      <section class="panel col-6">
+        <h2>交叉链接完整性</h2>
+        <table>
+          <thead><tr><th>检查项</th><th>状态</th></tr></thead>
+          <tbody>
+            <tr><td>论文页到论文笔记、Reader、知识卡、图谱、日志</td><td>已补齐；HTML 日报入口已加入主读页导航。</td></tr>
+            <tr><td>论文笔记 Knowledge Links</td><td>已含概念、方法、项目和机会链接，并新增晚间闭环回链。</td></tr>
+            <tr><td>新增知识卡回链来源论文和项目</td><td>AARRR、平台适配、馆型差异、网络调查法、内容分析法均已回链。</td></tr>
+            <tr><td>新增知识点进入复习队列</td><td>5 个新增条目均已排到 2026-07-01。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel col-4">
+        <h2>待办事项</h2>
+        <ol>
+          <li>明早先清 8 个到期复习项，尤其是 SICAS、DCI 和描述性账号调查。</li>
+          <li>把 AARRR 每阶段写成“平台指标 + 服务指标 + 证据缺口”。</li>
+          <li>用户下载 CNKI 清单后运行 intake 并生成 Reader。</li>
+          <li>择机做 Git 快照；当前工作树仍有大量研究资产和生成资产未提交。</li>
+        </ol>
+      </section>
+
+      <section class="panel col-4">
+        <h2>未解决问题</h2>
+        <ul>
+          <li>AARRR 的 Revenue 在图书馆语境下如何可观测，还需要指标化。</li>
+          <li>2020-2021 年平台数据不能直接代表 2026 年生态。</li>
+          <li>高校图书馆样本只有 18 个，馆型比较外推需谨慎。</li>
+          <li>孤立节点仍多，旧日志和旧推荐记录需要后续成批接回项目链路。</li>
+        </ul>
+      </section>
+
+      <section class="panel col-4">
+        <h2>明日计划</h2>
+        <ol>
+          <li>复习 AARRR、平台适配、馆型差异，重点回答 Revenue 如何非营利化。</li>
+          <li>起草 SICAS-AARRR 对照表：SICAS 管路径，AARRR 管指标。</li>
+          <li>优先考虑精读 <code>cnki_2021_645f03f388</code>，补“传播力评价”证据线。</li>
+          <li>若用户完成下载，先处理 CNKI intake，再重新运行每日推荐。</li>
+        </ol>
+      </section>
+
+      <section class="panel col-12">
+        <h2>可检索关键词</h2>
+        <p>AARRR 漏斗模型；SICAS-AARRR 整合框架；平台适配；馆型差异；网络调查法；内容分析法；图书馆短视频；公共图书馆；高校图书馆；抖音；快手；B站；服务价值；Revenue 非营利化；传播力评价；复习队列；知识图谱；CNKI 人工下载交接；cnki_2021_3771e58987；cnki_2021_645f03f388。</p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="wrap">Manual closeout log. Refresh commands should regenerate indexes and mirrors after this page changes.</footer>
+</body>
+</html>

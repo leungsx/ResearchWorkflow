@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>5 篇已读论文快速复盘 - 图书馆短视频相关研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>5 篇已读论文快速复盘 - 图书馆短视频相关研究</h1>
+      <p class="sub">projects/library_short_video/literature/recaps/2026-06-20-five-paper-quick-recap.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/literature/recaps/2026-06-20-five-paper-quick-recap.md</div>
+        <article class="md-view">
+<h1>5 篇已读论文快速复盘 - 图书馆短视频相关研究</h1>
+<p>Date: 2026-06-20 Project: <code>library_short_video</code> Source: <code>literature/context_packs/</code></p>
+<h2>一句话总判断</h2>
+<p>这 5 篇文献共同说明：图书馆短视频研究已经从“是否要做、怎么运营”的早期讨论，推进到“哪些内容特征影响平台互动”的经验研究；但目前共同短板是把点赞、评论、分享等平台互动当成效果指标，还没有充分证明这些互动能转化为图书馆服务价值、阅读推广成效或公共文化使命。</p>
+<h2>五篇文献各自角色</h2>
+<table><thead><tr><th>Citekey</th><th>文献</th><th>角色</th><th>主要价值</th><th>核心限制</th></tr></thead><tbody><tr><td><code>cnki_2020_64b4f881c9</code></td><td>王海燕 2020</td><td>早期问题基线</td><td>说明 2019 年图书馆抖音账号开通少、运营弱、原创不足</td><td>描述性强，不能证明策略有效</td></tr><tr><td><code>cnki_2021_7556aafa99</code></td><td>孙雨、陈凤娟 2021</td><td>公共馆服务地图</td><td>63 家公共图书馆账号调查，形成服务策略框架</td><td>获赞/粉丝/作品数不能代表服务效果</td></tr><tr><td><code>cnki_2020_2a150c6df8</code></td><td>沈丽红 2020</td><td>热门内容规律</td><td>从 328 账号、8069 视频中筛出 103 条热门视频，归纳爆款特征</td><td>只看热门样本，不能证明因果</td></tr><tr><td><code>cnki_2021_d35f8e895a</code></td><td>高晓晶等 2021</td><td>官方馆实证核心文献</td><td>Hook Model + 10 个图书馆官方账号 + 879 视频，变量化分析互动效果</td><td>互动指标不能直接代表服务价值，且不能当因果结论</td></tr><tr><td><code>cnki_2021_dfab60236e</code></td><td>杨达森等 2021</td><td>外部方法模板</td><td>ELM + 30 个高粉社会化阅读账号 + 10294 视频，方法更强</td><td>样本不是图书馆官方账号，迁移需谨慎</td></tr></tbody></table>
+<h2>研究主线</h2>
+<ol>
+<li>王海燕 2020 给出早期现场：图书馆短视频账号少、弱、不稳定。</li>
+<li>孙雨、陈凤娟 2021 把公共图书馆抖音服务做成了更系统的服务地图。</li>
+<li>沈丽红 2020 从热门视频反推内容规律，提出流量型内容特征。</li>
+<li>高晓晶等 2021 把图书馆官方账号研究推进到模型和变量检验。</li>
+<li>杨达森等 2021 提供更强的大样本、多模态、回归方法模板，但样本转向社会化阅读账号。</li>
+</ol>
+<h2>共同发现</h2>
+<ul>
+<li>图书馆短视频的早期问题集中在：开通率低、运营不规范、作品少、原创内容弱、互动不足。</li>
+<li>能提升平台互动的内容因素大致包括：标题设计、内容主题、音乐/制作形式、信息类型、可读性、网络热词、标题互文性、时长控制。</li>
+<li>热门内容常借助：热点、情绪、名人、实拍/采访、知识普及和社会文化内容。</li>
+<li>研究逐渐从经验建议转向变量化、模型化和实证检验。</li>
+</ul>
+<h2>共同缺口</h2>
+<ul>
+<li>平台互动指标不足：点赞、评论、分享、粉丝不能直接等于阅读推广效果或图书馆服务价值。</li>
+<li>因果识别不足：多数研究是描述、内容分析、非参数检验或回归，不能直接证明某个策略导致效果提升。</li>
+<li>平台时代漂移：多数数据来自 2019-2021 年，当前 2024-2026 年平台生态可能已变化。</li>
+<li>样本外推不足：头部馆、公共馆、社会化账号之间差异很大，不能直接互相替代。</li>
+<li>变量还不够完整：推荐算法、发布时间、评论语义、主持人风格、剪辑节奏、账号定位、服务转化等变量缺位。</li>
+</ul>
+<h2>最有潜力的研究方向</h2>
+<ol>
+<li>构建图书馆短视频“平台互动-服务触达-阅读转化”复合评价指标。</li>
+<li>整合 Hook Model 与 ELM，解释图书馆短视频中“触发/酬赏”和“中心/边缘线索”的作用机制。</li>
+<li>对比图书馆官方账号与社会化阅读账号，判断哪些经验可以迁移、哪些不能迁移。</li>
+<li>用 2024-2026 年新数据复测早期研究结论。</li>
+<li>区分“流量型热门”和“服务价值型热门”，避免把高互动直接等同于图书馆使命实现。</li>
+</ol>
+<h2>当前最适合继续推进的判断</h2>
+<p>如果目标是形成论文选题，最有价值的切口不是简单问“图书馆短视频怎么做更火”，而是问：</p>
+<blockquote>图书馆短视频的高互动内容，是否真的带来了阅读推广和公共文化服务价值？如果没有，应该如何构建兼顾平台传播和图书馆使命的评价框架？</blockquote>
+<p>这个方向能承接 5 篇文献的共同基础，也能避开它们最明显的共同局限。</p>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

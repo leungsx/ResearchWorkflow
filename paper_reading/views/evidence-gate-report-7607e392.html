@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evidence Gate Report</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Evidence Gate Report</h1>
+      <p class="sub">projects/library_short_video/manuscript/evidence_gate_report.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：projects/library_short_video/manuscript/evidence_gate_report.md</div>
+        <article class="md-view">
+<h1>Evidence Gate Report</h1>
+<p>Generated: 2026-06-29T09:15:46 Project: <code>library_short_video</code> Matrix: <code>/Users/leung/ResearchWorkflow/library/literature_matrix.csv</code></p>
+<h2>Summary</h2>
+<table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr><td>Status</td><td>WARNINGS</td></tr><tr><td>Literature matrix rows</td><td>60</td></tr><tr><td>Project-tagged rows</td><td>60</td></tr><tr><td>Citekeys used in project materials</td><td>9</td></tr><tr><td>ERROR issues</td><td>0</td></tr><tr><td>WARN issues</td><td>1</td></tr><tr><td>INFO issues</td><td>51</td></tr></tbody></table>
+<h2>Gate Rules</h2>
+<ul>
+<li><code>metadata-only</code>, <code>abstract-only</code>, <code>ai-summarized</code>, <code>unread</code>, or blank sources cannot support manuscript claims.</li>
+<li>Critical manuscript evidence should be <code>human-read</code> or <code>verified</code>.</li>
+<li>Accepted evidence needs a source locator: <code>pdf_path</code>, <code>note_path</code>, or <code>literature/readers/&lt;citekey&gt;/paper.md</code>.</li>
+</ul>
+<h2>Issues</h2>
+<table><thead><tr><th>Severity</th><th>Location</th><th>Issue</th><th>Suggested action</th></tr></thead><tbody><tr><td>INFO</td><td><code>cnki_2020_62aa02b5b0 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2019_94a1721837 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2019_d713007c64 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2020_5ca581e54f (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_dddc719517 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_50f2b81085 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2020_0842a8f6c4 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2020_2f64bb62c6 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_2ba9195a8a (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_2bcdca1cf9 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>WARN</td><td><code>cnki_2021_645f03f388 (literature synthesis)</code></td><td>Referenced in project materials but still <code>metadata-only</code>.</td><td>Keep it out of manuscript claims until full-text reading and source locators are available.</td></tr><tr><td>INFO</td><td><code>cnki_2022_efd2209e07 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_86b70a7c0f (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_4d1ed48a48 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_2d4348379a (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_e0a8336b38 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_c8e47e2e81 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2019_9ec51df06a (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_fc17e50522 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_c7cfb20665 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_262e161fba (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_4c81746e3f (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2023_82f69af538 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_398981384c (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2020_6bf0d72fd0 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_0cc75176c8 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_d60db663ef (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2019_e5680a5c6f (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_5a331088f6 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_151bdd551c (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_f09cc21db1 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_9747478bfb (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_592e3fc8d9 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2023_8392476a4a (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_52ddb883c3 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_65ed123378 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_cff072e93b (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2024_9481032c38 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_dea116d7f1 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_749cafc8bb (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2020_b9e3748735 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2020_1c7df3126c (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_98ccb705d3 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2020_a84718cff7 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_1853e8d80a (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_0912e8eaa5 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2023_1bfcef28cd (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_6a37d9ebb4 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2020_b6c00967c4 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2023_5147fb76e7 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2022_5e24d834f4 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr><tr><td>INFO</td><td><code>cnki_2021_add9763b02 (project literature pool)</code></td><td>Project-tagged source remains <code>metadata-only</code>.</td><td>This is acceptable for a frontier pool, but not for manuscript evidence.</td></tr></tbody></table>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

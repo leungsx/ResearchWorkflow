@@ -1,6 +1,6 @@
 # Context Index
 
-Last updated: 2026-06-30T08:50:25
+Last updated: 2026-06-30T20:08:58
 
 ## Default Startup Read Order
 
@@ -47,7 +47,7 @@ Read hot state first. Do not scan old raw logs unless the current task needs exa
 
 These are preserved for audit and exact reconstruction, but are not default startup context.
 
-- `2026-06-30.md` (300 words, summary)
+- `2026-06-30.md` (333 words, summary)
 - `2026-06-29.md` (526 words, summary)
 - `2026-06-28.md` (198 words, summary)
 - `2026-06-27.md` (115 words, no-summary)

@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>论文研讨卡 - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>论文研讨卡 - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索</h1>
+      <p class="sub">vault/15_CNKI_Frontier/paper_briefs/cnki_2021_d35f8e895a.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：vault/15_CNKI_Frontier/paper_briefs/cnki_2021_d35f8e895a.md</div>
+        <article class="md-view">
+<h1>论文研讨卡 - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索</h1>
+<p>Generated: 2026-06-20T10:09:53 Updated: 2026-06-20 Citekey: <code>cnki_2021_d35f8e895a</code> Source level: 全文 reader 级, pending human confirmation</p>
+<h2>元数据</h2>
+<ul>
+<li>题名：图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索</li>
+<li>作者：高晓晶;喻梦倩;杨家燕;张毓晗</li>
+<li>年份：2021</li>
+<li>来源：图书情报工作</li>
+<li>数据库：CNKI</li>
+<li>CSSCI/核心状态：未标注</li>
+<li>DOI：未记录</li>
+<li>阅读状态：source-grounded-reader; not human-read; not verified</li>
+<li>本地原文：<code>library/pdfs/library_short_video/cnki_2021_d35f8e895a.caj</code></li>
+<li>Reader：<code>projects/library_short_video/literature/readers/cnki_2021_d35f8e895a/paper.md</code></li>
+</ul>
+<h2>全文级理解</h2>
+<ul>
+<li>一句话概括：这篇文章用“上瘾模型”组织图书馆短视频传播互动的影响因素，并用 879 个图书馆抖音短视频样本进行非参数检验，是当前学习集中最适合先讨论“理论框架 + 平台数据 + 运营策略”如何结合的一篇。</li>
+<li>研究对象：粉丝量排名前 10 的图书馆官方抖音号，最新 100 个短视频作品，不足 100 个则取全部，共 879 个样本。</li>
+<li>方法线索：内容编码 + 平台互动指标建模 + SPSS 非参数检验。因变量为基于点赞、评论、转发计算的传播及互动 <code>C指数</code>；自变量包括标题句型、标题长度、背景音乐情感类型、制作类别、内容主题、信息类型、时长、相关或连续性。</li>
+<li>主要发现：标题句型、背景音乐情感类型、制作类别、内容主题、信息类型对 <code>C指数</code> 有显著影响；标题长度、时长、相关或连续性未表现出显著影响。</li>
+<li>方法价值：它提供了一个可复用的中文 LIS 经验研究模板，但后续研究不能直接把相关性写成因果关系。</li>
+</ul>
+<h2>可用证据锚点</h2>
+<ul>
+<li><code>cnki_2021_d35f8e895a:B0006</code>：研究综述与该文自述研究缺口。</li>
+<li><code>cnki_2021_d35f8e895a:B0008</code>：图书馆短视频运营问题，包括开通比例低、作品数量少、优质内容少。</li>
+<li><code>cnki_2021_d35f8e895a:B0009</code>：上瘾模型到 8 个变量的映射。</li>
+<li><code>cnki_2021_d35f8e895a:B0010</code> 和 <code>B0011</code>：样本、因变量、自变量与非参数检验路径。</li>
+<li><code>cnki_2021_d35f8e895a:B0011</code> 到 <code>B0013</code>：显著和非显著因素的统计结果。</li>
+<li><code>cnki_2021_d35f8e895a:B0014</code> 到 <code>B0016</code>：结果解释、运营策略和结语。</li>
+</ul>
+<h2>研讨问题</h2>
+<ul>
+<li>它解决的主要是“图书馆短视频如何提高互动效果”的方法/实践问题，还是“图书馆知识传播机制如何被平台逻辑重塑”的理论问题？</li>
+<li>如果后续要投《图书情报工作》，我们是复用它的变量体系，还是用它作为对比对象，提出更强的服务质量/用户价值指标？</li>
+<li>该文将“互动效果”主要操作化为点赞、评论、转发。这个指标是否足以支持“阅读推广”或“知识传播”层面的主张？</li>
+<li>2020 年左右的抖音图书馆账号状态是否已经过时？是否需要 2024-2026 的平台数据作更新研究？</li>
+</ul>
+<h2>待补充</h2>
+<ul>
+<li>[ ] 用户确认是否已读全文。</li>
+<li>[ ] 核对 reader 抽取质量和原文表格/图示。</li>
+<li>[ ] 若未来写作引用统计结果，补充页码或表格定位。</li>
+<li>[ ] 与其他 4 个已生成 reader 做交叉综合，避免单篇文献驱动结论。</li>
+</ul>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CNKI 每日论文推荐 - 图书馆短视频相关研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>CNKI 每日论文推荐 - 图书馆短视频相关研究</h1>
+      <p class="sub">vault/15_CNKI_Frontier/daily_recommendations/2026-06-21-library_short_video-next-after-main.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：vault/15_CNKI_Frontier/daily_recommendations/2026-06-21-library_short_video-next-after-main.md</div>
+        <article class="md-view">
+<h1>CNKI 每日论文推荐 - 图书馆短视频相关研究</h1>
+<p>Date: 2026-06-21 Project: <code>library_short_video</code> Stage: <code>foundation_high_impact</code> / 基础高影响 Stage logic: 先读领域内被引、下载、来源和贴合度都较强的论文，建立共同语言。 Candidate pool: 20 project-tagged CNKI rows Profile: <code>projects/library_short_video/literature/recommendation_profile.json</code> State: <code>projects/library_short_video/literature/daily_learning_state.json</code></p>
+<h2>边界</h2>
+<ul>
+<li>这是每日学习推荐，不等同于全文核验。</li>
+<li><code>metadata-only</code>、<code>skimmed</code> 不能直接作为论文证据；真正写进论文前必须补足全文阅读和 source locator。</li>
+<li>原文只使用你通过 CNKI/机构/图书馆合法取得的本地文件。</li>
+</ul>
+<h2>指标来源</h2>
+<ul>
+<li><code>library/cnki_exports/library_short_video/cnki_library_short_video_current.csv</code></li>
+<li><code>library/cnki_exports/library_short_video/cnki_library_short_video_current.json</code></li>
+<li><code>library/cnki_exports/library_short_video/cnki_library_short_video_2026-06-21_page1.csv</code></li>
+<li><code>library/cnki_exports/library_short_video/cnki_library_short_video_2026-06-21_page1.json</code></li>
+<li><code>library/cnki_exports/library_short_video/cnki_library_short_video_page1.csv</code></li>
+<li><code>library/cnki_exports/library_short_video/cnki_library_short_video_page1.json</code></li>
+</ul>
+<h2>今日主读</h2>
+<p><strong>公共图书馆短视频公众平台建设现状分析</strong></p>
+<ul>
+<li>Citekey: <code>cnki_2020_5ca581e54f</code></li>
+<li>年份/来源: 2020 / 图书馆学研究</li>
+<li>作者: 曾一昕;张齐婕</li>
+<li>CNKI 指标: 被引 107，下载 1954</li>
+<li>阅读状态: <code>metadata-only</code></li>
+<li>Reader: 未生成</li>
+<li>本地全文: 未记录</li>
+</ul>
+<h3>为什么今天读它</h3>
+<ul>
+<li>CNKI 被引 107，下载 1954</li>
+<li>领域词命中: 图书馆短视频、公共图书馆、图书馆、短视频、视频</li>
+<li>核心主题组覆盖: 图书馆短视频、图书馆短视频</li>
+<li>图情领域来源</li>
+<li>可用于现状/问题/策略地图</li>
+</ul>
+<h3>今天怎么读</h3>
+<ul>
+<li>先读题名、摘要/引言和结论，确认它为什么成为领域基础文献。</li>
+<li>再看研究对象、数据来源、指标和方法，判断证据强度。</li>
+<li>提取 3 个可复用概念或判断框架，以及 2 个明显局限。</li>
+<li>最后连接到你的问题：它帮助我们理解图书馆短视频的什么核心机制？</li>
+</ul>
+<h3>研讨问题</h3>
+<ul>
+<li>这篇文章真正解决的是图书馆服务问题、传播效果问题，还是平台运营问题？</li>
+<li>它为什么被引较多：理论框架、数据方法、实践问题，还是选题时机？</li>
+<li>它把短视频效果测量成什么：观看、点赞、互动、阅读推广、服务触达，还是知识传播？</li>
+<li>它的证据是否足以支撑结论？哪些地方只是经验判断或策略建议？</li>
+<li>如果面向《图书情报工作》，它提示我们需要补强哪类图情领域贡献？</li>
+</ul>
+<h3>下一步命令</h3>
+<pre><code class="language-bash">make paper-brief CITEKEY=cnki_2020_5ca581e54f
+make insight-bank PROJECT=library_short_video CITEKEY=cnki_2020_5ca581e54f</code></pre>
+<h3>可用资源</h3>
+<ul>
+<li>如需精读：先通过授权 CNKI/机构渠道下载全文，再运行 <code>make paper-reader</code>。</li>
+</ul>
+<h2>伴读队列</h2>
+<table><thead><tr><th>Rank</th><th>Score</th><th>Citekey</th><th>Year</th><th>Title</th><th>Source</th><th>Cited</th><th>Downloads</th><th>Reader</th><th>PDF</th><th>Read status</th></tr></thead><tbody><tr><td>1</td><td>75.9</td><td><code>cnki_2019_94a1721837</code></td><td>2019</td><td>短视频APP在图书馆推广中的应用及发展策略——基于平台数据的统计分析</td><td>图书馆学研究</td><td>130</td><td>2989</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>2</td><td>75.3</td><td><code>cnki_2021_2ba9195a8a</code></td><td>2021</td><td>我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析</td><td>图书馆学研究</td><td>79</td><td>2025</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>3</td><td>74.0</td><td><code>cnki_2023_34348faa1e</code></td><td>2023</td><td>基于SICAS模型的公共图书馆短视频营销策略研究</td><td>图书馆工作与研究</td><td>105</td><td>5245</td><td>yes</td><td>yes</td><td>metadata-only</td></tr></tbody></table>
+<h2>后续候选池</h2>
+<table><thead><tr><th>Rank</th><th>Score</th><th>Citekey</th><th>Year</th><th>Title</th><th>Source</th><th>Cited</th><th>Downloads</th><th>Reader</th><th>PDF</th><th>Read status</th></tr></thead><tbody><tr><td>1</td><td>76.4</td><td><code>cnki_2020_5ca581e54f</code></td><td>2020</td><td>公共图书馆短视频公众平台建设现状分析</td><td>图书馆学研究</td><td>107</td><td>1954</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>2</td><td>75.9</td><td><code>cnki_2019_94a1721837</code></td><td>2019</td><td>短视频APP在图书馆推广中的应用及发展策略——基于平台数据的统计分析</td><td>图书馆学研究</td><td>130</td><td>2989</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>3</td><td>75.3</td><td><code>cnki_2021_2ba9195a8a</code></td><td>2021</td><td>我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析</td><td>图书馆学研究</td><td>79</td><td>2025</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>4</td><td>74.0</td><td><code>cnki_2023_34348faa1e</code></td><td>2023</td><td>基于SICAS模型的公共图书馆短视频营销策略研究</td><td>图书馆工作与研究</td><td>105</td><td>5245</td><td>yes</td><td>yes</td><td>metadata-only</td></tr><tr><td>5</td><td>72.7</td><td><code>cnki_2021_645f03f388</code></td><td>2021</td><td>图书馆短视频账号传播力研究——以省级公共图书馆为例</td><td>图书馆学研究</td><td>74</td><td>2082</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>6</td><td>72.0</td><td><code>cnki_2021_2bcdca1cf9</code></td><td>2021</td><td>短视频社会化阅读推广效果分析——以抖音短视频为例</td><td>图书馆</td><td>74</td><td>4127</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>7</td><td>71.7</td><td><code>cnki_2020_62aa02b5b0</code></td><td>2020</td><td>大学生手机短视频过度使用行为影响因素研究</td><td>图书馆学研究</td><td>167</td><td>13278</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>8</td><td>63.9</td><td><code>cnki_2022_efd2209e07</code></td><td>2022</td><td>基于4P营销模型的高校图书馆读书类短视频运营策略研究</td><td>图书馆工作与研究</td><td>72</td><td>4461</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>9</td><td>62.8</td><td><code>cnki_2019_d713007c64</code></td><td>2019</td><td>媒体融合背景下高校图书馆服务营销策略研究</td><td>图书馆工作与研究</td><td>109</td><td>2415</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>10</td><td>62.2</td><td><code>cnki_2020_0842a8f6c4</code></td><td>2020</td><td>文旅融合背景下的公共数字文化服务创新发展——以陕西省图书馆“智能文化云地标”的建设实践为例</td><td>国家图书馆学刊</td><td>92</td><td>4124</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>11</td><td>62.0</td><td><code>cnki_2020_2f64bb62c6</code></td><td>2020</td><td>短视频古籍推广调查及发展策略</td><td>图书馆论坛</td><td>81</td><td>2453</td><td>no</td><td>no</td><td>metadata-only</td></tr><tr><td>12</td><td>60.5</td><td><code>cnki_2021_dddc719517</code></td><td>2021</td><td>“新4C法则”下图书馆网络直播营销策略研究</td><td>图书馆工作与研究</td><td>99</td><td>3768</td><td>no</td><td>no</td><td>metadata-only</td></tr></tbody></table>
+<h2>今日记录动作</h2>
+<ul>
+<li>[ ] 读完后，把真实阅读状态只升级到实际达到的层级：<code>skimmed</code>、<code>human-read</code> 或 <code>verified</code>。</li>
+<li>[ ] 把主读论文的创新点、局限性和可转化机会写入 <code>projects/&lt;project&gt;/literature/innovation_limitation_bank.md</code>。</li>
+<li>[ ] 若讨论形成稳定判断，更新 <code>projects/&lt;project&gt;/03_literature_synthesis.md</code>。</li>
+<li>[ ] 若用于论文主张，补 source locator，再运行 <code>make evidence-gate PROJECT=&lt;project&gt;</code>。</li>
+</ul>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

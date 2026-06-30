@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>方法卡：网络调查法</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>方法卡：网络调查法</h1>
+      <p class="sub">可直接在浏览器阅读的知识卡镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../../paper_reading/today.html">今日精读</a>
+<a href="../../paper_reading/index.html">论文归档</a>
+<a href="../index.html" aria-current="page">知识卡</a>
+<a href="../review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="../../paper_reading/views/vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../index.html">返回知识卡入口</a>
+          <a href="../../paper_reading/today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：vault/03_Methods/网络调查法.md</div>
+        <article class="md-view">
+<section class="frontmatter"><h2>元数据</h2><table><tbody><tr><th>type</th><td>method</td></tr><tr><th>id</th><td>method-web-survey</td></tr><tr><th>title</th><td>&quot;网络调查法&quot;</td></tr><tr><th>domain</th><td>&quot;研究设计 / 平台观察 / 图书馆新媒体&quot;</td></tr><tr><th>level</th><td>&quot;beginner&quot;</td></tr><tr><th>status</th><td>learning</td></tr><tr><th>review_stage</th><td>1</td></tr><tr><th>next_review</th><td>2026-07-01</td></tr></tbody></table></section>
+<h1>网络调查法</h1>
+<h2>一句话用途</h2>
+<p>网络调查法用于系统收集互联网上可观察的账号、页面、作品、互动和服务入口信息，先建立研究对象的样本地图。</p>
+<h2>它解决什么科研问题</h2>
+<p>当研究对象分布在多个平台、缺少统一名录时，网络调查法适合回答“有哪些对象、在哪里、基本状态如何、可比字段是什么”。</p>
+<h2>通俗解释</h2>
+<p>它像做一份有规则的线上普查。不是随手看几个账号，而是先写清检索词、平台、时间点、筛选规则和记录字段，再按同一规则收集。</p>
+<h2>科研例子</h2>
+<p>在 <span class="wikilink">cnki_2021_3771e58987</span> 中，作者在抖音、快手、B站以“图书馆”为关键词检索账号，并参照公共图书馆评估定级名单和教育部高校名单筛选机构认证账号，最终保留公共图书馆 161 个、高校图书馆 18 个。</p>
+<h2>常见误区</h2>
+<ul>
+<li>不要只写“在平台搜索”而不记录检索词、日期和筛选规则。</li>
+<li>不要把平台搜索结果当成完整总体，平台算法和命名方式会造成遗漏。</li>
+<li>不要把描述性调查写成因果研究。</li>
+</ul>
+<h2>如何用于我的研究</h2>
+<ul>
+<li>可用于 <span class="wikilink">图书馆短视频相关研究</span> 的多平台账号名录建设。</li>
+<li>适合和 <span class="wikilink">平台适配</span>、<span class="wikilink">馆型差异</span> 结合，形成公共馆/高校馆/科研馆的样本底表。</li>
+<li>后续可接 <span class="wikilink">内容分析法</span>、统计建模、访谈或案例研究。</li>
+</ul>
+<h2>来源论文</h2>
+<ul>
+<li><span class="wikilink">cnki_2021_3771e58987</span></li>
+</ul>
+<h2>和哪些概念相关</h2>
+<ul>
+<li><span class="wikilink">平台适配</span></li>
+<li><span class="wikilink">馆型差异</span></li>
+<li><span class="wikilink">AARRR 漏斗模型</span></li>
+</ul>
+<h2>和哪些方法相关</h2>
+<ul>
+<li><span class="wikilink">内容分析法</span></li>
+<li><span class="wikilink">描述性账号调查</span></li>
+</ul>
+<h2>复习问题</h2>
+<ol>
+<li>网络调查法最适合回答什么类型的问题？</li>
+<li>为什么检索词、时间点和筛选规则必须提前写清？</li>
+<li>如果用网络调查法研究图书馆视频号，你会记录哪些字段？</li>
+</ol>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

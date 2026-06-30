@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>论文研讨卡 - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>论文研讨卡 - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究</h1>
+      <p class="sub">vault/15_CNKI_Frontier/paper_briefs/cnki_2020_2a150c6df8.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：vault/15_CNKI_Frontier/paper_briefs/cnki_2020_2a150c6df8.md</div>
+        <article class="md-view">
+<h1>论文研讨卡 - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究</h1>
+<p>Generated: 2026-06-20T14:57:09 Updated: 2026-06-20T22:59:06 Citekey: <code>cnki_2020_2a150c6df8</code> Source level: source-grounded reader / companion-read</p>
+<h2>元数据</h2>
+<ul>
+<li>题名：图书馆热门短视频内容规律探究——基于抖音平台的实证研究</li>
+<li>作者：沈丽红</li>
+<li>年份：2020</li>
+<li>来源：图书馆</li>
+<li>数据库：CNKI</li>
+<li>CSSCI/核心状态：未标注</li>
+<li>DOI：未记录</li>
+<li>阅读状态：skimmed</li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2020_2a150c6df8/paper.md</code></li>
+</ul>
+<h2>核心摘要</h2>
+<p>这篇文章回答的是“图书馆什么样的短视频更容易成为热门”。作者于 2020 年 6 月在抖音检索图书馆相关账号，得到 328 个图书馆抖音账户、8069 个短视频，再以点赞量超过 1000 且非转发视频为门槛，选取 103 条热门视频进行内容分析。研究认为：标题详尽、有话题引导、配字幕、实拍/采访形式、知识普及和社会文化主题、名人明星出镜、强情绪色彩，更容易出现在热门图书馆短视频中。</p>
+<h2>主要观点</h2>
+<ul>
+<li>图书馆短视频总体传播力不高，点赞超过 1000 的热门视频只占 8069 条中的 1.3%。</li>
+<li>热门视频集中在少数账号，存在明显聚集效应。</li>
+<li>15-60 秒是热门视频中最常见的时长，但作者强调内容质量比单纯时长更关键。</li>
+<li>标题、话题、字幕影响用户理解和平台分发；实拍和采访增强真实感；知识普及和社会文化内容更容易形成传播；情绪和名人效应能提高认同和扩散。</li>
+</ul>
+<h2>创新点 / 价值</h2>
+<ul>
+<li>从“热门视频”切入，不只是描述账号现状，而是尝试归纳内容规律。</li>
+<li>给出了可复用的内容编码维度：标题长度、话题引导、时长、字幕、类型、主题、情绪、人物角色。</li>
+<li>与后续 Hook Model/ELM 文献互补：它提供内容经验规则，后续模型文献提供理论化和统计检验。</li>
+</ul>
+<h2>局限性</h2>
+<ul>
+<li>只分析热门视频，没有完整的非热门对照组，因此不能证明这些因素导致热门。</li>
+<li>以点赞量为热门门槛，忽略播放、完播、收藏、关注转化和实际服务使用。</li>
+<li>作者承认外部因素如账号粉丝数、视频总数、账号成熟度等也可能影响传播；人工分类也会带来误差。</li>
+</ul>
+<h2>可用证据</h2>
+<ul>
+<li><code>B0001</code>: 摘要和核心发现。</li>
+<li><code>B0003</code>-<code>B0005</code>: 328 个账号、8069 条视频、103 条热门视频样本和点赞阈值。</li>
+<li><code>B0005</code>-<code>B0009</code>: 时长、标题、话题、类型、主题、字幕、情绪和角色分布。</li>
+<li><code>B0009</code>-<code>B0011</code>: 热门视频内容规律解释。</li>
+<li><code>B0012</code>-<code>B0013</code>: 内容建设建议。</li>
+<li><code>B0014</code>: 作者自述局限。</li>
+</ul>
+<h2>与本项目的关系</h2>
+<p>这篇适合作为“内容策略和变量来源”文献。它能帮助我们把变量库从标题、时长、主题扩展到字幕、话题、人物角色、情绪和真实感，但不能直接当作因果证据。真正有研究潜力的地方，是把这些热门内容规律与图书馆服务价值指标连接起来。</p>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>

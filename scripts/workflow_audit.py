@@ -5,6 +5,7 @@ import argparse
 import csv
 import datetime as dt
 import html
+import json
 import os
 import re
 import subprocess
@@ -13,15 +14,25 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote
 
+from rendering.action_queue import write_action_queue
+from rendering.workflow_state import write_workflow_state
+
 
 ROOT = Path(__file__).resolve().parents[1]
 VAULT = ROOT / "vault"
+PROJECTS = ROOT / "projects"
 PAPER_READING = ROOT / "paper_reading"
 KNOWLEDGE_CARDS = ROOT / "knowledge_cards"
 KNOWLEDGE_GRAPH = ROOT / "knowledge_graph"
+SEARCH = ROOT / "search"
 HTML_LOGS = ROOT / "logs"
 GRAPH_DIR = VAULT / "13_Knowledge_Graph"
+ARTIFACT_MANIFEST = GRAPH_DIR / "artifact_manifest.csv"
+SEARCH_INDEX = GRAPH_DIR / "search_index.json"
+ACTION_QUEUE = GRAPH_DIR / "action_queue.json"
 REVIEW_QUEUE = VAULT / "14_Review_Queue" / "review_queue.csv"
+REVIEW_STATE = VAULT / "14_Review_Queue" / "review_state.json"
+REVIEW_TODAY = KNOWLEDGE_CARDS / "review_today.html"
 AUDIT_DIR = VAULT / "07_Codex_Logs" / "workflow_audits"
 COMPACT_DIR = VAULT / "07_Codex_Logs" / "compact_daily"
 DAILY_DIR = VAULT / "07_Codex_Logs" / "daily"
@@ -29,6 +40,8 @@ SWEEP_DIR = VAULT / "07_Codex_Logs" / "file_sweeps"
 PACK_DIR = VAULT / "09_Context_Packs"
 BACKUP_DIR = ROOT / "backups"
 HEALTH_HTML = ROOT / "workflow_health.html"
+WORKFLOW_STATE_HTML = ROOT / "workflow_state.html"
+ACTION_QUEUE_HTML = ROOT / "action_queue.html"
 
 
 @dataclass
@@ -77,6 +90,15 @@ def csv_rows(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle))
 
 
+def read_json(path: Path) -> dict | list | None:
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+
+
 def html_links(path: Path) -> list[str]:
     parser = LinkParser()
     parser.feed(read_text(path))
@@ -84,7 +106,7 @@ def html_links(path: Path) -> list[str]:
 
 
 def is_external(href: str) -> bool:
-    return bool(re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", href)) and not href.startswith("file:")
+    return bool(re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", href))
 
 
 def local_target(page: Path, href: str) -> Path | None:
@@ -103,7 +125,11 @@ def user_facing_html_pages() -> list[Path]:
         PAPER_READING / "today.html",
         PAPER_READING / "index.html",
         KNOWLEDGE_CARDS / "index.html",
+        REVIEW_TODAY,
         KNOWLEDGE_GRAPH / "index.html",
+        SEARCH / "index.html",
+        WORKFLOW_STATE_HTML,
+        ACTION_QUEUE_HTML,
         HTML_LOGS / "index.html",
     ]
     pages.extend(sorted(PAPER_READING.glob("20*.html")))
@@ -113,7 +139,13 @@ def user_facing_html_pages() -> list[Path]:
 
 def all_generated_html_pages() -> list[Path]:
     pages = user_facing_html_pages()
-    for directory in [PAPER_READING / "views", KNOWLEDGE_CARDS / "views", HTML_LOGS / "views"]:
+    for directory in [
+        PAPER_READING / "views",
+        PAPER_READING / "views" / "directories",
+        KNOWLEDGE_CARDS / "views",
+        HTML_LOGS / "views",
+        SEARCH,
+    ]:
         pages.extend(sorted(directory.glob("*.html")))
     return sorted(set(pages))
 
@@ -128,7 +160,9 @@ def check_required_files(checks: list[Check], day: dt.date) -> None:
         PAPER_READING / "today.html",
         PAPER_READING / "index.html",
         KNOWLEDGE_CARDS / "index.html",
+        REVIEW_TODAY,
         KNOWLEDGE_GRAPH / "index.html",
+        SEARCH / "index.html",
         HTML_LOGS / "index.html",
         DAILY_DIR / f"{day.isoformat()}.md",
         COMPACT_DIR / f"{day.isoformat()}-summary.md",
@@ -151,7 +185,7 @@ def check_user_facing_markdown_links(checks: list[Check]) -> None:
     if offenders:
         add(checks, "易用性", "FAIL", "用户入口仍有裸 Markdown 链接", "\n".join(offenders[:20]))
     else:
-        add(checks, "易用性", "PASS", "用户入口没有裸 Markdown 直链", "主入口、今日页、知识卡、图谱和日志入口都指向可浏览页面。")
+        add(checks, "易用性", "PASS", "用户入口没有裸 Markdown 直链", "主入口、今日页、知识卡、复习、图谱、搜索和日志入口都指向可浏览页面。")
 
 
 def check_local_link_targets(checks: list[Check]) -> None:
@@ -215,6 +249,207 @@ def check_graph(checks: list[Check]) -> None:
         add(checks, "知识图谱", "FAIL", "图谱节点或关系为空", f"nodes={len(nodes)}, edges={len(edges)}")
     else:
         add(checks, "知识图谱", "PASS", "图谱入口是可视化关系图", f"nodes={len(nodes)}, unique_edges={len(edges)}")
+
+
+def check_artifact_manifest(checks: list[Check]) -> None:
+    rows = csv_rows(ARTIFACT_MANIFEST)
+    if not rows:
+        add(checks, "资产清单", "FAIL", "artifact manifest 缺失或为空", f"期望文件：{rel(ARTIFACT_MANIFEST)}")
+        return
+
+    required_fields = {"source_path", "source_type", "display_path", "display_type", "title", "layer", "generated_by"}
+    missing_fields = required_fields - set(rows[0].keys())
+    display_missing: list[str] = []
+    source_missing: list[str] = []
+    markdown_displays: list[str] = []
+    seen: set[tuple[str, str, str]] = set()
+    duplicates: list[str] = []
+    display_types = {row.get("display_type", "") for row in rows}
+
+    for row in rows:
+        source_path = row.get("source_path", "")
+        display_path = row.get("display_path", "")
+        display_type = row.get("display_type", "")
+        key = (source_path, display_path, display_type)
+        if key in seen:
+            duplicates.append(" | ".join(key))
+        seen.add(key)
+
+        if display_path.endswith(".md"):
+            markdown_displays.append(f"{source_path} -> {display_path}")
+        if display_path and not (ROOT / display_path).exists():
+            display_missing.append(f"{source_path} -> {display_path}")
+        if source_path and not (ROOT / source_path).exists():
+            source_missing.append(source_path)
+
+    required_types = {
+        "dashboard",
+        "paper_today_entry",
+        "knowledge_cards_index",
+        "review_today",
+        "knowledge_graph",
+        "search",
+        "logs_index",
+        "review_state",
+        "search_index",
+        "workflow_state",
+        "workflow_state_data",
+        "action_queue",
+        "action_queue_data",
+    }
+    missing_types = sorted(required_types - display_types)
+    failures = []
+    if missing_fields:
+        failures.append("缺少字段：" + "、".join(sorted(missing_fields)))
+    if display_missing:
+        failures.append("缺失展示页：" + "；".join(display_missing[:8]))
+    if markdown_displays:
+        failures.append("展示路径指向 Markdown：" + "；".join(markdown_displays[:8]))
+    if missing_types:
+        failures.append("缺少展示类型：" + "、".join(missing_types))
+    if duplicates:
+        failures.append("重复条目：" + "；".join(duplicates[:5]))
+
+    if failures:
+        add(checks, "资产清单", "FAIL", "artifact manifest 不满足展示契约", "；".join(failures))
+    elif source_missing:
+        add(checks, "资产清单", "WARN", "manifest 中存在源文件缺失", "；".join(source_missing[:8]))
+    else:
+        add(checks, "资产清单", "PASS", "artifact manifest 覆盖核心展示资产", f"{len(rows)} 条；display_types={len(display_types)}")
+
+
+def check_search_index(checks: list[Check]) -> None:
+    payload = read_json(SEARCH_INDEX)
+    search_html = SEARCH / "index.html"
+    search_text = read_text(search_html)
+    if not isinstance(payload, dict):
+        add(checks, "搜索索引", "FAIL", "search_index.json 缺失或不是合法 JSON", rel(SEARCH_INDEX))
+        return
+    entries = payload.get("entries", [])
+    if not isinstance(entries, list) or not entries:
+        add(checks, "搜索索引", "FAIL", "搜索索引为空", rel(SEARCH_INDEX))
+        return
+    if not search_html.exists() or "searchInput" not in search_text or "searchState" not in search_text:
+        add(checks, "搜索索引", "FAIL", "搜索 HTML 入口缺少交互标记", rel(search_html))
+        return
+
+    bad_targets: list[str] = []
+    markdown_targets: list[str] = []
+    missing_text: list[str] = []
+    for entry in entries:
+        display_path = str(entry.get("display_path", ""))
+        title = str(entry.get("title", ""))
+        if not display_path.endswith(".html"):
+            markdown_targets.append(f"{title} -> {display_path}")
+        if display_path and not (ROOT / display_path).exists():
+            bad_targets.append(f"{title} -> {display_path}")
+        if not entry.get("search_text"):
+            missing_text.append(title or display_path)
+
+    declared_count = payload.get("entry_count")
+    if declared_count != len(entries):
+        add(checks, "搜索索引", "FAIL", "搜索索引计数不一致", f"entry_count={declared_count}, actual={len(entries)}")
+    elif bad_targets or markdown_targets:
+        detail = []
+        if bad_targets:
+            detail.append("失效展示目标：" + "；".join(bad_targets[:8]))
+        if markdown_targets:
+            detail.append("非 HTML 展示目标：" + "；".join(markdown_targets[:8]))
+        add(checks, "搜索索引", "FAIL", "搜索结果目标不满足 HTML 契约", "；".join(detail))
+    elif missing_text:
+        add(checks, "搜索索引", "WARN", "部分搜索条目缺少 search_text", "；".join(missing_text[:8]))
+    else:
+        layers = sorted({str(entry.get("layer", "")) for entry in entries if entry.get("layer")})
+        add(checks, "搜索索引", "PASS", "搜索索引和搜索页可用", f"{len(entries)} 条；layers={len(layers)}")
+
+
+def check_review_state(checks: list[Check], day: dt.date) -> None:
+    queue_rows = csv_rows(REVIEW_QUEUE)
+    payload = read_json(REVIEW_STATE)
+    if not isinstance(payload, dict):
+        add(checks, "复习状态", "FAIL", "review_state.json 缺失或不是合法 JSON", rel(REVIEW_STATE))
+        return
+    if not REVIEW_TODAY.exists() or "今日复习入口" not in read_text(REVIEW_TODAY):
+        add(checks, "复习状态", "FAIL", "今日复习 HTML 入口缺失或内容异常", rel(REVIEW_TODAY))
+        return
+
+    summary = payload.get("summary", {})
+    expected_due = sum(1 for row in queue_rows if row.get("next_review", "") <= day.isoformat())
+    total = summary.get("total_items")
+    due_count = summary.get("due_count")
+    focus_items = payload.get("focus_items", [])
+    bad_focus: list[str] = []
+    if isinstance(focus_items, list):
+        for item in focus_items:
+            display_path = str(item.get("display_path", ""))
+            if not display_path.endswith(".html") or not (ROOT / display_path).exists():
+                bad_focus.append(f"{item.get('title', '')} -> {display_path}")
+
+    if total != len(queue_rows) or due_count != expected_due:
+        add(checks, "复习状态", "FAIL", "review_state 与 review_queue 不一致", f"total={total}/{len(queue_rows)}；due={due_count}/{expected_due}")
+    elif bad_focus:
+        add(checks, "复习状态", "FAIL", "复习重点项展示目标失效", "；".join(bad_focus[:8]))
+    else:
+        add(checks, "复习状态", "PASS", "复习状态快照与队列一致", f"total={total}, due={due_count}, focus={len(focus_items) if isinstance(focus_items, list) else 0}")
+
+
+def check_project_states(checks: list[Check]) -> None:
+    projects = sorted([path for path in PROJECTS.iterdir() if path.is_dir() and (path / "project.yaml").exists()])
+    if not projects:
+        add(checks, "项目状态", "WARN", "未发现 project.yaml 项目", "projects/ 下没有可审计项目。")
+        return
+
+    problems: list[str] = []
+    for project in projects:
+        state_path = project / "project_state.json"
+        payload = read_json(state_path)
+        if not isinstance(payload, dict):
+            problems.append(f"{project.name}: project_state.json 缺失或 JSON 无效")
+            continue
+        entrypoints = payload.get("entrypoints", {})
+        artifacts = payload.get("artifacts", {})
+        for key in ["today", "review_today", "search"]:
+            value = str(entrypoints.get(key, ""))
+            if not value or not value.endswith(".html") or not (ROOT / value).exists():
+                problems.append(f"{project.name}: entrypoints.{key} -> {value}")
+        for key in ["artifact_manifest", "search_index"]:
+            value = str(artifacts.get(key, entrypoints.get(key, "")))
+            if not value or not (ROOT / value).exists():
+                problems.append(f"{project.name}: {key} -> {value}")
+        review = payload.get("review", {})
+        if not isinstance(review, dict) or "focus_items" not in review:
+            problems.append(f"{project.name}: review.focus_items 缺失")
+
+    if problems:
+        add(checks, "项目状态", "FAIL", "项目状态文件缺少关键入口", "；".join(problems[:10]))
+    else:
+        add(checks, "项目状态", "PASS", "项目状态文件可供自动化读取", f"{len(projects)} 个项目。")
+
+
+def check_action_queue(checks: list[Check]) -> None:
+    payload = read_json(ACTION_QUEUE)
+    if not isinstance(payload, dict):
+        add(checks, "行动队列", "FAIL", "action_queue.json 缺失或不是合法 JSON", rel(ACTION_QUEUE))
+        return
+    if not ACTION_QUEUE_HTML.exists() or "行动队列" not in read_text(ACTION_QUEUE_HTML):
+        add(checks, "行动队列", "FAIL", "行动队列 HTML 入口缺失或内容异常", rel(ACTION_QUEUE_HTML))
+        return
+    actions = payload.get("actions", [])
+    if not isinstance(actions, list) or not actions:
+        add(checks, "行动队列", "WARN", "行动队列为空", "如果审计和复习都无积压，可以接受；否则需检查生成器。")
+        return
+    bad_targets: list[str] = []
+    for action in actions:
+        entrypoint = str(action.get("entrypoint", ""))
+        if not entrypoint.endswith(".html") or not (ROOT / entrypoint).exists():
+            bad_targets.append(f"{action.get('title', '')} -> {entrypoint}")
+    summary = payload.get("summary", {})
+    if summary.get("total_open") != len(actions):
+        add(checks, "行动队列", "FAIL", "行动队列计数不一致", f"total_open={summary.get('total_open')}, actual={len(actions)}")
+    elif bad_targets:
+        add(checks, "行动队列", "FAIL", "行动队列存在非 HTML 或失效入口", "；".join(bad_targets[:8]))
+    else:
+        add(checks, "行动队列", "PASS", "行动队列可用且入口有效", f"{len(actions)} 个开放行动。")
 
 
 def check_review_queue(checks: list[Check], day: dt.date) -> None:
@@ -328,6 +563,10 @@ def run_checks(day: dt.date) -> list[Check]:
     check_local_link_targets(checks)
     check_mirror_freshness(checks)
     check_graph(checks)
+    check_artifact_manifest(checks)
+    check_search_index(checks)
+    check_review_state(checks, day)
+    check_project_states(checks)
     check_review_queue(checks, day)
     check_backup(checks, day)
     check_git_backup(checks)
@@ -431,7 +670,11 @@ def html_report(day: dt.date, checks: list[Check]) -> str:
       <nav class="nav">
         <a href="study_dashboard.html">总览</a>
         <a href="paper_reading/today.html">今日精读</a>
+        <a href="knowledge_cards/review_today.html">今日复习</a>
         <a href="knowledge_graph/index.html">知识图谱</a>
+        <a href="search/index.html">全局搜索</a>
+        <a href="workflow_state.html">总状态</a>
+        <a href="action_queue.html">行动队列</a>
         <a href="logs/index.html">学习日志</a>
       </nav>
     </div>
@@ -452,6 +695,11 @@ def html_report(day: dt.date, checks: list[Check]) -> str:
 
 def write_reports(day: dt.date, checks: list[Check]) -> tuple[Path, Path]:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+    write_workflow_state(checks)
+    write_action_queue()
+    check_action_queue(checks)
+    write_workflow_state(checks)
+    write_action_queue()
     md_path = AUDIT_DIR / f"{day.isoformat()}-workflow-audit.md"
     md_path.write_text(markdown_report(day, checks) + "\n", encoding="utf-8")
     HEALTH_HTML.write_text(html_report(day, checks), encoding="utf-8")

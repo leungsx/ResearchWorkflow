@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex-First Research Operating Protocol</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182026;
+      --muted: #61707d;
+      --line: #d9e0e6;
+      --paper: #ffffff;
+      --soft: #f6f8fa;
+      --blue: #2463eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f4f6f8;
+      line-height: 1.55;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Codex-First Research Operating Protocol</h1>
+      <p class="sub">codex/OPERATING_PROTOCOL.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：codex/OPERATING_PROTOCOL.md</div>
+        <article class="md-view">
+<h1>Codex-First Research Operating Protocol</h1>
+<p>This protocol exists because the user will use Codex as the primary interface for research. The user does not want to manually organize files, literature, daily notes, or weekly summaries. Codex should perform those operations whenever research work happens in this workspace.</p>
+<h2>Core Contract</h2>
+<ol>
+<li>Codex is responsible for organizing research artifacts created through the conversation.</li>
+<li>Codex should not rely on the user to manually move files, classify literature, or maintain daily/weekly logs.</li>
+<li>Codex must manage context growth by writing durable summaries into local files.</li>
+<li>Codex must keep a user model, but update it cautiously from repeated evidence rather than single-message overfitting.</li>
+<li>Codex cannot autonomously run when no Codex session exists. &quot;Daily&quot; and &quot;weekly&quot; mean: when a Codex session is active on that day/week, Codex must update the corresponding records.</li>
+</ol>
+<h2>Session Start Routine</h2>
+<p>When a research session starts, or when the user asks to continue research:</p>
+<pre><code class="language-bash">cd /Users/leung/ResearchWorkflow
+make codex-start</code></pre>
+<p>Then read, as needed:</p>
+<ul>
+<li><code>codex/state/current_context.md</code></li>
+<li><code>codex/state/open_loops.md</code></li>
+<li><code>codex/state/user_model.md</code></li>
+<li><code>codex/state/context_index.md</code> when present</li>
+<li>today&#x27;s compact summary under <code>vault/07_Codex_Logs/compact_daily/</code> when present</li>
+<li>today&#x27;s raw log under <code>vault/07_Codex_Logs/daily/</code> only when exact chronology or details are needed</li>
+<li>current weekly review under <code>vault/08_Weekly_Reviews/</code></li>
+</ul>
+<p>Do not dump these files to the user. Use them to orient the work.</p>
+<h2>During-Session Capture</h2>
+<p>Capture these items while working:</p>
+<ul>
+<li>user&#x27;s explicit goals</li>
+<li>decisions made</li>
+<li>files created or modified</li>
+<li>literature searched, read, or discussed</li>
+<li>experiments or commands run</li>
+<li>figures/data generated</li>
+<li>unresolved questions</li>
+<li>changes in the user&#x27;s preferences, constraints, or thinking style</li>
+</ul>
+<p>If a session is long, compress intermediate reasoning into the daily log and keep the final answer focused.</p>
+<h2>Session Closeout Routine</h2>
+<p>Before finishing any substantive research-workflow turn:</p>
+<ol>
+<li>Append a concise entry to today&#x27;s daily log.</li>
+<li>Run <code>make codex-sweep</code> when files were created or modified.</li>
+<li>Update <code>codex/state/current_context.md</code> if durable context changed.</li>
+<li>Update <code>codex/state/open_loops.md</code> if new gaps or next actions appear.</li>
+<li>Update <code>codex/state/user_model.md</code> only when a repeated or explicit preference is observed.</li>
+<li>If the turn crosses a weekly review boundary or the user asks for review, update the weekly review file.</li>
+</ol>
+<p>The closeout can be skipped only for trivial Q&amp;A that produces no durable research state.</p>
+<h2>Fast-Lane Policy</h2>
+<p>The workflow uses three operating levels. Choose the lightest level that preserves research integrity.</p>
+<h3>Micro Tasks</h3>
+<p>Examples:</p>
+<ul>
+<li>recommend the next paper from an existing matrix</li>
+<li>check current project status</li>
+<li>locate a reader, context pack, or PDF</li>
+<li>answer a quick workflow question</li>
+<li>produce a short recap from an existing context pack</li>
+</ul>
+<p>Default handling:</p>
+<ol>
+<li>Use existing hot state and generated runtime snapshots first.</li>
+<li>If the task creates a durable trace, record one quick event with</li>
+<p><code>make codex-event PROJECT=&lt;slug&gt; SUMMARY=&quot;...&quot;</code>.</p>
+<li>Refresh the generated snapshot with</li>
+<p><code>make fast-status PROJECT=&lt;slug&gt; TOPIC=&quot;&lt;topic&gt;&quot;</code> when helpful.</p>
+<li>Do not run file sweep, compact, evidence gate, dashboard rewrites, or context</li>
+<p>pack regeneration unless the micro task changes evidence state.</p>
+</ol>
+<h3>Standard Tasks</h3>
+<p>Examples:</p>
+<ul>
+<li>validate and organize a new PDF/CAJ conversion</li>
+<li>generate a Reader or paper context pack</li>
+<li>finish guided reading of a paper</li>
+<li>update <code>read_status</code>, synthesis, or the innovation-limitation bank</li>
+<li>change a user-facing board because the user&#x27;s next action changed</li>
+</ul>
+<p>Default handling:</p>
+<ol>
+<li>Update the canonical artifact directly affected by the work.</li>
+<li>Update user-facing boards only when the user needs the changed entry point.</li>
+<li>Append one daily closeout entry, preferably through</li>
+<p><code>make codex-close-standard PROJECT=&lt;slug&gt; SUMMARY=&quot;...&quot;</code>.</p>
+<li>Run evidence gate only when manuscript evidence, read status, or source</li>
+<p>locator safety changed.</p>
+<li>Run sweep at closeout; compact only if the daily log grew materially.</li>
+</ol>
+<h3>Deep Tasks</h3>
+<p>Examples:</p>
+<ul>
+<li>milestone synthesis</li>
+<li>weekly review</li>
+<li>research-question narrowing</li>
+<li>manuscript claims, citation audits, submission package, or passport</li>
+<li>broad architecture changes</li>
+</ul>
+<p>Default handling:</p>
+<ol>
+<li>Update hot state, open loops, and user-facing docs as needed.</li>
+<li>Run the relevant integrity checks.</li>
+<li>Use <code>make codex-close-deep PROJECT=&lt;slug&gt; SUMMARY=&quot;...&quot;</code> or the explicit</li>
+<p>closeout routine.</p>
+<li>Run sweep and compact before ending.</li>
+</ol>
+<p>The fast-lane policy does not weaken evidence boundaries. It only prevents low-risk micro tasks from triggering full archival and dashboard maintenance.</p>
+<h2>Weekly Review Routine</h2>
+<p>Once per active research week, Codex should synthesize:</p>
+<ul>
+<li>main questions discussed</li>
+<li>decisions and rationale</li>
+<li>literature and methods touched</li>
+<li>files created or changed</li>
+<li>open loops</li>
+<li>next week&#x27;s recommended priorities</li>
+<li>observed user thinking patterns</li>
+<li>workflow improvements to implement</li>
+</ul>
+<p>Use:</p>
+<pre><code class="language-bash">make codex-weekly</code></pre>
+<p>Then add human-quality synthesis manually where the script leaves placeholders.</p>
+<h2>Context Management</h2>
+<p>Use local context packs instead of relying on long chat history:</p>
+<ul>
+<li><code>codex/state/current_context.md</code>: compressed durable state.</li>
+<li><code>codex/state/context_index.md</code>: startup routing index for compact summaries, context packs, weekly reviews, and cold raw logs.</li>
+<li><code>vault/09_Context_Packs/</code>: dated context snapshots.</li>
+<li><code>vault/07_Codex_Logs/daily/</code>: chronological raw session record; keep for audit, not default startup reading.</li>
+<li><code>vault/07_Codex_Logs/compact_daily/</code>: compact daily summaries for fast startup reading.</li>
+<li><code>vault/08_Weekly_Reviews/</code>: weekly synthesis.</li>
+</ul>
+<p>When context gets long, write a new context pack with:</p>
+<ul>
+<li>current research goals</li>
+<li>active projects</li>
+<li>important files</li>
+<li>decisions</li>
+<li>open questions</li>
+<li>user preferences</li>
+<li>next actions</li>
+</ul>
+<p>Future sessions should resume from the context pack rather than re-reading all prior logs.</p>
+<h2>Log Compaction Policy</h2>
+<p>The workflow uses a hot / warm / cold context model:</p>
+<ul>
+<li>Hot: <code>current_context.md</code>, <code>open_loops.md</code>, <code>user_model.md</code>, and <code>context_index.md</code>.</li>
+<li>Warm: compact daily summaries, current weekly review, and the latest context pack.</li>
+<li>Cold: raw daily logs and file sweeps.</li>
+</ul>
+<p>Default startup should read hot context first and warm summaries only as needed. Do not read old raw daily logs by default. Raw logs are preserved for audit, exact chronology, or disputed details.</p>
+<p>Use:</p>
+<pre><code class="language-bash">make codex-compact DATE=YYYY-MM-DD
+make codex-compact-all
+make codex-context-audit</code></pre>
+<p>After substantive turns, run <code>make codex-compact</code> when the daily log has grown, when the turn creates durable context, or before ending a long session. Promote only cross-day durable facts into <code>current_context.md</code>; leave transient chronology in compact summaries or raw logs.</p>
+<h2>Literature Handling</h2>
+<p>When literature is searched or discussed:</p>
+<ol>
+<li>Save search metadata under <code>library/search_results/</code>.</li>
+<li>Import relevant results into <code>library/literature_matrix.csv</code>.</li>
+<li>Create or update Obsidian notes for important papers.</li>
+<li>Mark whether evidence is abstract-only, AI-summarized, skimmed, human-read, or verified.</li>
+<li>Do not treat AI-generated summaries as verified evidence.</li>
+</ol>
+<h2>Idea Lab Handling</h2>
+<p>When the user wants brainstorming, new research ideas, topic discovery, or research direction guidance:</p>
+<ol>
+<li>Route to deep-research Socratic mode principles: guide first, do not prematurely assign a topic.</li>
+<li>Create or update an Idea Lab session under <code>vault/11_Idea_Lab/sessions/</code>.</li>
+<li>Use accumulated context from <code>current_context.md</code>, <code>user_model.md</code>, <code>open_loops.md</code>, <code>literature_matrix.csv</code>, and relevant Obsidian notes.</li>
+<li>Save promising ideas as idea cards under <code>vault/11_Idea_Lab/idea_cards/</code>.</li>
+<li>Mark whether each idea needs a frontier scan.</li>
+<li>When current frontier claims are needed, perform up-to-date literature/web lookup and record sources in <code>vault/11_Idea_Lab/frontier_scans/</code>.</li>
+<li>Use FINER as an initial filter before promoting an idea to a formal research project.</li>
+<li>Only create a formal project after the user has converged on at least one candidate research question.</li>
+</ol>
+<h2>Happy Research Loop Handling</h2>
+<p>When the user asks for a simple, enjoyable research flow, or asks to connect ideas, experiments, results, and paper contribution:</p>
+<ol>
+<li>Identify the current loop stage: inspiration, idea, research question, hypothesis, experiment design, run, result interpretation, claim-evidence mapping, writing, or archive.</li>
+<li>Ask only the minimum necessary question to move one small step forward.</li>
+<li>If a guess or expectation appears, save it in <code>05_hypothesis_registry.md</code>.</li>
+<li>If data or an experiment appears, design or update <code>04_experiment_plan.md</code>.</li>
+<li>If results appear, update <code>06_result_interpretation.md</code>.</li>
+<li>If a paper claim appears, update <code>07_claim_evidence_map.md</code>.</li>
+<li>Treat non-supportive or inconclusive results as useful information, not failure.</li>
+<li>Before writing strong claims, check reproducibility, statistical interpretation, alternative explanations, and literature alignment.</li>
+</ol>
+<h2>Knowledge Coach Handling</h2>
+<p>When the user asks about a concept, theory, scientific method, statistical method, research design, paper-writing concept, or anything they do not understand:</p>
+<ol>
+<li>Teach in plain language first, with one simple example and one research example.</li>
+<li>Explain common misunderstandings and how to remember the idea.</li>
+<li>Connect the knowledge point to the user&#x27;s current projects, Idea Lab, literature matrix, or methods notes when possible.</li>
+<li>Create or update an Obsidian concept note under <code>vault/02_Concepts/</code> or method note under <code>vault/03_Methods/</code>.</li>
+<li>Create a learning session under <code>vault/12_Learning_Log/sessions/</code> when the explanation is substantive.</li>
+<li>Add the item to <code>vault/14_Review_Queue/review_queue.csv</code> for later review.</li>
+<li>Use Obsidian <code><span class="wikilink">links</span></code> to connect concepts, methods, literature, projects, and ideas.</li>
+<li>When useful, export the knowledge graph with <code>make obsidian-graph</code> so Gephi can visualize the user&#x27;s learning and research directions.</li>
+<li>Do not overcomplicate the first explanation; teach progressively and check understanding through short recall questions.</li>
+</ol>
+<h2>User Model Rules</h2>
+<p>Maintain <code>codex/state/user_model.md</code>.</p>
+<p>Record:</p>
+<ul>
+<li>stable preferences</li>
+<li>repeated question styles</li>
+<li>common friction points</li>
+<li>preferred output language and granularity</li>
+<li>research domains and methods</li>
+<li>collaboration expectations</li>
+</ul>
+<p>Avoid:</p>
+<ul>
+<li>psychological overreach</li>
+<li>inferring stable traits from one message</li>
+<li>hiding uncertainty</li>
+<li>using the user model to flatter rather than improve work</li>
+</ul>
+<h2>Non-Negotiable Boundaries</h2>
+<ul>
+<li>Do not upload private manuscripts, raw data, or participant data to external services without explicit consent.</li>
+<li>Do not invent citations, paper details, software results, or file contents.</li>
+<li>Do not skip integrity checks for paper claims, data, or figures.</li>
+<li>Do not assume scheduled background work happened unless a local record proves it.</li>
+</ul>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+</body>
+</html>
