@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-06-30T22:34:21",
+  "generated_at": "2026-06-30T22:36:26",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -15,7 +15,7 @@
     "manifest_rows": 105,
     "search_entries": 105,
     "project_count": 2,
-    "git_dirty_paths": 7
+    "git_dirty_paths": 0
   },
   "audit": {
     "counts": {
@@ -88,13 +88,13 @@
         "area": "备份",
         "status": "PASS",
         "title": "最近备份可用",
-        "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 2.4 小时前。"
+        "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 2.5 小时前。"
       },
       {
         "area": "Git/异地备份",
         "status": "PASS",
         "title": "Git 本地和远程快照状态正常",
-        "detail": "upstream=origin/main；last commit: b38ebc5 2026-06-30 22:33:59 +0800 refresh workflow audit state"
+        "detail": "upstream=origin/main；last commit: 48db7d6 2026-06-30 22:36:08 +0800 fix workflow state git dirty baseline"
       },
       {
         "area": "Token/记忆",
