@@ -1,7 +1,7 @@
 # Workflow Audit - 2026-06-30
 
-Generated: 2026-06-30T22:33:20
-Summary: PASS=13 WARN=3 FAIL=0
+Generated: 2026-06-30T22:34:21
+Summary: PASS=14 WARN=2 FAIL=0
 
 ## Checks
 
@@ -18,11 +18,11 @@ Summary: PASS=13 WARN=3 FAIL=0
 | 项目状态 | PASS | 项目状态文件可供自动化读取 | 2 个项目。 |
 | 复习队列 | WARN | 存在到期复习项 | 8 项到期：方向链；Hook Model 上瘾模型；SICAS模型；软营销；沉浸式内容；用户感知价值；DCI传播力指数；描述性账号调查 |
 | 备份 | PASS | 最近备份可用 | backups/researchworkflow-critical-20260630-200857.zip，约 2.4 小时前。 |
-| Git/异地备份 | WARN | 本地提交尚未推送到远程 | ahead=2, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git |
+| Git/异地备份 | PASS | Git 本地和远程快照状态正常 | upstream=origin/main；last commit: b38ebc5 2026-06-30 22:33:59 +0800 refresh workflow audit state |
 | Token/记忆 | PASS | 今日 compact summary 可作为默认启动上下文 | vault/07_Codex_Logs/compact_daily/2026-06-30-summary.md，约 319 words。 |
 | 文件卫生 | WARN | 工作区存在系统/缓存文件 | .DS_Store=21；__pycache__=3；这些不会进入 file sweep，但可择机清理。 |
 | Schema | PASS | 核心机器状态 schema 校验通过 | 8 个文件通过校验。 |
-| 行动队列 | PASS | 行动队列可用且入口有效 | 13 个开放行动。 |
+| 行动队列 | PASS | 行动队列可用且入口有效 | 12 个开放行动。 |
 
 ## Recommended Daily Order
 

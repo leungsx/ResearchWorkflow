@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-06-30T22:33:20",
+  "generated_at": "2026-06-30T22:34:21",
   "date": "2026-06-30",
   "summary": {
     "counts": {
-      "PASS": 13,
-      "WARN": 3,
+      "PASS": 14,
+      "WARN": 2,
       "FAIL": 0
     },
     "check_count": 16
@@ -83,9 +83,9 @@
     },
     {
       "area": "Git/异地备份",
-      "status": "WARN",
-      "title": "本地提交尚未推送到远程",
-      "detail": "ahead=2, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git"
+      "status": "PASS",
+      "title": "Git 本地和远程快照状态正常",
+      "detail": "upstream=origin/main；last commit: b38ebc5 2026-06-30 22:33:59 +0800 refresh workflow audit state"
     },
     {
       "area": "Token/记忆",
@@ -109,7 +109,7 @@
       "area": "行动队列",
       "status": "PASS",
       "title": "行动队列可用且入口有效",
-      "detail": "13 个开放行动。"
+      "detail": "12 个开放行动。"
     }
   ]
 }

@@ -1,21 +1,21 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-06-30T22:33:20",
+  "generated_at": "2026-06-30T22:34:21",
   "source_state": "vault/13_Knowledge_Graph/workflow_state.json",
   "entrypoint": "action_queue.html",
   "summary": {
-    "total_open": 13,
+    "total_open": 12,
     "high_priority": 6,
     "by_kind": {
       "review": 1,
       "review_item": 5,
-      "audit_warn": 2,
+      "audit_warn": 1,
       "project": 5
     }
   },
   "actions": [
     {
-      "id": "review-3-完成-8-个到期知识卡复习",
+      "id": "review-2-完成-8-个到期知识卡复习",
       "kind": "review",
       "priority": 90,
       "title": "完成 8 个到期知识卡复习",
@@ -26,7 +26,7 @@
       "rank": 1
     },
     {
-      "id": "review_item-6-复习-dci传播力指数",
+      "id": "review_item-5-复习-dci传播力指数",
       "kind": "review_item",
       "priority": 80,
       "title": "复习：DCI传播力指数",
@@ -37,7 +37,7 @@
       "rank": 2
     },
     {
-      "id": "review_item-5-复习-hook-model-上瘾模型",
+      "id": "review_item-4-复习-hook-model-上瘾模型",
       "kind": "review_item",
       "priority": 80,
       "title": "复习：Hook Model 上瘾模型",
@@ -48,7 +48,7 @@
       "rank": 3
     },
     {
-      "id": "review_item-7-复习-sicas模型",
+      "id": "review_item-6-复习-sicas模型",
       "kind": "review_item",
       "priority": 80,
       "title": "复习：SICAS模型",
@@ -59,7 +59,7 @@
       "rank": 4
     },
     {
-      "id": "review_item-8-复习-描述性账号调查",
+      "id": "review_item-7-复习-描述性账号调查",
       "kind": "review_item",
       "priority": 80,
       "title": "复习：描述性账号调查",
@@ -70,7 +70,7 @@
       "rank": 5
     },
     {
-      "id": "review_item-4-复习-方向链",
+      "id": "review_item-3-复习-方向链",
       "kind": "review_item",
       "priority": 80,
       "title": "复习：方向链",
@@ -92,18 +92,7 @@
       "rank": 7
     },
     {
-      "id": "audit_warn-2-处理提醒-本地提交尚未推送到远程",
-      "kind": "audit_warn",
-      "priority": 70,
-      "title": "处理提醒：本地提交尚未推送到远程",
-      "reason": "ahead=2, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git",
-      "entrypoint": "workflow_health.html",
-      "source": "Git/异地备份",
-      "status": "open",
-      "rank": 8
-    },
-    {
-      "id": "project-12-starter-research-project-先建立或导入项目文献矩阵-再生成",
+      "id": "project-11-starter-research-project-先建立或导入项目文献矩阵-再生成",
       "kind": "project",
       "priority": 60,
       "title": "Starter Research Project：先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
@@ -111,10 +100,10 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-b90a4a93.html",
       "source": "starter_project",
       "status": "open",
-      "rank": 9
+      "rank": 8
     },
     {
-      "id": "project-13-starter-research-project-如果这是占位项目-保持-proje",
+      "id": "project-12-starter-research-project-如果这是占位项目-保持-proje",
       "kind": "project",
       "priority": 60,
       "title": "Starter Research Project：如果这是占位项目，保持 project_state.json 作为结构模板即可。",
@@ -122,10 +111,10 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-b90a4a93.html",
       "source": "starter_project",
       "status": "open",
-      "rank": 10
+      "rank": 9
     },
     {
-      "id": "project-9-图书馆短视频相关研究-先处理-evidence-gate-的-warn-error",
+      "id": "project-8-图书馆短视频相关研究-先处理-evidence-gate-的-warn-error",
       "kind": "project",
       "priority": 60,
       "title": "图书馆短视频相关研究：先处理 evidence gate 的 WARN/ERROR，避免 metadata-only 文献进入论文主张。",
@@ -133,10 +122,10 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 11
+      "rank": 10
     },
     {
-      "id": "project-11-图书馆短视频相关研究-围绕最近主读--cnki-2021-3771e58987--补",
+      "id": "project-10-图书馆短视频相关研究-围绕最近主读--cnki-2021-3771e58987--补",
       "kind": "project",
       "priority": 60,
       "title": "图书馆短视频相关研究：围绕最近主读 `cnki_2021_3771e58987`，补齐与既有概念/方法的关系和证据边界。",
@@ -144,10 +133,10 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 12
+      "rank": 11
     },
     {
-      "id": "project-10-图书馆短视频相关研究-把已读文献继续汇总进文献综述工作台-收敛-2-3-个研究问题",
+      "id": "project-9-图书馆短视频相关研究-把已读文献继续汇总进文献综述工作台-收敛-2-3-个研究问题",
       "kind": "project",
       "priority": 60,
       "title": "图书馆短视频相关研究：把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。",
@@ -155,7 +144,7 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 13
+      "rank": 12
     }
   ]
 }
