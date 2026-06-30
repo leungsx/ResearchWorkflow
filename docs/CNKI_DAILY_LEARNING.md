@@ -35,6 +35,21 @@ make paper-context PROJECT=<project_slug> CITEKEY=<citekey>
 make paper-context PROJECT=<project_slug> ALL=1
 ```
 
+When the project needs more local full texts before daily reading, generate a
+human download handoff instead of trying to make Codex download everything:
+
+```bash
+make cnki-handoff PROJECT=<project_slug> TOPIC="研究主题" COUNT=12
+```
+
+The user downloads the listed papers into the generated
+`library/pdfs/<project_slug>/incoming/<date>/` folder, then Codex ingests them:
+
+```bash
+make cnki-intake PROJECT=<project_slug>
+make cnki-daily PROJECT=<project_slug> TOPIC="研究主题"
+```
+
 Allowed stages:
 
 - `foundation_high_impact`: high-citation, high-download, high-fit field papers.
@@ -108,17 +123,19 @@ Edit the profile rather than the script when the user's topic preference changes
 ## Daily Routine
 
 1. For a quick check, run `make fast-status PROJECT=<project_slug> TOPIC="主题" PRINT=1`.
-2. When you want a full daily recommendation report, run `make cnki-daily PROJECT=<project_slug> TOPIC="主题"`.
-3. Open the generated daily report.
-4. Read the primary paper with the listed reader or full text.
-5. Generate or open the paper context pack when continuing a discussion:
+2. If the recommended candidates do not have local full text, run `make cnki-handoff PROJECT=<project_slug> TOPIC="主题" COUNT=12` and ask the user to download into the generated folder.
+3. After the user downloads files, run `make cnki-intake PROJECT=<project_slug>`; add `BUILD_READERS=1` when the files are PDFs and should immediately become Readers.
+4. When you want a full daily recommendation report, run `make cnki-daily PROJECT=<project_slug> TOPIC="主题"`.
+5. Open the generated daily report.
+6. Read the primary paper with the listed reader or full text.
+7. Generate or open the paper context pack when continuing a discussion:
 
 ```bash
 make paper-context PROJECT=<project_slug> CITEKEY=<citekey>
 ```
 
-6. Discuss the report questions with Codex.
-7. Add the paper's reusable innovations, key limitations, and research
+8. Discuss the report questions with Codex.
+9. Add the paper's reusable innovations, key limitations, and research
    opportunities to:
 
 ```text
@@ -131,8 +148,8 @@ Use this helper to create a blank card if the paper is not in the bank yet:
 make insight-bank PROJECT=<project_slug> CITEKEY=<citekey>
 ```
 
-8. After real reading, update only the achieved `read_status`.
-9. If the paper supports a manuscript claim, add source locators and run:
+10. After real reading, update only the achieved `read_status`.
+11. If the paper supports a manuscript claim, add source locators and run:
 
 ```bash
 make evidence-gate PROJECT=<project_slug>

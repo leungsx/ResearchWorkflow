@@ -1,6 +1,6 @@
 # Context Index
 
-Last updated: 2026-06-29T23:03:17
+Last updated: 2026-06-30T08:50:25
 
 ## Default Startup Read Order
 
@@ -13,11 +13,12 @@ Read hot state first. Do not scan old raw logs unless the current task needs exa
 
 ## Today
 
-- Daily log: `/Users/leung/ResearchWorkflow/vault/07_Codex_Logs/daily/2026-06-29.md`
-- Compact summary: `/Users/leung/ResearchWorkflow/vault/07_Codex_Logs/compact_daily/2026-06-29-summary.md`
+- Daily log: `/Users/leung/ResearchWorkflow/vault/07_Codex_Logs/daily/2026-06-30.md`
+- Compact summary: `/Users/leung/ResearchWorkflow/vault/07_Codex_Logs/compact_daily/2026-06-30-summary.md`
 
 ## Recent Compact Daily Summaries
 
+- `2026-06-30-summary.md` (319 words)
 - `2026-06-29-summary.md` (336 words)
 - `2026-06-28-summary.md` (133 words)
 - `2026-06-21-summary.md` (665 words)
@@ -27,6 +28,7 @@ Read hot state first. Do not scan old raw logs unless the current task needs exa
 
 ## Recent Context Packs
 
+- `2026-06-30-context-pack.md` (177 words)
 - `2026-06-29-context-pack.md` (351 words)
 - `2026-06-28-context-pack.md` (253 words)
 - `2026-06-27-context-pack.md` (41 words)
@@ -45,6 +47,7 @@ Read hot state first. Do not scan old raw logs unless the current task needs exa
 
 These are preserved for audit and exact reconstruction, but are not default startup context.
 
+- `2026-06-30.md` (300 words, summary)
 - `2026-06-29.md` (526 words, summary)
 - `2026-06-28.md` (198 words, summary)
 - `2026-06-27.md` (115 words, no-summary)

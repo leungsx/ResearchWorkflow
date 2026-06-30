@@ -1,6 +1,6 @@
 PYTHON ?= /Users/leung/anaconda3/bin/python
 
-.PHONY: check new status fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
+.PHONY: check new status fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
 
 check:
 	$(PYTHON) scripts/check_environment.py
@@ -75,6 +75,12 @@ cnki-frontier:
 
 cnki-daily:
 	$(PYTHON) scripts/cnki_daily_recommend.py --project "$(PROJECT)" $(if $(TOPIC),--topic "$(TOPIC)",) $(if $(DATE),--date "$(DATE)",) $(if $(STAGE),--stage "$(STAGE)",) $(if $(COMPANIONS),--companions "$(COMPANIONS)",) $(if $(OUTPUT),--output "$(OUTPUT)",) $(if $(PROFILE),--profile "$(PROFILE)",) $(if $(NO_STATE),--no-update-state,)
+
+cnki-handoff:
+	$(PYTHON) scripts/cnki_human_download_handoff.py request $(if $(PROJECT),--project "$(PROJECT)",) $(if $(TOPIC),--topic "$(TOPIC)",) $(if $(DATE),--date "$(DATE)",) $(if $(STAGE),--stage "$(STAGE)",) $(if $(COUNT),--count "$(COUNT)",) $(if $(PROFILE),--profile "$(PROFILE)",) $(if $(OPEN),--open-cnki,) $(if $(ALLOW_EXTERNAL),--allow-external,)
+
+cnki-intake:
+	$(PYTHON) scripts/cnki_human_download_handoff.py intake $(if $(PROJECT),--project "$(PROJECT)",) $(if $(REQUEST),--request "$(REQUEST)",) $(if $(INCOMING),--incoming-dir "$(INCOMING)",) $(if $(TARGET),--target-dir "$(TARGET)",) $(if $(BUILD_READERS),--build-readers,) $(if $(MOVE),--move,)
 
 cnki-download:
 	$(PYTHON) scripts/cnki_click_download_titles.py $(if $(TITLE),--title "$(TITLE)",) $(if $(TITLES),--titles-file "$(TITLES)",) $(if $(PROJECT),--target-dir "library/pdfs/$(PROJECT)",) $(if $(MODE),--download-mode "$(MODE)",) $(if $(TIMEOUT),--timeout "$(TIMEOUT)",) $(if $(DETAIL_TIMEOUT),--detail-timeout "$(DETAIL_TIMEOUT)",) $(if $(DELAY_MIN),--delay-min "$(DELAY_MIN)",) $(if $(DELAY_MAX),--delay-max "$(DELAY_MAX)",) $(if $(CONFIRM_SAVE),--confirm-save-dialog,) $(if $(SAVE_DIALOG_DELAY),--save-dialog-delay "$(SAVE_DIALOG_DELAY)",) $(if $(NO_STOP_ON_BARRIER),--no-stop-on-barrier,) --update-matrix

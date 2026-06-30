@@ -1,6 +1,6 @@
 # User Model
 
-Last updated: 2026-06-29
+Last updated: 2026-06-30
 
 ## Explicit Preferences
 
@@ -12,6 +12,7 @@ Last updated: 2026-06-29
 - The user's main literature source is likely CNKI/知网; they prefer Codex to operate the CNKI page when they provide local browser access, while keeping access legal and not sharing passwords.
 - For CNKI full-text downloads, the user prefers the detail-page PDF route: click the paper title from search results, enter the paper detail page, then click `PDF下载`; result-list download is only a fallback because it often returns CAJ.
 - The user does not want CNKI browser acquisition to become a script-only black box. Prefer official Codex Chrome extension / `@Chrome` as the visible primary surface for signed-in CNKI page operation when available, with local scripts only as a supplement for metadata capture, file validation, renaming, matrix updates, and repeatable batch bookkeeping.
+- The user prefers a human-in-the-loop CNKI full-text replenishment pattern when direct CNKI acquisition is unreliable: Codex opens/prepares CNKI advanced-search guidance, generates a ranked download checklist and exact incoming folder, the user downloads legal full texts there, and Codex then validates, renames, updates the matrix, builds readers, and recommends/analyzes.
 - The user is interested in reducing token usage in the daily paper-acquisition and learning workflow. Prefer local scripts, local Markdown, readers, context packs, and saved matrices for repeatable work; use browser/GUI control only for signed-in access and unstable UI steps.
 - The user explicitly feels the workflow becomes slow when small tasks trigger full logging, file sweeps, compact summaries, and dashboard synchronization. For small tasks, prefer the fast-lane architecture: quick runtime snapshot/ledger first, standard/deep archival only when evidence state, user-facing navigation, or project milestones change.
 - The user wants an ongoing CNKI-based learning routine: regularly identify 5-7 frontier papers, discuss the set, then pick one paper for deeper reading and methodological/innovation analysis.

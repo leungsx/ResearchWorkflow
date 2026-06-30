@@ -102,6 +102,38 @@ library_short_video_platform_2019_2026.xlsx
 library_short_video_reading_promotion_2019_2026.xlsx
 ```
 
+## 人工下载交接流程
+
+当需要补充全文库存时，不再默认让 Codex 直接批量下载。推荐使用人机交接清单：
+
+```bash
+make cnki-handoff PROJECT=library_short_video TOPIC="图书馆短视频相关研究" COUNT=12 OPEN=1
+```
+
+Codex 会生成：
+
+- HTML 下载清单：`vault/15_CNKI_Frontier/download_requests/library_short_video/<date>-library_short_video-cnki-download-request.html`
+- CSV 下载清单：`vault/15_CNKI_Frontier/download_requests/library_short_video/<date>-library_short_video-cnki-download-request.csv`
+- 指定下载文件夹：`library/pdfs/library_short_video/incoming/<date>/`
+
+用户在 CNKI 中按清单合法下载 PDF/CAJ/KDH/NH 到指定文件夹后，运行：
+
+```bash
+make cnki-intake PROJECT=library_short_video
+```
+
+如果下载到的是 PDF 且希望马上生成 Reader：
+
+```bash
+make cnki-intake PROJECT=library_short_video BUILD_READERS=1
+```
+
+如果下载到 CAJ/KDH/NH：
+
+```bash
+make caj-convert PROJECT=library_short_video SCAN=1
+```
+
 ## Import Commands
 
 Dry-run first:
@@ -156,4 +188,3 @@ For each selected paper, answer:
 3. What does it count as "effectiveness": views, likes, interaction, reading promotion, user satisfaction, service reach, or knowledge dissemination?
 4. What is the actual evidence, and what remains speculative?
 5. What can be borrowed for a Chinese LIS paper targeting 《图书情报工作》?
-

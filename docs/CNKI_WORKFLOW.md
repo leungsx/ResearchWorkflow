@@ -64,6 +64,73 @@ This command still does not enter passwords or bypass CAPTCHA, certificate
 warnings, institutional login, or subscription barriers. It assumes the user
 has already opened CNKI through a legal access route in Chrome.
 
+## Preferred Human Download Handoff
+
+When direct scripted CNKI full-text acquisition is unstable or undesirable, use
+the human-in-the-loop handoff. This is now the preferred replenishment pattern
+for routine use:
+
+1. Codex prepares CNKI search terms, ranking logic, a download checklist, and a
+   target folder.
+2. The user opens CNKI through their own legal access route and downloads the
+   listed papers into that target folder.
+3. Codex validates file types, matches files to citekeys, renames/copies them
+   into the stable project library, updates `library/literature_matrix.csv`,
+   and optionally builds Readers.
+
+Create a checklist:
+
+```bash
+make cnki-handoff \
+  PROJECT=library_short_video \
+  TOPIC="图书馆短视频相关研究" \
+  COUNT=12
+```
+
+By default the checklist is strict: a paper must fit the project core terms
+instead of merely being a generic short-video paper. If you intentionally want
+adjacent comparison papers, add:
+
+```bash
+make cnki-handoff PROJECT=library_short_video TOPIC="图书馆短视频相关研究" COUNT=12 ALLOW_EXTERNAL=1
+```
+
+Open CNKI advanced search at the same time:
+
+```bash
+make cnki-handoff PROJECT=library_short_video TOPIC="图书馆短视频相关研究" COUNT=12 OPEN=1
+```
+
+Outputs:
+
+- Browser page: `vault/15_CNKI_Frontier/download_requests/<project>/<date>-<project>-cnki-download-request.html`
+- Canonical request note: `vault/15_CNKI_Frontier/download_requests/<project>/<date>-<project>-cnki-download-request.md`
+- Machine-readable checklist: `vault/15_CNKI_Frontier/download_requests/<project>/<date>-<project>-cnki-download-request.csv`
+- User download folder: `library/pdfs/<project>/incoming/<date>/`
+
+After the user downloads PDFs/CAJ/KDH/NH files into the target folder:
+
+```bash
+make cnki-intake PROJECT=library_short_video
+```
+
+If the downloaded files are PDFs and Readers should be generated immediately:
+
+```bash
+make cnki-intake PROJECT=library_short_video BUILD_READERS=1
+```
+
+The intake command rejects fake PDFs whose file extension is `.pdf` but whose
+file signature is not `%PDF-`. CAJ/KDH/NH files are accepted as local stock but
+should be converted before source-grounded reading:
+
+```bash
+make caj-convert PROJECT=library_short_video SCAN=1
+```
+
+Use this handoff when the user wants control and visibility. Use `cnki-restock`
+only for small, slow, explicitly authorized browser-assisted runs.
+
 ## Recommended Flow
 
 1. User opens CNKI through a legal access route.
@@ -83,8 +150,8 @@ make import-cnki INPUT=library/cnki_exports/<file> TAG=<project_slug>
 make cnki-daily PROJECT=<project_slug> TOPIC="研究主题"
 ```
 
-7. Download authorized full texts manually or through the browser session when
-   permitted. Preferred CNKI route:
+7. Download authorized full texts manually through the handoff checklist or
+   through the browser session when permitted. Preferred CNKI route:
    - click the paper title in the result list;
    - enter the paper detail / abstract page;
    - click `PDF下载` on the detail page.

@@ -117,6 +117,12 @@ make import-cnki INPUT=library/cnki_exports/<file> TAG=<project_slug>
 # 生成 5-7 篇前沿候选和研讨问题
 make cnki-frontier TAG=<project_slug> TOPIC="生成式人工智能与知识服务"
 
+# 需要补充全文库存时，生成“人工下载交接清单”和指定下载文件夹
+make cnki-handoff PROJECT=<project_slug> TOPIC="生成式人工智能与知识服务" COUNT=12
+
+# 用户下载到指定 incoming 文件夹后，验收、改名、更新文献矩阵
+make cnki-intake PROJECT=<project_slug>
+
 # 为某一篇生成单篇研讨卡
 make paper-brief CITEKEY=<citekey>
 
