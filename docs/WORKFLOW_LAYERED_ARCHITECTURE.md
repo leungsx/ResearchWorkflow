@@ -37,6 +37,7 @@ Canonical assets 是可以长期维护和引用的源文件：
 - `vault/13_Knowledge_Graph/search_index.json`
 - `vault/13_Knowledge_Graph/workflow_state.json`
 - `vault/13_Knowledge_Graph/action_queue.json`
+- `vault/13_Knowledge_Graph/workflow_audit_report.json`
 - `vault/14_Review_Queue/review_queue.csv`
 - `vault/14_Review_Queue/review_state.json`
 
@@ -108,6 +109,7 @@ Generated assets 是脚本生成的浏览和索引文件：
 | `make search-index` | 单独刷新 `search_index.json`，通常由 `make learning-dashboard` 自动包含 |
 | `make workflow-state` | 单独刷新 `workflow_state.json` 和 `workflow_state.html` |
 | `make action-queue` | 单独刷新 `action_queue.json` 和 `action_queue.html` |
+| `make schema-validate` | 校验核心 JSON/CSV 状态文件的结构、计数和 HTML 入口 |
 | `make workflow-audit` | 检查入口、链接、证据边界、备份和生成资产健康 |
 | `make workflow-refresh` | 顺序运行图谱、展示、备份、归档和审计 |
 | `make workflow-refresh-git` | 在 refresh 基础上提交并推送文本资产 |
@@ -126,6 +128,7 @@ Generated assets 是脚本生成的浏览和索引文件：
 | `scripts/rendering/search.py` | 从 `artifact_manifest.csv` 生成全局搜索索引 |
 | `scripts/rendering/workflow_state.py` | 聚合项目、复习、搜索、图谱和审计状态 |
 | `scripts/rendering/action_queue.py` | 从总状态生成按优先级排序的开放行动 |
+| `scripts/rendering/schemas.py` | 校验核心状态文件 schema、计数一致性和 HTML 入口 |
 
 新增展示入口时，先扩展 `routes.py` 或 `manifest.py`，再由页面生成器调用；不要在页面模板里临时拼接 Markdown 直链。
 
@@ -193,6 +196,32 @@ Generated assets 是脚本生成的浏览和索引文件：
 - 优先级顺序：审计 FAIL、到期复习、重点知识卡、审计 WARN、项目下一步建议。
 - 行动队列从 `workflow_state.json` 派生，不替代项目状态、复习状态或审计报告。
 
+## Schema 校验契约
+
+`make schema-validate` 校验这些机器可读状态文件：
+
+- `vault/13_Knowledge_Graph/artifact_manifest.csv`
+- `vault/13_Knowledge_Graph/search_index.json`
+- `vault/14_Review_Queue/review_state.json`
+- `vault/13_Knowledge_Graph/workflow_state.json`
+- `vault/13_Knowledge_Graph/action_queue.json`
+- `vault/13_Knowledge_Graph/workflow_audit_report.json`
+- `projects/*/project_state.json`
+
+校验重点：
+
+- 必需字段存在，顶层类型正确。
+- 计数字段与实际数组长度一致。
+- 用户侧入口必须指向存在的 HTML 页面。
+- 项目状态中的 `entrypoints` 是展示入口；原始 Markdown 路径应放在 source 或 project metadata 中。
+- 审计报告 JSON 的 `summary.counts` 必须与 `checks` 数组一致。
+
+## 审计报告数据契约
+
+`vault/07_Codex_Logs/workflow_audits/YYYY-MM-DD-workflow-audit.md` 是按日期归档的人类日志；`workflow_health.html` 是用户侧体检页；`vault/13_Knowledge_Graph/workflow_audit_report.json` 是自动化默认读取的最新审计数据。
+
+以后需要读取最近审计结果时，应优先读 `workflow_audit_report.json`，不要解析 Markdown 审计日志。
+
 ## 改造优先级
 
 1. 先保证链接路由和 artifact manifest 稳定。
@@ -225,4 +254,5 @@ Generated assets 是脚本生成的浏览和索引文件：
 - `projects/*/project_state.json` 存在，并包含今日精读、今日复习、搜索、manifest 和 search index 等关键入口。
 - `workflow_state.json` 与 `workflow_state.html` 已刷新，能聚合当前项目、复习、搜索、图谱和审计状态。
 - `action_queue.json` 与 `action_queue.html` 已刷新，所有行动入口都指向存在的 HTML 页面。
+- `workflow_audit_report.json` 已刷新，且 schema 校验通过。
 - 图谱 CSV 和图谱 HTML 均可用。

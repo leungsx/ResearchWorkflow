@@ -21,6 +21,7 @@ from rendering.paths import (
     ROOT,
     SEARCH_INDEX_HTML,
     SEARCH_INDEX_JSON,
+    WORKFLOW_AUDIT_JSON,
     WORKFLOW_HEALTH,
     WORKFLOW_STATE_HTML,
     WORKFLOW_STATE_JSON,
@@ -169,6 +170,7 @@ def build_workflow_state(audit_checks: list[Any] | None = None) -> dict[str, Any
             "counts": audit_counts,
             "checks": checks,
             "health_html": rel(WORKFLOW_HEALTH),
+            "report_json": rel(WORKFLOW_AUDIT_JSON),
         },
         "review": {
             "summary": review_summary,
@@ -184,6 +186,7 @@ def build_workflow_state(audit_checks: list[Any] | None = None) -> dict[str, Any
             "backup_index": rel(BACKUP_INDEX) if BACKUP_INDEX.exists() else "",
             "latest_backup": rel(latest_backup) if latest_backup else "",
             "action_queue": rel(ACTION_QUEUE_JSON),
+            "workflow_audit_report": rel(WORKFLOW_AUDIT_JSON),
         },
         "next_actions": list(dict.fromkeys(next_actions))[:8],
     }

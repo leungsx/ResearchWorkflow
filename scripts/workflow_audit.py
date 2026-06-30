@@ -15,6 +15,8 @@ from pathlib import Path
 from urllib.parse import unquote
 
 from rendering.action_queue import write_action_queue
+from rendering.paths import WORKFLOW_AUDIT_JSON
+from rendering.schemas import validate_workflow_schemas
 from rendering.workflow_state import write_workflow_state
 
 
@@ -30,6 +32,7 @@ GRAPH_DIR = VAULT / "13_Knowledge_Graph"
 ARTIFACT_MANIFEST = GRAPH_DIR / "artifact_manifest.csv"
 SEARCH_INDEX = GRAPH_DIR / "search_index.json"
 ACTION_QUEUE = GRAPH_DIR / "action_queue.json"
+AUDIT_REPORT_JSON = WORKFLOW_AUDIT_JSON
 REVIEW_QUEUE = VAULT / "14_Review_Queue" / "review_queue.csv"
 REVIEW_STATE = VAULT / "14_Review_Queue" / "review_state.json"
 REVIEW_TODAY = KNOWLEDGE_CARDS / "review_today.html"
@@ -296,6 +299,7 @@ def check_artifact_manifest(checks: list[Check]) -> None:
         "workflow_state_data",
         "action_queue",
         "action_queue_data",
+        "workflow_audit_data",
     }
     missing_types = sorted(required_types - display_types)
     failures = []
@@ -408,7 +412,7 @@ def check_project_states(checks: list[Check]) -> None:
             continue
         entrypoints = payload.get("entrypoints", {})
         artifacts = payload.get("artifacts", {})
-        for key in ["today", "review_today", "search"]:
+        for key in ["today", "project_dashboard", "review_today", "search"]:
             value = str(entrypoints.get(key, ""))
             if not value or not value.endswith(".html") or not (ROOT / value).exists():
                 problems.append(f"{project.name}: entrypoints.{key} -> {value}")
@@ -579,6 +583,53 @@ def status_counts(checks: list[Check]) -> dict[str, int]:
     return {status: sum(1 for check in checks if check.status == status) for status in ["PASS", "WARN", "FAIL"]}
 
 
+def check_schema_validation(checks: list[Check]) -> None:
+    report = validate_workflow_schemas()
+    failures = [issue for issue in report.issues if issue.status == "FAIL"]
+    warnings = [issue for issue in report.issues if issue.status == "WARN"]
+    if failures:
+        detail = "；".join(f"{issue.path}: {issue.message}" for issue in failures[:10])
+        add(checks, "Schema", "FAIL", "核心机器状态 schema 校验失败", detail)
+    elif warnings:
+        detail = "；".join(f"{issue.path}: {issue.message}" for issue in warnings[:10])
+        add(checks, "Schema", "WARN", "核心机器状态 schema 存在提醒", detail)
+    else:
+        add(checks, "Schema", "PASS", "核心机器状态 schema 校验通过", f"{len(report.checked_files)} 个文件通过校验。")
+
+
+def audit_report_payload(day: dt.date, checks: list[Check], md_path: Path, html_path: Path) -> dict[str, object]:
+    counts = status_counts(checks)
+    return {
+        "schema_version": "1.0",
+        "generated_at": dt.datetime.now().isoformat(timespec="seconds"),
+        "date": day.isoformat(),
+        "summary": {
+            "counts": counts,
+            "check_count": len(checks),
+        },
+        "reports": {
+            "markdown": rel(md_path),
+            "html": rel(html_path),
+        },
+        "checks": [
+            {
+                "area": check.area,
+                "status": check.status,
+                "title": check.title,
+                "detail": check.detail,
+            }
+            for check in checks
+        ],
+    }
+
+
+def write_audit_json(day: dt.date, checks: list[Check], md_path: Path, html_path: Path) -> Path:
+    AUDIT_REPORT_JSON.parent.mkdir(parents=True, exist_ok=True)
+    payload = audit_report_payload(day, checks, md_path, html_path)
+    AUDIT_REPORT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return AUDIT_REPORT_JSON
+
+
 def markdown_report(day: dt.date, checks: list[Check]) -> str:
     counts = status_counts(checks)
     lines = [
@@ -693,17 +744,30 @@ def html_report(day: dt.date, checks: list[Check]) -> str:
 """
 
 
-def write_reports(day: dt.date, checks: list[Check]) -> tuple[Path, Path]:
+def write_reports(day: dt.date, checks: list[Check]) -> tuple[Path, Path, Path]:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+    md_path = AUDIT_DIR / f"{day.isoformat()}-workflow-audit.md"
+
+    # Produce a preliminary machine report so schema validation can validate
+    # the unified audit JSON location during the same run.
     write_workflow_state(checks)
     write_action_queue()
+    md_path.write_text(markdown_report(day, checks) + "\n", encoding="utf-8")
+    HEALTH_HTML.write_text(html_report(day, checks), encoding="utf-8")
+    write_audit_json(day, checks, md_path, HEALTH_HTML)
+
+    check_schema_validation(checks)
+    write_workflow_state(checks)
+    write_action_queue()
+
     check_action_queue(checks)
     write_workflow_state(checks)
     write_action_queue()
-    md_path = AUDIT_DIR / f"{day.isoformat()}-workflow-audit.md"
+
     md_path.write_text(markdown_report(day, checks) + "\n", encoding="utf-8")
     HEALTH_HTML.write_text(html_report(day, checks), encoding="utf-8")
-    return md_path, HEALTH_HTML
+    json_path = write_audit_json(day, checks, md_path, HEALTH_HTML)
+    return md_path, HEALTH_HTML, json_path
 
 
 def main() -> int:
@@ -714,10 +778,11 @@ def main() -> int:
 
     day = parse_date(args.date)
     checks = run_checks(day)
-    md_path, html_path = write_reports(day, checks)
+    md_path, html_path, json_path = write_reports(day, checks)
     counts = status_counts(checks)
     print(f"Wrote workflow audit: {md_path}")
     print(f"Wrote workflow health page: {html_path}")
+    print(f"Wrote workflow audit data: {json_path}")
     print(f"PASS={counts['PASS']} WARN={counts['WARN']} FAIL={counts['FAIL']}")
     if counts["FAIL"] or (args.strict and counts["WARN"]):
         return 1

@@ -63,6 +63,7 @@ Required outputs for every new deep-read paper:
 | Workflow state HTML | `workflow_state.html` | Browser-first current-state and next-action page. |
 | Action queue | `vault/13_Knowledge_Graph/action_queue.json` | Prioritized open-action queue generated from workflow state. |
 | Action queue HTML | `action_queue.html` | Browser-first prioritized action page. |
+| Workflow audit data | `vault/13_Knowledge_Graph/workflow_audit_report.json` | Latest machine-readable audit result; do not parse Markdown logs for automation. |
 | Dashboard | `study_dashboard.html` | Daily visual entry point. |
 
 ## Artifact Contract
@@ -139,8 +140,10 @@ The evening task should verify:
 - `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/search_index.json` and `search/index.html`; search results should open HTML display pages only.
 - `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/workflow_state.json` and `workflow_state.html`; workflow audit should refresh them again with final audit counts.
 - `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/action_queue.json` and `action_queue.html`; each action should link to an HTML entrypoint.
+- `make schema-validate` should pass after dashboard/state generation; it checks core JSON/CSV fields, counts, and HTML entrypoints.
 - `knowledge_graph/index.html` should default to a visual, interactive graph view. CSV/table links are secondary source-data links, not the primary interface.
 - `workflow_health.html` is the browser-first workflow health page. It should be refreshed by `make workflow-audit`.
+- `make workflow-audit` should also refresh `vault/13_Knowledge_Graph/workflow_audit_report.json`, the canonical latest audit data file for automation.
 - `backups/index.html` is the browser-first backup index. It should be refreshed by `make workflow-backup`.
 - Daily closeout should prefer the sequential no-race command `make workflow-refresh-git DATE=<YYYY-MM-DD>` when remote backup is desired, or `make workflow-refresh DATE=<YYYY-MM-DD>` for local-only refresh.
 - Use stable filenames with dates and short slugs.

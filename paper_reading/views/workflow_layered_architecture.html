@@ -241,6 +241,7 @@
 <li><code>vault/13_Knowledge_Graph/search_index.json</code></li>
 <li><code>vault/13_Knowledge_Graph/workflow_state.json</code></li>
 <li><code>vault/13_Knowledge_Graph/action_queue.json</code></li>
+<li><code>vault/13_Knowledge_Graph/workflow_audit_report.json</code></li>
 <li><code>vault/14_Review_Queue/review_queue.csv</code></li>
 <li><code>vault/14_Review_Queue/review_state.json</code></li>
 </ul>
@@ -287,10 +288,10 @@
 </ul>
 <h2>命令契约</h2>
 <p>常用命令职责如下：</p>
-<table><thead><tr><th>命令</th><th>职责</th></tr></thead><tbody><tr><td><code>make obsidian-graph</code></td><td>从 Obsidian 双链导出图谱 CSV</td></tr><tr><td><code>make learning-dashboard</code></td><td>生成 HTML 展示层和 artifact manifest</td></tr><tr><td><code>make search-index</code></td><td>单独刷新 <code>search_index.json</code>，通常由 <code>make learning-dashboard</code> 自动包含</td></tr><tr><td><code>make workflow-state</code></td><td>单独刷新 <code>workflow_state.json</code> 和 <code>workflow_state.html</code></td></tr><tr><td><code>make action-queue</code></td><td>单独刷新 <code>action_queue.json</code> 和 <code>action_queue.html</code></td></tr><tr><td><code>make workflow-audit</code></td><td>检查入口、链接、证据边界、备份和生成资产健康</td></tr><tr><td><code>make workflow-refresh</code></td><td>顺序运行图谱、展示、备份、归档和审计</td></tr><tr><td><code>make workflow-refresh-git</code></td><td>在 refresh 基础上提交并推送文本资产</td></tr></tbody></table>
+<table><thead><tr><th>命令</th><th>职责</th></tr></thead><tbody><tr><td><code>make obsidian-graph</code></td><td>从 Obsidian 双链导出图谱 CSV</td></tr><tr><td><code>make learning-dashboard</code></td><td>生成 HTML 展示层和 artifact manifest</td></tr><tr><td><code>make search-index</code></td><td>单独刷新 <code>search_index.json</code>，通常由 <code>make learning-dashboard</code> 自动包含</td></tr><tr><td><code>make workflow-state</code></td><td>单独刷新 <code>workflow_state.json</code> 和 <code>workflow_state.html</code></td></tr><tr><td><code>make action-queue</code></td><td>单独刷新 <code>action_queue.json</code> 和 <code>action_queue.html</code></td></tr><tr><td><code>make schema-validate</code></td><td>校验核心 JSON/CSV 状态文件的结构、计数和 HTML 入口</td></tr><tr><td><code>make workflow-audit</code></td><td>检查入口、链接、证据边界、备份和生成资产健康</td></tr><tr><td><code>make workflow-refresh</code></td><td>顺序运行图谱、展示、备份、归档和审计</td></tr><tr><td><code>make workflow-refresh-git</code></td><td>在 refresh 基础上提交并推送文本资产</td></tr></tbody></table>
 <h2>渲染模块边界</h2>
 <p><code>make learning-dashboard</code> 的实现应保持如下职责拆分：</p>
-<table><thead><tr><th>模块</th><th>职责</th></tr></thead><tbody><tr><td><code>scripts/build_learning_dashboard.py</code></td><td>页面布局、HTML 外壳、各入口页生成顺序</td></tr><tr><td><code>scripts/rendering/paths.py</code></td><td>全局路径常量、标题读取、CSV/Markdown/HTML 基础列表工具</td></tr><tr><td><code>scripts/rendering/routes.py</code></td><td>本地源文件、目录和 Markdown 链接到默认 HTML 展示页的路由规则</td></tr><tr><td><code>scripts/rendering/manifest.py</code></td><td><code>artifact_manifest.csv</code> 行生成与写入</td></tr><tr><td><code>scripts/rendering/review.py</code></td><td>从 <code>review_queue.csv</code> 生成今日复习状态和复习项展示路径</td></tr><tr><td><code>scripts/rendering/search.py</code></td><td>从 <code>artifact_manifest.csv</code> 生成全局搜索索引</td></tr><tr><td><code>scripts/rendering/workflow_state.py</code></td><td>聚合项目、复习、搜索、图谱和审计状态</td></tr><tr><td><code>scripts/rendering/action_queue.py</code></td><td>从总状态生成按优先级排序的开放行动</td></tr></tbody></table>
+<table><thead><tr><th>模块</th><th>职责</th></tr></thead><tbody><tr><td><code>scripts/build_learning_dashboard.py</code></td><td>页面布局、HTML 外壳、各入口页生成顺序</td></tr><tr><td><code>scripts/rendering/paths.py</code></td><td>全局路径常量、标题读取、CSV/Markdown/HTML 基础列表工具</td></tr><tr><td><code>scripts/rendering/routes.py</code></td><td>本地源文件、目录和 Markdown 链接到默认 HTML 展示页的路由规则</td></tr><tr><td><code>scripts/rendering/manifest.py</code></td><td><code>artifact_manifest.csv</code> 行生成与写入</td></tr><tr><td><code>scripts/rendering/review.py</code></td><td>从 <code>review_queue.csv</code> 生成今日复习状态和复习项展示路径</td></tr><tr><td><code>scripts/rendering/search.py</code></td><td>从 <code>artifact_manifest.csv</code> 生成全局搜索索引</td></tr><tr><td><code>scripts/rendering/workflow_state.py</code></td><td>聚合项目、复习、搜索、图谱和审计状态</td></tr><tr><td><code>scripts/rendering/action_queue.py</code></td><td>从总状态生成按优先级排序的开放行动</td></tr><tr><td><code>scripts/rendering/schemas.py</code></td><td>校验核心状态文件 schema、计数一致性和 HTML 入口</td></tr></tbody></table>
 <p>新增展示入口时，先扩展 <code>routes.py</code> 或 <code>manifest.py</code>，再由页面生成器调用；不要在页面模板里临时拼接 Markdown 直链。</p>
 <h2>项目状态契约</h2>
 <p><code>projects/&lt;project&gt;/project_state.json</code> 是给脚本和自动化读取的机器可读项目状态，不替代 <code>00_project_dashboard.md</code>、<code>reading_board.md</code> 或文献综述工作台。</p>
@@ -344,6 +345,28 @@
 <li>优先级顺序：审计 FAIL、到期复习、重点知识卡、审计 WARN、项目下一步建议。</li>
 <li>行动队列从 <code>workflow_state.json</code> 派生，不替代项目状态、复习状态或审计报告。</li>
 </ul>
+<h2>Schema 校验契约</h2>
+<p><code>make schema-validate</code> 校验这些机器可读状态文件：</p>
+<ul>
+<li><code>vault/13_Knowledge_Graph/artifact_manifest.csv</code></li>
+<li><code>vault/13_Knowledge_Graph/search_index.json</code></li>
+<li><code>vault/14_Review_Queue/review_state.json</code></li>
+<li><code>vault/13_Knowledge_Graph/workflow_state.json</code></li>
+<li><code>vault/13_Knowledge_Graph/action_queue.json</code></li>
+<li><code>vault/13_Knowledge_Graph/workflow_audit_report.json</code></li>
+<li><code>projects/*/project_state.json</code></li>
+</ul>
+<p>校验重点：</p>
+<ul>
+<li>必需字段存在，顶层类型正确。</li>
+<li>计数字段与实际数组长度一致。</li>
+<li>用户侧入口必须指向存在的 HTML 页面。</li>
+<li>项目状态中的 <code>entrypoints</code> 是展示入口；原始 Markdown 路径应放在 source 或 project metadata 中。</li>
+<li>审计报告 JSON 的 <code>summary.counts</code> 必须与 <code>checks</code> 数组一致。</li>
+</ul>
+<h2>审计报告数据契约</h2>
+<p><code>vault/07_Codex_Logs/workflow_audits/YYYY-MM-DD-workflow-audit.md</code> 是按日期归档的人类日志；<code>workflow_health.html</code> 是用户侧体检页；<code>vault/13_Knowledge_Graph/workflow_audit_report.json</code> 是自动化默认读取的最新审计数据。</p>
+<p>以后需要读取最近审计结果时，应优先读 <code>workflow_audit_report.json</code>，不要解析 Markdown 审计日志。</p>
 <h2>改造优先级</h2>
 <ol>
 <li>先保证链接路由和 artifact manifest 稳定。</li>
@@ -374,6 +397,7 @@
 <li><code>projects/*/project_state.json</code> 存在，并包含今日精读、今日复习、搜索、manifest 和 search index 等关键入口。</li>
 <li><code>workflow_state.json</code> 与 <code>workflow_state.html</code> 已刷新，能聚合当前项目、复习、搜索、图谱和审计状态。</li>
 <li><code>action_queue.json</code> 与 <code>action_queue.html</code> 已刷新，所有行动入口都指向存在的 HTML 页面。</li>
+<li><code>workflow_audit_report.json</code> 已刷新，且 schema 校验通过。</li>
 <li>图谱 CSV 和图谱 HTML 均可用。</li>
 </ul>
         </article>
@@ -381,6 +405,6 @@
     </section>
 
   </main>
-  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:10.</footer>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-06-30 22:32.</footer>
 </body>
 </html>

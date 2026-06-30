@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-06-30T22:11:08",
+  "generated_at": "2026-06-30T22:32:42",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -12,14 +12,14 @@
     "action_queue": "action_queue.html"
   },
   "counts": {
-    "manifest_rows": 104,
-    "search_entries": 104,
+    "manifest_rows": 105,
+    "search_entries": 105,
     "project_count": 2,
-    "git_dirty_paths": 127
+    "git_dirty_paths": 111
   },
   "audit": {
     "counts": {
-      "PASS": 12,
+      "PASS": 13,
       "WARN": 3,
       "FAIL": 0
     },
@@ -58,13 +58,13 @@
         "area": "资产清单",
         "status": "PASS",
         "title": "artifact manifest 覆盖核心展示资产",
-        "detail": "104 条；display_types=23"
+        "detail": "105 条；display_types=24"
       },
       {
         "area": "搜索索引",
         "status": "PASS",
         "title": "搜索索引和搜索页可用",
-        "detail": "104 条；layers=4"
+        "detail": "105 条；layers=4"
       },
       {
         "area": "复习状态",
@@ -88,13 +88,13 @@
         "area": "备份",
         "status": "PASS",
         "title": "最近备份可用",
-        "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 2.0 小时前。"
+        "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 2.4 小时前。"
       },
       {
         "area": "Git/异地备份",
         "status": "WARN",
         "title": "存在尚未提交的 Git 改动",
-        "detail": "127 个路径待快照： M Makefile； M codex/state/context_index.md； M docs/INTEGRATED_RESEARCH_LEARNING_WORKFLOW.md； M docs/PAPER_READING_OUTPUT_STANDARD.md； M knowledge_cards/index.html； M knowledge_cards/views/concept-7f8a8bb3.html； M knowledge_cards/views/concept-824dc24b.html； M knowledge_cards/views/concept-841db0d5.html"
+        "detail": "111 个路径待快照： M Makefile； M action_queue.html； M docs/INTEGRATED_RESEARCH_LEARNING_WORKFLOW.md； M docs/WORKFLOW_LAYERED_ARCHITECTURE.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-53b320d5.html"
       },
       {
         "area": "Token/记忆",
@@ -109,13 +109,20 @@
         "detail": ".DS_Store=21；__pycache__=3；这些不会进入 file sweep，但可择机清理。"
       },
       {
+        "area": "Schema",
+        "status": "PASS",
+        "title": "核心机器状态 schema 校验通过",
+        "detail": "8 个文件通过校验。"
+      },
+      {
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
         "detail": "13 个开放行动。"
       }
     ],
-    "health_html": "workflow_health.html"
+    "health_html": "workflow_health.html",
+    "report_json": "vault/13_Knowledge_Graph/workflow_audit_report.json"
   },
   "review": {
     "summary": {
@@ -312,7 +319,8 @@
     "search_index": "vault/13_Knowledge_Graph/search_index.json",
     "backup_index": "backups/index.html",
     "latest_backup": "backups/researchworkflow-critical-20260630-200857.zip",
-    "action_queue": "vault/13_Knowledge_Graph/action_queue.json"
+    "action_queue": "vault/13_Knowledge_Graph/action_queue.json",
+    "workflow_audit_report": "vault/13_Knowledge_Graph/workflow_audit_report.json"
   },
   "next_actions": [
     "先处理 8 个到期复习项。",

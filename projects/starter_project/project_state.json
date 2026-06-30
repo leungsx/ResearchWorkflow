@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-06-30T22:10:02",
+  "generated_at": "2026-06-30T22:32:41",
   "project": {
     "slug": "starter_project",
     "title": "Starter Research Project",
@@ -12,13 +12,18 @@
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
-    "project_dashboard": "projects/starter_project/00_project_dashboard.md",
-    "reading_board": "projects/starter_project/literature/reading_board.md",
-    "literature_workbench": "projects/starter_project/literature/literature_review_workbench.md",
-    "literature_synthesis": "projects/starter_project/03_literature_synthesis.md",
+    "project_dashboard": "paper_reading/views/00-project-dashboard-b90a4a93.html",
+    "reading_board": "",
+    "literature_workbench": "",
+    "literature_synthesis": "paper_reading/views/03-literature-synthesis-01206220.html",
     "review_today": "knowledge_cards/review_today.html",
-    "search": "search/index.html",
-    "artifact_manifest": "vault/13_Knowledge_Graph/artifact_manifest.csv"
+    "search": "search/index.html"
+  },
+  "source_documents": {
+    "project_dashboard": "projects/starter_project/00_project_dashboard.md",
+    "reading_board": "",
+    "literature_workbench": "",
+    "literature_synthesis": "projects/starter_project/03_literature_synthesis.md"
   },
   "literature": {
     "matrix_rows": 0,
@@ -116,6 +121,7 @@
     ]
   },
   "artifacts": {
+    "artifact_manifest": "vault/13_Knowledge_Graph/artifact_manifest.csv",
     "manifest_path": "vault/13_Knowledge_Graph/artifact_manifest.csv",
     "search_index": "vault/13_Knowledge_Graph/search_index.json",
     "project_related_entries": 5,

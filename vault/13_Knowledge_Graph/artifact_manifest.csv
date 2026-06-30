@@ -101,5 +101,6 @@ vault/14_Review_Queue/review_state.json,json,knowledge_cards/review_today.html,r
 knowledge_cards/review_today.html,html,knowledge_cards/review_today.html,review_today,今日复习入口,Presentation,make learning-dashboard
 search/index.html,html,search/index.html,search,全局搜索入口,Presentation,make learning-dashboard
 vault/13_Knowledge_Graph/search_index.json,json,search/index.html,search_index,Search index,Knowledge,make learning-dashboard
+vault/13_Knowledge_Graph/workflow_audit_report.json,json,workflow_health.html,workflow_audit_data,Workflow audit report,Knowledge,make learning-dashboard
 workflow_state.html,html,workflow_state.html,workflow_state,工作流总状态,Presentation,make learning-dashboard
 vault/13_Knowledge_Graph/workflow_state.json,json,workflow_state.html,workflow_state_data,Workflow state,Knowledge,make learning-dashboard

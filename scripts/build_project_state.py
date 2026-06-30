@@ -10,6 +10,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from rendering.routes import paper_markdown_view_path
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECTS = ROOT / "projects"
@@ -34,6 +35,10 @@ def rel(path: Path | str | None) -> str:
         return str(item.relative_to(ROOT))
     except ValueError:
         return str(item)
+
+
+def html_view(path: Path) -> str:
+    return rel(paper_markdown_view_path(path))
 
 
 def clean(value: Any) -> str:
@@ -259,6 +264,10 @@ def build_state(project_slug: str) -> dict[str, Any]:
     artifacts = artifact_entries_for_project(project_slug)
     deep_read = deep_read_from_latest_state(state.get("latest") or {})
     pdf_count = count_existing([row.get("pdf_path", "") for row in rows])
+    dashboard = project / "00_project_dashboard.md"
+    reading_board = project / "literature" / "reading_board.md"
+    literature_workbench = project / "literature" / "literature_review_workbench.md"
+    literature_synthesis = project / "03_literature_synthesis.md"
 
     return {
         "schema_version": "1.0",
@@ -269,18 +278,23 @@ def build_state(project_slug: str) -> dict[str, Any]:
             "status": meta.get("status", ""),
             "created_at": meta.get("created_at", ""),
             "path": rel(project),
-            "dashboard": rel(project / "00_project_dashboard.md"),
+            "dashboard": rel(dashboard),
         },
         "entrypoints": {
             "study_dashboard": "study_dashboard.html",
             "today": "paper_reading/today.html",
-            "project_dashboard": rel(project / "00_project_dashboard.md"),
-            "reading_board": rel(project / "literature" / "reading_board.md"),
-            "literature_workbench": rel(project / "literature" / "literature_review_workbench.md"),
-            "literature_synthesis": rel(project / "03_literature_synthesis.md"),
+            "project_dashboard": html_view(dashboard),
+            "reading_board": html_view(reading_board) if reading_board.exists() else "",
+            "literature_workbench": html_view(literature_workbench) if literature_workbench.exists() else "",
+            "literature_synthesis": html_view(literature_synthesis) if literature_synthesis.exists() else "",
             "review_today": rel(REVIEW_TODAY),
             "search": rel(SEARCH_INDEX_HTML),
-            "artifact_manifest": rel(ARTIFACT_MANIFEST),
+        },
+        "source_documents": {
+            "project_dashboard": rel(dashboard),
+            "reading_board": rel(reading_board) if reading_board.exists() else "",
+            "literature_workbench": rel(literature_workbench) if literature_workbench.exists() else "",
+            "literature_synthesis": rel(literature_synthesis) if literature_synthesis.exists() else "",
         },
         "literature": {
             "matrix_rows": len(rows),
@@ -295,6 +309,7 @@ def build_state(project_slug: str) -> dict[str, Any]:
         "evidence_gate": evidence,
         "review": review_snapshot(),
         "artifacts": {
+            "artifact_manifest": rel(ARTIFACT_MANIFEST),
             "manifest_path": rel(ARTIFACT_MANIFEST),
             "search_index": rel(SEARCH_INDEX_JSON),
             "project_related_entries": len(artifacts),

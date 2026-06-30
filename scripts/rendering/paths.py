@@ -38,6 +38,7 @@ SEARCH_INDEX_JSON = GRAPH_DIR / "search_index.json"
 SEARCH_INDEX_HTML = SEARCH / "index.html"
 WORKFLOW_STATE_JSON = GRAPH_DIR / "workflow_state.json"
 ACTION_QUEUE_JSON = GRAPH_DIR / "action_queue.json"
+WORKFLOW_AUDIT_JSON = GRAPH_DIR / "workflow_audit_report.json"
 
 MARKDOWN_VIEW_SOURCES = [
     (

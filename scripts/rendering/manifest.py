@@ -23,6 +23,8 @@ from rendering.paths import (
     SEARCH,
     SEARCH_INDEX_HTML,
     SEARCH_INDEX_JSON,
+    WORKFLOW_AUDIT_JSON,
+    WORKFLOW_HEALTH,
     WORKFLOW_STATE_HTML,
     WORKFLOW_STATE_JSON,
     html_title,
@@ -181,6 +183,7 @@ def artifact_manifest_rows() -> list[dict[str, str]]:
     add(SEARCH_INDEX_JSON, SEARCH_INDEX_HTML, "search_index", "Search index")
     add(WORKFLOW_STATE_JSON, WORKFLOW_STATE_HTML, "workflow_state_data", "Workflow state")
     add(ACTION_QUEUE_JSON, ACTION_QUEUE_HTML, "action_queue_data", "Action queue")
+    add(WORKFLOW_AUDIT_JSON, WORKFLOW_HEALTH, "workflow_audit_data", "Workflow audit report")
 
     rows.sort(key=lambda row: (row["display_type"], row["source_path"], row["display_path"]))
     return rows
