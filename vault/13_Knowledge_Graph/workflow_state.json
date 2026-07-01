@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T19:59:18",
+  "generated_at": "2026-07-01T20:00:27",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -17,12 +17,12 @@
     "manifest_rows": 120,
     "search_entries": 120,
     "project_count": 2,
-    "git_dirty_paths": 120
+    "git_dirty_paths": 0
   },
   "audit": {
     "counts": {
-      "PASS": 17,
-      "WARN": 1,
+      "PASS": 18,
+      "WARN": 0,
       "FAIL": 0
     },
     "checks": [
@@ -90,13 +90,13 @@
         "area": "备份",
         "status": "PASS",
         "title": "最近备份可用",
-        "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 23.8 小时前。"
+        "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 23.9 小时前。"
       },
       {
         "area": "Git/异地备份",
-        "status": "WARN",
-        "title": "存在尚未提交的 Git 改动",
-        "detail": "120 个路径待快照： M .gitignore； M Makefile； M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html"
+        "status": "PASS",
+        "title": "Git 本地和远程快照状态正常",
+        "detail": "upstream=origin/main；last commit: d1b0572 2026-07-01 20:00:07 +0800 Fix review page writeback server"
       },
       {
         "area": "Token/记忆",
@@ -120,7 +120,7 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "6 个开放行动。"
+        "detail": "5 个开放行动。"
       },
       {
         "area": "项目协作层",
@@ -322,7 +322,6 @@
     "把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。",
     "围绕最近主读 `cnki_2021_5530e86157`，补齐与既有概念/方法的关系和证据边界。",
     "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
-    "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
-    "择机处理 workflow-audit 的 WARN 项，尤其是 Git 快照和到期复习。"
+    "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
   ]
 }
