@@ -91,3 +91,19 @@ Research question: How do library type and platform fit shape short-video strate
 ## Current Preferred Direction
 
 Candidate A should be the default main line because it best connects the current knowledge cards: [[SICAS模型]], [[AARRR 漏斗模型]], [[数字阅读推广]], [[服务价值]], [[互动营销]], [[渠道营销]] and [[情感营销]]. Candidate B can become the mechanism sub-question, and Candidate C can become the boundary/comparison sub-question.
+
+## Converged Main Question
+
+Updated: 2026-07-01 evening close.
+
+Main question: How can visible platform engagement from library short videos be translated into observable service value in digital reading promotion?
+
+Sub-question 1: Which content cues and service-design mechanisms move users from sense/interest into interaction, connection, and service action?
+
+Sub-question 2: How should service-value indicators vary across public libraries, university libraries, research-oriented libraries, and short-video platforms?
+
+Current decision: treat the project as an empirical-framework article, not only a descriptive literature map. The immediate framework is `platform engagement -> service touchpoint -> reading-promotion outcome`, with [[SICAS模型]] explaining user path, [[AARRR 漏斗模型]] organizing stage indicators, and [[数字阅读推广]] / [[服务价值]] setting the library-service boundary.
+
+Evidence boundary: the current 8-paper corpus supports framework building and variable selection. It does not yet support causal claims that a specific title, music, format, or marketing tactic independently increases service value.
+
+Next reading: formally deep-read `cnki_2021_d35f8e895a` next because it already has converted PDF + Reader and directly operationalizes propagation/interaction through a C index. Keep `cnki_2021_645f03f388` as a metadata-only target until full text or Reader exists.

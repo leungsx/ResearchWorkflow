@@ -1149,7 +1149,7 @@ def review_mark_script() -> str:
       const endpoint = "http://127.0.0.1:8765/review/studied";
       const healthEndpoint = "http://127.0.0.1:8765/health";
       const status = document.querySelector("[data-review-status]");
-      const serviceHelp = "请先运行 make review-server-start；若只想前台运行，可用 make review-server。备用命令仍然可用。";
+      const serviceHelp = "工作流启动时会自动检查；若当前未连接，请运行 make review-server-ensure。备用命令仍然可用。";
       const setStatus = (message) => {
         if (status) status.textContent = message;
       };
@@ -1208,9 +1208,9 @@ def build_review_today() -> None:
     bulk_button = '<button class="inline-button" type="button" data-review-bulk>一键标记当前到期项已学习</button>' if due_items else ""
     bulk_button_line = f"          {bulk_button}\n" if bulk_button else ""
     writeback_hint = (
-        "需要先运行 <code>make review-server-start</code> 才能在网页内写回。"
+        "工作流启动时会自动检查本地写回服务；若按钮不可用，运行 <code>make review-server-ensure</code>。"
         if due_items
-        else "当前没有到期项；未来 7 天知识卡可逐条提前标记。网页写回需要先运行 <code>make review-server-start</code>。"
+        else "当前没有到期项；未来 7 天知识卡可逐条提前标记。工作流启动时会自动检查本地写回服务。"
     )
     body = f"""
     <section class="grid">
@@ -1710,6 +1710,8 @@ def build_graph_index() -> None:
         <div class="graph-toolbar">
           <input id="graphSearch" type="search" placeholder="搜索论文、概念、方法或项目节点">
           <button type="button" data-kind="all" class="active">全部</button>
+          <button type="button" data-kind="project_scope">只看主项目</button>
+          <button type="button" data-kind="core_chain">论文-概念-方法主链</button>
           <button type="button" data-kind="literature">文献</button>
           <button type="button" data-kind="concept">概念</button>
           <button type="button" data-kind="method">方法</button>
@@ -1756,6 +1758,8 @@ def build_graph_index() -> None:
       const stats = document.getElementById("graphStats");
       const buttons = Array.from(document.querySelectorAll("[data-kind]"));
       const nodeMap = new Map(graphData.nodes.map((node) => [node.id, node]));
+      const mainProjectId = "library_short_video";
+      const coreKinds = new Set(["literature", "concept", "method", "project"]);
       const palette = {
         literature: "#2463eb",
         concept: "#16805d",
@@ -1791,9 +1795,33 @@ def build_graph_index() -> None:
         return element;
       }
 
+      function nodesForActiveMode() {
+        if (activeKind === "project_scope") {
+          const keep = new Set([mainProjectId]);
+          graphData.edges.forEach((edge) => {
+            if (edge.source === mainProjectId) keep.add(edge.target);
+            if (edge.target === mainProjectId) keep.add(edge.source);
+          });
+          return graphData.nodes.filter((node) => keep.has(node.id) && (node.id === mainProjectId || coreKinds.has(node.kind)));
+        }
+        if (activeKind === "core_chain") {
+          const keep = new Set();
+          graphData.edges.forEach((edge) => {
+            const source = nodeMap.get(edge.source);
+            const target = nodeMap.get(edge.target);
+            if (source && target && coreKinds.has(source.kind) && coreKinds.has(target.kind)) {
+              keep.add(edge.source);
+              keep.add(edge.target);
+            }
+          });
+          return graphData.nodes.filter((node) => keep.has(node.id));
+        }
+        return graphData.nodes.filter((node) => activeKind === "all" || node.kind === activeKind);
+      }
+
       function visibleNodes() {
         const query = search.value.trim().toLowerCase();
-        const base = graphData.nodes.filter((node) => activeKind === "all" || node.kind === activeKind);
+        const base = nodesForActiveMode();
         if (!query) return base;
         const direct = base.filter((node) => `${node.label} ${node.id} ${node.type}`.toLowerCase().includes(query));
         const keep = new Set(direct.map((node) => node.id));

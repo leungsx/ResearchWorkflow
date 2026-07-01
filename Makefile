@@ -1,6 +1,6 @@
 PYTHON ?= /Users/leung/anaconda3/bin/python
 
-.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
+.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-ensure review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
 
 check:
 	$(PYTHON) scripts/check_environment.py
@@ -27,6 +27,9 @@ review-server:
 	$(PYTHON) scripts/review_mark_server.py $(if $(PORT),--port "$(PORT)",)
 
 review-server-start:
+	$(PYTHON) scripts/review_server_control.py start $(if $(PORT),--port "$(PORT)",)
+
+review-server-ensure:
 	$(PYTHON) scripts/review_server_control.py start $(if $(PORT),--port "$(PORT)",)
 
 review-server-stop:
@@ -69,6 +72,7 @@ workflow-backup-prune:
 	$(PYTHON) scripts/workflow_backup.py --prune-only --keep "$(KEEP)"
 
 workflow-refresh:
+	$(MAKE) review-server-ensure
 	$(MAKE) obsidian-graph
 	$(MAKE) learning-dashboard
 	$(MAKE) workflow-backup $(if $(DATE),DATE="$(DATE)",) $(if $(NOTE),NOTE="$(NOTE)",)
@@ -176,6 +180,7 @@ typora-project:
 	$(PYTHON) scripts/open_in_typora.py --project "$(PROJECT)" --doc "$(DOC)"
 
 codex-start:
+	$(MAKE) review-server-ensure
 	$(PYTHON) scripts/codex_archive.py start $(if $(DATE),--date "$(DATE)",)
 
 codex-event:

@@ -115,6 +115,23 @@ These questions are working candidates, not manuscript claims. The evidence base
 | RQ-B | Which content and service-design mechanisms move users from attention to interaction and then to service action? | Content analysis plus path coding across SICAS stages; later can be tested with platform and library service data. | Hook Model, ELM, SICAS, head-account practice extraction, and popular-content coding literature. | Needs new data or human verification before estimating effects. |
 | RQ-C | How do library type and platform fit shape short-video strategy and evaluation indicators? | Comparative account survey by public/university/research library and Douyin/Kuaishou/Bilibili/video-platform context. | AARRR comparative paper, public-library surveys, historical Douyin baselines, and platform-fit concept cards. | Existing samples are 2019-2021 heavy; current-platform claims need 2024-2026 data. |
 
+## Converged RQ Position
+
+Updated: 2026-07-01 evening close.
+
+The project should now narrow from a general literature-map project into an empirical-framework article around one main question:
+
+> How can visible platform engagement from library short videos be translated into observable service value in digital reading promotion?
+
+Two sub-questions should carry the empirical design:
+
+1. Which content cues and service-design mechanisms move users from sense/interest into interaction, connection, and service action?
+2. How should service-value indicators vary across public libraries, university libraries, research-oriented libraries, and different short-video platforms?
+
+This position keeps the existing literature together without over-claiming. Hook Model, ELM, DCI/C index, and popular-video content analysis supply the platform-interaction side; SICAS, AARRR, Zhang 2021 digital-reading promotion, and public-library service studies supply the service-path side. The manuscript still needs new or verified data before making causal claims.
+
+Next reading should prioritize `cnki_2021_d35f8e895a` because it has a converted PDF/Reader and directly operationalizes propagation and interaction through a C index. `cnki_2021_645f03f388` remains a useful propagation-power target but is still metadata-only.
+
 ## Evidence Table
 
 | Claim | Evidence | Citation | Verification |

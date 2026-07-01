@@ -204,10 +204,17 @@ def context_pack_count(project: Path) -> int:
 
 def next_reading_candidates(rows: list[dict[str, str]], limit: int = 5) -> list[dict[str, str]]:
     priority = {"metadata-only": 0, "": 1, "skimmed": 2, "human-read": 3, "verified": 4}
+    target_terms = ("传播力", "传播及互动", "互动效果", "服务价值", "评价", "指标", "DCI", "C指数")
+
+    def target_score(row: dict[str, str]) -> int:
+        haystack = f"{row.get('title', '')} {row.get('keywords', '')} {row.get('abstract', '')}"
+        return sum(1 for term in target_terms if term in haystack)
+
     candidates = sorted(
         rows,
         key=lambda row: (
             0 if row.get("pdf_path") or row.get("note_path") else 1,
+            -target_score(row),
             priority.get(clean(row.get("read_status")), 9),
             row.get("year", ""),
             row.get("citekey", ""),
@@ -235,7 +242,25 @@ def next_reading_candidates(rows: list[dict[str, str]], limit: int = 5) -> list[
     return result
 
 
-def next_actions(rows: list[dict[str, str]], state: dict[str, Any], evidence: dict[str, str]) -> list[str]:
+def research_questions_converged(project: Path) -> bool:
+    path = project / "01_research_question.md"
+    if not path.exists():
+        return False
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    return "## Converged Main Question" in text
+
+
+def latest_primary_links_done(primary: str) -> bool:
+    if not primary:
+        return False
+    path = ROOT / "vault" / "01_Literature" / f"{primary}.md"
+    if not path.exists():
+        return False
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    return "## Knowledge Links" in text and "## 证据和边界" in text
+
+
+def next_actions(project: Path, rows: list[dict[str, str]], state: dict[str, Any], evidence: dict[str, str]) -> list[str]:
     actions: list[str] = []
     if not rows:
         return [
@@ -245,10 +270,10 @@ def next_actions(rows: list[dict[str, str]], state: dict[str, Any], evidence: di
     statuses = Counter(clean(row.get("read_status")) or "blank" for row in rows)
     if evidence.get("status") not in {"PASS", "pass"}:
         actions.append("先处理 evidence gate 的 WARN/ERROR，避免 metadata-only 文献进入论文主张。")
-    if statuses.get("skimmed", 0) >= 6:
+    if statuses.get("skimmed", 0) >= 6 and not research_questions_converged(project):
         actions.append("把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。")
     latest = state.get("latest") or {}
-    if latest.get("primary"):
+    if latest.get("primary") and not latest_primary_links_done(str(latest["primary"])):
         actions.append(f"围绕最近主读 `{latest['primary']}`，补齐与既有概念/方法的关系和证据边界。")
     actions.append("下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。")
     return actions[:4]
@@ -327,7 +352,7 @@ def build_state(project_slug: str) -> dict[str, Any]:
                 for row in artifacts[:30]
             ],
         },
-        "next_actions": next_actions(rows, state, evidence),
+        "next_actions": next_actions(project, rows, state, evidence),
     }
 
 
