@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T19:56:36",
+  "generated_at": "2026-07-01T20:07:50",
   "project": {
     "slug": "starter_project",
     "title": "Starter Research Project",
@@ -56,14 +56,6 @@
     "state_path": "vault/14_Review_Queue/review_state.json",
     "review_today": "knowledge_cards/review_today.html",
     "focus_items": [
-      {
-        "id": "concept-interactive-marketing",
-        "title": "互动营销",
-        "type": "concept",
-        "next_review": "2026-07-02",
-        "prompt": "互动营销为什么不能等同于评论数越多越好？",
-        "display_path": "knowledge_cards/views/concept-452dce22.html"
-      },
       {
         "id": "method-head-account-practice-extraction",
         "title": "头部账号实践提炼",

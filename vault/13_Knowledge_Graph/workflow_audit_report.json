@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T20:00:27",
+  "generated_at": "2026-07-01T20:07:43",
   "date": "2026-07-01",
   "summary": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 16,
+      "WARN": 2,
       "FAIL": 0
     },
     "check_count": 18
@@ -31,31 +31,31 @@
       "area": "链接健康",
       "status": "PASS",
       "title": "HTML 本地链接均可解析",
-      "detail": "检查 109 个 HTML 页面。"
+      "detail": "检查 111 个 HTML 页面。"
     },
     {
       "area": "镜像页",
       "status": "PASS",
       "title": "HTML 镜像与源文件同步",
-      "detail": "检查 80 个镜像页。"
+      "detail": "检查 81 个镜像页。"
     },
     {
       "area": "知识图谱",
       "status": "PASS",
       "title": "图谱入口是可视化关系图",
-      "detail": "nodes=117, unique_edges=290"
+      "detail": "nodes=118, unique_edges=305"
     },
     {
       "area": "资产清单",
       "status": "PASS",
       "title": "artifact manifest 覆盖核心展示资产",
-      "detail": "120 条；display_types=28"
+      "detail": "121 条；display_types=28"
     },
     {
       "area": "搜索索引",
       "status": "PASS",
       "title": "搜索索引和搜索页可用",
-      "detail": "120 条；layers=4"
+      "detail": "121 条；layers=4"
     },
     {
       "area": "复习状态",
@@ -79,13 +79,13 @@
       "area": "备份",
       "status": "PASS",
       "title": "最近备份可用",
-      "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 23.9 小时前。"
+      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 0.0 小时前。"
     },
     {
       "area": "Git/异地备份",
-      "status": "PASS",
-      "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: d1b0572 2026-07-01 20:00:07 +0800 Fix review page writeback server"
+      "status": "WARN",
+      "title": "存在尚未提交的 Git 改动",
+      "detail": "123 个路径待快照： M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-452dce22.html； M knowledge_cards/views/concept-53b320d5.html"
     },
     {
       "area": "Token/记忆",
@@ -95,9 +95,9 @@
     },
     {
       "area": "文件卫生",
-      "status": "PASS",
-      "title": "未发现常见系统/缓存文件",
-      "detail": "工作区较干净。"
+      "status": "WARN",
+      "title": "工作区存在系统/缓存文件",
+      "detail": "__pycache__=1；这些不会进入 file sweep，但可择机清理。"
     },
     {
       "area": "Schema",
@@ -109,7 +109,7 @@
       "area": "行动队列",
       "status": "PASS",
       "title": "行动队列可用且入口有效",
-      "detail": "5 个开放行动。"
+      "detail": "6 个开放行动。"
     },
     {
       "area": "项目协作层",
@@ -121,7 +121,7 @@
       "area": "自动归档策略",
       "status": "PASS",
       "title": "自动归档策略可用",
-      "detail": "backup=6, prune=0, cache=0"
+      "detail": "backup=7, prune=0, cache=1"
     }
   ]
 }

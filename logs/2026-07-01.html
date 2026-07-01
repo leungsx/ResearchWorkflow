@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026-07-01 学习日志</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18242a;
+      --muted: #61717b;
+      --line: #d7e1df;
+      --paper: #ffffff;
+      --soft: #f5f8f7;
+      --green: #1f6f5b;
+      --blue: #255f99;
+      --amber: #94630c;
+      --rose: #9d3150;
+      --slate: #263847;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f8faf9 0%, #eef4f3 100%);
+      line-height: 1.62;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      color: #f8fbff;
+      background: linear-gradient(135deg, #203246 0%, #27695e 58%, #80672d 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 26px 22px; }
+    h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 21px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    .sub { max-width: 900px; color: rgba(248,251,255,0.9); }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      color: #f8fbff;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 7px 11px;
+      font-size: 14px;
+    }
+    main.wrap { padding-top: 22px; }
+    .hero, .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel, .metric {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 10px 24px rgba(24, 34, 45, 0.05);
+    }
+    .panel { padding: 18px; }
+    .metric { padding: 16px; }
+    .col-3 { grid-column: span 3; }
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .col-8 { grid-column: span 8; }
+    .col-12 { grid-column: 1 / -1; }
+    .metric b { display: block; font-size: 29px; line-height: 1.08; color: var(--slate); }
+    .metric span { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; }
+    .callout {
+      border: 1px solid #cfe2dc;
+      border-left: 4px solid var(--green);
+      background: #f2faf7;
+      border-radius: 0 8px 8px 0;
+      padding: 13px 14px;
+      margin-top: 12px;
+    }
+    .list { display: grid; gap: 10px; }
+    .item {
+      border-left: 4px solid var(--blue);
+      background: var(--soft);
+      padding: 11px 12px;
+      border-radius: 0 8px 8px 0;
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; vertical-align: top; padding: 9px 6px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 600; }
+    ul, ol { margin: 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; padding: 0; margin: 0; list-style: none; }
+    .tags li {
+      border: 1px solid #cfe0dc;
+      background: #eef8f4;
+      color: var(--green);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 13px;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: #eef2f7;
+      border: 1px solid #dce5ee;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 10px 0 24px; }
+    @media (max-width: 920px) {
+      .hero, .grid { grid-template-columns: 1fr; }
+      .col-3, .col-4, .col-6, .col-8, .col-12 { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>2026-07-01 学习日志</h1>
+      <p class="sub">晚间闭环执行于 2026-07-01 20:03 CST 左右。今天的重点是把数字阅读推广论文、6 张知识卡、复习队列、图谱关系和明日传播力评价任务接成“论文 -> 知识卡 -> 图谱 -> 复习 -> 项目行动”的闭环。</p>
+      <nav class="nav">
+        <a href="../study_dashboard.html">总览</a>
+        <a href="../paper_reading/2026-07-01-digital-reading-promotion.html">今日精读</a>
+        <a href="../knowledge_cards/index.html">知识卡</a>
+        <a href="../knowledge_graph/index.html">知识图谱</a>
+        <a href="index.html" aria-current="page">学习日志</a>
+        <a href="views/2026-07-01-digital-reading-promotion-paper-83676eb0.html">主读会话浏览版</a>
+        <a href="views/2026-07-01-evening-close-35b4d344.html">晚间闭环浏览版</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <section class="panel col-8">
+        <h2>今日概览</h2>
+        <p>今天主读 <a href="../paper_reading/2026-07-01-digital-reading-promotion.html">《基于短视频营销的公共图书馆数字阅读推广策略研究》</a>，把 SICAS 的用户路径和 AARRR 的阶段指标推进到公共图书馆数字阅读推广服务场景。</p>
+        <p>这篇论文的稳定价值不是证明短视频策略有效，而是把“平台互动”拉回“数字阅读推广”和“服务价值”：情感营销负责共鸣，渠道营销负责触达，互动营销负责参与，最后都要落到资源访问、活动报名、借阅/咨询、到馆、用户反馈等服务结果。</p>
+        <div class="callout">
+          <strong>核心判断：</strong> 明天最值得优先做的是把 SICAS、AARRR 和情感/渠道/互动三条策略合成“路径-指标-服务动作”草图，并补传播力评价线。
+        </div>
+      </section>
+      <section class="grid col-4">
+        <div class="metric col-6"><b>1</b><span>今日主读论文</span></div>
+        <div class="metric col-6"><b>6</b><span>新增/更新概念与方法卡</span></div>
+        <div class="metric col-6"><b>118</b><span>知识图谱节点</span></div>
+        <div class="metric col-6"><b>305</b><span>知识图谱关系边</span></div>
+      </section>
+    </section>
+
+    <section class="grid">
+      <section class="panel col-8">
+        <h2>时间线</h2>
+        <table>
+          <thead><tr><th>时间</th><th>动作</th><th>结果</th></tr></thead>
+          <tbody>
+            <tr><td>09:10 左右</td><td>生成今日主读与知识资产</td><td>形成数字阅读推广精读页、论文笔记、主读 session、5 张概念卡、1 张方法卡和复习队列条目。</td></tr>
+            <tr><td>白天</td><td>刷新项目与学习入口</td><td>更新项目 workbench、reading board、evidence gate、review state、search index 和 dashboard 相关 HTML。</td></tr>
+            <tr><td>20:00</td><td>读取晚间闭环规范并扫描今日变更</td><td>确认今日核心新增集中在论文精读、Obsidian 文献/知识卡、复习队列、知识图谱和项目 workbench。</td></tr>
+            <tr><td>20:03</td><td>补晚间闭环日志与回链</td><td>论文页新增 HTML 日报入口；论文笔记和主读 session 回链到晚间闭环。</td></tr>
+            <tr><td>20:03</td><td>导出知识图谱</td><td><code>make obsidian-graph</code> 输出 118 个节点、305 条边；孤立节点 57 个。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel col-4">
+        <h2>主题标签</h2>
+        <ul class="tags">
+          <li>数字阅读推广</li>
+          <li>服务价值</li>
+          <li>情感营销</li>
+          <li>渠道营销</li>
+          <li>互动营销</li>
+          <li>头部账号实践提炼</li>
+          <li>SICAS</li>
+          <li>AARRR</li>
+          <li>传播力评价</li>
+        </ul>
+      </section>
+
+      <section class="panel col-4">
+        <h2>论文精读入口</h2>
+        <div class="list">
+          <div class="item green"><a href="../paper_reading/2026-07-01-digital-reading-promotion.html">数字阅读推广今日精读页</a><div class="meta">阅读路线、证据逻辑、方法流程、知识卡和明日行动。</div></div>
+          <div class="item"><a href="../paper_reading/views/cnki-2021-5530e86157-96644c0b.html">Obsidian 论文笔记浏览版</a><div class="meta">已含 Knowledge Links、主读会话和晚间闭环回链。</div></div>
+          <div class="item amber"><a href="../paper_reading/views/paper-495f8717.html">Source-Grounded Reader</a><div class="meta">写作引用前仍需回原 CAJ/PDF 核验页码和表格值。</div></div>
+          <div class="item"><a href="../paper_reading/views/cnki-2021-5530e86157-05cc0475.html">上下文包</a><div class="meta">下次共读优先加载，不要重复全量打开 Reader。</div></div>
+        </div>
+      </section>
+
+      <section class="panel col-4">
+        <h2>知识卡入口</h2>
+        <div class="list">
+          <div class="item rose"><a href="../knowledge_cards/views/concept-b0f48f34.html">数字阅读推广</a><div class="meta">服务场景核心，不能被平台互动指标替代。</div></div>
+          <div class="item rose"><a href="../knowledge_cards/views/concept-e98c8c55.html">服务价值</a><div class="meta">结果变量方向：资源访问、活动报名、借阅/咨询、到馆、反馈。</div></div>
+          <div class="item rose"><a href="../knowledge_cards/views/concept-d7b1f9e6.html">情感营销</a><div class="meta">解释用户为什么愿意注意并靠近数字阅读内容。</div></div>
+          <div class="item rose"><a href="../knowledge_cards/views/concept-401f5cfe.html">渠道营销</a><div class="meta">解释用户如何从短视频平台进入其他服务入口。</div></div>
+          <div class="item rose"><a href="../knowledge_cards/views/concept-452dce22.html">互动营销</a><div class="meta">已在今日复习到 stage 2，下一次复习日为 2026-07-04。</div></div>
+          <div class="item green"><a href="../knowledge_cards/views/method-e92ba575.html">头部账号实践提炼</a><div class="meta">适合生成变量和假设，不能直接当因果证据。</div></div>
+        </div>
+      </section>
+
+      <section class="panel col-4">
+        <h2>知识图谱入口</h2>
+        <table>
+          <tbody>
+            <tr><td>入口</td><td><a href="../knowledge_graph/index.html">knowledge_graph/index.html</a></td></tr>
+            <tr><td>节点 / 边</td><td><code>118 / 305</code></td></tr>
+            <tr><td>孤立节点</td><td><code>57</code>，主要是旧每日摘要、file sweep、context pack、模板项目和部分 CNKI 交接记录。</td></tr>
+            <tr><td>新增高价值关系</td><td><code>服务价值 -> AARRR 漏斗模型</code>、<code>互动营销 -> SICAS模型</code>、<code>渠道营销 -> 平台适配</code>、<code>情感营销 -> 用户感知价值</code>。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel col-6">
+        <h2>文件归档摘要</h2>
+        <ul>
+          <li>论文 HTML：<code>paper_reading/2026-07-01-digital-reading-promotion.html</code></li>
+          <li>论文笔记：<code>vault/01_Literature/cnki_2021_5530e86157.md</code></li>
+          <li>知识卡：<code>vault/02_Concepts/数字阅读推广.md</code>、<code>服务价值.md</code>、<code>情感营销.md</code>、<code>渠道营销.md</code>、<code>互动营销.md</code></li>
+          <li>方法卡：<code>vault/03_Methods/头部账号实践提炼.md</code></li>
+          <li>学习会话：<code>vault/12_Learning_Log/sessions/2026-07-01-digital-reading-promotion-paper.md</code> 和 <code>2026-07-01-evening-close.md</code></li>
+          <li>项目工作台：<code>projects/library_short_video/</code> 下的 dashboard、research question、literature synthesis、reading board、evidence gate 和 project state 已有今日更新。</li>
+          <li>待判断：<code>.tmp/review-server.*</code> 是今日复习页写回服务运行痕迹，保留原位；未发现需要移动或删除的研究文件。</li>
+        </ul>
+      </section>
+
+      <section class="panel col-6">
+        <h2>交叉链接完整性</h2>
+        <ul>
+          <li>论文精读页已链接到论文笔记、Reader、上下文包、文献综述工作台、知识卡入口、知识图谱、主读会话和本 HTML 日报。</li>
+          <li>论文笔记已包含 Knowledge Links，并补上主读会话、晚间闭环和 HTML 日报回链。</li>
+          <li>晚间闭环浏览版已生成：<a href="views/2026-07-01-evening-close-35b4d344.html">2026-07-01 Evening Close</a>。</li>
+          <li>6 张新增/更新知识卡均链接回 <code>cnki_2021_5530e86157</code> 和当前项目。</li>
+          <li>新增知识点均有复习问题并进入复习队列；5 个 stage 1 条目将于 2026-07-02 复习。</li>
+        </ul>
+      </section>
+
+      <section class="panel col-6">
+        <h2>待办事项</h2>
+        <ol>
+          <li>2026-07-02 先复习 <code>数字阅读推广</code>、<code>服务价值</code>、<code>情感营销</code>、<code>渠道营销</code>、<code>头部账号实践提炼</code>。</li>
+          <li>起草“路径-指标-服务动作”草图：SICAS 路径、AARRR 阶段、情感/渠道/互动策略三者对齐。</li>
+          <li>把服务价值拆成平台互动、服务触达、阅读转化三层指标。</li>
+          <li>继续补 `cnki_2021_645f03f388` 全文或 Reader，用于传播力评价线。</li>
+        </ol>
+      </section>
+
+      <section class="panel col-6">
+        <h2>未解决问题</h2>
+        <ul>
+          <li>头部账号实践提炼只能提供策略变量线索，不能证明策略有效。</li>
+          <li>2020 年抖音平台生态和 2026 年环境存在漂移，后续需要复测或补新近文献。</li>
+          <li>头部账号经验不能直接外推到普通馆、小馆、高校馆或科研型图书馆。</li>
+          <li>服务价值指标仍需操作化，否则容易继续停在点赞、评论、粉丝数。</li>
+        </ul>
+      </section>
+
+      <section class="panel col-8">
+        <h2>明日计划</h2>
+        <p>明早建议先做 10 分钟复习，再把今天的三条策略线转成变量表。论文推荐优先补传播力评价线：`cnki_2021_645f03f388`《图书馆短视频账号传播力研究——以省级公共图书馆为例》。如果全文未到位，先做下载交接；如果已到位，重点提取评价指标、账号样本规则和能否接到服务价值的边界。</p>
+      </section>
+
+      <section class="panel col-4">
+        <h2>可检索关键词</h2>
+        <p>数字阅读推广；服务价值；情感营销；渠道营销；互动营销；头部账号实践提炼；SICAS；AARRR；平台互动；服务触达；阅读转化；公共图书馆；抖音；头部账号；传播力评价；复习队列；图书馆短视频。</p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="wrap">Updated for the 2026-07-01 evening closeout. Source Markdown stays in Obsidian; this page is the browser-first daily entry.</footer>
+</body>
+</html>

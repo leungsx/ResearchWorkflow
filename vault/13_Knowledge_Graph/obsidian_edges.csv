@@ -63,6 +63,7 @@ Source,Target,Type,Weight,Label
 2026-06-30-evening-close,网络调查法,Directed,2,obsidian_link
 2026-06-30-evening-close,软营销,Directed,1,obsidian_link
 2026-06-30-evening-close,馆型差异,Directed,5,obsidian_link
+2026-07-01-digital-reading-promotion-paper,2026-07-01-evening-close,Directed,1,obsidian_link
 2026-07-01-digital-reading-promotion-paper,AARRR 漏斗模型,Directed,2,obsidian_link
 2026-07-01-digital-reading-promotion-paper,SICAS模型,Directed,2,obsidian_link
 2026-07-01-digital-reading-promotion-paper,cnki_2021_5530e86157,Directed,7,obsidian_link
@@ -75,6 +76,19 @@ Source,Target,Type,Weight,Label
 2026-07-01-digital-reading-promotion-paper,服务价值,Directed,4,obsidian_link
 2026-07-01-digital-reading-promotion-paper,渠道营销,Directed,4,obsidian_link
 2026-07-01-digital-reading-promotion-paper,用户感知价值,Directed,1,obsidian_link
+2026-07-01-evening-close,2026-07-01-digital-reading-promotion-paper,Directed,1,obsidian_link
+2026-07-01-evening-close,AARRR 漏斗模型,Directed,3,obsidian_link
+2026-07-01-evening-close,SICAS模型,Directed,3,obsidian_link
+2026-07-01-evening-close,cnki_2021_5530e86157,Directed,9,obsidian_link
+2026-07-01-evening-close,library_short_video,Directed,2,obsidian_link
+2026-07-01-evening-close,互动营销,Directed,5,obsidian_link
+2026-07-01-evening-close,头部账号实践提炼,Directed,4,obsidian_link
+2026-07-01-evening-close,平台适配,Directed,1,obsidian_link
+2026-07-01-evening-close,情感营销,Directed,5,obsidian_link
+2026-07-01-evening-close,数字阅读推广,Directed,6,obsidian_link
+2026-07-01-evening-close,服务价值,Directed,8,obsidian_link
+2026-07-01-evening-close,渠道营销,Directed,5,obsidian_link
+2026-07-01-evening-close,用户感知价值,Directed,1,obsidian_link
 AARRR 漏斗模型,ELM 精细加工可能性模型,Directed,1,obsidian_link
 AARRR 漏斗模型,Hook Model 上瘾模型,Directed,1,obsidian_link
 AARRR 漏斗模型,SICAS模型,Directed,2,obsidian_link
@@ -131,6 +145,7 @@ cnki_2021_3771e58987,网络调查法,Directed,2,obsidian_link
 cnki_2021_3771e58987,馆型差异,Directed,2,obsidian_link
 cnki_2021_3771e58987,馆型平台适配复测,Directed,2,obsidian_link
 cnki_2021_5530e86157,2026-07-01-digital-reading-promotion-paper,Directed,1,obsidian_link
+cnki_2021_5530e86157,2026-07-01-evening-close,Directed,1,obsidian_link
 cnki_2021_5530e86157,AARRR 漏斗模型,Directed,4,obsidian_link
 cnki_2021_5530e86157,SICAS模型,Directed,4,obsidian_link
 cnki_2021_5530e86157,cnki_2020_2a150c6df8,Directed,1,obsidian_link
