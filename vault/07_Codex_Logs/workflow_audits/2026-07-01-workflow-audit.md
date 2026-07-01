@@ -1,7 +1,7 @@
 # Workflow Audit - 2026-07-01
 
-Generated: 2026-07-01T08:57:32
-Summary: PASS=15 WARN=3 FAIL=0
+Generated: 2026-07-01T08:57:53
+Summary: PASS=16 WARN=2 FAIL=0
 
 ## Checks
 
@@ -18,11 +18,11 @@ Summary: PASS=15 WARN=3 FAIL=0
 | 项目状态 | PASS | 项目状态文件可供自动化读取 | 2 个项目。 |
 | 复习队列 | WARN | 存在到期复习项 | 13 项到期：方向链；Hook Model 上瘾模型；SICAS模型；软营销；沉浸式内容；用户感知价值；DCI传播力指数；描述性账号调查 |
 | 备份 | PASS | 最近备份可用 | backups/researchworkflow-critical-20260630-200857.zip，约 12.8 小时前。 |
-| Git/异地备份 | WARN | 存在尚未提交的 Git 改动 | 130 个路径待快照： M Makefile； M action_queue.html； M codex/state/context_index.md； M docs/INTEGRATED_RESEARCH_LEARNING_WORKFLOW.md； M docs/WORKFLOW_LAYERED_ARCHITECTURE.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html |
+| Git/异地备份 | PASS | Git 本地和远程快照状态正常 | upstream=origin/main；last commit: 7b1dda4 2026-07-01 08:57:41 +0800 add search collaboration archive workflow layers |
 | Token/记忆 | PASS | 今日 compact summary 可作为默认启动上下文 | vault/07_Codex_Logs/compact_daily/2026-07-01-summary.md，约 88 words。 |
 | 文件卫生 | WARN | 工作区存在系统/缓存文件 | .DS_Store=21；__pycache__=3；这些不会进入 file sweep，但可择机清理。 |
 | Schema | PASS | 核心机器状态 schema 校验通过 | 10 个文件通过校验。 |
-| 行动队列 | PASS | 行动队列可用且入口有效 | 13 个开放行动。 |
+| 行动队列 | PASS | 行动队列可用且入口有效 | 12 个开放行动。 |
 | 项目协作层 | PASS | 项目协作层可用 | 2 个项目；user_waiting=3。 |
 | 自动归档策略 | PASS | 自动归档策略可用 | backup=6, prune=0, cache=24 |
 
