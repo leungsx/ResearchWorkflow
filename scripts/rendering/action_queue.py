@@ -145,16 +145,14 @@ def href_for(path: str) -> str:
 def write_action_queue_html(queue: dict[str, Any]) -> None:
     actions = queue.get("actions", [])
     rows = "\n".join(
-        f"""
-        <article class="action">
+        f"""        <article class="action">
           <div class="rank">#{action.get("rank", "")}</div>
           <div>
             <h2><a href="{href_for(str(action.get("entrypoint", "")))}">{html.escape(str(action.get("title", "")))}</a></h2>
             <p>{html.escape(str(action.get("reason", "")))}</p>
             <p class="meta">{html.escape(str(action.get("kind", "")))} · priority {action.get("priority", "")} · {html.escape(str(action.get("source", "")))}</p>
           </div>
-        </article>
-        """
+        </article>"""
         for action in actions
     )
     summary = queue.get("summary", {})

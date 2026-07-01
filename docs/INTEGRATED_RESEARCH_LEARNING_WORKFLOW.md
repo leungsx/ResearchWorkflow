@@ -64,6 +64,10 @@ Required outputs for every new deep-read paper:
 | Action queue | `vault/13_Knowledge_Graph/action_queue.json` | Prioritized open-action queue generated from workflow state. |
 | Action queue HTML | `action_queue.html` | Browser-first prioritized action page. |
 | Workflow audit data | `vault/13_Knowledge_Graph/workflow_audit_report.json` | Latest machine-readable audit result; do not parse Markdown logs for automation. |
+| Project collaboration | `vault/13_Knowledge_Graph/collaboration_state.json` | Machine-readable user/Codex handoff and project collaboration state. |
+| Project collaboration HTML | `project_collaboration.html` | Browser-first project handoff and collaboration page. |
+| Archive policy | `vault/13_Knowledge_Graph/archive_policy.json` | Machine-readable retention, backup, log, generated-asset, and cache policy report. |
+| Archive policy HTML | `archive_policy.html` | Browser-first automatic archive strategy page. |
 | Dashboard | `study_dashboard.html` | Daily visual entry point. |
 
 ## Artifact Contract
@@ -137,9 +141,11 @@ The evening task should verify:
 - `make learning-dashboard` should generate HTML mirrors for linked Markdown files and linked folders, rewrite local Markdown links to those mirrors, and remove stale generated mirror pages.
 - `make learning-dashboard` should also refresh `projects/*/project_state.json`; Markdown dashboards remain human-facing, while JSON state is for automation.
 - `make learning-dashboard` should also refresh `vault/14_Review_Queue/review_state.json` and `knowledge_cards/review_today.html`;复习入口应链接到知识卡 HTML 展示页。
-- `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/search_index.json` and `search/index.html`; search results should open HTML display pages only.
+- `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/search_index.json` and `search/index.html`; search results should open HTML display pages only and should support relevance sorting, snippets, keywords, project filters, and type filters.
 - `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/workflow_state.json` and `workflow_state.html`; workflow audit should refresh them again with final audit counts.
 - `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/action_queue.json` and `action_queue.html`; each action should link to an HTML entrypoint.
+- `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/collaboration_state.json` and `project_collaboration.html`; collaboration state separates user decisions from Codex-executable actions.
+- `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/archive_policy.json` and `archive_policy.html`; archive automation reports retention and cleanup candidates but does not delete uncertain research files.
 - `make schema-validate` should pass after dashboard/state generation; it checks core JSON/CSV fields, counts, and HTML entrypoints.
 - `knowledge_graph/index.html` should default to a visual, interactive graph view. CSV/table links are secondary source-data links, not the primary interface.
 - `workflow_health.html` is the browser-first workflow health page. It should be refreshed by `make workflow-audit`.

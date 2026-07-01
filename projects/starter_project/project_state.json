@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-06-30T22:32:41",
+  "generated_at": "2026-07-01T08:57:32",
   "project": {
     "slug": "starter_project",
     "title": "Starter Research Project",
@@ -17,7 +17,9 @@
     "literature_workbench": "",
     "literature_synthesis": "paper_reading/views/03-literature-synthesis-01206220.html",
     "review_today": "knowledge_cards/review_today.html",
-    "search": "search/index.html"
+    "search": "search/index.html",
+    "project_collaboration": "project_collaboration.html",
+    "archive_policy": "archive_policy.html"
   },
   "source_documents": {
     "project_dashboard": "projects/starter_project/00_project_dashboard.md",
@@ -47,9 +49,9 @@
     "warn": "0"
   },
   "review": {
-    "due_count": 8,
-    "overdue_count": 2,
-    "upcoming_7_count": 5,
+    "due_count": 13,
+    "overdue_count": 8,
+    "upcoming_7_count": 0,
     "queue_path": "vault/14_Review_Queue/review_queue.csv",
     "state_path": "vault/14_Review_Queue/review_state.json",
     "review_today": "knowledge_cards/review_today.html",
@@ -117,6 +119,22 @@
         "next_review": "2026-06-30",
         "prompt": "解释软营销和硬推广的差别，并说说它为什么重要。",
         "display_path": "knowledge_cards/views/concept-841db0d5.html"
+      },
+      {
+        "id": "concept-aarrr-funnel",
+        "title": "AARRR 漏斗模型",
+        "type": "concept",
+        "next_review": "2026-07-01",
+        "prompt": "说出 AARRR 五个阶段，并解释图书馆语境中的 Revenue 应该如何转译。",
+        "display_path": "knowledge_cards/views/concept-aarrr-bf76ae6c.html"
+      },
+      {
+        "id": "method-content-analysis",
+        "title": "内容分析法",
+        "type": "method",
+        "next_review": "2026-07-01",
+        "prompt": "内容分析法如何把短视频观察转成可复核变量？",
+        "display_path": "knowledge_cards/views/method-4dc0db40.html"
       }
     ]
   },
@@ -124,7 +142,7 @@
     "artifact_manifest": "vault/13_Knowledge_Graph/artifact_manifest.csv",
     "manifest_path": "vault/13_Knowledge_Graph/artifact_manifest.csv",
     "search_index": "vault/13_Knowledge_Graph/search_index.json",
-    "project_related_entries": 5,
+    "project_related_entries": 7,
     "html_entries": [
       {
         "source_path": "study_dashboard.html",
@@ -137,6 +155,18 @@
         "display_path": "paper_reading/views/00-project-dashboard-b90a4a93.html",
         "display_type": "markdown_view",
         "title": "Project Dashboard"
+      },
+      {
+        "source_path": "projects/starter_project/03_literature_synthesis.md",
+        "display_path": "paper_reading/views/03-literature-synthesis-01206220.html",
+        "display_type": "markdown_view",
+        "title": "Literature Synthesis"
+      },
+      {
+        "source_path": "projects/starter_project/manuscript/evidence_gate_report.md",
+        "display_path": "paper_reading/views/evidence-gate-report-f15d3e57.html",
+        "display_type": "markdown_view",
+        "title": "Evidence Gate Report"
       },
       {
         "source_path": "paper_reading/index.html",

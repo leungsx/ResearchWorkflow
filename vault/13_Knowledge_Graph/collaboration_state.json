@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-01T08:57:32",
+  "entrypoint": "project_collaboration.html",
+  "summary": {
+    "project_count": 2,
+    "user_waiting": 3,
+    "codex_ready": 8,
+    "open_actions": 13
+  },
+  "roles": {
+    "user": [
+      "确认研究方向、证据边界和是否补全文。",
+      "完成主动回忆和主观判断。",
+      "决定哪些研究问题进入写作或实验设计。"
+    ],
+    "codex": [
+      "刷新状态、索引、HTML 入口和审计报告。",
+      "把论文转成知识卡、图谱关系和项目行动。",
+      "根据项目状态推荐下一篇可精读文献。"
+    ]
+  },
+  "entrypoints": {
+    "workflow_state": "workflow_state.html",
+    "action_queue": "action_queue.html",
+    "review_today": "knowledge_cards/review_today.html",
+    "search": "search/index.html",
+    "workflow_health": "workflow_health.html"
+  },
+  "projects": [
+    {
+      "slug": "library_short_video",
+      "title": "图书馆短视频相关研究",
+      "status": "draft",
+      "stage": "synthesis",
+      "state_path": "projects/library_short_video/project_state.json",
+      "matrix_rows": 60,
+      "reader_packages": 8,
+      "review_due": 13,
+      "latest_deep_read": {
+        "title": "2026-06-30 精读：公共图书馆和高校图书馆短视频营销比较研究",
+        "path": "paper_reading/2026-06-30-aarrr-library-short-video.html",
+        "updated_at": "2026-06-30T20:06:44"
+      },
+      "entrypoints": {
+        "dashboard": "paper_reading/views/00-project-dashboard-dd8418ad.html",
+        "reading_board": "paper_reading/views/reading-board-026f6ec8.html",
+        "literature_workbench": "paper_reading/views/literature_review_workbench.html",
+        "literature_synthesis": "paper_reading/views/literature_synthesis.html",
+        "review_today": "knowledge_cards/review_today.html",
+        "search": "search/index.html",
+        "archive_policy": "archive_policy.html"
+      },
+      "user_handoffs": [
+        "人工确认 evidence gate 中 WARN/ERROR 的证据边界。",
+        "完成 13 个到期知识卡主动回忆。"
+      ],
+      "codex_handoffs": [
+        "先处理 evidence gate 的 WARN/ERROR，避免 metadata-only 文献进入论文主张。",
+        "把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。",
+        "围绕最近主读 `cnki_2021_3771e58987`，补齐与既有概念/方法的关系和证据边界。",
+        "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
+        "把下一篇精读结果沉淀为 HTML、知识卡、图谱关系和复习问题。"
+      ],
+      "source_documents": {
+        "project_dashboard": "projects/library_short_video/00_project_dashboard.md",
+        "reading_board": "projects/library_short_video/literature/reading_board.md",
+        "literature_workbench": "projects/library_short_video/literature/literature_review_workbench.md",
+        "literature_synthesis": "projects/library_short_video/03_literature_synthesis.md"
+      },
+      "artifact_count": 46
+    },
+    {
+      "slug": "starter_project",
+      "title": "Starter Research Project",
+      "status": "draft",
+      "stage": "setup",
+      "state_path": "projects/starter_project/project_state.json",
+      "matrix_rows": 0,
+      "reader_packages": 0,
+      "review_due": 13,
+      "latest_deep_read": {},
+      "entrypoints": {
+        "dashboard": "paper_reading/views/00-project-dashboard-b90a4a93.html",
+        "reading_board": "",
+        "literature_workbench": "",
+        "literature_synthesis": "paper_reading/views/03-literature-synthesis-01206220.html",
+        "review_today": "knowledge_cards/review_today.html",
+        "search": "search/index.html",
+        "archive_policy": "archive_policy.html"
+      },
+      "user_handoffs": [
+        "完成 13 个到期知识卡主动回忆。"
+      ],
+      "codex_handoffs": [
+        "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
+        "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
+        "把下一篇精读结果沉淀为 HTML、知识卡、图谱关系和复习问题。"
+      ],
+      "source_documents": {
+        "project_dashboard": "projects/starter_project/00_project_dashboard.md",
+        "reading_board": "",
+        "literature_workbench": "",
+        "literature_synthesis": "projects/starter_project/03_literature_synthesis.md"
+      },
+      "artifact_count": 7
+    }
+  ]
+}

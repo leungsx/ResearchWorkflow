@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-07-01T08:57:32",
+  "entrypoint": "archive_policy.html",
+  "summary": {
+    "backup_count": 6,
+    "backup_prune_candidates": 0,
+    "daily_log_count": 9,
+    "compact_candidates": 0,
+    "cache_candidates": 24,
+    "generated_html_count": 83
+  },
+  "policy": {
+    "canonical_sources": "Markdown、CSV、YAML、项目状态 JSON 和图谱状态 JSON 默认长期保留。",
+    "generated_assets": "HTML 展示页、搜索页、总状态页和行动队列可由脚本重建，但仍随 Git 快照保留。",
+    "backup_retention": "zip 备份保留最近 30 个；超出部分只通过显式 prune 命令删除。",
+    "logs": "daily log 默认保留；超过 45 天应有 compact summary。",
+    "raw_files": "PDF、CAJ/KDH、原始数据和大型二进制不进 Git，归属外部材料库。",
+    "safety": "自动化只报告和生成索引；删除或移动不确定文件必须显式命令执行。"
+  },
+  "entrypoints": {
+    "backup_index": "backups/index.html",
+    "workflow_health": "workflow_health.html",
+    "audit_data": "vault/13_Knowledge_Graph/workflow_audit_report.json"
+  },
+  "backups": {
+    "keep_newest": 30,
+    "count": 6,
+    "latest": "backups/researchworkflow-critical-20260630-200857.zip",
+    "latest_age_days": 0.53,
+    "prune_candidates": []
+  },
+  "logs": {
+    "daily_count": 9,
+    "compact_count": 8,
+    "compact_after_days": 45,
+    "compact_candidates": []
+  },
+  "generated": {
+    "generated_html_count": 83,
+    "managed_by": "make learning-dashboard",
+    "stale_cleanup": "生成器按 manifest/路由清理可重建 HTML；不要手工删除源 Markdown。"
+  },
+  "caches": {
+    "ds_store_count": 21,
+    "pycache_count": 3,
+    "safe_cleanup_candidates": [
+      ".DS_Store",
+      "tools/.DS_Store",
+      "tools/caj2pdf/.DS_Store",
+      "projects/.DS_Store",
+      "projects/starter_project/.DS_Store",
+      "projects/starter_project/submission_package/.DS_Store",
+      "projects/starter_project/submission_package/20260619-105023/.DS_Store",
+      "projects/library_short_video/.DS_Store",
+      "projects/library_short_video/literature/.DS_Store",
+      "projects/library_short_video/literature/readers/.DS_Store",
+      "codex/.DS_Store",
+      "library/.DS_Store",
+      "library/cnki_exports/.DS_Store",
+      "library/pdfs/.DS_Store",
+      "library/pdfs/library_short_video/.DS_Store",
+      "library/text/.DS_Store",
+      "docs/.DS_Store",
+      "vault/.DS_Store",
+      "vault/11_Idea_Lab/.DS_Store",
+      "vault/15_CNKI_Frontier/.DS_Store",
+      "tools/caj2pdf/__pycache__",
+      "scripts/__pycache__",
+      "scripts/rendering/__pycache__"
+    ]
+  },
+  "actions": [
+    {
+      "id": "backup-prune",
+      "title": "备份包保留最近 30 个",
+      "mode": "manual_destructive",
+      "command": "make workflow-backup-prune KEEP=30",
+      "reason": "只删除超出保留窗口的 zip 备份包，不触碰源文件。",
+      "candidate_count": 0
+    },
+    {
+      "id": "log-compact",
+      "title": "超过 45 天的 daily log 应有 compact summary",
+      "mode": "automatic_report",
+      "command": "make codex-compact-all BEFORE=<YYYY-MM-DD>",
+      "reason": "压缩旧日志以降低上下文负担；原始日志默认保留。",
+      "candidate_count": 0
+    },
+    {
+      "id": "cache-clean",
+      "title": "系统缓存文件可安全清理",
+      "mode": "manual_safe_cleanup",
+      "command": "find . -name .DS_Store -delete && find . -name __pycache__ -type d -prune -exec rm -rf {} +",
+      "reason": "只清理 macOS/Python 缓存；不影响研究源资产。",
+      "candidate_count": 24
+    }
+  ]
+}

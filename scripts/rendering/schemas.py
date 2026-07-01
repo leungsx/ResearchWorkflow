@@ -8,7 +8,9 @@ from typing import Any
 
 from rendering.paths import (
     ACTION_QUEUE_JSON,
+    ARCHIVE_POLICY_JSON,
     ARTIFACT_MANIFEST,
+    COLLABORATION_JSON,
     PROJECTS,
     REVIEW_STATE,
     ROOT,
@@ -129,7 +131,15 @@ def validate_search_index(path: Path, issues: list[SchemaIssue], checked: list[s
         if not isinstance(entry, dict):
             add(issues, path, "FAIL", f"entries[{index}] 必须是对象")
             continue
-        require_keys(entry, path, f"entries[{index}]", ["id", "title", "layer", "display_type", "source_path", "display_path", "search_text"], issues)
+        require_keys(
+            entry,
+            path,
+            f"entries[{index}]",
+            ["id", "title", "layer", "display_type", "source_path", "display_path", "summary", "snippet_text", "keywords", "weight", "search_text"],
+            issues,
+        )
+        require_type(entry, path, "keywords", list, issues, f"entries[{index}]")
+        require_type(entry, path, "weight", int, issues, f"entries[{index}]")
         require_existing_html(entry.get("display_path"), path, f"entries[{index}].display_path", issues)
 
 
@@ -181,7 +191,7 @@ def validate_project_state(path: Path, issues: list[SchemaIssue], checked: list[
     else:
         add(issues, path, "FAIL", "project 必须是对象")
     if isinstance(entrypoints, dict):
-        for key in ["study_dashboard", "today", "project_dashboard", "review_today", "search"]:
+        for key in ["study_dashboard", "today", "project_dashboard", "review_today", "search", "project_collaboration", "archive_policy"]:
             require_existing_html(entrypoints.get(key), path, f"entrypoints.{key}", issues)
     else:
         add(issues, path, "FAIL", "entrypoints 必须是对象")
@@ -211,7 +221,7 @@ def validate_workflow_state(path: Path, issues: list[SchemaIssue], checked: list
     require_keys(payload, path, "root", ["schema_version", "generated_at", "entrypoints", "counts", "audit", "review", "graph", "projects", "artifacts", "next_actions"], issues)
     entrypoints = payload.get("entrypoints", {})
     if isinstance(entrypoints, dict):
-        for key in ["study_dashboard", "today", "review_today", "knowledge_graph", "search", "workflow_health", "workflow_state", "action_queue"]:
+        for key in ["study_dashboard", "today", "review_today", "knowledge_graph", "search", "workflow_health", "workflow_state", "action_queue", "project_collaboration", "archive_policy"]:
             require_existing_html(entrypoints.get(key), path, f"entrypoints.{key}", issues)
     else:
         add(issues, path, "FAIL", "entrypoints 必须是对象")
@@ -296,6 +306,59 @@ def validate_audit_report(path: Path, issues: list[SchemaIssue], checked: list[s
             add(issues, path, "FAIL", f"checks[{index}].status 非法：{check.get('status')}")
 
 
+def validate_collaboration_state(path: Path, issues: list[SchemaIssue], checked: list[str]) -> None:
+    payload = load_json(path, issues, checked)
+    if not isinstance(payload, dict):
+        add(issues, path, "FAIL", "顶层结构必须是对象")
+        return
+    require_keys(payload, path, "root", ["schema_version", "generated_at", "entrypoint", "summary", "roles", "entrypoints", "projects"], issues)
+    require_existing_html(payload.get("entrypoint"), path, "entrypoint", issues)
+    summary = payload.get("summary", {})
+    if isinstance(summary, dict):
+        for key in ["project_count", "user_waiting", "codex_ready", "open_actions"]:
+            require_type(summary, path, key, int, issues, "summary")
+    projects = payload.get("projects", [])
+    if not isinstance(projects, list):
+        add(issues, path, "FAIL", "projects 必须是数组")
+        return
+    if isinstance(summary, dict) and summary.get("project_count") != len(projects):
+        add(issues, path, "FAIL", f"summary.project_count 与 projects 长度不一致：{summary.get('project_count')} / {len(projects)}")
+    for index, project in enumerate(projects, start=1):
+        if not isinstance(project, dict):
+            add(issues, path, "FAIL", f"projects[{index}] 必须是对象")
+            continue
+        require_keys(project, path, f"projects[{index}]", ["slug", "title", "stage", "state_path", "entrypoints", "user_handoffs", "codex_handoffs"], issues)
+        require_existing_path(project.get("state_path"), path, f"projects[{index}].state_path", issues)
+        entrypoints = project.get("entrypoints", {})
+        if isinstance(entrypoints, dict):
+            for key, value in entrypoints.items():
+                if value:
+                    require_existing_html(value, path, f"projects[{index}].entrypoints.{key}", issues)
+
+
+def validate_archive_policy(path: Path, issues: list[SchemaIssue], checked: list[str]) -> None:
+    payload = load_json(path, issues, checked)
+    if not isinstance(payload, dict):
+        add(issues, path, "FAIL", "顶层结构必须是对象")
+        return
+    require_keys(payload, path, "root", ["schema_version", "generated_at", "entrypoint", "summary", "policy", "entrypoints", "backups", "logs", "generated", "caches", "actions"], issues)
+    require_existing_html(payload.get("entrypoint"), path, "entrypoint", issues)
+    summary = payload.get("summary", {})
+    if isinstance(summary, dict):
+        for key in ["backup_count", "backup_prune_candidates", "daily_log_count", "compact_candidates", "cache_candidates", "generated_html_count"]:
+            require_type(summary, path, key, int, issues, "summary")
+    actions = payload.get("actions", [])
+    if not isinstance(actions, list):
+        add(issues, path, "FAIL", "actions 必须是数组")
+        return
+    for index, action in enumerate(actions, start=1):
+        if not isinstance(action, dict):
+            add(issues, path, "FAIL", f"actions[{index}] 必须是对象")
+            continue
+        require_keys(action, path, f"actions[{index}]", ["id", "title", "mode", "command", "reason", "candidate_count"], issues)
+        require_type(action, path, "candidate_count", int, issues, f"actions[{index}]")
+
+
 def validate_workflow_schemas(include_audit_report: bool = True) -> SchemaReport:
     checked: list[str] = []
     issues: list[SchemaIssue] = []
@@ -305,6 +368,8 @@ def validate_workflow_schemas(include_audit_report: bool = True) -> SchemaReport
         (REVIEW_STATE, validate_review_state),
         (WORKFLOW_STATE_JSON, validate_workflow_state),
         (ACTION_QUEUE_JSON, validate_action_queue),
+        (COLLABORATION_JSON, validate_collaboration_state),
+        (ARCHIVE_POLICY_JSON, validate_archive_policy),
     ]
     if include_audit_report:
         validators.append((WORKFLOW_AUDIT_JSON, validate_audit_report))

@@ -11,7 +11,11 @@ from rendering.paths import (
     ARTIFACT_MANIFEST,
     ACTION_QUEUE_HTML,
     ACTION_QUEUE_JSON,
+    ARCHIVE_POLICY_HTML,
+    ARCHIVE_POLICY_JSON,
     BACKUP_INDEX,
+    COLLABORATION_HTML,
+    COLLABORATION_JSON,
     GRAPH_DIR,
     KNOWLEDGE_GRAPH,
     PAPER_READING,
@@ -159,6 +163,8 @@ def build_workflow_state(audit_checks: list[Any] | None = None, git_dirty_paths:
             "workflow_health": rel(WORKFLOW_HEALTH),
             "workflow_state": rel(WORKFLOW_STATE_HTML),
             "action_queue": rel(ACTION_QUEUE_HTML),
+            "project_collaboration": rel(COLLABORATION_HTML),
+            "archive_policy": rel(ARCHIVE_POLICY_HTML),
         },
         "counts": {
             "manifest_rows": len(manifest_rows),
@@ -187,6 +193,8 @@ def build_workflow_state(audit_checks: list[Any] | None = None, git_dirty_paths:
             "latest_backup": rel(latest_backup) if latest_backup else "",
             "action_queue": rel(ACTION_QUEUE_JSON),
             "workflow_audit_report": rel(WORKFLOW_AUDIT_JSON),
+            "project_collaboration": rel(COLLABORATION_JSON),
+            "archive_policy": rel(ARCHIVE_POLICY_JSON),
         },
         "next_actions": list(dict.fromkeys(next_actions))[:8],
     }
@@ -256,6 +264,8 @@ def write_workflow_state_html(state: dict[str, Any]) -> None:
         <a href="search/index.html">全局搜索</a>
         <a href="knowledge_graph/index.html">知识图谱</a>
         <a href="action_queue.html">行动队列</a>
+        <a href="project_collaboration.html">项目协作</a>
+        <a href="archive_policy.html">归档策略</a>
         <a href="workflow_health.html">工作流体检</a>
       </nav>
     </div>
@@ -277,6 +287,8 @@ def write_workflow_state_html(state: dict[str, Any]) -> None:
           <div class="item"><a href="paper_reading/today.html">今日精读入口</a><div class="meta">每天主读论文。</div></div>
           <div class="item"><a href="knowledge_cards/review_today.html">今日复习入口</a><div class="meta">主动回忆到期知识卡。</div></div>
           <div class="item"><a href="action_queue.html">行动队列</a><div class="meta">按优先级处理今天最该做的事。</div></div>
+          <div class="item"><a href="project_collaboration.html">项目协作层</a><div class="meta">查看用户和 Codex 的分工。</div></div>
+          <div class="item"><a href="archive_policy.html">自动归档策略</a><div class="meta">查看备份、日志和缓存策略。</div></div>
           <div class="item"><a href="search/index.html">全局搜索入口</a><div class="meta">查论文、概念、方法和项目材料。</div></div>
         </div>
       </section>

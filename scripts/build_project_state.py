@@ -22,6 +22,8 @@ REVIEW_STATE = ROOT / "vault" / "14_Review_Queue" / "review_state.json"
 REVIEW_TODAY = ROOT / "knowledge_cards" / "review_today.html"
 SEARCH_INDEX_HTML = ROOT / "search" / "index.html"
 SEARCH_INDEX_JSON = GRAPH_DIR / "search_index.json"
+COLLABORATION_HTML = ROOT / "project_collaboration.html"
+ARCHIVE_POLICY_HTML = ROOT / "archive_policy.html"
 PAPER_READING = ROOT / "paper_reading"
 
 from rendering.review import build_review_state
@@ -289,6 +291,8 @@ def build_state(project_slug: str) -> dict[str, Any]:
             "literature_synthesis": html_view(literature_synthesis) if literature_synthesis.exists() else "",
             "review_today": rel(REVIEW_TODAY),
             "search": rel(SEARCH_INDEX_HTML),
+            "project_collaboration": rel(COLLABORATION_HTML),
+            "archive_policy": rel(ARCHIVE_POLICY_HTML),
         },
         "source_documents": {
             "project_dashboard": rel(dashboard),

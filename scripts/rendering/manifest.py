@@ -7,6 +7,10 @@ from rendering.paths import (
     ARTIFACT_MANIFEST,
     ACTION_QUEUE_HTML,
     ACTION_QUEUE_JSON,
+    ARCHIVE_POLICY_HTML,
+    ARCHIVE_POLICY_JSON,
+    COLLABORATION_HTML,
+    COLLABORATION_JSON,
     CONCEPTS,
     GRAPH_DIR,
     HTML_LOGS,
@@ -136,6 +140,8 @@ def artifact_manifest_rows() -> list[dict[str, str]]:
         (HTML_LOGS / "index.html", "logs_index", "学习日志入口"),
         (WORKFLOW_STATE_HTML, "workflow_state", "工作流总状态"),
         (ACTION_QUEUE_HTML, "action_queue", "行动队列"),
+        (COLLABORATION_HTML, "project_collaboration", "项目协作层"),
+        (ARCHIVE_POLICY_HTML, "archive_policy", "自动归档策略"),
     ]:
         if source.exists():
             add(source, source, display_type, title)
@@ -184,6 +190,8 @@ def artifact_manifest_rows() -> list[dict[str, str]]:
     add(WORKFLOW_STATE_JSON, WORKFLOW_STATE_HTML, "workflow_state_data", "Workflow state")
     add(ACTION_QUEUE_JSON, ACTION_QUEUE_HTML, "action_queue_data", "Action queue")
     add(WORKFLOW_AUDIT_JSON, WORKFLOW_HEALTH, "workflow_audit_data", "Workflow audit report")
+    add(COLLABORATION_JSON, COLLABORATION_HTML, "project_collaboration_data", "Project collaboration state")
+    add(ARCHIVE_POLICY_JSON, ARCHIVE_POLICY_HTML, "archive_policy_data", "Archive policy")
 
     rows.sort(key=lambda row: (row["display_type"], row["source_path"], row["display_path"]))
     return rows
@@ -194,6 +202,6 @@ def build_artifact_manifest() -> None:
     fieldnames = ["source_path", "source_type", "display_path", "display_type", "title", "layer", "generated_by"]
     rows = artifact_manifest_rows()
     with ARTIFACT_MANIFEST.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)

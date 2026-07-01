@@ -195,7 +195,20 @@ def directory_links_in_text(source: Path) -> list[Path]:
 
 def seed_markdown_sources() -> list[Path]:
     seeds = [source for _, _, source, _ in MARKDOWN_VIEW_SOURCES]
-    seeds.extend(sorted(PROJECTS.glob("*/00_project_dashboard.md")))
+    for project in sorted(PROJECTS.glob("*")):
+        if not project.is_dir() or not (project / "project.yaml").exists():
+            continue
+        for relative in [
+            "00_project_dashboard.md",
+            "literature/reading_board.md",
+            "literature/literature_review_workbench.md",
+            "03_literature_synthesis.md",
+            "literature/innovation_limitation_bank.md",
+            "manuscript/evidence_gate_report.md",
+        ]:
+            source = project / relative
+            if source.exists():
+                seeds.append(source)
     seeds.extend(list_md(VAULT / "01_Literature"))
     seeds.extend(list_md(CONCEPTS))
     seeds.extend(list_md(METHODS))

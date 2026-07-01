@@ -11,7 +11,9 @@ from rendering.manifest import artifact_manifest_rows, build_artifact_manifest
 from rendering.paths import (
     ARTIFACT_MANIFEST,
     ACTION_QUEUE_HTML,
+    ARCHIVE_POLICY_HTML,
     BACKUP_INDEX,
+    COLLABORATION_HTML,
     CONCEPTS,
     DIR_VIEWS,
     GRAPH_DIR,
@@ -43,6 +45,8 @@ from rendering.paths import (
     md_title,
     paper_pages,
 )
+from rendering.archive_policy import write_archive_policy
+from rendering.collaboration import write_collaboration_state
 from rendering.routes import (
     card_view_path,
     directory_sources_from_markdown,
@@ -276,6 +280,8 @@ def shell(title: str, subtitle: str, current: str, body: str, output: Path) -> s
         ("学习日志", HTML_LOGS / "index.html"),
         ("总状态", WORKFLOW_STATE_HTML),
         ("行动队列", ACTION_QUEUE_HTML),
+        ("项目协作", COLLABORATION_HTML),
+        ("归档策略", ARCHIVE_POLICY_HTML),
         ("工作流体检", WORKFLOW_HEALTH),
         ("Vault 首页", PAPER_VIEWS / "vault-home.html"),
     ]
@@ -367,6 +373,8 @@ def build_dashboard() -> None:
           <div class="item"><a href="{href(SEARCH_INDEX_HTML, out)}">全局搜索入口</a><div class="meta">搜索论文、知识卡、项目文件、日志和图谱相关资产。</div></div>
           <div class="item green"><a href="{href(WORKFLOW_STATE_HTML, out)}">工作流总状态</a><div class="meta">聚合项目、复习、搜索、图谱和审计状态。</div></div>
           <div class="item amber"><a href="{href(ACTION_QUEUE_HTML, out)}">行动队列</a><div class="meta">按优先级排列今天最该处理的事项。</div></div>
+          <div class="item green"><a href="{href(COLLABORATION_HTML, out)}">项目协作层</a><div class="meta">查看用户待确认、Codex 可推进和项目入口。</div></div>
+          <div class="item amber"><a href="{href(ARCHIVE_POLICY_HTML, out)}">自动归档策略</a><div class="meta">查看备份、日志、生成页和缓存文件的归档策略。</div></div>
           <div class="item"><a href="{href(WORKFLOW_HEALTH, out)}">工作流体检页</a><div class="meta">检查入口、链接、镜像页、图谱、归档、复习队列和备份。</div></div>
           <div class="item rose"><a href="{href(REVIEW_TODAY, out)}">今日复习入口</a><div class="meta">{len(due)} 个知识点今天需要主动回忆。</div></div>
           <div class="item green">{f'<a href="{href(BACKUP_INDEX, out)}">备份索引</a>' if BACKUP_INDEX.exists() else '备份索引'}<div class="meta">{esc(latest_backup.name if latest_backup else '尚未生成备份；运行 make workflow-backup。')}</div></div>
@@ -1073,8 +1081,10 @@ def build_search_page() -> None:
     data_json = json.dumps(state, ensure_ascii=False).replace("</", "<\\/")
     layer_options = sorted({entry["layer"] for entry in state["entries"] if entry.get("layer")})
     type_options = sorted({entry["display_type"] for entry in state["entries"] if entry.get("display_type")})
+    project_options = sorted({entry["project"] for entry in state["entries"] if entry.get("project")})
     layer_buttons = "".join(f'<button type="button" data-layer="{esc(layer)}">{esc(layer)}</button>' for layer in layer_options)
     type_options_html = "".join(f'<option value="{esc(kind)}">{esc(kind)}</option>' for kind in type_options)
+    project_options_html = "".join(f'<option value="{esc(project)}">{esc(project)}</option>' for project in project_options)
     body = f"""
     <style>
       .search-box {{
@@ -1131,6 +1141,31 @@ def build_search_page() -> None:
         color: var(--muted);
         font-size: 12px;
       }}
+      mark {{
+        background: #fff0b8;
+        color: inherit;
+        border-radius: 3px;
+        padding: 0 2px;
+      }}
+      .result-meta {{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+      }}
+      .keyword {{
+        display: inline-flex;
+        border: 1px solid #d8e2ec;
+        background: #fff;
+        border-radius: 999px;
+        padding: 1px 7px;
+        color: var(--muted);
+        font-size: 12px;
+      }}
+      .score {{
+        color: var(--amber);
+        font-weight: 700;
+      }}
     </style>
     <section class="grid">
       <div class="metric"><b>{state['entry_count']}</b><span>可搜索入口</span></div>
@@ -1149,6 +1184,16 @@ def build_search_page() -> None:
               <option value="all">全部类型</option>
               {type_options_html}
             </select>
+            <select id="projectFilter" aria-label="项目">
+              <option value="all">全部项目</option>
+              {project_options_html}
+            </select>
+            <select id="sortMode" aria-label="排序">
+              <option value="relevance">相关度优先</option>
+              <option value="recent">最近日期优先</option>
+              <option value="weight">核心入口优先</option>
+              <option value="title">标题 A-Z</option>
+            </select>
           </div>
         </div>
       </section>
@@ -1163,6 +1208,7 @@ def build_search_page() -> None:
         <ol class="steps">
           <li>用中文关键词搜主题、论文、方法或项目文件。</li>
           <li>用架构层筛选源材料、知识资产或展示入口。</li>
+          <li>用项目和类型过滤缩小范围，结果按相关度、日期或核心入口排序。</li>
           <li>点击结果进入 HTML 展示页，再回到图谱或复习页继续连接。</li>
         </ol>
       </section>
@@ -1181,6 +1227,8 @@ def build_search_page() -> None:
       const results = document.getElementById("searchResults");
       const visibleCount = document.getElementById("visibleCount");
       const typeFilter = document.getElementById("typeFilter");
+      const projectFilter = document.getElementById("projectFilter");
+      const sortMode = document.getElementById("sortMode");
       const layerButtons = Array.from(document.querySelectorAll("[data-layer]"));
       let activeLayer = "all";
 
@@ -1198,15 +1246,74 @@ def build_search_page() -> None:
         return rootPrefix + String(displayPath).split("/").map(encodeURIComponent).join("/");
       }}
 
+      function escapeRegExp(value) {{
+        return String(value).replace(/[.*+?^${{}}()|[\\]\\\\]/g, "\\\\$&");
+      }}
+
+      function highlight(value, tokens) {{
+        let text = escapeHtml(value || "");
+        tokens.filter((token) => token.length >= 2).slice(0, 8).forEach((token) => {{
+          const pattern = new RegExp(escapeRegExp(escapeHtml(token)), "ig");
+          text = text.replace(pattern, (match) => `<mark>${{match}}</mark>`);
+        }});
+        return text;
+      }}
+
+      function snippet(entry, tokens) {{
+        const base = String(entry.snippet_text || entry.summary || entry.source_path || "");
+        if (!tokens.length) return base.slice(0, 220);
+        const lower = base.toLowerCase();
+        let index = -1;
+        for (const token of tokens) {{
+          index = lower.indexOf(token);
+          if (index >= 0) break;
+        }}
+        if (index < 0) return base.slice(0, 220);
+        const start = Math.max(0, index - 80);
+        const end = Math.min(base.length, index + 180);
+        return `${{start > 0 ? "..." : ""}}${{base.slice(start, end)}}${{end < base.length ? "..." : ""}}`;
+      }}
+
+      function score(entry, tokens) {{
+        if (!tokens.length) return Number(entry.weight || 0);
+        const title = String(entry.title || "").toLowerCase();
+        const summary = String(entry.summary || "").toLowerCase();
+        const source = String(entry.source_path || "").toLowerCase();
+        const keywords = (entry.keywords || []).join(" ").toLowerCase();
+        let total = Number(entry.weight || 0);
+        tokens.forEach((token) => {{
+          if (title.includes(token)) total += 80;
+          if (keywords.includes(token)) total += 50;
+          if (summary.includes(token)) total += 25;
+          if (source.includes(token)) total += 15;
+          if (String(entry.search_text || "").includes(token)) total += 5;
+        }});
+        return total;
+      }}
+
       function matches(entry, tokens) {{
         if (activeLayer !== "all" && entry.layer !== activeLayer) return false;
         if (typeFilter.value !== "all" && entry.display_type !== typeFilter.value) return false;
+        if (projectFilter.value !== "all" && entry.project !== projectFilter.value) return false;
         return tokens.every((token) => entry.search_text.includes(token));
+      }}
+
+      function sortEntries(entries) {{
+        if (sortMode.value === "recent") {{
+          return entries.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || b._score - a._score);
+        }}
+        if (sortMode.value === "weight") {{
+          return entries.sort((a, b) => Number(b.weight || 0) - Number(a.weight || 0) || b._score - a._score);
+        }}
+        if (sortMode.value === "title") {{
+          return entries.sort((a, b) => String(a.title || "").localeCompare(String(b.title || ""), "zh-Hans-CN"));
+        }}
+        return entries.sort((a, b) => b._score - a._score || String(b.date || "").localeCompare(String(a.date || "")));
       }}
 
       function render() {{
         const tokens = input.value.trim().toLowerCase().split(/\\s+/).filter(Boolean);
-        const visible = searchState.entries.filter((entry) => matches(entry, tokens)).slice(0, 80);
+        const visible = sortEntries(searchState.entries.filter((entry) => matches(entry, tokens)).map((entry) => ({{ ...entry, _score: score(entry, tokens) }}))).slice(0, 80);
         visibleCount.textContent = visible.length;
         if (!visible.length) {{
           results.innerHTML = '<div class="empty">没有匹配结果。换一个论文题名、概念、方法或项目关键词。</div>';
@@ -1215,11 +1322,15 @@ def build_search_page() -> None:
         results.innerHTML = visible.map((entry) => `
           <div class="result-row">
             <div class="result-title">
-              <a href="${{hrefFor(entry.display_path)}}">${{escapeHtml(entry.title)}}</a>
+              <a href="${{hrefFor(entry.display_path)}}">${{highlight(entry.title, tokens)}}</a>
               <span class="badge">${{escapeHtml(entry.layer || "Unknown")}}</span>
               <span class="badge">${{escapeHtml(entry.display_type)}}</span>
+              ${{entry.project ? `<span class="badge">${{escapeHtml(entry.project)}}</span>` : ""}}
+              ${{entry.date ? `<span class="badge">${{escapeHtml(entry.date)}}</span>` : ""}}
+              <span class="badge score">${{Math.round(entry._score)}}</span>
             </div>
-            <div class="meta">${{escapeHtml(entry.summary || entry.source_path)}}</div>
+            <div class="meta">${{highlight(snippet(entry, tokens), tokens)}}</div>
+            <div class="result-meta">${{(entry.keywords || []).slice(0, 8).map((keyword) => `<span class="keyword">${{escapeHtml(keyword)}}</span>`).join("")}}</div>
             <div class="meta">源：${{escapeHtml(entry.source_path)}} · 展示：${{escapeHtml(entry.display_path)}}</div>
           </div>
         `).join("");
@@ -1234,6 +1345,8 @@ def build_search_page() -> None:
       }});
       input.addEventListener("input", render);
       typeFilter.addEventListener("change", render);
+      projectFilter.addEventListener("change", render);
+      sortMode.addEventListener("change", render);
       render();
     </script>
 """
@@ -1646,6 +1759,8 @@ def main() -> int:
     build_review_today()
     build_cards_index()
     build_graph_index()
+    write_collaboration_state()
+    write_archive_policy()
     build_dashboard()
     build_artifact_manifest()
     build_search_page()
@@ -1663,6 +1778,8 @@ def main() -> int:
     print(f"Wrote {SEARCH_INDEX_HTML}")
     print(f"Wrote {SEARCH_INDEX_JSON}")
     print(f"Wrote {ARTIFACT_MANIFEST}")
+    print(f"Wrote {COLLABORATION_HTML}")
+    print(f"Wrote {ARCHIVE_POLICY_HTML}")
     print(f"Wrote {HTML_LOGS / 'index.html'}")
     print(f"Wrote {LOG_VIEWS}")
     return 0

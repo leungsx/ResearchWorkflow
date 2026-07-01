@@ -1,6 +1,8 @@
 source_path,source_type,display_path,display_type,title,layer,generated_by
 action_queue.html,html,action_queue.html,action_queue,行动队列,Presentation,make learning-dashboard
 vault/13_Knowledge_Graph/action_queue.json,json,action_queue.html,action_queue_data,Action queue,Knowledge,make learning-dashboard
+archive_policy.html,html,archive_policy.html,archive_policy,自动归档策略,Presentation,make learning-dashboard
+vault/13_Knowledge_Graph/archive_policy.json,json,archive_policy.html,archive_policy_data,Archive policy,Knowledge,make learning-dashboard
 vault/02_Concepts/AARRR 漏斗模型.md,markdown,knowledge_cards/views/concept-aarrr-bf76ae6c.html,concept_card_view,AARRR 漏斗模型,Knowledge,make learning-dashboard
 vault/02_Concepts/Hook Model 上瘾模型.md,markdown,knowledge_cards/views/concept-hook-model-878dcbb7.html,concept_card_view,Hook Model 上瘾模型,Knowledge,make learning-dashboard
 vault/02_Concepts/SICAS模型.md,markdown,knowledge_cards/views/concept-sicas-e14df8c7.html,concept_card_view,SICAS模型,Knowledge,make learning-dashboard
@@ -38,7 +40,6 @@ logs/index.html,html,logs/index.html,logs_index,学习日志入口,Presentation,
 codex/OPERATING_PROTOCOL.md,markdown,paper_reading/views/operating-protocol-7492396d.html,markdown_view,Codex-First Research Operating Protocol,Orchestration/QA,make learning-dashboard
 codex/runtime/library_short_video_fast_snapshot.md,markdown,paper_reading/views/library-short-video-fast-snapshot-d2e5e287.html,markdown_view,Fast Runtime Snapshot - library_short_video,Orchestration/QA,make learning-dashboard
 docs/WORKFLOW_LAYERED_ARCHITECTURE.md,markdown,paper_reading/views/workflow_layered_architecture.html,markdown_view,分层架构契约,Orchestration/QA,make learning-dashboard
-projects/_template/00_project_dashboard.md,markdown,paper_reading/views/00-project-dashboard-1415061d.html,markdown_view,Project Dashboard,Knowledge,make learning-dashboard
 projects/library_short_video/00_project_dashboard.md,markdown,paper_reading/views/00-project-dashboard-dd8418ad.html,markdown_view,Project Dashboard - 图书馆短视频相关研究,Knowledge,make learning-dashboard
 projects/library_short_video/03_literature_synthesis.md,markdown,paper_reading/views/literature_synthesis.html,markdown_view,跨文献综述,Knowledge,make learning-dashboard
 projects/library_short_video/literature/caj_conversion/cnki_2020_64b4f881c9.md,markdown,paper_reading/views/cnki-2020-64b4f881c9-bf538524.html,markdown_view,CAJ Conversion Report - cnki_2020_64b4f881c9,Knowledge,make learning-dashboard
@@ -68,6 +69,8 @@ projects/library_short_video/literature/reading_board.md,markdown,paper_reading/
 projects/library_short_video/literature/recaps/2026-06-20-five-paper-quick-recap.md,markdown,paper_reading/views/2026-06-20-five-paper-quick-recap-8b992799.html,markdown_view,5 篇已读论文快速复盘 - 图书馆短视频相关研究,Knowledge,make learning-dashboard
 projects/library_short_video/manuscript/evidence_gate_report.md,markdown,paper_reading/views/evidence-gate-report-7607e392.html,markdown_view,Evidence Gate Report,Knowledge,make learning-dashboard
 projects/starter_project/00_project_dashboard.md,markdown,paper_reading/views/00-project-dashboard-b90a4a93.html,markdown_view,Project Dashboard,Knowledge,make learning-dashboard
+projects/starter_project/03_literature_synthesis.md,markdown,paper_reading/views/03-literature-synthesis-01206220.html,markdown_view,Literature Synthesis,Knowledge,make learning-dashboard
+projects/starter_project/manuscript/evidence_gate_report.md,markdown,paper_reading/views/evidence-gate-report-f15d3e57.html,markdown_view,Evidence Gate Report,Knowledge,make learning-dashboard
 vault/01_Literature/cnki_2021_3771e58987.md,markdown,paper_reading/views/cnki-2021-3771e58987-6c1b15ea.html,markdown_view,公共图书馆和高校图书馆短视频营销比较研究,Knowledge,make learning-dashboard
 vault/01_Literature/cnki_2023_34348faa1e.md,markdown,paper_reading/views/cnki_2023_34348faa1e-note.html,markdown_view,Obsidian 论文笔记,Knowledge,make learning-dashboard
 vault/02_Concepts/SICAS模型.md,markdown,paper_reading/views/sicas-model-concept.html,markdown_view,知识卡：SICAS 模型,Knowledge,make learning-dashboard
@@ -94,6 +97,8 @@ paper_reading/index.html,html,paper_reading/index.html,paper_index,论文精读�
 paper_reading/2026-06-29-sicas-public-library-short-video.html,html,paper_reading/2026-06-29-sicas-public-library-short-video.html,paper_page,2026-06-29 精读：基于SICAS模型的公共图书馆短视频营销策略研究,Presentation,make learning-dashboard
 paper_reading/2026-06-30-aarrr-library-short-video.html,html,paper_reading/2026-06-30-aarrr-library-short-video.html,paper_page,2026-06-30 精读：公共图书馆和高校图书馆短视频营销比较研究,Presentation,make learning-dashboard
 paper_reading/today.html,html,paper_reading/today.html,paper_today_entry,今日精读入口,Presentation,make learning-dashboard
+project_collaboration.html,html,project_collaboration.html,project_collaboration,项目协作层,Presentation,make learning-dashboard
+vault/13_Knowledge_Graph/collaboration_state.json,json,project_collaboration.html,project_collaboration_data,Project collaboration state,Knowledge,make learning-dashboard
 projects/library_short_video/project_state.json,json,paper_reading/views/00-project-dashboard-dd8418ad.html,project_state,library_short_video project state,Knowledge,make learning-dashboard
 projects/starter_project/project_state.json,json,paper_reading/views/00-project-dashboard-b90a4a93.html,project_state,starter_project project state,Knowledge,make learning-dashboard
 vault/14_Review_Queue/review_queue.csv,csv,knowledge_cards/review_today.html,review_queue,Review queue,Knowledge,make learning-dashboard

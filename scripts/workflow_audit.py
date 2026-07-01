@@ -15,7 +15,9 @@ from pathlib import Path
 from urllib.parse import unquote
 
 from rendering.action_queue import write_action_queue
-from rendering.paths import WORKFLOW_AUDIT_JSON
+from rendering.archive_policy import write_archive_policy
+from rendering.collaboration import write_collaboration_state
+from rendering.paths import ARCHIVE_POLICY_HTML, ARCHIVE_POLICY_JSON, COLLABORATION_HTML, COLLABORATION_JSON, WORKFLOW_AUDIT_JSON
 from rendering.schemas import validate_workflow_schemas
 from rendering.workflow_state import write_workflow_state
 
@@ -32,6 +34,8 @@ GRAPH_DIR = VAULT / "13_Knowledge_Graph"
 ARTIFACT_MANIFEST = GRAPH_DIR / "artifact_manifest.csv"
 SEARCH_INDEX = GRAPH_DIR / "search_index.json"
 ACTION_QUEUE = GRAPH_DIR / "action_queue.json"
+COLLABORATION_STATE = COLLABORATION_JSON
+ARCHIVE_POLICY = ARCHIVE_POLICY_JSON
 AUDIT_REPORT_JSON = WORKFLOW_AUDIT_JSON
 REVIEW_QUEUE = VAULT / "14_Review_Queue" / "review_queue.csv"
 REVIEW_STATE = VAULT / "14_Review_Queue" / "review_state.json"
@@ -45,6 +49,8 @@ BACKUP_DIR = ROOT / "backups"
 HEALTH_HTML = ROOT / "workflow_health.html"
 WORKFLOW_STATE_HTML = ROOT / "workflow_state.html"
 ACTION_QUEUE_HTML = ROOT / "action_queue.html"
+COLLABORATION_PAGE = COLLABORATION_HTML
+ARCHIVE_POLICY_PAGE = ARCHIVE_POLICY_HTML
 
 
 @dataclass
@@ -133,6 +139,8 @@ def user_facing_html_pages() -> list[Path]:
         SEARCH / "index.html",
         WORKFLOW_STATE_HTML,
         ACTION_QUEUE_HTML,
+        COLLABORATION_PAGE,
+        ARCHIVE_POLICY_PAGE,
         HTML_LOGS / "index.html",
     ]
     pages.extend(sorted(PAPER_READING.glob("20*.html")))
@@ -166,6 +174,8 @@ def check_required_files(checks: list[Check], day: dt.date) -> None:
         REVIEW_TODAY,
         KNOWLEDGE_GRAPH / "index.html",
         SEARCH / "index.html",
+        COLLABORATION_PAGE,
+        ARCHIVE_POLICY_PAGE,
         HTML_LOGS / "index.html",
         DAILY_DIR / f"{day.isoformat()}.md",
         COMPACT_DIR / f"{day.isoformat()}-summary.md",
@@ -299,6 +309,10 @@ def check_artifact_manifest(checks: list[Check]) -> None:
         "workflow_state_data",
         "action_queue",
         "action_queue_data",
+        "project_collaboration",
+        "project_collaboration_data",
+        "archive_policy",
+        "archive_policy_data",
         "workflow_audit_data",
     }
     missing_types = sorted(required_types - display_types)
@@ -454,6 +468,53 @@ def check_action_queue(checks: list[Check]) -> None:
         add(checks, "行动队列", "FAIL", "行动队列存在非 HTML 或失效入口", "；".join(bad_targets[:8]))
     else:
         add(checks, "行动队列", "PASS", "行动队列可用且入口有效", f"{len(actions)} 个开放行动。")
+
+
+def check_collaboration_state(checks: list[Check]) -> None:
+    payload = read_json(COLLABORATION_STATE)
+    if not isinstance(payload, dict):
+        add(checks, "项目协作层", "FAIL", "collaboration_state.json 缺失或不是合法 JSON", rel(COLLABORATION_STATE))
+        return
+    if not COLLABORATION_PAGE.exists() or "项目协作层" not in read_text(COLLABORATION_PAGE):
+        add(checks, "项目协作层", "FAIL", "项目协作 HTML 入口缺失或内容异常", rel(COLLABORATION_PAGE))
+        return
+    projects = payload.get("projects", [])
+    if not isinstance(projects, list):
+        add(checks, "项目协作层", "FAIL", "collaboration_state.projects 不是数组", rel(COLLABORATION_STATE))
+        return
+    bad_targets: list[str] = []
+    for project in projects:
+        entrypoints = project.get("entrypoints", {}) if isinstance(project, dict) else {}
+        for key, value in entrypoints.items():
+            path = str(value or "")
+            if path and (not path.endswith(".html") or not (ROOT / path).exists()):
+                bad_targets.append(f"{project.get('slug', '')}.{key} -> {path}")
+    summary = payload.get("summary", {})
+    if summary.get("project_count") != len(projects):
+        add(checks, "项目协作层", "FAIL", "协作层项目计数不一致", f"project_count={summary.get('project_count')}, actual={len(projects)}")
+    elif bad_targets:
+        add(checks, "项目协作层", "FAIL", "协作层存在失效或非 HTML 入口", "；".join(bad_targets[:8]))
+    else:
+        add(checks, "项目协作层", "PASS", "项目协作层可用", f"{len(projects)} 个项目；user_waiting={summary.get('user_waiting', 0)}。")
+
+
+def check_archive_policy(checks: list[Check]) -> None:
+    payload = read_json(ARCHIVE_POLICY)
+    if not isinstance(payload, dict):
+        add(checks, "自动归档策略", "FAIL", "archive_policy.json 缺失或不是合法 JSON", rel(ARCHIVE_POLICY))
+        return
+    if not ARCHIVE_POLICY_PAGE.exists() or "自动归档策略" not in read_text(ARCHIVE_POLICY_PAGE):
+        add(checks, "自动归档策略", "FAIL", "自动归档策略 HTML 入口缺失或内容异常", rel(ARCHIVE_POLICY_PAGE))
+        return
+    summary = payload.get("summary", {})
+    actions = payload.get("actions", [])
+    if not isinstance(actions, list) or not actions:
+        add(checks, "自动归档策略", "FAIL", "归档策略缺少建议动作", rel(ARCHIVE_POLICY))
+    elif "backup_count" not in summary or "cache_candidates" not in summary:
+        add(checks, "自动归档策略", "FAIL", "归档策略 summary 缺少关键计数", rel(ARCHIVE_POLICY))
+    else:
+        detail = f"backup={summary.get('backup_count', 0)}, prune={summary.get('backup_prune_candidates', 0)}, cache={summary.get('cache_candidates', 0)}"
+        add(checks, "自动归档策略", "PASS", "自动归档策略可用", detail)
 
 
 def check_review_queue(checks: list[Check], day: dt.date) -> None:
@@ -665,14 +726,12 @@ def markdown_report(day: dt.date, checks: list[Check]) -> str:
 def html_report(day: dt.date, checks: list[Check]) -> str:
     counts = status_counts(checks)
     cards = "\n".join(
-        f"""
-        <article class="check {check.status.lower()}">
+        f"""        <article class="check {check.status.lower()}">
           <div class="status">{check.status}</div>
           <h2>{html.escape(check.title)}</h2>
           <p class="area">{html.escape(check.area)}</p>
           <p>{html.escape(check.detail)}</p>
-        </article>
-        """
+        </article>"""
         for check in checks
     )
     return f"""<!doctype html>
@@ -726,6 +785,8 @@ def html_report(day: dt.date, checks: list[Check]) -> str:
         <a href="search/index.html">全局搜索</a>
         <a href="workflow_state.html">总状态</a>
         <a href="action_queue.html">行动队列</a>
+        <a href="project_collaboration.html">项目协作</a>
+        <a href="archive_policy.html">归档策略</a>
         <a href="logs/index.html">学习日志</a>
       </nav>
     </div>
@@ -753,6 +814,8 @@ def write_reports(day: dt.date, checks: list[Check]) -> tuple[Path, Path, Path]:
     # the unified audit JSON location during the same run.
     write_workflow_state(checks, git_dirty_paths=baseline_dirty_paths)
     write_action_queue()
+    write_collaboration_state()
+    write_archive_policy()
     md_path.write_text(markdown_report(day, checks) + "\n", encoding="utf-8")
     HEALTH_HTML.write_text(html_report(day, checks), encoding="utf-8")
     write_audit_json(day, checks, md_path, HEALTH_HTML)
@@ -760,10 +823,16 @@ def write_reports(day: dt.date, checks: list[Check]) -> tuple[Path, Path, Path]:
     check_schema_validation(checks)
     write_workflow_state(checks, git_dirty_paths=baseline_dirty_paths)
     write_action_queue()
+    write_collaboration_state()
+    write_archive_policy()
 
     check_action_queue(checks)
+    check_collaboration_state(checks)
+    check_archive_policy(checks)
     write_workflow_state(checks, git_dirty_paths=baseline_dirty_paths)
     write_action_queue()
+    write_collaboration_state()
+    write_archive_policy()
 
     md_path.write_text(markdown_report(day, checks) + "\n", encoding="utf-8")
     HEALTH_HTML.write_text(html_report(day, checks), encoding="utf-8")

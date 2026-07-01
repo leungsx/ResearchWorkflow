@@ -11,11 +11,13 @@ Last updated: 2026-06-30
 | 打开可视化学习总入口 | [学习仪表盘](/Users/leung/ResearchWorkflow/study_dashboard.html) | `打开我的学习仪表盘，告诉我今天该从哪里开始。` |
 | 查看当前工作流总状态 | [工作流总状态](/Users/leung/ResearchWorkflow/workflow_state.html) | `打开工作流总状态，告诉我当前最该处理什么。` |
 | 查看今天行动队列 | [行动队列](/Users/leung/ResearchWorkflow/action_queue.html) | `打开行动队列，按优先级告诉我今天先做什么。` |
+| 查看项目协作分工 | [项目协作层](/Users/leung/ResearchWorkflow/project_collaboration.html) | `打开项目协作层，告诉我哪些需要我确认，哪些你可以继续做。` |
+| 查看自动归档策略 | [自动归档策略](/Users/leung/ResearchWorkflow/archive_policy.html) | `打开自动归档策略，告诉我哪些文件需要归档或清理。` |
 | 打开今日精读固定入口 | [今日精读入口](/Users/leung/ResearchWorkflow/paper_reading/today.html) | `打开今天的精读入口，直接带我读你今天推荐的主论文。` |
 | 看论文精读归档 | [论文精读归档](/Users/leung/ResearchWorkflow/paper_reading/index.html) | `打开论文精读归档，我想回看前几天的主读论文。` |
 | 看知识卡和复习队列 | [知识卡入口](/Users/leung/ResearchWorkflow/knowledge_cards/index.html) / [今日复习入口](/Users/leung/ResearchWorkflow/knowledge_cards/review_today.html) | `根据今天新学的概念，带我复习知识卡。` |
 | 看知识之间的关系 | [知识图谱入口](/Users/leung/ResearchWorkflow/knowledge_graph/index.html) | `从知识图谱里解释这篇论文和已有知识的关系。` |
-| 搜索论文、概念、方法和项目材料 | [全局搜索入口](/Users/leung/ResearchWorkflow/search/index.html) | `搜索我的研究工作流里和 AARRR 或 SICAS 有关的材料。` |
+| 搜索论文、概念、方法和项目材料 | [全局搜索入口](/Users/leung/ResearchWorkflow/search/index.html) | `搜索我的研究工作流里和 AARRR 或 SICAS 有关的材料，并按相关度排序。` |
 | 看工作流分层架构 | [分层架构契约](/Users/leung/ResearchWorkflow/paper_reading/views/workflow_layered_architecture.html) | `打开分层架构契约，告诉我现在系统各层怎么分工。` |
 | 快速看下一步，不触发完整归档 | [快速运行快照](/Users/leung/ResearchWorkflow/paper_reading/views/library-short-video-fast-snapshot-d2e5e287.html) | `用快速模式告诉我下一篇该读什么。` |
 | 看当前项目进度 | [图书馆短视频项目看板](/Users/leung/ResearchWorkflow/paper_reading/views/00-project-dashboard-dd8418ad.html) | `打开图书馆短视频项目看板，告诉我下一步做什么。` |
@@ -62,6 +64,8 @@ flowchart LR
 | 全局搜索 | 从一个入口检索论文页、知识卡、项目文件、日志和图谱展示资产 | 看 [全局搜索入口](/Users/leung/ResearchWorkflow/search/index.html) |
 | 工作流总状态 | 聚合项目、复习、搜索、图谱、审计和下一步动作 | 看 [工作流总状态](/Users/leung/ResearchWorkflow/workflow_state.html) |
 | 行动队列 | 把审计、复习和项目建议转成按优先级排列的开放行动 | 看 [行动队列](/Users/leung/ResearchWorkflow/action_queue.html) |
+| 项目协作层 | 把用户待确认事项、Codex 可执行事项和项目入口放在同一页 | 看 [项目协作层](/Users/leung/ResearchWorkflow/project_collaboration.html) |
+| 自动归档策略 | 报告备份、日志、生成页和缓存文件的保留/清理策略 | 看 [自动归档策略](/Users/leung/ResearchWorkflow/archive_policy.html) |
 | 上下文和日志 | 防止长对话丢失，保证下次能接着做 | Codex 自动维护 `codex/state/` 和 `vault/07_Codex_Logs/` |
 | Fast-lane 快速状态 | 只查下一篇/当前状态时避免触发完整归档链 | 看 `codex/runtime/<project>_fast_snapshot.md`，或说 `用快速模式` |
 
@@ -121,6 +125,8 @@ flowchart TD
 - `继续我的科研工作流，先打开首页和项目看板。`
 - `打开工作流总状态，告诉我当前最该处理什么。`
 - `打开行动队列，按优先级告诉我今天先做什么。`
+- `打开项目协作层，区分哪些事情需要我确认，哪些你可以继续推进。`
+- `打开自动归档策略，告诉我当前备份、日志和缓存文件状态。`
 - `用快速模式告诉我下一篇该读什么，不要做完整归档。`
 - `今天我应该读哪篇论文？为什么？`
 - `打开今天的阅读看板，按顺序带我读。`
@@ -129,7 +135,7 @@ flowchart TD
 - `打开这篇论文的 reader，带我过摘要、方法、结论、创新和局限。`
 - `从创新-局限台账里帮我找新的研究问题。`
 - `打开文献综述工作台，帮我整理阶段性论文工作总结。`
-- `搜索我的研究工作流里和 AARRR、SICAS、传播力指标有关的材料。`
+- `搜索我的研究工作流里和 AARRR、SICAS、传播力指标有关的材料，并显示命中片段。`
 - `我现在一头雾水，帮我用用户视角解释当前项目文件。`
 
 ## 其他入口

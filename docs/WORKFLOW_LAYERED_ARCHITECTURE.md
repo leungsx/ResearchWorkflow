@@ -38,6 +38,8 @@ Canonical assets 是可以长期维护和引用的源文件：
 - `vault/13_Knowledge_Graph/workflow_state.json`
 - `vault/13_Knowledge_Graph/action_queue.json`
 - `vault/13_Knowledge_Graph/workflow_audit_report.json`
+- `vault/13_Knowledge_Graph/collaboration_state.json`
+- `vault/13_Knowledge_Graph/archive_policy.json`
 - `vault/14_Review_Queue/review_queue.csv`
 - `vault/14_Review_Queue/review_state.json`
 
@@ -61,6 +63,8 @@ Generated assets 是脚本生成的浏览和索引文件：
 - `workflow_health.html`
 - `workflow_state.html`
 - `action_queue.html`
+- `project_collaboration.html`
+- `archive_policy.html`
 - `backups/index.html`
 
 这些文件不应手工维护。发现错误时应修生成脚本或源文件，然后重新运行生成命令。
@@ -109,6 +113,8 @@ Generated assets 是脚本生成的浏览和索引文件：
 | `make search-index` | 单独刷新 `search_index.json`，通常由 `make learning-dashboard` 自动包含 |
 | `make workflow-state` | 单独刷新 `workflow_state.json` 和 `workflow_state.html` |
 | `make action-queue` | 单独刷新 `action_queue.json` 和 `action_queue.html` |
+| `make collaboration-state` | 单独刷新 `collaboration_state.json` 和 `project_collaboration.html` |
+| `make archive-policy` | 单独刷新 `archive_policy.json` 和 `archive_policy.html` |
 | `make schema-validate` | 校验核心 JSON/CSV 状态文件的结构、计数和 HTML 入口 |
 | `make workflow-audit` | 检查入口、链接、证据边界、备份和生成资产健康 |
 | `make workflow-refresh` | 顺序运行图谱、展示、备份、归档和审计 |
@@ -128,6 +134,8 @@ Generated assets 是脚本生成的浏览和索引文件：
 | `scripts/rendering/search.py` | 从 `artifact_manifest.csv` 生成全局搜索索引 |
 | `scripts/rendering/workflow_state.py` | 聚合项目、复习、搜索、图谱和审计状态 |
 | `scripts/rendering/action_queue.py` | 从总状态生成按优先级排序的开放行动 |
+| `scripts/rendering/collaboration.py` | 聚合项目协作分工、用户待确认事项和 Codex 可执行事项 |
+| `scripts/rendering/archive_policy.py` | 报告备份、日志、生成资产和缓存文件的归档/清理策略 |
 | `scripts/rendering/schemas.py` | 校验核心状态文件 schema、计数一致性和 HTML 入口 |
 
 新增展示入口时，先扩展 `routes.py` 或 `manifest.py`，再由页面生成器调用；不要在页面模板里临时拼接 Markdown 直链。
@@ -166,9 +174,10 @@ Generated assets 是脚本生成的浏览和索引文件：
 
 搜索索引至少包含：
 
-- 标题、源路径、展示路径、架构层和展示类型。
-- 每个条目的短摘要和用于前端搜索的规范化文本。
+- 标题、源路径、展示路径、架构层、展示类型、项目、日期和权重。
+- 每个条目的短摘要、命中片段文本、关键词和用于前端搜索的规范化文本。
 - 所有结果的点击目标必须是 HTML 展示页，不直接打开 Markdown 源文件。
+- `search/index.html` 应支持相关度排序、项目筛选、展示类型筛选、命中片段和关键词高亮。
 
 搜索层只负责发现和导航，不替代图谱、复习队列、项目状态或证据门禁。
 
@@ -196,6 +205,30 @@ Generated assets 是脚本生成的浏览和索引文件：
 - 优先级顺序：审计 FAIL、到期复习、重点知识卡、审计 WARN、项目下一步建议。
 - 行动队列从 `workflow_state.json` 派生，不替代项目状态、复习状态或审计报告。
 
+## 项目协作层契约
+
+`vault/13_Knowledge_Graph/collaboration_state.json` 是项目协作分工的机器可读状态；`project_collaboration.html` 是用户侧默认入口。
+
+协作层应满足：
+
+- 汇总每个项目的阶段、文献矩阵规模、Reader 数、最近主读和 HTML 入口。
+- 把事项区分为“用户待确认”和“Codex 可推进”。
+- 用户待确认通常包括 evidence gate 边界、是否补全文、主动回忆和研究问题取舍。
+- Codex 可推进通常包括刷新状态、精读下一篇、补知识卡、补图谱关系和更新项目综述。
+- 协作层不替代项目看板；它是跨项目的执行分工页。
+
+## 自动归档策略契约
+
+`vault/13_Knowledge_Graph/archive_policy.json` 是归档策略状态；`archive_policy.html` 是用户侧默认入口。
+
+归档策略应满足：
+
+- 明确 canonical source、generated assets、backup zips、logs、raw files 和 cache files 的处理边界。
+- 默认只报告和生成策略，不删除不确定研究文件。
+- zip 备份裁剪必须通过显式命令执行，例如 `make workflow-backup-prune KEEP=30`。
+- `.DS_Store` 和 `__pycache__` 属于可安全清理缓存，但仍以报告为主。
+- 日志压缩优先生成 compact summary，原始 daily log 默认保留。
+
 ## Schema 校验契约
 
 `make schema-validate` 校验这些机器可读状态文件：
@@ -206,6 +239,8 @@ Generated assets 是脚本生成的浏览和索引文件：
 - `vault/13_Knowledge_Graph/workflow_state.json`
 - `vault/13_Knowledge_Graph/action_queue.json`
 - `vault/13_Knowledge_Graph/workflow_audit_report.json`
+- `vault/13_Knowledge_Graph/collaboration_state.json`
+- `vault/13_Knowledge_Graph/archive_policy.json`
 - `projects/*/project_state.json`
 
 校验重点：
@@ -241,6 +276,7 @@ Generated assets 是脚本生成的浏览和索引文件：
 - 知识图谱 CSV 与 HTML 图谱都能刷新。
 - 复习队列包含新增知识点或明确标注无需复习，且 `review_state.json`、`knowledge_cards/review_today.html` 已刷新。
 - `workflow-audit` 没有 FAIL；如有 WARN，必须说明证据边界或待处理事项。
+- `project_collaboration.html` 与 `archive_policy.html` 已刷新，且对应 JSON 通过 schema 校验。
 
 ## 审计覆盖范围
 
@@ -254,5 +290,7 @@ Generated assets 是脚本生成的浏览和索引文件：
 - `projects/*/project_state.json` 存在，并包含今日精读、今日复习、搜索、manifest 和 search index 等关键入口。
 - `workflow_state.json` 与 `workflow_state.html` 已刷新，能聚合当前项目、复习、搜索、图谱和审计状态。
 - `action_queue.json` 与 `action_queue.html` 已刷新，所有行动入口都指向存在的 HTML 页面。
+- `collaboration_state.json` 与 `project_collaboration.html` 已刷新，所有项目入口指向存在的 HTML 页面。
+- `archive_policy.json` 与 `archive_policy.html` 已刷新，能报告备份、日志、生成资产和缓存策略。
 - `workflow_audit_report.json` 已刷新，且 schema 校验通过。
 - 图谱 CSV 和图谱 HTML 均可用。

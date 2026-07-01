@@ -23,6 +23,8 @@ DIR_VIEWS = PAPER_VIEWS / "directories"
 WORKFLOW_HEALTH = ROOT / "workflow_health.html"
 WORKFLOW_STATE_HTML = ROOT / "workflow_state.html"
 ACTION_QUEUE_HTML = ROOT / "action_queue.html"
+COLLABORATION_HTML = ROOT / "project_collaboration.html"
+ARCHIVE_POLICY_HTML = ROOT / "archive_policy.html"
 BACKUP_INDEX = ROOT / "backups" / "index.html"
 PAPER_RESERVED = {"index.html", "today.html"}
 
@@ -39,6 +41,8 @@ SEARCH_INDEX_HTML = SEARCH / "index.html"
 WORKFLOW_STATE_JSON = GRAPH_DIR / "workflow_state.json"
 ACTION_QUEUE_JSON = GRAPH_DIR / "action_queue.json"
 WORKFLOW_AUDIT_JSON = GRAPH_DIR / "workflow_audit_report.json"
+COLLABORATION_JSON = GRAPH_DIR / "collaboration_state.json"
+ARCHIVE_POLICY_JSON = GRAPH_DIR / "archive_policy.json"
 
 MARKDOWN_VIEW_SOURCES = [
     (

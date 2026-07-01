@@ -4,6 +4,7 @@ import datetime as dt
 import hashlib
 import json
 import re
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -12,6 +13,34 @@ from rendering.paths import ROOT, SEARCH_INDEX_JSON, read_text
 
 
 INDEXABLE_SUFFIXES = {".md", ".html", ".csv", ".json", ".yaml", ".yml", ".txt"}
+TOKEN_RE = re.compile(r"[A-Za-z0-9_]{2,}|[\u4e00-\u9fff]{2,}")
+STOPWORDS = {
+    "html",
+    "json",
+    "markdown",
+    "source",
+    "display",
+    "generated",
+    "project",
+    "paper",
+    "view",
+    "index",
+}
+TYPE_WEIGHTS = {
+    "paper_today_entry": 130,
+    "paper_page": 120,
+    "concept_card_view": 110,
+    "method_card_view": 110,
+    "project_state": 105,
+    "workflow_state": 100,
+    "action_queue": 100,
+    "review_today": 95,
+    "knowledge_graph": 90,
+    "search": 85,
+    "markdown_view": 75,
+    "directory_view": 45,
+}
+SEARCH_TEXT_LIMIT = 8000
 
 
 def clean_text(value: str) -> str:
@@ -39,6 +68,53 @@ def summary_for(text: str, limit: int = 260) -> str:
     return text[:limit].rstrip() + "..."
 
 
+def snippet_for(text: str, limit: int = 1800) -> str:
+    if len(text) <= limit:
+        return text
+    return text[:limit].rstrip() + "..."
+
+
+def tokens_for(text: str) -> list[str]:
+    return [match.group(0).lower() for match in TOKEN_RE.finditer(text)]
+
+
+def keywords_for(title: str, source_path: str, display_type: str, layer: str, text: str) -> list[str]:
+    weighted = " ".join([title, title, source_path, display_type, layer, text[:4000]])
+    counter = Counter(token for token in tokens_for(weighted) if token not in STOPWORDS and len(token) <= 32)
+    return [token for token, _ in counter.most_common(12)]
+
+
+def date_for(*values: str) -> str:
+    joined = " ".join(values)
+    match = re.search(r"\b(20\d{2})[-_/]?(0[1-9]|1[0-2])[-_/]?([0-3]\d)\b", joined)
+    if not match:
+        return ""
+    return f"{match.group(1)}-{match.group(2)}-{match.group(3)}"
+
+
+def project_for(source_path: str, display_path: str) -> str:
+    for value in [source_path, display_path]:
+        parts = Path(value).parts
+        if "projects" in parts:
+            index = parts.index("projects")
+            if index + 1 < len(parts):
+                return parts[index + 1]
+        if "library_short_video" in value:
+            return "library_short_video"
+    return ""
+
+
+def weight_for(display_type: str, layer: str, title: str) -> int:
+    weight = TYPE_WEIGHTS.get(display_type, 60)
+    if layer == "Knowledge":
+        weight += 8
+    elif layer == "Presentation":
+        weight += 5
+    if "入口" in title or "状态" in title:
+        weight += 5
+    return weight
+
+
 def entry_id(row: dict[str, str]) -> str:
     key = f"{row.get('source_path', '')}|{row.get('display_path', '')}|{row.get('display_type', '')}"
     return hashlib.sha1(key.encode("utf-8")).hexdigest()[:12]
@@ -58,27 +134,42 @@ def build_search_index(rows: list[dict[str, str]] | None = None) -> dict[str, An
             continue
         text = source_text(source)
         title = row.get("title", "") or source.name
+        source_path = row.get("source_path", "")
+        display_type = row.get("display_type", "")
+        layer = row.get("layer", "")
+        display_date = date_for(source_path, display_path, title)
+        project = project_for(source_path, display_path)
+        keywords = keywords_for(title, source_path, display_type, layer, text)
+        search_body = text[:SEARCH_TEXT_LIMIT]
         searchable = clean_text(
             " ".join(
                 [
                     title,
-                    row.get("source_path", ""),
-                    row.get("display_path", ""),
-                    row.get("display_type", ""),
-                    row.get("layer", ""),
-                    text,
+                    source_path,
+                    display_path,
+                    display_type,
+                    layer,
+                    display_date,
+                    project,
+                    " ".join(keywords),
+                    search_body,
                 ]
             )
         )
         item = {
             "id": entry_id(row),
             "title": title,
-            "layer": row.get("layer", ""),
-            "display_type": row.get("display_type", ""),
+            "layer": layer,
+            "display_type": display_type,
             "source_type": row.get("source_type", ""),
-            "source_path": row.get("source_path", ""),
+            "source_path": source_path,
             "display_path": display_path,
             "summary": summary_for(text),
+            "snippet_text": snippet_for(text),
+            "keywords": keywords,
+            "date": display_date,
+            "project": project,
+            "weight": weight_for(display_type, layer, title),
             "search_text": searchable.lower(),
         }
         dedupe_key = f"{item['display_path']}|{item['title']}"
