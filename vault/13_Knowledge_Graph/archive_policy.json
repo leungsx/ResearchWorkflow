@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T20:07:50",
+  "generated_at": "2026-07-01T20:10:00",
   "entrypoint": "archive_policy.html",
   "summary": {
     "backup_count": 7,
     "backup_prune_candidates": 0,
     "daily_log_count": 9,
     "compact_candidates": 0,
-    "cache_candidates": 1,
+    "cache_candidates": 0,
     "generated_html_count": 93
   },
   "policy": {
@@ -43,10 +43,8 @@
   },
   "caches": {
     "ds_store_count": 0,
-    "pycache_count": 1,
-    "safe_cleanup_candidates": [
-      "scripts/rendering/__pycache__"
-    ]
+    "pycache_count": 0,
+    "safe_cleanup_candidates": []
   },
   "actions": [
     {
@@ -71,7 +69,7 @@
       "mode": "manual_safe_cleanup",
       "command": "find . -name .DS_Store -delete && find . -name __pycache__ -type d -prune -exec rm -rf {} +",
       "reason": "只清理 macOS/Python 缓存；不影响研究源资产。",
-      "candidate_count": 1
+      "candidate_count": 0
     }
   ]
 }

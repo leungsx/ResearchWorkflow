@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T20:07:43",
+  "generated_at": "2026-07-01T20:10:00",
   "date": "2026-07-01",
   "summary": {
     "counts": {
-      "PASS": 16,
-      "WARN": 2,
+      "PASS": 18,
+      "WARN": 0,
       "FAIL": 0
     },
     "check_count": 18
@@ -83,9 +83,9 @@
     },
     {
       "area": "Git/异地备份",
-      "status": "WARN",
-      "title": "存在尚未提交的 Git 改动",
-      "detail": "123 个路径待快照： M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-452dce22.html； M knowledge_cards/views/concept-53b320d5.html"
+      "status": "PASS",
+      "title": "Git 本地和远程快照状态正常",
+      "detail": "upstream=origin/main；last commit: ae5919d 2026-07-01 20:09:51 +0800 Close July 1 reading workflow"
     },
     {
       "area": "Token/记忆",
@@ -95,9 +95,9 @@
     },
     {
       "area": "文件卫生",
-      "status": "WARN",
-      "title": "工作区存在系统/缓存文件",
-      "detail": "__pycache__=1；这些不会进入 file sweep，但可择机清理。"
+      "status": "PASS",
+      "title": "未发现常见系统/缓存文件",
+      "detail": "工作区较干净。"
     },
     {
       "area": "Schema",
@@ -109,7 +109,7 @@
       "area": "行动队列",
       "status": "PASS",
       "title": "行动队列可用且入口有效",
-      "detail": "6 个开放行动。"
+      "detail": "5 个开放行动。"
     },
     {
       "area": "项目协作层",
@@ -121,7 +121,7 @@
       "area": "自动归档策略",
       "status": "PASS",
       "title": "自动归档策略可用",
-      "detail": "backup=7, prune=0, cache=1"
+      "detail": "backup=7, prune=0, cache=0"
     }
   ]
 }
