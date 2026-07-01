@@ -1,14 +1,20 @@
-id,title,type,stage,next_review,prompt,note_path
-concept-方向链,方向链,concept,1,2026-06-19,用自己的话解释 方向链，并举一个科研例子。,/Users/leung/ResearchWorkflow/vault/02_Concepts/方向链.md
-concept-hook-model,Hook Model 上瘾模型,concept,1,2026-06-21,用自己的话解释 Hook Model 的四个环节，并举一个图书馆短视频例子。,/Users/leung/ResearchWorkflow/vault/02_Concepts/Hook Model 上瘾模型.md
-concept-sicas-model,SICAS模型,concept,1,2026-06-30,用自己的话说出 SICAS 五个阶段，并给一个图书馆短视频例子。,/Users/leung/ResearchWorkflow/vault/02_Concepts/SICAS模型.md
-concept-soft-marketing,软营销,concept,1,2026-06-30,解释软营销和硬推广的差别，并说说它为什么重要。,/Users/leung/ResearchWorkflow/vault/02_Concepts/软营销.md
-concept-immersive-content,沉浸式内容,concept,1,2026-06-30,说明什么叫沉浸式内容，以及它为什么不等于单纯娱乐化。,/Users/leung/ResearchWorkflow/vault/02_Concepts/沉浸式内容.md
-concept-perceived-value,用户感知价值,concept,1,2026-06-30,用户感知价值是什么？它和点赞数有什么区别？,/Users/leung/ResearchWorkflow/vault/02_Concepts/用户感知价值.md
-method-dci-index,DCI传播力指数,method,1,2026-06-30,说明 DCI 为什么比单一粉丝数更适合比较账号传播表现。,/Users/leung/ResearchWorkflow/vault/03_Methods/DCI传播力指数.md
-method-descriptive-account-survey,描述性账号调查,method,1,2026-06-30,描述性账号调查最适合回答什么问题？为什么不等于因果研究？,/Users/leung/ResearchWorkflow/vault/03_Methods/描述性账号调查.md
-concept-aarrr-funnel,AARRR 漏斗模型,concept,1,2026-07-01,说出 AARRR 五个阶段，并解释图书馆语境中的 Revenue 应该如何转译。,/Users/leung/ResearchWorkflow/vault/02_Concepts/AARRR 漏斗模型.md
-concept-platform-fit,平台适配,concept,1,2026-07-01,为什么平台不是中性背景？举一个图书馆短视频平台适配例子。,/Users/leung/ResearchWorkflow/vault/02_Concepts/平台适配.md
-concept-library-type-difference,馆型差异,concept,1,2026-07-01,公共图书馆和高校图书馆的短视频服务价值指标可能有什么不同？,/Users/leung/ResearchWorkflow/vault/02_Concepts/馆型差异.md
-method-web-survey,网络调查法,method,1,2026-07-01,网络调查法做平台账号研究时，必须提前写清哪三类规则？,/Users/leung/ResearchWorkflow/vault/03_Methods/网络调查法.md
-method-content-analysis,内容分析法,method,1,2026-07-01,内容分析法如何把短视频观察转成可复核变量？,/Users/leung/ResearchWorkflow/vault/03_Methods/内容分析法.md
+id,title,type,stage,next_review,prompt,note_path,last_reviewed,review_count,learning_status
+concept-方向链,方向链,concept,2,2026-07-04,用自己的话解释 方向链，并举一个科研例子。,/Users/leung/ResearchWorkflow/vault/02_Concepts/方向链.md,2026-07-01,1,learned
+concept-hook-model,Hook Model 上瘾模型,concept,2,2026-07-04,用自己的话解释 Hook Model 的四个环节，并举一个图书馆短视频例子。,/Users/leung/ResearchWorkflow/vault/02_Concepts/Hook Model 上瘾模型.md,2026-07-01,1,learned
+concept-sicas-model,SICAS模型,concept,2,2026-07-04,用自己的话说出 SICAS 五个阶段，并给一个图书馆短视频例子。,/Users/leung/ResearchWorkflow/vault/02_Concepts/SICAS模型.md,2026-07-01,1,learned
+concept-soft-marketing,软营销,concept,2,2026-07-04,解释软营销和硬推广的差别，并说说它为什么重要。,/Users/leung/ResearchWorkflow/vault/02_Concepts/软营销.md,2026-07-01,1,learned
+concept-immersive-content,沉浸式内容,concept,2,2026-07-04,说明什么叫沉浸式内容，以及它为什么不等于单纯娱乐化。,/Users/leung/ResearchWorkflow/vault/02_Concepts/沉浸式内容.md,2026-07-01,1,learned
+concept-perceived-value,用户感知价值,concept,2,2026-07-04,用户感知价值是什么？它和点赞数有什么区别？,/Users/leung/ResearchWorkflow/vault/02_Concepts/用户感知价值.md,2026-07-01,1,learned
+method-dci-index,DCI传播力指数,method,2,2026-07-04,说明 DCI 为什么比单一粉丝数更适合比较账号传播表现。,/Users/leung/ResearchWorkflow/vault/03_Methods/DCI传播力指数.md,2026-07-01,1,learned
+method-descriptive-account-survey,描述性账号调查,method,2,2026-07-04,描述性账号调查最适合回答什么问题？为什么不等于因果研究？,/Users/leung/ResearchWorkflow/vault/03_Methods/描述性账号调查.md,2026-07-01,1,learned
+concept-aarrr-funnel,AARRR 漏斗模型,concept,2,2026-07-04,说出 AARRR 五个阶段，并解释图书馆语境中的 Revenue 应该如何转译。,/Users/leung/ResearchWorkflow/vault/02_Concepts/AARRR 漏斗模型.md,2026-07-01,1,learned
+concept-platform-fit,平台适配,concept,2,2026-07-04,为什么平台不是中性背景？举一个图书馆短视频平台适配例子。,/Users/leung/ResearchWorkflow/vault/02_Concepts/平台适配.md,2026-07-01,1,learned
+concept-library-type-difference,馆型差异,concept,2,2026-07-04,公共图书馆和高校图书馆的短视频服务价值指标可能有什么不同？,/Users/leung/ResearchWorkflow/vault/02_Concepts/馆型差异.md,2026-07-01,1,learned
+method-web-survey,网络调查法,method,2,2026-07-04,网络调查法做平台账号研究时，必须提前写清哪三类规则？,/Users/leung/ResearchWorkflow/vault/03_Methods/网络调查法.md,2026-07-01,1,learned
+method-content-analysis,内容分析法,method,2,2026-07-04,内容分析法如何把短视频观察转成可复核变量？,/Users/leung/ResearchWorkflow/vault/03_Methods/内容分析法.md,2026-07-01,1,learned
+concept-digital-reading-promotion,数字阅读推广,concept,1,2026-07-02,数字阅读推广和普通账号宣传有什么区别？,/Users/leung/ResearchWorkflow/vault/02_Concepts/数字阅读推广.md,,,
+concept-service-value,服务价值,concept,1,2026-07-02,服务价值和平台互动最大的区别是什么？,/Users/leung/ResearchWorkflow/vault/02_Concepts/服务价值.md,,,
+concept-emotional-marketing,情感营销,concept,1,2026-07-02,情感营销为什么不能只理解为煽情？,/Users/leung/ResearchWorkflow/vault/02_Concepts/情感营销.md,,,
+concept-channel-marketing,渠道营销,concept,1,2026-07-02,渠道营销和简单多平台发布有什么区别？,/Users/leung/ResearchWorkflow/vault/02_Concepts/渠道营销.md,,,
+concept-interactive-marketing,互动营销,concept,1,2026-07-02,互动营销为什么不能等同于评论数越多越好？,/Users/leung/ResearchWorkflow/vault/02_Concepts/互动营销.md,,,
+method-head-account-practice-extraction,头部账号实践提炼,method,1,2026-07-02,头部账号实践提炼为什么不能直接证明策略有效？,/Users/leung/ResearchWorkflow/vault/03_Methods/头部账号实践提炼.md,,,

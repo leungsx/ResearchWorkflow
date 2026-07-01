@@ -392,7 +392,8 @@ def check_review_state(checks: list[Check], day: dt.date) -> None:
         return
 
     summary = payload.get("summary", {})
-    expected_due = sum(1 for row in queue_rows if row.get("next_review", "") <= day.isoformat())
+    today = day.isoformat()
+    expected_due = sum(1 for row in queue_rows if row.get("next_review", "") <= today and row.get("last_reviewed", "") != today)
     total = summary.get("total_items")
     due_count = summary.get("due_count")
     focus_items = payload.get("focus_items", [])
@@ -520,7 +521,7 @@ def check_archive_policy(checks: list[Check]) -> None:
 def check_review_queue(checks: list[Check], day: dt.date) -> None:
     rows = csv_rows(REVIEW_QUEUE)
     today = day.isoformat()
-    due = [row for row in rows if row.get("next_review", "") <= today]
+    due = [row for row in rows if row.get("next_review", "") <= today and row.get("last_reviewed", "") != today]
     if not rows:
         add(checks, "复习队列", "WARN", "复习队列为空", "新增知识卡后应写入 review_queue.csv。")
     elif due:

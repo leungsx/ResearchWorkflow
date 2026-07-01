@@ -1,10 +1,10 @@
 # Project Dashboard - 图书馆短视频相关研究
 
-Last updated: 2026-06-30
+Last updated: 2026-07-01
 
 ## 一句话进度
 
-这个项目已经从“准备检索”推进到“真实 CNKI 检索 + 授权全文组织 + 每日推荐 + 8 篇文献带读”。现在最重要的不是再堆功能，而是把已读文献通过文献综述工作台收敛成清晰研究问题和论文工作总结。
+这个项目已经从“准备检索”推进到“真实 CNKI 检索 + 授权全文组织 + 每日推荐 + 8 篇文献带读 + 3 篇正式 HTML 精读”。现在最重要的不是再堆功能，而是把 SICAS、AARRR 和数字阅读推广服务转化三条线收敛成清晰研究问题和指标草图。
 
 ## 当前状态
 
@@ -17,13 +17,13 @@ Last updated: 2026-06-30
 | CAJ 转 PDF | 当前学习集已跑通 | [CAJ 转换记录](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/caj_conversion/) |
 | Reader | 8/8 已生成 | [readers](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/README.md) |
 | 论文上下文包 | 已读 7 篇已生成，用于省 token 带读 | [context_packs](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/context_packs/) |
-| 今日推荐 | 2026-06-30 主读已完成 AARRR 比较论文精读，下一步继续补传播力评价候选 | [今日精读入口](/Users/leung/ResearchWorkflow/paper_reading/today.html) |
+| 今日推荐 | 2026-07-01 主读已完成张承 2021 数字阅读推广服务转化论文精读，下一步继续补传播力评价候选 | [今日精读入口](/Users/leung/ResearchWorkflow/paper_reading/today.html) |
 | 今日阅读看板 | 已建立 | [reading_board.md](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/reading_board.md) |
 | 5 篇快速复盘 | 已生成 | [2026-06-20-five-paper-quick-recap.md](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/recaps/2026-06-20-five-paper-quick-recap.md) |
 | 创新/局限/机会台账 | 8 张卡片 | [innovation_limitation_bank.md](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/innovation_limitation_bank.md) |
-| 文献综述工作台 | 已建立；用于逐篇结论、逻辑分类、综述线索和阶段性论文工作总结 | [literature_review_workbench.md](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/literature_review_workbench.md) |
+| 文献综述工作台 | 已建立；今日补入张承 2021 深读，用于把平台互动推进到数字阅读推广服务价值 | [literature_review_workbench.md](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/literature_review_workbench.md) |
 | 文献综述 | 已开始形成主线 | [03_literature_synthesis.md](/Users/leung/ResearchWorkflow/projects/library_short_video/03_literature_synthesis.md) |
-| 证据门禁 | ERROR=0, WARN=1 | [evidence_gate_report.md](/Users/leung/ResearchWorkflow/projects/library_short_video/manuscript/evidence_gate_report.md) |
+| 证据门禁 | ERROR=0, WARN=0；metadata-only 候选只保留在补读/检索语境 | [evidence_gate_report.md](/Users/leung/ResearchWorkflow/projects/library_short_video/manuscript/evidence_gate_report.md) |
 
 ## 当前阅读进度
 
@@ -55,10 +55,10 @@ flowchart TD
 
 ## 下一步建议
 
-1. 先把 [[AARRR 漏斗模型]] 与 [[SICAS模型]] 对齐成“用户路径 + 阶段指标”草图。
-2. 若继续阅读，优先补读 `cnki_2021_645f03f388`《图书馆短视频账号传播力研究——以省级公共图书馆为例》。
-3. 或者把当前 8 篇已读文献继续收敛成 2-3 个候选研究问题与指标草图。
-4. 如果准备写论文，先不要直接写正文；先把文献综述工作台、`01_research_question.md` 和 `03_literature_synthesis.md` 对齐。
+1. 默认以“图书馆短视频互动如何连接数字阅读推广服务价值”为主问题。
+2. 把 [[SICAS模型]]、[[AARRR 漏斗模型]] 和 [[数字阅读推广]] 对齐成“用户路径 + 阶段指标 + 服务动作”指标草图。
+3. 继续补读传播力评价或 2023 后多平台研究；metadata-only 候选只作为补读方向，不进入论文主张。
+4. 如果准备写论文，先不要直接写正文；先把文献综述工作台、`01_research_question.md` 和 `03_literature_synthesis.md` 对齐为 1 个主问题 + 2 个子问题。
 
 ## 你可以直接说
 

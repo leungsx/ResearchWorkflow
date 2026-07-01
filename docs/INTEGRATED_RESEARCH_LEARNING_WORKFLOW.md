@@ -141,6 +141,7 @@ The evening task should verify:
 - `make learning-dashboard` should generate HTML mirrors for linked Markdown files and linked folders, rewrite local Markdown links to those mirrors, and remove stale generated mirror pages.
 - `make learning-dashboard` should also refresh `projects/*/project_state.json`; Markdown dashboards remain human-facing, while JSON state is for automation.
 - `make learning-dashboard` should also refresh `vault/14_Review_Queue/review_state.json` and `knowledge_cards/review_today.html`;复习入口应链接到知识卡 HTML 展示页。
+- 学完复习卡后必须写回 `review_queue.csv`，而不只是打开 HTML；使用 `make review-studied ID=<review-id>` 标记单项，或 `make review-studied-due` 标记当前全部到期项。标记后条目进入“今日已学习”，并自动安排下一次复习。
 - `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/search_index.json` and `search/index.html`; search results should open HTML display pages only and should support relevance sorting, snippets, keywords, project filters, and type filters.
 - `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/workflow_state.json` and `workflow_state.html`; workflow audit should refresh them again with final audit counts.
 - `make learning-dashboard` should also refresh `vault/13_Knowledge_Graph/action_queue.json` and `action_queue.html`; each action should link to an HTML entrypoint.

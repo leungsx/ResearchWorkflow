@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T08:57:53",
+  "generated_at": "2026-07-01T14:05:28",
   "entrypoint": "archive_policy.html",
   "summary": {
     "backup_count": 6,
     "backup_prune_candidates": 0,
     "daily_log_count": 9,
     "compact_candidates": 0,
-    "cache_candidates": 24,
-    "generated_html_count": 83
+    "cache_candidates": 1,
+    "generated_html_count": 92
   },
   "policy": {
     "canonical_sources": "Markdown、CSV、YAML、项目状态 JSON 和图谱状态 JSON 默认长期保留。",
@@ -27,7 +27,7 @@
     "keep_newest": 30,
     "count": 6,
     "latest": "backups/researchworkflow-critical-20260630-200857.zip",
-    "latest_age_days": 0.53,
+    "latest_age_days": 0.75,
     "prune_candidates": []
   },
   "logs": {
@@ -37,37 +37,15 @@
     "compact_candidates": []
   },
   "generated": {
-    "generated_html_count": 83,
+    "generated_html_count": 92,
     "managed_by": "make learning-dashboard",
     "stale_cleanup": "生成器按 manifest/路由清理可重建 HTML；不要手工删除源 Markdown。"
   },
   "caches": {
-    "ds_store_count": 21,
-    "pycache_count": 3,
+    "ds_store_count": 0,
+    "pycache_count": 1,
     "safe_cleanup_candidates": [
-      ".DS_Store",
-      "tools/.DS_Store",
-      "tools/caj2pdf/.DS_Store",
-      "projects/.DS_Store",
-      "projects/starter_project/.DS_Store",
-      "projects/starter_project/submission_package/.DS_Store",
-      "projects/starter_project/submission_package/20260619-105023/.DS_Store",
-      "projects/library_short_video/.DS_Store",
-      "projects/library_short_video/literature/.DS_Store",
-      "projects/library_short_video/literature/readers/.DS_Store",
-      "codex/.DS_Store",
-      "library/.DS_Store",
-      "library/cnki_exports/.DS_Store",
-      "library/pdfs/.DS_Store",
-      "library/pdfs/library_short_video/.DS_Store",
-      "library/text/.DS_Store",
-      "docs/.DS_Store",
-      "vault/.DS_Store",
-      "vault/11_Idea_Lab/.DS_Store",
-      "vault/15_CNKI_Frontier/.DS_Store",
-      "tools/caj2pdf/__pycache__",
-      "scripts/__pycache__",
-      "scripts/rendering/__pycache__"
+      "scripts/__pycache__"
     ]
   },
   "actions": [
@@ -93,7 +71,7 @@
       "mode": "manual_safe_cleanup",
       "command": "find . -name .DS_Store -delete && find . -name __pycache__ -type d -prune -exec rm -rf {} +",
       "reason": "只清理 macOS/Python 缓存；不影响研究源资产。",
-      "candidate_count": 24
+      "candidate_count": 1
     }
   ]
 }

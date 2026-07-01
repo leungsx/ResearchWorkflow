@@ -1,98 +1,18 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T08:57:53",
+  "generated_at": "2026-07-01T14:05:28",
   "source_state": "vault/13_Knowledge_Graph/workflow_state.json",
   "entrypoint": "action_queue.html",
   "summary": {
-    "total_open": 12,
-    "high_priority": 6,
+    "total_open": 5,
+    "high_priority": 0,
     "by_kind": {
-      "review": 1,
-      "review_item": 5,
-      "audit_warn": 1,
       "project": 5
     }
   },
   "actions": [
     {
-      "id": "review-2-完成-13-个到期知识卡复习",
-      "kind": "review",
-      "priority": 90,
-      "title": "完成 13 个到期知识卡复习",
-      "reason": "先主动回忆，再打开知识卡核对概念、误区和研究用法。",
-      "entrypoint": "knowledge_cards/review_today.html",
-      "source": "vault/14_Review_Queue/review_state.json",
-      "status": "open",
-      "rank": 1
-    },
-    {
-      "id": "review_item-5-复习-dci传播力指数",
-      "kind": "review_item",
-      "priority": 80,
-      "title": "复习：DCI传播力指数",
-      "reason": "说明 DCI 为什么比单一粉丝数更适合比较账号传播表现。",
-      "entrypoint": "knowledge_cards/views/method-dci-48f2a84e.html",
-      "source": "vault/03_Methods/DCI传播力指数.md",
-      "status": "open",
-      "rank": 2
-    },
-    {
-      "id": "review_item-4-复习-hook-model-上瘾模型",
-      "kind": "review_item",
-      "priority": 80,
-      "title": "复习：Hook Model 上瘾模型",
-      "reason": "用自己的话解释 Hook Model 的四个环节，并举一个图书馆短视频例子。",
-      "entrypoint": "knowledge_cards/views/concept-hook-model-878dcbb7.html",
-      "source": "vault/02_Concepts/Hook Model 上瘾模型.md",
-      "status": "open",
-      "rank": 3
-    },
-    {
-      "id": "review_item-6-复习-sicas模型",
-      "kind": "review_item",
-      "priority": 80,
-      "title": "复习：SICAS模型",
-      "reason": "用自己的话说出 SICAS 五个阶段，并给一个图书馆短视频例子。",
-      "entrypoint": "knowledge_cards/views/concept-sicas-e14df8c7.html",
-      "source": "vault/02_Concepts/SICAS模型.md",
-      "status": "open",
-      "rank": 4
-    },
-    {
-      "id": "review_item-7-复习-描述性账号调查",
-      "kind": "review_item",
-      "priority": 80,
-      "title": "复习：描述性账号调查",
-      "reason": "描述性账号调查最适合回答什么问题？为什么不等于因果研究？",
-      "entrypoint": "knowledge_cards/views/method-86d250ef.html",
-      "source": "vault/03_Methods/描述性账号调查.md",
-      "status": "open",
-      "rank": 5
-    },
-    {
-      "id": "review_item-3-复习-方向链",
-      "kind": "review_item",
-      "priority": 80,
-      "title": "复习：方向链",
-      "reason": "用自己的话解释 方向链，并举一个科研例子。",
-      "entrypoint": "knowledge_cards/views/concept-e068f0fc.html",
-      "source": "vault/02_Concepts/方向链.md",
-      "status": "open",
-      "rank": 6
-    },
-    {
-      "id": "audit_warn-1-处理提醒-存在到期复习项",
-      "kind": "audit_warn",
-      "priority": 70,
-      "title": "处理提醒：存在到期复习项",
-      "reason": "13 项到期：方向链；Hook Model 上瘾模型；SICAS模型；软营销；沉浸式内容；用户感知价值；DCI传播力指数；描述性账号调查",
-      "entrypoint": "workflow_health.html",
-      "source": "复习队列",
-      "status": "open",
-      "rank": 7
-    },
-    {
-      "id": "project-11-starter-research-project-先建立或导入项目文献矩阵-再生成",
+      "id": "project-4-starter-research-project-先建立或导入项目文献矩阵-再生成",
       "kind": "project",
       "priority": 60,
       "title": "Starter Research Project：先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
@@ -100,10 +20,10 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-b90a4a93.html",
       "source": "starter_project",
       "status": "open",
-      "rank": 8
+      "rank": 1
     },
     {
-      "id": "project-12-starter-research-project-如果这是占位项目-保持-proje",
+      "id": "project-5-starter-research-project-如果这是占位项目-保持-proje",
       "kind": "project",
       "priority": 60,
       "title": "Starter Research Project：如果这是占位项目，保持 project_state.json 作为结构模板即可。",
@@ -111,32 +31,32 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-b90a4a93.html",
       "source": "starter_project",
       "status": "open",
-      "rank": 9
+      "rank": 2
     },
     {
-      "id": "project-8-图书馆短视频相关研究-先处理-evidence-gate-的-warn-error",
+      "id": "project-3-图书馆短视频相关研究-下一篇阅读优先选择已有-pdf-reader-且能推进传播力评",
       "kind": "project",
       "priority": 60,
-      "title": "图书馆短视频相关研究：先处理 evidence gate 的 WARN/ERROR，避免 metadata-only 文献进入论文主张。",
+      "title": "图书馆短视频相关研究：下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
       "reason": "来自项目状态的下一步建议。",
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 10
+      "rank": 3
     },
     {
-      "id": "project-10-图书馆短视频相关研究-围绕最近主读--cnki-2021-3771e58987--补",
+      "id": "project-2-图书馆短视频相关研究-围绕最近主读--cnki-2021-5530e86157--补",
       "kind": "project",
       "priority": 60,
-      "title": "图书馆短视频相关研究：围绕最近主读 `cnki_2021_3771e58987`，补齐与既有概念/方法的关系和证据边界。",
+      "title": "图书馆短视频相关研究：围绕最近主读 `cnki_2021_5530e86157`，补齐与既有概念/方法的关系和证据边界。",
       "reason": "来自项目状态的下一步建议。",
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 11
+      "rank": 4
     },
     {
-      "id": "project-9-图书馆短视频相关研究-把已读文献继续汇总进文献综述工作台-收敛-2-3-个研究问题",
+      "id": "project-1-图书馆短视频相关研究-把已读文献继续汇总进文献综述工作台-收敛-2-3-个研究问题",
       "kind": "project",
       "priority": 60,
       "title": "图书馆短视频相关研究：把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。",
@@ -144,7 +64,7 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 12
+      "rank": 5
     }
   ]
 }

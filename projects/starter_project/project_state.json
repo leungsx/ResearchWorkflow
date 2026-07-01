@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T08:57:32",
+  "generated_at": "2026-07-01T14:05:28",
   "project": {
     "slug": "starter_project",
     "title": "Starter Research Project",
@@ -49,92 +49,60 @@
     "warn": "0"
   },
   "review": {
-    "due_count": 13,
-    "overdue_count": 8,
-    "upcoming_7_count": 0,
+    "due_count": 0,
+    "overdue_count": 0,
+    "upcoming_7_count": 19,
     "queue_path": "vault/14_Review_Queue/review_queue.csv",
     "state_path": "vault/14_Review_Queue/review_state.json",
     "review_today": "knowledge_cards/review_today.html",
     "focus_items": [
       {
-        "id": "concept-方向链",
-        "title": "方向链",
+        "id": "concept-interactive-marketing",
+        "title": "互动营销",
         "type": "concept",
-        "next_review": "2026-06-19",
-        "prompt": "用自己的话解释 方向链，并举一个科研例子。",
-        "display_path": "knowledge_cards/views/concept-e068f0fc.html"
+        "next_review": "2026-07-02",
+        "prompt": "互动营销为什么不能等同于评论数越多越好？",
+        "display_path": "knowledge_cards/views/concept-452dce22.html"
       },
       {
-        "id": "concept-hook-model",
-        "title": "Hook Model 上瘾模型",
-        "type": "concept",
-        "next_review": "2026-06-21",
-        "prompt": "用自己的话解释 Hook Model 的四个环节，并举一个图书馆短视频例子。",
-        "display_path": "knowledge_cards/views/concept-hook-model-878dcbb7.html"
-      },
-      {
-        "id": "method-dci-index",
-        "title": "DCI传播力指数",
+        "id": "method-head-account-practice-extraction",
+        "title": "头部账号实践提炼",
         "type": "method",
-        "next_review": "2026-06-30",
-        "prompt": "说明 DCI 为什么比单一粉丝数更适合比较账号传播表现。",
-        "display_path": "knowledge_cards/views/method-dci-48f2a84e.html"
+        "next_review": "2026-07-02",
+        "prompt": "头部账号实践提炼为什么不能直接证明策略有效？",
+        "display_path": "knowledge_cards/views/method-e92ba575.html"
       },
       {
-        "id": "concept-sicas-model",
-        "title": "SICAS模型",
+        "id": "concept-emotional-marketing",
+        "title": "情感营销",
         "type": "concept",
-        "next_review": "2026-06-30",
-        "prompt": "用自己的话说出 SICAS 五个阶段，并给一个图书馆短视频例子。",
-        "display_path": "knowledge_cards/views/concept-sicas-e14df8c7.html"
+        "next_review": "2026-07-02",
+        "prompt": "情感营销为什么不能只理解为煽情？",
+        "display_path": "knowledge_cards/views/concept-d7b1f9e6.html"
       },
       {
-        "id": "method-descriptive-account-survey",
-        "title": "描述性账号调查",
-        "type": "method",
-        "next_review": "2026-06-30",
-        "prompt": "描述性账号调查最适合回答什么问题？为什么不等于因果研究？",
-        "display_path": "knowledge_cards/views/method-86d250ef.html"
-      },
-      {
-        "id": "concept-immersive-content",
-        "title": "沉浸式内容",
+        "id": "concept-digital-reading-promotion",
+        "title": "数字阅读推广",
         "type": "concept",
-        "next_review": "2026-06-30",
-        "prompt": "说明什么叫沉浸式内容，以及它为什么不等于单纯娱乐化。",
-        "display_path": "knowledge_cards/views/concept-7f8a8bb3.html"
+        "next_review": "2026-07-02",
+        "prompt": "数字阅读推广和普通账号宣传有什么区别？",
+        "display_path": "knowledge_cards/views/concept-b0f48f34.html"
       },
       {
-        "id": "concept-perceived-value",
-        "title": "用户感知价值",
+        "id": "concept-service-value",
+        "title": "服务价值",
         "type": "concept",
-        "next_review": "2026-06-30",
-        "prompt": "用户感知价值是什么？它和点赞数有什么区别？",
-        "display_path": "knowledge_cards/views/concept-824dc24b.html"
+        "next_review": "2026-07-02",
+        "prompt": "服务价值和平台互动最大的区别是什么？",
+        "display_path": "knowledge_cards/views/concept-e98c8c55.html"
       },
       {
-        "id": "concept-soft-marketing",
-        "title": "软营销",
+        "id": "concept-channel-marketing",
+        "title": "渠道营销",
         "type": "concept",
-        "next_review": "2026-06-30",
-        "prompt": "解释软营销和硬推广的差别，并说说它为什么重要。",
-        "display_path": "knowledge_cards/views/concept-841db0d5.html"
-      },
-      {
-        "id": "concept-aarrr-funnel",
-        "title": "AARRR 漏斗模型",
-        "type": "concept",
-        "next_review": "2026-07-01",
-        "prompt": "说出 AARRR 五个阶段，并解释图书馆语境中的 Revenue 应该如何转译。",
-        "display_path": "knowledge_cards/views/concept-aarrr-bf76ae6c.html"
-      },
-      {
-        "id": "method-content-analysis",
-        "title": "内容分析法",
-        "type": "method",
-        "next_review": "2026-07-01",
-        "prompt": "内容分析法如何把短视频观察转成可复核变量？",
-        "display_path": "knowledge_cards/views/method-4dc0db40.html"
+        "next_review": "2026-07-02",
+        "prompt": "渠道营销和简单多平台发布有什么区别？",
+        "display_path": "knowledge_cards/views/concept-401f5cfe.html"
       }
     ]
   },

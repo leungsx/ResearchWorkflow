@@ -1,6 +1,6 @@
 PYTHON ?= /Users/leung/anaconda3/bin/python
 
-.PHONY: check new status project-state review-state search-index workflow-state action-queue collaboration-state archive-policy schema-validate fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
+.PHONY: check new status project-state review-state review-studied review-studied-due review-server search-index workflow-state action-queue collaboration-state archive-policy schema-validate fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
 
 check:
 	$(PYTHON) scripts/check_environment.py
@@ -16,6 +16,15 @@ project-state:
 
 review-state:
 	$(PYTHON) scripts/build_review_state.py $(if $(DATE),--date "$(DATE)",)
+
+review-studied:
+	$(PYTHON) scripts/mark_review_studied.py $(if $(ID),--id "$(ID)",) $(if $(DATE),--date "$(DATE)",) $(if $(NEXT_DAYS),--next-days "$(NEXT_DAYS)",)
+
+review-studied-due:
+	$(PYTHON) scripts/mark_review_studied.py --all-due $(if $(DATE),--date "$(DATE)",) $(if $(NEXT_DAYS),--next-days "$(NEXT_DAYS)",)
+
+review-server:
+	$(PYTHON) scripts/review_mark_server.py $(if $(PORT),--port "$(PORT)",)
 
 search-index:
 	$(PYTHON) scripts/build_search_index.py

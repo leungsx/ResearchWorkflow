@@ -163,10 +163,14 @@ Generated assets 是脚本生成的浏览和索引文件：
 
 - 今日日期、生成时间和源队列路径。
 - 总数、今日到期、逾期、未来 7 天和未排期数量。
+- 今日已学习数量，以及当天已完成复习项列表。
 - `focus_items`：今天最应该主动回忆的知识卡。
 - 每个复习项的源卡片路径和默认 HTML 展示路径。
+- `last_reviewed`、`review_count` 和 `learning_status` 用于区分“已学习”和“未处理”；打开 HTML 本身不等于写回复习完成。
 
 用户侧默认打开 `knowledge_cards/review_today.html`，不直接打开 CSV 或 Markdown 卡片。
+
+完成复习后应通过 `make review-studied ID=<review-id>` 或 `make review-studied-due` 写回 `review_queue.csv`。行动队列只应为真正到期且未在当天标记学习的条目生成复习行动。
 
 ## 搜索索引契约
 
@@ -203,6 +207,7 @@ Generated assets 是脚本生成的浏览和索引文件：
 - 每个行动包含 `kind`、`priority`、`title`、`reason`、`entrypoint`、`source` 和 `status`。
 - `entrypoint` 必须指向存在的 HTML 展示页。
 - 优先级顺序：审计 FAIL、到期复习、重点知识卡、审计 WARN、项目下一步建议。
+- 重点知识卡只有在存在真正到期复习时进入行动队列；未来 7 天复习项只在复习页展示，不应提前变成待办。
 - 行动队列从 `workflow_state.json` 派生，不替代项目状态、复习状态或审计报告。
 
 ## 项目协作层契约

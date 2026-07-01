@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026-07-01 精读：基于短视频营销的公共图书馆数字阅读推广策略研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d2528;
+      --muted: #63717a;
+      --line: #d8e2e2;
+      --paper: #ffffff;
+      --soft: #f4f8f7;
+      --green: #1f6f5b;
+      --blue: #255f99;
+      --amber: #92610c;
+      --rose: #9d3150;
+      --slate: #263847;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Hiragino Sans GB", "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      line-height: 1.64;
+      background: linear-gradient(180deg, #f8faf9 0%, #eef4f3 100%);
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 24px; }
+    header {
+      color: #f8fbff;
+      background: linear-gradient(135deg, #233645 0%, #27695e 58%, #80672d 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.16);
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 9px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+    h1 { margin: 14px 0 10px; font-size: 36px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin: 0 0 9px; font-size: 17px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    .sub { max-width: 920px; color: rgba(248,251,255,0.9); }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      color: #f8fbff;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.09);
+      border-radius: 8px;
+      padding: 7px 11px;
+      font-size: 14px;
+    }
+    main.wrap { margin-top: -24px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel, .metric {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 10px 24px rgba(24, 34, 45, 0.06);
+    }
+    .panel { padding: 18px; }
+    .metric { padding: 16px; }
+    .span-12 { grid-column: 1 / -1; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; color: var(--slate); }
+    .metric span { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px 18px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .meta div { padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
+    .label {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+    .tag {
+      display: inline-block;
+      margin: 0 7px 8px 0;
+      padding: 5px 9px;
+      background: #edf7f4;
+      color: var(--green);
+      border: 1px solid #cfe5dd;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .route { display: grid; gap: 10px; }
+    .route-item {
+      padding: 13px 14px;
+      border-left: 4px solid var(--green);
+      background: var(--soft);
+      border-radius: 0 8px 8px 0;
+    }
+    .route-item strong { display: block; margin-bottom: 5px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 600; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .step {
+      position: relative;
+      min-height: 168px;
+      padding: 14px;
+      border: 1px solid #cfe0e2;
+      border-radius: 8px;
+      background: #f8fbfb;
+    }
+    .step:not(:last-child)::after {
+      content: ">";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--green);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .num {
+      display: inline-flex;
+      width: 28px;
+      height: 28px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+    .callout {
+      padding: 14px;
+      border: 1px solid #ead8a8;
+      border-radius: 8px;
+      background: #fff9eb;
+    }
+    .callout.warn {
+      border-color: #efc2ce;
+      background: #fff4f6;
+    }
+    .glossary { display: grid; gap: 10px; }
+    .glossary div {
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+    }
+    ul, ol { margin: 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      padding: 12px 14px;
+    }
+    details + details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 600; }
+    .actions label {
+      display: block;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--line);
+    }
+    .actions input { margin-right: 8px; }
+    .foot { color: var(--muted); font-size: 13px; }
+    @media (max-width: 920px) {
+      .span-8, .span-6, .span-4, .span-12, .metric { grid-column: 1 / -1; }
+      .flow { grid-template-columns: 1fr; }
+      .step:not(:last-child)::after { content: "v"; right: auto; left: 50%; top: auto; bottom: -19px; transform: translateX(-50%); }
+      h1 { font-size: 29px; }
+      .meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <span class="eyebrow">Daily Deep Read · 2026-07-01</span>
+      <h1>基于短视频营销的公共图书馆数字阅读推广策略研究</h1>
+      <p class="sub">今天读张承 2021 这篇，是为了把 SICAS 和 AARRR 里仍偏“路径/指标”的框架，落到公共图书馆数字阅读推广的服务场景：情感共鸣、渠道触达、互动参与，最后是否能接到真实阅读服务。</p>
+      <nav class="nav">
+        <a href="../study_dashboard.html">学习仪表盘</a>
+        <a href="views/cnki-2021-5530e86157-96644c0b.html">Obsidian 论文笔记</a>
+        <a href="views/paper-495f8717.html">Reader</a>
+        <a href="views/cnki-2021-5530e86157-05cc0475.html">上下文包</a>
+        <a href="views/literature_review_workbench.html">文献综述工作台</a>
+        <a href="../knowledge_cards/index.html">知识卡入口</a>
+        <a href="../knowledge_graph/index.html">知识图谱</a>
+        <a href="../logs/views/2026-07-01-digital-reading-promotion-paper-83676eb0.html">主读会话</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+      <section class="panel span-8">
+        <h2>题目与推荐理由</h2>
+        <div class="meta">
+          <div><span class="label">作者</span>张承</div>
+          <div><span class="label">年份 / 来源</span>2021 / 《图书馆工作与研究》2021(5): 85-91</div>
+          <div><span class="label">DOI</span><a href="https://doi.org/10.16384/j.cnki.lwas.2021.05.012">10.16384/j.cnki.lwas.2021.05.012</a></div>
+          <div><span class="label">当前项目角色</span>数字阅读推广、服务转化、策略变量化</div>
+          <div><span class="label">来源</span>CNKI 授权全文 Reader；本地 CAJ 已入库</div>
+          <div><span class="label">证据状态</span>source-grounded skim；页码和表格值写作前需回原文核验</div>
+        </div>
+        <p style="margin-top:14px;">推荐它，是因为当前项目已经有 Hook、ELM、SICAS、AARRR 四条模型线，但这些模型仍容易停在平台互动指标。这篇直接把短视频营销接到公共图书馆数字阅读推广，适合补“平台互动如何转成服务触达与阅读参与”这一缺口。</p>
+        <div style="margin-top:14px;">
+          <span class="tag">数字阅读推广</span>
+          <span class="tag">服务价值</span>
+          <span class="tag">情感营销</span>
+          <span class="tag">渠道营销</span>
+          <span class="tag">互动营销</span>
+          <span class="tag">头部账号实践提炼</span>
+        </div>
+      </section>
+
+      <section class="grid span-4">
+        <div class="metric"><b>90</b><span>粉丝长期超过 1 万的公共图书馆抖音头部账号</span></div>
+        <div class="metric"><b>27,455</b><span>2020-05-01 至 2020-11-30 观察期短视频</span></div>
+        <div class="metric"><b>3</b><span>策略主线：情感、渠道、互动</span></div>
+        <div class="metric"><b>1</b><span>核心转向：从流量互动到数字阅读推广服务价值</span></div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>30 秒定位</h2>
+        <div class="route">
+          <div class="route-item"><strong>它在项目里是什么角色？</strong>它是服务转化桥梁文献：把图书馆短视频从“涨粉、点赞、爆款”拉回“数字阅读推广、用户参与和线上线下服务闭环”。</div>
+          <div class="route-item"><strong>今天为什么读它？</strong>昨天的 AARRR 能组织阶段指标，前天的 SICAS 能组织用户路径；这篇告诉我们这些路径和指标应该落到哪些服务动作上。</div>
+          <div class="route-item"><strong>先抓什么？</strong>抓三条策略线：情感营销负责共鸣，渠道营销负责精准触达，互动营销负责把关注转成持续参与。</div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>核心内容</h2>
+        <ul>
+          <li>研究问题：公共图书馆如何借助短视频营销提升数字阅读推广的覆盖、深度、参与和服务场景连接。</li>
+          <li>理论/概念：数字阅读推广、服务价值、情感营销、渠道营销、互动营销、用户感知价值。</li>
+          <li>方法与数据：以抖音为平台，检索“公共图书馆”“阅读推广”“数字阅读”，动态跟踪 2020-05-01 至 2020-11-30 的头部账号实践。</li>
+          <li>主要发现：头部账号经验可归纳为 PUGV 内容与场景融合、双矩阵渠道运营、用户标签与社区化互动，并转译为三条数字阅读推广策略。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-12">
+        <h2>方法流程图</h2>
+        <div class="flow">
+          <div class="step"><span class="num">1</span><h3>定义对象</h3><p>以公共图书馆数字阅读推广为目标，不泛化到一般短视频营销。</p></div>
+          <div class="step"><span class="num">2</span><h3>平台检索</h3><p>在抖音用“公共图书馆”“阅读推广”“数字阅读”检索账号。</p></div>
+          <div class="step"><span class="num">3</span><h3>动态筛选</h3><p>半年度跟踪后保留 90 个粉丝长期超过 1 万的头部账号。</p></div>
+          <div class="step"><span class="num">4</span><h3>经验提炼</h3><p>从内容、方式、路径三方面归纳 27,455 条短视频实践。</p></div>
+          <div class="step"><span class="num">5</span><h3>服务转译</h3><p>形成情感、渠道、互动三条策略，并暴露服务价值指标缺口。</p></div>
+        </div>
+      </section>
+
+      <section class="panel span-12">
+        <h2>证据逻辑</h2>
+        <table>
+          <thead><tr><th>论文主张</th><th>证据来源</th><th>可用性</th><th>边界</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>短视频营销能扩展数字阅读推广的覆盖面与纵深度。</td>
+              <td>摘要与引言：`B0001`-`B0003`。</td>
+              <td>适合写作背景和问题意识。</td>
+              <td>仍需区分“平台注意力”与“真实阅读结果”。</td>
+            </tr>
+            <tr>
+              <td>头部账号实践集中在内容 IP/场景融合、双矩阵渠道和用户标签互动。</td>
+              <td>样本与实践经验：`B0003`-`B0007`。</td>
+              <td>适合抽取变量和案例线索。</td>
+              <td>头部账号会高估整体公共馆能力。</td>
+            </tr>
+            <tr>
+              <td>情感、渠道、互动三条策略可以组织数字阅读推广服务路径。</td>
+              <td>策略部分：`B0008`-`B0013`。</td>
+              <td>适合构建“共鸣-触达-参与-转化”框架。</td>
+              <td>文章未检验三类策略的独立效果。</td>
+            </tr>
+            <tr>
+              <td>线上互动和线下/数字服务可以通过二维码、POI、积分、直播等入口连接。</td>
+              <td>线上线下转化案例：`B0011`-`B0013`。</td>
+              <td>适合设计服务转化指标。</td>
+              <td>案例可启发指标，不能直接证明普遍有效。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel span-6">
+        <h2>创新 / 贡献</h2>
+        <ul>
+          <li>把短视频研究从“图书馆宣传”推进到“数字阅读推广服务设计”。</li>
+          <li>用 90 个头部账号和 27,455 条视频构成 2020 年公共图书馆抖音头部实践基线。</li>
+          <li>把策略拆成情感营销、渠道营销、互动营销三条可继续变量化的线。</li>
+          <li>把线上平台互动和线下/数字阅读场景连接起来，为服务价值测量留下入口。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-6">
+        <h2>局限 / 外推边界</h2>
+        <ul>
+          <li>研究对象是头部账号，不能代表普通馆、小馆、高校馆或科研型图书馆。</li>
+          <li>方法是实践提炼和策略归纳，不是回归、准实验或因果识别。</li>
+          <li>数据来自 2020 年抖音生态，平台算法、用户习惯和馆方能力已经可能变化。</li>
+          <li>论文强调关注度、参与力和营销效果，但服务价值指标仍需另行操作化。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-6">
+        <h2>与已读文献的关系</h2>
+        <ul>
+          <li>与 <a href="views/cnki_2023_34348faa1e-note.html">SICAS 论文</a> 互补：SICAS 给路径，这篇给数字阅读推广场景和策略动作。</li>
+          <li>与 <a href="views/cnki-2021-3771e58987-6c1b15ea.html">AARRR 比较论文</a> 互补：AARRR 管阶段指标，这篇提醒指标要落到服务触达和阅读转化。</li>
+          <li>与热门内容规律论文互补：热门内容能解释流量，这篇追问流量是否服务数字阅读。</li>
+          <li>与公共馆抖音服务现状论文互补：后者画服务地图，这篇提炼头部账号的服务策略。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-6">
+        <h2>可复现性判断</h2>
+        <div class="callout">
+          <p><strong>可复现部分：</strong>检索词、观察时间、头部账号门槛、视频数量、分析维度可以转成复测方案。</p>
+          <p><strong>待补部分：</strong>账号完整名录、编码表、视频级原始数据、编码一致性和页码表格核验。若以后写实证论文，不能只复用作者策略结论，必须重建变量口径。</p>
+        </div>
+      </section>
+
+      <section class="panel span-12">
+        <h2>术语表</h2>
+        <div class="glossary">
+          <div><strong>数字阅读推广</strong>：让用户发现、理解、使用电子书、数据库、线上活动和阅读服务的图书馆服务过程。</div>
+          <div><strong>服务价值</strong>：短视频带来的公共文化服务结果，不等于点赞数；可包括资源访问、活动参与、到馆、借阅、用户满意度和阅读素养提升。</div>
+          <div><strong>情感营销</strong>：用共鸣、故事、场景和情绪连接用户，让用户愿意注意和靠近数字阅读内容。</div>
+          <div><strong>渠道营销</strong>：通过账号矩阵、多平台导流、直播和链接入口，把合适内容送到合适用户面前。</div>
+          <div><strong>互动营销</strong>：用评论、话题、直播、竞赛、问答、POI 和积分等机制，把一次关注转成持续参与。</div>
+          <div><strong>头部账号实践提炼</strong>：从表现较好的账号中抽取经验模式，适合提出变量和假设，但不能直接代表所有账号。</div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>互动精读问题</h2>
+        <details open>
+          <summary>问题 1：这篇论文和 SICAS 的关系是什么？</summary>
+          <p>SICAS 是用户路径框架；这篇提供路径里的服务动作。比如 Interest & Interactive 可以落到沉浸内容和评论互动，Action 可以落到二维码、POI、直播或线下活动报名。</p>
+        </details>
+        <details>
+          <summary>问题 2：为什么头部账号样本既有价值又危险？</summary>
+          <p>价值在于它暴露高水平实践，适合提炼变量；危险在于它会高估普通图书馆能力，不能直接外推到全部馆型。</p>
+        </details>
+        <details>
+          <summary>问题 3：如果我要做自己的研究，最应该补什么指标？</summary>
+          <p>补服务价值指标：数字资源点击、活动报名、到馆或线上服务访问、借阅/咨询、用户反馈，而不是只看点赞评论分享。</p>
+        </details>
+      </section>
+
+      <section class="panel span-6">
+        <h2>今日行动清单</h2>
+        <div class="actions">
+          <label><input type="checkbox"> 用 15 分钟读完“30 秒定位”和“证据逻辑”。</label>
+          <label><input type="checkbox"> 主动复述三条策略线：情感共鸣、渠道触达、互动参与。</label>
+          <label><input type="checkbox"> 把这篇放进 SICAS-AARRR 草图：SICAS 管路径，AARRR 管阶段，张承 2021 管服务动作。</label>
+          <label><input type="checkbox"> 在文献综述工作台里标出“平台互动-服务触达-阅读转化”的证据缺口。</label>
+          <label><input type="checkbox"> 下次优先补 `cnki_2021_645f03f388` 的全文，专门补传播力评价。</label>
+        </div>
+      </section>
+
+      <section class="panel span-12">
+        <h2>延伸阅读</h2>
+        <table>
+          <thead><tr><th>材料</th><th>为什么接着读</th></tr></thead>
+          <tbody>
+            <tr><td><a href="views/cnki_2023_34348faa1e-note.html">刘青、郭嘉如 2023：SICAS 公共馆短视频营销</a></td><td>补完整用户路径和 DCI 传播力诊断。</td></tr>
+            <tr><td><a href="views/cnki-2021-3771e58987-6c1b15ea.html">龚雪竹 2021：公共馆/高校馆短视频营销比较</a></td><td>补 AARRR、馆型差异和平台适配。</td></tr>
+            <tr><td><a href="views/cnki-2020-2a150c6df8-984b9b2e.html">沈丽红 2020：热门短视频内容规律</a></td><td>补内容变量，但要警惕热门不等于服务价值。</td></tr>
+            <tr><td><a href="views/cnki-2021-7556aafa99-1f5b3fc2.html">孙雨、陈凤娟 2021：公共馆抖音服务现状</a></td><td>补公共馆服务地图和运营成熟度变量。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel span-12">
+        <h2>今天沉淀的知识卡</h2>
+        <p><a href="../knowledge_cards/views/concept-b0f48f34.html">数字阅读推广</a>、<a href="../knowledge_cards/views/concept-e98c8c55.html">服务价值</a>、<a href="../knowledge_cards/views/concept-d7b1f9e6.html">情感营销</a>、<a href="../knowledge_cards/views/concept-401f5cfe.html">渠道营销</a>、<a href="../knowledge_cards/views/concept-452dce22.html">互动营销</a>、<a href="../knowledge_cards/views/method-e92ba575.html">头部账号实践提炼</a>。</p>
+        <p class="foot">来源边界：本页基于本地 source-grounded Reader `cnki_2021_5530e86157` 与上下文包生成；页码、图表和具体数值在正式写作前必须回原 CAJ/PDF 核验。</p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

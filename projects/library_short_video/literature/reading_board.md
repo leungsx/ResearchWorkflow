@@ -1,11 +1,20 @@
 # 今日阅读看板 - 图书馆短视频相关研究
 
-Date: 2026-06-21
+Date: 2026-07-01
 Project: `library_short_video`
 
 ## 这张看板解决什么问题
 
 你不需要去猜“论文在哪里”“研讨卡是什么”“reader 怎么读”。这张看板把今天推荐文献的入口和用途放在一起。
+
+## 2026-07-01 当前主读
+
+| 角色 | Citekey | 题名 | 阅读状态 | 今天为什么读 | 入口 |
+|---|---|---|---|---|---|
+| 主读 | `cnki_2021_5530e86157` | 基于短视频营销的公共图书馆数字阅读推广策略研究 | `skimmed` | 把 SICAS 的用户路径和 AARRR 的阶段指标落到数字阅读推广服务动作：情感共鸣、渠道触达、互动参与和服务转化 | [HTML 精读页](/Users/leung/ResearchWorkflow/paper_reading/2026-07-01-digital-reading-promotion.html) / [上下文包](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/context_packs/cnki_2021_5530e86157.md) / [Reader](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/cnki_2021_5530e86157/paper.md) / [论文笔记](/Users/leung/ResearchWorkflow/vault/01_Literature/cnki_2021_5530e86157.md) |
+| 框架回顾 | `cnki_2023_34348faa1e` | 基于SICAS模型的公共图书馆短视频营销策略研究 | `skimmed` | 对照用户感知、兴趣互动、连接沟通、行动、分享五阶段 | [论文笔记](/Users/leung/ResearchWorkflow/vault/01_Literature/cnki_2023_34348faa1e.md) / [Reader](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/cnki_2023_34348faa1e/paper.md) |
+| 指标回顾 | `cnki_2021_3771e58987` | 公共图书馆和高校图书馆短视频营销比较研究 | `skimmed` | 对照 AARRR、馆型差异和平台适配，避免把服务动作与阶段指标混在一起 | [论文笔记](/Users/leung/ResearchWorkflow/vault/01_Literature/cnki_2021_3771e58987.md) / [HTML 精读页](/Users/leung/ResearchWorkflow/paper_reading/2026-06-30-aarrr-library-short-video.html) |
+| 下一篇候选 | `cnki_2021_645f03f388` | 图书馆短视频账号传播力研究——以省级公共图书馆为例 | `metadata-only` | 最贴近传播力评价，但仍需合法全文/Reader，当前不能作为 source-grounded 主读 | [下载请求报告](/Users/leung/ResearchWorkflow/vault/15_CNKI_Frontier/download_requests/library_short_video/2026-06-30-library_short_video-cnki-download-request.md) |
 
 ## 2026-06-21 今日推荐
 

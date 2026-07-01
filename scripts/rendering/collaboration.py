@@ -195,35 +195,44 @@ def write_collaboration_html(state: dict[str, Any]) -> None:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>项目协作层</title>
   <style>
-    :root {{ --ink:#182026; --muted:#61707d; --line:#d9e0e6; --paper:#fff; --soft:#f6f8fa; --blue:#2463eb; --green:#16805d; --amber:#a15c07; }}
+    :root {{ --ink:#1e293b; --muted:#64748b; --line:#dbe4ee; --paper:#fff; --soft:#f8fafc; --blue:#2563eb; --green:#16805d; --amber:#a15c07; --ring:rgba(37,99,235,.34); --shadow:0 10px 28px rgba(15,23,42,.06); }}
     * {{ box-sizing:border-box; }}
-    body {{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",Arial,sans-serif; color:var(--ink); background:#f4f6f8; line-height:1.55; }}
+    body {{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",Arial,sans-serif; color:var(--ink); background:#f8fafc; line-height:1.6; }}
     header {{ background:var(--paper); border-bottom:1px solid var(--line); }}
     .wrap {{ max-width:1160px; margin:0 auto; padding:28px 22px; }}
     h1 {{ margin:0 0 8px; font-size:34px; }}
     h2 {{ margin:0 0 8px; font-size:20px; }}
     h3 {{ margin:0 0 8px; font-size:15px; }}
-    a {{ color:var(--blue); text-decoration:none; }}
+    a {{ color:var(--blue); text-decoration:none; text-underline-offset:3px; }}
+    a:hover {{ text-decoration:underline; }}
+    a:focus-visible {{ outline:3px solid var(--ring); outline-offset:2px; border-radius:7px; }}
+    .skip-link {{ position:absolute; left:18px; top:10px; z-index:20; transform:translateY(-140%); background:var(--ink); color:#fff; padding:8px 12px; border-radius:7px; }}
+    .skip-link:focus {{ transform:translateY(0); }}
     .sub,.meta {{ color:var(--muted); }}
     .nav,.links {{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }}
-    .nav a,.links a {{ min-height:34px; padding:6px 10px; border:1px solid var(--line); border-radius:7px; background:#fff; color:var(--ink); }}
+    .nav a,.links a {{ min-height:40px; padding:7px 11px; border:1px solid var(--line); border-radius:7px; background:#fff; color:var(--ink); transition:background-color 160ms ease,border-color 160ms ease,color 160ms ease; }}
+    .nav a:hover,.links a:hover {{ border-color:#bfcee0; background:#f8fbff; text-decoration:none; }}
+    .nav a[aria-current="page"] {{ border-color:#b9ccff; background:#eef4ff; color:#1d4ed8; font-weight:650; }}
     .metrics {{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:14px; }}
-    .metric,.project,.panel {{ background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; }}
+    .metric,.project,.panel {{ background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; box-shadow:var(--shadow); }}
     .metric b {{ display:block; font-size:28px; line-height:1.1; }}
     .list {{ display:grid; gap:12px; }}
     .project {{ border-left:4px solid var(--green); }}
     .columns {{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px; }}
     ul {{ margin:0; padding-left:20px; }}
     li {{ margin:5px 0; }}
-    @media (max-width:820px) {{ .metrics,.columns {{ grid-template-columns:1fr; }} h1 {{ font-size:28px; }} }}
+    @media (max-width:820px) {{ .metrics,.columns {{ grid-template-columns:1fr; }} h1 {{ font-size:28px; }} .wrap {{ padding-left:16px; padding-right:16px; }} .nav,.links {{ flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; }} .nav a,.links a {{ flex:0 0 auto; }} }}
+    @media (prefers-reduced-motion:reduce) {{ *,*::before,*::after {{ transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; }} }}
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳到正文</a>
   <header>
     <div class="wrap">
       <h1>项目协作层</h1>
       <p class="sub">Generated {html.escape(str(state.get("generated_at", "")))} · 把用户决策、Codex 可执行事项和项目入口放在同一页。</p>
       <nav class="nav">
+        <a href="project_collaboration.html" aria-current="page">项目协作层</a>
         <a href="workflow_state.html">工作流总状态</a>
         <a href="action_queue.html">行动队列</a>
         <a href="search/index.html">全局搜索</a>
@@ -232,7 +241,7 @@ def write_collaboration_html(state: dict[str, Any]) -> None:
       </nav>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap" id="main-content">
     <section class="metrics">
       <div class="metric"><b>{summary.get("project_count", 0)}</b><span class="meta">项目</span></div>
       <div class="metric"><b>{summary.get("user_waiting", 0)}</b><span class="meta">用户待确认</span></div>

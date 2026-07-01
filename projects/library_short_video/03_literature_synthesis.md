@@ -1,6 +1,6 @@
 # Literature Synthesis
 
-Updated: 2026-06-30
+Updated: 2026-07-01
 
 ## Search Strings
 
@@ -37,7 +37,7 @@ Updated: 2026-06-30
   - `cnki_2021_dfab60236e` suggests a second, external benchmark line: readable content, concise readable titles, title intertextuality, and 15-60 second duration are associated with better transmission effect in socialized reading-promotion accounts.
   - `cnki_2021_7556aafa99` expands the strategy frame from content tips to public-library service design: planning and goals, distinctive original content, PUGC, professional teams, integrated media operation, online-offline conversion, and cross-regional/cross-industry cooperation.
   - `cnki_2020_2a150c6df8` adds content-production details: title/topic/subtitle design, real-shot and interview formats, knowledge and social-cultural themes, celebrity resources, emotion, music, text, and真人出镜.
-  - `cnki_2021_5530e86157` links short-video marketing directly to public-library digital reading promotion. It frames the strategy path as emotional marketing, channel marketing, and interactive marketing, and emphasizes content-IP/scenario integration, dual-matrix operation, user tags, community interaction, and online-offline conversion.
+  - `cnki_2021_5530e86157` links short-video marketing directly to public-library digital reading promotion. It frames the strategy path as emotional marketing, channel marketing, and interactive marketing, and emphasizes content-IP/scenario integration, dual-matrix operation, user tags, community interaction, and online-offline conversion. 2026-07-01 deep-read update: treat it as the service-action bridge between SICAS user path and AARRR stage indicators.
   - `cnki_2023_34348faa1e` adds a SICAS-based path view: the key issue is not only what content to post, but how sense, interest, connect, action, and share are chained into service conversion.
 - **Comparative platform / lifecycle marketing**
   - `cnki_2021_3771e58987` compares public libraries and university libraries across Douyin, Kuaishou, and Bilibili, using AARRR as a lifecycle framework. It is useful for moving the project from single-platform operation tips toward library-type and platform-fit analysis.
@@ -99,10 +99,21 @@ Updated: 2026-06-30
 - **Platform/time limitation**: The first reviewed empirical paper reflects 2020-era Douyin accounts; short-video platform affordances, recommendation logic, and library account practices may have shifted by 2026.
 - **Library-type limitation**: Public libraries dominate visible high-follower accounts, while academic/research library accounts appear underrepresented and need separate analysis.
 - **Measurement limitation**: Likes, comments, shares, and composite indices measure visible interaction, but not reading-promotion quality, learning outcomes, service uptake, user satisfaction, or long-term knowledge dissemination.
+- **Service-action gap**: Zhang 2021 identifies emotional, channel, and interactive marketing actions, but later work still needs to operationalize whether these actions lead to resource access, activity participation, borrowing, consultation, or user satisfaction.
 - **External-validity limitation**: `cnki_2021_dfab60236e` studies socialized reading-promotion accounts rather than library-operated accounts, so its findings are best treated as an external benchmark, not a direct library conclusion.
 - **Traffic-service tension**: The popular-video paper shows that social hot events and strong emotion can drive high traffic, while the public-library survey warns against broad, vague, or over-entertaining content. Later research should distinguish traffic-effective content from library-mission-aligned service communication.
 - **Historical-baseline limitation**: The three companion papers are mainly 2019-2020 Douyin snapshots. They are excellent for field history and baseline diagnosis, but current claims require updated platform data.
-- **Reading coverage gap**: The project's current 8-paper learning set now has complete Codex-assisted source-grounded reading notes. The next gap is no longer within the set itself, but in extending coverage to the next candidate line such as `cnki_2021_645f03f388` and newer multi-platform or post-2023 studies.
+- **Reading coverage gap**: The project's current 8-paper learning set now has complete Codex-assisted source-grounded reading notes. The next gap is no longer within the set itself, but in extending coverage to propagation-power evaluation and newer multi-platform or post-2023 studies. Specific metadata-only candidates remain in the workbench only and must not be cited as evidence here until a source-grounded reader exists.
+
+## Current Research Question Shortlist
+
+These questions are working candidates, not manuscript claims. The evidence base is currently 8 source-grounded skimmed papers; all statistical details and page/table locators still require original-text verification before formal writing.
+
+| Candidate | Research question | Method implied | Evidence base | Boundary |
+|---|---|---|---|---|
+| RQ-A | How can library short-video engagement be connected to observable service value in digital reading promotion? | Build a composite indicator framework that separates platform interaction, service touchpoint, and reading-promotion outcome. | SICAS path, AARRR lifecycle translation, Zhang 2021 digital-reading strategy, and existing engagement-index papers. | Current evidence supports framework building, not causal claims. |
+| RQ-B | Which content and service-design mechanisms move users from attention to interaction and then to service action? | Content analysis plus path coding across SICAS stages; later can be tested with platform and library service data. | Hook Model, ELM, SICAS, head-account practice extraction, and popular-content coding literature. | Needs new data or human verification before estimating effects. |
+| RQ-C | How do library type and platform fit shape short-video strategy and evaluation indicators? | Comparative account survey by public/university/research library and Douyin/Kuaishou/Bilibili/video-platform context. | AARRR comparative paper, public-library surveys, historical Douyin baselines, and platform-fit concept cards. | Existing samples are 2019-2021 heavy; current-platform claims need 2024-2026 data. |
 
 ## Evidence Table
 

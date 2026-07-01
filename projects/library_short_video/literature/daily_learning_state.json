@@ -48,7 +48,19 @@
       ],
       "output": "paper_reading/2026-06-30-aarrr-library-short-video.html",
       "updated_at": "2026-06-30T09:00:00"
+    },
+    {
+      "date": "2026-07-01",
+      "stage": "service_value_deep_read",
+      "primary": "cnki_2021_5530e86157",
+      "companions": [
+        "cnki_2023_34348faa1e",
+        "cnki_2021_3771e58987",
+        "cnki_2020_2a150c6df8"
+      ],
+      "output": "paper_reading/2026-07-01-digital-reading-promotion.html",
+      "updated_at": "2026-07-01T09:00:00"
     }
   ],
-  "last_updated": "2026-06-30T09:00:00"
+  "last_updated": "2026-07-01T09:00:00"
 }

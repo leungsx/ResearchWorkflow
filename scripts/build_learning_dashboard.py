@@ -87,23 +87,26 @@ def common_css() -> str:
     return """
     :root {
       color-scheme: light;
-      --ink: #182026;
-      --muted: #61707d;
-      --line: #d9e0e6;
+      --ink: #1e293b;
+      --muted: #64748b;
+      --line: #dbe4ee;
       --paper: #ffffff;
-      --soft: #f6f8fa;
-      --blue: #2463eb;
+      --soft: #f8fafc;
+      --blue: #2563eb;
       --green: #16805d;
       --amber: #a15c07;
       --rose: #b4234b;
+      --ring: rgba(37, 99, 235, 0.34);
+      --shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
       color: var(--ink);
-      background: #f4f6f8;
-      line-height: 1.55;
+      background: #f8fafc;
+      line-height: 1.6;
     }
     header {
       background: var(--paper);
@@ -114,51 +117,93 @@ def common_css() -> str:
     h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
     h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
     p { margin: 0 0 12px; }
-    a { color: var(--blue); text-decoration: none; }
+    a { color: var(--blue); text-decoration: none; text-underline-offset: 3px; }
     a:hover { text-decoration: underline; }
+    a:focus-visible,
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+      border-radius: 7px;
+    }
+    .skip-link {
+      position: absolute;
+      left: 18px;
+      top: 10px;
+      z-index: 20;
+      transform: translateY(-140%);
+      background: var(--ink);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 7px;
+    }
+    .skip-link:focus { transform: translateY(0); }
     .sub { color: var(--muted); max-width: 780px; }
     .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
     .nav a {
       display: inline-flex;
       align-items: center;
-      min-height: 34px;
-      padding: 6px 10px;
+      min-height: 44px;
+      padding: 7px 11px;
       border: 1px solid var(--line);
       border-radius: 7px;
       background: #fff;
       color: var(--ink);
       font-size: 14px;
+      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+    }
+    .nav a:hover {
+      border-color: #bfcee0;
+      background: #f8fbff;
+      text-decoration: none;
+    }
+    .nav a[aria-current="page"] {
+      border-color: #b9ccff;
+      background: #eef4ff;
+      color: #1d4ed8;
+      font-weight: 650;
     }
     main.wrap { padding-top: 22px; }
     .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
     .panel {
       grid-column: span 6;
+      min-width: 0;
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 18px;
+      box-shadow: var(--shadow);
     }
     .panel.wide { grid-column: 1 / -1; }
     .metric {
       grid-column: span 3;
+      min-width: 0;
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 16px;
+      box-shadow: var(--shadow);
     }
     .metric b { display: block; font-size: 28px; line-height: 1.1; }
     .metric span { color: var(--muted); font-size: 13px; }
-    .list { display: grid; gap: 10px; }
+    .list { display: grid; gap: 10px; min-width: 0; }
     .item {
+      min-width: 0;
       border-left: 3px solid var(--blue);
       background: var(--soft);
       padding: 10px 12px;
       border-radius: 0 7px 7px 0;
+      transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+    .item:hover {
+      background: #eef4ff;
+      transform: translateY(-1px);
     }
     .item.green { border-left-color: var(--green); }
     .item.amber { border-left-color: var(--amber); }
     .item.rose { border-left-color: var(--rose); }
-    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; overflow-wrap: anywhere; }
     .empty {
       color: var(--muted);
       background: var(--soft);
@@ -168,9 +213,18 @@ def common_css() -> str:
     }
     .steps { margin: 0; padding-left: 20px; }
     .steps li { margin: 6px 0; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
-    th { color: var(--muted); font-weight: 600; }
+    table {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      border-collapse: collapse;
+      font-size: 14px;
+      -webkit-overflow-scrolling: touch;
+    }
+    thead, tbody, tr { width: 100%; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 9px 8px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 650; background: #fbfdff; }
     code {
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       background: #eef3f8;
@@ -202,7 +256,6 @@ def common_css() -> str:
     .toolbar a, .toolbar button {
       display: inline-flex;
       align-items: center;
-      min-height: 34px;
       padding: 6px 10px;
       border: 1px solid var(--line);
       border-radius: 7px;
@@ -211,11 +264,50 @@ def common_css() -> str:
       font: inherit;
       font-size: 14px;
       cursor: pointer;
+      min-height: 44px;
     }
     .toolbar button.active {
       border-color: var(--blue);
       color: var(--blue);
       background: #eef4ff;
+    }
+    .inline-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+    .review-mark { min-width: 112px; }
+    .inline-button:hover {
+      border-color: #b9ccff;
+      background: #eef4ff;
+      color: #1d4ed8;
+    }
+    .inline-button[disabled] {
+      cursor: not-allowed;
+      opacity: 0.58;
+    }
+    .review-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+    }
+    .review-status {
+      min-height: 24px;
+      color: var(--muted);
+      font-size: 14px;
     }
     .source-path {
       color: var(--muted);
@@ -263,6 +355,17 @@ def common_css() -> str:
     @media (max-width: 840px) {
       .panel, .metric { grid-column: 1 / -1; }
       h1 { font-size: 28px; }
+      .wrap { padding-left: 16px; padding-right: 16px; }
+      .nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+      .nav a { flex: 0 0 auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
     """
 
@@ -299,6 +402,7 @@ def shell(title: str, subtitle: str, current: str, body: str, output: Path) -> s
   <style>{common_css()}</style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳到正文</a>
   <header>
     <div class="wrap">
       <h1>{esc(title)}</h1>
@@ -306,7 +410,7 @@ def shell(title: str, subtitle: str, current: str, body: str, output: Path) -> s
       <nav class="nav">{nav_html}</nav>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap" id="main-content">
 {body}
   </main>
   <footer class="wrap">Generated by scripts/build_learning_dashboard.py at {esc(generated)}.</footer>
@@ -1010,6 +1114,17 @@ def review_items_table(items: list[dict[str, object]], output: Path, limit: int 
             delta_text = "今天" if delta == 0 else f"{abs(delta)} 天前" if delta < 0 else f"{delta} 天后"
         else:
             delta_text = ""
+        status = str(item.get("status", ""))
+        if status == "learned_today":
+            delta_text = "今日已学习"
+        command = f"make review-studied ID={item.get('id', '')}"
+        if status == "learned_today":
+            action = '<span class="meta">已学习</span>'
+        else:
+            action = (
+                f'<button class="inline-button review-mark" type="button" '
+                f'data-review-id="{esc(item.get("id", ""))}">标记已学习</button>'
+            )
         rows.append(
             "<tr>"
             f"<td>{title_html}</td>"
@@ -1018,12 +1133,56 @@ def review_items_table(items: list[dict[str, object]], output: Path, limit: int 
             f"<td>{esc(item.get('next_review', ''))}</td>"
             f"<td>{esc(delta_text)}</td>"
             f"<td>{esc(item.get('prompt', ''))}</td>"
+            f"<td>{action}</td>"
+            f"<td><code>{esc(command)}</code></td>"
             "</tr>"
         )
     return (
-        "<table><thead><tr><th>知识卡</th><th>类型</th><th>阶段</th><th>复习日</th><th>状态</th><th>主动回忆问题</th></tr></thead>"
+        "<table><thead><tr><th>知识卡</th><th>类型</th><th>阶段</th><th>下次复习</th><th>状态</th><th>主动回忆问题</th><th>操作</th><th>备用命令</th></tr></thead>"
         f"<tbody>{''.join(rows)}</tbody></table>"
     )
+
+
+def review_mark_script() -> str:
+    return """<script>
+    (() => {
+      const endpoint = "http://127.0.0.1:8765/review/studied";
+      const status = document.querySelector("[data-review-status]");
+      const setStatus = (message) => {
+        if (status) status.textContent = message;
+      };
+      const mark = async (payload, button) => {
+        const buttons = button ? [button] : Array.from(document.querySelectorAll(".review-mark, [data-review-bulk]"));
+        buttons.forEach((item) => { item.disabled = true; });
+        setStatus("正在写回复习状态...");
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(payload)
+          });
+          const data = await response.json();
+          if (!response.ok || !data.ok) {
+            throw new Error(data.error || "写回失败");
+          }
+          setStatus(`已标记 ${data.marked_count} 个知识卡，页面即将刷新。`);
+          window.setTimeout(() => window.location.reload(), 900);
+        } catch (error) {
+          setStatus(`无法写回：${error.message}。请先运行 make review-server，或使用表格里的备用命令。`);
+          buttons.forEach((item) => { item.disabled = false; });
+        }
+      };
+      document.querySelectorAll(".review-mark").forEach((button) => {
+        button.addEventListener("click", () => {
+          mark({id: button.dataset.reviewId}, button);
+        });
+      });
+      const bulk = document.querySelector("[data-review-bulk]");
+      if (bulk) {
+        bulk.addEventListener("click", () => mark({all_due: true}, null));
+      }
+    })();
+    </script>"""
 
 
 def build_review_today() -> None:
@@ -1034,16 +1193,27 @@ def build_review_today() -> None:
     focus_items = state["focus_items"]
     due_items = state["due_items"]
     upcoming_items = state["upcoming_7_items"]
+    learned_items = state.get("learned_items", [])
     focus_label = "到期知识卡" if due_items else "未来 7 天知识卡"
+    bulk_button = '<button class="inline-button" type="button" data-review-bulk>一键标记当前到期项已学习</button>' if due_items else ""
+    bulk_button_line = f"          {bulk_button}\n" if bulk_button else ""
+    writeback_hint = (
+        "需要先运行 <code>make review-server</code> 才能在网页内写回。"
+        if due_items
+        else "当前没有到期项；未来 7 天知识卡可逐条提前标记。网页写回需要先运行 <code>make review-server</code>。"
+    )
     body = f"""
     <section class="grid">
       <div class="metric"><b>{summary['due_count']}</b><span>今日到期</span></div>
       <div class="metric"><b>{summary['overdue_count']}</b><span>已经逾期</span></div>
+      <div class="metric"><b>{summary.get('learned_today_count', 0)}</b><span>今日已学习</span></div>
       <div class="metric"><b>{summary['upcoming_7_count']}</b><span>7 天内复习</span></div>
-      <div class="metric"><b>{summary['total_items']}</b><span>队列总数</span></div>
 
       <section class="panel wide">
         <h2>{focus_label}</h2>
+        <div class="review-actions">
+{bulk_button_line}          <span class="review-status" data-review-status aria-live="polite">{writeback_hint}</span>
+        </div>
         {review_items_table(focus_items, out, 12)}
       </section>
 
@@ -1052,7 +1222,9 @@ def build_review_today() -> None:
         <ol class="steps">
           <li>先遮住知识卡正文，只回答表格里的主动回忆问题。</li>
           <li>再打开知识卡，核对一句话解释、误区和研究用法。</li>
-          <li>最后把仍然模糊的点转成下一次论文阅读或写作问题。</li>
+          <li>学完后点击表格里的按钮；如果本页到期项都学完，可以点击“一键标记当前到期项已学习”。</li>
+          <li>也可以直接对 Codex 说：<code>今天到期复习都学完了</code>。</li>
+          <li>系统会写回 <code>review_queue.csv</code>，把条目移到“今日已学习”，并安排下一次复习。</li>
         </ol>
       </section>
       <section class="panel">
@@ -1064,10 +1236,16 @@ def build_review_today() -> None:
       </section>
 
       <section class="panel wide">
+        <h2>今日已学习</h2>
+        {review_items_table(learned_items, out, 20)}
+      </section>
+
+      <section class="panel wide">
         <h2>未来 7 天</h2>
         {review_items_table(upcoming_items, out, 20)}
       </section>
     </section>
+    {review_mark_script()}
 """
     out.write_text(shell("今日复习入口", "主动回忆、知识卡核对和下一轮阅读问题。", "复习", body, out), encoding="utf-8")
 
@@ -1106,7 +1284,7 @@ def build_search_page() -> None:
         align-items: center;
       }}
       .filter-row button {{
-        min-height: 34px;
+        min-height: 44px;
         border: 1px solid var(--line);
         border-radius: 999px;
         background: #fff;
@@ -1120,20 +1298,28 @@ def build_search_page() -> None:
         background: #eef4ff;
       }}
       .result-row {{
+        min-width: 0;
         border-left: 3px solid var(--blue);
         background: var(--soft);
         border-radius: 0 8px 8px 0;
         padding: 12px 14px;
+        overflow-wrap: anywhere;
       }}
       .result-title {{
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
         align-items: baseline;
+        min-width: 0;
+      }}
+      .result-title a {{
+        min-width: 0;
+        overflow-wrap: anywhere;
       }}
       .badge {{
         display: inline-flex;
         align-items: center;
+        max-width: 100%;
         border-radius: 999px;
         background: #eef3f8;
         border: 1px solid #d8e2ec;
@@ -1155,6 +1341,7 @@ def build_search_page() -> None:
       }}
       .keyword {{
         display: inline-flex;
+        max-width: 100%;
         border: 1px solid #d8e2ec;
         background: #fff;
         border-radius: 999px;

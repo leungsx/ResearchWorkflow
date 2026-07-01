@@ -69,11 +69,11 @@ def main() -> int:
     nodes_path = args.output_dir / "obsidian_nodes.csv"
     edges_path = args.output_dir / "obsidian_edges.csv"
     with nodes_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["Id", "Label", "Type"])
+        writer = csv.DictWriter(handle, fieldnames=["Id", "Label", "Type"], lineterminator="\n")
         writer.writeheader()
         writer.writerows(nodes.values())
     with edges_path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["Source", "Target", "Type", "Weight", "Label"])
+        writer = csv.DictWriter(handle, fieldnames=["Source", "Target", "Type", "Weight", "Label"], lineterminator="\n")
         writer.writeheader()
         writer.writerows(edges)
 

@@ -1,6 +1,6 @@
 # 科研工作流首页
 
-Last updated: 2026-06-30
+Last updated: 2026-07-01
 
 这页是入口，不是档案库。你每天只需要从这里进入，或者直接对 Codex 说一句自然语言。
 
@@ -116,8 +116,8 @@ flowchart TD
 
 - Project: `library_short_video`
 - Topic: 图书馆短视频相关研究
-- 当前状态：CNKI 项目矩阵 60 条，8 篇授权全文/Reader，8 篇 source-grounded skimmed，并已补出 SICAS 与 AARRR 两篇论文精读 HTML。
-- 今日任务：把 AARRR 与 SICAS 对齐成“用户路径 + 阶段指标”，继续收敛研究问题、指标框架和项目可执行下一步。
+- 当前状态：CNKI 项目矩阵 60 条，8 篇授权全文/Reader，8 篇 source-grounded skimmed，并已补出 SICAS、AARRR 与数字阅读推广服务转化 3 篇论文精读 HTML。
+- 今日任务：把 SICAS、AARRR 与数字阅读推广服务转化对齐成“用户路径 + 阶段指标 + 服务动作”，继续收敛研究问题、指标框架和项目可执行下一步。
 - 下一步：先用文献综述工作台收敛研究问题，或继续补读 `cnki_2021_645f03f388`。
 
 ## 常用自然语言

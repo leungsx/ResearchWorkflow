@@ -40,6 +40,9 @@ REVIEW_FIELDS = [
     "next_review",
     "prompt",
     "note_path",
+    "last_reviewed",
+    "review_count",
+    "learning_status",
 ]
 
 
@@ -150,6 +153,9 @@ next_review: {next_review_date()}
             "next_review": next_review_date(),
             "prompt": f"用自己的话解释 {args.title}，并举一个科研例子。",
             "note_path": str(path),
+            "last_reviewed": "",
+            "review_count": "0",
+            "learning_status": "learning",
         },
     )
     print(f"Created concept note: {path}")
@@ -238,6 +244,9 @@ next_review: {next_review_date()}
             "next_review": next_review_date(),
             "prompt": f"说明 {args.title} 适合解决什么问题、有什么前提假设。",
             "note_path": str(path),
+            "last_reviewed": "",
+            "review_count": "0",
+            "learning_status": "learning",
         },
     )
     print(f"Created method note: {path}")

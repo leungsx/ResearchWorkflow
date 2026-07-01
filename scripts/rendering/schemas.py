@@ -148,12 +148,12 @@ def validate_review_state(path: Path, issues: list[SchemaIssue], checked: list[s
     if not isinstance(payload, dict):
         add(issues, path, "FAIL", "顶层结构必须是对象")
         return
-    require_keys(payload, path, "root", ["schema_version", "generated_at", "today", "queue_path", "summary", "focus_items", "due_items", "all_items"], issues)
+    require_keys(payload, path, "root", ["schema_version", "generated_at", "today", "queue_path", "summary", "focus_items", "due_items", "learned_items", "all_items"], issues)
     summary = payload.get("summary", {})
     if not isinstance(summary, dict):
         add(issues, path, "FAIL", "summary 必须是对象")
         return
-    for key in ["total_items", "due_count", "overdue_count", "upcoming_7_count", "future_count", "unscheduled_count"]:
+    for key in ["total_items", "due_count", "overdue_count", "upcoming_7_count", "future_count", "unscheduled_count", "learned_today_count"]:
         require_type(summary, path, key, int, issues, "summary")
     all_items = payload.get("all_items", [])
     due_items = payload.get("due_items", [])
@@ -162,7 +162,10 @@ def validate_review_state(path: Path, issues: list[SchemaIssue], checked: list[s
         add(issues, path, "FAIL", f"summary.total_items 与 all_items 长度不一致：{summary.get('total_items')} / {len(all_items)}")
     if isinstance(due_items, list) and summary.get("due_count") != len(due_items):
         add(issues, path, "FAIL", f"summary.due_count 与 due_items 长度不一致：{summary.get('due_count')} / {len(due_items)}")
-    for label, items in [("focus_items", focus_items), ("due_items", due_items), ("all_items", all_items)]:
+    learned_items = payload.get("learned_items", [])
+    if isinstance(learned_items, list) and summary.get("learned_today_count") != len(learned_items):
+        add(issues, path, "FAIL", f"summary.learned_today_count 与 learned_items 长度不一致：{summary.get('learned_today_count')} / {len(learned_items)}")
+    for label, items in [("focus_items", focus_items), ("due_items", due_items), ("learned_items", learned_items), ("all_items", all_items)]:
         if not isinstance(items, list):
             add(issues, path, "FAIL", f"{label} 必须是数组")
             continue

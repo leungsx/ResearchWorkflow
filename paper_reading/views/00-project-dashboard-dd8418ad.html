@@ -7,23 +7,26 @@
   <style>
     :root {
       color-scheme: light;
-      --ink: #182026;
-      --muted: #61707d;
-      --line: #d9e0e6;
+      --ink: #1e293b;
+      --muted: #64748b;
+      --line: #dbe4ee;
       --paper: #ffffff;
-      --soft: #f6f8fa;
-      --blue: #2463eb;
+      --soft: #f8fafc;
+      --blue: #2563eb;
       --green: #16805d;
       --amber: #a15c07;
       --rose: #b4234b;
+      --ring: rgba(37, 99, 235, 0.34);
+      --shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
       color: var(--ink);
-      background: #f4f6f8;
-      line-height: 1.55;
+      background: #f8fafc;
+      line-height: 1.6;
     }
     header {
       background: var(--paper);
@@ -34,51 +37,93 @@
     h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
     h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
     p { margin: 0 0 12px; }
-    a { color: var(--blue); text-decoration: none; }
+    a { color: var(--blue); text-decoration: none; text-underline-offset: 3px; }
     a:hover { text-decoration: underline; }
+    a:focus-visible,
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+      border-radius: 7px;
+    }
+    .skip-link {
+      position: absolute;
+      left: 18px;
+      top: 10px;
+      z-index: 20;
+      transform: translateY(-140%);
+      background: var(--ink);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 7px;
+    }
+    .skip-link:focus { transform: translateY(0); }
     .sub { color: var(--muted); max-width: 780px; }
     .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
     .nav a {
       display: inline-flex;
       align-items: center;
-      min-height: 34px;
-      padding: 6px 10px;
+      min-height: 44px;
+      padding: 7px 11px;
       border: 1px solid var(--line);
       border-radius: 7px;
       background: #fff;
       color: var(--ink);
       font-size: 14px;
+      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+    }
+    .nav a:hover {
+      border-color: #bfcee0;
+      background: #f8fbff;
+      text-decoration: none;
+    }
+    .nav a[aria-current="page"] {
+      border-color: #b9ccff;
+      background: #eef4ff;
+      color: #1d4ed8;
+      font-weight: 650;
     }
     main.wrap { padding-top: 22px; }
     .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
     .panel {
       grid-column: span 6;
+      min-width: 0;
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 18px;
+      box-shadow: var(--shadow);
     }
     .panel.wide { grid-column: 1 / -1; }
     .metric {
       grid-column: span 3;
+      min-width: 0;
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 16px;
+      box-shadow: var(--shadow);
     }
     .metric b { display: block; font-size: 28px; line-height: 1.1; }
     .metric span { color: var(--muted); font-size: 13px; }
-    .list { display: grid; gap: 10px; }
+    .list { display: grid; gap: 10px; min-width: 0; }
     .item {
+      min-width: 0;
       border-left: 3px solid var(--blue);
       background: var(--soft);
       padding: 10px 12px;
       border-radius: 0 7px 7px 0;
+      transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+    .item:hover {
+      background: #eef4ff;
+      transform: translateY(-1px);
     }
     .item.green { border-left-color: var(--green); }
     .item.amber { border-left-color: var(--amber); }
     .item.rose { border-left-color: var(--rose); }
-    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; overflow-wrap: anywhere; }
     .empty {
       color: var(--muted);
       background: var(--soft);
@@ -88,9 +133,18 @@
     }
     .steps { margin: 0; padding-left: 20px; }
     .steps li { margin: 6px 0; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
-    th { color: var(--muted); font-weight: 600; }
+    table {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      border-collapse: collapse;
+      font-size: 14px;
+      -webkit-overflow-scrolling: touch;
+    }
+    thead, tbody, tr { width: 100%; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 9px 8px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 650; background: #fbfdff; }
     code {
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       background: #eef3f8;
@@ -122,7 +176,6 @@
     .toolbar a, .toolbar button {
       display: inline-flex;
       align-items: center;
-      min-height: 34px;
       padding: 6px 10px;
       border: 1px solid var(--line);
       border-radius: 7px;
@@ -131,11 +184,50 @@
       font: inherit;
       font-size: 14px;
       cursor: pointer;
+      min-height: 44px;
     }
     .toolbar button.active {
       border-color: var(--blue);
       color: var(--blue);
       background: #eef4ff;
+    }
+    .inline-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+    .review-mark { min-width: 112px; }
+    .inline-button:hover {
+      border-color: #b9ccff;
+      background: #eef4ff;
+      color: #1d4ed8;
+    }
+    .inline-button[disabled] {
+      cursor: not-allowed;
+      opacity: 0.58;
+    }
+    .review-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+    }
+    .review-status {
+      min-height: 24px;
+      color: var(--muted);
+      font-size: 14px;
     }
     .source-path {
       color: var(--muted);
@@ -183,10 +275,22 @@
     @media (max-width: 840px) {
       .panel, .metric { grid-column: 1 / -1; }
       h1 { font-size: 28px; }
+      .wrap { padding-left: 16px; padding-right: 16px; }
+      .nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+      .nav a { flex: 0 0 auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
     </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳到正文</a>
   <header>
     <div class="wrap">
       <h1>Project Dashboard - 图书馆短视频相关研究</h1>
@@ -207,7 +311,7 @@
 <a href="vault-home.html">Vault 首页</a></nav>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap" id="main-content">
 
     <section class="grid">
       <section class="panel wide">
@@ -218,11 +322,11 @@
         <div class="source-path">源文件：projects/library_short_video/00_project_dashboard.md</div>
         <article class="md-view">
 <h1>Project Dashboard - 图书馆短视频相关研究</h1>
-<p>Last updated: 2026-06-30</p>
+<p>Last updated: 2026-07-01</p>
 <h2>一句话进度</h2>
-<p>这个项目已经从“准备检索”推进到“真实 CNKI 检索 + 授权全文组织 + 每日推荐 + 8 篇文献带读”。现在最重要的不是再堆功能，而是把已读文献通过文献综述工作台收敛成清晰研究问题和论文工作总结。</p>
+<p>这个项目已经从“准备检索”推进到“真实 CNKI 检索 + 授权全文组织 + 每日推荐 + 8 篇文献带读 + 3 篇正式 HTML 精读”。现在最重要的不是再堆功能，而是把 SICAS、AARRR 和数字阅读推广服务转化三条线收敛成清晰研究问题和指标草图。</p>
 <h2>当前状态</h2>
-<table><thead><tr><th>模块</th><th>状态</th><th>位置</th></tr></thead><tbody><tr><td>CNKI 检索计划</td><td>已有</td><td><a href="cnki-search-plan-81b24ea3.html">cnki_search_plan.md</a></td></tr><tr><td>CNKI 检索结果/入库</td><td>项目矩阵 60 条；CNKI 检索结果曾刷新到 914 条</td><td><a href="../../library/literature_matrix.csv">literature_matrix.csv</a></td></tr><tr><td>Fast-lane 快速快照</td><td>已建立；用于下一篇推荐/状态查询，减少小任务联动修改</td><td><a href="library-short-video-fast-snapshot-d2e5e287.html">library_short_video_fast_snapshot.md</a></td></tr><tr><td>授权全文</td><td>8 篇已组织</td><td><a href="directories/library-short-video-8b015fe8.html">PDF 文件夹</a></td></tr><tr><td>CAJ 转 PDF</td><td>当前学习集已跑通</td><td><a href="directories/caj-conversion-db8913e9.html">CAJ 转换记录</a></td></tr><tr><td>Reader</td><td>8/8 已生成</td><td><a href="readme-184a812b.html">readers</a></td></tr><tr><td>论文上下文包</td><td>已读 7 篇已生成，用于省 token 带读</td><td><a href="directories/context-packs-4b4dd996.html">context_packs</a></td></tr><tr><td>今日推荐</td><td>2026-06-30 主读已完成 AARRR 比较论文精读，下一步继续补传播力评价候选</td><td><a href="../today.html">今日精读入口</a></td></tr><tr><td>今日阅读看板</td><td>已建立</td><td><a href="reading-board-026f6ec8.html">reading_board.md</a></td></tr><tr><td>5 篇快速复盘</td><td>已生成</td><td><a href="2026-06-20-five-paper-quick-recap-8b992799.html">2026-06-20-five-paper-quick-recap.md</a></td></tr><tr><td>创新/局限/机会台账</td><td>8 张卡片</td><td><a href="innovation_limitation_bank.html">innovation_limitation_bank.md</a></td></tr><tr><td>文献综述工作台</td><td>已建立；用于逐篇结论、逻辑分类、综述线索和阶段性论文工作总结</td><td><a href="literature_review_workbench.html">literature_review_workbench.md</a></td></tr><tr><td>文献综述</td><td>已开始形成主线</td><td><a href="literature_synthesis.html">03_literature_synthesis.md</a></td></tr><tr><td>证据门禁</td><td>ERROR=0, WARN=1</td><td><a href="evidence-gate-report-7607e392.html">evidence_gate_report.md</a></td></tr></tbody></table>
+<table><thead><tr><th>模块</th><th>状态</th><th>位置</th></tr></thead><tbody><tr><td>CNKI 检索计划</td><td>已有</td><td><a href="cnki-search-plan-81b24ea3.html">cnki_search_plan.md</a></td></tr><tr><td>CNKI 检索结果/入库</td><td>项目矩阵 60 条；CNKI 检索结果曾刷新到 914 条</td><td><a href="../../library/literature_matrix.csv">literature_matrix.csv</a></td></tr><tr><td>Fast-lane 快速快照</td><td>已建立；用于下一篇推荐/状态查询，减少小任务联动修改</td><td><a href="library-short-video-fast-snapshot-d2e5e287.html">library_short_video_fast_snapshot.md</a></td></tr><tr><td>授权全文</td><td>8 篇已组织</td><td><a href="directories/library-short-video-8b015fe8.html">PDF 文件夹</a></td></tr><tr><td>CAJ 转 PDF</td><td>当前学习集已跑通</td><td><a href="directories/caj-conversion-db8913e9.html">CAJ 转换记录</a></td></tr><tr><td>Reader</td><td>8/8 已生成</td><td><a href="readme-184a812b.html">readers</a></td></tr><tr><td>论文上下文包</td><td>已读 7 篇已生成，用于省 token 带读</td><td><a href="directories/context-packs-4b4dd996.html">context_packs</a></td></tr><tr><td>今日推荐</td><td>2026-07-01 主读已完成张承 2021 数字阅读推广服务转化论文精读，下一步继续补传播力评价候选</td><td><a href="../today.html">今日精读入口</a></td></tr><tr><td>今日阅读看板</td><td>已建立</td><td><a href="reading-board-026f6ec8.html">reading_board.md</a></td></tr><tr><td>5 篇快速复盘</td><td>已生成</td><td><a href="2026-06-20-five-paper-quick-recap-8b992799.html">2026-06-20-five-paper-quick-recap.md</a></td></tr><tr><td>创新/局限/机会台账</td><td>8 张卡片</td><td><a href="innovation_limitation_bank.html">innovation_limitation_bank.md</a></td></tr><tr><td>文献综述工作台</td><td>已建立；今日补入张承 2021 深读，用于把平台互动推进到数字阅读推广服务价值</td><td><a href="literature_review_workbench.html">literature_review_workbench.md</a></td></tr><tr><td>文献综述</td><td>已开始形成主线</td><td><a href="literature_synthesis.html">03_literature_synthesis.md</a></td></tr><tr><td>证据门禁</td><td>ERROR=0, WARN=0；metadata-only 候选只保留在补读/检索语境</td><td><a href="evidence-gate-report-7607e392.html">evidence_gate_report.md</a></td></tr></tbody></table>
 <h2>当前阅读进度</h2>
 <table><thead><tr><th>状态</th><th>篇数</th><th>含义</th></tr></thead><tbody><tr><td><code>skimmed</code></td><td>8</td><td>Codex 已带读并写入 reader notes/研讨卡/综述/台账，但还不是人工逐页核验</td></tr><tr><td><code>metadata-only</code></td><td>52</td><td>只在候选池或尚未读完，不能作为论文主张证据</td></tr><tr><td><code>human-read</code></td><td>0</td><td>需要你确认已经认真读过</td></tr><tr><td><code>verified</code></td><td>0</td><td>需要原文页码/证据完全核验后才能标</td></tr></tbody></table>
 <h2>项目流程图</h2>
@@ -242,10 +346,10 @@
     I --&gt; J[研究问题/方法设计]</code></pre>
 <h2>下一步建议</h2>
 <ol>
-<li>先把 <span class="wikilink">AARRR 漏斗模型</span> 与 <span class="wikilink">SICAS模型</span> 对齐成“用户路径 + 阶段指标”草图。</li>
-<li>若继续阅读，优先补读 <code>cnki_2021_645f03f388</code>《图书馆短视频账号传播力研究——以省级公共图书馆为例》。</li>
-<li>或者把当前 8 篇已读文献继续收敛成 2-3 个候选研究问题与指标草图。</li>
-<li>如果准备写论文，先不要直接写正文；先把文献综述工作台、<code>01_research_question.md</code> 和 <code>03_literature_synthesis.md</code> 对齐。</li>
+<li>默认以“图书馆短视频互动如何连接数字阅读推广服务价值”为主问题。</li>
+<li>把 <span class="wikilink">SICAS模型</span>、<span class="wikilink">AARRR 漏斗模型</span> 和 <span class="wikilink">数字阅读推广</span> 对齐成“用户路径 + 阶段指标 + 服务动作”指标草图。</li>
+<li>继续补读传播力评价或 2023 后多平台研究；metadata-only 候选只作为补读方向，不进入论文主张。</li>
+<li>如果准备写论文，先不要直接写正文；先把文献综述工作台、<code>01_research_question.md</code> 和 <code>03_literature_synthesis.md</code> 对齐为 1 个主问题 + 2 个子问题。</li>
 </ol>
 <h2>你可以直接说</h2>
 <ul>
@@ -272,6 +376,6 @@ make evidence-gate PROJECT=library_short_video</code></pre>
     </section>
 
   </main>
-  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-07-01 08:57.</footer>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-07-01 14:05.</footer>
 </body>
 </html>

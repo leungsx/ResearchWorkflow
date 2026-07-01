@@ -1,6 +1,6 @@
 # Evidence Gate Report
 
-Generated: 2026-06-29T09:15:46
+Generated: 2026-07-01T14:05:46
 Project: `library_short_video`
 Matrix: `/Users/leung/ResearchWorkflow/library/literature_matrix.csv`
 
@@ -8,13 +8,13 @@ Matrix: `/Users/leung/ResearchWorkflow/library/literature_matrix.csv`
 
 | Metric | Value |
 |---|---:|
-| Status | WARNINGS |
+| Status | PASS |
 | Literature matrix rows | 60 |
 | Project-tagged rows | 60 |
-| Citekeys used in project materials | 9 |
+| Citekeys used in project materials | 8 |
 | ERROR issues | 0 |
-| WARN issues | 1 |
-| INFO issues | 51 |
+| WARN issues | 0 |
+| INFO issues | 52 |
 
 ## Gate Rules
 
@@ -36,7 +36,7 @@ Matrix: `/Users/leung/ResearchWorkflow/library/literature_matrix.csv`
 | INFO | `cnki_2020_2f64bb62c6 (project literature pool)` | Project-tagged source remains `metadata-only`. | This is acceptable for a frontier pool, but not for manuscript evidence. |
 | INFO | `cnki_2021_2ba9195a8a (project literature pool)` | Project-tagged source remains `metadata-only`. | This is acceptable for a frontier pool, but not for manuscript evidence. |
 | INFO | `cnki_2021_2bcdca1cf9 (project literature pool)` | Project-tagged source remains `metadata-only`. | This is acceptable for a frontier pool, but not for manuscript evidence. |
-| WARN | `cnki_2021_645f03f388 (literature synthesis)` | Referenced in project materials but still `metadata-only`. | Keep it out of manuscript claims until full-text reading and source locators are available. |
+| INFO | `cnki_2021_645f03f388 (project literature pool)` | Project-tagged source remains `metadata-only`. | This is acceptable for a frontier pool, but not for manuscript evidence. |
 | INFO | `cnki_2022_efd2209e07 (project literature pool)` | Project-tagged source remains `metadata-only`. | This is acceptable for a frontier pool, but not for manuscript evidence. |
 | INFO | `cnki_2021_86b70a7c0f (project literature pool)` | Project-tagged source remains `metadata-only`. | This is acceptable for a frontier pool, but not for manuscript evidence. |
 | INFO | `cnki_2021_4d1ed48a48 (project literature pool)` | Project-tagged source remains `metadata-only`. | This is acceptable for a frontier pool, but not for manuscript evidence. |

@@ -63,6 +63,18 @@ Source,Target,Type,Weight,Label
 2026-06-30-evening-close,网络调查法,Directed,2,obsidian_link
 2026-06-30-evening-close,软营销,Directed,1,obsidian_link
 2026-06-30-evening-close,馆型差异,Directed,5,obsidian_link
+2026-07-01-digital-reading-promotion-paper,AARRR 漏斗模型,Directed,2,obsidian_link
+2026-07-01-digital-reading-promotion-paper,SICAS模型,Directed,2,obsidian_link
+2026-07-01-digital-reading-promotion-paper,cnki_2021_5530e86157,Directed,7,obsidian_link
+2026-07-01-digital-reading-promotion-paper,library_short_video,Directed,2,obsidian_link
+2026-07-01-digital-reading-promotion-paper,互动营销,Directed,4,obsidian_link
+2026-07-01-digital-reading-promotion-paper,头部账号实践提炼,Directed,2,obsidian_link
+2026-07-01-digital-reading-promotion-paper,平台适配,Directed,1,obsidian_link
+2026-07-01-digital-reading-promotion-paper,情感营销,Directed,4,obsidian_link
+2026-07-01-digital-reading-promotion-paper,数字阅读推广,Directed,3,obsidian_link
+2026-07-01-digital-reading-promotion-paper,服务价值,Directed,4,obsidian_link
+2026-07-01-digital-reading-promotion-paper,渠道营销,Directed,4,obsidian_link
+2026-07-01-digital-reading-promotion-paper,用户感知价值,Directed,1,obsidian_link
 AARRR 漏斗模型,ELM 精细加工可能性模型,Directed,1,obsidian_link
 AARRR 漏斗模型,Hook Model 上瘾模型,Directed,1,obsidian_link
 AARRR 漏斗模型,SICAS模型,Directed,2,obsidian_link
@@ -118,6 +130,26 @@ cnki_2021_3771e58987,服务价值,Directed,1,obsidian_link
 cnki_2021_3771e58987,网络调查法,Directed,2,obsidian_link
 cnki_2021_3771e58987,馆型差异,Directed,2,obsidian_link
 cnki_2021_3771e58987,馆型平台适配复测,Directed,2,obsidian_link
+cnki_2021_5530e86157,2026-07-01-digital-reading-promotion-paper,Directed,1,obsidian_link
+cnki_2021_5530e86157,AARRR 漏斗模型,Directed,4,obsidian_link
+cnki_2021_5530e86157,SICAS模型,Directed,4,obsidian_link
+cnki_2021_5530e86157,cnki_2020_2a150c6df8,Directed,1,obsidian_link
+cnki_2021_5530e86157,cnki_2021_3771e58987,Directed,1,obsidian_link
+cnki_2021_5530e86157,cnki_2021_7556aafa99,Directed,1,obsidian_link
+cnki_2021_5530e86157,library_short_video,Directed,2,obsidian_link
+cnki_2021_5530e86157,互动营销,Directed,4,obsidian_link
+cnki_2021_5530e86157,内容分析法,Directed,1,obsidian_link
+cnki_2021_5530e86157,头部账号与普通馆迁移边界,Directed,2,obsidian_link
+cnki_2021_5530e86157,头部账号实践提炼,Directed,2,obsidian_link
+cnki_2021_5530e86157,平台互动-服务触达-阅读转化,Directed,2,obsidian_link
+cnki_2021_5530e86157,情感-渠道-互动-服务转化模型,Directed,2,obsidian_link
+cnki_2021_5530e86157,情感营销,Directed,4,obsidian_link
+cnki_2021_5530e86157,描述性账号调查,Directed,2,obsidian_link
+cnki_2021_5530e86157,数字阅读推广,Directed,5,obsidian_link
+cnki_2021_5530e86157,服务价值,Directed,5,obsidian_link
+cnki_2021_5530e86157,沉浸式内容,Directed,2,obsidian_link
+cnki_2021_5530e86157,渠道营销,Directed,4,obsidian_link
+cnki_2021_5530e86157,用户感知价值,Directed,2,obsidian_link
 cnki_2023_34348faa1e,2026-06-29-evening-close,Directed,1,obsidian_link
 cnki_2023_34348faa1e,2026-06-29-sicas-paper,Directed,1,obsidian_link
 cnki_2023_34348faa1e,AARRR 漏斗模型,Directed,2,obsidian_link
@@ -136,6 +168,24 @@ cnki_2023_34348faa1e,沉浸式内容,Directed,2,obsidian_link
 cnki_2023_34348faa1e,用户感知价值,Directed,2,obsidian_link
 cnki_2023_34348faa1e,精神激励,Directed,1,obsidian_link
 cnki_2023_34348faa1e,软营销,Directed,2,obsidian_link
+library_short_video,AARRR 漏斗模型,Directed,1,obsidian_link
+library_short_video,DCI传播力指数,Directed,1,obsidian_link
+library_short_video,SICAS模型,Directed,1,obsidian_link
+library_short_video,互动营销,Directed,1,obsidian_link
+library_short_video,平台适配,Directed,1,obsidian_link
+library_short_video,情感营销,Directed,1,obsidian_link
+library_short_video,数字阅读推广,Directed,1,obsidian_link
+library_short_video,服务价值,Directed,1,obsidian_link
+library_short_video,渠道营销,Directed,1,obsidian_link
+library_short_video,软营销,Directed,1,obsidian_link
+library_short_video,馆型差异,Directed,1,obsidian_link
+互动营销,SICAS模型,Directed,2,obsidian_link
+互动营销,cnki_2021_5530e86157,Directed,2,obsidian_link
+互动营销,内容分析法,Directed,1,obsidian_link
+互动营销,头部账号实践提炼,Directed,1,obsidian_link
+互动营销,情感营销,Directed,1,obsidian_link
+互动营销,数字阅读推广,Directed,1,obsidian_link
+互动营销,服务价值,Directed,2,obsidian_link
 内容分析法,AARRR 漏斗模型,Directed,2,obsidian_link
 内容分析法,SICAS模型,Directed,2,obsidian_link
 内容分析法,cnki_2021_3771e58987,Directed,2,obsidian_link
@@ -144,6 +194,15 @@ cnki_2023_34348faa1e,软营销,Directed,2,obsidian_link
 内容分析法,描述性账号调查,Directed,1,obsidian_link
 内容分析法,服务价值,Directed,1,obsidian_link
 内容分析法,网络调查法,Directed,1,obsidian_link
+头部账号实践提炼,cnki_2021_5530e86157,Directed,2,obsidian_link
+头部账号实践提炼,library_short_video,Directed,1,obsidian_link
+头部账号实践提炼,互动营销,Directed,2,obsidian_link
+头部账号实践提炼,内容分析法,Directed,1,obsidian_link
+头部账号实践提炼,情感营销,Directed,2,obsidian_link
+头部账号实践提炼,描述性账号调查,Directed,1,obsidian_link
+头部账号实践提炼,数字阅读推广,Directed,1,obsidian_link
+头部账号实践提炼,服务价值,Directed,2,obsidian_link
+头部账号实践提炼,渠道营销,Directed,2,obsidian_link
 平台适配,AARRR 漏斗模型,Directed,1,obsidian_link
 平台适配,SICAS模型,Directed,1,obsidian_link
 平台适配,cnki_2021_3771e58987,Directed,2,obsidian_link
@@ -152,19 +211,57 @@ cnki_2023_34348faa1e,软营销,Directed,2,obsidian_link
 平台适配,服务价值,Directed,1,obsidian_link
 平台适配,网络调查法,Directed,1,obsidian_link
 平台适配,馆型差异,Directed,2,obsidian_link
+情感营销,SICAS模型,Directed,1,obsidian_link
+情感营销,cnki_2021_5530e86157,Directed,2,obsidian_link
+情感营销,互动营销,Directed,1,obsidian_link
+情感营销,内容分析法,Directed,1,obsidian_link
+情感营销,头部账号实践提炼,Directed,1,obsidian_link
+情感营销,数字阅读推广,Directed,1,obsidian_link
+情感营销,服务价值,Directed,1,obsidian_link
+情感营销,沉浸式内容,Directed,1,obsidian_link
+情感营销,用户感知价值,Directed,1,obsidian_link
 描述性账号调查,SICAS模型,Directed,1,obsidian_link
 描述性账号调查,cnki_2023_34348faa1e,Directed,2,obsidian_link
 描述性账号调查,library_short_video,Directed,1,obsidian_link
 描述性账号调查,用户感知价值,Directed,1,obsidian_link
 描述性账号调查,软营销,Directed,1,obsidian_link
+数字阅读推广,AARRR 漏斗模型,Directed,2,obsidian_link
+数字阅读推广,SICAS模型,Directed,2,obsidian_link
+数字阅读推广,cnki_2021_5530e86157,Directed,2,obsidian_link
+数字阅读推广,library_short_video,Directed,1,obsidian_link
+数字阅读推广,互动营销,Directed,1,obsidian_link
+数字阅读推广,头部账号实践提炼,Directed,1,obsidian_link
+数字阅读推广,情感营销,Directed,1,obsidian_link
+数字阅读推广,描述性账号调查,Directed,1,obsidian_link
+数字阅读推广,服务价值,Directed,1,obsidian_link
+数字阅读推广,渠道营销,Directed,1,obsidian_link
 方向链,Idea Lab,Directed,1,obsidian_link
 方向链,Obsidian 知识图谱,Directed,1,obsidian_link
 方向链,快乐科研闭环,Directed,1,obsidian_link
+服务价值,AARRR 漏斗模型,Directed,2,obsidian_link
+服务价值,SICAS模型,Directed,2,obsidian_link
+服务价值,cnki_2021_3771e58987,Directed,1,obsidian_link
+服务价值,cnki_2021_5530e86157,Directed,2,obsidian_link
+服务价值,library_short_video,Directed,1,obsidian_link
+服务价值,互动营销,Directed,1,obsidian_link
+服务价值,内容分析法,Directed,1,obsidian_link
+服务价值,平台互动-服务触达-阅读转化,Directed,1,obsidian_link
+服务价值,描述性账号调查,Directed,1,obsidian_link
+服务价值,数字阅读推广,Directed,1,obsidian_link
+服务价值,用户感知价值,Directed,1,obsidian_link
 沉浸式内容,Hook Model 上瘾模型,Directed,2,obsidian_link
 沉浸式内容,SICAS模型,Directed,2,obsidian_link
 沉浸式内容,cnki_2023_34348faa1e,Directed,1,obsidian_link
 沉浸式内容,描述性账号调查,Directed,1,obsidian_link
 沉浸式内容,用户感知价值,Directed,2,obsidian_link
+渠道营销,AARRR 漏斗模型,Directed,2,obsidian_link
+渠道营销,cnki_2021_5530e86157,Directed,2,obsidian_link
+渠道营销,头部账号实践提炼,Directed,1,obsidian_link
+渠道营销,平台适配,Directed,2,obsidian_link
+渠道营销,描述性账号调查,Directed,1,obsidian_link
+渠道营销,数字阅读推广,Directed,1,obsidian_link
+渠道营销,服务价值,Directed,1,obsidian_link
+渠道营销,馆型差异,Directed,1,obsidian_link
 用户感知价值,SICAS模型,Directed,2,obsidian_link
 用户感知价值,cnki_2023_34348faa1e,Directed,1,obsidian_link
 用户感知价值,library_short_video,Directed,1,obsidian_link

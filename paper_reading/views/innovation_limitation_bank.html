@@ -7,23 +7,26 @@
   <style>
     :root {
       color-scheme: light;
-      --ink: #182026;
-      --muted: #61707d;
-      --line: #d9e0e6;
+      --ink: #1e293b;
+      --muted: #64748b;
+      --line: #dbe4ee;
       --paper: #ffffff;
-      --soft: #f6f8fa;
-      --blue: #2463eb;
+      --soft: #f8fafc;
+      --blue: #2563eb;
       --green: #16805d;
       --amber: #a15c07;
       --rose: #b4234b;
+      --ring: rgba(37, 99, 235, 0.34);
+      --shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
       color: var(--ink);
-      background: #f4f6f8;
-      line-height: 1.55;
+      background: #f8fafc;
+      line-height: 1.6;
     }
     header {
       background: var(--paper);
@@ -34,51 +37,93 @@
     h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
     h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
     p { margin: 0 0 12px; }
-    a { color: var(--blue); text-decoration: none; }
+    a { color: var(--blue); text-decoration: none; text-underline-offset: 3px; }
     a:hover { text-decoration: underline; }
+    a:focus-visible,
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+      border-radius: 7px;
+    }
+    .skip-link {
+      position: absolute;
+      left: 18px;
+      top: 10px;
+      z-index: 20;
+      transform: translateY(-140%);
+      background: var(--ink);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 7px;
+    }
+    .skip-link:focus { transform: translateY(0); }
     .sub { color: var(--muted); max-width: 780px; }
     .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
     .nav a {
       display: inline-flex;
       align-items: center;
-      min-height: 34px;
-      padding: 6px 10px;
+      min-height: 44px;
+      padding: 7px 11px;
       border: 1px solid var(--line);
       border-radius: 7px;
       background: #fff;
       color: var(--ink);
       font-size: 14px;
+      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+    }
+    .nav a:hover {
+      border-color: #bfcee0;
+      background: #f8fbff;
+      text-decoration: none;
+    }
+    .nav a[aria-current="page"] {
+      border-color: #b9ccff;
+      background: #eef4ff;
+      color: #1d4ed8;
+      font-weight: 650;
     }
     main.wrap { padding-top: 22px; }
     .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
     .panel {
       grid-column: span 6;
+      min-width: 0;
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 18px;
+      box-shadow: var(--shadow);
     }
     .panel.wide { grid-column: 1 / -1; }
     .metric {
       grid-column: span 3;
+      min-width: 0;
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 16px;
+      box-shadow: var(--shadow);
     }
     .metric b { display: block; font-size: 28px; line-height: 1.1; }
     .metric span { color: var(--muted); font-size: 13px; }
-    .list { display: grid; gap: 10px; }
+    .list { display: grid; gap: 10px; min-width: 0; }
     .item {
+      min-width: 0;
       border-left: 3px solid var(--blue);
       background: var(--soft);
       padding: 10px 12px;
       border-radius: 0 7px 7px 0;
+      transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+    .item:hover {
+      background: #eef4ff;
+      transform: translateY(-1px);
     }
     .item.green { border-left-color: var(--green); }
     .item.amber { border-left-color: var(--amber); }
     .item.rose { border-left-color: var(--rose); }
-    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; overflow-wrap: anywhere; }
     .empty {
       color: var(--muted);
       background: var(--soft);
@@ -88,9 +133,18 @@
     }
     .steps { margin: 0; padding-left: 20px; }
     .steps li { margin: 6px 0; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px 6px; vertical-align: top; }
-    th { color: var(--muted); font-weight: 600; }
+    table {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      border-collapse: collapse;
+      font-size: 14px;
+      -webkit-overflow-scrolling: touch;
+    }
+    thead, tbody, tr { width: 100%; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 9px 8px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 650; background: #fbfdff; }
     code {
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       background: #eef3f8;
@@ -122,7 +176,6 @@
     .toolbar a, .toolbar button {
       display: inline-flex;
       align-items: center;
-      min-height: 34px;
       padding: 6px 10px;
       border: 1px solid var(--line);
       border-radius: 7px;
@@ -131,11 +184,50 @@
       font: inherit;
       font-size: 14px;
       cursor: pointer;
+      min-height: 44px;
     }
     .toolbar button.active {
       border-color: var(--blue);
       color: var(--blue);
       background: #eef4ff;
+    }
+    .inline-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+    .review-mark { min-width: 112px; }
+    .inline-button:hover {
+      border-color: #b9ccff;
+      background: #eef4ff;
+      color: #1d4ed8;
+    }
+    .inline-button[disabled] {
+      cursor: not-allowed;
+      opacity: 0.58;
+    }
+    .review-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+    }
+    .review-status {
+      min-height: 24px;
+      color: var(--muted);
+      font-size: 14px;
     }
     .source-path {
       color: var(--muted);
@@ -183,10 +275,22 @@
     @media (max-width: 840px) {
       .panel, .metric { grid-column: 1 / -1; }
       h1 { font-size: 28px; }
+      .wrap { padding-left: 16px; padding-right: 16px; }
+      .nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+      .nav a { flex: 0 0 auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
     </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳到正文</a>
   <header>
     <div class="wrap">
       <h1>创新-局限-机会台账</h1>
@@ -207,7 +311,7 @@
 <a href="vault-home.html">Vault 首页</a></nav>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap" id="main-content">
 
     <section class="grid">
       <section class="panel wide">
@@ -326,6 +430,7 @@
 <li>Read status: <code>skimmed</code></li>
 <li>Reader: <code>projects/library_short_video/literature/readers/cnki_2021_5530e86157/paper.md</code></li>
 <li>证据边界: source-grounded guided skim；暂无页码；文章是策略归纳和实践提炼，不是因果检验。</li>
+<li>2026-07-01 深读沉淀: 已生成 HTML 精读页、Obsidian 论文笔记和知识卡；今日新增关系重点为 <span class="wikilink">数字阅读推广</span> -&gt; <span class="wikilink">服务价值</span>，<span class="wikilink">情感营销</span> / <span class="wikilink">渠道营销</span> / <span class="wikilink">互动营销</span> -&gt; <span class="wikilink">SICAS模型</span> / <span class="wikilink">AARRR 漏斗模型</span>。</li>
 </ul>
 <h4>可复用创新点</h4>
 <table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>对象/场景拓展</td><td>将短视频营销直接嵌入公共图书馆数字阅读推广问题，而不只是一般图书馆宣传或平台流量</td><td><code>B0001</code>, <code>B0003</code></td><td>有助于把研究问题从“短视频是否热门”推进到“短视频如何服务数字阅读推广”</td><td>O-001</td></tr><tr><td>数据/样本建设</td><td>选取 90 个粉丝长期超过 1 万的公共图书馆抖音头部账号，观察 2020-05-01 至 2020-11-30 的 27,455 条短视频</td><td><code>B0003</code>, <code>B0004</code></td><td>可作为 2020 年公共图书馆头部账号实践样本和后续纵向比较基线</td><td>O-004</td></tr><tr><td>实践策略转译</td><td>将头部账号经验归纳为内容 IP 与场景融合、双矩阵营销、用户标签和社区化情境互动</td><td><code>B0005</code>-<code>B0007</code></td><td>可转化为服务设计、账号运营能力和平台协同变量</td><td>O-007</td></tr><tr><td>实践策略转译</td><td>提出情感营销、渠道营销、互动营销三条数字阅读推广短视频策略</td><td><code>B0008</code>-<code>B0013</code></td><td>可形成“情感共鸣-渠道触达-互动参与-服务转化”的研究路径</td><td>O-009</td></tr><tr><td>对象/场景拓展</td><td>强调线上交互、线下数字阅读场景、POI、积分激励和真实阅读体验的连接</td><td><code>B0011</code>-<code>B0013</code></td><td>有助于突破单一平台互动指标，连接图书馆服务场景</td><td>O-001</td></tr></tbody></table>
@@ -394,6 +499,6 @@
     </section>
 
   </main>
-  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-07-01 08:57.</footer>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-07-01 14:05.</footer>
 </body>
 </html>

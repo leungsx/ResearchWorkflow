@@ -56,3 +56,38 @@
 - The first reviewed paper suggests a stronger candidate angle: not only "what themes exist", but how library short-video studies connect service/knowledge value with platform interaction mechanisms.
 - Candidate RQ for later discussion: How have Chinese LIS studies operationalized the communication and interaction effects of library short videos, and what evidence gaps remain between platform engagement metrics and library service value?
 - Keep as tentative until at least 3-5 source-grounded readers have been cross-synthesized.
+
+## Candidate Shortlist After 8 Source-Grounded Readers
+
+Status: working shortlist, updated 2026-07-01. These are not manuscript claims. Current evidence is `skimmed` and source-grounded, but page/table locators still need original-text verification before formal writing.
+
+### Candidate A - Service Value Measurement
+
+Research question: How can visible platform engagement from library short videos be connected to observable service value in digital reading promotion?
+
+- Method implied: build a composite indicator framework separating platform interaction, service touchpoint, and reading-promotion outcome.
+- Evidence base: SICAS user path, AARRR stage indicators, Zhang 2021 digital-reading promotion strategy, and engagement-index papers.
+- Scope: Chinese LIS studies and library-run short-video accounts; public-library cases first, with later extension to university/research libraries.
+- Boundary: current literature supports framework building; it does not yet prove that engagement causes service value.
+
+### Candidate B - Mechanism From Attention To Action
+
+Research question: Which content cues and service-design mechanisms move users from attention to interaction and then to service action in library short-video contexts?
+
+- Method implied: content analysis plus SICAS-stage path coding; later test with platform metrics and library service data.
+- Evidence base: Hook Model, ELM, popular-content analysis, head-account practice extraction, and SICAS service path literature.
+- Scope: content/title/music/theme/information-type variables and service actions such as resource access, activity participation, consultation, or reading promotion.
+- Boundary: current evidence is mostly descriptive, correlational, or non-parametric; causal language must wait for new data.
+
+### Candidate C - Library Type And Platform Fit
+
+Research question: How do library type and platform fit shape short-video strategy and evaluation indicators?
+
+- Method implied: comparative account survey by public library, university library, and research-oriented library across major video platforms.
+- Evidence base: AARRR comparative study, public-library service surveys, historical Douyin baselines, and platform-fit concept cards.
+- Scope: platform discovery, activation, retention, service-value translation, and sharing/referral indicators.
+- Boundary: existing evidence is 2019-2021 heavy; current-platform claims require 2024-2026 data.
+
+## Current Preferred Direction
+
+Candidate A should be the default main line because it best connects the current knowledge cards: [[SICAS模型]], [[AARRR 漏斗模型]], [[数字阅读推广]], [[服务价值]], [[互动营销]], [[渠道营销]] and [[情感营销]]. Candidate B can become the mechanism sub-question, and Candidate C can become the boundary/comparison sub-question.
