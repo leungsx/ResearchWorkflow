@@ -1,6 +1,6 @@
 # Workflow Audit - 2026-07-01
 
-Generated: 2026-07-01T14:26:28
+Generated: 2026-07-01T14:28:05
 Summary: PASS=17 WARN=1 FAIL=0
 
 ## Checks
@@ -18,7 +18,7 @@ Summary: PASS=17 WARN=1 FAIL=0
 | 项目状态 | PASS | 项目状态文件可供自动化读取 | 2 个项目。 |
 | 复习队列 | PASS | 今日无积压复习项 | 队列共 19 项。 |
 | 备份 | PASS | 最近备份可用 | backups/researchworkflow-critical-20260630-200857.zip，约 18.3 小时前。 |
-| Git/异地备份 | WARN | 存在尚未提交的 Git 改动 | 116 个路径待快照： M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-452dce22.html； M knowledge_cards/views/concept-53b320d5.html |
+| Git/异地备份 | WARN | 存在尚未提交的 Git 改动 | 11 个路径待快照： M action_queue.html； M archive_policy.html； M project_collaboration.html； M vault/07_Codex_Logs/workflow_audits/2026-07-01-workflow-audit.md； M vault/13_Knowledge_Graph/action_queue.json； M vault/13_Knowledge_Graph/archive_policy.json； M vault/13_Knowledge_Graph/collaboration_state.json； M vault/13_Knowledge_Graph/workflow_audit_report.json |
 | Token/记忆 | PASS | 今日 compact summary 可作为默认启动上下文 | vault/07_Codex_Logs/compact_daily/2026-07-01-summary.md，约 88 words。 |
 | 文件卫生 | PASS | 未发现常见系统/缓存文件 | 工作区较干净。 |
 | Schema | PASS | 核心机器状态 schema 校验通过 | 10 个文件通过校验。 |
