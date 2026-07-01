@@ -1,30 +1,18 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T14:28:05",
+  "generated_at": "2026-07-01T14:29:15",
   "source_state": "vault/13_Knowledge_Graph/workflow_state.json",
   "entrypoint": "action_queue.html",
   "summary": {
-    "total_open": 6,
+    "total_open": 5,
     "high_priority": 0,
     "by_kind": {
-      "audit_warn": 1,
       "project": 5
     }
   },
   "actions": [
     {
-      "id": "audit_warn-1-处理提醒-存在尚未提交的-git-改动",
-      "kind": "audit_warn",
-      "priority": 70,
-      "title": "处理提醒：存在尚未提交的 Git 改动",
-      "reason": "11 个路径待快照： M action_queue.html； M archive_policy.html； M project_collaboration.html； M vault/07_Codex_Logs/workflow_audits/2026-07-01-workflow-audit.md； M vault/13_Knowledge_Graph/action_queue.json； M vault/13_Knowledge_Graph/archive_policy.json； M vault/13_Knowledge_Graph/collaboration_state.json； M vault/13_Knowledge_Graph/workflow_audit_report.json",
-      "entrypoint": "workflow_health.html",
-      "source": "Git/异地备份",
-      "status": "open",
-      "rank": 1
-    },
-    {
-      "id": "project-5-starter-research-project-先建立或导入项目文献矩阵-再生成",
+      "id": "project-4-starter-research-project-先建立或导入项目文献矩阵-再生成",
       "kind": "project",
       "priority": 60,
       "title": "Starter Research Project：先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
@@ -32,10 +20,10 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-b90a4a93.html",
       "source": "starter_project",
       "status": "open",
-      "rank": 2
+      "rank": 1
     },
     {
-      "id": "project-6-starter-research-project-如果这是占位项目-保持-proje",
+      "id": "project-5-starter-research-project-如果这是占位项目-保持-proje",
       "kind": "project",
       "priority": 60,
       "title": "Starter Research Project：如果这是占位项目，保持 project_state.json 作为结构模板即可。",
@@ -43,10 +31,10 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-b90a4a93.html",
       "source": "starter_project",
       "status": "open",
-      "rank": 3
+      "rank": 2
     },
     {
-      "id": "project-4-图书馆短视频相关研究-下一篇阅读优先选择已有-pdf-reader-且能推进传播力评",
+      "id": "project-3-图书馆短视频相关研究-下一篇阅读优先选择已有-pdf-reader-且能推进传播力评",
       "kind": "project",
       "priority": 60,
       "title": "图书馆短视频相关研究：下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
@@ -54,10 +42,10 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 4
+      "rank": 3
     },
     {
-      "id": "project-3-图书馆短视频相关研究-围绕最近主读--cnki-2021-5530e86157--补",
+      "id": "project-2-图书馆短视频相关研究-围绕最近主读--cnki-2021-5530e86157--补",
       "kind": "project",
       "priority": 60,
       "title": "图书馆短视频相关研究：围绕最近主读 `cnki_2021_5530e86157`，补齐与既有概念/方法的关系和证据边界。",
@@ -65,10 +53,10 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 5
+      "rank": 4
     },
     {
-      "id": "project-2-图书馆短视频相关研究-把已读文献继续汇总进文献综述工作台-收敛-2-3-个研究问题",
+      "id": "project-1-图书馆短视频相关研究-把已读文献继续汇总进文献综述工作台-收敛-2-3-个研究问题",
       "kind": "project",
       "priority": 60,
       "title": "图书馆短视频相关研究：把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。",
@@ -76,7 +64,7 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 6
+      "rank": 5
     }
   ]
 }

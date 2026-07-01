@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T14:28:05",
+  "generated_at": "2026-07-01T14:29:15",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -17,12 +17,12 @@
     "manifest_rows": 120,
     "search_entries": 120,
     "project_count": 2,
-    "git_dirty_paths": 11
+    "git_dirty_paths": 0
   },
   "audit": {
     "counts": {
-      "PASS": 17,
-      "WARN": 1,
+      "PASS": 18,
+      "WARN": 0,
       "FAIL": 0
     },
     "checks": [
@@ -94,9 +94,9 @@
       },
       {
         "area": "Git/异地备份",
-        "status": "WARN",
-        "title": "存在尚未提交的 Git 改动",
-        "detail": "11 个路径待快照： M action_queue.html； M archive_policy.html； M project_collaboration.html； M vault/07_Codex_Logs/workflow_audits/2026-07-01-workflow-audit.md； M vault/13_Knowledge_Graph/action_queue.json； M vault/13_Knowledge_Graph/archive_policy.json； M vault/13_Knowledge_Graph/collaboration_state.json； M vault/13_Knowledge_Graph/workflow_audit_report.json"
+        "status": "PASS",
+        "title": "Git 本地和远程快照状态正常",
+        "detail": "upstream=origin/main；last commit: a189688 2026-07-01 14:29:01 +0800 Refresh workflow audit after graph labels"
       },
       {
         "area": "Token/记忆",
@@ -120,7 +120,7 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "6 个开放行动。"
+        "detail": "5 个开放行动。"
       },
       {
         "area": "项目协作层",
@@ -337,7 +337,6 @@
     "把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。",
     "围绕最近主读 `cnki_2021_5530e86157`，补齐与既有概念/方法的关系和证据边界。",
     "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
-    "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
-    "择机处理 workflow-audit 的 WARN 项，尤其是 Git 快照和到期复习。"
+    "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
   ]
 }
