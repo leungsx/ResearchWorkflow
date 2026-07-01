@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T14:06:59",
+  "generated_at": "2026-07-01T14:26:28",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -17,12 +17,12 @@
     "manifest_rows": 120,
     "search_entries": 120,
     "project_count": 2,
-    "git_dirty_paths": 0
+    "git_dirty_paths": 116
   },
   "audit": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "checks": [
@@ -54,7 +54,7 @@
         "area": "知识图谱",
         "status": "PASS",
         "title": "图谱入口是可视化关系图",
-        "detail": "nodes=127, unique_edges=290"
+        "detail": "nodes=117, unique_edges=290"
       },
       {
         "area": "资产清单",
@@ -90,13 +90,13 @@
         "area": "备份",
         "status": "PASS",
         "title": "最近备份可用",
-        "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 18.0 小时前。"
+        "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 18.3 小时前。"
       },
       {
         "area": "Git/异地备份",
-        "status": "PASS",
-        "title": "Git 本地和远程快照状态正常",
-        "detail": "upstream=origin/main；last commit: 4d68018 2026-07-01 14:06:44 +0800 refresh generated workflow views"
+        "status": "WARN",
+        "title": "存在尚未提交的 Git 改动",
+        "detail": "116 个路径待快照： M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-452dce22.html； M knowledge_cards/views/concept-53b320d5.html"
       },
       {
         "area": "Token/记忆",
@@ -120,7 +120,7 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "5 个开放行动。"
+        "detail": "6 个开放行动。"
       },
       {
         "area": "项目协作层",
@@ -252,7 +252,7 @@
     "html": "knowledge_cards/review_today.html"
   },
   "graph": {
-    "nodes": 127,
+    "nodes": 117,
     "edges": 290,
     "html": "knowledge_graph/index.html"
   },
@@ -337,6 +337,7 @@
     "把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。",
     "围绕最近主读 `cnki_2021_5530e86157`，补齐与既有概念/方法的关系和证据边界。",
     "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
-    "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
+    "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
+    "择机处理 workflow-audit 的 WARN 项，尤其是 Git 快照和到期复习。"
   ]
 }
