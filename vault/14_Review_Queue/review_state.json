@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T14:24:23",
+  "generated_at": "2026-07-01T19:57:31",
   "today": "2026-07-01",
   "queue_path": "vault/14_Review_Queue/review_queue.csv",
   "summary": {
@@ -10,32 +10,17 @@
     "upcoming_7_count": 19,
     "future_count": 0,
     "unscheduled_count": 0,
-    "learned_today_count": 13,
+    "learned_today_count": 14,
     "by_type": {
       "concept": 14,
       "method": 5
     },
     "by_stage": {
-      "1": 6,
-      "2": 13
+      "1": 5,
+      "2": 14
     }
   },
   "focus_items": [
-    {
-      "id": "concept-interactive-marketing",
-      "title": "互动营销",
-      "type": "concept",
-      "stage": "1",
-      "next_review": "2026-07-02",
-      "days_delta": 1,
-      "status": "upcoming_7",
-      "learning_status": "",
-      "last_reviewed": "",
-      "review_count": 0,
-      "prompt": "互动营销为什么不能等同于评论数越多越好？",
-      "source_path": "vault/02_Concepts/互动营销.md",
-      "display_path": "knowledge_cards/views/concept-452dce22.html"
-    },
     {
       "id": "method-head-account-practice-extraction",
       "title": "头部账号实践提炼",
@@ -114,21 +99,6 @@
   ],
   "due_items": [],
   "upcoming_7_items": [
-    {
-      "id": "concept-interactive-marketing",
-      "title": "互动营销",
-      "type": "concept",
-      "stage": "1",
-      "next_review": "2026-07-02",
-      "days_delta": 1,
-      "status": "upcoming_7",
-      "learning_status": "",
-      "last_reviewed": "",
-      "review_count": 0,
-      "prompt": "互动营销为什么不能等同于评论数越多越好？",
-      "source_path": "vault/02_Concepts/互动营销.md",
-      "display_path": "knowledge_cards/views/concept-452dce22.html"
-    },
     {
       "id": "method-head-account-practice-extraction",
       "title": "头部账号实践提炼",
@@ -263,6 +233,21 @@
       "prompt": "用自己的话说出 SICAS 五个阶段，并给一个图书馆短视频例子。",
       "source_path": "vault/02_Concepts/SICAS模型.md",
       "display_path": "knowledge_cards/views/concept-sicas-e14df8c7.html"
+    },
+    {
+      "id": "concept-interactive-marketing",
+      "title": "互动营销",
+      "type": "concept",
+      "stage": "2",
+      "next_review": "2026-07-04",
+      "days_delta": 3,
+      "status": "learned_today",
+      "learning_status": "learned",
+      "last_reviewed": "2026-07-01",
+      "review_count": 1,
+      "prompt": "互动营销为什么不能等同于评论数越多越好？",
+      "source_path": "vault/02_Concepts/互动营销.md",
+      "display_path": "knowledge_cards/views/concept-452dce22.html"
     },
     {
       "id": "method-content-analysis",
@@ -462,6 +447,21 @@
       "display_path": "knowledge_cards/views/concept-sicas-e14df8c7.html"
     },
     {
+      "id": "concept-interactive-marketing",
+      "title": "互动营销",
+      "type": "concept",
+      "stage": "2",
+      "next_review": "2026-07-04",
+      "days_delta": 3,
+      "status": "learned_today",
+      "learning_status": "learned",
+      "last_reviewed": "2026-07-01",
+      "review_count": 1,
+      "prompt": "互动营销为什么不能等同于评论数越多越好？",
+      "source_path": "vault/02_Concepts/互动营销.md",
+      "display_path": "knowledge_cards/views/concept-452dce22.html"
+    },
+    {
       "id": "method-content-analysis",
       "title": "内容分析法",
       "type": "method",
@@ -599,21 +599,6 @@
   ],
   "all_items": [
     {
-      "id": "concept-interactive-marketing",
-      "title": "互动营销",
-      "type": "concept",
-      "stage": "1",
-      "next_review": "2026-07-02",
-      "days_delta": 1,
-      "status": "upcoming_7",
-      "learning_status": "",
-      "last_reviewed": "",
-      "review_count": 0,
-      "prompt": "互动营销为什么不能等同于评论数越多越好？",
-      "source_path": "vault/02_Concepts/互动营销.md",
-      "display_path": "knowledge_cards/views/concept-452dce22.html"
-    },
-    {
       "id": "method-head-account-practice-extraction",
       "title": "头部账号实践提炼",
       "type": "method",
@@ -747,6 +732,21 @@
       "prompt": "用自己的话说出 SICAS 五个阶段，并给一个图书馆短视频例子。",
       "source_path": "vault/02_Concepts/SICAS模型.md",
       "display_path": "knowledge_cards/views/concept-sicas-e14df8c7.html"
+    },
+    {
+      "id": "concept-interactive-marketing",
+      "title": "互动营销",
+      "type": "concept",
+      "stage": "2",
+      "next_review": "2026-07-04",
+      "days_delta": 3,
+      "status": "learned_today",
+      "learning_status": "learned",
+      "last_reviewed": "2026-07-01",
+      "review_count": 1,
+      "prompt": "互动营销为什么不能等同于评论数越多越好？",
+      "source_path": "vault/02_Concepts/互动营销.md",
+      "display_path": "knowledge_cards/views/concept-452dce22.html"
     },
     {
       "id": "method-content-analysis",

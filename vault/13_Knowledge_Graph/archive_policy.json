@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T14:29:15",
+  "generated_at": "2026-07-01T19:59:18",
   "entrypoint": "archive_policy.html",
   "summary": {
     "backup_count": 6,
@@ -27,7 +27,7 @@
     "keep_newest": 30,
     "count": 6,
     "latest": "backups/researchworkflow-critical-20260630-200857.zip",
-    "latest_age_days": 0.76,
+    "latest_age_days": 0.99,
     "prune_candidates": []
   },
   "logs": {

@@ -1,6 +1,6 @@
 PYTHON ?= /Users/leung/anaconda3/bin/python
 
-.PHONY: check new status project-state review-state review-studied review-studied-due review-server search-index workflow-state action-queue collaboration-state archive-policy schema-validate fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
+.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
 
 check:
 	$(PYTHON) scripts/check_environment.py
@@ -25,6 +25,15 @@ review-studied-due:
 
 review-server:
 	$(PYTHON) scripts/review_mark_server.py $(if $(PORT),--port "$(PORT)",)
+
+review-server-start:
+	$(PYTHON) scripts/review_server_control.py start $(if $(PORT),--port "$(PORT)",)
+
+review-server-stop:
+	$(PYTHON) scripts/review_server_control.py stop $(if $(PORT),--port "$(PORT)",)
+
+review-server-status:
+	$(PYTHON) scripts/review_server_control.py status $(if $(PORT),--port "$(PORT)",)
 
 search-index:
 	$(PYTHON) scripts/build_search_index.py

@@ -1147,15 +1147,22 @@ def review_mark_script() -> str:
     return """<script>
     (() => {
       const endpoint = "http://127.0.0.1:8765/review/studied";
+      const healthEndpoint = "http://127.0.0.1:8765/health";
       const status = document.querySelector("[data-review-status]");
+      const serviceHelp = "请先运行 make review-server-start；若只想前台运行，可用 make review-server。备用命令仍然可用。";
       const setStatus = (message) => {
         if (status) status.textContent = message;
+      };
+      const checkService = async () => {
+        const response = await fetch(healthEndpoint, {method: "GET"});
+        if (!response.ok) throw new Error("本地写回服务未启动");
       };
       const mark = async (payload, button) => {
         const buttons = button ? [button] : Array.from(document.querySelectorAll(".review-mark, [data-review-bulk]"));
         buttons.forEach((item) => { item.disabled = true; });
         setStatus("正在写回复习状态...");
         try {
+          await checkService();
           const response = await fetch(endpoint, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -1168,10 +1175,13 @@ def review_mark_script() -> str:
           setStatus(`已标记 ${data.marked_count} 个知识卡，页面即将刷新。`);
           window.setTimeout(() => window.location.reload(), 900);
         } catch (error) {
-          setStatus(`无法写回：${error.message}。请先运行 make review-server，或使用表格里的备用命令。`);
+          setStatus(`无法写回：${error.message}。${serviceHelp}`);
           buttons.forEach((item) => { item.disabled = false; });
         }
       };
+      checkService()
+        .then(() => setStatus("本地写回服务已连接，可以直接标记已学习。"))
+        .catch(() => setStatus(`本地写回服务未启动。${serviceHelp}`));
       document.querySelectorAll(".review-mark").forEach((button) => {
         button.addEventListener("click", () => {
           mark({id: button.dataset.reviewId}, button);
@@ -1198,9 +1208,9 @@ def build_review_today() -> None:
     bulk_button = '<button class="inline-button" type="button" data-review-bulk>一键标记当前到期项已学习</button>' if due_items else ""
     bulk_button_line = f"          {bulk_button}\n" if bulk_button else ""
     writeback_hint = (
-        "需要先运行 <code>make review-server</code> 才能在网页内写回。"
+        "需要先运行 <code>make review-server-start</code> 才能在网页内写回。"
         if due_items
-        else "当前没有到期项；未来 7 天知识卡可逐条提前标记。网页写回需要先运行 <code>make review-server</code>。"
+        else "当前没有到期项；未来 7 天知识卡可逐条提前标记。网页写回需要先运行 <code>make review-server-start</code>。"
     )
     body = f"""
     <section class="grid">

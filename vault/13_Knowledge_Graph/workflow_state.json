@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T14:29:15",
+  "generated_at": "2026-07-01T19:59:18",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -17,12 +17,12 @@
     "manifest_rows": 120,
     "search_entries": 120,
     "project_count": 2,
-    "git_dirty_paths": 0
+    "git_dirty_paths": 120
   },
   "audit": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "checks": [
@@ -72,7 +72,7 @@
         "area": "复习状态",
         "status": "PASS",
         "title": "复习状态快照与队列一致",
-        "detail": "total=19, due=0, focus=6"
+        "detail": "total=19, due=0, focus=5"
       },
       {
         "area": "项目状态",
@@ -90,13 +90,13 @@
         "area": "备份",
         "status": "PASS",
         "title": "最近备份可用",
-        "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 18.3 小时前。"
+        "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 23.8 小时前。"
       },
       {
         "area": "Git/异地备份",
-        "status": "PASS",
-        "title": "Git 本地和远程快照状态正常",
-        "detail": "upstream=origin/main；last commit: a189688 2026-07-01 14:29:01 +0800 Refresh workflow audit after graph labels"
+        "status": "WARN",
+        "title": "存在尚未提交的 Git 改动",
+        "detail": "120 个路径待快照： M .gitignore； M Makefile； M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html"
       },
       {
         "area": "Token/记忆",
@@ -120,7 +120,7 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "5 个开放行动。"
+        "detail": "6 个开放行动。"
       },
       {
         "area": "项目协作层",
@@ -146,32 +146,17 @@
       "upcoming_7_count": 19,
       "future_count": 0,
       "unscheduled_count": 0,
-      "learned_today_count": 13,
+      "learned_today_count": 14,
       "by_type": {
         "concept": 14,
         "method": 5
       },
       "by_stage": {
-        "1": 6,
-        "2": 13
+        "1": 5,
+        "2": 14
       }
     },
     "focus_items": [
-      {
-        "id": "concept-interactive-marketing",
-        "title": "互动营销",
-        "type": "concept",
-        "stage": "1",
-        "next_review": "2026-07-02",
-        "days_delta": 1,
-        "status": "upcoming_7",
-        "learning_status": "",
-        "last_reviewed": "",
-        "review_count": 0,
-        "prompt": "互动营销为什么不能等同于评论数越多越好？",
-        "source_path": "vault/02_Concepts/互动营销.md",
-        "display_path": "knowledge_cards/views/concept-452dce22.html"
-      },
       {
         "id": "method-head-account-practice-extraction",
         "title": "头部账号实践提炼",
@@ -337,6 +322,7 @@
     "把已读文献继续汇总进文献综述工作台，收敛 2-3 个研究问题。",
     "围绕最近主读 `cnki_2021_5530e86157`，补齐与既有概念/方法的关系和证据边界。",
     "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
-    "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
+    "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
+    "择机处理 workflow-audit 的 WARN 项，尤其是 Git 快照和到期复习。"
   ]
 }

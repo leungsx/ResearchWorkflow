@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T14:29:15",
+  "generated_at": "2026-07-01T19:59:18",
   "date": "2026-07-01",
   "summary": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "check_count": 18
@@ -61,7 +61,7 @@
       "area": "复习状态",
       "status": "PASS",
       "title": "复习状态快照与队列一致",
-      "detail": "total=19, due=0, focus=6"
+      "detail": "total=19, due=0, focus=5"
     },
     {
       "area": "项目状态",
@@ -79,13 +79,13 @@
       "area": "备份",
       "status": "PASS",
       "title": "最近备份可用",
-      "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 18.3 小时前。"
+      "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 23.8 小时前。"
     },
     {
       "area": "Git/异地备份",
-      "status": "PASS",
-      "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: a189688 2026-07-01 14:29:01 +0800 Refresh workflow audit after graph labels"
+      "status": "WARN",
+      "title": "存在尚未提交的 Git 改动",
+      "detail": "120 个路径待快照： M .gitignore； M Makefile； M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html"
     },
     {
       "area": "Token/记忆",
@@ -109,7 +109,7 @@
       "area": "行动队列",
       "status": "PASS",
       "title": "行动队列可用且入口有效",
-      "detail": "5 个开放行动。"
+      "detail": "6 个开放行动。"
     },
     {
       "area": "项目协作层",
