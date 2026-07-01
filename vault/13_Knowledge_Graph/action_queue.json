@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T14:05:28",
+  "generated_at": "2026-07-01T14:06:31",
   "source_state": "vault/13_Knowledge_Graph/workflow_state.json",
   "entrypoint": "action_queue.html",
   "summary": {

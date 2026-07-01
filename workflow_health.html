@@ -40,7 +40,7 @@
   <header>
     <div class="wrap">
       <h1>ResearchWorkflow 体检</h1>
-      <p class="sub">Generated 2026-07-01 14:04 · PASS=16 WARN=2 FAIL=0</p>
+      <p class="sub">Generated 2026-07-01 14:06 · PASS=16 WARN=2 FAIL=0</p>
       <nav class="nav">
         <a href="study_dashboard.html">总览</a>
         <a href="paper_reading/today.html">今日精读</a>
@@ -79,11 +79,11 @@
           <p class="area">链接健康</p>
           <p>检查 109 个 HTML 页面。</p>
         </article>
-        <article class="check pass">
-          <div class="status">PASS</div>
-          <h2>HTML 镜像与源文件同步</h2>
+        <article class="check warn">
+          <div class="status">WARN</div>
+          <h2>HTML 镜像可能过期</h2>
           <p class="area">镜像页</p>
-          <p>检查 80 个镜像页。</p>
+          <p>paper_reading/views/evidence-gate-report-7607e392.html older than projects/library_short_video/manuscript/evidence_gate_report.md</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
@@ -125,13 +125,13 @@
           <div class="status">PASS</div>
           <h2>最近备份可用</h2>
           <p class="area">备份</p>
-          <p>backups/researchworkflow-critical-20260630-200857.zip，约 17.9 小时前。</p>
+          <p>backups/researchworkflow-critical-20260630-200857.zip，约 18.0 小时前。</p>
         </article>
         <article class="check warn">
           <div class="status">WARN</div>
-          <h2>存在尚未提交的 Git 改动</h2>
+          <h2>本地提交尚未推送到远程</h2>
           <p class="area">Git/异地备份</p>
-          <p>153 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M docs/INTEGRATED_RESEARCH_LEARNING_WORKFLOW.md； M docs/WORKFLOW_LAYERED_ARCHITECTURE.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html</p>
+          <p>ahead=1, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
@@ -139,11 +139,11 @@
           <p class="area">Token/记忆</p>
           <p>vault/07_Codex_Logs/compact_daily/2026-07-01-summary.md，约 88 words。</p>
         </article>
-        <article class="check warn">
-          <div class="status">WARN</div>
-          <h2>工作区存在系统/缓存文件</h2>
+        <article class="check pass">
+          <div class="status">PASS</div>
+          <h2>未发现常见系统/缓存文件</h2>
           <p class="area">文件卫生</p>
-          <p>__pycache__=1；这些不会进入 file sweep，但可择机清理。</p>
+          <p>工作区较干净。</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
@@ -167,7 +167,7 @@
           <div class="status">PASS</div>
           <h2>自动归档策略可用</h2>
           <p class="area">自动归档策略</p>
-          <p>backup=6, prune=0, cache=1</p>
+          <p>backup=6, prune=0, cache=0</p>
         </article></section>
   </main>
   <footer class="wrap">Run <code>make workflow-audit</code> to refresh this page.</footer>

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T14:04:07",
+  "generated_at": "2026-07-01T14:06:04",
   "date": "2026-07-01",
   "summary": {
     "counts": {
@@ -35,9 +35,9 @@
     },
     {
       "area": "镜像页",
-      "status": "PASS",
-      "title": "HTML 镜像与源文件同步",
-      "detail": "检查 80 个镜像页。"
+      "status": "WARN",
+      "title": "HTML 镜像可能过期",
+      "detail": "paper_reading/views/evidence-gate-report-7607e392.html older than projects/library_short_video/manuscript/evidence_gate_report.md"
     },
     {
       "area": "知识图谱",
@@ -79,13 +79,13 @@
       "area": "备份",
       "status": "PASS",
       "title": "最近备份可用",
-      "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 17.9 小时前。"
+      "detail": "backups/researchworkflow-critical-20260630-200857.zip，约 18.0 小时前。"
     },
     {
       "area": "Git/异地备份",
       "status": "WARN",
-      "title": "存在尚未提交的 Git 改动",
-      "detail": "153 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M docs/INTEGRATED_RESEARCH_LEARNING_WORKFLOW.md； M docs/WORKFLOW_LAYERED_ARCHITECTURE.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html"
+      "title": "本地提交尚未推送到远程",
+      "detail": "ahead=1, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git"
     },
     {
       "area": "Token/记忆",
@@ -95,9 +95,9 @@
     },
     {
       "area": "文件卫生",
-      "status": "WARN",
-      "title": "工作区存在系统/缓存文件",
-      "detail": "__pycache__=1；这些不会进入 file sweep，但可择机清理。"
+      "status": "PASS",
+      "title": "未发现常见系统/缓存文件",
+      "detail": "工作区较干净。"
     },
     {
       "area": "Schema",
@@ -121,7 +121,7 @@
       "area": "自动归档策略",
       "status": "PASS",
       "title": "自动归档策略可用",
-      "detail": "backup=6, prune=0, cache=1"
+      "detail": "backup=6, prune=0, cache=0"
     }
   ]
 }

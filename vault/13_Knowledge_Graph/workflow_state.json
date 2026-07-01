@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T14:05:28",
+  "generated_at": "2026-07-01T14:06:31",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -17,7 +17,7 @@
     "manifest_rows": 120,
     "search_entries": 120,
     "project_count": 2,
-    "git_dirty_paths": 154
+    "git_dirty_paths": 114
   },
   "audit": {
     "counts": {
