@@ -133,6 +133,11 @@ def build_workflow_state(audit_checks: list[Any] | None = None, git_dirty_paths:
                     "detail": getattr(check, "detail", ""),
                 }
             )
+    else:
+        latest_audit = read_json(WORKFLOW_AUDIT_JSON, {})
+        latest_checks = latest_audit.get("checks", []) if isinstance(latest_audit, dict) else []
+        if isinstance(latest_checks, list):
+            checks.extend(item for item in latest_checks if isinstance(item, dict))
     audit_counts = {
         "PASS": sum(1 for check in checks if check.get("status") == "PASS"),
         "WARN": sum(1 for check in checks if check.get("status") == "WARN"),

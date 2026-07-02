@@ -15,6 +15,15 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from scan_incoming_pdfs import duplicate_key  # noqa: E402
+from transition_literature_state import parse_state_schema, transition_allowed  # noqa: E402
+from workflow_config import active_project_slug, read_workflow_config  # noqa: E402
+
+
+ACTIVE_PROJECT = active_project_slug()
+
+
+def project_path(*parts: str) -> Path:
+    return ROOT / "projects" / ACTIVE_PROJECT / Path(*parts)
 
 
 class LinkParser(HTMLParser):
@@ -72,8 +81,8 @@ def user_html_pages() -> list[Path]:
         ROOT / "knowledge_graph",
         ROOT / "search",
         ROOT / "logs",
-        ROOT / "projects" / "library_short_video" / "literature",
-        ROOT / "projects" / "library_short_video" / "manuscript",
+        project_path("literature"),
+        project_path("manuscript"),
     ]:
         if directory.exists():
             pages.extend(sorted(directory.rglob("*.html")))
@@ -81,6 +90,22 @@ def user_html_pages() -> list[Path]:
 
 
 class WorkflowSmokeTests(unittest.TestCase):
+    def test_active_project_config_points_to_existing_project(self) -> None:
+        config = read_workflow_config()
+        self.assertEqual(config.get("active_project"), ACTIVE_PROJECT)
+        self.assertTrue((ROOT / "config" / "workflow.yaml").exists())
+        self.assertTrue(project_path("project.yaml").exists())
+
+    def test_literature_state_machine_schema_is_enforced(self) -> None:
+        schema = parse_state_schema(ROOT / "schemas" / "literature_state.schema.yaml")
+        states = set(schema["states"])
+        self.assertIn("reader-generated", states)
+        self.assertIn("verified", states)
+        self.assertTrue(transition_allowed(schema, "metadata-only", "fulltext-available"))
+        self.assertTrue(transition_allowed(schema, "skimmed", "human-read"))
+        self.assertFalse(transition_allowed(schema, "metadata-only", "manuscript-cited"))
+        self.assertEqual("vault/07_Codex_Logs/literature_events.jsonl", schema["event_log"])
+
     def test_required_entrypoints_exist_and_have_basic_html_scaffold(self) -> None:
         required = [
             ROOT / "study_dashboard.html",
@@ -95,9 +120,9 @@ class WorkflowSmokeTests(unittest.TestCase):
             ROOT / "project_collaboration.html",
             ROOT / "archive_policy.html",
             ROOT / "workflow_health.html",
-            ROOT / "projects" / "library_short_video" / "literature" / "incoming_pdf_triage.html",
-            ROOT / "projects" / "library_short_video" / "literature" / "evidence_locator_table.html",
-            ROOT / "projects" / "library_short_video" / "manuscript" / "writing_panel.html",
+            project_path("literature", "incoming_pdf_triage.html"),
+            project_path("literature", "evidence_locator_table.html"),
+            project_path("manuscript", "writing_panel.html"),
         ]
         for page in required:
             with self.subTest(page=page.relative_to(ROOT).as_posix()):
@@ -130,9 +155,9 @@ class WorkflowSmokeTests(unittest.TestCase):
             ROOT / "project_collaboration.html",
             ROOT / "archive_policy.html",
             ROOT / "workflow_health.html",
-            ROOT / "projects" / "library_short_video" / "literature" / "incoming_pdf_triage.html",
-            ROOT / "projects" / "library_short_video" / "literature" / "evidence_locator_table.html",
-            ROOT / "projects" / "library_short_video" / "manuscript" / "writing_panel.html",
+            project_path("literature", "incoming_pdf_triage.html"),
+            project_path("literature", "evidence_locator_table.html"),
+            project_path("manuscript", "writing_panel.html"),
         ]
         missing: list[str] = []
         for page in key_pages:
@@ -160,8 +185,13 @@ class WorkflowSmokeTests(unittest.TestCase):
         md_displays = [row["display_path"] for row in rows if row["display_path"].endswith(".md")]
         self.assertEqual([], md_displays)
 
+    def test_workflow_audit_report_records_mode(self) -> None:
+        report_path = ROOT / "vault" / "13_Knowledge_Graph" / "workflow_audit_report.json"
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        self.assertIn(report.get("audit_mode"), {"readonly", "refresh_then_audit"})
+
     def test_project_state_prioritizes_unread_incoming_candidates(self) -> None:
-        state = json.loads((ROOT / "projects" / "library_short_video" / "project_state.json").read_text(encoding="utf-8"))
+        state = json.loads(project_path("project_state.json").read_text(encoding="utf-8"))
         candidates = state["literature"]["next_reading_candidates"]
         self.assertGreaterEqual(len(candidates), 3)
         top_statuses = {candidate["read_status"] for candidate in candidates[:5]}
@@ -171,7 +201,7 @@ class WorkflowSmokeTests(unittest.TestCase):
 
     def test_incoming_triage_handles_copy_suffix_duplicates(self) -> None:
         self.assertEqual(duplicate_key("抖音阅读推广短视频传播效果影响因素研究_杨达森"), duplicate_key("抖音阅读推广短视频传播效果影响因素研究_杨达森 (1)"))
-        path = ROOT / "projects" / "library_short_video" / "literature" / "incoming_pdf_triage.csv"
+        path = project_path("literature", "incoming_pdf_triage.csv")
         rows = csv_rows(path)
         copy_rows = [row for row in rows if re.search(r"[\(（]\d+[\)）]", row["file_name"])]
         for row in copy_rows:
@@ -194,10 +224,10 @@ class WorkflowSmokeTests(unittest.TestCase):
         self.assertIn('let activeKind = "project_scope"', text)
 
     def test_evidence_locator_and_writing_panel_are_populated(self) -> None:
-        evidence = csv_rows(ROOT / "projects" / "library_short_video" / "literature" / "evidence_locator_table.csv")
+        evidence = csv_rows(project_path("literature", "evidence_locator_table.csv"))
         self.assertGreater(len(evidence), 10)
         self.assertTrue(all(row["locator_status"] in {"page_pending", "page_located_needs_human_check"} for row in evidence))
-        writing = read_text(ROOT / "projects" / "library_short_video" / "manuscript" / "writing_panel.html")
+        writing = read_text(project_path("manuscript", "writing_panel.html"))
         self.assertIn("Variable And Indicator Draft", writing)
         self.assertIn("Evidence Readiness", writing)
         self.assertNotIn("<p>|", writing)

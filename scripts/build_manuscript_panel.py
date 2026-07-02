@@ -8,6 +8,8 @@ import html
 import re
 from pathlib import Path
 
+from workflow_config import active_project_slug
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECTS = ROOT / "projects"
@@ -212,7 +214,7 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build a project manuscript production panel.")
-    parser.add_argument("--project", default="library_short_video")
+    parser.add_argument("--project", default=active_project_slug())
     args = parser.parse_args()
 
     project = PROJECTS / args.project

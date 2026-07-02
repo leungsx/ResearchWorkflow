@@ -1,0 +1,55 @@
+version: 1.0
+field: read_status
+states:
+  - metadata-only
+  - unread
+  - fulltext-available
+  - reader-generated
+  - skimmed
+  - human-read
+  - verified
+  - claim-linked
+  - manuscript-cited
+  - discarded
+accepted_for_manuscript_evidence:
+  - human-read
+  - verified
+  - claim-linked
+  - manuscript-cited
+blocked_for_manuscript_evidence:
+  - metadata-only
+  - unread
+  - fulltext-available
+  - reader-generated
+  - skimmed
+allowed_transitions:
+  metadata-only:
+    - fulltext-available
+    - discarded
+  unread:
+    - fulltext-available
+    - discarded
+  fulltext-available:
+    - reader-generated
+    - skimmed
+    - discarded
+  reader-generated:
+    - skimmed
+    - human-read
+    - discarded
+  skimmed:
+    - human-read
+    - verified
+    - discarded
+  human-read:
+    - verified
+    - claim-linked
+  verified:
+    - claim-linked
+    - manuscript-cited
+  claim-linked:
+    - manuscript-cited
+  manuscript-cited:
+    - verified
+  discarded: []
+event_log: vault/07_Codex_Logs/literature_events.jsonl

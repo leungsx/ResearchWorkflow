@@ -1,8 +1,17 @@
 workflow_name: ResearchWorkflow
 created_for: leung
 language: zh-CN
+active_project: library_short_video
+dashboard_projects:
+  - library_short_video
 default_target_journal: 图书情报工作
 default_journal_profile: docs/journal_profiles/tushuqingbaogongzuo.md
+
+projects:
+  library_short_video:
+    topic: 图书馆短视频相关研究
+    default_database: CNKI
+    incoming_pdf_dir: library/pdfs/library_short_video/incoming
 
 stages:
   - id: research_question

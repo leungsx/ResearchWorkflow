@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T14:33:12",
+  "generated_at": "2026-07-02T14:54:27",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -17,12 +17,12 @@
     "manifest_rows": 133,
     "search_entries": 133,
     "project_count": 2,
-    "git_dirty_paths": 0
+    "git_dirty_paths": 145
   },
   "audit": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 16,
+      "WARN": 2,
       "FAIL": 0
     },
     "checks": [
@@ -90,13 +90,13 @@
         "area": "备份",
         "status": "PASS",
         "title": "最近备份可用",
-        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 18.4 小时前。"
+        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 18.8 小时前。"
       },
       {
         "area": "Git/异地备份",
-        "status": "PASS",
-        "title": "Git 本地和远程快照状态正常",
-        "detail": "upstream=origin/main；last commit: fb559f2 2026-07-02 14:32:58 +0800 Refresh workflow audit after tests"
+        "status": "WARN",
+        "title": "存在尚未提交的 Git 改动",
+        "detail": "145 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M config/workflow.yaml； M docs/USABLE_FUNCTIONS_TEST_GUIDE.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html"
       },
       {
         "area": "Token/记忆",
@@ -106,9 +106,9 @@
       },
       {
         "area": "文件卫生",
-        "status": "PASS",
-        "title": "未发现常见系统/缓存文件",
-        "detail": "工作区较干净。"
+        "status": "WARN",
+        "title": "工作区存在系统/缓存文件",
+        "detail": "__pycache__=1；这些不会进入 file sweep，但可择机清理。"
       },
       {
         "area": "Schema",
@@ -120,7 +120,7 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "2 个开放行动。"
+        "detail": "3 个开放行动。"
       },
       {
         "area": "项目协作层",
@@ -425,6 +425,7 @@
     "Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
     "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
     "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
-    "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
+    "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
+    "择机处理 workflow-audit 的 WARN 项，尤其是 Git 快照和到期复习。"
   ]
 }

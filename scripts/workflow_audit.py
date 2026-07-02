@@ -659,12 +659,13 @@ def check_schema_validation(checks: list[Check]) -> None:
         add(checks, "Schema", "PASS", "核心机器状态 schema 校验通过", f"{len(report.checked_files)} 个文件通过校验。")
 
 
-def audit_report_payload(day: dt.date, checks: list[Check], md_path: Path, html_path: Path) -> dict[str, object]:
+def audit_report_payload(day: dt.date, checks: list[Check], md_path: Path, html_path: Path, audit_mode: str) -> dict[str, object]:
     counts = status_counts(checks)
     return {
         "schema_version": "1.0",
         "generated_at": dt.datetime.now().isoformat(timespec="seconds"),
         "date": day.isoformat(),
+        "audit_mode": audit_mode,
         "summary": {
             "counts": counts,
             "check_count": len(checks),
@@ -685,19 +686,20 @@ def audit_report_payload(day: dt.date, checks: list[Check], md_path: Path, html_
     }
 
 
-def write_audit_json(day: dt.date, checks: list[Check], md_path: Path, html_path: Path) -> Path:
+def write_audit_json(day: dt.date, checks: list[Check], md_path: Path, html_path: Path, audit_mode: str) -> Path:
     AUDIT_REPORT_JSON.parent.mkdir(parents=True, exist_ok=True)
-    payload = audit_report_payload(day, checks, md_path, html_path)
+    payload = audit_report_payload(day, checks, md_path, html_path, audit_mode)
     AUDIT_REPORT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return AUDIT_REPORT_JSON
 
 
-def markdown_report(day: dt.date, checks: list[Check]) -> str:
+def markdown_report(day: dt.date, checks: list[Check], audit_mode: str) -> str:
     counts = status_counts(checks)
     lines = [
         f"# Workflow Audit - {day.isoformat()}",
         "",
         f"Generated: {dt.datetime.now().isoformat(timespec='seconds')}",
+        f"Audit mode: `{audit_mode}`",
         f"Summary: PASS={counts['PASS']} WARN={counts['WARN']} FAIL={counts['FAIL']}",
         "",
         "## Checks",
@@ -724,7 +726,7 @@ def markdown_report(day: dt.date, checks: list[Check]) -> str:
     return "\n".join(lines)
 
 
-def html_report(day: dt.date, checks: list[Check]) -> str:
+def html_report(day: dt.date, checks: list[Check], audit_mode: str) -> str:
     counts = status_counts(checks)
     cards = "\n".join(
         f"""        <article class="check {check.status.lower()}">
@@ -777,7 +779,7 @@ def html_report(day: dt.date, checks: list[Check]) -> str:
   <header>
     <div class="wrap">
       <h1>ResearchWorkflow 体检</h1>
-      <p class="sub">Generated {dt.datetime.now().strftime("%Y-%m-%d %H:%M")} · PASS={counts['PASS']} WARN={counts['WARN']} FAIL={counts['FAIL']}</p>
+      <p class="sub">Generated {dt.datetime.now().strftime("%Y-%m-%d %H:%M")} · mode={html.escape(audit_mode)} · PASS={counts['PASS']} WARN={counts['WARN']} FAIL={counts['FAIL']}</p>
       <nav class="nav">
         <a href="study_dashboard.html">总览</a>
         <a href="paper_reading/today.html">今日精读</a>
@@ -806,38 +808,38 @@ def html_report(day: dt.date, checks: list[Check]) -> str:
 """
 
 
-def write_reports(day: dt.date, checks: list[Check]) -> tuple[Path, Path, Path]:
+def render_state_outputs(checks: list[Check], baseline_dirty_paths: int) -> None:
+    write_workflow_state(checks, git_dirty_paths=baseline_dirty_paths)
+    write_action_queue()
+    write_collaboration_state()
+    write_archive_policy()
+
+
+def write_reports(day: dt.date, checks: list[Check], refresh_state: bool) -> tuple[Path, Path, Path]:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     md_path = AUDIT_DIR / f"{day.isoformat()}-workflow-audit.md"
     baseline_dirty_paths = len([line for line in git_command(["status", "--porcelain"]).stdout.splitlines() if line.strip()])
+    audit_mode = "refresh_then_audit" if refresh_state else "readonly"
 
-    # Produce a preliminary machine report so schema validation can validate
-    # the unified audit JSON location during the same run.
-    write_workflow_state(checks, git_dirty_paths=baseline_dirty_paths)
-    write_action_queue()
-    write_collaboration_state()
-    write_archive_policy()
-    md_path.write_text(markdown_report(day, checks) + "\n", encoding="utf-8")
-    HEALTH_HTML.write_text(html_report(day, checks), encoding="utf-8")
-    write_audit_json(day, checks, md_path, HEALTH_HTML)
+    if refresh_state:
+        render_state_outputs(checks, baseline_dirty_paths)
+    md_path.write_text(markdown_report(day, checks, audit_mode) + "\n", encoding="utf-8")
+    HEALTH_HTML.write_text(html_report(day, checks, audit_mode), encoding="utf-8")
+    write_audit_json(day, checks, md_path, HEALTH_HTML, audit_mode)
 
     check_schema_validation(checks)
-    write_workflow_state(checks, git_dirty_paths=baseline_dirty_paths)
-    write_action_queue()
-    write_collaboration_state()
-    write_archive_policy()
+    if refresh_state:
+        render_state_outputs(checks, baseline_dirty_paths)
 
     check_action_queue(checks)
     check_collaboration_state(checks)
     check_archive_policy(checks)
-    write_workflow_state(checks, git_dirty_paths=baseline_dirty_paths)
-    write_action_queue()
-    write_collaboration_state()
-    write_archive_policy()
+    if refresh_state:
+        render_state_outputs(checks, baseline_dirty_paths)
 
-    md_path.write_text(markdown_report(day, checks) + "\n", encoding="utf-8")
-    HEALTH_HTML.write_text(html_report(day, checks), encoding="utf-8")
-    json_path = write_audit_json(day, checks, md_path, HEALTH_HTML)
+    md_path.write_text(markdown_report(day, checks, audit_mode) + "\n", encoding="utf-8")
+    HEALTH_HTML.write_text(html_report(day, checks, audit_mode), encoding="utf-8")
+    json_path = write_audit_json(day, checks, md_path, HEALTH_HTML, audit_mode)
     return md_path, HEALTH_HTML, json_path
 
 
@@ -845,11 +847,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Audit ResearchWorkflow usability, links, graph, archive, and backup health.")
     parser.add_argument("--date", help="YYYY-MM-DD; defaults to today")
     parser.add_argument("--strict", action="store_true", help="Return non-zero on WARN as well as FAIL.")
+    parser.add_argument("--readonly", action="store_true", help="Do not refresh workflow/action/collaboration/archive state before auditing.")
+    parser.add_argument("--refresh-state", action="store_true", help="Refresh workflow/action/collaboration/archive state during audit.")
     args = parser.parse_args()
 
     day = parse_date(args.date)
     checks = run_checks(day)
-    md_path, html_path, json_path = write_reports(day, checks)
+    refresh_state = args.refresh_state or not args.readonly
+    md_path, html_path, json_path = write_reports(day, checks, refresh_state=refresh_state)
     counts = status_counts(checks)
     print(f"Wrote workflow audit: {md_path}")
     print(f"Wrote workflow health page: {html_path}")

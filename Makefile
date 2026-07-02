@@ -1,8 +1,9 @@
-PYTHON ?= /Users/leung/anaconda3/bin/python
+PYTHON ?= python3
 PYTHONDONTWRITEBYTECODE ?= 1
 export PYTHONDONTWRITEBYTECODE
+ACTIVE_PROJECT ?= $(shell PYTHONDONTWRITEBYTECODE=1 $(PYTHON) scripts/get_active_project.py)
 
-.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-ensure review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate fast-status workflow-policy workflow-audit workflow-test workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate evidence-locators manuscript-panel incoming-triage citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
+.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-ensure review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate fast-status workflow-policy workflow-render workflow-audit-readonly workflow-audit-refresh workflow-audit workflow-test workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate evidence-locators manuscript-panel incoming-triage lit-transition citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
 
 check:
 	$(PYTHON) scripts/check_environment.py
@@ -11,7 +12,7 @@ new:
 	$(PYTHON) scripts/new_project.py "$(SLUG)" "$(TITLE)"
 
 status:
-	$(PYTHON) scripts/project_status.py --project "$(PROJECT)"
+	$(PYTHON) scripts/project_status.py --project "$(if $(PROJECT),$(PROJECT),$(ACTIVE_PROJECT))"
 
 project-state:
 	$(PYTHON) scripts/build_project_state.py $(if $(PROJECT),--project "$(PROJECT)",--all)
@@ -64,8 +65,20 @@ fast-status:
 workflow-policy:
 	$(PYTHON) scripts/research_fastlane.py policy
 
-workflow-audit:
-	$(PYTHON) scripts/workflow_audit.py $(if $(DATE),--date "$(DATE)",) $(if $(STRICT),--strict,)
+workflow-render:
+	$(MAKE) workflow-state
+	$(MAKE) action-queue
+	$(MAKE) collaboration-state
+	$(MAKE) archive-policy
+
+workflow-audit-readonly:
+	$(PYTHON) scripts/workflow_audit.py --readonly $(if $(DATE),--date "$(DATE)",) $(if $(STRICT),--strict,)
+
+workflow-audit-refresh:
+	$(MAKE) workflow-render
+	$(MAKE) workflow-audit-readonly $(if $(DATE),DATE="$(DATE)",) $(if $(STRICT),STRICT=1,)
+
+workflow-audit: workflow-audit-readonly
 
 workflow-test:
 	$(PYTHON) scripts/workflow_tests.py
@@ -104,16 +117,19 @@ backfill-all:
 	$(PYTHON) scripts/backfill_project.py --all $(if $(APPLY),--apply,)
 
 evidence-gate:
-	$(PYTHON) scripts/evidence_gate.py --project "$(PROJECT)" $(if $(STRICT),--fail-on-errors,)
+	$(PYTHON) scripts/evidence_gate.py --project "$(if $(PROJECT),$(PROJECT),$(ACTIVE_PROJECT))" $(if $(STRICT),--fail-on-errors,)
 
 evidence-locators:
-	$(PYTHON) scripts/build_evidence_locators.py --project "$(if $(PROJECT),$(PROJECT),library_short_video)"
+	$(PYTHON) scripts/build_evidence_locators.py --project "$(if $(PROJECT),$(PROJECT),$(ACTIVE_PROJECT))"
 
 manuscript-panel:
-	$(PYTHON) scripts/build_manuscript_panel.py --project "$(if $(PROJECT),$(PROJECT),library_short_video)"
+	$(PYTHON) scripts/build_manuscript_panel.py --project "$(if $(PROJECT),$(PROJECT),$(ACTIVE_PROJECT))"
 
 incoming-triage:
-	$(PYTHON) scripts/scan_incoming_pdfs.py --project "$(if $(PROJECT),$(PROJECT),library_short_video)" $(if $(INCOMING),--incoming-dir "$(INCOMING)",)
+	$(PYTHON) scripts/scan_incoming_pdfs.py --project "$(if $(PROJECT),$(PROJECT),$(ACTIVE_PROJECT))" $(if $(INCOMING),--incoming-dir "$(INCOMING)",)
+
+lit-transition:
+	$(PYTHON) scripts/transition_literature_state.py --citekey "$(CITEKEY)" --to "$(TO)" $(if $(FROM),--from-status "$(FROM)",) $(if $(REASON),--reason "$(REASON)",) $(if $(EVIDENCE),--evidence "$(EVIDENCE)",) $(if $(PROJECT),--project "$(PROJECT)",) $(if $(DRY),--dry-run,)
 
 citation-audit:
 	$(PYTHON) scripts/audit_references_gbt7714.py --project "$(PROJECT)" $(if $(STRICT),--fail-on-errors,)
@@ -243,9 +259,9 @@ obsidian-graph:
 	$(PYTHON) scripts/obsidian_graph_export.py
 
 learning-dashboard:
-	$(PYTHON) scripts/scan_incoming_pdfs.py --project "library_short_video"
-	$(PYTHON) scripts/build_evidence_locators.py --project "library_short_video"
-	$(PYTHON) scripts/build_manuscript_panel.py --project "library_short_video"
+	$(PYTHON) scripts/scan_incoming_pdfs.py --project "$(ACTIVE_PROJECT)"
+	$(PYTHON) scripts/build_evidence_locators.py --project "$(ACTIVE_PROJECT)"
+	$(PYTHON) scripts/build_manuscript_panel.py --project "$(ACTIVE_PROJECT)"
 	$(PYTHON) scripts/build_project_state.py --all
 	$(PYTHON) scripts/build_workflow_state.py
 	$(PYTHON) scripts/build_action_queue.py

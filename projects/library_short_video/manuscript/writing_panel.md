@@ -1,6 +1,6 @@
 # Manuscript Production Panel
 
-Generated: 2026-07-02T14:31:42
+Generated: 2026-07-02T14:54:26
 Project: `library_short_video`
 
 ## Current Manuscript Direction

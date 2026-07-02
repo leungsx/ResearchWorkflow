@@ -65,6 +65,14 @@ from rendering.routes import (
 from rendering.review import build_review_state as build_review_state_payload
 from rendering.review import write_review_state
 from rendering.search import build_search_index, write_search_index
+from workflow_config import active_project_slug
+
+
+ACTIVE_PROJECT = active_project_slug()
+
+
+def active_project_path(*parts: str) -> Path:
+    return ROOT / "projects" / ACTIVE_PROJECT / Path(*parts)
 
 
 def due_reviews() -> list[dict[str, str]]:
@@ -372,9 +380,9 @@ def common_css() -> str:
 
 def shell(title: str, subtitle: str, current: str, body: str, output: Path) -> str:
     generated = dt.datetime.now().strftime("%Y-%m-%d %H:%M")
-    evidence_page = ROOT / "projects" / "library_short_video" / "literature" / "evidence_locator_table.html"
-    incoming_page = ROOT / "projects" / "library_short_video" / "literature" / "incoming_pdf_triage.html"
-    writing_page = ROOT / "projects" / "library_short_video" / "manuscript" / "writing_panel.html"
+    evidence_page = active_project_path("literature", "evidence_locator_table.html")
+    incoming_page = active_project_path("literature", "incoming_pdf_triage.html")
+    writing_page = active_project_path("manuscript", "writing_panel.html")
     nav = [
         ("总览", ROOT / "study_dashboard.html"),
         ("今日精读", PAPER_READING / "today.html"),
@@ -441,9 +449,9 @@ def item_list(paths: list[Path], output: Path, color: str = "") -> str:
 
 def build_dashboard() -> None:
     out = ROOT / "study_dashboard.html"
-    evidence_page = ROOT / "projects" / "library_short_video" / "literature" / "evidence_locator_table.html"
-    incoming_page = ROOT / "projects" / "library_short_video" / "literature" / "incoming_pdf_triage.html"
-    writing_page = ROOT / "projects" / "library_short_video" / "manuscript" / "writing_panel.html"
+    evidence_page = active_project_path("literature", "evidence_locator_table.html")
+    incoming_page = active_project_path("literature", "incoming_pdf_triage.html")
+    writing_page = active_project_path("manuscript", "writing_panel.html")
     pages = paper_pages()
     log_pages = list_html(HTML_LOGS)
     concepts = list_md(CONCEPTS)
@@ -1770,7 +1778,7 @@ def build_graph_index() -> None:
       const stats = document.getElementById("graphStats");
       const buttons = Array.from(document.querySelectorAll("[data-kind]"));
       const nodeMap = new Map(graphData.nodes.map((node) => [node.id, node]));
-      const mainProjectId = "library_short_video";
+      const mainProjectId = "{esc(ACTIVE_PROJECT)}";
       const coreKinds = new Set(["literature", "concept", "method", "project"]);
       const palette = {
         literature: "#2463eb",

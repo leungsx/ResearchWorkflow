@@ -40,7 +40,7 @@
   <header>
     <div class="wrap">
       <h1>ResearchWorkflow 体检</h1>
-      <p class="sub">Generated 2026-07-02 14:33 · PASS=18 WARN=0 FAIL=0</p>
+      <p class="sub">Generated 2026-07-02 14:54 · mode=readonly · PASS=17 WARN=1 FAIL=0</p>
       <nav class="nav">
         <a href="study_dashboard.html">总览</a>
         <a href="paper_reading/today.html">今日精读</a>
@@ -57,8 +57,8 @@
   </header>
   <main class="wrap">
     <section class="metrics">
-      <div class="metric"><b>18</b><span>通过</span></div>
-      <div class="metric"><b>0</b><span>提醒</span></div>
+      <div class="metric"><b>17</b><span>通过</span></div>
+      <div class="metric"><b>1</b><span>提醒</span></div>
       <div class="metric"><b>0</b><span>失败</span></div>
     </section>
     <section class="checks">        <article class="check pass">
@@ -125,13 +125,13 @@
           <div class="status">PASS</div>
           <h2>最近备份可用</h2>
           <p class="area">备份</p>
-          <p>backups/researchworkflow-critical-20260701-200737.zip，约 18.4 小时前。</p>
+          <p>backups/researchworkflow-critical-20260701-200737.zip，约 18.8 小时前。</p>
         </article>
-        <article class="check pass">
-          <div class="status">PASS</div>
-          <h2>Git 本地和远程快照状态正常</h2>
+        <article class="check warn">
+          <div class="status">WARN</div>
+          <h2>存在尚未提交的 Git 改动</h2>
           <p class="area">Git/异地备份</p>
-          <p>upstream=origin/main；last commit: fb559f2 2026-07-02 14:32:58 +0800 Refresh workflow audit after tests</p>
+          <p>145 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M config/workflow.yaml； M docs/USABLE_FUNCTIONS_TEST_GUIDE.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
@@ -155,7 +155,7 @@
           <div class="status">PASS</div>
           <h2>行动队列可用且入口有效</h2>
           <p class="area">行动队列</p>
-          <p>2 个开放行动。</p>
+          <p>3 个开放行动。</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>

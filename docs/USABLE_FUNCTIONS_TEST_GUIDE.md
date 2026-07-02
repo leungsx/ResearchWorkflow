@@ -60,6 +60,31 @@ make workflow-test
 
 这条命令只读当前产物，不刷新页面、不改 CSV、不提交 Git。每次运行 `make learning-dashboard`、`make incoming-triage` 或改展示层脚本后，建议先跑它，再跑 schema 和 audit。
 
+### 1.0.1 审计与渲染分层
+
+用途：把“刷新状态页”和“检查当前状态”分开。
+
+```bash
+make workflow-render
+make workflow-audit-readonly
+make workflow-audit
+```
+
+- `workflow-render`：刷新总状态、行动队列、协作层和归档策略，有副作用。
+- `workflow-audit-readonly`：只读检查当前产物，只写审计报告和体检页。
+- `workflow-audit`：日常组合命令，先 render，再 readonly audit。
+
+### 1.0.2 文献状态机
+
+用途：通过正式状态流转更新 `library/literature_matrix.csv` 的 `read_status`，并写入事件日志。
+
+```bash
+make lit-transition CITEKEY=cnki_2024_xxx FROM=metadata-only TO=fulltext-available REASON="Authorized PDF added"
+make lit-transition CITEKEY=cnki_2024_xxx FROM=skimmed TO=human-read REASON="Finished close reading" EVIDENCE="Reader notes checked"
+```
+
+状态规则见 `docs/STATE_MACHINE.md`。
+
 ### 1.1 基础环境
 
 用途：确认 Python、R、Pandoc、Gephi、Typora、PDF 解析包是否可用。

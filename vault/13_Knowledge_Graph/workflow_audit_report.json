@@ -1,11 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T14:33:12",
+  "generated_at": "2026-07-02T14:54:52",
   "date": "2026-07-02",
+  "audit_mode": "readonly",
   "summary": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "check_count": 18
@@ -79,13 +80,13 @@
       "area": "备份",
       "status": "PASS",
       "title": "最近备份可用",
-      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 18.4 小时前。"
+      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 18.8 小时前。"
     },
     {
       "area": "Git/异地备份",
-      "status": "PASS",
-      "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: fb559f2 2026-07-02 14:32:58 +0800 Refresh workflow audit after tests"
+      "status": "WARN",
+      "title": "存在尚未提交的 Git 改动",
+      "detail": "145 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M config/workflow.yaml； M docs/USABLE_FUNCTIONS_TEST_GUIDE.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html"
     },
     {
       "area": "Token/记忆",
@@ -109,7 +110,7 @@
       "area": "行动队列",
       "status": "PASS",
       "title": "行动队列可用且入口有效",
-      "detail": "2 个开放行动。"
+      "detail": "3 个开放行动。"
     },
     {
       "area": "项目协作层",

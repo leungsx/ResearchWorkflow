@@ -10,6 +10,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+from workflow_config import active_project_slug
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECTS = ROOT / "projects"
@@ -325,7 +327,7 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build a project-level evidence locator table from Readers and synthesis claims.")
-    parser.add_argument("--project", default="library_short_video")
+    parser.add_argument("--project", default=active_project_slug())
     args = parser.parse_args()
 
     project = PROJECTS / args.project
