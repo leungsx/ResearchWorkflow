@@ -1,10 +1,10 @@
 # Workflow Audit - 2026-07-02
 
-Generated: 2026-07-02T20:49:27
+Generated: 2026-07-02T20:51:08
 Audit mode: `readonly`
 Pre-refresh state hash: `7b85bb32901273dae49c40ed4f9919bba44d213ba0de9bde54a4f26dddac46c9`
 Post-refresh state hash: `7b85bb32901273dae49c40ed4f9919bba44d213ba0de9bde54a4f26dddac46c9`
-Summary: PASS=17 WARN=1 FAIL=0
+Summary: PASS=18 WARN=0 FAIL=0
 
 ## Checks
 
@@ -21,7 +21,7 @@ Summary: PASS=17 WARN=1 FAIL=0
 | 项目状态 | PASS | 项目状态文件可供自动化读取 | 2 个项目。 |
 | 复习队列 | PASS | 今日无积压复习项 | 队列共 24 项。 |
 | 备份 | PASS | 最近备份可用 | backups/researchworkflow-critical-20260701-200737.zip，约 24.7 小时前。 |
-| Git/异地备份 | WARN | 存在尚未提交的 Git 改动 | 135 个路径待快照： M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-4358f2f5.html； M knowledge_cards/views/concept-44250b7b.html |
+| Git/异地备份 | PASS | Git 本地和远程快照状态正常 | upstream=origin/main；last commit: 79ec3b2 2026-07-02 20:50:03 +0800 Connect claim evidence to writing panel |
 | Token/记忆 | PASS | 今日 compact summary 可作为默认启动上下文 | vault/07_Codex_Logs/compact_daily/2026-07-02-summary.md，约 88 words。 |
 | 文件卫生 | PASS | 未发现常见系统/缓存文件 | 工作区较干净。 |
 | Schema | PASS | 核心机器状态 schema 校验通过 | 13 个文件通过校验。 |
