@@ -146,6 +146,7 @@ def validate_claim_evidence_links(path: Path, issues: list[SchemaIssue], checked
     checked.append(rel(path))
     expected = schema_list(CLAIM_EVIDENCE_LINKS_SCHEMA, "field_order")
     required = set(schema_list(CLAIM_EVIDENCE_LINKS_SCHEMA, "required_fields"))
+    usage_values = set(schema_list(CLAIM_EVIDENCE_LINKS_SCHEMA, "evidence_usage_status_values"))
     if not path.exists():
         add(issues, path, "FAIL", "claim_evidence_links.csv 缺失")
         return
@@ -166,6 +167,9 @@ def validate_claim_evidence_links(path: Path, issues: list[SchemaIssue], checked
         seen.add(key)
         if str(row.get("used_in_manuscript", "")).strip().lower() not in {"true", "false"}:
             add(issues, path, "FAIL", f"第 {index} 行 used_in_manuscript 必须是 true/false")
+        usage = str(row.get("evidence_usage_status", "")).strip()
+        if usage_values and usage not in usage_values:
+            add(issues, path, "FAIL", f"第 {index} 行 evidence_usage_status 非法：{usage}")
 
 
 def validate_artifact_manifest(path: Path, issues: list[SchemaIssue], checked: list[str]) -> None:
@@ -325,7 +329,7 @@ def validate_writing_traceability(path: Path, issues: list[SchemaIssue], checked
             if not isinstance(item, dict):
                 add(issues, path, "FAIL", f"top_verification_tasks[{index}] 必须是对象")
                 continue
-            require_keys(item, path, f"top_verification_tasks[{index}]", ["task_id", "priority", "verification_status", "claim_id", "citekey", "source_block_id", "page", "read_status", "next_action"], issues)
+            require_keys(item, path, f"top_verification_tasks[{index}]", ["task_id", "priority", "verification_status", "claim_id", "citekey", "source_block_id", "page", "read_status", "evidence_usage_status", "next_action"], issues)
     for list_key, required in [
         ("research_question_traces", ["slot", "question", "linked_claims", "source_trace", "readiness"]),
         ("variable_traces", ["layer", "candidate_indicators", "linked_claims", "source_trace", "boundary"]),
@@ -361,6 +365,7 @@ def validate_page_verification_queue(path: Path, issues: list[SchemaIssue], chec
     if isinstance(summary, dict) and summary.get("total_items") != len(items):
         add(issues, path, "FAIL", f"summary.total_items 与 items 长度不一致：{summary.get('total_items')} / {len(items)}")
     allowed_statuses = {"needs_page_locator", "needs_page_check", "needs_human_read", "ready_for_manuscript_review"}
+    usage_values = set(schema_list(CLAIM_EVIDENCE_LINKS_SCHEMA, "evidence_usage_status_values"))
     required = [
         "task_id",
         "priority",
@@ -372,6 +377,7 @@ def validate_page_verification_queue(path: Path, issues: list[SchemaIssue], chec
         "page",
         "locator_status",
         "read_status",
+        "evidence_usage_status",
         "used_in_manuscript",
         "risk",
         "source_path",
@@ -389,6 +395,9 @@ def validate_page_verification_queue(path: Path, issues: list[SchemaIssue], chec
             add(issues, path, "FAIL", f"items[{index}].priority 必须是数字字符串")
         if str(item.get("used_in_manuscript", "")).lower() not in {"true", "false"}:
             add(issues, path, "FAIL", f"items[{index}].used_in_manuscript 必须是 true/false")
+        usage = str(item.get("evidence_usage_status", "")).strip()
+        if usage_values and usage not in usage_values:
+            add(issues, path, "FAIL", f"items[{index}].evidence_usage_status 非法：{usage}")
         display = str(item.get("reader_display_path", ""))
         if display:
             require_existing_html(display, path, f"items[{index}].reader_display_path", issues)
@@ -561,6 +570,8 @@ def validate_workflow_schemas(include_audit_report: bool = True) -> SchemaReport
     for path in sorted(PROJECTS.glob("*/project_state.json")):
         validators.append((path, validate_project_state))
     for path in sorted(PROJECTS.glob("*/evidence/claim_evidence_links.csv")):
+        validators.append((path, validate_claim_evidence_links))
+    for path in sorted(PROJECTS.glob("*/evidence/claim_evidence_candidates.csv")):
         validators.append((path, validate_claim_evidence_links))
     for path in sorted(PROJECTS.glob("*/evidence/page_verification_queue.json")):
         validators.append((path, validate_page_verification_queue))

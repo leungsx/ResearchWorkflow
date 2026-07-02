@@ -26,4 +26,4 @@ make experiment PROJECT=library_short_video NAME=pilot INPUTS="data/processed/in
 - `human-validated`: the user has read the relevant source and can explain the claim boundary.
 - `publication-ready`: the source has page/table/locator checks and is linked to a claim or manuscript passage.
 
-Use `projects/<slug>/evidence/claim_evidence_links.csv` for structured claim-source links. Keep Markdown maps for human reading, but use CSV for audit and downstream writing checks.
+Use `projects/<slug>/evidence/claim_evidence_candidates.csv` as the auto-generated candidate table. Use `projects/<slug>/evidence/claim_evidence_links.csv` as the protected working table for human evidence decisions; refresh syncs append new candidate rows but preserves existing `evidence_usage_status`, `used_in_manuscript`, and strength/risk judgments.

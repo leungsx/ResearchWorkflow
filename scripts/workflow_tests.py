@@ -105,10 +105,24 @@ class WorkflowSmokeTests(unittest.TestCase):
         states = set(schema["states"])
         self.assertIn("reader-generated", states)
         self.assertIn("verified", states)
+        self.assertNotIn("claim-linked", states)
+        self.assertNotIn("manuscript-cited", states)
         self.assertTrue(transition_allowed(schema, "metadata-only", "fulltext-available"))
         self.assertTrue(transition_allowed(schema, "skimmed", "human-read"))
         self.assertFalse(transition_allowed(schema, "metadata-only", "manuscript-cited"))
+        self.assertFalse(transition_allowed(schema, "verified", "claim-linked"))
         self.assertEqual("vault/07_Codex_Logs/literature_events.jsonl", schema["event_log"])
+
+    def test_workflow_config_reads_nested_project_rules(self) -> None:
+        config = read_workflow_config()
+        self.assertIsInstance(config.get("projects"), dict)
+        projects = config.get("projects", {})
+        self.assertIn(ACTIVE_PROJECT, projects)
+        active_project = projects[ACTIVE_PROJECT]
+        self.assertIsInstance(active_project, dict)
+        self.assertIn("incoming_pdf_dir", active_project)
+        self.assertIsInstance(config.get("rules"), dict)
+        self.assertEqual("every_core_claim_requires_traceable_evidence", config["rules"]["manuscript_policy"])
 
     def test_required_entrypoints_exist_and_have_basic_html_scaffold(self) -> None:
         required = [
@@ -218,6 +232,7 @@ class WorkflowSmokeTests(unittest.TestCase):
                 "page",
                 "locator_status",
                 "read_status",
+                "evidence_usage_status",
                 "strength",
                 "risk",
                 "used_in_manuscript",
@@ -226,6 +241,16 @@ class WorkflowSmokeTests(unittest.TestCase):
             list(rows[0].keys()),
         )
         self.assertTrue(all(row["used_in_manuscript"] in {"true", "false"} for row in rows))
+        self.assertTrue(all(row["evidence_usage_status"] in {"not-used", "candidate", "claim-linked", "manuscript-cited", "submission-evidence"} for row in rows))
+
+    def test_claim_evidence_candidates_do_not_replace_protected_links(self) -> None:
+        candidates = csv_rows(project_path("evidence", "claim_evidence_candidates.csv"))
+        links = csv_rows(project_path("evidence", "claim_evidence_links.csv"))
+        self.assertEqual(len(candidates), len(links))
+        self.assertEqual(list(candidates[0].keys()), list(links[0].keys()))
+        candidate_keys = {(row["claim_id"], row["citekey"], row["source_block_id"]) for row in candidates}
+        link_keys = {(row["claim_id"], row["citekey"], row["source_block_id"]) for row in links}
+        self.assertTrue(candidate_keys <= link_keys)
 
     def test_page_verification_queue_connects_claims_to_sources(self) -> None:
         csv_path = project_path("evidence", "page_verification_queue.csv")
@@ -239,7 +264,7 @@ class WorkflowSmokeTests(unittest.TestCase):
         self.assertEqual(len(rows), queue["summary"]["total_items"])
         self.assertEqual(len(rows), len(queue["items"]))
         self.assertIn("needs_page_locator", {row["verification_status"] for row in rows})
-        for field in ["claim_id", "citekey", "source_block_id", "page", "read_status", "next_action"]:
+        for field in ["claim_id", "citekey", "source_block_id", "page", "read_status", "evidence_usage_status", "next_action"]:
             self.assertIn(field, rows[0])
         html_text = read_text(html_path)
         self.assertIn("Claim -> Source Block -> Page -> Read Status", html_text)
@@ -314,6 +339,7 @@ class WorkflowSmokeTests(unittest.TestCase):
         self.assertGreater(trace["summary"]["claim_link_rows"], 10)
         self.assertGreater(trace["verification_queue_summary"]["total_items"], 10)
         self.assertGreaterEqual(len(trace["top_verification_tasks"]), 3)
+        self.assertIn("evidence_usage_status", trace["top_verification_tasks"][0])
         self.assertGreaterEqual(len(trace["research_question_traces"]), 3)
         self.assertGreaterEqual(len(trace["variable_traces"]), 4)
         self.assertGreaterEqual(len(trace["paragraph_traces"]), 4)

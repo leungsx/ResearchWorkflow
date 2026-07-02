@@ -12,6 +12,7 @@ field_order:
   - page
   - locator_status
   - read_status
+  - evidence_usage_status
   - strength
   - risk
   - used_in_manuscript
@@ -24,4 +25,11 @@ required_fields:
   - source_block_id
   - locator_status
   - read_status
+  - evidence_usage_status
   - used_in_manuscript
+evidence_usage_status_values:
+  - not-used
+  - candidate
+  - claim-linked
+  - manuscript-cited
+  - submission-evidence

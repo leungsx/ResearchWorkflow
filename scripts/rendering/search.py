@@ -8,6 +8,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from workflow_config import active_project_slug
 from rendering.manifest import artifact_manifest_rows
 from rendering.paths import ROOT, SEARCH_INDEX_JSON, read_text
 
@@ -40,7 +41,7 @@ TYPE_WEIGHTS = {
     "markdown_view": 75,
     "directory_view": 45,
 }
-SEARCH_TEXT_LIMIT = 8000
+SEARCH_TEXT_LIMIT = 3000
 
 
 def clean_text(value: str) -> str:
@@ -93,14 +94,15 @@ def date_for(*values: str) -> str:
 
 
 def project_for(source_path: str, display_path: str) -> str:
+    active_project = active_project_slug()
     for value in [source_path, display_path]:
         parts = Path(value).parts
         if "projects" in parts:
             index = parts.index("projects")
             if index + 1 < len(parts):
                 return parts[index + 1]
-        if "library_short_video" in value:
-            return "library_short_video"
+        if active_project and active_project in value:
+            return active_project
     return ""
 
 
@@ -190,5 +192,19 @@ def build_search_index(rows: list[dict[str, str]] | None = None) -> dict[str, An
 def write_search_index(rows: list[dict[str, str]] | None = None) -> Path:
     SEARCH_INDEX_JSON.parent.mkdir(parents=True, exist_ok=True)
     payload = build_search_index(rows)
-    SEARCH_INDEX_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if SEARCH_INDEX_JSON.exists():
+        try:
+            previous = json.loads(SEARCH_INDEX_JSON.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            previous = {}
+        comparable_previous = dict(previous)
+        comparable_payload = dict(payload)
+        comparable_previous.pop("generated_at", None)
+        comparable_payload.pop("generated_at", None)
+        if comparable_previous == comparable_payload and isinstance(previous.get("generated_at"), str):
+            payload["generated_at"] = previous["generated_at"]
+    content = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+    if SEARCH_INDEX_JSON.exists() and SEARCH_INDEX_JSON.read_text(encoding="utf-8") == content:
+        return SEARCH_INDEX_JSON
+    SEARCH_INDEX_JSON.write_text(content, encoding="utf-8")
     return SEARCH_INDEX_JSON

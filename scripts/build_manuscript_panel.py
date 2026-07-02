@@ -17,7 +17,8 @@ from workflow_config import active_project_slug
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECTS = ROOT / "projects"
-READY_READ_STATUSES = {"human-read", "verified", "claim-linked", "manuscript-cited"}
+READY_READ_STATUSES = {"human-read", "verified"}
+CRITICAL_USAGE_STATUSES = {"claim-linked", "manuscript-cited", "submission-evidence"}
 VERIFICATION_FIELDS = [
     "task_id",
     "priority",
@@ -30,6 +31,7 @@ VERIFICATION_FIELDS = [
     "page",
     "locator_status",
     "read_status",
+    "evidence_usage_status",
     "used_in_manuscript",
     "risk",
     "source_path",
@@ -112,6 +114,15 @@ def truthy(value: str) -> bool:
     return clean(value).lower() in {"1", "true", "yes", "y"}
 
 
+def evidence_usage_status(row: dict[str, str]) -> str:
+    explicit = clean(row.get("evidence_usage_status", ""))
+    if explicit:
+        return explicit
+    if truthy(row.get("used_in_manuscript", "")):
+        return "manuscript-cited"
+    return "candidate"
+
+
 def slug(value: str) -> str:
     text = re.sub(r"[^a-zA-Z0-9]+", "-", value).strip("-").lower()
     return text or "item"
@@ -145,7 +156,8 @@ def verification_status(row: dict[str, str]) -> str:
 def verification_priority(row: dict[str, str]) -> int:
     score = 10
     status = verification_status(row)
-    if truthy(row.get("used_in_manuscript", "")):
+    usage = evidence_usage_status(row)
+    if usage in CRITICAL_USAGE_STATUSES or truthy(row.get("used_in_manuscript", "")):
         score += 100
     if status == "needs_page_locator":
         score += 50
@@ -190,6 +202,7 @@ def verification_queue_rows(project: Path) -> list[dict[str, str]]:
                 "page": clean(row.get("page", "")),
                 "locator_status": clean(row.get("locator_status", "")),
                 "read_status": clean(row.get("read_status", "")),
+                "evidence_usage_status": evidence_usage_status(row),
                 "used_in_manuscript": clean(row.get("used_in_manuscript", "")).lower() or "false",
                 "risk": clean(row.get("risk", "")),
                 "source_path": clean(row.get("source_path", "")),
@@ -396,7 +409,7 @@ def traceability_payload(project_slug: str, project: Path, queue_rows: list[dict
         },
         "verification_queue_summary": verification_summary(queue_rows),
         "top_verification_tasks": [
-            {key: item[key] for key in ["task_id", "priority", "verification_status", "claim_id", "citekey", "source_block_id", "page", "read_status", "next_action"]}
+            {key: item[key] for key in ["task_id", "priority", "verification_status", "claim_id", "citekey", "source_block_id", "page", "read_status", "evidence_usage_status", "next_action"]}
             for item in queue_rows[:8]
         ],
         "research_question_traces": question_traces,
@@ -443,7 +456,7 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
           <td>{html.escape(row['title'] or row['citekey'])}<br><code>{html.escape(row['citekey'])}</code></td>
           <td>{source_cell(row)}</td>
           <td>{html.escape(row['page'] or '待补')}</td>
-          <td><code>{html.escape(row['verification_status'])}</code><br><span>{html.escape(row['read_status'])}</span></td>
+          <td><code>{html.escape(row['verification_status'])}</code><br><span>{html.escape(row['read_status'])} / {html.escape(row['evidence_usage_status'])}</span></td>
           <td>{html.escape(row['next_action'])}</td>
           <td>{html.escape(row['snippet'])}</td>
         </tr>
@@ -661,7 +674,7 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
     lines.extend(["", "## Top Verification Tasks", ""])
     lines.extend(
         md_table(
-            [["Task", "Claim", "Source block", "Page", "Read status", "Next action"]]
+            [["Task", "Claim", "Source block", "Page", "Read status", "Usage status", "Next action"]]
             + [
                 [
                     str(item["task_id"]),
@@ -669,6 +682,7 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
                     str(item["source_block_id"]),
                     str(item["page"] or "待补"),
                     str(item["read_status"]),
+                    str(item["evidence_usage_status"]),
                     str(item["next_action"]),
                 ]
                 for item in trace["top_verification_tasks"]

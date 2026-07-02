@@ -35,8 +35,6 @@ read_status_values:
   - skimmed
   - human-read
   - verified
-  - claim-linked
-  - manuscript-cited
   - discarded
 path_fields:
   - note_path

@@ -1,6 +1,6 @@
 # Manuscript Production Panel
 
-Generated: 2026-07-02T21:03:02
+Generated: 2026-07-02T21:32:22
 Project: `library_short_video`
 
 ## Current Manuscript Direction
@@ -80,16 +80,16 @@ Project: `library_short_video`
 
 ## Top Verification Tasks
 
-| Task                                   | Claim | Source block               | Page | Read status | Next action                                                    |
-| -------------------------------------- | ----- | -------------------------- | ---- | ----------- | -------------------------------------------------------------- |
-| verify-c001-cnki-2021-d35f8e895a-b0006 | C001  | cnki_2021_d35f8e895a:B0006 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
-| verify-c001-cnki-2021-d35f8e895a-b0009 | C001  | cnki_2021_d35f8e895a:B0009 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
-| verify-c001-cnki-2021-d35f8e895a-b0010 | C001  | cnki_2021_d35f8e895a:B0010 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
-| verify-c001-cnki-2021-d35f8e895a-b0011 | C001  | cnki_2021_d35f8e895a:B0011 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
-| verify-c002-cnki-2021-dfab60236e-b0004 | C002  | cnki_2021_dfab60236e:B0004 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
-| verify-c002-cnki-2021-dfab60236e-b0008 | C002  | cnki_2021_dfab60236e:B0008 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
-| verify-c002-cnki-2021-dfab60236e-b0010 | C002  | cnki_2021_dfab60236e:B0010 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
-| verify-c002-cnki-2021-dfab60236e-b0013 | C002  | cnki_2021_dfab60236e:B0013 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
+| Task                                   | Claim | Source block               | Page | Read status | Usage status | Next action                                                    |
+| -------------------------------------- | ----- | -------------------------- | ---- | ----------- | ------------ | -------------------------------------------------------------- |
+| verify-c001-cnki-2021-d35f8e895a-b0006 | C001  | cnki_2021_d35f8e895a:B0006 | 待补   | skimmed     | candidate    | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c001-cnki-2021-d35f8e895a-b0009 | C001  | cnki_2021_d35f8e895a:B0009 | 待补   | skimmed     | candidate    | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c001-cnki-2021-d35f8e895a-b0010 | C001  | cnki_2021_d35f8e895a:B0010 | 待补   | skimmed     | candidate    | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c001-cnki-2021-d35f8e895a-b0011 | C001  | cnki_2021_d35f8e895a:B0011 | 待补   | skimmed     | candidate    | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c002-cnki-2021-dfab60236e-b0004 | C002  | cnki_2021_dfab60236e:B0004 | 待补   | skimmed     | candidate    | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c002-cnki-2021-dfab60236e-b0008 | C002  | cnki_2021_dfab60236e:B0008 | 待补   | skimmed     | candidate    | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c002-cnki-2021-dfab60236e-b0010 | C002  | cnki_2021_dfab60236e:B0010 | 待补   | skimmed     | candidate    | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c002-cnki-2021-dfab60236e-b0013 | C002  | cnki_2021_dfab60236e:B0013 | 待补   | skimmed     | candidate    | Open original PDF/Reader and fill exact page or table locator. |
 
 ## Next Writing Actions
 

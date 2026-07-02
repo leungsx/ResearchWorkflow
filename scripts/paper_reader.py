@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROJECTS = ROOT / "projects"
 MATRIX = ROOT / "library" / "literature_matrix.csv"
 LIBRARY_READERS = ROOT / "library" / "readers"
+READER_GENERATED_FROM = {"fulltext-available"}
 
 
 def load_rows(matrix: Path) -> list[dict[str, str]]:
@@ -220,24 +221,34 @@ def render_notes(row: dict[str, str], source: Path, source_type: str, block_coun
     )
 
 
-def update_matrix(matrix: Path, citekey: str, paper_path: Path, source: Path, source_type: str) -> None:
+def update_matrix(matrix: Path, citekey: str, paper_path: Path, source: Path, source_type: str) -> str:
     rows = load_rows(matrix)
     if not rows:
-        return
+        return ""
     fieldnames = list(rows[0].keys())
     changed = False
+    status_message = ""
     for row in rows:
         if row.get("citekey") != citekey:
             continue
         row["note_path"] = str(paper_path)
         if source_type == "pdf":
             row["pdf_path"] = str(source)
+        current = (row.get("read_status") or "").strip()
+        if current in READER_GENERATED_FROM:
+            row["read_status"] = "reader-generated"
+            status_message = f"Read status changed: {current} -> reader-generated"
+        elif current in {"metadata-only", "unread"}:
+            status_message = f"Read status left as {current}; transition to fulltext-available before reader-generated."
+        else:
+            status_message = f"Read status left as {current or 'blank'}."
         changed = True
     if changed:
         with matrix.open("w", newline="", encoding="utf-8") as handle:
             writer = csv.DictWriter(handle, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(rows)
+    return status_message
 
 
 def main() -> int:
@@ -249,7 +260,7 @@ def main() -> int:
     parser.add_argument("--pdf", default="")
     parser.add_argument("--text", default="")
     parser.add_argument("--output-dir", type=Path)
-    parser.add_argument("--update-matrix", action="store_true", help="Write note_path/pdf_path back to the literature matrix without changing read_status")
+    parser.add_argument("--update-matrix", action="store_true", help="Write note_path/pdf_path back to the literature matrix and safely move fulltext-available rows to reader-generated")
     args = parser.parse_args()
 
     if args.project and not (PROJECTS / args.project).exists():
@@ -269,12 +280,13 @@ def main() -> int:
     paper_path.write_text(render_paper(row, blocks, source, source_type), encoding="utf-8")
     (target / "source_map.json").write_text(json.dumps(source_map(row, blocks, source, source_type), ensure_ascii=False, indent=2), encoding="utf-8")
     (target / "translation_notes.md").write_text(render_notes(row, source, source_type, len(blocks)), encoding="utf-8")
+    status_message = "Read status was not changed automatically."
     if args.update_matrix:
-        update_matrix(args.matrix, citekey, paper_path, source, source_type)
+        status_message = update_matrix(args.matrix, citekey, paper_path, source, source_type) or status_message
 
     print(f"Wrote reader package: {target}")
     print(f"Blocks extracted: {len(blocks)}")
-    print("Read status was not changed automatically.")
+    print(status_message)
     return 0
 
 

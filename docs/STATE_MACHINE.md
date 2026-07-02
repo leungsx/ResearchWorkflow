@@ -2,11 +2,11 @@
 
 Last updated: 2026-07-02
 
-This document defines the canonical `read_status` lifecycle for literature records in `library/literature_matrix.csv`.
+This document defines the canonical `read_status` lifecycle for literature records in `library/literature_matrix.csv`, and the separate `evidence_usage_status` lifecycle for claim-evidence rows.
 
 ## Why This Exists
 
-PDF availability, Reader generation, quick skimming, human reading, and manuscript citation are different states. A source-grounded Reader is machine-prepared evidence; it is not the same as a human-validated source. Manuscript evidence should not rely on `metadata-only`, `unread`, `fulltext-available`, `reader-generated`, or `skimmed` records.
+PDF availability, Reader generation, quick skimming, and human verification are reading states. Claim linking and manuscript citation are evidence usage states. A source-grounded Reader is machine-prepared evidence; it is not the same as a human-validated source. Manuscript evidence should not rely on `metadata-only`, `unread`, `fulltext-available`, `reader-generated`, or `skimmed` records.
 
 ## Literature States
 
@@ -19,9 +19,19 @@ PDF availability, Reader generation, quick skimming, human reading, and manuscri
 | `skimmed` | The paper was skimmed and summarized for learning, not verified for citation. | No |
 | `human-read` | The user has read the relevant source material and can explain its evidence boundary. | Yes |
 | `verified` | Key claims, pages/tables, and citation boundaries were checked against the original source. | Yes |
-| `claim-linked` | The source is linked to a structured claim/evidence record. | Yes |
-| `manuscript-cited` | The source is used in manuscript or submission-facing evidence. | Yes |
 | `discarded` | Excluded from the current project evidence set. | No |
+
+## Evidence Usage States
+
+These live in `projects/<slug>/evidence/claim_evidence_links.csv`, not in `library/literature_matrix.csv`.
+
+| State | Meaning |
+|---|---|
+| `not-used` | The source block is known but not currently used for a claim. |
+| `candidate` | The source block is a candidate evidence row generated from locator/synthesis work. |
+| `claim-linked` | A human has linked the source block to a structured claim. |
+| `manuscript-cited` | The source block supports manuscript-facing text or citation. |
+| `submission-evidence` | The source block is part of submission-facing evidence and audit materials. |
 
 ## Command
 
@@ -42,8 +52,8 @@ Each successful transition updates `library/literature_matrix.csv` and appends a
 
 ## Rules
 
-- Do not move from `metadata-only` or `unread` directly to `human-read`, `verified`, `claim-linked`, or `manuscript-cited`.
+- Do not move from `metadata-only` or `unread` directly to `human-read` or `verified`.
 - `reader-generated` means the system prepared a Reader; it does not mean the user has read the paper.
 - `skimmed` can help learning and synthesis, but it is still blocked as manuscript evidence.
 - `verified` should be reserved for source claims whose page/table/locator boundaries have been checked.
-- `claim-linked` and `manuscript-cited` should be used only when structured evidence links exist or the source is actually cited in manuscript-facing text.
+- `claim-linked` and `manuscript-cited` belong in `evidence_usage_status`; they should be used only when structured evidence links exist or the source is actually cited in manuscript-facing text.

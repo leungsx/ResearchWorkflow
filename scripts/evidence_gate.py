@@ -15,6 +15,7 @@ MATRIX = ROOT / "library" / "literature_matrix.csv"
 BLOCKED_READ_STATUSES = {"", "metadata-only", "abstract-only", "ai-summarized", "unread"}
 ACCEPTED_READ_STATUSES = {"human-read", "verified"}
 PARTIAL_READ_STATUSES = {"skimmed"}
+CRITICAL_USAGE_STATUSES = {"claim-linked", "manuscript-cited", "submission-evidence"}
 
 
 @dataclass
@@ -80,6 +81,11 @@ def truthy(value: str) -> bool:
     return value.strip().lower() in {"1", "true", "yes", "y", "是"}
 
 
+def critical_usage(row: dict[str, str]) -> bool:
+    usage = row.get("evidence_usage_status", "").strip()
+    return usage in CRITICAL_USAGE_STATUSES or truthy(row.get("used_in_manuscript", ""))
+
+
 def structured_citekey_usages(project: Path, citekey: str) -> list[tuple[str, Path, bool]]:
     path = claim_evidence_links(project)
     if not citekey or not path.exists():
@@ -89,10 +95,12 @@ def structured_citekey_usages(project: Path, citekey: str) -> list[tuple[str, Pa
         for row in csv.DictReader(handle):
             if row.get("citekey", "").strip() != citekey:
                 continue
-            critical = truthy(row.get("used_in_manuscript", ""))
+            critical = critical_usage(row)
             label = "structured claim-evidence link"
             if row.get("claim_id"):
                 label += f" {row['claim_id']}"
+            if row.get("evidence_usage_status"):
+                label += f" [{row['evidence_usage_status']}]"
             usages.append((label, path, critical))
     return usages
 

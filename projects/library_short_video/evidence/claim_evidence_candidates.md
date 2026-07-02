@@ -1,8 +1,8 @@
-# Protected Claim-Evidence Links
+# Claim-Evidence Candidates
 
-This file is synced from candidates by appending new rows only. Manual evidence usage decisions are preserved.
+This file is generated from the evidence locator table and may be overwritten on refresh.
 
-- CSV: `projects/library_short_video/evidence/claim_evidence_links.csv`
+- CSV: `projects/library_short_video/evidence/claim_evidence_candidates.csv`
 - Rows: 59
 
 | Claim | Citekey | Source block | Read status | Evidence usage | Locator | Used in manuscript | Risk |

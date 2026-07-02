@@ -96,13 +96,14 @@ make lit-transition CITEKEY=cnki_2024_xxx FROM=skimmed TO=human-read REASON="Fin
 make literature-matrix-validate
 make literature-matrix-migrate
 make claim-evidence-links PROJECT=library_short_video
+make claim-evidence-sync PROJECT=library_short_video
 make privacy-audit
 make experiment PROJECT=library_short_video NAME=pilot INPUTS="data/processed/input.csv" OUTPUTS="results/out.csv" SEED=42 CMD="python analysis/python/analysis.py"
 ```
 
 - `literature-matrix-validate`：按 `schemas/literature_matrix.schema.yaml` 检查字段、必填项、状态枚举和重复 citekey。
 - `literature-matrix-migrate`：默认只报告字段差异；`APPLY=1` 时按 schema 补齐/重排字段。
-- `claim-evidence-links`：从 evidence locator 生成 `projects/<slug>/evidence/claim_evidence_links.csv`，给证据门禁和写作面板使用。
+- `claim-evidence-links` / `claim-evidence-sync`：从 evidence locator 生成可覆盖的 `claim_evidence_candidates.csv`，并只向受保护的 `claim_evidence_links.csv` 追加新行，不覆盖人工确认的 `evidence_usage_status`。
 - `privacy-audit`：扫描 Git 跟踪文本中的 secret-like 内容和敏感研究词；`STRICT=1` 时 warning 也会失败。
 - `experiment`：记录命令、Git commit、输入/输出 hash、pip freeze、随机种子、参数快照和 hypothesis ID。
 

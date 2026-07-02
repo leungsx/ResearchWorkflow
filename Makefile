@@ -5,7 +5,7 @@ PYTHONDONTWRITEBYTECODE ?= 1
 export PYTHONDONTWRITEBYTECODE
 ACTIVE_PROJECT ?= $(shell PYTHONDONTWRITEBYTECODE=1 $(PYTHON) scripts/get_active_project.py)
 
-.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-ensure review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate literature-matrix-validate literature-matrix-migrate privacy-audit fast-status workflow-policy workflow-render workflow-audit-readonly workflow-audit-refresh workflow-audit workflow-test workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate evidence-locators claim-evidence-links manuscript-panel incoming-triage lit-transition experiment citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
+.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-ensure review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate literature-matrix-validate literature-matrix-migrate privacy-audit fast-status workflow-policy workflow-render workflow-audit-readonly workflow-audit-refresh workflow-audit workflow-test workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate evidence-locators claim-evidence-links claim-evidence-sync manuscript-panel incoming-triage lit-transition experiment citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph data-refresh page-render learning-dashboard
 
 check:
 	$(PYTHON) scripts/check_environment.py
@@ -109,7 +109,6 @@ workflow-refresh:
 	$(MAKE) codex-compact $(if $(DATE),DATE="$(DATE)",)
 	$(MAKE) codex-context-index
 	$(MAKE) workflow-audit $(if $(DATE),DATE="$(DATE)",)
-	$(MAKE) learning-dashboard
 
 workflow-refresh-git:
 	$(MAKE) workflow-refresh $(if $(DATE),DATE="$(DATE)",) $(if $(NOTE),NOTE="$(NOTE)",)
@@ -135,6 +134,8 @@ evidence-locators:
 
 claim-evidence-links:
 	$(PYTHON) scripts/build_claim_evidence_links.py --project "$(if $(PROJECT),$(PROJECT),$(ACTIVE_PROJECT))"
+
+claim-evidence-sync: claim-evidence-links
 
 manuscript-panel:
 	$(PYTHON) scripts/build_manuscript_panel.py --project "$(if $(PROJECT),$(PROJECT),$(ACTIVE_PROJECT))"
@@ -275,7 +276,7 @@ knowledge-status:
 obsidian-graph:
 	$(PYTHON) scripts/obsidian_graph_export.py
 
-learning-dashboard:
+data-refresh:
 	$(PYTHON) scripts/scan_incoming_pdfs.py --project "$(ACTIVE_PROJECT)"
 	$(PYTHON) scripts/build_evidence_locators.py --project "$(ACTIVE_PROJECT)"
 	$(PYTHON) scripts/build_claim_evidence_links.py --project "$(ACTIVE_PROJECT)"
@@ -286,9 +287,8 @@ learning-dashboard:
 	$(PYTHON) scripts/build_action_queue.py
 	$(PYTHON) scripts/build_collaboration_state.py
 	$(PYTHON) scripts/build_archive_policy.py
+
+page-render:
 	$(PYTHON) scripts/build_learning_dashboard.py
-	$(PYTHON) scripts/build_project_state.py --all
-	$(PYTHON) scripts/build_workflow_state.py
-	$(PYTHON) scripts/build_action_queue.py
-	$(PYTHON) scripts/build_collaboration_state.py
-	$(PYTHON) scripts/build_archive_policy.py
+
+learning-dashboard: data-refresh page-render

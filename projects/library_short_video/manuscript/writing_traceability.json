@@ -1,6 +1,6 @@
 {
   "schema_version": "ResearchWorkflow.WritingTraceability.v1",
-  "generated_at": "2026-07-02T21:03:02",
+  "generated_at": "2026-07-02T21:32:22",
   "project": "library_short_video",
   "summary": {
     "claim_link_rows": 59,
@@ -26,6 +26,7 @@
       "source_block_id": "cnki_2021_d35f8e895a:B0006",
       "page": "",
       "read_status": "skimmed",
+      "evidence_usage_status": "candidate",
       "next_action": "Open original PDF/Reader and fill exact page or table locator."
     },
     {
@@ -37,6 +38,7 @@
       "source_block_id": "cnki_2021_d35f8e895a:B0009",
       "page": "",
       "read_status": "skimmed",
+      "evidence_usage_status": "candidate",
       "next_action": "Open original PDF/Reader and fill exact page or table locator."
     },
     {
@@ -48,6 +50,7 @@
       "source_block_id": "cnki_2021_d35f8e895a:B0010",
       "page": "",
       "read_status": "skimmed",
+      "evidence_usage_status": "candidate",
       "next_action": "Open original PDF/Reader and fill exact page or table locator."
     },
     {
@@ -59,6 +62,7 @@
       "source_block_id": "cnki_2021_d35f8e895a:B0011",
       "page": "",
       "read_status": "skimmed",
+      "evidence_usage_status": "candidate",
       "next_action": "Open original PDF/Reader and fill exact page or table locator."
     },
     {
@@ -70,6 +74,7 @@
       "source_block_id": "cnki_2021_dfab60236e:B0004",
       "page": "",
       "read_status": "skimmed",
+      "evidence_usage_status": "candidate",
       "next_action": "Open original PDF/Reader and fill exact page or table locator."
     },
     {
@@ -81,6 +86,7 @@
       "source_block_id": "cnki_2021_dfab60236e:B0008",
       "page": "",
       "read_status": "skimmed",
+      "evidence_usage_status": "candidate",
       "next_action": "Open original PDF/Reader and fill exact page or table locator."
     },
     {
@@ -92,6 +98,7 @@
       "source_block_id": "cnki_2021_dfab60236e:B0010",
       "page": "",
       "read_status": "skimmed",
+      "evidence_usage_status": "candidate",
       "next_action": "Open original PDF/Reader and fill exact page or table locator."
     },
     {
@@ -103,6 +110,7 @@
       "source_block_id": "cnki_2021_dfab60236e:B0013",
       "page": "",
       "read_status": "skimmed",
+      "evidence_usage_status": "candidate",
       "next_action": "Open original PDF/Reader and fill exact page or table locator."
     }
   ],

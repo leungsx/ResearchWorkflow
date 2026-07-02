@@ -5,7 +5,9 @@
 ## 快速开始
 
 ```bash
-cd /Users/leung/ResearchWorkflow
+git clone <your-private-repo-url> ResearchWorkflow
+cd ResearchWorkflow
+cp .env.example .env
 make check
 make workflow-audit
 make workflow-refresh-git DATE=2026-06-29 NOTE="daily closeout"
