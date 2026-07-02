@@ -1,30 +1,18 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T14:14:55",
+  "generated_at": "2026-07-02T14:15:36",
   "source_state": "vault/13_Knowledge_Graph/workflow_state.json",
   "entrypoint": "action_queue.html",
   "summary": {
-    "total_open": 3,
+    "total_open": 2,
     "high_priority": 0,
     "by_kind": {
-      "audit_warn": 1,
       "project": 2
     }
   },
   "actions": [
     {
-      "id": "audit_warn-1-处理提醒-存在尚未提交的-git-改动",
-      "kind": "audit_warn",
-      "priority": 70,
-      "title": "处理提醒：存在尚未提交的 Git 改动",
-      "reason": "151 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-4358f2f5.html",
-      "entrypoint": "workflow_health.html",
-      "source": "Git/异地备份",
-      "status": "open",
-      "rank": 1
-    },
-    {
-      "id": "project-2-图书馆短视频相关研究-incoming-分拣建议-先把-公共图书馆短视频公众平台建设",
+      "id": "project-1-图书馆短视频相关研究-incoming-分拣建议-先把-公共图书馆短视频公众平台建设",
       "kind": "project",
       "priority": 60,
       "title": "图书馆短视频相关研究：Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
@@ -32,10 +20,10 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 2
+      "rank": 1
     },
     {
-      "id": "project-3-图书馆短视频相关研究-下一篇阅读优先选择已有-pdf-reader-且能推进传播力评",
+      "id": "project-2-图书馆短视频相关研究-下一篇阅读优先选择已有-pdf-reader-且能推进传播力评",
       "kind": "project",
       "priority": 60,
       "title": "图书馆短视频相关研究：下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
@@ -43,7 +31,7 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 3
+      "rank": 2
     }
   ]
 }
