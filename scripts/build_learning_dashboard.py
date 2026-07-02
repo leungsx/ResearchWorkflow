@@ -372,6 +372,9 @@ def common_css() -> str:
 
 def shell(title: str, subtitle: str, current: str, body: str, output: Path) -> str:
     generated = dt.datetime.now().strftime("%Y-%m-%d %H:%M")
+    evidence_page = ROOT / "projects" / "library_short_video" / "literature" / "evidence_locator_table.html"
+    incoming_page = ROOT / "projects" / "library_short_video" / "literature" / "incoming_pdf_triage.html"
+    writing_page = ROOT / "projects" / "library_short_video" / "manuscript" / "writing_panel.html"
     nav = [
         ("总览", ROOT / "study_dashboard.html"),
         ("今日精读", PAPER_READING / "today.html"),
@@ -388,6 +391,9 @@ def shell(title: str, subtitle: str, current: str, body: str, output: Path) -> s
         ("工作流体检", WORKFLOW_HEALTH),
         ("Vault 首页", PAPER_VIEWS / "vault-home.html"),
     ]
+    for label, path in [("PDF分拣", incoming_page), ("证据核验", evidence_page), ("论文写作", writing_page)]:
+        if path.exists():
+            nav.insert(-1, (label, path))
     nav_items: list[str] = []
     for label, path in nav:
         current_attr = ' aria-current="page"' if label == current else ""
@@ -435,6 +441,9 @@ def item_list(paths: list[Path], output: Path, color: str = "") -> str:
 
 def build_dashboard() -> None:
     out = ROOT / "study_dashboard.html"
+    evidence_page = ROOT / "projects" / "library_short_video" / "literature" / "evidence_locator_table.html"
+    incoming_page = ROOT / "projects" / "library_short_video" / "literature" / "incoming_pdf_triage.html"
+    writing_page = ROOT / "projects" / "library_short_video" / "manuscript" / "writing_panel.html"
     pages = paper_pages()
     log_pages = list_html(HTML_LOGS)
     concepts = list_md(CONCEPTS)
@@ -480,6 +489,9 @@ def build_dashboard() -> None:
           <div class="item green"><a href="{href(COLLABORATION_HTML, out)}">项目协作层</a><div class="meta">查看用户待确认、Codex 可推进和项目入口。</div></div>
           <div class="item amber"><a href="{href(ARCHIVE_POLICY_HTML, out)}">自动归档策略</a><div class="meta">查看备份、日志、生成页和缓存文件的归档策略。</div></div>
           <div class="item"><a href="{href(WORKFLOW_HEALTH, out)}">工作流体检页</a><div class="meta">检查入口、链接、镜像页、图谱、归档、复习队列和备份。</div></div>
+          {f'<div class="item green"><a href="{href(incoming_page, out)}">Incoming PDF 分拣</a><div class="meta">扫描 incoming 全文，匹配矩阵并建议入库、建 Reader 或归档重复件。</div></div>' if incoming_page.exists() else ''}
+          {f'<div class="item green"><a href="{href(evidence_page, out)}">证据核验表</a><div class="meta">集中查看主张、文献、Reader block、页码和核验状态。</div></div>' if evidence_page.exists() else ''}
+          {f'<div class="item amber"><a href="{href(writing_page, out)}">论文写作推进面板</a><div class="meta">把已读文献转成研究问题、变量指标、机制链和可写段落。</div></div>' if writing_page.exists() else ''}
           <div class="item rose"><a href="{href(REVIEW_TODAY, out)}">今日复习入口</a><div class="meta">{len(due)} 个知识点今天需要主动回忆。</div></div>
           <div class="item green">{f'<a href="{href(BACKUP_INDEX, out)}">备份索引</a>' if BACKUP_INDEX.exists() else '备份索引'}<div class="meta">{esc(latest_backup.name if latest_backup else '尚未生成备份；运行 make workflow-backup。')}</div></div>
           <div class="item amber"><a href="{href(WORKFLOW_HEALTH, out)}">最近审计概览</a><div class="meta">{esc(str(latest_audit.relative_to(ROOT)) if latest_audit else '运行 make workflow-audit 后生成。')}</div></div>
@@ -1709,8 +1721,8 @@ def build_graph_index() -> None:
         </div>
         <div class="graph-toolbar">
           <input id="graphSearch" type="search" placeholder="搜索论文、概念、方法或项目节点">
-          <button type="button" data-kind="all" class="active">全部</button>
-          <button type="button" data-kind="project_scope">只看主项目</button>
+          <button type="button" data-kind="all">全部</button>
+          <button type="button" data-kind="project_scope" class="active">只看主项目</button>
           <button type="button" data-kind="core_chain">论文-概念-方法主链</button>
           <button type="button" data-kind="literature">文献</button>
           <button type="button" data-kind="concept">概念</button>
@@ -1776,7 +1788,7 @@ def build_graph_index() -> None:
         learning: "学习记录",
         linked: "关联节点"
       };
-      let activeKind = "all";
+      let activeKind = "project_scope";
       let selectedId = null;
 
       function escapeHtml(value) {

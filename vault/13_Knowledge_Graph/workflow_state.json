@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T13:48:50",
+  "generated_at": "2026-07-02T14:14:55",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -14,10 +14,10 @@
     "archive_policy": "archive_policy.html"
   },
   "counts": {
-    "manifest_rows": 130,
-    "search_entries": 130,
+    "manifest_rows": 133,
+    "search_entries": 133,
     "project_count": 2,
-    "git_dirty_paths": 154
+    "git_dirty_paths": 151
   },
   "audit": {
     "counts": {
@@ -54,19 +54,19 @@
         "area": "知识图谱",
         "status": "PASS",
         "title": "图谱入口是可视化关系图",
-        "detail": "nodes=128, unique_edges=391"
+        "detail": "nodes=133, unique_edges=391"
       },
       {
         "area": "资产清单",
         "status": "PASS",
         "title": "artifact manifest 覆盖核心展示资产",
-        "detail": "130 条；display_types=28"
+        "detail": "133 条；display_types=31"
       },
       {
         "area": "搜索索引",
         "status": "PASS",
         "title": "搜索索引和搜索页可用",
-        "detail": "130 条；layers=4"
+        "detail": "133 条；layers=4"
       },
       {
         "area": "复习状态",
@@ -90,13 +90,13 @@
         "area": "备份",
         "status": "PASS",
         "title": "最近备份可用",
-        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 17.7 小时前。"
+        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 18.1 小时前。"
       },
       {
         "area": "Git/异地备份",
         "status": "WARN",
         "title": "存在尚未提交的 Git 改动",
-        "detail": "154 个路径待快照： M action_queue.html； M archive_policy.html； M codex/state/context_index.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-452dce22.html"
+        "detail": "151 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-4358f2f5.html"
       },
       {
         "area": "Token/记忆",
@@ -120,13 +120,13 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "4 个开放行动。"
+        "detail": "3 个开放行动。"
       },
       {
         "area": "项目协作层",
         "status": "PASS",
         "title": "项目协作层可用",
-        "detail": "2 个项目；user_waiting=0。"
+        "detail": "2 个项目；user_waiting=1。"
       },
       {
         "area": "自动归档策略",
@@ -282,7 +282,7 @@
     "html": "knowledge_cards/review_today.html"
   },
   "graph": {
-    "nodes": 128,
+    "nodes": 133,
     "edges": 391,
     "html": "knowledge_graph/index.html"
   },
@@ -300,39 +300,84 @@
       },
       "next_reading_candidates": [
         {
-          "citekey": "cnki_2021_d35f8e895a",
-          "title": "图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索",
-          "year": "2021",
-          "source": "图书情报工作",
-          "read_status": "skimmed",
-          "reader_path": "projects/library_short_video/literature/readers/cnki_2021_d35f8e895a/paper.md",
-          "pdf_path": "library/pdfs/library_short_video/converted/cnki_2021_d35f8e895a.pdf"
-        },
-        {
-          "citekey": "cnki_2021_645f03f388",
-          "title": "图书馆短视频账号传播力研究——以省级公共图书馆为例",
-          "year": "2021",
+          "citekey": "cnki_2022_e0a8336b38",
+          "title": "公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析",
+          "year": "2022",
           "source": "图书馆学研究",
-          "read_status": "skimmed",
-          "reader_path": "projects/library_short_video/literature/readers/cnki_2021_645f03f388/paper.md",
-          "pdf_path": "library/pdfs/library_short_video/cnki_2021_645f03f388.pdf"
+          "read_status": "metadata-only",
+          "has_pdf": false,
+          "has_incoming_pdf": true,
+          "has_reader": false,
+          "project_gap": [
+            "传播力评价",
+            "机制解释"
+          ],
+          "evidence_value": "medium-high",
+          "next_action": "intake_incoming_pdf",
+          "reader_path": "",
+          "pdf_path": "",
+          "incoming_file": "library/pdfs/library_short_video/incoming/公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析_曾群.pdf"
         },
         {
-          "citekey": "cnki_2020_2a150c6df8",
-          "title": "图书馆热门短视频内容规律探究——基于抖音平台的实证研究",
+          "citekey": "cnki_2023_82f69af538",
+          "title": "高校图书馆B站视频传播效果影响因素实证研究",
+          "year": "2023",
+          "source": "图书情报工作",
+          "read_status": "metadata-only",
+          "has_pdf": false,
+          "has_incoming_pdf": true,
+          "has_reader": false,
+          "project_gap": [
+            "传播力评价",
+            "机制解释"
+          ],
+          "evidence_value": "medium-high",
+          "next_action": "intake_incoming_pdf",
+          "reader_path": "",
+          "pdf_path": "",
+          "incoming_file": "library/pdfs/library_short_video/incoming/高校图书馆B站视频传播效果影响因素实证研究_丁大尉.pdf"
+        },
+        {
+          "citekey": "cnki_2020_5ca581e54f",
+          "title": "公共图书馆短视频公众平台建设现状分析",
           "year": "2020",
-          "source": "图书馆",
-          "read_status": "skimmed",
-          "reader_path": "projects/library_short_video/literature/readers/cnki_2020_2a150c6df8/paper.md",
-          "pdf_path": "library/pdfs/library_short_video/cnki_2020_2a150c6df8.caj"
+          "source": "图书馆学研究",
+          "read_status": "metadata-only",
+          "has_pdf": false,
+          "has_incoming_pdf": true,
+          "has_reader": false,
+          "project_gap": [
+            "服务价值指标"
+          ],
+          "evidence_value": "high",
+          "next_action": "intake_incoming_pdf",
+          "reader_path": "",
+          "pdf_path": "",
+          "incoming_file": "library/pdfs/library_short_video/incoming/公共图书馆短视频公众平台建设现状分析_曾一昕.pdf"
         }
       ],
       "review_due_count": 0,
       "next_actions": [
+        "Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
         "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。"
       ],
       "state_path": "projects/library_short_video/project_state.json",
-      "dashboard_html": "paper_reading/views/00-project-dashboard-dd8418ad.html"
+      "dashboard_html": "paper_reading/views/00-project-dashboard-dd8418ad.html",
+      "entrypoints": {
+        "study_dashboard": "study_dashboard.html",
+        "today": "paper_reading/today.html",
+        "project_dashboard": "paper_reading/views/00-project-dashboard-dd8418ad.html",
+        "reading_board": "paper_reading/views/reading-board-026f6ec8.html",
+        "literature_workbench": "paper_reading/views/literature_review_workbench.html",
+        "literature_synthesis": "paper_reading/views/literature_synthesis.html",
+        "incoming_pdf_triage": "projects/library_short_video/literature/incoming_pdf_triage.html",
+        "evidence_locator_table": "projects/library_short_video/literature/evidence_locator_table.html",
+        "manuscript_writing_panel": "projects/library_short_video/manuscript/writing_panel.html",
+        "review_today": "knowledge_cards/review_today.html",
+        "search": "search/index.html",
+        "project_collaboration": "project_collaboration.html",
+        "archive_policy": "archive_policy.html"
+      }
     },
     {
       "slug": "starter_project",
@@ -348,7 +393,22 @@
         "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
       ],
       "state_path": "projects/starter_project/project_state.json",
-      "dashboard_html": "paper_reading/views/00-project-dashboard-b90a4a93.html"
+      "dashboard_html": "paper_reading/views/00-project-dashboard-b90a4a93.html",
+      "entrypoints": {
+        "study_dashboard": "study_dashboard.html",
+        "today": "paper_reading/today.html",
+        "project_dashboard": "paper_reading/views/00-project-dashboard-b90a4a93.html",
+        "reading_board": "",
+        "literature_workbench": "",
+        "literature_synthesis": "paper_reading/views/03-literature-synthesis-01206220.html",
+        "incoming_pdf_triage": "",
+        "evidence_locator_table": "",
+        "manuscript_writing_panel": "",
+        "review_today": "knowledge_cards/review_today.html",
+        "search": "search/index.html",
+        "project_collaboration": "project_collaboration.html",
+        "archive_policy": "archive_policy.html"
+      }
     }
   ],
   "artifacts": {
@@ -362,6 +422,7 @@
     "archive_policy": "vault/13_Knowledge_Graph/archive_policy.json"
   },
   "next_actions": [
+    "Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
     "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
     "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
     "如果这是占位项目，保持 project_state.json 作为结构模板即可。",

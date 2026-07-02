@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T11:26:32",
+  "generated_at": "2026-07-02T14:14:39",
   "project": {
     "slug": "starter_project",
     "title": "Starter Research Project",
@@ -16,6 +16,9 @@
     "reading_board": "",
     "literature_workbench": "",
     "literature_synthesis": "paper_reading/views/03-literature-synthesis-01206220.html",
+    "incoming_pdf_triage": "",
+    "evidence_locator_table": "",
+    "manuscript_writing_panel": "",
     "review_today": "knowledge_cards/review_today.html",
     "search": "search/index.html",
     "project_collaboration": "project_collaboration.html",
@@ -25,7 +28,10 @@
     "project_dashboard": "projects/starter_project/00_project_dashboard.md",
     "reading_board": "",
     "literature_workbench": "",
-    "literature_synthesis": "projects/starter_project/03_literature_synthesis.md"
+    "literature_synthesis": "projects/starter_project/03_literature_synthesis.md",
+    "incoming_pdf_triage": "",
+    "evidence_locator_table": "",
+    "manuscript_writing_panel": ""
   },
   "literature": {
     "matrix_rows": 0,
@@ -40,13 +46,27 @@
       "history_count": 0
     },
     "latest_deep_read": {},
-    "next_reading_candidates": []
+    "next_reading_candidates": [],
+    "incoming_pdf_triage": {
+      "csv": "",
+      "html": "",
+      "item_count": 0,
+      "action_counts": {},
+      "top_items": []
+    }
   },
   "evidence_gate": {
     "path": "projects/starter_project/manuscript/evidence_gate_report.md",
     "status": "PASS",
     "error": "0",
     "warn": "0"
+  },
+  "evidence_locators": {
+    "csv": "",
+    "html": "",
+    "rows": 0,
+    "page_located": 0,
+    "page_pending": 0
   },
   "review": {
     "due_count": 0,

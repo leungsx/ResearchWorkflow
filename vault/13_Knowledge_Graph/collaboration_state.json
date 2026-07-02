@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T13:48:50",
+  "generated_at": "2026-07-02T14:14:55",
   "entrypoint": "project_collaboration.html",
   "summary": {
     "project_count": 2,
-    "user_waiting": 0,
-    "codex_ready": 5,
-    "open_actions": 4
+    "user_waiting": 1,
+    "codex_ready": 6,
+    "open_actions": 3
   },
   "roles": {
     "user": [
@@ -47,12 +47,18 @@
         "reading_board": "paper_reading/views/reading-board-026f6ec8.html",
         "literature_workbench": "paper_reading/views/literature_review_workbench.html",
         "literature_synthesis": "paper_reading/views/literature_synthesis.html",
+        "incoming_pdf_triage": "projects/library_short_video/literature/incoming_pdf_triage.html",
+        "evidence_locator_table": "projects/library_short_video/literature/evidence_locator_table.html",
+        "manuscript_writing_panel": "projects/library_short_video/manuscript/writing_panel.html",
         "review_today": "knowledge_cards/review_today.html",
         "search": "search/index.html",
         "archive_policy": "archive_policy.html"
       },
-      "user_handoffs": [],
+      "user_handoffs": [
+        "如要读取 metadata-only 文献，需要先补 PDF/CAJ 或授权下载。"
+      ],
       "codex_handoffs": [
+        "Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
         "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
         "把下一篇精读结果沉淀为 HTML、知识卡、图谱关系和复习问题。"
       ],
@@ -60,9 +66,12 @@
         "project_dashboard": "projects/library_short_video/00_project_dashboard.md",
         "reading_board": "projects/library_short_video/literature/reading_board.md",
         "literature_workbench": "projects/library_short_video/literature/literature_review_workbench.md",
-        "literature_synthesis": "projects/library_short_video/03_literature_synthesis.md"
+        "literature_synthesis": "projects/library_short_video/03_literature_synthesis.md",
+        "incoming_pdf_triage": "projects/library_short_video/literature/incoming_pdf_triage.md",
+        "evidence_locator_table": "projects/library_short_video/literature/evidence_locator_table.md",
+        "manuscript_writing_panel": "projects/library_short_video/manuscript/writing_panel.md"
       },
-      "artifact_count": 48
+      "artifact_count": 51
     },
     {
       "slug": "starter_project",
@@ -79,6 +88,9 @@
         "reading_board": "",
         "literature_workbench": "",
         "literature_synthesis": "paper_reading/views/03-literature-synthesis-01206220.html",
+        "incoming_pdf_triage": "",
+        "evidence_locator_table": "",
+        "manuscript_writing_panel": "",
         "review_today": "knowledge_cards/review_today.html",
         "search": "search/index.html",
         "archive_policy": "archive_policy.html"
@@ -93,7 +105,10 @@
         "project_dashboard": "projects/starter_project/00_project_dashboard.md",
         "reading_board": "",
         "literature_workbench": "",
-        "literature_synthesis": "projects/starter_project/03_literature_synthesis.md"
+        "literature_synthesis": "projects/starter_project/03_literature_synthesis.md",
+        "incoming_pdf_triage": "",
+        "evidence_locator_table": "",
+        "manuscript_writing_panel": ""
       },
       "artifact_count": 7
     }

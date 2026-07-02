@@ -1,6 +1,6 @@
 # Workflow Audit - 2026-07-02
 
-Generated: 2026-07-02T13:48:50
+Generated: 2026-07-02T14:14:55
 Summary: PASS=16 WARN=2 FAIL=0
 
 ## Checks
@@ -11,19 +11,19 @@ Summary: PASS=16 WARN=2 FAIL=0
 | 易用性 | PASS | 用户入口没有裸 Markdown 直链 | 主入口、今日页、知识卡、复习、图谱、搜索和日志入口都指向可浏览页面。 |
 | 链接健康 | PASS | HTML 本地链接均可解析 | 检查 120 个 HTML 页面。 |
 | 镜像页 | PASS | HTML 镜像与源文件同步 | 检查 89 个镜像页。 |
-| 知识图谱 | PASS | 图谱入口是可视化关系图 | nodes=128, unique_edges=391 |
-| 资产清单 | PASS | artifact manifest 覆盖核心展示资产 | 130 条；display_types=28 |
-| 搜索索引 | PASS | 搜索索引和搜索页可用 | 130 条；layers=4 |
+| 知识图谱 | PASS | 图谱入口是可视化关系图 | nodes=133, unique_edges=391 |
+| 资产清单 | PASS | artifact manifest 覆盖核心展示资产 | 133 条；display_types=31 |
+| 搜索索引 | PASS | 搜索索引和搜索页可用 | 133 条；layers=4 |
 | 复习状态 | PASS | 复习状态快照与队列一致 | total=24, due=0, focus=8 |
 | 项目状态 | PASS | 项目状态文件可供自动化读取 | 2 个项目。 |
 | 复习队列 | PASS | 今日无积压复习项 | 队列共 24 项。 |
-| 备份 | PASS | 最近备份可用 | backups/researchworkflow-critical-20260701-200737.zip，约 17.7 小时前。 |
-| Git/异地备份 | WARN | 存在尚未提交的 Git 改动 | 154 个路径待快照： M action_queue.html； M archive_policy.html； M codex/state/context_index.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-452dce22.html |
+| 备份 | PASS | 最近备份可用 | backups/researchworkflow-critical-20260701-200737.zip，约 18.1 小时前。 |
+| Git/异地备份 | WARN | 存在尚未提交的 Git 改动 | 151 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-4358f2f5.html |
 | Token/记忆 | PASS | 今日 compact summary 可作为默认启动上下文 | vault/07_Codex_Logs/compact_daily/2026-07-02-summary.md，约 88 words。 |
 | 文件卫生 | WARN | 工作区存在系统/缓存文件 | .DS_Store=4；__pycache__=2；这些不会进入 file sweep，但可择机清理。 |
 | Schema | PASS | 核心机器状态 schema 校验通过 | 10 个文件通过校验。 |
-| 行动队列 | PASS | 行动队列可用且入口有效 | 4 个开放行动。 |
-| 项目协作层 | PASS | 项目协作层可用 | 2 个项目；user_waiting=0。 |
+| 行动队列 | PASS | 行动队列可用且入口有效 | 3 个开放行动。 |
+| 项目协作层 | PASS | 项目协作层可用 | 2 个项目；user_waiting=1。 |
 | 自动归档策略 | PASS | 自动归档策略可用 | backup=7, prune=0, cache=6 |
 
 ## Recommended Daily Order

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T11:26:32",
+  "generated_at": "2026-07-02T14:14:39",
   "project": {
     "slug": "library_short_video",
     "title": "图书馆短视频相关研究",
@@ -16,6 +16,9 @@
     "reading_board": "paper_reading/views/reading-board-026f6ec8.html",
     "literature_workbench": "paper_reading/views/literature_review_workbench.html",
     "literature_synthesis": "paper_reading/views/literature_synthesis.html",
+    "incoming_pdf_triage": "projects/library_short_video/literature/incoming_pdf_triage.html",
+    "evidence_locator_table": "projects/library_short_video/literature/evidence_locator_table.html",
+    "manuscript_writing_panel": "projects/library_short_video/manuscript/writing_panel.html",
     "review_today": "knowledge_cards/review_today.html",
     "search": "search/index.html",
     "project_collaboration": "project_collaboration.html",
@@ -25,7 +28,10 @@
     "project_dashboard": "projects/library_short_video/00_project_dashboard.md",
     "reading_board": "projects/library_short_video/literature/reading_board.md",
     "literature_workbench": "projects/library_short_video/literature/literature_review_workbench.md",
-    "literature_synthesis": "projects/library_short_video/03_literature_synthesis.md"
+    "literature_synthesis": "projects/library_short_video/03_literature_synthesis.md",
+    "incoming_pdf_triage": "projects/library_short_video/literature/incoming_pdf_triage.md",
+    "evidence_locator_table": "projects/library_short_video/literature/evidence_locator_table.md",
+    "manuscript_writing_panel": "projects/library_short_video/manuscript/writing_panel.md"
   },
   "literature": {
     "matrix_rows": 60,
@@ -60,57 +66,226 @@
     },
     "next_reading_candidates": [
       {
-        "citekey": "cnki_2021_d35f8e895a",
-        "title": "图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索",
-        "year": "2021",
-        "source": "图书情报工作",
-        "read_status": "skimmed",
-        "reader_path": "projects/library_short_video/literature/readers/cnki_2021_d35f8e895a/paper.md",
-        "pdf_path": "library/pdfs/library_short_video/converted/cnki_2021_d35f8e895a.pdf"
+        "citekey": "cnki_2022_e0a8336b38",
+        "title": "公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析",
+        "year": "2022",
+        "source": "图书馆学研究",
+        "read_status": "metadata-only",
+        "has_pdf": false,
+        "has_incoming_pdf": true,
+        "has_reader": false,
+        "project_gap": [
+          "传播力评价",
+          "机制解释"
+        ],
+        "evidence_value": "medium-high",
+        "next_action": "intake_incoming_pdf",
+        "reader_path": "",
+        "pdf_path": "",
+        "incoming_file": "library/pdfs/library_short_video/incoming/公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析_曾群.pdf"
       },
       {
-        "citekey": "cnki_2021_645f03f388",
-        "title": "图书馆短视频账号传播力研究——以省级公共图书馆为例",
+        "citekey": "cnki_2023_82f69af538",
+        "title": "高校图书馆B站视频传播效果影响因素实证研究",
+        "year": "2023",
+        "source": "图书情报工作",
+        "read_status": "metadata-only",
+        "has_pdf": false,
+        "has_incoming_pdf": true,
+        "has_reader": false,
+        "project_gap": [
+          "传播力评价",
+          "机制解释"
+        ],
+        "evidence_value": "medium-high",
+        "next_action": "intake_incoming_pdf",
+        "reader_path": "",
+        "pdf_path": "",
+        "incoming_file": "library/pdfs/library_short_video/incoming/高校图书馆B站视频传播效果影响因素实证研究_丁大尉.pdf"
+      },
+      {
+        "citekey": "cnki_2020_5ca581e54f",
+        "title": "公共图书馆短视频公众平台建设现状分析",
+        "year": "2020",
+        "source": "图书馆学研究",
+        "read_status": "metadata-only",
+        "has_pdf": false,
+        "has_incoming_pdf": true,
+        "has_reader": false,
+        "project_gap": [
+          "服务价值指标"
+        ],
+        "evidence_value": "high",
+        "next_action": "intake_incoming_pdf",
+        "reader_path": "",
+        "pdf_path": "",
+        "incoming_file": "library/pdfs/library_short_video/incoming/公共图书馆短视频公众平台建设现状分析_曾一昕.pdf"
+      },
+      {
+        "citekey": "cnki_2021_2ba9195a8a",
+        "title": "我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析",
         "year": "2021",
         "source": "图书馆学研究",
-        "read_status": "skimmed",
-        "reader_path": "projects/library_short_video/literature/readers/cnki_2021_645f03f388/paper.md",
-        "pdf_path": "library/pdfs/library_short_video/cnki_2021_645f03f388.pdf"
+        "read_status": "metadata-only",
+        "has_pdf": false,
+        "has_incoming_pdf": true,
+        "has_reader": false,
+        "project_gap": [
+          "服务价值指标"
+        ],
+        "evidence_value": "high",
+        "next_action": "intake_incoming_pdf",
+        "reader_path": "",
+        "pdf_path": "",
+        "incoming_file": "library/pdfs/library_short_video/incoming/我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析_隋鑫.pdf"
       },
       {
-        "citekey": "cnki_2020_2a150c6df8",
-        "title": "图书馆热门短视频内容规律探究——基于抖音平台的实证研究",
-        "year": "2020",
-        "source": "图书馆",
-        "read_status": "skimmed",
-        "reader_path": "projects/library_short_video/literature/readers/cnki_2020_2a150c6df8/paper.md",
-        "pdf_path": "library/pdfs/library_short_video/cnki_2020_2a150c6df8.caj"
-      },
-      {
-        "citekey": "cnki_2020_64b4f881c9",
-        "title": "图书馆短视频发展现状、问题与对策分析——以抖音平台为例",
-        "year": "2020",
+        "citekey": "cnki_2022_dea116d7f1",
+        "title": "我国省级公共图书馆抖音短视频运营现状与发展策略研究",
+        "year": "2022",
         "source": "图书馆工作与研究",
-        "read_status": "skimmed",
-        "reader_path": "projects/library_short_video/literature/readers/cnki_2020_64b4f881c9/paper.md",
-        "pdf_path": "library/pdfs/library_short_video/converted/cnki_2020_64b4f881c9.pdf"
-      },
-      {
-        "citekey": "cnki_2021_3771e58987",
-        "title": "公共图书馆和高校图书馆短视频营销比较研究",
-        "year": "2021",
-        "source": "大学图书馆学报",
-        "read_status": "skimmed",
-        "reader_path": "projects/library_short_video/literature/readers/cnki_2021_3771e58987/paper.md",
-        "pdf_path": "library/pdfs/library_short_video/cnki_2021_3771e58987.pdf"
+        "read_status": "metadata-only",
+        "has_pdf": false,
+        "has_incoming_pdf": true,
+        "has_reader": false,
+        "project_gap": [],
+        "evidence_value": "medium",
+        "next_action": "intake_incoming_pdf",
+        "reader_path": "",
+        "pdf_path": "",
+        "incoming_file": "library/pdfs/library_short_video/incoming/我国省级公共图书馆抖音短视频运营现状与发展策略研究_胡海燕.pdf"
       }
-    ]
+    ],
+    "incoming_pdf_triage": {
+      "csv": "projects/library_short_video/literature/incoming_pdf_triage.csv",
+      "html": "projects/library_short_video/literature/incoming_pdf_triage.html",
+      "item_count": 24,
+      "action_counts": {
+        "add_to_matrix_or_mark_external": 3,
+        "already_skimmed_keep_as_backup": 9,
+        "external_comparison_or_ignore": 7,
+        "intake_to_stable_pdf": 5
+      },
+      "top_items": [
+        {
+          "file_path": "library/pdfs/library_short_video/incoming/公共图书馆短视频公众平台建设现状分析_曾一昕.pdf",
+          "file_name": "公共图书馆短视频公众平台建设现状分析_曾一昕.pdf",
+          "matched_citekey": "cnki_2020_5ca581e54f",
+          "matched_title": "公共图书馆短视频公众平台建设现状分析",
+          "read_status": "metadata-only",
+          "has_pdf": "no",
+          "has_reader": "no",
+          "project_gap": "服务价值指标",
+          "evidence_value": "high",
+          "duplicate_group_size": "1",
+          "next_action": "intake_to_stable_pdf"
+        },
+        {
+          "file_path": "library/pdfs/library_short_video/incoming/我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析_隋鑫.pdf",
+          "file_name": "我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析_隋鑫.pdf",
+          "matched_citekey": "cnki_2021_2ba9195a8a",
+          "matched_title": "我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析",
+          "read_status": "metadata-only",
+          "has_pdf": "no",
+          "has_reader": "no",
+          "project_gap": "服务价值指标",
+          "evidence_value": "high",
+          "duplicate_group_size": "1",
+          "next_action": "intake_to_stable_pdf"
+        },
+        {
+          "file_path": "library/pdfs/library_short_video/incoming/我国省级公共图书馆抖音短视频运营现状与发展策略研究_胡海燕.pdf",
+          "file_name": "我国省级公共图书馆抖音短视频运营现状与发展策略研究_胡海燕.pdf",
+          "matched_citekey": "cnki_2022_dea116d7f1",
+          "matched_title": "我国省级公共图书馆抖音短视频运营现状与发展策略研究",
+          "read_status": "metadata-only",
+          "has_pdf": "no",
+          "has_reader": "no",
+          "project_gap": "待判断",
+          "evidence_value": "medium",
+          "duplicate_group_size": "1",
+          "next_action": "intake_to_stable_pdf"
+        },
+        {
+          "file_path": "library/pdfs/library_short_video/incoming/公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析_曾群.pdf",
+          "file_name": "公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析_曾群.pdf",
+          "matched_citekey": "cnki_2022_e0a8336b38",
+          "matched_title": "公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析",
+          "read_status": "metadata-only",
+          "has_pdf": "no",
+          "has_reader": "no",
+          "project_gap": "传播力评价；机制解释",
+          "evidence_value": "medium-high",
+          "duplicate_group_size": "1",
+          "next_action": "intake_to_stable_pdf"
+        },
+        {
+          "file_path": "library/pdfs/library_short_video/incoming/高校图书馆B站视频传播效果影响因素实证研究_丁大尉.pdf",
+          "file_name": "高校图书馆B站视频传播效果影响因素实证研究_丁大尉.pdf",
+          "matched_citekey": "cnki_2023_82f69af538",
+          "matched_title": "高校图书馆B站视频传播效果影响因素实证研究",
+          "read_status": "metadata-only",
+          "has_pdf": "no",
+          "has_reader": "no",
+          "project_gap": "传播力评价；机制解释",
+          "evidence_value": "medium-high",
+          "duplicate_group_size": "1",
+          "next_action": "intake_to_stable_pdf"
+        },
+        {
+          "file_path": "library/pdfs/library_short_video/incoming/公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf",
+          "file_name": "公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf",
+          "matched_citekey": "",
+          "matched_title": "",
+          "read_status": "unmatched",
+          "has_pdf": "no",
+          "has_reader": "no",
+          "project_gap": "传播力评价；服务价值指标；机制解释",
+          "evidence_value": "medium",
+          "duplicate_group_size": "1",
+          "next_action": "add_to_matrix_or_mark_external"
+        },
+        {
+          "file_path": "library/pdfs/library_short_video/incoming/基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf",
+          "file_name": "基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf",
+          "matched_citekey": "",
+          "matched_title": "",
+          "read_status": "unmatched",
+          "has_pdf": "no",
+          "has_reader": "no",
+          "project_gap": "传播力评价；机制解释",
+          "evidence_value": "medium",
+          "duplicate_group_size": "1",
+          "next_action": "add_to_matrix_or_mark_external"
+        },
+        {
+          "file_path": "library/pdfs/library_short_video/incoming/多模态视域下图书馆阅读推广短视频用户体验影响机制研究_程秀峰.pdf",
+          "file_name": "多模态视域下图书馆阅读推广短视频用户体验影响机制研究_程秀峰.pdf",
+          "matched_citekey": "",
+          "matched_title": "",
+          "read_status": "unmatched",
+          "has_pdf": "no",
+          "has_reader": "no",
+          "project_gap": "服务价值指标；机制解释",
+          "evidence_value": "medium",
+          "duplicate_group_size": "1",
+          "next_action": "add_to_matrix_or_mark_external"
+        }
+      ]
+    }
   },
   "evidence_gate": {
     "path": "projects/library_short_video/manuscript/evidence_gate_report.md",
     "status": "PASS",
     "error": "0",
     "warn": "0"
+  },
+  "evidence_locators": {
+    "csv": "projects/library_short_video/literature/evidence_locator_table.csv",
+    "html": "projects/library_short_video/literature/evidence_locator_table.html",
+    "rows": 59,
+    "page_located": 8,
+    "page_pending": 51
   },
   "review": {
     "due_count": 0,
@@ -190,7 +365,7 @@
     "artifact_manifest": "vault/13_Knowledge_Graph/artifact_manifest.csv",
     "manifest_path": "vault/13_Knowledge_Graph/artifact_manifest.csv",
     "search_index": "vault/13_Knowledge_Graph/search_index.json",
-    "project_related_entries": 48,
+    "project_related_entries": 51,
     "html_entries": [
       {
         "source_path": "study_dashboard.html",
@@ -257,6 +432,24 @@
         "display_path": "paper_reading/views/directories/context-packs-4b4dd996.html",
         "display_type": "directory_view",
         "title": "context_packs"
+      },
+      {
+        "source_path": "projects/library_short_video/literature/evidence_locator_table.csv",
+        "display_path": "projects/library_short_video/literature/evidence_locator_table.html",
+        "display_type": "evidence_locator_table",
+        "title": "library_short_video evidence locator table"
+      },
+      {
+        "source_path": "projects/library_short_video/literature/incoming_pdf_triage.csv",
+        "display_path": "projects/library_short_video/literature/incoming_pdf_triage.html",
+        "display_type": "incoming_pdf_triage",
+        "title": "library_short_video incoming PDF triage"
+      },
+      {
+        "source_path": "projects/library_short_video/manuscript/writing_panel.md",
+        "display_path": "projects/library_short_video/manuscript/writing_panel.html",
+        "display_type": "manuscript_writing_panel",
+        "title": "library_short_video manuscript writing panel"
       },
       {
         "source_path": "codex/runtime/library_short_video_fast_snapshot.md",
@@ -353,28 +546,11 @@
         "display_path": "paper_reading/views/cnki-2021-dfab60236e-d1ec0ae6.html",
         "display_type": "markdown_view",
         "title": "论文带读上下文包 - 抖音阅读推广短视频传播效果影响因素研究"
-      },
-      {
-        "source_path": "projects/library_short_video/literature/innovation_limitation_bank.md",
-        "display_path": "paper_reading/views/innovation_limitation_bank.html",
-        "display_type": "markdown_view",
-        "title": "创新-局限-机会台账"
-      },
-      {
-        "source_path": "projects/library_short_video/literature/literature_review_workbench.md",
-        "display_path": "paper_reading/views/literature_review_workbench.html",
-        "display_type": "markdown_view",
-        "title": "文献综述工作台"
-      },
-      {
-        "source_path": "projects/library_short_video/literature/readers/README.md",
-        "display_path": "paper_reading/views/readme-184a812b.html",
-        "display_type": "markdown_view",
-        "title": "Paper Reader Packages"
       }
     ]
   },
   "next_actions": [
+    "Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
     "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。"
   ]
 }

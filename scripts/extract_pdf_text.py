@@ -5,6 +5,7 @@ import argparse
 import shutil
 import subprocess
 from pathlib import Path
+from typing import Iterable
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -12,40 +13,40 @@ PDF_DIR = ROOT / "library" / "papers"
 TEXT_DIR = ROOT / "library" / "text"
 
 
-def extract_with_pymupdf(pdf: Path) -> str | None:
+def extract_pages_with_pymupdf(pdf: Path) -> list[tuple[int, str]] | None:
     try:
         import fitz  # type: ignore
     except Exception:
         return None
     doc = fitz.open(pdf)
     try:
-        return "\n\n".join(page.get_text() for page in doc)
+        return [(index + 1, page.get_text() or "") for index, page in enumerate(doc)]
     finally:
         doc.close()
 
 
-def extract_with_pdfplumber(pdf: Path) -> str | None:
+def extract_pages_with_pdfplumber(pdf: Path) -> list[tuple[int, str]] | None:
     try:
         import pdfplumber  # type: ignore
     except Exception:
         return None
     pages = []
     with pdfplumber.open(pdf) as doc:
-        for page in doc.pages:
-            pages.append(page.extract_text() or "")
-    return "\n\n".join(pages)
+        for index, page in enumerate(doc.pages, start=1):
+            pages.append((index, page.extract_text() or ""))
+    return pages
 
 
-def extract_with_pypdf(pdf: Path) -> str | None:
+def extract_pages_with_pypdf(pdf: Path) -> list[tuple[int, str]] | None:
     try:
         from pypdf import PdfReader  # type: ignore
     except Exception:
         return None
     reader = PdfReader(str(pdf))
-    return "\n\n".join(page.extract_text() or "" for page in reader.pages)
+    return [(index + 1, page.extract_text() or "") for index, page in enumerate(reader.pages)]
 
 
-def extract_with_pdftotext(pdf: Path) -> str | None:
+def extract_pages_with_pdftotext(pdf: Path) -> list[tuple[int, str]] | None:
     exe = shutil.which("pdftotext")
     if not exe:
         return None
@@ -58,10 +59,11 @@ def extract_with_pdftotext(pdf: Path) -> str | None:
     )
     if result.returncode != 0:
         raise RuntimeError(result.stderr.strip())
-    return result.stdout
+    chunks = result.stdout.split("\f")
+    return [(index, text) for index, text in enumerate(chunks, start=1) if text.strip()]
 
 
-def extract(pdf: Path) -> str:
+def check_pdf_header(pdf: Path) -> None:
     header = pdf.read_bytes()[:16]
     if not header.startswith(b"%PDF-"):
         if header.startswith(b"KDH "):
@@ -70,11 +72,30 @@ def extract(pdf: Path) -> str:
                 "Run `make caj-convert PROJECT=<slug> CITEKEY=<citekey> RUN_READER=1 UPDATE=1` first."
             )
         raise RuntimeError(f"{pdf} does not look like a PDF file.")
-    for method in (extract_with_pymupdf, extract_with_pdfplumber, extract_with_pypdf, extract_with_pdftotext):
-        text = method(pdf)
-        if text:
-            return text
+
+
+def non_empty_pages(pages: Iterable[tuple[int, str]]) -> list[tuple[int, str]]:
+    return [(page, text) for page, text in pages if text and text.strip()]
+
+
+def extract_pages(pdf: Path) -> list[tuple[int, str]]:
+    check_pdf_header(pdf)
+    for method in (
+        extract_pages_with_pymupdf,
+        extract_pages_with_pdfplumber,
+        extract_pages_with_pypdf,
+        extract_pages_with_pdftotext,
+    ):
+        pages = method(pdf)
+        if pages:
+            clean_pages = non_empty_pages(pages)
+            if clean_pages:
+                return clean_pages
     raise RuntimeError("No PDF extraction backend available. Install pymupdf, pdfplumber, pypdf, or poppler.")
+
+
+def extract(pdf: Path) -> str:
+    return "\n\n".join(text for _page, text in extract_pages(pdf))
 
 
 def main() -> int:

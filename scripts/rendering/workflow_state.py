@@ -111,6 +111,7 @@ def project_summaries() -> list[dict[str, Any]]:
                 "next_actions": payload.get("next_actions", [])[:4] if isinstance(payload, dict) else [],
                 "state_path": rel(project),
                 "dashboard_html": dashboard_html,
+                "entrypoints": payload.get("entrypoints", {}) if isinstance(payload, dict) else {},
             }
         )
     return projects
@@ -204,6 +205,24 @@ def status_class(status: str) -> str:
     return status.lower() if status in {"PASS", "WARN", "FAIL"} else "warn"
 
 
+def project_entry_links(project: dict[str, Any]) -> str:
+    entrypoints = project.get("entrypoints", {})
+    if not isinstance(entrypoints, dict):
+        return ""
+    links = []
+    for key, label in [
+        ("incoming_pdf_triage", "PDF分拣"),
+        ("evidence_locator_table", "证据核验"),
+        ("manuscript_writing_panel", "论文写作"),
+    ]:
+        target = str(entrypoints.get(key, ""))
+        if target:
+            links.append(f'<a href="{html.escape(target)}">{label}</a>')
+    if not links:
+        return ""
+    return '<p class="meta">' + " · ".join(links) + "</p>"
+
+
 def write_workflow_state_html(state: dict[str, Any]) -> None:
     counts = state.get("counts", {})
     audit = state.get("audit", {}).get("counts", {})
@@ -215,6 +234,7 @@ def write_workflow_state_html(state: dict[str, Any]) -> None:
         <article class="item">
           <h2>{html.escape(str(project.get("title", "")))}</h2>
           <p class="meta">{html.escape(str(project.get("slug", "")))} · 文献 {project.get("matrix_rows", 0)} · Reader {project.get("reader_packages", 0)}</p>
+          {project_entry_links(project)}
           <ul>{''.join(f'<li>{html.escape(str(action))}</li>' for action in project.get('next_actions', [])[:3])}</ul>
         </article>
         """

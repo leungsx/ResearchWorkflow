@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T13:48:50",
+  "generated_at": "2026-07-02T14:14:55",
   "date": "2026-07-02",
   "summary": {
     "counts": {
@@ -43,19 +43,19 @@
       "area": "知识图谱",
       "status": "PASS",
       "title": "图谱入口是可视化关系图",
-      "detail": "nodes=128, unique_edges=391"
+      "detail": "nodes=133, unique_edges=391"
     },
     {
       "area": "资产清单",
       "status": "PASS",
       "title": "artifact manifest 覆盖核心展示资产",
-      "detail": "130 条；display_types=28"
+      "detail": "133 条；display_types=31"
     },
     {
       "area": "搜索索引",
       "status": "PASS",
       "title": "搜索索引和搜索页可用",
-      "detail": "130 条；layers=4"
+      "detail": "133 条；layers=4"
     },
     {
       "area": "复习状态",
@@ -79,13 +79,13 @@
       "area": "备份",
       "status": "PASS",
       "title": "最近备份可用",
-      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 17.7 小时前。"
+      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 18.1 小时前。"
     },
     {
       "area": "Git/异地备份",
       "status": "WARN",
       "title": "存在尚未提交的 Git 改动",
-      "detail": "154 个路径待快照： M action_queue.html； M archive_policy.html； M codex/state/context_index.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-452dce22.html"
+      "detail": "151 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-4358f2f5.html"
     },
     {
       "area": "Token/记忆",
@@ -109,13 +109,13 @@
       "area": "行动队列",
       "status": "PASS",
       "title": "行动队列可用且入口有效",
-      "detail": "4 个开放行动。"
+      "detail": "3 个开放行动。"
     },
     {
       "area": "项目协作层",
       "status": "PASS",
       "title": "项目协作层可用",
-      "detail": "2 个项目；user_waiting=0。"
+      "detail": "2 个项目；user_waiting=1。"
     },
     {
       "area": "自动归档策略",

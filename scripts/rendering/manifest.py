@@ -92,6 +92,32 @@ def artifact_title(path: Path) -> str:
     return path.name
 
 
+def asset_role_for(display_type: str) -> str:
+    if display_type in {
+        "dashboard",
+        "paper_today_entry",
+        "paper_index",
+        "knowledge_cards_index",
+        "review_today",
+        "knowledge_graph",
+        "search",
+        "logs_index",
+        "workflow_state",
+        "action_queue",
+        "project_collaboration",
+        "archive_policy",
+        "incoming_pdf_triage",
+        "evidence_locator_table",
+        "manuscript_writing_panel",
+    }:
+        return "core_entry"
+    if display_type in {"markdown_view", "concept_card_view", "method_card_view", "log_view", "directory_view"}:
+        return "mirror_view"
+    if display_type.endswith("_data") or display_type in {"graph_source_data", "review_queue", "review_state", "search_index"}:
+        return "source_data"
+    return "generated_view"
+
+
 def collect_directory_tree(seeds: list[Path]) -> list[Path]:
     directories: dict[Path, Path] = {}
     queue = [source for source in seeds if source.exists() and source.is_dir()]
@@ -126,6 +152,7 @@ def artifact_manifest_rows() -> list[dict[str, str]]:
                 "title": title or artifact_title(source),
                 "layer": layer_for_source(source),
                 "generated_by": generated_by,
+                "asset_role": asset_role_for(display_type),
             }
         )
 
@@ -175,6 +202,15 @@ def artifact_manifest_rows() -> list[dict[str, str]]:
     for project in sorted([path for path in PROJECTS.iterdir() if path.is_dir() and (path / "project.yaml").exists()]):
         dashboard = project / "00_project_dashboard.md"
         add(project / "project_state.json", paper_markdown_view_path(dashboard), "project_state", f"{project.name} project state")
+        incoming = project / "literature" / "incoming_pdf_triage.html"
+        if incoming.exists():
+            add(project / "literature" / "incoming_pdf_triage.csv", incoming, "incoming_pdf_triage", f"{project.name} incoming PDF triage")
+        evidence = project / "literature" / "evidence_locator_table.html"
+        if evidence.exists():
+            add(project / "literature" / "evidence_locator_table.csv", evidence, "evidence_locator_table", f"{project.name} evidence locator table")
+        writing = project / "manuscript" / "writing_panel.html"
+        if writing.exists():
+            add(project / "manuscript" / "writing_panel.md", writing, "manuscript_writing_panel", f"{project.name} manuscript writing panel")
 
     for source, title in [
         (GRAPH_DIR / "obsidian_nodes.csv", "Obsidian graph nodes"),
@@ -199,7 +235,7 @@ def artifact_manifest_rows() -> list[dict[str, str]]:
 
 def build_artifact_manifest() -> None:
     GRAPH_DIR.mkdir(parents=True, exist_ok=True)
-    fieldnames = ["source_path", "source_type", "display_path", "display_type", "title", "layer", "generated_by"]
+    fieldnames = ["source_path", "source_type", "display_path", "display_type", "title", "layer", "generated_by", "asset_role"]
     rows = artifact_manifest_rows()
     with ARTIFACT_MANIFEST.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")

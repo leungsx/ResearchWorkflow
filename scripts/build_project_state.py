@@ -25,6 +25,12 @@ SEARCH_INDEX_JSON = GRAPH_DIR / "search_index.json"
 COLLABORATION_HTML = ROOT / "project_collaboration.html"
 ARCHIVE_POLICY_HTML = ROOT / "archive_policy.html"
 PAPER_READING = ROOT / "paper_reading"
+FULLTEXT_SUFFIXES = {".pdf", ".caj", ".kdh", ".nh"}
+PROJECT_GAP_TERMS = {
+    "传播力评价": ("传播力", "传播效果", "互动效果", "评价", "指标", "DCI", "指数", "爆款"),
+    "服务价值指标": ("服务价值", "阅读服务", "阅读推广", "服务", "转化", "用户体验", "公众平台"),
+    "机制解释": ("机制", "模型", "路径", "影响因素", "组态", "文本分析", "SICAS", "上瘾模型"),
+}
 
 from rendering.review import build_review_state
 
@@ -149,6 +155,20 @@ def evidence_summary(project: Path) -> dict[str, str]:
     }
 
 
+def evidence_locator_summary(project: Path) -> dict[str, Any]:
+    csv_path = project / "literature" / "evidence_locator_table.csv"
+    html_path = project / "literature" / "evidence_locator_table.html"
+    rows = read_csv(csv_path)
+    located = sum(1 for row in rows if clean(row.get("page")))
+    return {
+        "csv": rel(csv_path) if csv_path.exists() else "",
+        "html": rel(html_path) if html_path.exists() else "",
+        "rows": len(rows),
+        "page_located": located,
+        "page_pending": len(rows) - located,
+    }
+
+
 def artifact_entries_for_project(project: str) -> list[dict[str, str]]:
     rows = read_csv(ARTIFACT_MANIFEST)
     keep: list[dict[str, str]] = []
@@ -202,20 +222,77 @@ def context_pack_count(project: Path) -> int:
     return len([path for path in (project / "literature" / "context_packs").glob("*.md") if path.is_file()])
 
 
-def next_reading_candidates(rows: list[dict[str, str]], limit: int = 5) -> list[dict[str, str]]:
-    priority = {"metadata-only": 0, "": 1, "skimmed": 2, "human-read": 3, "verified": 4}
-    target_terms = ("传播力", "传播及互动", "互动效果", "服务价值", "评价", "指标", "DCI", "C指数")
+def reader_path_for(project: Path, citekey: str) -> Path | None:
+    path = project / "literature" / "readers" / citekey / "paper.md"
+    return path if citekey and path.exists() else None
+
+
+def fulltext_path_for(row: dict[str, str]) -> Path | None:
+    path = Path(row.get("pdf_path", ""))
+    if not str(path):
+        return None
+    if not path.is_absolute():
+        path = ROOT / path
+    return path if path.exists() and path.suffix.lower() in FULLTEXT_SUFFIXES else None
+
+
+def project_gap_tags(row: dict[str, str]) -> list[str]:
+    haystack = f"{row.get('title', '')} {row.get('keywords', '')} {row.get('abstract', '')} {row.get('core_findings', '')} {row.get('methods', '')}"
+    tags: list[str] = []
+    for tag, terms in PROJECT_GAP_TERMS.items():
+        if any(term in haystack for term in terms):
+            tags.append(tag)
+    return tags
+
+
+def evidence_value(tags: list[str], has_reader: bool, has_pdf: bool, status: str) -> str:
+    if "服务价值指标" in tags:
+        return "high"
+    if "传播力评价" in tags or "机制解释" in tags:
+        return "medium-high" if has_reader or has_pdf else "medium"
+    if status in {"metadata-only", "unread", "blank", ""} and has_pdf:
+        return "medium"
+    return "review" if status == "skimmed" else "unknown"
+
+
+def candidate_next_action(status: str, has_reader: bool, has_pdf: bool, tags: list[str]) -> str:
+    if status in {"verified", "human-read"}:
+        return "keep_as_verified_reference"
+    if status == "skimmed":
+        return "review_or_upgrade_only_if_needed"
+    if has_reader and ("服务价值指标" in tags or "传播力评价" in tags):
+        return "candidate_for_deep_read"
+    if has_pdf and not has_reader:
+        return "build_reader"
+    if has_pdf:
+        return "candidate_for_deep_read"
+    return "download_or_match_fulltext"
+
+
+def incoming_by_citekey(project: Path) -> dict[str, dict[str, str]]:
+    rows = read_csv(project / "literature" / "incoming_pdf_triage.csv")
+    result: dict[str, dict[str, str]] = {}
+    for row in rows:
+        citekey = clean(row.get("matched_citekey"))
+        if citekey and citekey not in result:
+            result[citekey] = row
+    return result
+
+
+def next_reading_candidates(project: Path, rows: list[dict[str, str]], limit: int = 5) -> list[dict[str, str]]:
+    status_priority = {"metadata-only": 0, "unread": 0, "": 1, "blank": 1, "skimmed": 8, "human-read": 10, "verified": 11}
+    incoming = incoming_by_citekey(project)
 
     def target_score(row: dict[str, str]) -> int:
-        haystack = f"{row.get('title', '')} {row.get('keywords', '')} {row.get('abstract', '')}"
-        return sum(1 for term in target_terms if term in haystack)
+        return len(project_gap_tags(row))
 
     candidates = sorted(
         rows,
         key=lambda row: (
-            0 if row.get("pdf_path") or row.get("note_path") else 1,
+            status_priority.get(clean(row.get("read_status")) or "blank", 9),
+            0 if fulltext_path_for(row) or reader_path_for(project, row.get("citekey", "")) or row.get("citekey", "") in incoming else 1,
             -target_score(row),
-            priority.get(clean(row.get("read_status")), 9),
+            -(1 if "服务价值指标" in project_gap_tags(row) else 0),
             row.get("year", ""),
             row.get("citekey", ""),
         ),
@@ -226,20 +303,51 @@ def next_reading_candidates(rows: list[dict[str, str]], limit: int = 5) -> list[
         status = clean(row.get("read_status"))
         if status in {"verified", "human-read"}:
             continue
+        citekey = row.get("citekey", "")
+        reader = reader_path_for(project, citekey)
+        fulltext = fulltext_path_for(row)
+        incoming_item = incoming.get(citekey, {})
+        has_incoming_pdf = bool(incoming_item)
+        tags = project_gap_tags(row)
+        normalized_status = status or "blank"
+        next_action = candidate_next_action(normalized_status, bool(reader), bool(fulltext), tags)
+        if has_incoming_pdf and not fulltext:
+            next_action = "intake_incoming_pdf"
         result.append(
             {
-                "citekey": row.get("citekey", ""),
+                "citekey": citekey,
                 "title": row.get("title", ""),
                 "year": row.get("year", ""),
                 "source": row.get("source", ""),
-                "read_status": status or "blank",
-                "reader_path": rel(row.get("note_path", "")),
-                "pdf_path": rel(row.get("pdf_path", "")),
+                "read_status": normalized_status,
+                "has_pdf": bool(fulltext),
+                "has_incoming_pdf": has_incoming_pdf,
+                "has_reader": bool(reader),
+                "project_gap": tags,
+                "evidence_value": evidence_value(tags, bool(reader), bool(fulltext) or has_incoming_pdf, normalized_status),
+                "next_action": next_action,
+                "reader_path": rel(reader or row.get("note_path", "")),
+                "pdf_path": rel(fulltext or row.get("pdf_path", "")),
+                "incoming_file": incoming_item.get("file_path", ""),
             }
         )
         if len(result) >= limit:
             break
     return result
+
+
+def incoming_triage_summary(project: Path) -> dict[str, Any]:
+    csv_path = project / "literature" / "incoming_pdf_triage.csv"
+    html_path = project / "literature" / "incoming_pdf_triage.html"
+    rows = read_csv(csv_path)
+    actions = Counter(row.get("next_action", "") or "unknown" for row in rows)
+    return {
+        "csv": rel(csv_path) if csv_path.exists() else "",
+        "html": rel(html_path) if html_path.exists() else "",
+        "item_count": len(rows),
+        "action_counts": dict(sorted(actions.items())),
+        "top_items": rows[:8],
+    }
 
 
 def research_questions_converged(project: Path) -> bool:
@@ -267,6 +375,19 @@ def next_actions(project: Path, rows: list[dict[str, str]], state: dict[str, Any
             "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
             "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
         ]
+    triage = incoming_triage_summary(project)
+    for item in triage.get("top_items", [])[:3]:
+        action = item.get("next_action", "")
+        title = item.get("matched_title") or item.get("file_name", "")
+        if action == "build_reader":
+            actions.append(f"Incoming 分拣建议：先为《{title}》生成 Reader。")
+            break
+        if action in {"intake_incoming_pdf", "intake_to_stable_pdf"}:
+            actions.append(f"Incoming 分拣建议：先把《{title}》入库为稳定全文，再生成 Reader。")
+            break
+        if action == "candidate_for_deep_read":
+            actions.append(f"下一篇候选优先考虑《{title}》，它已有全文/Reader 且贴近当前项目缺口。")
+            break
     statuses = Counter(clean(row.get("read_status")) or "blank" for row in rows)
     if evidence.get("status") not in {"PASS", "pass"}:
         actions.append("先处理 evidence gate 的 WARN/ERROR，避免 metadata-only 文献进入论文主张。")
@@ -295,6 +416,9 @@ def build_state(project_slug: str) -> dict[str, Any]:
     reading_board = project / "literature" / "reading_board.md"
     literature_workbench = project / "literature" / "literature_review_workbench.md"
     literature_synthesis = project / "03_literature_synthesis.md"
+    incoming_triage = project / "literature" / "incoming_pdf_triage.html"
+    evidence_locator = project / "literature" / "evidence_locator_table.html"
+    writing_panel = project / "manuscript" / "writing_panel.html"
 
     return {
         "schema_version": "1.0",
@@ -314,6 +438,9 @@ def build_state(project_slug: str) -> dict[str, Any]:
             "reading_board": html_view(reading_board) if reading_board.exists() else "",
             "literature_workbench": html_view(literature_workbench) if literature_workbench.exists() else "",
             "literature_synthesis": html_view(literature_synthesis) if literature_synthesis.exists() else "",
+            "incoming_pdf_triage": rel(incoming_triage) if incoming_triage.exists() else "",
+            "evidence_locator_table": rel(evidence_locator) if evidence_locator.exists() else "",
+            "manuscript_writing_panel": rel(writing_panel) if writing_panel.exists() else "",
             "review_today": rel(REVIEW_TODAY),
             "search": rel(SEARCH_INDEX_HTML),
             "project_collaboration": rel(COLLABORATION_HTML),
@@ -324,6 +451,9 @@ def build_state(project_slug: str) -> dict[str, Any]:
             "reading_board": rel(reading_board) if reading_board.exists() else "",
             "literature_workbench": rel(literature_workbench) if literature_workbench.exists() else "",
             "literature_synthesis": rel(literature_synthesis) if literature_synthesis.exists() else "",
+            "incoming_pdf_triage": rel(project / "literature" / "incoming_pdf_triage.md") if (project / "literature" / "incoming_pdf_triage.md").exists() else "",
+            "evidence_locator_table": rel(project / "literature" / "evidence_locator_table.md") if (project / "literature" / "evidence_locator_table.md").exists() else "",
+            "manuscript_writing_panel": rel(project / "manuscript" / "writing_panel.md") if (project / "manuscript" / "writing_panel.md").exists() else "",
         },
         "literature": {
             "matrix_rows": len(rows),
@@ -333,9 +463,11 @@ def build_state(project_slug: str) -> dict[str, Any]:
             "context_packs": context_pack_count(project),
             "latest_recommendation": state,
             "latest_deep_read": deep_read,
-            "next_reading_candidates": next_reading_candidates(rows),
+            "next_reading_candidates": next_reading_candidates(project, rows),
+            "incoming_pdf_triage": incoming_triage_summary(project),
         },
         "evidence_gate": evidence,
+        "evidence_locators": evidence_locator_summary(project),
         "review": review_snapshot(),
         "artifacts": {
             "artifact_manifest": rel(ARTIFACT_MANIFEST),

@@ -17,6 +17,7 @@ MATRIX = ROOT / "library" / "literature_matrix.csv"
 CNKI_EXPORTS = ROOT / "library" / "cnki_exports"
 PROJECTS = ROOT / "projects"
 OUT_DIR = ROOT / "vault" / "15_CNKI_Frontier" / "daily_recommendations"
+FULLTEXT_SUFFIXES = {".pdf", ".caj", ".kdh", ".nh"}
 
 # Daily discovery should surface the next unread paper. Upgrading a skimmed
 # paper to human-read/verified is a separate, user-directed reading task.
@@ -115,6 +116,12 @@ METHOD_TERMS = [
     "4C",
     "上瘾模型",
 ]
+
+GAP_TERMS = {
+    "传播力评价": ["传播力", "传播效果", "互动效果", "评价", "指标", "指数", "DCI", "爆款"],
+    "服务价值指标": ["服务价值", "阅读服务", "阅读推广", "服务", "转化", "用户体验", "公众平台"],
+    "机制解释": ["机制", "模型", "路径", "影响因素", "组态", "文本分析", "SICAS", "上瘾模型"],
+}
 
 
 @dataclass
@@ -440,11 +447,23 @@ def signal_score(title: str, terms: list[str], weight: float = 16.0) -> float:
     return min(100.0, weight * len(hits))
 
 
+def score_project_gap(row: dict[str, str]) -> tuple[float, list[str]]:
+    blob = clean("\n".join([row.get("title", ""), row.get("methods", ""), row.get("core_findings", ""), row.get("target_journal_relevance", "")]))
+    tags = [tag for tag, terms in GAP_TERMS.items() if any(term and term in blob for term in terms)]
+    score = min(100.0, 28.0 * len(tags))
+    if "服务价值指标" in tags:
+        score += 18.0
+    score = min(100.0, score)
+    reasons = [f"补当前项目缺口: {'、'.join(tags)}"] if tags else []
+    return score, reasons
+
+
 def availability(row: dict[str, str], project: str) -> tuple[float, Path | None, Path | None, list[str]]:
     citekey = row.get("citekey", "")
     reader = PROJECTS / project / "literature" / "readers" / citekey / "paper.md"
     reader_path = reader if reader.exists() else None
     pdf_path = resolve_path(row.get("pdf_path", ""))
+    incoming_path = incoming_fulltext(row, project)
     reasons: list[str] = []
     score = 0.0
     if reader_path:
@@ -453,6 +472,10 @@ def availability(row: dict[str, str], project: str) -> tuple[float, Path | None,
     if pdf_path and pdf_path.exists():
         score += 12.0
         reasons.append("已有本地授权全文/转换 PDF")
+    elif incoming_path:
+        pdf_path = incoming_path
+        score += 10.0
+        reasons.append("incoming 中已有待入库全文")
     elif pdf_path:
         score += 4.0
         reasons.append("矩阵有全文路径但文件需核对")
@@ -460,6 +483,26 @@ def availability(row: dict[str, str], project: str) -> tuple[float, Path | None,
         score += 6.0
         reasons.append("已有笔记路径")
     return min(40.0, score), reader_path, pdf_path, reasons
+
+
+def incoming_fulltext(row: dict[str, str], project: str) -> Path | None:
+    incoming_dir = ROOT / "library" / "pdfs" / project / "incoming"
+    if not incoming_dir.exists():
+        return None
+    citekey = clean(row.get("citekey"))
+    title_key = normalize_title(row.get("title", ""))
+    for path in sorted(incoming_dir.rglob("*")):
+        if not path.is_file() or path.suffix.lower() not in FULLTEXT_SUFFIXES:
+            continue
+        name = path.stem
+        name_key = normalize_title(name)
+        if citekey and citekey in name:
+            return path
+        if title_key and (title_key in name_key or name_key in title_key):
+            return path
+        if title_key and len(title_key) >= 14 and title_key[:14] in name_key:
+            return path
+    return None
 
 
 def candidate_score(
@@ -486,6 +529,7 @@ def candidate_score(
     source_score, source_reason = score_source(source, profile)
     review_signal = signal_score(title, REVIEW_TERMS)
     method_signal = signal_score(title, METHOD_TERMS)
+    gap_signal, gap_reasons = score_project_gap(row)
     recent_signal = 0.0
     if year:
         recent_signal = max(0.0, 100.0 - max(0, current_year - year) * 18.0)
@@ -506,6 +550,7 @@ def candidate_score(
         "source": source_score,
         "review_signal": review_signal,
         "method_signal": method_signal,
+        "project_gap": gap_signal,
         "recent_signal": recent_signal,
         "availability": availability_score,
         "foundation_age": foundation_age,
@@ -521,6 +566,7 @@ def candidate_score(
             + source_score * 0.12
             + availability_score * 0.10
             + recent_signal * 0.04
+            + gap_signal * 0.08
         )
     elif stage == "recent_important":
         score = (
@@ -530,6 +576,7 @@ def candidate_score(
             + source_score * 0.12
             + availability_score * 0.08
             + method_signal * 0.03
+            + gap_signal * 0.08
         )
     elif stage == "method_model":
         score = (
@@ -539,6 +586,7 @@ def candidate_score(
             + source_score * 0.11
             + availability_score * 0.10
             + recent_signal * 0.05
+            + gap_signal * 0.12
         )
     else:
         score = (
@@ -546,6 +594,7 @@ def candidate_score(
             + relevance * 0.25
             + source_score * 0.16
             + availability_score * 0.10
+            + gap_signal * 0.10
             + foundation_age
         )
 
@@ -561,6 +610,7 @@ def candidate_score(
         reasons.append("可用于现状/问题/策略地图")
     if method_signal > 0:
         reasons.append("有模型、实证或方法线索")
+    reasons.extend(gap_reasons)
     if year >= current_year - 3 and year:
         reasons.append("近年文献")
     reasons.extend(availability_reasons)

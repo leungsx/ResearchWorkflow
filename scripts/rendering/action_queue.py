@@ -93,6 +93,8 @@ def build_action_queue(state: dict[str, Any] | None = None) -> dict[str, Any]:
 
     for project in state.get("projects", []) if isinstance(state, dict) else []:
         slug = project.get("slug", "")
+        if slug == "starter_project":
+            continue
         for action in project.get("next_actions", [])[:3]:
             add_action(
                 actions,

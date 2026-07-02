@@ -1,6 +1,6 @@
 PYTHON ?= /Users/leung/anaconda3/bin/python
 
-.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-ensure review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
+.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-ensure review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate fast-status workflow-policy workflow-audit workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate evidence-locators manuscript-panel incoming-triage citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
 
 check:
 	$(PYTHON) scripts/check_environment.py
@@ -100,6 +100,15 @@ backfill-all:
 
 evidence-gate:
 	$(PYTHON) scripts/evidence_gate.py --project "$(PROJECT)" $(if $(STRICT),--fail-on-errors,)
+
+evidence-locators:
+	$(PYTHON) scripts/build_evidence_locators.py --project "$(if $(PROJECT),$(PROJECT),library_short_video)"
+
+manuscript-panel:
+	$(PYTHON) scripts/build_manuscript_panel.py --project "$(if $(PROJECT),$(PROJECT),library_short_video)"
+
+incoming-triage:
+	$(PYTHON) scripts/scan_incoming_pdfs.py --project "$(if $(PROJECT),$(PROJECT),library_short_video)" $(if $(INCOMING),--incoming-dir "$(INCOMING)",)
 
 citation-audit:
 	$(PYTHON) scripts/audit_references_gbt7714.py --project "$(PROJECT)" $(if $(STRICT),--fail-on-errors,)
@@ -229,6 +238,9 @@ obsidian-graph:
 	$(PYTHON) scripts/obsidian_graph_export.py
 
 learning-dashboard:
+	$(PYTHON) scripts/scan_incoming_pdfs.py --project "library_short_video"
+	$(PYTHON) scripts/build_evidence_locators.py --project "library_short_video"
+	$(PYTHON) scripts/build_manuscript_panel.py --project "library_short_video"
 	$(PYTHON) scripts/build_project_state.py --all
 	$(PYTHON) scripts/build_workflow_state.py
 	$(PYTHON) scripts/build_action_queue.py

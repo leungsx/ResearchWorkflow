@@ -7,6 +7,7 @@ import datetime as dt
 import json
 import re
 from pathlib import Path
+from typing import Any
 
 import extract_pdf_text
 
@@ -44,28 +45,39 @@ def clean(text: str) -> str:
     return re.sub(r"\s+", " ", text or "").strip()
 
 
-def split_blocks(text: str, max_chars: int = 1200) -> list[str]:
+def split_page_text(page: int | None, text: str, max_chars: int = 1200) -> list[dict[str, Any]]:
     paragraphs = [clean(part) for part in re.split(r"\n\s*\n+", text) if clean(part)]
-    blocks: list[str] = []
+    blocks: list[dict[str, Any]] = []
     current: list[str] = []
     current_len = 0
     for paragraph in paragraphs:
         if current and current_len + len(paragraph) + 2 > max_chars:
-            blocks.append("\n\n".join(current))
+            blocks.append({"text": "\n\n".join(current), "page": page})
             current = []
             current_len = 0
         if len(paragraph) > max_chars:
             if current:
-                blocks.append("\n\n".join(current))
+                blocks.append({"text": "\n\n".join(current), "page": page})
                 current = []
                 current_len = 0
             for start in range(0, len(paragraph), max_chars):
-                blocks.append(paragraph[start : start + max_chars])
+                blocks.append({"text": paragraph[start : start + max_chars], "page": page})
             continue
         current.append(paragraph)
         current_len += len(paragraph) + 2
     if current:
-        blocks.append("\n\n".join(current))
+        blocks.append({"text": "\n\n".join(current), "page": page})
+    return blocks
+
+
+def split_blocks(text: str, max_chars: int = 1200) -> list[dict[str, Any]]:
+    return split_page_text(None, text, max_chars=max_chars)
+
+
+def split_page_blocks(pages: list[tuple[int, str]], max_chars: int = 1200) -> list[dict[str, Any]]:
+    blocks: list[dict[str, Any]] = []
+    for page, text in pages:
+        blocks.extend(split_page_text(page, text, max_chars=max_chars))
     return blocks
 
 
@@ -78,12 +90,12 @@ def resolve_source(row: dict[str, str], pdf: str, text: str) -> tuple[Path, str]
     raise ValueError("Provide --pdf/--text, or set pdf_path in the literature matrix.")
 
 
-def read_source(source: Path, source_type: str) -> str:
+def read_source_blocks(source: Path, source_type: str) -> list[dict[str, Any]]:
     if not source.exists():
         raise FileNotFoundError(source)
     if source_type == "text":
-        return source.read_text(encoding="utf-8", errors="ignore")
-    return extract_pdf_text.extract(source)
+        return split_blocks(source.read_text(encoding="utf-8", errors="ignore"))
+    return split_page_blocks(extract_pdf_text.extract_pages(source))
 
 
 def output_dir(project: str, citekey: str, output: Path | None) -> Path:
@@ -94,7 +106,7 @@ def output_dir(project: str, citekey: str, output: Path | None) -> Path:
     return LIBRARY_READERS / citekey
 
 
-def render_paper(row: dict[str, str], blocks: list[str], source: Path, source_type: str) -> str:
+def render_paper(row: dict[str, str], blocks: list[dict[str, Any]], source: Path, source_type: str) -> str:
     citekey = row.get("citekey", "")
     title = row.get("title", "")
     lines = [
@@ -126,14 +138,16 @@ def render_paper(row: dict[str, str], blocks: list[str], source: Path, source_ty
     ]
     for index, block in enumerate(blocks, start=1):
         block_id = f"B{index:04d}"
+        page = block.get("page")
+        page_text = str(page) if page else "unknown from current extractor"
         lines.extend(
             [
                 f"### {block_id}",
                 "",
                 f"- Source ID: `{citekey}:{block_id}`",
-                "- Page: unknown from current extractor",
+                f"- Page: {page_text}",
                 "",
-                block,
+                str(block.get("text", "")),
                 "",
             ]
         )
@@ -152,7 +166,7 @@ def render_paper(row: dict[str, str], blocks: list[str], source: Path, source_ty
     return "\n".join(lines)
 
 
-def source_map(row: dict[str, str], blocks: list[str], source: Path, source_type: str) -> dict:
+def source_map(row: dict[str, str], blocks: list[dict[str, Any]], source: Path, source_type: str) -> dict:
     citekey = row.get("citekey", "")
     return {
         "schema": "ResearchWorkflow.SourceMap.v1",
@@ -166,10 +180,10 @@ def source_map(row: dict[str, str], blocks: list[str], source: Path, source_type
             {
                 "block_id": f"B{index:04d}",
                 "source_id": f"{citekey}:B{index:04d}",
-                "page": None,
+                "page": block.get("page"),
                 "block_type": "text",
-                "char_count": len(block),
-                "text": block,
+                "char_count": len(str(block.get("text", ""))),
+                "text": str(block.get("text", "")),
             }
             for index, block in enumerate(blocks, start=1)
         ],
@@ -191,7 +205,8 @@ def render_notes(row: dict[str, str], source: Path, source_type: str, block_coun
             "",
             "- The source file must come from legal CNKI/institutional/library access.",
             "- This reader does not automatically mark the paper as human-read.",
-            "- Page numbers are unknown when the current extraction backend does not expose page-aware blocks.",
+            "- Page numbers are captured when the PDF extraction backend exposes page-aware text blocks.",
+            "- Page locators still require human checking against the original PDF before manuscript citation.",
             "- Figures and tables are not extracted in this deterministic v1 reader.",
             "",
             "## Human Reading To Complete",
@@ -243,8 +258,7 @@ def main() -> int:
     row = find_row(load_rows(args.matrix), args.citekey, args.title)
     citekey = row.get("citekey", "")
     source, source_type = resolve_source(row, args.pdf, args.text)
-    text = read_source(source, source_type)
-    blocks = split_blocks(text)
+    blocks = read_source_blocks(source, source_type)
     if not blocks:
         raise RuntimeError("No text blocks extracted from source.")
 

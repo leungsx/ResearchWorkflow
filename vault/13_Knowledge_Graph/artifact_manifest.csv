@@ -1,131 +1,134 @@
-source_path,source_type,display_path,display_type,title,layer,generated_by
-action_queue.html,html,action_queue.html,action_queue,行动队列,Presentation,make learning-dashboard
-vault/13_Knowledge_Graph/action_queue.json,json,action_queue.html,action_queue_data,Action queue,Knowledge,make learning-dashboard
-archive_policy.html,html,archive_policy.html,archive_policy,自动归档策略,Presentation,make learning-dashboard
-vault/13_Knowledge_Graph/archive_policy.json,json,archive_policy.html,archive_policy_data,Archive policy,Knowledge,make learning-dashboard
-vault/02_Concepts/AARRR 漏斗模型.md,markdown,knowledge_cards/views/concept-aarrr-bf76ae6c.html,concept_card_view,AARRR 漏斗模型,Knowledge,make learning-dashboard
-vault/02_Concepts/Hook Model 上瘾模型.md,markdown,knowledge_cards/views/concept-hook-model-878dcbb7.html,concept_card_view,Hook Model 上瘾模型,Knowledge,make learning-dashboard
-vault/02_Concepts/SICAS模型.md,markdown,knowledge_cards/views/concept-sicas-e14df8c7.html,concept_card_view,SICAS模型,Knowledge,make learning-dashboard
-vault/02_Concepts/互动营销.md,markdown,knowledge_cards/views/concept-452dce22.html,concept_card_view,互动营销,Knowledge,make learning-dashboard
-vault/02_Concepts/传播力评价.md,markdown,knowledge_cards/views/concept-44250b7b.html,concept_card_view,传播力评价,Knowledge,make learning-dashboard
-vault/02_Concepts/平台互动-服务触达-阅读转化.md,markdown,knowledge_cards/views/concept-4358f2f5.html,concept_card_view,平台互动-服务触达-阅读转化,Knowledge,make learning-dashboard
-vault/02_Concepts/平台适配.md,markdown,knowledge_cards/views/concept-53b320d5.html,concept_card_view,平台适配,Knowledge,make learning-dashboard
-vault/02_Concepts/情感营销.md,markdown,knowledge_cards/views/concept-d7b1f9e6.html,concept_card_view,情感营销,Knowledge,make learning-dashboard
-vault/02_Concepts/数字阅读推广.md,markdown,knowledge_cards/views/concept-b0f48f34.html,concept_card_view,数字阅读推广,Knowledge,make learning-dashboard
-vault/02_Concepts/方向链.md,markdown,knowledge_cards/views/concept-e068f0fc.html,concept_card_view,方向链,Knowledge,make learning-dashboard
-vault/02_Concepts/服务价值.md,markdown,knowledge_cards/views/concept-e98c8c55.html,concept_card_view,服务价值,Knowledge,make learning-dashboard
-vault/02_Concepts/沉浸式内容.md,markdown,knowledge_cards/views/concept-7f8a8bb3.html,concept_card_view,沉浸式内容,Knowledge,make learning-dashboard
-vault/02_Concepts/渠道营销.md,markdown,knowledge_cards/views/concept-401f5cfe.html,concept_card_view,渠道营销,Knowledge,make learning-dashboard
-vault/02_Concepts/用户感知价值.md,markdown,knowledge_cards/views/concept-824dc24b.html,concept_card_view,用户感知价值,Knowledge,make learning-dashboard
-vault/02_Concepts/软营销.md,markdown,knowledge_cards/views/concept-841db0d5.html,concept_card_view,软营销,Knowledge,make learning-dashboard
-vault/02_Concepts/馆型差异.md,markdown,knowledge_cards/views/concept-1c7d1e51.html,concept_card_view,馆型差异,Knowledge,make learning-dashboard
-study_dashboard.html,html,study_dashboard.html,dashboard,ResearchWorkflow 学习仪表盘,Presentation,make learning-dashboard
-library/pdfs/library_short_video,directory,paper_reading/views/directories/library-short-video-8b015fe8.html,directory_view,library_short_video,Source,make learning-dashboard
-library/pdfs/library_short_video/converted,directory,paper_reading/views/directories/converted-67e02670.html,directory_view,converted,Source,make learning-dashboard
-library/pdfs/library_short_video/incoming,directory,paper_reading/views/directories/incoming-468da0bf.html,directory_view,incoming,Source,make learning-dashboard
-library/pdfs/library_short_video/incoming/2026-06-30,directory,paper_reading/views/directories/2026-06-30-d7c885ed.html,directory_view,2026-06-30,Source,make learning-dashboard
-projects/library_short_video/literature/caj_conversion,directory,paper_reading/views/directories/caj-conversion-db8913e9.html,directory_view,caj_conversion,Knowledge,make learning-dashboard
-projects/library_short_video/literature/caj_conversion/cnki_2020_64b4f881c9_preview,directory,paper_reading/views/directories/cnki-2020-64b4f881c9-preview-0fc2d053.html,directory_view,cnki_2020_64b4f881c9_preview,Knowledge,make learning-dashboard
-projects/library_short_video/literature/caj_conversion/cnki_2021_d35f8e895a_preview,directory,paper_reading/views/directories/cnki-2021-d35f8e895a-preview-e9db0bd8.html,directory_view,cnki_2021_d35f8e895a_preview,Knowledge,make learning-dashboard
-projects/library_short_video/literature/caj_conversion/cnki_2021_dfab60236e_preview,directory,paper_reading/views/directories/cnki-2021-dfab60236e-preview-add63b94.html,directory_view,cnki_2021_dfab60236e_preview,Knowledge,make learning-dashboard
-projects/library_short_video/literature/caj_conversion/cnki_2023_34348faa1e_preview,directory,paper_reading/views/directories/cnki-2023-34348faa1e-preview-f5494d52.html,directory_view,cnki_2023_34348faa1e_preview,Knowledge,make learning-dashboard
-projects/library_short_video/literature/context_packs,directory,paper_reading/views/directories/context-packs-4b4dd996.html,directory_view,context_packs,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/paper_briefs,directory,paper_reading/views/directories/paper-briefs-6a749cd8.html,directory_view,paper_briefs,Knowledge,make learning-dashboard
-vault/13_Knowledge_Graph/artifact_manifest.csv,csv,knowledge_graph/index.html,graph_source_data,Artifact manifest,Knowledge,make obsidian-graph && make learning-dashboard
-vault/13_Knowledge_Graph/knowledge_index.csv,csv,knowledge_graph/index.html,graph_source_data,Knowledge card index,Knowledge,make obsidian-graph && make learning-dashboard
-vault/13_Knowledge_Graph/obsidian_edges.csv,csv,knowledge_graph/index.html,graph_source_data,Obsidian graph edges,Knowledge,make obsidian-graph && make learning-dashboard
-vault/13_Knowledge_Graph/obsidian_nodes.csv,csv,knowledge_graph/index.html,graph_source_data,Obsidian graph nodes,Knowledge,make obsidian-graph && make learning-dashboard
-knowledge_cards/index.html,html,knowledge_cards/index.html,knowledge_cards_index,知识卡入口,Presentation,make learning-dashboard
-knowledge_graph/index.html,html,knowledge_graph/index.html,knowledge_graph,知识图谱入口,Presentation,make learning-dashboard
-vault/12_Learning_Log/sessions/2026-06-18-knowledge.md,markdown,logs/views/2026-06-18-knowledge-edc7455a.html,log_view,Learning Session - 科研方法学习系统,Knowledge,make learning-dashboard
-vault/12_Learning_Log/sessions/2026-06-20-hook-model.md,markdown,logs/views/2026-06-20-hook-model-132c5c65.html,log_view,Learning Session - Hook Model 上瘾模型,Knowledge,make learning-dashboard
-vault/12_Learning_Log/sessions/2026-06-29-evening-close.md,markdown,logs/views/2026-06-29-evening-close-631a6a14.html,log_view,Learning Session - 2026-06-29 Evening Close,Knowledge,make learning-dashboard
-vault/12_Learning_Log/sessions/2026-06-29-sicas-paper.md,markdown,logs/views/2026-06-29-sicas-paper-a3d0cfd2.html,log_view,Learning Session - SICAS 论文精读,Knowledge,make learning-dashboard
-vault/12_Learning_Log/sessions/2026-06-30-aarrr-paper.md,markdown,logs/views/2026-06-30-aarrr-paper-f11d92b3.html,log_view,Learning Session - AARRR 比较论文精读,Knowledge,make learning-dashboard
-vault/12_Learning_Log/sessions/2026-06-30-evening-close.md,markdown,logs/views/2026-06-30-evening-close-07814ed3.html,log_view,Learning Session - 2026-06-30 Evening Close,Knowledge,make learning-dashboard
-vault/12_Learning_Log/sessions/2026-07-01-digital-reading-promotion-paper.md,markdown,logs/views/2026-07-01-digital-reading-promotion-paper-83676eb0.html,log_view,Learning Session - 数字阅读推广服务转化论文精读,Knowledge,make learning-dashboard
-vault/12_Learning_Log/sessions/2026-07-01-evening-close.md,markdown,logs/views/2026-07-01-evening-close-35b4d344.html,log_view,Learning Session - 2026-07-01 Evening Close,Knowledge,make learning-dashboard
-vault/12_Learning_Log/sessions/2026-07-02-propagation-power-evaluation-paper.md,markdown,logs/views/2026-07-02-propagation-power-evaluation-paper-7d398028.html,log_view,Learning Session - 2026-07-02 传播力评价论文精读,Knowledge,make learning-dashboard
-logs/index.html,html,logs/index.html,logs_index,学习日志入口,Presentation,make learning-dashboard
-codex/OPERATING_PROTOCOL.md,markdown,paper_reading/views/operating-protocol-7492396d.html,markdown_view,Codex-First Research Operating Protocol,Orchestration/QA,make learning-dashboard
-codex/runtime/library_short_video_fast_snapshot.md,markdown,paper_reading/views/library-short-video-fast-snapshot-d2e5e287.html,markdown_view,Fast Runtime Snapshot - library_short_video,Orchestration/QA,make learning-dashboard
-docs/WORKFLOW_LAYERED_ARCHITECTURE.md,markdown,paper_reading/views/workflow_layered_architecture.html,markdown_view,分层架构契约,Orchestration/QA,make learning-dashboard
-projects/library_short_video/00_project_dashboard.md,markdown,paper_reading/views/00-project-dashboard-dd8418ad.html,markdown_view,Project Dashboard - 图书馆短视频相关研究,Knowledge,make learning-dashboard
-projects/library_short_video/03_literature_synthesis.md,markdown,paper_reading/views/literature_synthesis.html,markdown_view,跨文献综述,Knowledge,make learning-dashboard
-projects/library_short_video/literature/caj_conversion/cnki_2020_64b4f881c9.md,markdown,paper_reading/views/cnki-2020-64b4f881c9-bf538524.html,markdown_view,CAJ Conversion Report - cnki_2020_64b4f881c9,Knowledge,make learning-dashboard
-projects/library_short_video/literature/caj_conversion/cnki_2021_d35f8e895a.md,markdown,paper_reading/views/cnki-2021-d35f8e895a-fa79e5bc.html,markdown_view,CAJ Conversion Report - cnki_2021_d35f8e895a,Knowledge,make learning-dashboard
-projects/library_short_video/literature/caj_conversion/cnki_2021_dfab60236e.md,markdown,paper_reading/views/cnki-2021-dfab60236e-6aa38981.html,markdown_view,CAJ Conversion Report - cnki_2021_dfab60236e,Knowledge,make learning-dashboard
-projects/library_short_video/literature/caj_conversion/cnki_2023_34348faa1e.md,markdown,paper_reading/views/cnki-2023-34348faa1e-0e4cbc5e.html,markdown_view,CAJ Conversion Report - cnki_2023_34348faa1e,Knowledge,make learning-dashboard
-projects/library_short_video/literature/cnki_search_plan.md,markdown,paper_reading/views/cnki-search-plan-81b24ea3.html,markdown_view,CNKI Search Plan - 图书馆短视频相关研究,Knowledge,make learning-dashboard
-projects/library_short_video/literature/context_packs/cnki_2020_2a150c6df8.md,markdown,paper_reading/views/cnki-2020-2a150c6df8-984b9b2e.html,markdown_view,论文带读上下文包 - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究,Knowledge,make learning-dashboard
-projects/library_short_video/literature/context_packs/cnki_2020_64b4f881c9.md,markdown,paper_reading/views/cnki-2020-64b4f881c9-bf8d739c.html,markdown_view,论文带读上下文包 - 图书馆短视频发展现状、问题与对策分析——以抖音平台为例,Knowledge,make learning-dashboard
-projects/library_short_video/literature/context_packs/cnki_2021_3771e58987.md,markdown,paper_reading/views/cnki-2021-3771e58987-eb215045.html,markdown_view,论文带读上下文包 - 公共图书馆和高校图书馆短视频营销比较研究,Knowledge,make learning-dashboard
-projects/library_short_video/literature/context_packs/cnki_2021_5530e86157.md,markdown,paper_reading/views/cnki-2021-5530e86157-05cc0475.html,markdown_view,论文带读上下文包 - 基于短视频营销的公共图书馆数字阅读推广策略研究,Knowledge,make learning-dashboard
-projects/library_short_video/literature/context_packs/cnki_2021_645f03f388.md,markdown,paper_reading/views/cnki-2021-645f03f388-0a001b11.html,markdown_view,论文带读上下文包 - 图书馆短视频账号传播力研究——以省级公共图书馆为例,Knowledge,make learning-dashboard
-projects/library_short_video/literature/context_packs/cnki_2021_7556aafa99.md,markdown,paper_reading/views/cnki-2021-7556aafa99-1f5b3fc2.html,markdown_view,论文带读上下文包 - 公共图书馆“抖音”短视频服务现状及发展策略研究,Knowledge,make learning-dashboard
-projects/library_short_video/literature/context_packs/cnki_2021_d35f8e895a.md,markdown,paper_reading/views/cnki-2021-d35f8e895a-0586195d.html,markdown_view,论文带读上下文包 - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索,Knowledge,make learning-dashboard
-projects/library_short_video/literature/context_packs/cnki_2021_dfab60236e.md,markdown,paper_reading/views/cnki-2021-dfab60236e-d1ec0ae6.html,markdown_view,论文带读上下文包 - 抖音阅读推广短视频传播效果影响因素研究,Knowledge,make learning-dashboard
-projects/library_short_video/literature/innovation_limitation_bank.md,markdown,paper_reading/views/innovation_limitation_bank.html,markdown_view,创新-局限-机会台账,Knowledge,make learning-dashboard
-projects/library_short_video/literature/literature_review_workbench.md,markdown,paper_reading/views/literature_review_workbench.html,markdown_view,文献综述工作台,Knowledge,make learning-dashboard
-projects/library_short_video/literature/readers/README.md,markdown,paper_reading/views/readme-184a812b.html,markdown_view,Paper Reader Packages,Source,make learning-dashboard
-projects/library_short_video/literature/readers/cnki_2020_2a150c6df8/paper.md,markdown,paper_reading/views/paper-c04dcc5b.html,markdown_view,Source-Grounded Reader - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究,Source,make learning-dashboard
-projects/library_short_video/literature/readers/cnki_2020_64b4f881c9/paper.md,markdown,paper_reading/views/paper-cd9b4518.html,markdown_view,Source-Grounded Reader - 图书馆短视频发展现状、问题与对策分析——以抖音平台为例,Source,make learning-dashboard
-projects/library_short_video/literature/readers/cnki_2021_3771e58987/paper.md,markdown,paper_reading/views/paper-21739661.html,markdown_view,Source-Grounded Reader - 公共图书馆和高校图书馆短视频营销比较研究,Source,make learning-dashboard
-projects/library_short_video/literature/readers/cnki_2021_5530e86157/paper.md,markdown,paper_reading/views/paper-495f8717.html,markdown_view,Source-Grounded Reader - 基于短视频营销的公共图书馆数字阅读推广策略研究,Source,make learning-dashboard
-projects/library_short_video/literature/readers/cnki_2021_645f03f388/paper.md,markdown,paper_reading/views/paper-f2f9e4d9.html,markdown_view,Source-Grounded Reader - 图书馆短视频账号传播力研究——以省级公共图书馆为例,Source,make learning-dashboard
-projects/library_short_video/literature/readers/cnki_2021_7556aafa99/paper.md,markdown,paper_reading/views/paper-0231710d.html,markdown_view,Source-Grounded Reader - 公共图书馆“抖音”短视频服务现状及发展策略研究,Source,make learning-dashboard
-projects/library_short_video/literature/readers/cnki_2021_d35f8e895a/paper.md,markdown,paper_reading/views/paper-b30ed69c.html,markdown_view,Source-Grounded Reader - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索,Source,make learning-dashboard
-projects/library_short_video/literature/readers/cnki_2021_dfab60236e/paper.md,markdown,paper_reading/views/paper-8448cb0c.html,markdown_view,Source-Grounded Reader - 抖音阅读推广短视频传播效果影响因素研究,Source,make learning-dashboard
-projects/library_short_video/literature/readers/cnki_2023_34348faa1e/paper.md,markdown,paper_reading/views/cnki_2023_34348faa1e-reader.html,markdown_view,Source-Grounded Reader,Source,make learning-dashboard
-projects/library_short_video/literature/reading_board.md,markdown,paper_reading/views/reading-board-026f6ec8.html,markdown_view,今日阅读看板 - 图书馆短视频相关研究,Knowledge,make learning-dashboard
-projects/library_short_video/literature/recaps/2026-06-20-five-paper-quick-recap.md,markdown,paper_reading/views/2026-06-20-five-paper-quick-recap-8b992799.html,markdown_view,5 篇已读论文快速复盘 - 图书馆短视频相关研究,Knowledge,make learning-dashboard
-projects/library_short_video/manuscript/evidence_gate_report.md,markdown,paper_reading/views/evidence-gate-report-7607e392.html,markdown_view,Evidence Gate Report,Knowledge,make learning-dashboard
-projects/starter_project/00_project_dashboard.md,markdown,paper_reading/views/00-project-dashboard-b90a4a93.html,markdown_view,Project Dashboard,Knowledge,make learning-dashboard
-projects/starter_project/03_literature_synthesis.md,markdown,paper_reading/views/03-literature-synthesis-01206220.html,markdown_view,Literature Synthesis,Knowledge,make learning-dashboard
-projects/starter_project/manuscript/evidence_gate_report.md,markdown,paper_reading/views/evidence-gate-report-f15d3e57.html,markdown_view,Evidence Gate Report,Knowledge,make learning-dashboard
-vault/01_Literature/cnki_2021_3771e58987.md,markdown,paper_reading/views/cnki-2021-3771e58987-6c1b15ea.html,markdown_view,公共图书馆和高校图书馆短视频营销比较研究,Knowledge,make learning-dashboard
-vault/01_Literature/cnki_2021_5530e86157.md,markdown,paper_reading/views/cnki-2021-5530e86157-96644c0b.html,markdown_view,基于短视频营销的公共图书馆数字阅读推广策略研究,Knowledge,make learning-dashboard
-vault/01_Literature/cnki_2021_645f03f388.md,markdown,paper_reading/views/cnki-2021-645f03f388-609a8a67.html,markdown_view,图书馆短视频账号传播力研究——以省级公共图书馆为例,Knowledge,make learning-dashboard
-vault/01_Literature/cnki_2023_34348faa1e.md,markdown,paper_reading/views/cnki_2023_34348faa1e-note.html,markdown_view,Obsidian 论文笔记,Knowledge,make learning-dashboard
-vault/02_Concepts/SICAS模型.md,markdown,paper_reading/views/sicas-model-concept.html,markdown_view,知识卡：SICAS 模型,Knowledge,make learning-dashboard
-vault/03_Methods/DCI传播力指数.md,markdown,paper_reading/views/dci-index-method.html,markdown_view,方法卡：DCI 传播力指数,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/daily_recommendations/2026-06-20-library_short_video.md,markdown,paper_reading/views/2026-06-20-library-short-video.html,markdown_view,2026-06-20 CNKI 每日推荐,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/daily_recommendations/2026-06-21-library_short_video-after-refresh.md,markdown,paper_reading/views/2026-06-21-library-short-video-after-refresh-b3fd57a8.html,markdown_view,CNKI 每日论文推荐 - 图书馆短视频相关研究,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/daily_recommendations/2026-06-21-library_short_video-next-after-main.md,markdown,paper_reading/views/2026-06-21-library-short-video-next-after-main-60f7e2b9.html,markdown_view,CNKI 每日论文推荐 - 图书馆短视频相关研究,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/paper_briefs/cnki_2020_2a150c6df8.md,markdown,paper_reading/views/cnki-2020-2a150c6df8-74f60b26.html,markdown_view,论文研讨卡 - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/paper_briefs/cnki_2020_64b4f881c9.md,markdown,paper_reading/views/cnki-2020-64b4f881c9-5862d960.html,markdown_view,论文研讨卡 - 图书馆短视频发展现状、问题与对策分析——以抖音平台为例,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/paper_briefs/cnki_2021_3771e58987.md,markdown,paper_reading/views/cnki-2021-3771e58987-87a3a5e7.html,markdown_view,论文研讨卡 - 公共图书馆和高校图书馆短视频营销比较研究,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/paper_briefs/cnki_2021_5530e86157.md,markdown,paper_reading/views/cnki-2021-5530e86157-97f81afb.html,markdown_view,论文研讨卡 - 基于短视频营销的公共图书馆数字阅读推广策略研究,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/paper_briefs/cnki_2021_7556aafa99.md,markdown,paper_reading/views/cnki-2021-7556aafa99-c617bb34.html,markdown_view,论文研讨卡 - 公共图书馆“抖音”短视频服务现状及发展策略研究,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/paper_briefs/cnki_2021_d35f8e895a.md,markdown,paper_reading/views/cnki-2021-d35f8e895a-b50b9659.html,markdown_view,论文研讨卡 - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/paper_briefs/cnki_2021_dddc719517.md,markdown,paper_reading/views/cnki-2021-dddc719517-e6fa6967.html,markdown_view,论文研讨卡 - “新4C法则”下图书馆网络直播营销策略研究,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/paper_briefs/cnki_2021_dfab60236e.md,markdown,paper_reading/views/cnki-2021-dfab60236e-049e14b9.html,markdown_view,论文研讨卡 - 抖音阅读推广短视频传播效果影响因素研究,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/paper_briefs/cnki_2022_efd2209e07.md,markdown,paper_reading/views/cnki-2022-efd2209e07-7f67942f.html,markdown_view,论文研讨卡 - 基于4P营销模型的高校图书馆读书类短视频运营策略研究,Knowledge,make learning-dashboard
-vault/15_CNKI_Frontier/paper_briefs/cnki_2023_34348faa1e.md,markdown,paper_reading/views/cnki-2023-34348faa1e-8ca7c248.html,markdown_view,论文研讨卡 - 基于SICAS模型的公共图书馆短视频营销策略研究,Knowledge,make learning-dashboard
-vault/Home.md,markdown,paper_reading/views/vault-home.html,markdown_view,Vault 首页,Knowledge,make learning-dashboard
-vault/03_Methods/DCI传播力指数.md,markdown,knowledge_cards/views/method-dci-48f2a84e.html,method_card_view,DCI传播力指数,Knowledge,make learning-dashboard
-vault/03_Methods/内容分析法.md,markdown,knowledge_cards/views/method-4dc0db40.html,method_card_view,内容分析法,Knowledge,make learning-dashboard
-vault/03_Methods/图书馆短视频内容质量评价.md,markdown,knowledge_cards/views/method-e2773847.html,method_card_view,图书馆短视频内容质量评价,Knowledge,make learning-dashboard
-vault/03_Methods/头部账号实践提炼.md,markdown,knowledge_cards/views/method-e92ba575.html,method_card_view,头部账号实践提炼,Knowledge,make learning-dashboard
-vault/03_Methods/描述性账号调查.md,markdown,knowledge_cards/views/method-86d250ef.html,method_card_view,描述性账号调查,Knowledge,make learning-dashboard
-vault/03_Methods/熵权法.md,markdown,knowledge_cards/views/method-91db7b6b.html,method_card_view,熵权法,Knowledge,make learning-dashboard
-vault/03_Methods/爆款指数.md,markdown,knowledge_cards/views/method-579dd6c5.html,method_card_view,爆款指数,Knowledge,make learning-dashboard
-vault/03_Methods/网络调查法.md,markdown,knowledge_cards/views/method-afcfecce.html,method_card_view,网络调查法,Knowledge,make learning-dashboard
-paper_reading/index.html,html,paper_reading/index.html,paper_index,论文精读归档,Presentation,make learning-dashboard
-paper_reading/2026-06-29-sicas-public-library-short-video.html,html,paper_reading/2026-06-29-sicas-public-library-short-video.html,paper_page,2026-06-29 精读：基于SICAS模型的公共图书馆短视频营销策略研究,Presentation,make learning-dashboard
-paper_reading/2026-06-30-aarrr-library-short-video.html,html,paper_reading/2026-06-30-aarrr-library-short-video.html,paper_page,2026-06-30 精读：公共图书馆和高校图书馆短视频营销比较研究,Presentation,make learning-dashboard
-paper_reading/2026-07-01-digital-reading-promotion.html,html,paper_reading/2026-07-01-digital-reading-promotion.html,paper_page,2026-07-01 精读：基于短视频营销的公共图书馆数字阅读推广策略研究,Presentation,make learning-dashboard
-paper_reading/2026-07-02-propagation-power-evaluation.html,html,paper_reading/2026-07-02-propagation-power-evaluation.html,paper_page,2026-07-02 精读：图书馆短视频账号传播力研究,Presentation,make learning-dashboard
-paper_reading/today.html,html,paper_reading/today.html,paper_today_entry,今日精读入口,Presentation,make learning-dashboard
-project_collaboration.html,html,project_collaboration.html,project_collaboration,项目协作层,Presentation,make learning-dashboard
-vault/13_Knowledge_Graph/collaboration_state.json,json,project_collaboration.html,project_collaboration_data,Project collaboration state,Knowledge,make learning-dashboard
-projects/library_short_video/project_state.json,json,paper_reading/views/00-project-dashboard-dd8418ad.html,project_state,library_short_video project state,Knowledge,make learning-dashboard
-projects/starter_project/project_state.json,json,paper_reading/views/00-project-dashboard-b90a4a93.html,project_state,starter_project project state,Knowledge,make learning-dashboard
-vault/14_Review_Queue/review_queue.csv,csv,knowledge_cards/review_today.html,review_queue,Review queue,Knowledge,make learning-dashboard
-vault/14_Review_Queue/review_state.json,json,knowledge_cards/review_today.html,review_state,Review state,Knowledge,make learning-dashboard
-knowledge_cards/review_today.html,html,knowledge_cards/review_today.html,review_today,今日复习入口,Presentation,make learning-dashboard
-search/index.html,html,search/index.html,search,全局搜索入口,Presentation,make learning-dashboard
-vault/13_Knowledge_Graph/search_index.json,json,search/index.html,search_index,Search index,Knowledge,make learning-dashboard
-vault/13_Knowledge_Graph/workflow_audit_report.json,json,workflow_health.html,workflow_audit_data,Workflow audit report,Knowledge,make learning-dashboard
-workflow_state.html,html,workflow_state.html,workflow_state,工作流总状态,Presentation,make learning-dashboard
-vault/13_Knowledge_Graph/workflow_state.json,json,workflow_state.html,workflow_state_data,Workflow state,Knowledge,make learning-dashboard
+source_path,source_type,display_path,display_type,title,layer,generated_by,asset_role
+action_queue.html,html,action_queue.html,action_queue,行动队列,Presentation,make learning-dashboard,core_entry
+vault/13_Knowledge_Graph/action_queue.json,json,action_queue.html,action_queue_data,Action queue,Knowledge,make learning-dashboard,source_data
+archive_policy.html,html,archive_policy.html,archive_policy,自动归档策略,Presentation,make learning-dashboard,core_entry
+vault/13_Knowledge_Graph/archive_policy.json,json,archive_policy.html,archive_policy_data,Archive policy,Knowledge,make learning-dashboard,source_data
+vault/02_Concepts/AARRR 漏斗模型.md,markdown,knowledge_cards/views/concept-aarrr-bf76ae6c.html,concept_card_view,AARRR 漏斗模型,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/Hook Model 上瘾模型.md,markdown,knowledge_cards/views/concept-hook-model-878dcbb7.html,concept_card_view,Hook Model 上瘾模型,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/SICAS模型.md,markdown,knowledge_cards/views/concept-sicas-e14df8c7.html,concept_card_view,SICAS模型,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/互动营销.md,markdown,knowledge_cards/views/concept-452dce22.html,concept_card_view,互动营销,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/传播力评价.md,markdown,knowledge_cards/views/concept-44250b7b.html,concept_card_view,传播力评价,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/平台互动-服务触达-阅读转化.md,markdown,knowledge_cards/views/concept-4358f2f5.html,concept_card_view,平台互动-服务触达-阅读转化,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/平台适配.md,markdown,knowledge_cards/views/concept-53b320d5.html,concept_card_view,平台适配,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/情感营销.md,markdown,knowledge_cards/views/concept-d7b1f9e6.html,concept_card_view,情感营销,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/数字阅读推广.md,markdown,knowledge_cards/views/concept-b0f48f34.html,concept_card_view,数字阅读推广,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/方向链.md,markdown,knowledge_cards/views/concept-e068f0fc.html,concept_card_view,方向链,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/服务价值.md,markdown,knowledge_cards/views/concept-e98c8c55.html,concept_card_view,服务价值,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/沉浸式内容.md,markdown,knowledge_cards/views/concept-7f8a8bb3.html,concept_card_view,沉浸式内容,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/渠道营销.md,markdown,knowledge_cards/views/concept-401f5cfe.html,concept_card_view,渠道营销,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/用户感知价值.md,markdown,knowledge_cards/views/concept-824dc24b.html,concept_card_view,用户感知价值,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/软营销.md,markdown,knowledge_cards/views/concept-841db0d5.html,concept_card_view,软营销,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/馆型差异.md,markdown,knowledge_cards/views/concept-1c7d1e51.html,concept_card_view,馆型差异,Knowledge,make learning-dashboard,mirror_view
+study_dashboard.html,html,study_dashboard.html,dashboard,ResearchWorkflow 学习仪表盘,Presentation,make learning-dashboard,core_entry
+library/pdfs/library_short_video,directory,paper_reading/views/directories/library-short-video-8b015fe8.html,directory_view,library_short_video,Source,make learning-dashboard,mirror_view
+library/pdfs/library_short_video/converted,directory,paper_reading/views/directories/converted-67e02670.html,directory_view,converted,Source,make learning-dashboard,mirror_view
+library/pdfs/library_short_video/incoming,directory,paper_reading/views/directories/incoming-468da0bf.html,directory_view,incoming,Source,make learning-dashboard,mirror_view
+library/pdfs/library_short_video/incoming/2026-06-30,directory,paper_reading/views/directories/2026-06-30-d7c885ed.html,directory_view,2026-06-30,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/caj_conversion,directory,paper_reading/views/directories/caj-conversion-db8913e9.html,directory_view,caj_conversion,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/caj_conversion/cnki_2020_64b4f881c9_preview,directory,paper_reading/views/directories/cnki-2020-64b4f881c9-preview-0fc2d053.html,directory_view,cnki_2020_64b4f881c9_preview,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/caj_conversion/cnki_2021_d35f8e895a_preview,directory,paper_reading/views/directories/cnki-2021-d35f8e895a-preview-e9db0bd8.html,directory_view,cnki_2021_d35f8e895a_preview,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/caj_conversion/cnki_2021_dfab60236e_preview,directory,paper_reading/views/directories/cnki-2021-dfab60236e-preview-add63b94.html,directory_view,cnki_2021_dfab60236e_preview,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/caj_conversion/cnki_2023_34348faa1e_preview,directory,paper_reading/views/directories/cnki-2023-34348faa1e-preview-f5494d52.html,directory_view,cnki_2023_34348faa1e_preview,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/context_packs,directory,paper_reading/views/directories/context-packs-4b4dd996.html,directory_view,context_packs,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/paper_briefs,directory,paper_reading/views/directories/paper-briefs-6a749cd8.html,directory_view,paper_briefs,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/evidence_locator_table.csv,csv,projects/library_short_video/literature/evidence_locator_table.html,evidence_locator_table,library_short_video evidence locator table,Knowledge,make learning-dashboard,core_entry
+vault/13_Knowledge_Graph/artifact_manifest.csv,csv,knowledge_graph/index.html,graph_source_data,Artifact manifest,Knowledge,make obsidian-graph && make learning-dashboard,source_data
+vault/13_Knowledge_Graph/knowledge_index.csv,csv,knowledge_graph/index.html,graph_source_data,Knowledge card index,Knowledge,make obsidian-graph && make learning-dashboard,source_data
+vault/13_Knowledge_Graph/obsidian_edges.csv,csv,knowledge_graph/index.html,graph_source_data,Obsidian graph edges,Knowledge,make obsidian-graph && make learning-dashboard,source_data
+vault/13_Knowledge_Graph/obsidian_nodes.csv,csv,knowledge_graph/index.html,graph_source_data,Obsidian graph nodes,Knowledge,make obsidian-graph && make learning-dashboard,source_data
+projects/library_short_video/literature/incoming_pdf_triage.csv,csv,projects/library_short_video/literature/incoming_pdf_triage.html,incoming_pdf_triage,library_short_video incoming PDF triage,Knowledge,make learning-dashboard,core_entry
+knowledge_cards/index.html,html,knowledge_cards/index.html,knowledge_cards_index,知识卡入口,Presentation,make learning-dashboard,core_entry
+knowledge_graph/index.html,html,knowledge_graph/index.html,knowledge_graph,知识图谱入口,Presentation,make learning-dashboard,core_entry
+vault/12_Learning_Log/sessions/2026-06-18-knowledge.md,markdown,logs/views/2026-06-18-knowledge-edc7455a.html,log_view,Learning Session - 科研方法学习系统,Knowledge,make learning-dashboard,mirror_view
+vault/12_Learning_Log/sessions/2026-06-20-hook-model.md,markdown,logs/views/2026-06-20-hook-model-132c5c65.html,log_view,Learning Session - Hook Model 上瘾模型,Knowledge,make learning-dashboard,mirror_view
+vault/12_Learning_Log/sessions/2026-06-29-evening-close.md,markdown,logs/views/2026-06-29-evening-close-631a6a14.html,log_view,Learning Session - 2026-06-29 Evening Close,Knowledge,make learning-dashboard,mirror_view
+vault/12_Learning_Log/sessions/2026-06-29-sicas-paper.md,markdown,logs/views/2026-06-29-sicas-paper-a3d0cfd2.html,log_view,Learning Session - SICAS 论文精读,Knowledge,make learning-dashboard,mirror_view
+vault/12_Learning_Log/sessions/2026-06-30-aarrr-paper.md,markdown,logs/views/2026-06-30-aarrr-paper-f11d92b3.html,log_view,Learning Session - AARRR 比较论文精读,Knowledge,make learning-dashboard,mirror_view
+vault/12_Learning_Log/sessions/2026-06-30-evening-close.md,markdown,logs/views/2026-06-30-evening-close-07814ed3.html,log_view,Learning Session - 2026-06-30 Evening Close,Knowledge,make learning-dashboard,mirror_view
+vault/12_Learning_Log/sessions/2026-07-01-digital-reading-promotion-paper.md,markdown,logs/views/2026-07-01-digital-reading-promotion-paper-83676eb0.html,log_view,Learning Session - 数字阅读推广服务转化论文精读,Knowledge,make learning-dashboard,mirror_view
+vault/12_Learning_Log/sessions/2026-07-01-evening-close.md,markdown,logs/views/2026-07-01-evening-close-35b4d344.html,log_view,Learning Session - 2026-07-01 Evening Close,Knowledge,make learning-dashboard,mirror_view
+vault/12_Learning_Log/sessions/2026-07-02-propagation-power-evaluation-paper.md,markdown,logs/views/2026-07-02-propagation-power-evaluation-paper-7d398028.html,log_view,Learning Session - 2026-07-02 传播力评价论文精读,Knowledge,make learning-dashboard,mirror_view
+logs/index.html,html,logs/index.html,logs_index,学习日志入口,Presentation,make learning-dashboard,core_entry
+projects/library_short_video/manuscript/writing_panel.md,markdown,projects/library_short_video/manuscript/writing_panel.html,manuscript_writing_panel,library_short_video manuscript writing panel,Knowledge,make learning-dashboard,core_entry
+codex/OPERATING_PROTOCOL.md,markdown,paper_reading/views/operating-protocol-7492396d.html,markdown_view,Codex-First Research Operating Protocol,Orchestration/QA,make learning-dashboard,mirror_view
+codex/runtime/library_short_video_fast_snapshot.md,markdown,paper_reading/views/library-short-video-fast-snapshot-d2e5e287.html,markdown_view,Fast Runtime Snapshot - library_short_video,Orchestration/QA,make learning-dashboard,mirror_view
+docs/WORKFLOW_LAYERED_ARCHITECTURE.md,markdown,paper_reading/views/workflow_layered_architecture.html,markdown_view,分层架构契约,Orchestration/QA,make learning-dashboard,mirror_view
+projects/library_short_video/00_project_dashboard.md,markdown,paper_reading/views/00-project-dashboard-dd8418ad.html,markdown_view,Project Dashboard - 图书馆短视频相关研究,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/03_literature_synthesis.md,markdown,paper_reading/views/literature_synthesis.html,markdown_view,跨文献综述,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/caj_conversion/cnki_2020_64b4f881c9.md,markdown,paper_reading/views/cnki-2020-64b4f881c9-bf538524.html,markdown_view,CAJ Conversion Report - cnki_2020_64b4f881c9,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/caj_conversion/cnki_2021_d35f8e895a.md,markdown,paper_reading/views/cnki-2021-d35f8e895a-fa79e5bc.html,markdown_view,CAJ Conversion Report - cnki_2021_d35f8e895a,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/caj_conversion/cnki_2021_dfab60236e.md,markdown,paper_reading/views/cnki-2021-dfab60236e-6aa38981.html,markdown_view,CAJ Conversion Report - cnki_2021_dfab60236e,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/caj_conversion/cnki_2023_34348faa1e.md,markdown,paper_reading/views/cnki-2023-34348faa1e-0e4cbc5e.html,markdown_view,CAJ Conversion Report - cnki_2023_34348faa1e,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/cnki_search_plan.md,markdown,paper_reading/views/cnki-search-plan-81b24ea3.html,markdown_view,CNKI Search Plan - 图书馆短视频相关研究,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/context_packs/cnki_2020_2a150c6df8.md,markdown,paper_reading/views/cnki-2020-2a150c6df8-984b9b2e.html,markdown_view,论文带读上下文包 - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/context_packs/cnki_2020_64b4f881c9.md,markdown,paper_reading/views/cnki-2020-64b4f881c9-bf8d739c.html,markdown_view,论文带读上下文包 - 图书馆短视频发展现状、问题与对策分析——以抖音平台为例,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/context_packs/cnki_2021_3771e58987.md,markdown,paper_reading/views/cnki-2021-3771e58987-eb215045.html,markdown_view,论文带读上下文包 - 公共图书馆和高校图书馆短视频营销比较研究,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/context_packs/cnki_2021_5530e86157.md,markdown,paper_reading/views/cnki-2021-5530e86157-05cc0475.html,markdown_view,论文带读上下文包 - 基于短视频营销的公共图书馆数字阅读推广策略研究,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/context_packs/cnki_2021_645f03f388.md,markdown,paper_reading/views/cnki-2021-645f03f388-0a001b11.html,markdown_view,论文带读上下文包 - 图书馆短视频账号传播力研究——以省级公共图书馆为例,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/context_packs/cnki_2021_7556aafa99.md,markdown,paper_reading/views/cnki-2021-7556aafa99-1f5b3fc2.html,markdown_view,论文带读上下文包 - 公共图书馆“抖音”短视频服务现状及发展策略研究,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/context_packs/cnki_2021_d35f8e895a.md,markdown,paper_reading/views/cnki-2021-d35f8e895a-0586195d.html,markdown_view,论文带读上下文包 - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/context_packs/cnki_2021_dfab60236e.md,markdown,paper_reading/views/cnki-2021-dfab60236e-d1ec0ae6.html,markdown_view,论文带读上下文包 - 抖音阅读推广短视频传播效果影响因素研究,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/innovation_limitation_bank.md,markdown,paper_reading/views/innovation_limitation_bank.html,markdown_view,创新-局限-机会台账,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/literature_review_workbench.md,markdown,paper_reading/views/literature_review_workbench.html,markdown_view,文献综述工作台,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/readers/README.md,markdown,paper_reading/views/readme-184a812b.html,markdown_view,Paper Reader Packages,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/readers/cnki_2020_2a150c6df8/paper.md,markdown,paper_reading/views/paper-c04dcc5b.html,markdown_view,Source-Grounded Reader - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/readers/cnki_2020_64b4f881c9/paper.md,markdown,paper_reading/views/paper-cd9b4518.html,markdown_view,Source-Grounded Reader - 图书馆短视频发展现状、问题与对策分析——以抖音平台为例,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/readers/cnki_2021_3771e58987/paper.md,markdown,paper_reading/views/paper-21739661.html,markdown_view,Source-Grounded Reader - 公共图书馆和高校图书馆短视频营销比较研究,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/readers/cnki_2021_5530e86157/paper.md,markdown,paper_reading/views/paper-495f8717.html,markdown_view,Source-Grounded Reader - 基于短视频营销的公共图书馆数字阅读推广策略研究,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/readers/cnki_2021_645f03f388/paper.md,markdown,paper_reading/views/paper-f2f9e4d9.html,markdown_view,Source-Grounded Reader - 图书馆短视频账号传播力研究——以省级公共图书馆为例,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/readers/cnki_2021_7556aafa99/paper.md,markdown,paper_reading/views/paper-0231710d.html,markdown_view,Source-Grounded Reader - 公共图书馆“抖音”短视频服务现状及发展策略研究,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/readers/cnki_2021_d35f8e895a/paper.md,markdown,paper_reading/views/paper-b30ed69c.html,markdown_view,Source-Grounded Reader - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/readers/cnki_2021_dfab60236e/paper.md,markdown,paper_reading/views/paper-8448cb0c.html,markdown_view,Source-Grounded Reader - 抖音阅读推广短视频传播效果影响因素研究,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/readers/cnki_2023_34348faa1e/paper.md,markdown,paper_reading/views/cnki_2023_34348faa1e-reader.html,markdown_view,Source-Grounded Reader,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/reading_board.md,markdown,paper_reading/views/reading-board-026f6ec8.html,markdown_view,今日阅读看板 - 图书馆短视频相关研究,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/recaps/2026-06-20-five-paper-quick-recap.md,markdown,paper_reading/views/2026-06-20-five-paper-quick-recap-8b992799.html,markdown_view,5 篇已读论文快速复盘 - 图书馆短视频相关研究,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/manuscript/evidence_gate_report.md,markdown,paper_reading/views/evidence-gate-report-7607e392.html,markdown_view,Evidence Gate Report,Knowledge,make learning-dashboard,mirror_view
+projects/starter_project/00_project_dashboard.md,markdown,paper_reading/views/00-project-dashboard-b90a4a93.html,markdown_view,Project Dashboard,Knowledge,make learning-dashboard,mirror_view
+projects/starter_project/03_literature_synthesis.md,markdown,paper_reading/views/03-literature-synthesis-01206220.html,markdown_view,Literature Synthesis,Knowledge,make learning-dashboard,mirror_view
+projects/starter_project/manuscript/evidence_gate_report.md,markdown,paper_reading/views/evidence-gate-report-f15d3e57.html,markdown_view,Evidence Gate Report,Knowledge,make learning-dashboard,mirror_view
+vault/01_Literature/cnki_2021_3771e58987.md,markdown,paper_reading/views/cnki-2021-3771e58987-6c1b15ea.html,markdown_view,公共图书馆和高校图书馆短视频营销比较研究,Knowledge,make learning-dashboard,mirror_view
+vault/01_Literature/cnki_2021_5530e86157.md,markdown,paper_reading/views/cnki-2021-5530e86157-96644c0b.html,markdown_view,基于短视频营销的公共图书馆数字阅读推广策略研究,Knowledge,make learning-dashboard,mirror_view
+vault/01_Literature/cnki_2021_645f03f388.md,markdown,paper_reading/views/cnki-2021-645f03f388-609a8a67.html,markdown_view,图书馆短视频账号传播力研究——以省级公共图书馆为例,Knowledge,make learning-dashboard,mirror_view
+vault/01_Literature/cnki_2023_34348faa1e.md,markdown,paper_reading/views/cnki_2023_34348faa1e-note.html,markdown_view,Obsidian 论文笔记,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/SICAS模型.md,markdown,paper_reading/views/sicas-model-concept.html,markdown_view,知识卡：SICAS 模型,Knowledge,make learning-dashboard,mirror_view
+vault/03_Methods/DCI传播力指数.md,markdown,paper_reading/views/dci-index-method.html,markdown_view,方法卡：DCI 传播力指数,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/daily_recommendations/2026-06-20-library_short_video.md,markdown,paper_reading/views/2026-06-20-library-short-video.html,markdown_view,2026-06-20 CNKI 每日推荐,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/daily_recommendations/2026-06-21-library_short_video-after-refresh.md,markdown,paper_reading/views/2026-06-21-library-short-video-after-refresh-b3fd57a8.html,markdown_view,CNKI 每日论文推荐 - 图书馆短视频相关研究,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/daily_recommendations/2026-06-21-library_short_video-next-after-main.md,markdown,paper_reading/views/2026-06-21-library-short-video-next-after-main-60f7e2b9.html,markdown_view,CNKI 每日论文推荐 - 图书馆短视频相关研究,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/paper_briefs/cnki_2020_2a150c6df8.md,markdown,paper_reading/views/cnki-2020-2a150c6df8-74f60b26.html,markdown_view,论文研讨卡 - 图书馆热门短视频内容规律探究——基于抖音平台的实证研究,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/paper_briefs/cnki_2020_64b4f881c9.md,markdown,paper_reading/views/cnki-2020-64b4f881c9-5862d960.html,markdown_view,论文研讨卡 - 图书馆短视频发展现状、问题与对策分析——以抖音平台为例,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/paper_briefs/cnki_2021_3771e58987.md,markdown,paper_reading/views/cnki-2021-3771e58987-87a3a5e7.html,markdown_view,论文研讨卡 - 公共图书馆和高校图书馆短视频营销比较研究,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/paper_briefs/cnki_2021_5530e86157.md,markdown,paper_reading/views/cnki-2021-5530e86157-97f81afb.html,markdown_view,论文研讨卡 - 基于短视频营销的公共图书馆数字阅读推广策略研究,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/paper_briefs/cnki_2021_7556aafa99.md,markdown,paper_reading/views/cnki-2021-7556aafa99-c617bb34.html,markdown_view,论文研讨卡 - 公共图书馆“抖音”短视频服务现状及发展策略研究,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/paper_briefs/cnki_2021_d35f8e895a.md,markdown,paper_reading/views/cnki-2021-d35f8e895a-b50b9659.html,markdown_view,论文研讨卡 - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/paper_briefs/cnki_2021_dddc719517.md,markdown,paper_reading/views/cnki-2021-dddc719517-e6fa6967.html,markdown_view,论文研讨卡 - “新4C法则”下图书馆网络直播营销策略研究,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/paper_briefs/cnki_2021_dfab60236e.md,markdown,paper_reading/views/cnki-2021-dfab60236e-049e14b9.html,markdown_view,论文研讨卡 - 抖音阅读推广短视频传播效果影响因素研究,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/paper_briefs/cnki_2022_efd2209e07.md,markdown,paper_reading/views/cnki-2022-efd2209e07-7f67942f.html,markdown_view,论文研讨卡 - 基于4P营销模型的高校图书馆读书类短视频运营策略研究,Knowledge,make learning-dashboard,mirror_view
+vault/15_CNKI_Frontier/paper_briefs/cnki_2023_34348faa1e.md,markdown,paper_reading/views/cnki-2023-34348faa1e-8ca7c248.html,markdown_view,论文研讨卡 - 基于SICAS模型的公共图书馆短视频营销策略研究,Knowledge,make learning-dashboard,mirror_view
+vault/Home.md,markdown,paper_reading/views/vault-home.html,markdown_view,Vault 首页,Knowledge,make learning-dashboard,mirror_view
+vault/03_Methods/DCI传播力指数.md,markdown,knowledge_cards/views/method-dci-48f2a84e.html,method_card_view,DCI传播力指数,Knowledge,make learning-dashboard,mirror_view
+vault/03_Methods/内容分析法.md,markdown,knowledge_cards/views/method-4dc0db40.html,method_card_view,内容分析法,Knowledge,make learning-dashboard,mirror_view
+vault/03_Methods/图书馆短视频内容质量评价.md,markdown,knowledge_cards/views/method-e2773847.html,method_card_view,图书馆短视频内容质量评价,Knowledge,make learning-dashboard,mirror_view
+vault/03_Methods/头部账号实践提炼.md,markdown,knowledge_cards/views/method-e92ba575.html,method_card_view,头部账号实践提炼,Knowledge,make learning-dashboard,mirror_view
+vault/03_Methods/描述性账号调查.md,markdown,knowledge_cards/views/method-86d250ef.html,method_card_view,描述性账号调查,Knowledge,make learning-dashboard,mirror_view
+vault/03_Methods/熵权法.md,markdown,knowledge_cards/views/method-91db7b6b.html,method_card_view,熵权法,Knowledge,make learning-dashboard,mirror_view
+vault/03_Methods/爆款指数.md,markdown,knowledge_cards/views/method-579dd6c5.html,method_card_view,爆款指数,Knowledge,make learning-dashboard,mirror_view
+vault/03_Methods/网络调查法.md,markdown,knowledge_cards/views/method-afcfecce.html,method_card_view,网络调查法,Knowledge,make learning-dashboard,mirror_view
+paper_reading/index.html,html,paper_reading/index.html,paper_index,论文精读归档,Presentation,make learning-dashboard,core_entry
+paper_reading/2026-06-29-sicas-public-library-short-video.html,html,paper_reading/2026-06-29-sicas-public-library-short-video.html,paper_page,2026-06-29 精读：基于SICAS模型的公共图书馆短视频营销策略研究,Presentation,make learning-dashboard,generated_view
+paper_reading/2026-06-30-aarrr-library-short-video.html,html,paper_reading/2026-06-30-aarrr-library-short-video.html,paper_page,2026-06-30 精读：公共图书馆和高校图书馆短视频营销比较研究,Presentation,make learning-dashboard,generated_view
+paper_reading/2026-07-01-digital-reading-promotion.html,html,paper_reading/2026-07-01-digital-reading-promotion.html,paper_page,2026-07-01 精读：基于短视频营销的公共图书馆数字阅读推广策略研究,Presentation,make learning-dashboard,generated_view
+paper_reading/2026-07-02-propagation-power-evaluation.html,html,paper_reading/2026-07-02-propagation-power-evaluation.html,paper_page,2026-07-02 精读：图书馆短视频账号传播力研究,Presentation,make learning-dashboard,generated_view
+paper_reading/today.html,html,paper_reading/today.html,paper_today_entry,今日精读入口,Presentation,make learning-dashboard,core_entry
+project_collaboration.html,html,project_collaboration.html,project_collaboration,项目协作层,Presentation,make learning-dashboard,core_entry
+vault/13_Knowledge_Graph/collaboration_state.json,json,project_collaboration.html,project_collaboration_data,Project collaboration state,Knowledge,make learning-dashboard,source_data
+projects/library_short_video/project_state.json,json,paper_reading/views/00-project-dashboard-dd8418ad.html,project_state,library_short_video project state,Knowledge,make learning-dashboard,generated_view
+projects/starter_project/project_state.json,json,paper_reading/views/00-project-dashboard-b90a4a93.html,project_state,starter_project project state,Knowledge,make learning-dashboard,generated_view
+vault/14_Review_Queue/review_queue.csv,csv,knowledge_cards/review_today.html,review_queue,Review queue,Knowledge,make learning-dashboard,source_data
+vault/14_Review_Queue/review_state.json,json,knowledge_cards/review_today.html,review_state,Review state,Knowledge,make learning-dashboard,source_data
+knowledge_cards/review_today.html,html,knowledge_cards/review_today.html,review_today,今日复习入口,Presentation,make learning-dashboard,core_entry
+search/index.html,html,search/index.html,search,全局搜索入口,Presentation,make learning-dashboard,core_entry
+vault/13_Knowledge_Graph/search_index.json,json,search/index.html,search_index,Search index,Knowledge,make learning-dashboard,source_data
+vault/13_Knowledge_Graph/workflow_audit_report.json,json,workflow_health.html,workflow_audit_data,Workflow audit report,Knowledge,make learning-dashboard,source_data
+workflow_state.html,html,workflow_state.html,workflow_state,工作流总状态,Presentation,make learning-dashboard,core_entry
+vault/13_Knowledge_Graph/workflow_state.json,json,workflow_state.html,workflow_state_data,Workflow state,Knowledge,make learning-dashboard,source_data
