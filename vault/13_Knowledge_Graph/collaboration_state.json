@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T01:59:07",
+  "generated_at": "2026-07-03T05:25:29",
   "entrypoint": "project_collaboration.html",
   "summary": {
     "project_count": 2,
-    "user_waiting": 1,
+    "user_waiting": 3,
     "codex_ready": 6,
-    "open_actions": 8
+    "open_actions": 9
   },
   "roles": {
     "user": [
@@ -36,7 +36,7 @@
       "state_path": "projects/library_short_video/project_state.json",
       "matrix_rows": 60,
       "reader_packages": 9,
-      "review_due": 0,
+      "review_due": 5,
       "latest_deep_read": {
         "title": "2026-07-02 精读：图书馆短视频账号传播力研究",
         "path": "paper_reading/2026-07-02-propagation-power-evaluation.html",
@@ -55,7 +55,8 @@
         "archive_policy": "archive_policy.html"
       },
       "user_handoffs": [
-        "如要读取 metadata-only 文献，需要先补 PDF/CAJ 或授权下载。"
+        "如要读取 metadata-only 文献，需要先补 PDF/CAJ 或授权下载。",
+        "完成 5 个到期知识卡主动回忆。"
       ],
       "codex_handoffs": [
         "Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
@@ -82,7 +83,7 @@
       "state_path": "projects/starter_project/project_state.json",
       "matrix_rows": 0,
       "reader_packages": 0,
-      "review_due": 0,
+      "review_due": 5,
       "latest_deep_read": {},
       "entrypoints": {
         "dashboard": "paper_reading/views/00-project-dashboard-b90a4a93.html",
@@ -96,7 +97,9 @@
         "search": "search/index.html",
         "archive_policy": "archive_policy.html"
       },
-      "user_handoffs": [],
+      "user_handoffs": [
+        "完成 5 个到期知识卡主动回忆。"
+      ],
       "codex_handoffs": [
         "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
         "如果这是占位项目，保持 project_state.json 作为结构模板即可。",

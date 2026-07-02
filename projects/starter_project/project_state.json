@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T21:03:03",
+  "generated_at": "2026-07-03T05:25:29",
   "project": {
     "slug": "starter_project",
     "title": "Starter Research Project",
@@ -71,9 +71,9 @@
     "page_pending": 0
   },
   "review": {
-    "due_count": 0,
+    "due_count": 5,
     "overdue_count": 0,
-    "upcoming_7_count": 24,
+    "upcoming_7_count": 19,
     "queue_path": "vault/14_Review_Queue/review_queue.csv",
     "state_path": "vault/14_Review_Queue/review_state.json",
     "review_today": "knowledge_cards/review_today.html",
@@ -117,30 +117,6 @@
         "next_review": "2026-07-03",
         "prompt": "爆款指数和总点赞量有什么区别？为什么它仍不能代表服务价值？",
         "display_path": "knowledge_cards/views/method-579dd6c5.html"
-      },
-      {
-        "id": "concept-aarrr-funnel",
-        "title": "AARRR 漏斗模型",
-        "type": "concept",
-        "next_review": "2026-07-04",
-        "prompt": "说出 AARRR 五个阶段，并解释图书馆语境中的 Revenue 应该如何转译。",
-        "display_path": "knowledge_cards/views/concept-aarrr-bf76ae6c.html"
-      },
-      {
-        "id": "method-dci-index",
-        "title": "DCI传播力指数",
-        "type": "method",
-        "next_review": "2026-07-04",
-        "prompt": "说明 DCI 为什么比单一粉丝数更适合比较账号传播表现。",
-        "display_path": "knowledge_cards/views/method-dci-48f2a84e.html"
-      },
-      {
-        "id": "concept-hook-model",
-        "title": "Hook Model 上瘾模型",
-        "type": "concept",
-        "next_review": "2026-07-04",
-        "prompt": "用自己的话解释 Hook Model 的四个环节，并举一个图书馆短视频例子。",
-        "display_path": "knowledge_cards/views/concept-hook-model-878dcbb7.html"
       }
     ]
   },

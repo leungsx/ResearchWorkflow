@@ -7,9 +7,11 @@ import datetime as dt
 import html
 import json
 import re
+from io import StringIO
 from pathlib import Path
 from typing import Any
 
+from rendering.io import write_json_if_changed, write_text_if_changed, write_text_preserving_generated_at
 from workflow_config import active_project_slug
 
 
@@ -206,7 +208,6 @@ def build_rows(project: str, explicit_incoming: Path | None) -> list[dict[str, s
 
 
 def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [
         "file_path",
         "file_name",
@@ -220,10 +221,11 @@ def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
         "duplicate_group_size",
         "next_action",
     ]
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
-        writer.writeheader()
-        writer.writerows(rows)
+    buffer = StringIO()
+    writer = csv.DictWriter(buffer, fieldnames=fieldnames, lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(rows)
+    write_text_if_changed(path, buffer.getvalue())
 
 
 def write_json(path: Path, rows: list[dict[str, str]]) -> None:
@@ -233,7 +235,7 @@ def write_json(path: Path, rows: list[dict[str, str]]) -> None:
         "item_count": len(rows),
         "items": rows,
     }
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_json_if_changed(path, payload)
 
 
 def write_md(path: Path, project: str, rows: list[dict[str, str]], csv_path: Path, html_path: Path) -> None:
@@ -270,7 +272,7 @@ def write_md(path: Path, project: str, rows: list[dict[str, str]], csv_path: Pat
             )
             + " |"
         )
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    write_text_preserving_generated_at(path, "\n".join(lines) + "\n")
 
 
 def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: Path, md_path: Path) -> None:
@@ -294,7 +296,8 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
         """
         for row in rows
     )
-    path.write_text(
+    write_text_preserving_generated_at(
+        path,
         f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -342,7 +345,6 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
 </body>
 </html>
 """,
-        encoding="utf-8",
     )
 
 

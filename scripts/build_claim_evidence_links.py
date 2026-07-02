@@ -3,9 +3,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+from io import StringIO
 from pathlib import Path
 
 from literature_matrix_schema import read_simple_schema
+from rendering.io import write_text_if_changed
 from workflow_config import active_project_slug
 
 
@@ -131,11 +133,11 @@ def sync_confirmed_links(candidates: list[dict[str, str]], existing_path: Path, 
 
 
 def write_csv(path: Path, rows: list[dict[str, str]], fields: list[str]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
-        writer.writeheader()
-        writer.writerows(rows)
+    buffer = StringIO()
+    writer = csv.DictWriter(buffer, fieldnames=fields, lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(rows)
+    write_text_if_changed(path, buffer.getvalue())
 
 
 def write_markdown(rows: list[dict[str, str]], output: Path, csv_path: Path, title: str, note: str) -> None:
@@ -159,7 +161,7 @@ def write_markdown(rows: list[dict[str, str]], output: Path, csv_path: Path, tit
     if len(rows) > 120:
         lines.append(f"| ... | ... | ... | ... | ... | ... | {len(rows) - 120} more rows omitted |")
     lines.append("")
-    output.write_text("\n".join(lines), encoding="utf-8")
+    write_text_if_changed(output, "\n".join(lines))
 
 
 def main() -> int:

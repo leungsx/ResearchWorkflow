@@ -20,7 +20,7 @@ from validate_literature_matrix import validate_matrix  # noqa: E402
 from privacy_audit import audit_paths  # noqa: E402
 from run_experiment import hash_target  # noqa: E402
 from workflow_config import active_project_slug, read_workflow_config  # noqa: E402
-from rendering.io import write_text_if_changed  # noqa: E402
+from rendering.io import write_text_if_changed, write_text_preserving_generated_at  # noqa: E402
 
 
 ACTIVE_PROJECT = active_project_slug()
@@ -324,6 +324,12 @@ class WorkflowSmokeTests(unittest.TestCase):
         self.assertIn("data-copy=", text)
         self.assertIn("rw-dashboard-mode", text)
 
+    def test_plain_generated_card_does_not_load_dashboard_interaction_script(self) -> None:
+        text = read_text(ROOT / "knowledge_cards" / "views" / "concept-sicas-e14df8c7.html")
+        self.assertNotIn("rw-dashboard-mode", text)
+        self.assertNotIn("data-mode-button=\"reading\"", text)
+        self.assertNotIn('document.querySelectorAll("[data-copy]")', text)
+
     def test_evidence_pages_expose_copy_commands(self) -> None:
         verification = read_text(project_path("evidence", "page_verification_queue.html"))
         writing = read_text(project_path("manuscript", "writing_panel.html"))
@@ -343,6 +349,18 @@ class WorkflowSmokeTests(unittest.TestCase):
             self.assertEqual(first_mtime, tmp.stat().st_mtime_ns)
             self.assertTrue(write_text_if_changed(tmp, "changed\n"))
             self.assertNotEqual(first_mtime, tmp.stat().st_mtime_ns)
+        finally:
+            tmp.unlink(missing_ok=True)
+
+    def test_write_text_preserving_generated_at_skips_timestamp_only_change(self) -> None:
+        tmp = ROOT / ".tmp" / "write-preserve-generated.txt"
+        tmp.parent.mkdir(exist_ok=True)
+        try:
+            first = "Generated: 2026-07-03T09:00:00\nRows: 2\n"
+            second = "Generated: 2026-07-03T10:00:00\nRows: 2\n"
+            self.assertTrue(write_text_preserving_generated_at(tmp, first))
+            self.assertFalse(write_text_preserving_generated_at(tmp, second))
+            self.assertEqual(first, tmp.read_text(encoding="utf-8"))
         finally:
             tmp.unlink(missing_ok=True)
 

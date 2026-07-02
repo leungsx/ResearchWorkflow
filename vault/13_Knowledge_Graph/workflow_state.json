@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T01:59:07",
+  "generated_at": "2026-07-03T05:25:29",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -17,12 +17,12 @@
     "manifest_rows": 134,
     "search_entries": 134,
     "project_count": 2,
-    "git_dirty_paths": 0
+    "git_dirty_paths": 9
   },
   "audit": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "checks": [
@@ -72,7 +72,7 @@
         "area": "复习状态",
         "status": "PASS",
         "title": "复习状态快照与队列一致",
-        "detail": "total=24, due=0, focus=8"
+        "detail": "total=24, due=5, focus=5"
       },
       {
         "area": "项目状态",
@@ -82,27 +82,27 @@
       },
       {
         "area": "复习队列",
-        "status": "PASS",
-        "title": "今日无积压复习项",
-        "detail": "队列共 24 项。"
+        "status": "WARN",
+        "title": "存在到期复习项",
+        "detail": "5 项到期：传播力评价；平台互动-服务触达-阅读转化；熵权法；爆款指数；图书馆短视频内容质量评价"
       },
       {
         "area": "备份",
         "status": "PASS",
         "title": "最近备份可用",
-        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 25.5 小时前。"
+        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 29.9 小时前。"
       },
       {
         "area": "Git/异地备份",
         "status": "PASS",
         "title": "Git 本地和远程快照状态正常",
-        "detail": "upstream=origin/main；last commit: 2f4f43b 2026-07-02 21:36:21 +0800 Refresh clean workflow surfaces"
+        "detail": "upstream=origin/main；last commit: de843b1 2026-07-03 01:59:54 +0800 Refresh clean workflow state after closeout"
       },
       {
         "area": "Token/记忆",
         "status": "PASS",
         "title": "今日 compact summary 可作为默认启动上下文",
-        "detail": "vault/07_Codex_Logs/compact_daily/2026-07-02-summary.md，约 88 words。"
+        "detail": "vault/07_Codex_Logs/compact_daily/2026-07-03-summary.md，约 107 words。"
       },
       {
         "area": "文件卫生",
@@ -120,7 +120,7 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "2 个开放行动。"
+        "detail": "8 个开放行动。"
       },
       {
         "area": "项目协作层",
@@ -312,7 +312,7 @@
           "incoming_file": "library/pdfs/library_short_video/incoming/公共图书馆短视频公众平台建设现状分析_曾一昕.pdf"
         }
       ],
-      "review_due_count": 0,
+      "review_due_count": 5,
       "next_actions": [
         "Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
         "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。"
@@ -344,7 +344,7 @@
       "reader_packages": 0,
       "latest_deep_read": {},
       "next_reading_candidates": [],
-      "review_due_count": 0,
+      "review_due_count": 5,
       "next_actions": [
         "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
         "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
@@ -384,6 +384,7 @@
     "Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
     "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
     "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
-    "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
+    "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
+    "择机处理 workflow-audit 的 WARN 项，尤其是 Git 快照和到期复习。"
   ]
 }
