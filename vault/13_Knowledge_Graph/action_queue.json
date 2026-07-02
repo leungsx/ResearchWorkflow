@@ -1,18 +1,86 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T21:35:58",
+  "generated_at": "2026-07-03T01:59:07",
   "source_state": "vault/13_Knowledge_Graph/workflow_state.json",
   "entrypoint": "action_queue.html",
   "summary": {
-    "total_open": 2,
-    "high_priority": 0,
+    "total_open": 8,
+    "high_priority": 6,
     "by_kind": {
+      "review": 1,
+      "review_item": 5,
       "project": 2
     }
   },
   "actions": [
     {
-      "id": "project-1-图书馆短视频相关研究-incoming-分拣建议-先把-公共图书馆短视频公众平台建设",
+      "id": "review-1-完成-5-个到期知识卡复习",
+      "kind": "review",
+      "priority": 90,
+      "title": "完成 5 个到期知识卡复习",
+      "reason": "先主动回忆，再打开知识卡核对概念、误区和研究用法。",
+      "entrypoint": "knowledge_cards/review_today.html",
+      "source": "vault/14_Review_Queue/review_state.json",
+      "status": "open",
+      "rank": 1
+    },
+    {
+      "id": "review_item-2-复习-传播力评价",
+      "kind": "review_item",
+      "priority": 80,
+      "title": "复习：传播力评价",
+      "reason": "传播力评价为什么不能等同于图书馆服务价值？",
+      "entrypoint": "knowledge_cards/views/concept-44250b7b.html",
+      "source": "vault/02_Concepts/传播力评价.md",
+      "status": "open",
+      "rank": 2
+    },
+    {
+      "id": "review_item-3-复习-图书馆短视频内容质量评价",
+      "kind": "review_item",
+      "priority": 80,
+      "title": "复习：图书馆短视频内容质量评价",
+      "reason": "图书馆短视频内容质量评价应如何兼顾知识性、趣味性和服务相关性？",
+      "entrypoint": "knowledge_cards/views/method-e2773847.html",
+      "source": "vault/03_Methods/图书馆短视频内容质量评价.md",
+      "status": "open",
+      "rank": 3
+    },
+    {
+      "id": "review_item-4-复习-平台互动-服务触达-阅读转化",
+      "kind": "review_item",
+      "priority": 80,
+      "title": "复习：平台互动-服务触达-阅读转化",
+      "reason": "平台互动、服务触达、阅读转化三层分别应该放哪些指标？",
+      "entrypoint": "knowledge_cards/views/concept-4358f2f5.html",
+      "source": "vault/02_Concepts/平台互动-服务触达-阅读转化.md",
+      "status": "open",
+      "rank": 4
+    },
+    {
+      "id": "review_item-5-复习-熵权法",
+      "kind": "review_item",
+      "priority": 80,
+      "title": "复习：熵权法",
+      "reason": "熵权法为什么会给差异更大的指标更高权重？",
+      "entrypoint": "knowledge_cards/views/method-91db7b6b.html",
+      "source": "vault/03_Methods/熵权法.md",
+      "status": "open",
+      "rank": 5
+    },
+    {
+      "id": "review_item-6-复习-爆款指数",
+      "kind": "review_item",
+      "priority": 80,
+      "title": "复习：爆款指数",
+      "reason": "爆款指数和总点赞量有什么区别？为什么它仍不能代表服务价值？",
+      "entrypoint": "knowledge_cards/views/method-579dd6c5.html",
+      "source": "vault/03_Methods/爆款指数.md",
+      "status": "open",
+      "rank": 6
+    },
+    {
+      "id": "project-7-图书馆短视频相关研究-incoming-分拣建议-先把-公共图书馆短视频公众平台建设",
       "kind": "project",
       "priority": 60,
       "title": "图书馆短视频相关研究：Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
@@ -20,10 +88,10 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 1
+      "rank": 7
     },
     {
-      "id": "project-2-图书馆短视频相关研究-下一篇阅读优先选择已有-pdf-reader-且能推进传播力评",
+      "id": "project-8-图书馆短视频相关研究-下一篇阅读优先选择已有-pdf-reader-且能推进传播力评",
       "kind": "project",
       "priority": 60,
       "title": "图书馆短视频相关研究：下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
@@ -31,7 +99,7 @@
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 2
+      "rank": 8
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T01:54:14",
+  "generated_at": "2026-07-03T01:59:07",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -141,9 +141,9 @@
   "review": {
     "summary": {
       "total_items": 24,
-      "due_count": 0,
+      "due_count": 5,
       "overdue_count": 0,
-      "upcoming_7_count": 24,
+      "upcoming_7_count": 19,
       "future_count": 0,
       "unscheduled_count": 0,
       "learned_today_count": 0,
@@ -153,7 +153,8 @@
       },
       "by_stage": {
         "1": 5,
-        "2": 19
+        "2": 18,
+        "3": 1
       }
     },
     "focus_items": [
@@ -163,8 +164,8 @@
         "type": "concept",
         "stage": "1",
         "next_review": "2026-07-03",
-        "days_delta": 1,
-        "status": "upcoming_7",
+        "days_delta": 0,
+        "status": "due",
         "learning_status": "learning",
         "last_reviewed": "",
         "review_count": 0,
@@ -178,8 +179,8 @@
         "type": "method",
         "stage": "1",
         "next_review": "2026-07-03",
-        "days_delta": 1,
-        "status": "upcoming_7",
+        "days_delta": 0,
+        "status": "due",
         "learning_status": "learning",
         "last_reviewed": "",
         "review_count": 0,
@@ -193,8 +194,8 @@
         "type": "concept",
         "stage": "1",
         "next_review": "2026-07-03",
-        "days_delta": 1,
-        "status": "upcoming_7",
+        "days_delta": 0,
+        "status": "due",
         "learning_status": "learning",
         "last_reviewed": "",
         "review_count": 0,
@@ -208,8 +209,8 @@
         "type": "method",
         "stage": "1",
         "next_review": "2026-07-03",
-        "days_delta": 1,
-        "status": "upcoming_7",
+        "days_delta": 0,
+        "status": "due",
         "learning_status": "learning",
         "last_reviewed": "",
         "review_count": 0,
@@ -223,59 +224,14 @@
         "type": "method",
         "stage": "1",
         "next_review": "2026-07-03",
-        "days_delta": 1,
-        "status": "upcoming_7",
+        "days_delta": 0,
+        "status": "due",
         "learning_status": "learning",
         "last_reviewed": "",
         "review_count": 0,
         "prompt": "爆款指数和总点赞量有什么区别？为什么它仍不能代表服务价值？",
         "source_path": "vault/03_Methods/爆款指数.md",
         "display_path": "knowledge_cards/views/method-579dd6c5.html"
-      },
-      {
-        "id": "concept-aarrr-funnel",
-        "title": "AARRR 漏斗模型",
-        "type": "concept",
-        "stage": "2",
-        "next_review": "2026-07-04",
-        "days_delta": 2,
-        "status": "upcoming_7",
-        "learning_status": "learned",
-        "last_reviewed": "2026-07-01",
-        "review_count": 1,
-        "prompt": "说出 AARRR 五个阶段，并解释图书馆语境中的 Revenue 应该如何转译。",
-        "source_path": "vault/02_Concepts/AARRR 漏斗模型.md",
-        "display_path": "knowledge_cards/views/concept-aarrr-bf76ae6c.html"
-      },
-      {
-        "id": "method-dci-index",
-        "title": "DCI传播力指数",
-        "type": "method",
-        "stage": "2",
-        "next_review": "2026-07-04",
-        "days_delta": 2,
-        "status": "upcoming_7",
-        "learning_status": "learned",
-        "last_reviewed": "2026-07-01",
-        "review_count": 1,
-        "prompt": "说明 DCI 为什么比单一粉丝数更适合比较账号传播表现。",
-        "source_path": "vault/03_Methods/DCI传播力指数.md",
-        "display_path": "knowledge_cards/views/method-dci-48f2a84e.html"
-      },
-      {
-        "id": "concept-hook-model",
-        "title": "Hook Model 上瘾模型",
-        "type": "concept",
-        "stage": "2",
-        "next_review": "2026-07-04",
-        "days_delta": 2,
-        "status": "upcoming_7",
-        "learning_status": "learned",
-        "last_reviewed": "2026-07-01",
-        "review_count": 1,
-        "prompt": "用自己的话解释 Hook Model 的四个环节，并举一个图书馆短视频例子。",
-        "source_path": "vault/02_Concepts/Hook Model 上瘾模型.md",
-        "display_path": "knowledge_cards/views/concept-hook-model-878dcbb7.html"
       }
     ],
     "state_path": "vault/14_Review_Queue/review_state.json",
@@ -424,6 +380,7 @@
     "archive_policy": "vault/13_Knowledge_Graph/archive_policy.json"
   },
   "next_actions": [
+    "先处理 5 个到期复习项。",
     "Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
     "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
     "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
