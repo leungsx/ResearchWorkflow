@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T02:00:22",
+  "generated_at": "2026-07-03T05:27:37",
   "date": "2026-07-03",
   "audit_mode": "readonly",
-  "pre_refresh_state_hash": "04b885ce261da830bc12d04de705fa6d76acd068386249d40b378ef477f45766",
-  "post_refresh_state_hash": "04b885ce261da830bc12d04de705fa6d76acd068386249d40b378ef477f45766",
+  "pre_refresh_state_hash": "a48ba34e98455655613097bb2f7274ae4d1371d2d43989d454e97fcc09edddf7",
+  "post_refresh_state_hash": "a48ba34e98455655613097bb2f7274ae4d1371d2d43989d454e97fcc09edddf7",
   "summary": {
     "counts": {
-      "PASS": 17,
-      "WARN": 1,
+      "PASS": 16,
+      "WARN": 2,
       "FAIL": 0
     },
     "check_count": 18
@@ -82,13 +82,13 @@
       "area": "备份",
       "status": "PASS",
       "title": "最近备份可用",
-      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 29.9 小时前。"
+      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 33.3 小时前。"
     },
     {
       "area": "Git/异地备份",
-      "status": "PASS",
-      "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: de843b1 2026-07-03 01:59:54 +0800 Refresh clean workflow state after closeout"
+      "status": "WARN",
+      "title": "本地提交尚未推送到远程",
+      "detail": "ahead=2, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git"
     },
     {
       "area": "Token/记忆",
@@ -112,13 +112,13 @@
       "area": "行动队列",
       "status": "PASS",
       "title": "行动队列可用且入口有效",
-      "detail": "8 个开放行动。"
+      "detail": "9 个开放行动。"
     },
     {
       "area": "项目协作层",
       "status": "PASS",
       "title": "项目协作层可用",
-      "detail": "2 个项目；user_waiting=1。"
+      "detail": "2 个项目；user_waiting=3。"
     },
     {
       "area": "自动归档策略",
