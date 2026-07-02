@@ -1,10 +1,10 @@
 # Workflow Audit - 2026-07-03
 
-Generated: 2026-07-03T05:27:37
+Generated: 2026-07-03T05:28:25
 Audit mode: `readonly`
 Pre-refresh state hash: `a48ba34e98455655613097bb2f7274ae4d1371d2d43989d454e97fcc09edddf7`
 Post-refresh state hash: `a48ba34e98455655613097bb2f7274ae4d1371d2d43989d454e97fcc09edddf7`
-Summary: PASS=16 WARN=2 FAIL=0
+Summary: PASS=17 WARN=1 FAIL=0
 
 ## Checks
 
@@ -21,7 +21,7 @@ Summary: PASS=16 WARN=2 FAIL=0
 | 项目状态 | PASS | 项目状态文件可供自动化读取 | 2 个项目。 |
 | 复习队列 | WARN | 存在到期复习项 | 5 项到期：传播力评价；平台互动-服务触达-阅读转化；熵权法；爆款指数；图书馆短视频内容质量评价 |
 | 备份 | PASS | 最近备份可用 | backups/researchworkflow-critical-20260701-200737.zip，约 33.3 小时前。 |
-| Git/异地备份 | WARN | 本地提交尚未推送到远程 | ahead=2, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git |
+| Git/异地备份 | PASS | Git 本地和远程快照状态正常 | upstream=origin/main；last commit: db47ea1 2026-07-03 05:28:07 +0800 Record audit after dashboard script optimization |
 | Token/记忆 | PASS | 今日 compact summary 可作为默认启动上下文 | vault/07_Codex_Logs/compact_daily/2026-07-03-summary.md，约 107 words。 |
 | 文件卫生 | PASS | 未发现常见系统/缓存文件 | 工作区较干净。 |
 | Schema | PASS | 核心机器状态 schema 校验通过 | 15 个文件通过校验。 |

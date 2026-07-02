@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T05:27:37",
+  "generated_at": "2026-07-03T05:28:25",
   "date": "2026-07-03",
   "audit_mode": "readonly",
   "pre_refresh_state_hash": "a48ba34e98455655613097bb2f7274ae4d1371d2d43989d454e97fcc09edddf7",
   "post_refresh_state_hash": "a48ba34e98455655613097bb2f7274ae4d1371d2d43989d454e97fcc09edddf7",
   "summary": {
     "counts": {
-      "PASS": 16,
-      "WARN": 2,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "check_count": 18
@@ -86,9 +86,9 @@
     },
     {
       "area": "Git/异地备份",
-      "status": "WARN",
-      "title": "本地提交尚未推送到远程",
-      "detail": "ahead=2, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git"
+      "status": "PASS",
+      "title": "Git 本地和远程快照状态正常",
+      "detail": "upstream=origin/main；last commit: db47ea1 2026-07-03 05:28:07 +0800 Record audit after dashboard script optimization"
     },
     {
       "area": "Token/记忆",
