@@ -1,7 +1,7 @@
 # Workflow Audit - 2026-07-02
 
-Generated: 2026-07-02T14:32:24
-Summary: PASS=17 WARN=1 FAIL=0
+Generated: 2026-07-02T14:33:12
+Summary: PASS=18 WARN=0 FAIL=0
 
 ## Checks
 
@@ -18,11 +18,11 @@ Summary: PASS=17 WARN=1 FAIL=0
 | 项目状态 | PASS | 项目状态文件可供自动化读取 | 2 个项目。 |
 | 复习队列 | PASS | 今日无积压复习项 | 队列共 24 项。 |
 | 备份 | PASS | 最近备份可用 | backups/researchworkflow-critical-20260701-200737.zip，约 18.4 小时前。 |
-| Git/异地备份 | WARN | 本地提交尚未推送到远程 | ahead=1, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git |
+| Git/异地备份 | PASS | Git 本地和远程快照状态正常 | upstream=origin/main；last commit: fb559f2 2026-07-02 14:32:58 +0800 Refresh workflow audit after tests |
 | Token/记忆 | PASS | 今日 compact summary 可作为默认启动上下文 | vault/07_Codex_Logs/compact_daily/2026-07-02-summary.md，约 88 words。 |
 | 文件卫生 | PASS | 未发现常见系统/缓存文件 | 工作区较干净。 |
 | Schema | PASS | 核心机器状态 schema 校验通过 | 10 个文件通过校验。 |
-| 行动队列 | PASS | 行动队列可用且入口有效 | 3 个开放行动。 |
+| 行动队列 | PASS | 行动队列可用且入口有效 | 2 个开放行动。 |
 | 项目协作层 | PASS | 项目协作层可用 | 2 个项目；user_waiting=1。 |
 | 自动归档策略 | PASS | 自动归档策略可用 | backup=7, prune=0, cache=0 |
 

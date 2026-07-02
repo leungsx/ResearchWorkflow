@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T14:32:24",
+  "generated_at": "2026-07-02T14:33:12",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -21,8 +21,8 @@
   },
   "audit": {
     "counts": {
-      "PASS": 17,
-      "WARN": 1,
+      "PASS": 18,
+      "WARN": 0,
       "FAIL": 0
     },
     "checks": [
@@ -94,9 +94,9 @@
       },
       {
         "area": "Git/异地备份",
-        "status": "WARN",
-        "title": "本地提交尚未推送到远程",
-        "detail": "ahead=1, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git"
+        "status": "PASS",
+        "title": "Git 本地和远程快照状态正常",
+        "detail": "upstream=origin/main；last commit: fb559f2 2026-07-02 14:32:58 +0800 Refresh workflow audit after tests"
       },
       {
         "area": "Token/记忆",
@@ -120,7 +120,7 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "3 个开放行动。"
+        "detail": "2 个开放行动。"
       },
       {
         "area": "项目协作层",
@@ -425,7 +425,6 @@
     "Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
     "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
     "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
-    "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
-    "择机处理 workflow-audit 的 WARN 项，尤其是 Git 快照和到期复习。"
+    "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
   ]
 }
