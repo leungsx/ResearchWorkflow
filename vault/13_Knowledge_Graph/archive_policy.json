@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T01:54:14",
+  "generated_at": "2026-07-03T01:57:49",
   "entrypoint": "archive_policy.html",
   "summary": {
     "backup_count": 7,
     "backup_prune_candidates": 0,
-    "daily_log_count": 10,
+    "daily_log_count": 11,
     "compact_candidates": 0,
     "cache_candidates": 0,
     "generated_html_count": 101
@@ -31,8 +31,8 @@
     "prune_candidates": []
   },
   "logs": {
-    "daily_count": 10,
-    "compact_count": 9,
+    "daily_count": 11,
+    "compact_count": 10,
     "compact_after_days": 45,
     "compact_candidates": []
   },
