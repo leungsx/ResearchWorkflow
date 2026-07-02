@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T20:48:31",
+  "generated_at": "2026-07-02T21:05:53",
   "entrypoint": "project_collaboration.html",
   "summary": {
     "project_count": 2,
     "user_waiting": 1,
     "codex_ready": 6,
-    "open_actions": 2
+    "open_actions": 3
   },
   "roles": {
     "user": [
@@ -69,9 +69,10 @@
         "literature_synthesis": "projects/library_short_video/03_literature_synthesis.md",
         "incoming_pdf_triage": "projects/library_short_video/literature/incoming_pdf_triage.md",
         "evidence_locator_table": "projects/library_short_video/literature/evidence_locator_table.md",
+        "page_verification_queue": "projects/library_short_video/evidence/page_verification_queue.csv",
         "manuscript_writing_panel": "projects/library_short_video/manuscript/writing_panel.md"
       },
-      "artifact_count": 51
+      "artifact_count": 52
     },
     {
       "slug": "starter_project",
@@ -108,6 +109,7 @@
         "literature_synthesis": "projects/starter_project/03_literature_synthesis.md",
         "incoming_pdf_triage": "",
         "evidence_locator_table": "",
+        "page_verification_queue": "",
         "manuscript_writing_panel": ""
       },
       "artifact_count": 7

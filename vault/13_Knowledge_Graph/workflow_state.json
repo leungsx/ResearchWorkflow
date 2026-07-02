@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T20:48:31",
+  "generated_at": "2026-07-02T21:05:53",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -14,15 +14,15 @@
     "archive_policy": "archive_policy.html"
   },
   "counts": {
-    "manifest_rows": 133,
-    "search_entries": 133,
+    "manifest_rows": 134,
+    "search_entries": 134,
     "project_count": 2,
-    "git_dirty_paths": 132
+    "git_dirty_paths": 11
   },
   "audit": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "checks": [
@@ -60,13 +60,13 @@
         "area": "资产清单",
         "status": "PASS",
         "title": "artifact manifest 覆盖核心展示资产",
-        "detail": "133 条；display_types=31"
+        "detail": "134 条；display_types=32"
       },
       {
         "area": "搜索索引",
         "status": "PASS",
         "title": "搜索索引和搜索页可用",
-        "detail": "133 条；layers=4"
+        "detail": "134 条；layers=4"
       },
       {
         "area": "复习状态",
@@ -90,13 +90,13 @@
         "area": "备份",
         "status": "PASS",
         "title": "最近备份可用",
-        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 19.1 小时前。"
+        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 24.9 小时前。"
       },
       {
         "area": "Git/异地备份",
-        "status": "PASS",
-        "title": "Git 本地和远程快照状态正常",
-        "detail": "upstream=origin/main；last commit: 4018990 2026-07-02 15:15:30 +0800 Add reproducibility and privacy workflow guards"
+        "status": "WARN",
+        "title": "存在尚未提交的 Git 改动",
+        "detail": "140 个路径待快照： M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-4358f2f5.html； M knowledge_cards/views/concept-44250b7b.html"
       },
       {
         "area": "Token/记忆",
@@ -114,13 +114,13 @@
         "area": "Schema",
         "status": "PASS",
         "title": "核心机器状态 schema 校验通过",
-        "detail": "12 个文件通过校验。"
+        "detail": "14 个文件通过校验。"
       },
       {
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "3 个开放行动。"
+        "detail": "2 个开放行动。"
       },
       {
         "area": "项目协作层",
@@ -132,7 +132,7 @@
         "area": "自动归档策略",
         "status": "PASS",
         "title": "自动归档策略可用",
-        "detail": "backup=7, prune=0, cache=0"
+        "detail": "backup=7, prune=0, cache=2"
       }
     ],
     "health_html": "workflow_health.html",
@@ -372,6 +372,7 @@
         "literature_synthesis": "paper_reading/views/literature_synthesis.html",
         "incoming_pdf_triage": "projects/library_short_video/literature/incoming_pdf_triage.html",
         "evidence_locator_table": "projects/library_short_video/literature/evidence_locator_table.html",
+        "page_verification_queue": "projects/library_short_video/evidence/page_verification_queue.html",
         "manuscript_writing_panel": "projects/library_short_video/manuscript/writing_panel.html",
         "review_today": "knowledge_cards/review_today.html",
         "search": "search/index.html",
@@ -403,6 +404,7 @@
         "literature_synthesis": "paper_reading/views/03-literature-synthesis-01206220.html",
         "incoming_pdf_triage": "",
         "evidence_locator_table": "",
+        "page_verification_queue": "",
         "manuscript_writing_panel": "",
         "review_today": "knowledge_cards/review_today.html",
         "search": "search/index.html",
@@ -425,6 +427,7 @@
     "Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
     "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
     "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
-    "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
+    "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
+    "择机处理 workflow-audit 的 WARN 项，尤其是 Git 快照和到期复习。"
   ]
 }

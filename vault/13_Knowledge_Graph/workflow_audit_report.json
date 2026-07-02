@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T20:51:08",
+  "generated_at": "2026-07-02T21:03:36",
   "date": "2026-07-02",
   "audit_mode": "readonly",
-  "pre_refresh_state_hash": "7b85bb32901273dae49c40ed4f9919bba44d213ba0de9bde54a4f26dddac46c9",
-  "post_refresh_state_hash": "7b85bb32901273dae49c40ed4f9919bba44d213ba0de9bde54a4f26dddac46c9",
+  "pre_refresh_state_hash": "9f01cdcb4ed30d61220a9cc87666b109f813e8050a83bb2ec8ba56b15b43798a",
+  "post_refresh_state_hash": "9f01cdcb4ed30d61220a9cc87666b109f813e8050a83bb2ec8ba56b15b43798a",
   "summary": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "check_count": 18
@@ -52,13 +52,13 @@
       "area": "资产清单",
       "status": "PASS",
       "title": "artifact manifest 覆盖核心展示资产",
-      "detail": "133 条；display_types=31"
+      "detail": "134 条；display_types=32"
     },
     {
       "area": "搜索索引",
       "status": "PASS",
       "title": "搜索索引和搜索页可用",
-      "detail": "133 条；layers=4"
+      "detail": "134 条；layers=4"
     },
     {
       "area": "复习状态",
@@ -82,13 +82,13 @@
       "area": "备份",
       "status": "PASS",
       "title": "最近备份可用",
-      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 24.7 小时前。"
+      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 24.9 小时前。"
     },
     {
       "area": "Git/异地备份",
-      "status": "PASS",
-      "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: 79ec3b2 2026-07-02 20:50:03 +0800 Connect claim evidence to writing panel"
+      "status": "WARN",
+      "title": "存在尚未提交的 Git 改动",
+      "detail": "140 个路径待快照： M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-4358f2f5.html； M knowledge_cards/views/concept-44250b7b.html"
     },
     {
       "area": "Token/记忆",
@@ -106,7 +106,7 @@
       "area": "Schema",
       "status": "PASS",
       "title": "核心机器状态 schema 校验通过",
-      "detail": "13 个文件通过校验。"
+      "detail": "14 个文件通过校验。"
     },
     {
       "area": "行动队列",
