@@ -279,8 +279,18 @@ class WorkflowSmokeTests(unittest.TestCase):
         self.assertTrue(all(row["locator_status"] in {"page_pending", "page_located_needs_human_check"} for row in evidence))
         writing = read_text(project_path("manuscript", "writing_panel.html"))
         self.assertIn("Variable And Indicator Draft", writing)
+        self.assertIn("Claim Evidence Traceability", writing)
+        self.assertIn("Research Question Evidence Trace", writing)
+        self.assertIn("Variable And Indicator Evidence Trace", writing)
+        self.assertIn("Paragraph Queue", writing)
         self.assertIn("Evidence Readiness", writing)
         self.assertNotIn("<p>|", writing)
+        trace = json.loads(project_path("manuscript", "writing_traceability.json").read_text(encoding="utf-8"))
+        self.assertEqual("ResearchWorkflow.WritingTraceability.v1", trace["schema_version"])
+        self.assertGreater(trace["summary"]["claim_link_rows"], 10)
+        self.assertGreaterEqual(len(trace["research_question_traces"]), 3)
+        self.assertGreaterEqual(len(trace["variable_traces"]), 4)
+        self.assertGreaterEqual(len(trace["paragraph_traces"]), 4)
 
 
 if __name__ == "__main__":

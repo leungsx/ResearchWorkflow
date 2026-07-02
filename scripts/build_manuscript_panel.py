@@ -5,6 +5,7 @@ import argparse
 import csv
 import datetime as dt
 import html
+import json
 import re
 from pathlib import Path
 
@@ -59,6 +60,204 @@ def evidence_summary(project: Path) -> tuple[int, int, int]:
     return len(rows), located, pending
 
 
+def csv_rows(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    with path.open(encoding="utf-8-sig", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def claim_links(project: Path) -> list[dict[str, str]]:
+    return csv_rows(project / "evidence" / "claim_evidence_links.csv")
+
+
+def group_claims(rows: list[dict[str, str]]) -> dict[str, list[dict[str, str]]]:
+    grouped: dict[str, list[dict[str, str]]] = {}
+    for row in rows:
+        claim_id = clean(row.get("claim_id", ""))
+        if claim_id:
+            grouped.setdefault(claim_id, []).append(row)
+    return grouped
+
+
+def row_trace(row: dict[str, str]) -> str:
+    page = clean(row.get("page", "")) or "page pending"
+    return f"{clean(row.get('source_block_id', ''))} / {page} / {clean(row.get('read_status', ''))}"
+
+
+def readiness(rows: list[dict[str, str]]) -> str:
+    accepted = {"human-read", "verified", "claim-linked", "manuscript-cited"}
+    located = sum(1 for row in rows if clean(row.get("page", "")))
+    human_ready = sum(1 for row in rows if clean(row.get("read_status", "")) in accepted)
+    return f"{human_ready}/{len(rows)} human-ready; {located}/{len(rows)} page-located"
+
+
+def claim_brief(rows: list[dict[str, str]], limit: int = 4) -> str:
+    if not rows:
+        return "No linked claim yet"
+    grouped = group_claims(rows)
+    labels = []
+    for claim_id, claim_rows in list(grouped.items())[:limit]:
+        labels.append(f"{claim_id} ({readiness(claim_rows)})")
+    if len(grouped) > limit:
+        labels.append(f"+{len(grouped) - limit} more")
+    return "; ".join(labels)
+
+
+def source_trace(rows: list[dict[str, str]], limit: int = 3) -> str:
+    traces = [row_trace(row) for row in rows[:limit]]
+    if len(rows) > limit:
+        traces.append(f"+{len(rows) - limit} more")
+    return "; ".join(traces) if traces else "No source trace yet"
+
+
+def match_claim_rows(rows: list[dict[str, str]], keywords: list[str], limit: int = 8) -> list[dict[str, str]]:
+    scored: list[tuple[int, str, dict[str, str]]] = []
+    for row in rows:
+        text = " ".join(
+            [
+                clean(row.get("claim_text", "")),
+                clean(row.get("citekey", "")),
+                clean(row.get("source_block_id", "")),
+            ]
+        ).lower()
+        score = sum(1 for keyword in keywords if keyword.lower() in text)
+        if score:
+            scored.append((score, clean(row.get("claim_id", "")), row))
+    scored.sort(key=lambda item: (-item[0], item[1], clean(item[2].get("source_block_id", ""))))
+    selected: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for _score, _claim_id, row in scored:
+        key = (clean(row.get("claim_id", "")), clean(row.get("source_block_id", "")))
+        if key in seen:
+            continue
+        seen.add(key)
+        selected.append(row)
+        if len(selected) >= limit:
+            break
+    return selected
+
+
+def traceability_payload(project_slug: str, project: Path) -> dict[str, object]:
+    rows = claim_links(project)
+    grouped = group_claims(rows)
+    located = sum(1 for row in rows if clean(row.get("page", "")))
+    human_ready = sum(1 for row in rows if clean(row.get("read_status", "")) in {"human-read", "verified", "claim-linked", "manuscript-cited"})
+    questions = current_questions(project)
+    question_rules = [
+        ("Main question", ["平台", "服务价值", "阅读推广", "传播力", "SICAS", "AARRR", "数字阅读"]),
+        ("Sub-question 1", ["标题", "内容", "音乐", "互动", "行动", "SICAS", "Hook", "机制"]),
+        ("Sub-question 2", ["公共图书馆", "高校图书馆", "平台", "差异", "馆型", "比较", "AARRR"]),
+    ]
+    question_traces = []
+    for index, question in enumerate(questions[:3]):
+        label, keywords = question_rules[index] if index < len(question_rules) else (f"Question {index + 1}", [])
+        matched = match_claim_rows(rows, keywords or [question], limit=8)
+        question_traces.append(
+            {
+                "slot": label,
+                "question": question,
+                "linked_claims": claim_brief(matched),
+                "source_trace": source_trace(matched),
+                "readiness": readiness(matched) if matched else "No linked claim yet",
+            }
+        )
+
+    variable_rules = [
+        {
+            "layer": "Platform engagement",
+            "indicators": "粉丝量、发布量、点赞/评论/转发、爆款指数、DCI/传播力指数、标题/音乐/内容形式",
+            "keywords": ["粉丝", "发布", "点赞", "评论", "转发", "爆款", "DCI", "传播力", "标题", "音乐", "内容"],
+            "boundary": "Can support visibility/interaction claims, not service-value claims alone.",
+        },
+        {
+            "layer": "Service touchpoint",
+            "indicators": "资源入口、活动入口、咨询/连接路径、线上线下转换、服务信息清晰度",
+            "keywords": ["服务", "触达", "资源", "活动", "咨询", "线上线下", "渠道", "互动营销", "数字阅读"],
+            "boundary": "Needs observable service path or library-service outcome before manuscript use.",
+        },
+        {
+            "layer": "Reading-promotion outcome",
+            "indicators": "阅读参与、资源访问、活动报名、读者反馈、知识传播效果、分享回流",
+            "keywords": ["阅读", "服务价值", "行动", "分享", "资源", "活动", "知识传播", "SICAS"],
+            "boundary": "Current corpus supports framework design; outcome measurement needs stronger data.",
+        },
+        {
+            "layer": "Boundary and comparison",
+            "indicators": "馆型、平台类型、时间窗口、账号规模、公共馆/高校馆/科研型图书馆差异",
+            "keywords": ["公共图书馆", "高校图书馆", "馆型", "平台", "差异", "比较", "账号"],
+            "boundary": "Do not generalize from one platform/time window to all library contexts.",
+        },
+    ]
+    variable_traces = []
+    for rule in variable_rules:
+        matched = match_claim_rows(rows, list(rule["keywords"]), limit=8)
+        variable_traces.append(
+            {
+                "layer": rule["layer"],
+                "candidate_indicators": rule["indicators"],
+                "linked_claims": claim_brief(matched),
+                "source_trace": source_trace(matched),
+                "boundary": rule["boundary"],
+            }
+        )
+
+    paragraph_rules = [
+        {
+            "slot": "Literature gap paragraph",
+            "purpose": "Explain why platform visibility needs to be separated from library service value.",
+            "keywords": ["服务价值", "传播力", "数字阅读", "平台", "互动"],
+            "next_action": "Verify page/table locators before turning this into a formal literature-review claim.",
+        },
+        {
+            "slot": "Framework paragraph",
+            "purpose": "Introduce platform engagement -> service touchpoint -> reading-promotion outcome.",
+            "keywords": ["SICAS", "AARRR", "服务", "阅读推广", "行动", "分享"],
+            "next_action": "Keep causal wording out until new data or verified source locators support it.",
+        },
+        {
+            "slot": "Variable paragraph",
+            "purpose": "Translate prior studies into candidate variables and indicators.",
+            "keywords": ["粉丝", "点赞", "评论", "标题", "内容", "音乐", "爆款", "DCI"],
+            "next_action": "Split observable platform metrics from service-path indicators.",
+        },
+        {
+            "slot": "Boundary paragraph",
+            "purpose": "State scope limits by library type, platform, time window, and evidence status.",
+            "keywords": ["公共图书馆", "高校图书馆", "平台", "比较", "差异", "时间"],
+            "next_action": "Add 2024-2026 data before making current-platform claims.",
+        },
+    ]
+    paragraph_traces = []
+    for rule in paragraph_rules:
+        matched = match_claim_rows(rows, list(rule["keywords"]), limit=8)
+        paragraph_traces.append(
+            {
+                "slot": rule["slot"],
+                "purpose": rule["purpose"],
+                "linked_claims": claim_brief(matched),
+                "source_trace": source_trace(matched),
+                "readiness": readiness(matched) if matched else "No linked claim yet",
+                "next_action": rule["next_action"],
+            }
+        )
+    return {
+        "schema_version": "ResearchWorkflow.WritingTraceability.v1",
+        "generated_at": dt.datetime.now().isoformat(timespec="seconds"),
+        "project": project_slug,
+        "summary": {
+            "claim_link_rows": len(rows),
+            "unique_claims": len(grouped),
+            "page_located_rows": located,
+            "page_pending_rows": len(rows) - located,
+            "human_ready_rows": human_ready,
+        },
+        "research_question_traces": question_traces,
+        "variable_traces": variable_traces,
+        "paragraph_traces": paragraph_traces,
+    }
+
+
 def md_table(rows: list[list[str]]) -> list[str]:
     if not rows:
         return []
@@ -71,9 +270,11 @@ def md_table(rows: list[list[str]]) -> list[str]:
     return lines
 
 
-def render_md(project_slug: str, project: Path) -> str:
+def render_md(project_slug: str, project: Path, trace: dict[str, object] | None = None) -> str:
     questions = current_questions(project)
     rows, located, pending = evidence_summary(project)
+    trace = trace or traceability_payload(project_slug, project)
+    summary = trace["summary"]
     lines = [
         "# Manuscript Production Panel",
         "",
@@ -117,6 +318,57 @@ def render_md(project_slug: str, project: Path) -> str:
     lines.extend(
         [
             "",
+            "## Claim Evidence Traceability",
+            "",
+        ]
+    )
+    lines.extend(
+        md_table(
+            [
+                ["Metric", "Value"],
+                ["Claim link rows", str(summary["claim_link_rows"])],
+                ["Unique claims", str(summary["unique_claims"])],
+                ["Page located rows", str(summary["page_located_rows"])],
+                ["Page pending rows", str(summary["page_pending_rows"])],
+                ["Human-ready rows", str(summary["human_ready_rows"])],
+            ]
+        )
+    )
+    lines.extend(["", "## Research Question Evidence Trace", ""])
+    lines.extend(
+        md_table(
+            [["Slot", "Research question", "Linked claims", "Source trace", "Readiness"]]
+            + [
+                [
+                    str(item["slot"]),
+                    str(item["question"]),
+                    str(item["linked_claims"]),
+                    str(item["source_trace"]),
+                    str(item["readiness"]),
+                ]
+                for item in trace["research_question_traces"]
+            ]
+        )
+    )
+    lines.extend(["", "## Variable And Indicator Evidence Trace", ""])
+    lines.extend(
+        md_table(
+            [["Layer", "Candidate indicators", "Linked claims", "Source trace", "Boundary"]]
+            + [
+                [
+                    str(item["layer"]),
+                    str(item["candidate_indicators"]),
+                    str(item["linked_claims"]),
+                    str(item["source_trace"]),
+                    str(item["boundary"]),
+                ]
+                for item in trace["variable_traces"]
+            ]
+        )
+    )
+    lines.extend(
+        [
+            "",
             "## Evidence Readiness",
             "",
             f"- Locator rows: {rows}",
@@ -125,10 +377,26 @@ def render_md(project_slug: str, project: Path) -> str:
             "",
             "## Paragraph Queue",
             "",
-            "- Literature gap paragraph: existing studies measure visibility and interaction more readily than service-value outcomes.",
-            "- Framework paragraph: separate platform engagement, service touchpoint, and reading-promotion outcome before combining indicators.",
-            "- Method paragraph: use source-grounded literature to draft variables, then require page/table verification before citation.",
-            "- Boundary paragraph: current evidence is mostly descriptive/correlational and 2019-2021 heavy; causal and current-platform claims need new data.",
+        ]
+    )
+    lines.extend(
+        md_table(
+            [["Paragraph slot", "Purpose", "Linked claims", "Source trace", "Readiness", "Next action"]]
+            + [
+                [
+                    str(item["slot"]),
+                    str(item["purpose"]),
+                    str(item["linked_claims"]),
+                    str(item["source_trace"]),
+                    str(item["readiness"]),
+                    str(item["next_action"]),
+                ]
+                for item in trace["paragraph_traces"]
+            ]
+        )
+    )
+    lines.extend(
+        [
             "",
             "## Next Writing Actions",
             "",
@@ -224,9 +492,13 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     md_path = out_dir / "writing_panel.md"
     html_path = out_dir / "writing_panel.html"
-    md_text = render_md(args.project, project)
+    trace_path = out_dir / "writing_traceability.json"
+    trace = traceability_payload(args.project, project)
+    trace_path.write_text(json.dumps(trace, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    md_text = render_md(args.project, project, trace=trace)
     md_path.write_text(md_text + "\n", encoding="utf-8")
     html_path.write_text(render_html(args.project, md_text, html_path, md_path), encoding="utf-8")
+    print(f"Wrote manuscript traceability data: {trace_path}")
     print(f"Wrote manuscript panel markdown: {md_path}")
     print(f"Wrote manuscript panel HTML: {html_path}")
     return 0

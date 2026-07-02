@@ -293,6 +293,34 @@ def validate_project_state(path: Path, issues: list[SchemaIssue], checked: list[
         add(issues, path, "FAIL", "artifacts 必须是对象")
 
 
+def validate_writing_traceability(path: Path, issues: list[SchemaIssue], checked: list[str]) -> None:
+    payload = load_json(path, issues, checked)
+    if not isinstance(payload, dict):
+        add(issues, path, "FAIL", "顶层结构必须是对象")
+        return
+    require_keys(payload, path, "root", ["schema_version", "generated_at", "project", "summary", "research_question_traces", "variable_traces", "paragraph_traces"], issues)
+    summary = payload.get("summary", {})
+    if isinstance(summary, dict):
+        for key in ["claim_link_rows", "unique_claims", "page_located_rows", "page_pending_rows", "human_ready_rows"]:
+            require_type(summary, path, key, int, issues, "summary")
+    else:
+        add(issues, path, "FAIL", "summary 必须是对象")
+    for list_key, required in [
+        ("research_question_traces", ["slot", "question", "linked_claims", "source_trace", "readiness"]),
+        ("variable_traces", ["layer", "candidate_indicators", "linked_claims", "source_trace", "boundary"]),
+        ("paragraph_traces", ["slot", "purpose", "linked_claims", "source_trace", "readiness", "next_action"]),
+    ]:
+        items = payload.get(list_key, [])
+        if not isinstance(items, list) or not items:
+            add(issues, path, "FAIL", f"{list_key} 必须是非空数组")
+            continue
+        for index, item in enumerate(items, start=1):
+            if not isinstance(item, dict):
+                add(issues, path, "FAIL", f"{list_key}[{index}] 必须是对象")
+                continue
+            require_keys(item, path, f"{list_key}[{index}]", required, issues)
+
+
 def validate_workflow_state(path: Path, issues: list[SchemaIssue], checked: list[str]) -> None:
     payload = load_json(path, issues, checked)
     if not isinstance(payload, dict):
@@ -458,6 +486,8 @@ def validate_workflow_schemas(include_audit_report: bool = True) -> SchemaReport
         validators.append((path, validate_project_state))
     for path in sorted(PROJECTS.glob("*/evidence/claim_evidence_links.csv")):
         validators.append((path, validate_claim_evidence_links))
+    for path in sorted(PROJECTS.glob("*/manuscript/writing_traceability.json")):
+        validators.append((path, validate_writing_traceability))
     for path, validator in validators:
         validator(path, issues, checked)
     return SchemaReport(checked_files=checked, issues=issues)

@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T15:12:55",
+  "generated_at": "2026-07-02T20:48:31",
   "entrypoint": "project_collaboration.html",
   "summary": {
     "project_count": 2,
     "user_waiting": 1,
     "codex_ready": 6,
-    "open_actions": 3
+    "open_actions": 2
   },
   "roles": {
     "user": [
