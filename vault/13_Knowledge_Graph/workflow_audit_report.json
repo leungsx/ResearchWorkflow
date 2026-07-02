@@ -1,20 +1,20 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T21:36:51",
-  "date": "2026-07-02",
+  "generated_at": "2026-07-03T02:00:22",
+  "date": "2026-07-03",
   "audit_mode": "readonly",
-  "pre_refresh_state_hash": "183de7ad1d19818c98b66bda3e4228e50d6f14b7fd899415b2e3d9d43bae06b4",
-  "post_refresh_state_hash": "183de7ad1d19818c98b66bda3e4228e50d6f14b7fd899415b2e3d9d43bae06b4",
+  "pre_refresh_state_hash": "04b885ce261da830bc12d04de705fa6d76acd068386249d40b378ef477f45766",
+  "post_refresh_state_hash": "04b885ce261da830bc12d04de705fa6d76acd068386249d40b378ef477f45766",
   "summary": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "check_count": 18
   },
   "reports": {
-    "markdown": "vault/07_Codex_Logs/workflow_audits/2026-07-02-workflow-audit.md",
+    "markdown": "vault/07_Codex_Logs/workflow_audits/2026-07-03-workflow-audit.md",
     "html": "workflow_health.html"
   },
   "checks": [
@@ -64,7 +64,7 @@
       "area": "复习状态",
       "status": "PASS",
       "title": "复习状态快照与队列一致",
-      "detail": "total=24, due=0, focus=8"
+      "detail": "total=24, due=5, focus=5"
     },
     {
       "area": "项目状态",
@@ -74,27 +74,27 @@
     },
     {
       "area": "复习队列",
-      "status": "PASS",
-      "title": "今日无积压复习项",
-      "detail": "队列共 24 项。"
+      "status": "WARN",
+      "title": "存在到期复习项",
+      "detail": "5 项到期：传播力评价；平台互动-服务触达-阅读转化；熵权法；爆款指数；图书馆短视频内容质量评价"
     },
     {
       "area": "备份",
       "status": "PASS",
       "title": "最近备份可用",
-      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 25.5 小时前。"
+      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 29.9 小时前。"
     },
     {
       "area": "Git/异地备份",
       "status": "PASS",
       "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: 2f4f43b 2026-07-02 21:36:21 +0800 Refresh clean workflow surfaces"
+      "detail": "upstream=origin/main；last commit: de843b1 2026-07-03 01:59:54 +0800 Refresh clean workflow state after closeout"
     },
     {
       "area": "Token/记忆",
       "status": "PASS",
       "title": "今日 compact summary 可作为默认启动上下文",
-      "detail": "vault/07_Codex_Logs/compact_daily/2026-07-02-summary.md，约 88 words。"
+      "detail": "vault/07_Codex_Logs/compact_daily/2026-07-03-summary.md，约 107 words。"
     },
     {
       "area": "文件卫生",
@@ -112,7 +112,7 @@
       "area": "行动队列",
       "status": "PASS",
       "title": "行动队列可用且入口有效",
-      "detail": "2 个开放行动。"
+      "detail": "8 个开放行动。"
     },
     {
       "area": "项目协作层",
