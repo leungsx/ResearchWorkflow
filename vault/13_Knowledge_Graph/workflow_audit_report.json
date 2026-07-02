@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T20:23:14",
-  "date": "2026-07-01",
+  "generated_at": "2026-07-02T13:48:50",
+  "date": "2026-07-02",
   "summary": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 16,
+      "WARN": 2,
       "FAIL": 0
     },
     "check_count": 18
   },
   "reports": {
-    "markdown": "vault/07_Codex_Logs/workflow_audits/2026-07-01-workflow-audit.md",
+    "markdown": "vault/07_Codex_Logs/workflow_audits/2026-07-02-workflow-audit.md",
     "html": "workflow_health.html"
   },
   "checks": [
@@ -31,37 +31,37 @@
       "area": "链接健康",
       "status": "PASS",
       "title": "HTML 本地链接均可解析",
-      "detail": "检查 111 个 HTML 页面。"
+      "detail": "检查 120 个 HTML 页面。"
     },
     {
       "area": "镜像页",
       "status": "PASS",
       "title": "HTML 镜像与源文件同步",
-      "detail": "检查 81 个镜像页。"
+      "detail": "检查 89 个镜像页。"
     },
     {
       "area": "知识图谱",
       "status": "PASS",
       "title": "图谱入口是可视化关系图",
-      "detail": "nodes=118, unique_edges=305"
+      "detail": "nodes=128, unique_edges=391"
     },
     {
       "area": "资产清单",
       "status": "PASS",
       "title": "artifact manifest 覆盖核心展示资产",
-      "detail": "121 条；display_types=28"
+      "detail": "130 条；display_types=28"
     },
     {
       "area": "搜索索引",
       "status": "PASS",
       "title": "搜索索引和搜索页可用",
-      "detail": "121 条；layers=4"
+      "detail": "130 条；layers=4"
     },
     {
       "area": "复习状态",
       "status": "PASS",
       "title": "复习状态快照与队列一致",
-      "detail": "total=19, due=0, focus=5"
+      "detail": "total=24, due=0, focus=8"
     },
     {
       "area": "项目状态",
@@ -73,31 +73,31 @@
       "area": "复习队列",
       "status": "PASS",
       "title": "今日无积压复习项",
-      "detail": "队列共 19 项。"
+      "detail": "队列共 24 项。"
     },
     {
       "area": "备份",
       "status": "PASS",
       "title": "最近备份可用",
-      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 0.3 小时前。"
+      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 17.7 小时前。"
     },
     {
       "area": "Git/异地备份",
-      "status": "PASS",
-      "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: 94811ac 2026-07-01 20:23:03 +0800 Refine research workflow actions and graph views"
+      "status": "WARN",
+      "title": "存在尚未提交的 Git 改动",
+      "detail": "154 个路径待快照： M action_queue.html； M archive_policy.html； M codex/state/context_index.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-452dce22.html"
     },
     {
       "area": "Token/记忆",
       "status": "PASS",
       "title": "今日 compact summary 可作为默认启动上下文",
-      "detail": "vault/07_Codex_Logs/compact_daily/2026-07-01-summary.md，约 88 words。"
+      "detail": "vault/07_Codex_Logs/compact_daily/2026-07-02-summary.md，约 88 words。"
     },
     {
       "area": "文件卫生",
-      "status": "PASS",
-      "title": "未发现常见系统/缓存文件",
-      "detail": "工作区较干净。"
+      "status": "WARN",
+      "title": "工作区存在系统/缓存文件",
+      "detail": ".DS_Store=4；__pycache__=2；这些不会进入 file sweep，但可择机清理。"
     },
     {
       "area": "Schema",
@@ -109,7 +109,7 @@
       "area": "行动队列",
       "status": "PASS",
       "title": "行动队列可用且入口有效",
-      "detail": "3 个开放行动。"
+      "detail": "4 个开放行动。"
     },
     {
       "area": "项目协作层",
@@ -121,7 +121,7 @@
       "area": "自动归档策略",
       "status": "PASS",
       "title": "自动归档策略可用",
-      "detail": "backup=7, prune=0, cache=0"
+      "detail": "backup=7, prune=0, cache=6"
     }
   ]
 }

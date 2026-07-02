@@ -40,7 +40,7 @@
   <header>
     <div class="wrap">
       <h1>ResearchWorkflow 体检</h1>
-      <p class="sub">Generated 2026-07-01 20:23 · PASS=18 WARN=0 FAIL=0</p>
+      <p class="sub">Generated 2026-07-02 13:48 · PASS=16 WARN=2 FAIL=0</p>
       <nav class="nav">
         <a href="study_dashboard.html">总览</a>
         <a href="paper_reading/today.html">今日精读</a>
@@ -57,8 +57,8 @@
   </header>
   <main class="wrap">
     <section class="metrics">
-      <div class="metric"><b>18</b><span>通过</span></div>
-      <div class="metric"><b>0</b><span>提醒</span></div>
+      <div class="metric"><b>16</b><span>通过</span></div>
+      <div class="metric"><b>2</b><span>提醒</span></div>
       <div class="metric"><b>0</b><span>失败</span></div>
     </section>
     <section class="checks">        <article class="check pass">
@@ -77,37 +77,37 @@
           <div class="status">PASS</div>
           <h2>HTML 本地链接均可解析</h2>
           <p class="area">链接健康</p>
-          <p>检查 111 个 HTML 页面。</p>
+          <p>检查 120 个 HTML 页面。</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
           <h2>HTML 镜像与源文件同步</h2>
           <p class="area">镜像页</p>
-          <p>检查 81 个镜像页。</p>
+          <p>检查 89 个镜像页。</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
           <h2>图谱入口是可视化关系图</h2>
           <p class="area">知识图谱</p>
-          <p>nodes=118, unique_edges=305</p>
+          <p>nodes=128, unique_edges=391</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
           <h2>artifact manifest 覆盖核心展示资产</h2>
           <p class="area">资产清单</p>
-          <p>121 条；display_types=28</p>
+          <p>130 条；display_types=28</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
           <h2>搜索索引和搜索页可用</h2>
           <p class="area">搜索索引</p>
-          <p>121 条；layers=4</p>
+          <p>130 条；layers=4</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
           <h2>复习状态快照与队列一致</h2>
           <p class="area">复习状态</p>
-          <p>total=19, due=0, focus=5</p>
+          <p>total=24, due=0, focus=8</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
@@ -119,31 +119,31 @@
           <div class="status">PASS</div>
           <h2>今日无积压复习项</h2>
           <p class="area">复习队列</p>
-          <p>队列共 19 项。</p>
+          <p>队列共 24 项。</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
           <h2>最近备份可用</h2>
           <p class="area">备份</p>
-          <p>backups/researchworkflow-critical-20260701-200737.zip，约 0.3 小时前。</p>
+          <p>backups/researchworkflow-critical-20260701-200737.zip，约 17.7 小时前。</p>
         </article>
-        <article class="check pass">
-          <div class="status">PASS</div>
-          <h2>Git 本地和远程快照状态正常</h2>
+        <article class="check warn">
+          <div class="status">WARN</div>
+          <h2>存在尚未提交的 Git 改动</h2>
           <p class="area">Git/异地备份</p>
-          <p>upstream=origin/main；last commit: 94811ac 2026-07-01 20:23:03 +0800 Refine research workflow actions and graph views</p>
+          <p>154 个路径待快照： M action_queue.html； M archive_policy.html； M codex/state/context_index.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-452dce22.html</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
           <h2>今日 compact summary 可作为默认启动上下文</h2>
           <p class="area">Token/记忆</p>
-          <p>vault/07_Codex_Logs/compact_daily/2026-07-01-summary.md，约 88 words。</p>
+          <p>vault/07_Codex_Logs/compact_daily/2026-07-02-summary.md，约 88 words。</p>
         </article>
-        <article class="check pass">
-          <div class="status">PASS</div>
-          <h2>未发现常见系统/缓存文件</h2>
+        <article class="check warn">
+          <div class="status">WARN</div>
+          <h2>工作区存在系统/缓存文件</h2>
           <p class="area">文件卫生</p>
-          <p>工作区较干净。</p>
+          <p>.DS_Store=4；__pycache__=2；这些不会进入 file sweep，但可择机清理。</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
@@ -155,7 +155,7 @@
           <div class="status">PASS</div>
           <h2>行动队列可用且入口有效</h2>
           <p class="area">行动队列</p>
-          <p>3 个开放行动。</p>
+          <p>4 个开放行动。</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
@@ -167,7 +167,7 @@
           <div class="status">PASS</div>
           <h2>自动归档策略可用</h2>
           <p class="area">自动归档策略</p>
-          <p>backup=7, prune=0, cache=0</p>
+          <p>backup=7, prune=0, cache=6</p>
         </article></section>
   </main>
   <footer class="wrap">Run <code>make workflow-audit</code> to refresh this page.</footer>

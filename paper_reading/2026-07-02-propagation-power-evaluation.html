@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026-07-02 精读：图书馆短视频账号传播力研究</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #65758b;
+      --line: #d8e2ea;
+      --paper: #ffffff;
+      --soft: #f6f8fb;
+      --blue: #225ea8;
+      --green: #14795f;
+      --amber: #9a620a;
+      --rose: #a83254;
+      --slate: #2f3d4a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      line-height: 1.64;
+      background: #f6f8fb;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 24px; }
+    header {
+      color: #f8fbff;
+      background: linear-gradient(135deg, #243847 0%, #176b61 54%, #8c6820 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 9px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      font-size: 12px;
+    }
+    h1 { margin: 14px 0 10px; font-size: 35px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin: 0 0 9px; font-size: 17px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    .sub { max-width: 930px; color: rgba(248,251,255,0.92); }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      color: #f8fbff;
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 7px 11px;
+      font-size: 14px;
+    }
+    main.wrap { margin-top: -22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel, .metric {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 10px 24px rgba(24, 34, 45, 0.06);
+    }
+    .panel { padding: 18px; }
+    .metric { padding: 16px; }
+    .span-12 { grid-column: 1 / -1; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; color: var(--slate); }
+    .metric span { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px 18px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .meta div { padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
+    .label { display: block; margin-bottom: 3px; color: var(--muted); font-size: 12px; }
+    .tag {
+      display: inline-block;
+      margin: 0 7px 8px 0;
+      padding: 5px 9px;
+      background: #eef8f5;
+      color: var(--green);
+      border: 1px solid #cfe5dd;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .route, .glossary, .cards { display: grid; gap: 10px; }
+    .route-item, .glossary div, .card-link {
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--green);
+      border-radius: 0 8px 8px 0;
+      background: var(--soft);
+    }
+    .route-item strong, .card-link strong { display: block; margin-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 650; background: #fbfdff; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .step {
+      position: relative;
+      min-height: 170px;
+      padding: 14px;
+      border: 1px solid #cfe0e2;
+      border-radius: 8px;
+      background: #f8fbfb;
+    }
+    .step:not(:last-child)::after {
+      content: ">";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--green);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .num {
+      display: inline-flex;
+      width: 28px;
+      height: 28px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+    .callout {
+      padding: 14px;
+      border: 1px solid #ead8a8;
+      border-radius: 8px;
+      background: #fff9eb;
+    }
+    .callout.warn { border-color: #efc2ce; background: #fff4f6; }
+    ul, ol { margin: 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      padding: 12px 14px;
+    }
+    details + details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 650; }
+    .actions label { display: block; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+    .actions input { margin-right: 8px; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    .foot { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+    @media (max-width: 920px) {
+      .span-8, .span-6, .span-4, .span-12, .metric { grid-column: 1 / -1; }
+      .flow { grid-template-columns: 1fr; }
+      .step:not(:last-child)::after { content: "v"; right: auto; left: 50%; top: auto; bottom: -19px; transform: translateX(-50%); }
+      h1 { font-size: 29px; }
+      .meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <span class="eyebrow">Daily Deep Read · 2026-07-02</span>
+      <h1>图书馆短视频账号传播力研究</h1>
+      <p class="sub">今天读王兴兰、夏晓红 2021 这篇，是为了补齐当前项目里的“平台传播指标”层：它告诉我们怎样把省级公共图书馆抖音账号的传播力做成可计算评价，同时提醒我们不要把传播力误当成服务价值。</p>
+      <nav class="nav">
+        <a href="../study_dashboard.html">学习仪表盘</a>
+        <a href="today.html">今日固定入口</a>
+        <a href="index.html">论文归档</a>
+        <a href="views/cnki-2021-645f03f388-609a8a67.html">Obsidian 论文笔记</a>
+        <a href="views/paper-f2f9e4d9.html">Reader</a>
+        <a href="views/cnki-2021-645f03f388-0a001b11.html">上下文包</a>
+        <a href="views/literature_review_workbench.html">文献综述工作台</a>
+        <a href="../knowledge_cards/index.html">知识卡入口</a>
+        <a href="../knowledge_graph/index.html">知识图谱</a>
+        <a href="../logs/views/2026-07-02-propagation-power-evaluation-paper-7d398028.html">主读会话</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+      <section class="panel span-8">
+        <h2>题目与推荐理由</h2>
+        <div class="meta">
+          <div><span class="label">作者</span>王兴兰；夏晓红</div>
+          <div><span class="label">年份 / 来源</span>2021 / 《图书馆学研究》2021(5)</div>
+          <div><span class="label">DOI</span><a href="https://doi.org/10.15941/j.cnki.issn1001-0424.2021.05.006">10.15941/j.cnki.issn1001-0424.2021.05.006</a></div>
+          <div><span class="label">当前项目角色</span>传播力评价、指标体系、平台传播层</div>
+          <div><span class="label">来源</span>CNKI 授权 PDF；本地 Reader 已生成</div>
+          <div><span class="label">证据边界</span>Reader 无页码；写作前需回 PDF 核表格和页码</div>
+        </div>
+        <p>推荐理由很直接：当前项目已经有 SICAS 的用户路径、AARRR 的阶段框架和数字阅读推广的服务动作，但仍需要一篇能把“传播力”量化成指标的文献。这篇正好补上这一层。</p>
+        <p><span class="tag">传播力评价</span><span class="tag">熵权法</span><span class="tag">爆款指数</span><span class="tag">省级公共图书馆</span><span class="tag">服务价值边界</span></p>
+      </section>
+
+      <aside class="panel span-4">
+        <h2>30 秒定位</h2>
+        <ol>
+          <li>它是平台传播层的指标文献，不是服务成效文献。</li>
+          <li>它评价账号传播力，不评价用户是否完成阅读服务行为。</li>
+          <li>它适合放入“平台互动-服务触达-阅读转化”的第一层。</li>
+        </ol>
+      </aside>
+
+      <div class="metric"><b>22</b><span>官方认证省级公共图书馆抖音账号</span></div>
+      <div class="metric"><b>5</b><span>最终传播力二级指标</span></div>
+      <div class="metric"><b>13</b><span>传播力低于 0.1 的账号</span></div>
+      <div class="metric"><b>2020</b><span>数据时间点为 2020-10-30</span></div>
+
+      <section class="panel span-12">
+        <h2>精读路线</h2>
+        <div class="route">
+          <div class="route-item"><strong>1. 30 秒定位</strong>先记住：这篇解决“账号传播力怎么量化”，不解决“服务价值是否实现”。</div>
+          <div class="route-item"><strong>2. 核心内容</strong>抓住研究对象、五个指标、熵权法和飞瓜指数对比。</div>
+          <div class="route-item"><strong>3. 证据和边界</strong>重点核 `B0004-B0011`：样本、指标、标准化、权重、排名和对比。</div>
+          <div class="route-item"><strong>4. 创新/局限/机会</strong>把传播力指标放入平台传播层，再追问服务触达和阅读转化缺什么数据。</div>
+        </div>
+      </section>
+
+      <section class="panel span-8">
+        <h2>核心内容</h2>
+        <table>
+          <thead><tr><th>问题</th><th>这篇论文怎么处理</th><th>对当前项目的用法</th></tr></thead>
+          <tbody>
+            <tr><td>研究问题</td><td>如何构建适合图书馆短视频账号的传播力评价模型。</td><td>补“平台传播层”指标，不直接进入服务价值结论。</td></tr>
+            <tr><td>样本</td><td>22 个官方认证省级公共图书馆抖音账号，数据日期为 2020-10-30。</td><td>可作为历史基线；不能代表高校馆、科研馆或 2026 平台生态。</td></tr>
+            <tr><td>指标</td><td>粉丝量、发布量、视频内容质量、总点赞量、爆款指数。</td><td>可转入变量表和平台传播指标草图。</td></tr>
+            <tr><td>方法</td><td>文献分析、网络调查、内容质量评分、熵权法、飞瓜指数对比。</td><td>可作为综合评价模板，但需要补服务指标。</td></tr>
+            <tr><td>发现</td><td>浙江图书馆传播力最高，13 个账号传播力低于 0.1；模型与飞瓜指数整体趋势一致但分层更细。</td><td>说明省级公共馆内部传播能力差异很大。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel span-4">
+        <h2>一句话抓主旨</h2>
+        <div class="callout">这篇不是告诉你“哪个视频会火”，而是告诉你“图书馆账号的传播能力可以怎样被拆成一组指标并排序”。</div>
+        <div class="callout warn" style="margin-top: 10px;">关键边界：传播力高，只说明平台扩散能力强；它还没有证明资源访问、活动参与、借阅、咨询或阅读习惯形成。</div>
+      </section>
+
+      <section class="panel span-12">
+        <h2>方法流程图</h2>
+        <div class="flow">
+          <div class="step"><span class="num">1</span><h3>选样本</h3><p>从省级公共图书馆中筛选官方认证抖音账号，最终保留 22 个账号。</p></div>
+          <div class="step"><span class="num">2</span><h3>建指标</h3><p>从网络特征、视频特征和传播特征中确定五个指标。</p></div>
+          <div class="step"><span class="num">3</span><h3>标准化</h3><p>对粉丝量、发布量、内容质量、点赞量和爆款指数进行标准化处理。</p></div>
+          <div class="step"><span class="num">4</span><h3>算权重</h3><p>用熵权法根据指标差异程度计算权重，再加权求和。</p></div>
+          <div class="step"><span class="num">5</span><h3>分层比较</h3><p>形成传播力排名和六层分级，并与飞瓜指数进行对比。</p></div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>证据逻辑</h2>
+        <ul>
+          <li><code>B0001</code> 给出研究目标、指标来源和熵权法。</li>
+          <li><code>B0003</code> 说明现有 DCI、飞瓜指数不完全适配图书馆账号。</li>
+          <li><code>B0004</code> 固定样本和数据日期。</li>
+          <li><code>B0005-B0007</code> 展开粉丝量、发布量、内容质量、点赞量、爆款指数。</li>
+          <li><code>B0008-B0010</code> 给出原始数据、标准化、熵权法权重和排名。</li>
+          <li><code>B0011</code> 用飞瓜指数对比说明模型的合理性。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-6">
+        <h2>可复现性</h2>
+        <ul>
+          <li>可复现部分：样本规则、五个指标、熵权法流程、加权排名逻辑。</li>
+          <li>需补材料：原始采集表、内容质量评分细则、编码者一致性、阈值设置理由。</li>
+          <li>不能直接复用：2020 年抖音账号状态、作者设置的粉丝和点赞标准化上限。</li>
+          <li>写作前要核验：表 3、表 4、表 5、表 6、表 7 的页码和数值。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-12">
+        <h2>关键要点</h2>
+        <table>
+          <thead><tr><th>要点</th><th>价值</th><th>边界</th></tr></thead>
+          <tbody>
+            <tr><td>图书馆专属传播力指标</td><td>比通用平台指数更贴近图书馆内容质量。</td><td>仍主要是平台传播，不是服务成效。</td></tr>
+            <tr><td>熵权法综合评价</td><td>为多指标排序提供数据驱动权重。</td><td>权重来自样本差异，不等于理论重要性。</td></tr>
+            <tr><td>爆款指数修正</td><td>识别账号是否依赖多个高赞视频形成传播。</td><td>爆款可能带来流量，但不一定带来阅读服务转化。</td></tr>
+            <tr><td>飞瓜指数对比</td><td>说明作者模型整体趋势合理且分层更细。</td><td>飞瓜本身也是平台指标，不能校准服务价值。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel span-6">
+        <h2>知识卡</h2>
+        <div class="cards">
+          <div class="card-link"><strong><a href="../knowledge_cards/views/concept-44250b7b.html">传播力评价</a></strong>账号在平台上的扩散、关注和互动能力评价。</div>
+          <div class="card-link"><strong><a href="../knowledge_cards/views/concept-4358f2f5.html">平台互动-服务触达-阅读转化</a></strong>把平台表现和图书馆服务结果分层。</div>
+          <div class="card-link"><strong><a href="../knowledge_cards/views/method-91db7b6b.html">熵权法</a></strong>根据指标差异程度分配综合评价权重。</div>
+          <div class="card-link"><strong><a href="../knowledge_cards/views/method-579dd6c5.html">爆款指数</a></strong>衡量账号是否依赖高点赞视频形成传播。</div>
+          <div class="card-link"><strong><a href="../knowledge_cards/views/method-e2773847.html">图书馆短视频内容质量评价</a></strong>把知识性、标题、逻辑和评论互动等内容特征转成指标。</div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>术语表</h2>
+        <div class="glossary">
+          <div><strong>传播力评价</strong><p>评价账号在平台上扩散信息和形成互动的能力。</p></div>
+          <div><strong>熵权法</strong><p>根据指标差异程度分配权重的综合评价方法。</p></div>
+          <div><strong>爆款指数</strong><p>爆款视频点赞量在总点赞量中的占比。</p></div>
+          <div><strong>服务价值</strong><p>短视频是否帮助用户发现、理解、使用和信任图书馆服务。</p></div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>创新、局限、机会</h2>
+        <h3>创新</h3>
+        <ul>
+          <li>把图书馆行业特征纳入短视频账号传播力评价。</li>
+          <li>将内容质量和爆款指数放进账号传播力模型。</li>
+          <li>用熵权法形成可计算、可比较的账号排名。</li>
+        </ul>
+        <h3>局限</h3>
+        <ul>
+          <li>没有服务触达、资源访问、活动参与等服务结果指标。</li>
+          <li>样本限于 2020 年省级公共图书馆抖音账号。</li>
+          <li>内容质量评分和标准化阈值需要补充可复核说明。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-6">
+        <h2>互动精读问题</h2>
+        <details>
+          <summary>问题 1：这篇论文的五个指标应该放在你的指标框架哪一层？</summary>
+          <p>应放在“平台传播/平台互动”层。它们能说明账号传播能力，但还没有到服务触达和阅读转化。</p>
+        </details>
+        <details>
+          <summary>问题 2：为什么熵权法算出的权重不能直接当成理论重要性？</summary>
+          <p>因为熵权法根据样本差异分配权重。某个指标差异大，会获得较高权重，但这不代表它在图书馆使命上一定更重要。</p>
+        </details>
+        <details>
+          <summary>问题 3：如果你要把这篇改造成 2026 年研究，会补什么数据？</summary>
+          <p>至少补多平台账号数据、服务入口点击、活动报名、资源访问、咨询/评论语义、借阅或到馆数据，并重新设定爆款阈值。</p>
+        </details>
+      </section>
+
+      <section class="panel span-8">
+        <h2>延伸阅读</h2>
+        <ul>
+          <li><a href="views/literature_review_workbench.html">文献综述工作台</a>：查看这篇如何进入当前综述逻辑。</li>
+          <li><a href="views/literature_synthesis.html">文献综述</a>：查看传播力评价线与 SICAS、AARRR、数字阅读推广的关系。</li>
+          <li><a href="views/innovation_limitation_bank.html">创新-局限-机会台账</a>：查看这篇转化出的研究机会。</li>
+          <li><a href="../knowledge_graph/index.html">知识图谱</a>：查看 paper -> concept -> method -> project 的关系。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-4">
+        <h2>今日行动清单</h2>
+        <div class="actions">
+          <label><input type="checkbox"> 先读摘要和表 3，确认五个传播力指标。</label>
+          <label><input type="checkbox"> 再读表 5 和表 6，理解熵权法权重和排名。</label>
+          <label><input type="checkbox"> 最后用一句话说明为什么传播力不能替代服务价值。</label>
+        </div>
+      </section>
+
+      <section class="panel span-12">
+        <h2>证据来源</h2>
+        <p class="foot">本页依据本地授权 PDF 抽取 Reader 生成。Source file: <code>/Users/leung/ResearchWorkflow/library/pdfs/library_short_video/cnki_2021_645f03f388.pdf</code>。Reader blocks: <code>B0001-B0014</code>。当前页不提供裸 Markdown 入口；所有本地点击入口优先指向 HTML 展示页。</p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

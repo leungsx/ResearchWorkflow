@@ -1,12 +1,12 @@
 # Literature Synthesis
 
-Updated: 2026-07-01
+Updated: 2026-07-02
 
 ## Search Strings
 
 - CNKI search used on 2026-06-21: `主题：图书馆 * 短视频`
 - Date range: `2019-01-01` to `2026-06-21`
-- Current pilot corpus: CNKI learning set for `library_short_video`; 8 authorized originals, 8 discussion cards/readers, 8 source-grounded skimmed papers.
+- Current pilot corpus: CNKI learning set for `library_short_video`; 9 authorized originals, 9 discussion cards/readers, 9 source-grounded skimmed papers.
 
 ## Inclusion Criteria
 
@@ -42,6 +42,9 @@ Updated: 2026-07-01
 - **Comparative platform / lifecycle marketing**
   - `cnki_2021_3771e58987` compares public libraries and university libraries across Douyin, Kuaishou, and Bilibili, using AARRR as a lifecycle framework. It is useful for moving the project from single-platform operation tips toward library-type and platform-fit analysis.
   - Its most valuable conceptual move is translating "revenue" in a non-profit library setting into brand activity, cultural influence, precise service promotion, and broader institutional support rather than commercial profit.
+- **Propagation-power evaluation / account-level indicators**
+  - `cnki_2021_645f03f388` 王兴兰、夏晓红, 2021, `图书馆学研究`: constructs a provincial-public-library Douyin account dissemination-capability model using fan count, publication volume, video content quality, total likes, and hot-video index, with entropy-weighted scoring and Feigua-index comparison. Evidence status: source-grounded reader exists, page numbers pending.
+  - This line is useful for the project's platform-propagation layer, but it must remain separate from service value and reading-promotion outcomes.
 - **Pending clusters**
   - Public-library service cases, short-video platform governance, and post-2023 multi-platform evidence still need cross-paper synthesis beyond the current 8-paper learning set.
 
@@ -73,6 +76,10 @@ Updated: 2026-07-01
 - **Composite communication index / DCI diagnosis**
   - `cnki_2023_34348faa1e` uses DCI-style publishing, interaction, and coverage dimensions to describe the communication influence of public-library Douyin accounts.
   - Reusable design idea: DCI is useful for comparative baseline description, but future work should place it beside service-value metrics rather than treating it as the end outcome.
+- **Entropy-weighted account dissemination evaluation**
+  - `cnki_2021_645f03f388`: surveys 22 officially verified provincial public-library Douyin accounts as of 2020-10-30, then evaluates account dissemination capability with five indicators: fan count, publication volume, video content quality, total likes, and hot-video index.
+  - Method details include content-quality scoring, manual normalization thresholds for extreme fan/like values, entropy-weighted indicator weights, weighted-sum ranking, six-level classification, and comparison with Feigua index.
+  - Reusable design idea: this is a compact template for the "platform propagation" layer of an evaluation framework, but future work should add service-touchpoint and reading-conversion metrics.
 - **Head-account practice extraction / strategy induction**
   - `cnki_2021_5530e86157`: searches Douyin with `公共图书馆`, `阅读推广`, and `数字阅读`; after half-year dynamic tracking from 2020-05-01 to 2020-11-30, selects 90 public-library Douyin head accounts whose follower counts remained above 10,000 and analyzes 27,455 short videos.
   - Analysis dimensions include image scenes, IP marketing, brand planning, copywriting, interaction strategy, content, mode, and path. The method is descriptive practice extraction and strategy induction, not regression or causal identification.
@@ -103,7 +110,7 @@ Updated: 2026-07-01
 - **External-validity limitation**: `cnki_2021_dfab60236e` studies socialized reading-promotion accounts rather than library-operated accounts, so its findings are best treated as an external benchmark, not a direct library conclusion.
 - **Traffic-service tension**: The popular-video paper shows that social hot events and strong emotion can drive high traffic, while the public-library survey warns against broad, vague, or over-entertaining content. Later research should distinguish traffic-effective content from library-mission-aligned service communication.
 - **Historical-baseline limitation**: The three companion papers are mainly 2019-2020 Douyin snapshots. They are excellent for field history and baseline diagnosis, but current claims require updated platform data.
-- **Reading coverage gap**: The project's current 8-paper learning set now has complete Codex-assisted source-grounded reading notes. The next gap is no longer within the set itself, but in extending coverage to propagation-power evaluation and newer multi-platform or post-2023 studies. Specific metadata-only candidates remain in the workbench only and must not be cited as evidence here until a source-grounded reader exists.
+- **Reading coverage gap**: The project's current 9-paper learning set now has complete Codex-assisted source-grounded reading notes. The next gap is no longer propagation-power evaluation itself, but reading-service effect, service-value indicators, and newer multi-platform or post-2023 studies. Specific metadata-only candidates remain in the workbench only and must not be cited as evidence here until a source-grounded reader exists.
 
 ## Current Research Question Shortlist
 
@@ -149,3 +156,4 @@ Next reading should prioritize `cnki_2021_d35f8e895a` because it has a converted
 | 公共图书馆短视频营销可被转译为数字阅读推广服务设计，重点包括情感营销、渠道营销、互动营销和线上线下转化。 | 90 个粉丝长期超过 1 万的公共图书馆抖音头部账号，2020-05-01 至 2020-11-30，27,455 条短视频；文章从内容、方式和路径提炼实践经验并提出策略。 | 张承, 2021, `cnki_2021_5530e86157`; reader blocks `B0001`, `B0003`-`B0007`, `B0008`-`B0013` | Source-grounded guided skim; descriptive strategy induction, not causal evidence. |
 | 公共图书馆与高校图书馆短视频营销可以通过馆型差异、平台差异和 AARRR 用户生命周期共同分析。 | 文章保留 161 个公共图书馆机构认证账号和 18 个高校图书馆机构认证账号，比较抖音、快手、B站上的账号开设、视频/粉丝、增量、内容主题和拉新/促活/留存/收益策略。 | 龚雪竹, 2021, `cnki_2021_3771e58987`; reader blocks `B0005`, `B0007`, `B0009`-`B0016` | Source-grounded guided skim; descriptive comparison and strategy framework, not causal evidence. |
 | SICAS 可以作为图书馆短视频从感知到服务行动再到分享回流的过程组织框架。 | 11 个粉丝过万公共图书馆抖音账号的 DCI 与运营现状诊断，按 Sense、Interest & Interactive、Connect & Communicate、Action、Share 五阶段转译为策略。 | 刘青、郭嘉如, 2023, `cnki_2023_34348faa1e`; reader blocks `B0005-B0016` | Source-grounded skim; page numbers and figure/table details still need original-PDF verification. |
+| 图书馆短视频账号传播力可以用账号层多指标综合评价描述，但传播力不等于服务价值。 | 22 个官方认证省级公共图书馆抖音账号；指标包括粉丝量、发布量、视频内容质量、总点赞量和爆款指数；熵权法计算权重并与飞瓜指数比较。 | 王兴兰、夏晓红, 2021, `cnki_2021_645f03f388`; reader blocks `B0004-B0011` | Source-grounded skim; table/page locators pending; supports platform-propagation layer only. |

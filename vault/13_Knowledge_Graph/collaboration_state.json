@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T20:23:14",
+  "generated_at": "2026-07-02T13:48:50",
   "entrypoint": "project_collaboration.html",
   "summary": {
     "project_count": 2,
     "user_waiting": 0,
     "codex_ready": 5,
-    "open_actions": 3
+    "open_actions": 4
   },
   "roles": {
     "user": [
@@ -35,12 +35,12 @@
       "stage": "synthesis",
       "state_path": "projects/library_short_video/project_state.json",
       "matrix_rows": 60,
-      "reader_packages": 8,
+      "reader_packages": 9,
       "review_due": 0,
       "latest_deep_read": {
-        "title": "2026-07-01 精读：基于短视频营销的公共图书馆数字阅读推广策略研究",
-        "path": "paper_reading/2026-07-01-digital-reading-promotion.html",
-        "updated_at": "2026-07-01T20:03:10"
+        "title": "2026-07-02 精读：图书馆短视频账号传播力研究",
+        "path": "paper_reading/2026-07-02-propagation-power-evaluation.html",
+        "updated_at": "2026-07-02T11:22:30"
       },
       "entrypoints": {
         "dashboard": "paper_reading/views/00-project-dashboard-dd8418ad.html",
@@ -62,7 +62,7 @@
         "literature_workbench": "projects/library_short_video/literature/literature_review_workbench.md",
         "literature_synthesis": "projects/library_short_video/03_literature_synthesis.md"
       },
-      "artifact_count": 47
+      "artifact_count": 48
     },
     {
       "slug": "starter_project",

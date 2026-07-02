@@ -60,7 +60,19 @@
       ],
       "output": "paper_reading/2026-07-01-digital-reading-promotion.html",
       "updated_at": "2026-07-01T09:00:00"
+    },
+    {
+      "date": "2026-07-02",
+      "stage": "propagation_power_deep_read",
+      "primary": "cnki_2021_645f03f388",
+      "companions": [
+        "cnki_2021_d35f8e895a",
+        "cnki_2023_34348faa1e",
+        "cnki_2021_5530e86157"
+      ],
+      "output": "paper_reading/2026-07-02-propagation-power-evaluation.html",
+      "updated_at": "2026-07-02T11:30:00"
     }
   ],
-  "last_updated": "2026-07-01T09:00:00"
+  "last_updated": "2026-07-02T11:30:00"
 }

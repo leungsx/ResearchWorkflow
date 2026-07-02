@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T20:23:14",
+  "generated_at": "2026-07-02T13:48:50",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -14,15 +14,15 @@
     "archive_policy": "archive_policy.html"
   },
   "counts": {
-    "manifest_rows": 121,
-    "search_entries": 121,
+    "manifest_rows": 130,
+    "search_entries": 130,
     "project_count": 2,
-    "git_dirty_paths": 0
+    "git_dirty_paths": 154
   },
   "audit": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 16,
+      "WARN": 2,
       "FAIL": 0
     },
     "checks": [
@@ -42,37 +42,37 @@
         "area": "链接健康",
         "status": "PASS",
         "title": "HTML 本地链接均可解析",
-        "detail": "检查 111 个 HTML 页面。"
+        "detail": "检查 120 个 HTML 页面。"
       },
       {
         "area": "镜像页",
         "status": "PASS",
         "title": "HTML 镜像与源文件同步",
-        "detail": "检查 81 个镜像页。"
+        "detail": "检查 89 个镜像页。"
       },
       {
         "area": "知识图谱",
         "status": "PASS",
         "title": "图谱入口是可视化关系图",
-        "detail": "nodes=118, unique_edges=305"
+        "detail": "nodes=128, unique_edges=391"
       },
       {
         "area": "资产清单",
         "status": "PASS",
         "title": "artifact manifest 覆盖核心展示资产",
-        "detail": "121 条；display_types=28"
+        "detail": "130 条；display_types=28"
       },
       {
         "area": "搜索索引",
         "status": "PASS",
         "title": "搜索索引和搜索页可用",
-        "detail": "121 条；layers=4"
+        "detail": "130 条；layers=4"
       },
       {
         "area": "复习状态",
         "status": "PASS",
         "title": "复习状态快照与队列一致",
-        "detail": "total=19, due=0, focus=5"
+        "detail": "total=24, due=0, focus=8"
       },
       {
         "area": "项目状态",
@@ -84,31 +84,31 @@
         "area": "复习队列",
         "status": "PASS",
         "title": "今日无积压复习项",
-        "detail": "队列共 19 项。"
+        "detail": "队列共 24 项。"
       },
       {
         "area": "备份",
         "status": "PASS",
         "title": "最近备份可用",
-        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 0.3 小时前。"
+        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 17.7 小时前。"
       },
       {
         "area": "Git/异地备份",
-        "status": "PASS",
-        "title": "Git 本地和远程快照状态正常",
-        "detail": "upstream=origin/main；last commit: 94811ac 2026-07-01 20:23:03 +0800 Refine research workflow actions and graph views"
+        "status": "WARN",
+        "title": "存在尚未提交的 Git 改动",
+        "detail": "154 个路径待快照： M action_queue.html； M archive_policy.html； M codex/state/context_index.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-452dce22.html"
       },
       {
         "area": "Token/记忆",
         "status": "PASS",
         "title": "今日 compact summary 可作为默认启动上下文",
-        "detail": "vault/07_Codex_Logs/compact_daily/2026-07-01-summary.md，约 88 words。"
+        "detail": "vault/07_Codex_Logs/compact_daily/2026-07-02-summary.md，约 88 words。"
       },
       {
         "area": "文件卫生",
-        "status": "PASS",
-        "title": "未发现常见系统/缓存文件",
-        "detail": "工作区较干净。"
+        "status": "WARN",
+        "title": "工作区存在系统/缓存文件",
+        "detail": ".DS_Store=4；__pycache__=2；这些不会进入 file sweep，但可择机清理。"
       },
       {
         "area": "Schema",
@@ -120,7 +120,7 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "3 个开放行动。"
+        "detail": "4 个开放行动。"
       },
       {
         "area": "项目协作层",
@@ -132,7 +132,7 @@
         "area": "自动归档策略",
         "status": "PASS",
         "title": "自动归档策略可用",
-        "detail": "backup=7, prune=0, cache=0"
+        "detail": "backup=7, prune=0, cache=6"
       }
     ],
     "health_html": "workflow_health.html",
@@ -140,105 +140,150 @@
   },
   "review": {
     "summary": {
-      "total_items": 19,
+      "total_items": 24,
       "due_count": 0,
       "overdue_count": 0,
-      "upcoming_7_count": 19,
+      "upcoming_7_count": 24,
       "future_count": 0,
       "unscheduled_count": 0,
-      "learned_today_count": 14,
+      "learned_today_count": 0,
       "by_type": {
-        "concept": 14,
-        "method": 5
+        "concept": 16,
+        "method": 8
       },
       "by_stage": {
         "1": 5,
-        "2": 14
+        "2": 19
       }
     },
     "focus_items": [
       {
-        "id": "method-head-account-practice-extraction",
-        "title": "头部账号实践提炼",
+        "id": "concept-propagation-power-evaluation",
+        "title": "传播力评价",
+        "type": "concept",
+        "stage": "1",
+        "next_review": "2026-07-03",
+        "days_delta": 1,
+        "status": "upcoming_7",
+        "learning_status": "learning",
+        "last_reviewed": "",
+        "review_count": 0,
+        "prompt": "传播力评价为什么不能等同于图书馆服务价值？",
+        "source_path": "vault/02_Concepts/传播力评价.md",
+        "display_path": "knowledge_cards/views/concept-44250b7b.html"
+      },
+      {
+        "id": "method-library-short-video-content-quality-evaluation",
+        "title": "图书馆短视频内容质量评价",
         "type": "method",
         "stage": "1",
-        "next_review": "2026-07-02",
+        "next_review": "2026-07-03",
         "days_delta": 1,
         "status": "upcoming_7",
-        "learning_status": "",
+        "learning_status": "learning",
         "last_reviewed": "",
         "review_count": 0,
-        "prompt": "头部账号实践提炼为什么不能直接证明策略有效？",
-        "source_path": "vault/03_Methods/头部账号实践提炼.md",
-        "display_path": "knowledge_cards/views/method-e92ba575.html"
+        "prompt": "图书馆短视频内容质量评价应如何兼顾知识性、趣味性和服务相关性？",
+        "source_path": "vault/03_Methods/图书馆短视频内容质量评价.md",
+        "display_path": "knowledge_cards/views/method-e2773847.html"
       },
       {
-        "id": "concept-emotional-marketing",
-        "title": "情感营销",
+        "id": "concept-platform-interaction-service-touchpoint-reading-conversion",
+        "title": "平台互动-服务触达-阅读转化",
         "type": "concept",
         "stage": "1",
-        "next_review": "2026-07-02",
+        "next_review": "2026-07-03",
         "days_delta": 1,
         "status": "upcoming_7",
-        "learning_status": "",
+        "learning_status": "learning",
         "last_reviewed": "",
         "review_count": 0,
-        "prompt": "情感营销为什么不能只理解为煽情？",
-        "source_path": "vault/02_Concepts/情感营销.md",
-        "display_path": "knowledge_cards/views/concept-d7b1f9e6.html"
+        "prompt": "平台互动、服务触达、阅读转化三层分别应该放哪些指标？",
+        "source_path": "vault/02_Concepts/平台互动-服务触达-阅读转化.md",
+        "display_path": "knowledge_cards/views/concept-4358f2f5.html"
       },
       {
-        "id": "concept-digital-reading-promotion",
-        "title": "数字阅读推广",
-        "type": "concept",
+        "id": "method-entropy-weight-method",
+        "title": "熵权法",
+        "type": "method",
         "stage": "1",
-        "next_review": "2026-07-02",
+        "next_review": "2026-07-03",
         "days_delta": 1,
         "status": "upcoming_7",
-        "learning_status": "",
+        "learning_status": "learning",
         "last_reviewed": "",
         "review_count": 0,
-        "prompt": "数字阅读推广和普通账号宣传有什么区别？",
-        "source_path": "vault/02_Concepts/数字阅读推广.md",
-        "display_path": "knowledge_cards/views/concept-b0f48f34.html"
+        "prompt": "熵权法为什么会给差异更大的指标更高权重？",
+        "source_path": "vault/03_Methods/熵权法.md",
+        "display_path": "knowledge_cards/views/method-91db7b6b.html"
       },
       {
-        "id": "concept-service-value",
-        "title": "服务价值",
-        "type": "concept",
+        "id": "method-viral-video-index",
+        "title": "爆款指数",
+        "type": "method",
         "stage": "1",
-        "next_review": "2026-07-02",
+        "next_review": "2026-07-03",
         "days_delta": 1,
         "status": "upcoming_7",
-        "learning_status": "",
+        "learning_status": "learning",
         "last_reviewed": "",
         "review_count": 0,
-        "prompt": "服务价值和平台互动最大的区别是什么？",
-        "source_path": "vault/02_Concepts/服务价值.md",
-        "display_path": "knowledge_cards/views/concept-e98c8c55.html"
+        "prompt": "爆款指数和总点赞量有什么区别？为什么它仍不能代表服务价值？",
+        "source_path": "vault/03_Methods/爆款指数.md",
+        "display_path": "knowledge_cards/views/method-579dd6c5.html"
       },
       {
-        "id": "concept-channel-marketing",
-        "title": "渠道营销",
+        "id": "concept-aarrr-funnel",
+        "title": "AARRR 漏斗模型",
         "type": "concept",
-        "stage": "1",
-        "next_review": "2026-07-02",
-        "days_delta": 1,
+        "stage": "2",
+        "next_review": "2026-07-04",
+        "days_delta": 2,
         "status": "upcoming_7",
-        "learning_status": "",
-        "last_reviewed": "",
-        "review_count": 0,
-        "prompt": "渠道营销和简单多平台发布有什么区别？",
-        "source_path": "vault/02_Concepts/渠道营销.md",
-        "display_path": "knowledge_cards/views/concept-401f5cfe.html"
+        "learning_status": "learned",
+        "last_reviewed": "2026-07-01",
+        "review_count": 1,
+        "prompt": "说出 AARRR 五个阶段，并解释图书馆语境中的 Revenue 应该如何转译。",
+        "source_path": "vault/02_Concepts/AARRR 漏斗模型.md",
+        "display_path": "knowledge_cards/views/concept-aarrr-bf76ae6c.html"
+      },
+      {
+        "id": "method-dci-index",
+        "title": "DCI传播力指数",
+        "type": "method",
+        "stage": "2",
+        "next_review": "2026-07-04",
+        "days_delta": 2,
+        "status": "upcoming_7",
+        "learning_status": "learned",
+        "last_reviewed": "2026-07-01",
+        "review_count": 1,
+        "prompt": "说明 DCI 为什么比单一粉丝数更适合比较账号传播表现。",
+        "source_path": "vault/03_Methods/DCI传播力指数.md",
+        "display_path": "knowledge_cards/views/method-dci-48f2a84e.html"
+      },
+      {
+        "id": "concept-hook-model",
+        "title": "Hook Model 上瘾模型",
+        "type": "concept",
+        "stage": "2",
+        "next_review": "2026-07-04",
+        "days_delta": 2,
+        "status": "upcoming_7",
+        "learning_status": "learned",
+        "last_reviewed": "2026-07-01",
+        "review_count": 1,
+        "prompt": "用自己的话解释 Hook Model 的四个环节，并举一个图书馆短视频例子。",
+        "source_path": "vault/02_Concepts/Hook Model 上瘾模型.md",
+        "display_path": "knowledge_cards/views/concept-hook-model-878dcbb7.html"
       }
     ],
     "state_path": "vault/14_Review_Queue/review_state.json",
     "html": "knowledge_cards/review_today.html"
   },
   "graph": {
-    "nodes": 118,
-    "edges": 305,
+    "nodes": 128,
+    "edges": 391,
     "html": "knowledge_graph/index.html"
   },
   "projects": [
@@ -247,11 +292,11 @@
       "title": "图书馆短视频相关研究",
       "status": "draft",
       "matrix_rows": 60,
-      "reader_packages": 8,
+      "reader_packages": 9,
       "latest_deep_read": {
-        "title": "2026-07-01 精读：基于短视频营销的公共图书馆数字阅读推广策略研究",
-        "path": "paper_reading/2026-07-01-digital-reading-promotion.html",
-        "updated_at": "2026-07-01T20:03:10"
+        "title": "2026-07-02 精读：图书馆短视频账号传播力研究",
+        "path": "paper_reading/2026-07-02-propagation-power-evaluation.html",
+        "updated_at": "2026-07-02T11:22:30"
       },
       "next_reading_candidates": [
         {
@@ -264,6 +309,15 @@
           "pdf_path": "library/pdfs/library_short_video/converted/cnki_2021_d35f8e895a.pdf"
         },
         {
+          "citekey": "cnki_2021_645f03f388",
+          "title": "图书馆短视频账号传播力研究——以省级公共图书馆为例",
+          "year": "2021",
+          "source": "图书馆学研究",
+          "read_status": "skimmed",
+          "reader_path": "projects/library_short_video/literature/readers/cnki_2021_645f03f388/paper.md",
+          "pdf_path": "library/pdfs/library_short_video/cnki_2021_645f03f388.pdf"
+        },
+        {
           "citekey": "cnki_2020_2a150c6df8",
           "title": "图书馆热门短视频内容规律探究——基于抖音平台的实证研究",
           "year": "2020",
@@ -271,15 +325,6 @@
           "read_status": "skimmed",
           "reader_path": "projects/library_short_video/literature/readers/cnki_2020_2a150c6df8/paper.md",
           "pdf_path": "library/pdfs/library_short_video/cnki_2020_2a150c6df8.caj"
-        },
-        {
-          "citekey": "cnki_2020_64b4f881c9",
-          "title": "图书馆短视频发展现状、问题与对策分析——以抖音平台为例",
-          "year": "2020",
-          "source": "图书馆工作与研究",
-          "read_status": "skimmed",
-          "reader_path": "projects/library_short_video/literature/readers/cnki_2020_64b4f881c9/paper.md",
-          "pdf_path": "library/pdfs/library_short_video/converted/cnki_2020_64b4f881c9.pdf"
         }
       ],
       "review_due_count": 0,
@@ -319,6 +364,7 @@
   "next_actions": [
     "下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
     "先建立或导入项目文献矩阵，再生成 Reader、上下文包和阅读看板。",
-    "如果这是占位项目，保持 project_state.json 作为结构模板即可。"
+    "如果这是占位项目，保持 project_state.json 作为结构模板即可。",
+    "择机处理 workflow-audit 的 WARN 项，尤其是 Git 快照和到期复习。"
   ]
 }

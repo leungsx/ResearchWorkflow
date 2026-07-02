@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-01T20:20:26",
+  "generated_at": "2026-07-02T11:26:32",
   "project": {
     "slug": "starter_project",
     "title": "Starter Research Project",
@@ -51,50 +51,74 @@
   "review": {
     "due_count": 0,
     "overdue_count": 0,
-    "upcoming_7_count": 19,
+    "upcoming_7_count": 24,
     "queue_path": "vault/14_Review_Queue/review_queue.csv",
     "state_path": "vault/14_Review_Queue/review_state.json",
     "review_today": "knowledge_cards/review_today.html",
     "focus_items": [
       {
-        "id": "method-head-account-practice-extraction",
-        "title": "头部账号实践提炼",
+        "id": "concept-propagation-power-evaluation",
+        "title": "传播力评价",
+        "type": "concept",
+        "next_review": "2026-07-03",
+        "prompt": "传播力评价为什么不能等同于图书馆服务价值？",
+        "display_path": "knowledge_cards/views/concept-44250b7b.html"
+      },
+      {
+        "id": "method-library-short-video-content-quality-evaluation",
+        "title": "图书馆短视频内容质量评价",
         "type": "method",
-        "next_review": "2026-07-02",
-        "prompt": "头部账号实践提炼为什么不能直接证明策略有效？",
-        "display_path": "knowledge_cards/views/method-e92ba575.html"
+        "next_review": "2026-07-03",
+        "prompt": "图书馆短视频内容质量评价应如何兼顾知识性、趣味性和服务相关性？",
+        "display_path": "knowledge_cards/views/method-e2773847.html"
       },
       {
-        "id": "concept-emotional-marketing",
-        "title": "情感营销",
+        "id": "concept-platform-interaction-service-touchpoint-reading-conversion",
+        "title": "平台互动-服务触达-阅读转化",
         "type": "concept",
-        "next_review": "2026-07-02",
-        "prompt": "情感营销为什么不能只理解为煽情？",
-        "display_path": "knowledge_cards/views/concept-d7b1f9e6.html"
+        "next_review": "2026-07-03",
+        "prompt": "平台互动、服务触达、阅读转化三层分别应该放哪些指标？",
+        "display_path": "knowledge_cards/views/concept-4358f2f5.html"
       },
       {
-        "id": "concept-digital-reading-promotion",
-        "title": "数字阅读推广",
-        "type": "concept",
-        "next_review": "2026-07-02",
-        "prompt": "数字阅读推广和普通账号宣传有什么区别？",
-        "display_path": "knowledge_cards/views/concept-b0f48f34.html"
+        "id": "method-entropy-weight-method",
+        "title": "熵权法",
+        "type": "method",
+        "next_review": "2026-07-03",
+        "prompt": "熵权法为什么会给差异更大的指标更高权重？",
+        "display_path": "knowledge_cards/views/method-91db7b6b.html"
       },
       {
-        "id": "concept-service-value",
-        "title": "服务价值",
-        "type": "concept",
-        "next_review": "2026-07-02",
-        "prompt": "服务价值和平台互动最大的区别是什么？",
-        "display_path": "knowledge_cards/views/concept-e98c8c55.html"
+        "id": "method-viral-video-index",
+        "title": "爆款指数",
+        "type": "method",
+        "next_review": "2026-07-03",
+        "prompt": "爆款指数和总点赞量有什么区别？为什么它仍不能代表服务价值？",
+        "display_path": "knowledge_cards/views/method-579dd6c5.html"
       },
       {
-        "id": "concept-channel-marketing",
-        "title": "渠道营销",
+        "id": "concept-aarrr-funnel",
+        "title": "AARRR 漏斗模型",
         "type": "concept",
-        "next_review": "2026-07-02",
-        "prompt": "渠道营销和简单多平台发布有什么区别？",
-        "display_path": "knowledge_cards/views/concept-401f5cfe.html"
+        "next_review": "2026-07-04",
+        "prompt": "说出 AARRR 五个阶段，并解释图书馆语境中的 Revenue 应该如何转译。",
+        "display_path": "knowledge_cards/views/concept-aarrr-bf76ae6c.html"
+      },
+      {
+        "id": "method-dci-index",
+        "title": "DCI传播力指数",
+        "type": "method",
+        "next_review": "2026-07-04",
+        "prompt": "说明 DCI 为什么比单一粉丝数更适合比较账号传播表现。",
+        "display_path": "knowledge_cards/views/method-dci-48f2a84e.html"
+      },
+      {
+        "id": "concept-hook-model",
+        "title": "Hook Model 上瘾模型",
+        "type": "concept",
+        "next_review": "2026-07-04",
+        "prompt": "用自己的话解释 Hook Model 的四个环节，并举一个图书馆短视频例子。",
+        "display_path": "knowledge_cards/views/concept-hook-model-878dcbb7.html"
       }
     ]
   },

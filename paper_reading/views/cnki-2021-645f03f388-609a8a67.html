@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>图书馆短视频账号传播力研究——以省级公共图书馆为例</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1e293b;
+      --muted: #64748b;
+      --line: #dbe4ee;
+      --paper: #ffffff;
+      --soft: #f8fafc;
+      --blue: #2563eb;
+      --green: #16805d;
+      --amber: #a15c07;
+      --rose: #b4234b;
+      --ring: rgba(37, 99, 235, 0.34);
+      --shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f8fafc;
+      line-height: 1.6;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    a { color: var(--blue); text-decoration: none; text-underline-offset: 3px; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible,
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+      border-radius: 7px;
+    }
+    .skip-link {
+      position: absolute;
+      left: 18px;
+      top: 10px;
+      z-index: 20;
+      transform: translateY(-140%);
+      background: var(--ink);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 7px;
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .sub { color: var(--muted); max-width: 780px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+    }
+    .nav a:hover {
+      border-color: #bfcee0;
+      background: #f8fbff;
+      text-decoration: none;
+    }
+    .nav a[aria-current="page"] {
+      border-color: #b9ccff;
+      background: #eef4ff;
+      color: #1d4ed8;
+      font-weight: 650;
+    }
+    main.wrap { padding-top: 22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel {
+      grid-column: span 6;
+      min-width: 0;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .panel.wide { grid-column: 1 / -1; }
+    .metric {
+      grid-column: span 3;
+      min-width: 0;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .list { display: grid; gap: 10px; min-width: 0; }
+    .item {
+      min-width: 0;
+      border-left: 3px solid var(--blue);
+      background: var(--soft);
+      padding: 10px 12px;
+      border-radius: 0 7px 7px 0;
+      transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+    .item:hover {
+      background: #eef4ff;
+      transform: translateY(-1px);
+    }
+    .item.green { border-left-color: var(--green); }
+    .item.amber { border-left-color: var(--amber); }
+    .item.rose { border-left-color: var(--rose); }
+    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; overflow-wrap: anywhere; }
+    .empty {
+      color: var(--muted);
+      background: var(--soft);
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .steps { margin: 0; padding-left: 20px; }
+    .steps li { margin: 6px 0; }
+    table {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      border-collapse: collapse;
+      font-size: 14px;
+      -webkit-overflow-scrolling: touch;
+    }
+    thead, tbody, tr { width: 100%; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 9px 8px; vertical-align: top; }
+    th { color: var(--muted); font-weight: 650; background: #fbfdff; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    pre {
+      overflow: auto;
+      white-space: pre-wrap;
+      background: #13202c;
+      color: #eef6ff;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    pre code {
+      background: transparent;
+      border: 0;
+      color: inherit;
+      padding: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .toolbar button.active {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: #eef4ff;
+    }
+    .inline-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+    .review-mark { min-width: 112px; }
+    .inline-button:hover {
+      border-color: #b9ccff;
+      background: #eef4ff;
+      color: #1d4ed8;
+    }
+    .inline-button[disabled] {
+      cursor: not-allowed;
+      opacity: 0.58;
+    }
+    .review-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+    }
+    .review-status {
+      min-height: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .source-path {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+      word-break: break-all;
+    }
+    .md-view {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .md-view h1 { margin-top: 0; font-size: 28px; }
+    .md-view h2 {
+      margin-top: 28px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+    .md-view h3 { margin-top: 22px; }
+    .md-view ul, .md-view ol { padding-left: 22px; }
+    .md-view li { margin: 5px 0; }
+    .md-view blockquote {
+      margin: 14px 0;
+      padding: 10px 14px;
+      border-left: 4px solid var(--blue);
+      background: #f0f5ff;
+      color: #24384e;
+    }
+    .md-view table {
+      display: block;
+      overflow-x: auto;
+      white-space: normal;
+      margin: 12px 0 18px;
+    }
+    .wikilink {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #cdddeb;
+      background: #f4f8fb;
+      color: #1e5678;
+      border-radius: 999px;
+      padding: 0 7px;
+      font-size: 0.92em;
+    }
+    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
+    @media (max-width: 840px) {
+      .panel, .metric { grid-column: 1 / -1; }
+      h1 { font-size: 28px; }
+      .wrap { padding-left: 16px; padding-right: 16px; }
+      .nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+      .nav a { flex: 0 0 auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+    </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到正文</a>
+  <header>
+    <div class="wrap">
+      <h1>图书馆短视频账号传播力研究——以省级公共图书馆为例</h1>
+      <p class="sub">vault/01_Literature/cnki_2021_645f03f388.md 的浏览器友好镜像页。</p>
+      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
+<a href="../today.html" aria-current="page">今日精读</a>
+<a href="../index.html">论文归档</a>
+<a href="../../knowledge_cards/index.html">知识卡</a>
+<a href="../../knowledge_cards/review_today.html">复习</a>
+<a href="../../knowledge_graph/index.html">知识图谱</a>
+<a href="../../search/index.html">搜索</a>
+<a href="../../logs/index.html">学习日志</a>
+<a href="../../workflow_state.html">总状态</a>
+<a href="../../action_queue.html">行动队列</a>
+<a href="../../project_collaboration.html">项目协作</a>
+<a href="../../archive_policy.html">归档策略</a>
+<a href="../../workflow_health.html">工作流体检</a>
+<a href="vault-home.html">Vault 首页</a></nav>
+    </div>
+  </header>
+  <main class="wrap" id="main-content">
+
+    <section class="grid">
+      <section class="panel wide">
+        <div class="toolbar">
+          <a href="../today.html">返回今日精读</a>
+          <a href="../../knowledge_graph/index.html">查看知识图谱</a>
+        </div>
+        <div class="source-path">源文件：vault/01_Literature/cnki_2021_645f03f388.md</div>
+        <article class="md-view">
+<section class="frontmatter"><h2>元数据</h2><table><tbody><tr><th>type</th><td>literature</td></tr><tr><th>id</th><td>cnki_2021_645f03f388</td></tr><tr><th>title</th><td>&quot;图书馆短视频账号传播力研究——以省级公共图书馆为例&quot;</td></tr><tr><th>authors</th><td>&quot;王兴兰;夏晓红&quot;</td></tr><tr><th>year</th><td>2021</td></tr><tr><th>source</th><td>&quot;图书馆学研究&quot;</td></tr><tr><th>doi</th><td>&quot;10.15941/j.cnki.issn1001-0424.2021.05.006&quot;</td></tr><tr><th>status</th><td>skimmed</td></tr><tr><th>project</th><td>library_short_video</td></tr></tbody></table></section>
+<h1>图书馆短视频账号传播力研究——以省级公共图书馆为例</h1>
+<h2>元数据</h2>
+<ul>
+<li>Citekey: <code>cnki_2021_645f03f388</code></li>
+<li>作者：王兴兰；夏晓红</li>
+<li>年份：2021</li>
+<li>来源：图书馆学研究, 2021(5)</li>
+<li>DOI：10.15941/j.cnki.issn1001-0424.2021.05.006</li>
+<li>Reader：<code>projects/library_short_video/literature/readers/cnki_2021_645f03f388/paper.md</code></li>
+<li>PDF：<code>library/pdfs/library_short_video/cnki_2021_645f03f388.pdf</code></li>
+<li>HTML 精读页：<code>paper_reading/2026-07-02-propagation-power-evaluation.html</code></li>
+</ul>
+<h2>30 秒定位</h2>
+<ul>
+<li>本项目角色：<span class="wikilink">图书馆短视频相关研究</span> 的传播力评价和指标体系补位文献。</li>
+<li>为什么今天读：当前项目已经有 <span class="wikilink">SICAS模型</span>、<span class="wikilink">AARRR 漏斗模型</span> 和 <span class="wikilink">数字阅读推广</span> 三条路径，但还缺一篇专门把账号传播力做成可计算指标的文献。</li>
+<li>核心提醒：这篇能帮助搭建“平台传播”指标层，但不能直接证明 <span class="wikilink">服务价值</span>。</li>
+</ul>
+<h2>核心内容</h2>
+<ul>
+<li>研究问题：如何构建适合图书馆短视频账号的传播力评价模型，并评价省级公共图书馆抖音账号的传播力差异。</li>
+<li>研究对象：22 个官方认证的省级公共图书馆抖音账号；数据获取时间为 2020-10-30。</li>
+<li>方法与数据：</li>
+<li>先用文献分析和网络调查梳理用户特征、网络特征、视频特征和传播特征。</li>
+<li>因用户名与头像在样本内差异不明显，用户特征未进入最终指标。</li>
+<li>最终指标包括粉丝量、发布量、视频内容质量、总点赞量和爆款指数。</li>
+<li>用 <span class="wikilink">熵权法</span> 确定指标权重，再计算每个账号传播力并分为六个层级。</li>
+<li>与飞瓜指数结果对比，以判断模型合理性。</li>
+<li>主要发现：</li>
+<li>省级公共图书馆抖音账号传播力差异很大，浙江图书馆显著领先。</li>
+<li>13 个账号传播力值小于 0.1，说明多数账号仍处在较低传播水平。</li>
+<li>与飞瓜指数相比，作者模型在整体趋势上一致，但分层更细，也更强调图书馆内容质量和爆款视频结构。</li>
+</ul>
+<h2>证据和边界</h2>
+<ul>
+<li>可用证据 blocks：</li>
+<li><code>B0001</code>：摘要、研究目的、四类特征和熵权法。</li>
+<li><code>B0003</code>：现有传播力评价研究、DCI/飞瓜指数及其图书馆适配不足。</li>
+<li><code>B0004</code>：22 个官方认证省级公共图书馆账号和数据日期。</li>
+<li><code>B0005-B0007</code>：粉丝量、发布量、内容质量、点赞总量和爆款指数。</li>
+<li><code>B0008-B0010</code>：原始指标表、标准化、熵权法权重和传播力排名。</li>
+<li><code>B0011</code>：与飞瓜指数比较，说明该方法的行业适配性。</li>
+<li><code>B0012-B0013</code>：用户需求、跨平台引流和个性化特色运营建议。</li>
+<li>证据边界：</li>
+<li>当前 Reader 无页码，正式写作前必须回 PDF 核页码和表格。</li>
+<li>样本限于 2020 年省级公共图书馆抖音账号，不能代表 2026 年平台生态。</li>
+<li>传播力指标主要是粉丝、发布、内容、点赞和爆款，仍属于平台/account 层表现。</li>
+<li>不能把传播力排名直接等同于数字阅读推广成效、服务触达或公共文化服务价值。</li>
+</ul>
+<h2>创新 / 局限 / 机会</h2>
+<h3>创新</h3>
+<ul>
+<li>把通用短视频传播力评价转向图书馆短视频账号，补足行业适配。</li>
+<li>将 <span class="wikilink">图书馆短视频内容质量评价</span> 纳入传播力指标，而不只看粉丝和点赞。</li>
+<li>用 <span class="wikilink">熵权法</span> 处理多指标权重，形成可复现的账号排名流程。</li>
+<li>修正 <span class="wikilink">爆款指数</span>，从“最高点赞量/总点赞量”改为“爆款视频点赞量总和/总点赞量”，更能体现爆款数量和集中度。</li>
+</ul>
+<h3>局限</h3>
+<ul>
+<li><span class="wikilink">传播力评价</span> 仍是平台表现评价，不是服务成效评价。</li>
+<li>内容质量评分存在人工判断，抽取文本中未看到编码一致性或信度检验。</li>
+<li>标准化阈值为作者决策，后续复用时需要重新说明理由。</li>
+<li>数据时间点偏早，且只覆盖省级公共图书馆官方认证账号。</li>
+</ul>
+<h3>机会</h3>
+<ul>
+<li><span class="wikilink">平台互动-服务触达-阅读转化</span>：把传播力指标放在第一层，再接资源访问、活动参与、咨询、借阅等服务指标。</li>
+<li><span class="wikilink">传播力评价</span> + <span class="wikilink">服务价值</span>：区分“账号有没有扩散能力”和“扩散后是否带来图书馆服务结果”。</li>
+<li><span class="wikilink">图书馆短视频内容质量评价</span> 可以成为后续编码表的核心模块，和 <span class="wikilink">内容分析法</span>、<span class="wikilink">SICAS模型</span> 阶段编码连接。</li>
+</ul>
+<h2>与已读文献的关系</h2>
+<ul>
+<li>与 <span class="wikilink">DCI传播力指数</span>：DCI 是通用平台综合指标，这篇更强调图书馆内容质量和行业适配。</li>
+<li>与 <span class="wikilink">cnki_2023_34348faa1e</span>：刘青、郭嘉如 2023 用 DCI 诊断 SICAS 路径，这篇补了更细的传播力计算方法。</li>
+<li>与 <span class="wikilink">cnki_2021_d35f8e895a</span>：高晓晶等关注短视频内容因素与互动效果差异；这篇关注账号层传播力综合评价。</li>
+<li>与 <span class="wikilink">cnki_2021_5530e86157</span>：张承 2021 把短视频接到数字阅读推广服务，这篇提供平台传播层指标。</li>
+<li>与 <span class="wikilink">cnki_2021_3771e58987</span>：龚雪竹 2021 提供馆型/平台比较框架，这篇说明省级公共馆内部也有传播力差异。</li>
+</ul>
+<h2>我对这篇的稳定判断</h2>
+<p>这篇适合放在项目指标体系的“平台传播层”。它可以告诉我们一个图书馆短视频账号有没有基础扩散能力，但还不能回答它是否真的促进了阅读推广、资源使用或用户服务体验。后续研究应把它和 <span class="wikilink">服务价值</span> 指标并列，而不是让传播力替代服务价值。</p>
+<h2>Knowledge Links</h2>
+<ul>
+<li>Concepts: <span class="wikilink">传播力评价</span>, <span class="wikilink">平台互动-服务触达-阅读转化</span>, <span class="wikilink">服务价值</span>, <span class="wikilink">数字阅读推广</span>, <span class="wikilink">馆型差异</span></li>
+<li>Methods: <span class="wikilink">熵权法</span>, <span class="wikilink">爆款指数</span>, <span class="wikilink">图书馆短视频内容质量评价</span>, <span class="wikilink">DCI传播力指数</span>, <span class="wikilink">内容分析法</span>, <span class="wikilink">网络调查法</span></li>
+<li>Project: <span class="wikilink">图书馆短视频相关研究</span></li>
+<li>Opportunities: <span class="wikilink">传播力评价与服务价值错位</span>, <span class="wikilink">省级公共图书馆账号复测</span>, <span class="wikilink">平台传播-服务结果复合指标</span></li>
+</ul>
+<h2>学习日志</h2>
+<ul>
+<li>主读会话：<span class="wikilink">2026-07-02-propagation-power-evaluation-paper</span></li>
+<li>HTML 精读页：<code>paper_reading/2026-07-02-propagation-power-evaluation.html</code></li>
+</ul>
+<h2>下一步</h2>
+<ol>
+<li>把这篇的五个传播力指标放入当前项目指标草图的“平台传播层”。</li>
+<li>用下一篇文献补“服务价值指标”或“传播力评价外部校准”。</li>
+<li>写作前回 PDF 核验表 3、表 4、表 5、表 6 和表 7 的页码。</li>
+</ol>
+        </article>
+      </section>
+    </section>
+
+  </main>
+  <footer class="wrap">Generated by scripts/build_learning_dashboard.py at 2026-07-02 11:26.</footer>
+</body>
+</html>
