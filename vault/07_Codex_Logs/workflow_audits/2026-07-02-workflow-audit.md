@@ -1,6 +1,6 @@
 # Workflow Audit - 2026-07-02
 
-Generated: 2026-07-02T14:31:45
+Generated: 2026-07-02T14:32:24
 Summary: PASS=17 WARN=1 FAIL=0
 
 ## Checks
@@ -18,7 +18,7 @@ Summary: PASS=17 WARN=1 FAIL=0
 | 项目状态 | PASS | 项目状态文件可供自动化读取 | 2 个项目。 |
 | 复习队列 | PASS | 今日无积压复习项 | 队列共 24 项。 |
 | 备份 | PASS | 最近备份可用 | backups/researchworkflow-critical-20260701-200737.zip，约 18.4 小时前。 |
-| Git/异地备份 | WARN | 存在尚未提交的 Git 改动 | 137 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M docs/USABLE_FUNCTIONS_TEST_GUIDE.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html |
+| Git/异地备份 | WARN | 本地提交尚未推送到远程 | ahead=1, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git |
 | Token/记忆 | PASS | 今日 compact summary 可作为默认启动上下文 | vault/07_Codex_Logs/compact_daily/2026-07-02-summary.md，约 88 words。 |
 | 文件卫生 | PASS | 未发现常见系统/缓存文件 | 工作区较干净。 |
 | Schema | PASS | 核心机器状态 schema 校验通过 | 10 个文件通过校验。 |
