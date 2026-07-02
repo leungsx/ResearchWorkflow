@@ -43,6 +43,16 @@ def normalize(value: str) -> str:
     return re.sub(r"[\s_《》<>“”\"'，,。．.：:；;、（）()\[\]【】\-—]+", "", value or "").lower()
 
 
+def duplicate_key(value: str) -> str:
+    stem = Path(value).stem
+    stem = re.sub(r"\s*[\(（]\d+[\)）]\s*$", "", stem)
+    return normalize(stem)
+
+
+def has_copy_suffix(value: str) -> bool:
+    return bool(re.search(r"[\(（]\d+[\)）]\s*$", Path(value).stem))
+
+
 def read_csv(path: Path) -> list[dict[str, str]]:
     if not path.exists():
         return []
@@ -109,12 +119,12 @@ def gap_tags(text: str) -> list[str]:
     return tags
 
 
-def next_action(path: Path, row: dict[str, str] | None, tags: list[str], duplicate_rank: int, project: str) -> str:
+def next_action(path: Path, row: dict[str, str] | None, tags: list[str], duplicate_copy: bool, project: str) -> str:
     text = path.name
+    if duplicate_copy:
+        return "duplicate_keep_one_then_archive"
     if any(term in text for term in EXTERNAL_TERMS) and not row:
         return "external_comparison_or_ignore"
-    if duplicate_rank > 1:
-        return "duplicate_keep_one_then_archive"
     if not row:
         return "add_to_matrix_or_mark_external" if tags else "manual_check_topic_fit"
     status = clean(row.get("read_status"))
@@ -150,14 +160,12 @@ def build_rows(project: str, explicit_incoming: Path | None) -> list[dict[str, s
     files = incoming_files(project, explicit_incoming)
     normalized_counts: dict[str, int] = {}
     for path in files:
-        key = normalize(path.stem)
+        key = duplicate_key(path.stem)
         normalized_counts[key] = normalized_counts.get(key, 0) + 1
 
-    seen_key_rank: dict[str, int] = {}
     result: list[dict[str, str]] = []
     for path in files:
-        key = normalize(path.stem)
-        seen_key_rank[key] = seen_key_rank.get(key, 0) + 1
+        key = duplicate_key(path.stem)
         row = match_row(path, rows)
         text = f"{path.name} {row.get('title', '') if row else ''} {row.get('core_findings', '') if row else ''}"
         tags = gap_tags(text)
@@ -176,7 +184,13 @@ def build_rows(project: str, explicit_incoming: Path | None) -> list[dict[str, s
                 "project_gap": "；".join(tags) if tags else "待判断",
                 "evidence_value": evidence_value(row, tags),
                 "duplicate_group_size": str(normalized_counts.get(key, 1)),
-                "next_action": next_action(path, row, tags, seen_key_rank[key], project),
+                "next_action": next_action(
+                    path,
+                    row,
+                    tags,
+                    normalized_counts.get(key, 1) > 1 and has_copy_suffix(path.stem),
+                    project,
+                ),
             }
         )
     action_rank = {
@@ -309,7 +323,7 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
   <header><div class="wrap">
     <h1>Incoming PDF 分拣</h1>
     <p class="sub">{html.escape(project)} · Generated {html.escape(dt.datetime.now().isoformat(timespec='seconds'))}</p>
-    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a> · <a href="{html.escape(csv_path.name)}">CSV</a> · <a href="{html.escape(md_path.name)}">Markdown 源</a></p>
+    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a> · <a href="{html.escape(csv_path.name)}">CSV 数据</a></p>
   </div></header>
   <main class="wrap">
     <section class="grid">{cards or '<div class="metric"><b>0</b><span>incoming 文件</span></div>'}</section>

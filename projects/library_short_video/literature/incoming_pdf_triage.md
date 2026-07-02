@@ -1,6 +1,6 @@
 # Incoming PDF Triage - library_short_video
 
-Generated: 2026-07-02T14:14:37
+Generated: 2026-07-02T14:31:42
 CSV: `projects/library_short_video/literature/incoming_pdf_triage.csv`
 HTML: `projects/library_short_video/literature/incoming_pdf_triage.html`
 
@@ -23,17 +23,17 @@ HTML: `projects/library_short_video/literature/incoming_pdf_triage.html`
 | 基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf | unmatched | unmatched | 传播力评价；机制解释 | medium | `add_to_matrix_or_mark_external` |
 | 多模态视域下图书馆阅读推广短视频用户体验影响机制研究_程秀峰.pdf | unmatched | unmatched | 服务价值指标；机制解释 | medium | `add_to_matrix_or_mark_external` |
 | 公共图书馆“抖音”短视频服务现状及发展策略研究_孙雨.pdf | `cnki_2021_7556aafa99` | skimmed | 服务价值指标 | high | `already_skimmed_keep_as_backup` |
-| 抖音阅读推广短视频传播效果影响因素研究_杨达森 (1).pdf | `cnki_2021_dfab60236e` | skimmed | 传播力评价；服务价值指标；机制解释 | high | `already_skimmed_keep_as_backup` |
+| 抖音阅读推广短视频传播效果影响因素研究_杨达森 (1).pdf | `cnki_2021_dfab60236e` | skimmed | 传播力评价；服务价值指标；机制解释 | high | `duplicate_keep_one_then_archive` |
 | 抖音阅读推广短视频传播效果影响因素研究_杨达森.pdf | `cnki_2021_dfab60236e` | skimmed | 传播力评价；服务价值指标；机制解释 | high | `already_skimmed_keep_as_backup` |
 | 传统戏剧类非遗短视频青少年观看意愿的影响因素——以皮影短视频为例_薛可.pdf | unmatched | unmatched | 机制解释 | medium | `external_comparison_or_ignore` |
 | 政务短视频公众参与的影响因素研究——以“共青团中央”政务抖音号为例_陈强.pdf | unmatched | unmatched | 机制解释 | medium | `external_comparison_or_ignore` |
-| 档案短视频传播效果的影响因素_杨达森 (1).pdf | unmatched | unmatched | 传播力评价；机制解释 | medium | `external_comparison_or_ignore` |
+| 档案短视频传播效果的影响因素_杨达森 (1).pdf | unmatched | unmatched | 传播力评价；机制解释 | medium | `duplicate_keep_one_then_archive` |
 | 档案短视频传播效果的影响因素_杨达森.pdf | unmatched | unmatched | 传播力评价；机制解释 | medium | `external_comparison_or_ignore` |
 | 面向短视频平台的非遗信息搜寻行为影响因素研究——基于层次回归和模糊集定性比较方法_徐孝娟.pdf | unmatched | unmatched | 机制解释 | medium | `external_comparison_or_ignore` |
 | 高校共青团抖音短视频传播效果影响因素实证研究——基于全国100所高校共青团抖音号的内容分析_黄艳__.pdf | unmatched | unmatched | 传播力评价；机制解释 | medium | `external_comparison_or_ignore` |
 | 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索_高晓晶.pdf | `cnki_2021_d35f8e895a` | skimmed | 传播力评价；机制解释 | medium-high | `already_skimmed_keep_as_backup` |
 | 图书馆短视频账号传播力研究——以省级公共图书馆为例_王兴兰.pdf | `cnki_2021_645f03f388` | skimmed | 传播力评价；机制解释 | medium-high | `already_skimmed_keep_as_backup` |
-| 公共图书馆和高校图书馆短视频营销比较研究_龚雪竹 (1).pdf | `cnki_2021_3771e58987` | skimmed | 待判断 | review | `already_skimmed_keep_as_backup` |
+| 公共图书馆和高校图书馆短视频营销比较研究_龚雪竹 (1).pdf | `cnki_2021_3771e58987` | skimmed | 待判断 | review | `duplicate_keep_one_then_archive` |
 | 公共图书馆和高校图书馆短视频营销比较研究_龚雪竹.pdf | `cnki_2021_3771e58987` | skimmed | 待判断 | review | `already_skimmed_keep_as_backup` |
 | 图书馆热门短视频内容规律探究——基于抖音平台的实证研究_沈丽红.pdf | `cnki_2020_2a150c6df8` | skimmed | 待判断 | review | `already_skimmed_keep_as_backup` |
 | 图书馆短视频发展现状、问题与对策分析——以抖音平台为例_王海燕.pdf | `cnki_2020_64b4f881c9` | skimmed | 待判断 | review | `already_skimmed_keep_as_backup` |

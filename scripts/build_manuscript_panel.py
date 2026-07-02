@@ -152,16 +152,20 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
                 body_parts.append("</tbody></table>")
                 in_table = False
             body_parts.append(f"<h2>{html.escape(line[3:])}</h2>")
+        elif line.startswith("| ") and "---" in line:
+            continue
         elif line.startswith("- "):
             body_parts.append(f"<p class=\"bullet\">{html.escape(line[2:])}</p>")
         elif line.startswith("`") and line.endswith("`"):
             body_parts.append(f"<p><code>{html.escape(line.strip('`'))}</code></p>")
-        elif line.startswith("| ") and "---" not in line:
+        elif line.startswith("| "):
             cells = [html.escape(cell.strip()) for cell in line.strip().strip("|").split("|")]
             if not in_table:
-                body_parts.append("<table><tbody>")
+                header = "".join(f"<th>{cell}</th>" for cell in cells)
+                body_parts.append(f"<table><thead><tr>{header}</tr></thead><tbody>")
                 in_table = True
-            body_parts.append("<tr>" + "".join(f"<td>{cell}</td>" for cell in cells) + "</tr>")
+            else:
+                body_parts.append("<tr>" + "".join(f"<td>{cell}</td>" for cell in cells) + "</tr>")
         elif clean(line):
             body_parts.append(f"<p>{html.escape(line)}</p>")
     if in_table:
@@ -187,8 +191,8 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
     .bullet::before {{ content:""; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--blue); margin:0 8px 2px -16px; }}
     code {{ background:#eef3f8; border:1px solid #d8e2ec; border-radius:5px; padding:1px 4px; }}
     table {{ width:100%; border-collapse:collapse; font-size:14px; margin:10px 0 18px; }}
-    td {{ text-align:left; vertical-align:top; border-bottom:1px solid var(--line); padding:9px 8px; }}
-    tr:first-child td {{ color:var(--muted); font-weight:650; background:#fbfdff; }}
+    th, td {{ text-align:left; vertical-align:top; border-bottom:1px solid var(--line); padding:9px 8px; }}
+    th {{ color:var(--muted); font-weight:650; background:#fbfdff; }}
     @media (max-width:840px) {{ h1 {{ font-size:28px; }} table {{ display:block; overflow-x:auto; }} }}
   </style>
 </head>
@@ -196,7 +200,7 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
   <header><div class="wrap">
     <h1>论文写作推进面板</h1>
     <p class="sub">{html.escape(project_slug)} · Generated {html.escape(dt.datetime.now().isoformat(timespec='seconds'))}</p>
-    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a> · <a href="{html.escape(md_path.name)}">Markdown 源</a></p>
+    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a></p>
   </div></header>
   <main class="wrap"><article class="panel">
     {''.join(body_parts)}

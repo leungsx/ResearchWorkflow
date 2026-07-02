@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T14:14:39",
+  "generated_at": "2026-07-02T14:31:44",
   "project": {
     "slug": "library_short_video",
     "title": "图书馆短视频相关研究",
@@ -162,8 +162,9 @@
       "item_count": 24,
       "action_counts": {
         "add_to_matrix_or_mark_external": 3,
-        "already_skimmed_keep_as_backup": 9,
-        "external_comparison_or_ignore": 7,
+        "already_skimmed_keep_as_backup": 7,
+        "duplicate_keep_one_then_archive": 3,
+        "external_comparison_or_ignore": 6,
         "intake_to_stable_pdf": 5
       },
       "top_items": [

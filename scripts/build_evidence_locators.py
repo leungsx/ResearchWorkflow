@@ -300,7 +300,7 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
   <header><div class="wrap">
     <h1>证据核验表</h1>
     <p class="sub">{html.escape(project)} · Generated {html.escape(dt.datetime.now().isoformat(timespec='seconds'))}</p>
-    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a> · <a href="{html.escape(csv_path.name)}">CSV</a> · <a href="{html.escape(md_path.name)}">Markdown 源</a></p>
+    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a> · <a href="{html.escape(csv_path.name)}">CSV 数据</a></p>
   </div></header>
   <main class="wrap">
     <section class="grid">

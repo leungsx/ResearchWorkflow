@@ -1,6 +1,6 @@
 {
   "schema_version": "ResearchWorkflow.IncomingTriage.v1",
-  "generated_at": "2026-07-02T14:14:37",
+  "generated_at": "2026-07-02T14:31:42",
   "item_count": 24,
   "items": [
     {
@@ -130,8 +130,8 @@
       "has_reader": "yes",
       "project_gap": "传播力评价；服务价值指标；机制解释",
       "evidence_value": "high",
-      "duplicate_group_size": "1",
-      "next_action": "already_skimmed_keep_as_backup"
+      "duplicate_group_size": "2",
+      "next_action": "duplicate_keep_one_then_archive"
     },
     {
       "file_path": "library/pdfs/library_short_video/incoming/抖音阅读推广短视频传播效果影响因素研究_杨达森.pdf",
@@ -143,7 +143,7 @@
       "has_reader": "yes",
       "project_gap": "传播力评价；服务价值指标；机制解释",
       "evidence_value": "high",
-      "duplicate_group_size": "1",
+      "duplicate_group_size": "2",
       "next_action": "already_skimmed_keep_as_backup"
     },
     {
@@ -182,8 +182,8 @@
       "has_reader": "no",
       "project_gap": "传播力评价；机制解释",
       "evidence_value": "medium",
-      "duplicate_group_size": "1",
-      "next_action": "external_comparison_or_ignore"
+      "duplicate_group_size": "2",
+      "next_action": "duplicate_keep_one_then_archive"
     },
     {
       "file_path": "library/pdfs/library_short_video/incoming/档案短视频传播效果的影响因素_杨达森.pdf",
@@ -195,7 +195,7 @@
       "has_reader": "no",
       "project_gap": "传播力评价；机制解释",
       "evidence_value": "medium",
-      "duplicate_group_size": "1",
+      "duplicate_group_size": "2",
       "next_action": "external_comparison_or_ignore"
     },
     {
@@ -260,8 +260,8 @@
       "has_reader": "yes",
       "project_gap": "待判断",
       "evidence_value": "review",
-      "duplicate_group_size": "1",
-      "next_action": "already_skimmed_keep_as_backup"
+      "duplicate_group_size": "2",
+      "next_action": "duplicate_keep_one_then_archive"
     },
     {
       "file_path": "library/pdfs/library_short_video/incoming/公共图书馆和高校图书馆短视频营销比较研究_龚雪竹.pdf",
@@ -273,7 +273,7 @@
       "has_reader": "yes",
       "project_gap": "待判断",
       "evidence_value": "review",
-      "duplicate_group_size": "1",
+      "duplicate_group_size": "2",
       "next_action": "already_skimmed_keep_as_backup"
     },
     {

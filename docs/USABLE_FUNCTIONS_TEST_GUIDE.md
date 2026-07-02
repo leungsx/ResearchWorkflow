@@ -1,6 +1,6 @@
 # 可用功能测试与使用手册
 
-Last updated: 2026-06-20
+Last updated: 2026-07-02
 
 这份手册只列当前已经能用的功能，并说明它们有什么用、什么时候用、怎么用、怎么测试。默认工作目录：
 
@@ -49,6 +49,16 @@ PROJECT=starter_project
 - 先用 `starter_project` 做 smoke test；等流程熟悉后，再用真实项目和真实 CNKI 导出文件测试。
 
 ## 1. 最推荐的逐项测试路线
+
+### 1.0 工作流回归测试
+
+用途：快速检查核心 HTML 入口、链接、推荐队列、复习按钮、知识图谱视图、证据核验表和写作面板是否还能正常使用。
+
+```bash
+make workflow-test
+```
+
+这条命令只读当前产物，不刷新页面、不改 CSV、不提交 Git。每次运行 `make learning-dashboard`、`make incoming-triage` 或改展示层脚本后，建议先跑它，再跑 schema 和 audit。
 
 ### 1.1 基础环境
 
