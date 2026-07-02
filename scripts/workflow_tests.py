@@ -20,6 +20,7 @@ from validate_literature_matrix import validate_matrix  # noqa: E402
 from privacy_audit import audit_paths  # noqa: E402
 from run_experiment import hash_target  # noqa: E402
 from workflow_config import active_project_slug, read_workflow_config  # noqa: E402
+from rendering.io import write_text_if_changed  # noqa: E402
 
 
 ACTIVE_PROJECT = active_project_slug()
@@ -313,6 +314,37 @@ class WorkflowSmokeTests(unittest.TestCase):
         self.assertIn("http://127.0.0.1:8765/review/studied", text)
         self.assertIn("make review-server-ensure", text)
         self.assertIn("make review-studied ID=", text)
+
+    def test_dashboard_has_mode_switch_and_copy_actions(self) -> None:
+        text = read_text(ROOT / "study_dashboard.html")
+        self.assertIn("data-mode-button=\"reading\"", text)
+        self.assertIn("data-mode-button=\"writing\"", text)
+        self.assertIn("data-mode-button=\"evidence\"", text)
+        self.assertIn("data-mode-button=\"maintenance\"", text)
+        self.assertIn("data-copy=", text)
+        self.assertIn("rw-dashboard-mode", text)
+
+    def test_evidence_pages_expose_copy_commands(self) -> None:
+        verification = read_text(project_path("evidence", "page_verification_queue.html"))
+        writing = read_text(project_path("manuscript", "writing_panel.html"))
+        for text in [verification, writing]:
+            self.assertIn("data-copy=", text)
+            self.assertIn(f"make manuscript-panel PROJECT={ACTIVE_PROJECT}", text)
+            self.assertIn(f"make evidence-gate PROJECT={ACTIVE_PROJECT}", text)
+            self.assertIn(f"make claim-evidence-sync PROJECT={ACTIVE_PROJECT}", text)
+
+    def test_write_text_if_changed_skips_identical_content(self) -> None:
+        tmp = ROOT / ".tmp" / "write-if-changed.txt"
+        tmp.parent.mkdir(exist_ok=True)
+        try:
+            self.assertTrue(write_text_if_changed(tmp, "stable\n"))
+            first_mtime = tmp.stat().st_mtime_ns
+            self.assertFalse(write_text_if_changed(tmp, "stable\n"))
+            self.assertEqual(first_mtime, tmp.stat().st_mtime_ns)
+            self.assertTrue(write_text_if_changed(tmp, "changed\n"))
+            self.assertNotEqual(first_mtime, tmp.stat().st_mtime_ns)
+        finally:
+            tmp.unlink(missing_ok=True)
 
     def test_graph_defaults_to_project_scope_and_keeps_core_chain_view(self) -> None:
         text = read_text(ROOT / "knowledge_graph" / "index.html")

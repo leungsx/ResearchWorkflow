@@ -7,6 +7,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+from rendering.io import write_json_if_changed, write_text_if_changed
 from rendering.paths import (
     ARTIFACT_MANIFEST,
     ACTION_QUEUE_HTML,
@@ -341,12 +342,12 @@ def write_workflow_state_html(state: dict[str, Any]) -> None:
 </body>
 </html>
 """
-    WORKFLOW_STATE_HTML.write_text(html_text, encoding="utf-8")
+    write_text_if_changed(WORKFLOW_STATE_HTML, html_text)
 
 
 def write_workflow_state(audit_checks: list[Any] | None = None, git_dirty_paths: int | None = None) -> tuple[Path, Path]:
     WORKFLOW_STATE_JSON.parent.mkdir(parents=True, exist_ok=True)
     state = build_workflow_state(audit_checks, git_dirty_paths=git_dirty_paths)
-    WORKFLOW_STATE_JSON.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_json_if_changed(WORKFLOW_STATE_JSON, state)
     write_workflow_state_html(state)
     return WORKFLOW_STATE_JSON, WORKFLOW_STATE_HTML

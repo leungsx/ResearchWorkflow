@@ -14,6 +14,12 @@
     h2 { margin:0 0 12px; font-size:21px; }
     a { color:var(--blue); text-decoration:none; }
     .sub, span { color:var(--muted); }
+    .toolbar { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .button { display:inline-flex; align-items:center; min-height:44px; padding:7px 11px; border:1px solid var(--line); border-radius:7px; background:#fff; color:var(--ink); font:inherit; font-size:14px; cursor:pointer; }
+    .button.primary { border-color:#1d4ed8; background:#2563eb; color:#fff; }
+    .button:hover { border-color:#b9ccff; background:#eef4ff; color:#1d4ed8; text-decoration:none; }
+    .button.primary:hover { background:#1d4ed8; color:#fff; }
+    .copy-feedback { min-height:20px; color:#16805d; font-size:13px; margin-top:8px; }
     .grid { display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }
     .metric, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; box-shadow:var(--shadow); }
     .metric { grid-column:span 3; }
@@ -29,8 +35,17 @@
 <body>
   <header><div class="wrap">
     <h1>页码级证据核验队列</h1>
-    <p class="sub">library_short_video · Generated 2026-07-02T21:32:22</p>
-    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a> · <a href="../manuscript/writing_panel.html">论文写作面板</a> · <a href="page_verification_queue.csv">CSV</a> · <a href="page_verification_queue.json">JSON</a></p>
+    <p class="sub">library_short_video · Claim -> Source Block -> Page -> Read Status</p>
+    <div class="toolbar">
+      <a class="button primary" href="../../../study_dashboard.html">返回学习仪表盘</a>
+      <a class="button" href="../manuscript/writing_panel.html">论文写作面板</a>
+      <a class="button" href="page_verification_queue.csv">CSV</a>
+      <a class="button" href="page_verification_queue.json">JSON</a>
+      <button type="button" class="button" data-copy="make manuscript-panel PROJECT=library_short_video" data-label="复制刷新命令">复制刷新命令</button>
+      <button type="button" class="button" data-copy="make evidence-gate PROJECT=library_short_video" data-label="复制门禁命令">复制门禁命令</button>
+      <button type="button" class="button" data-copy="make claim-evidence-sync PROJECT=library_short_video" data-label="复制同步命令">复制同步命令</button>
+    </div>
+    <div class="copy-feedback" aria-live="polite"></div>
   </div></header>
   <main class="wrap">
     <section class="grid">
@@ -695,5 +710,23 @@
       </section>
     </section>
   </main>
+  <script>
+    (() => {
+      const status = document.querySelector(".copy-feedback");
+      document.querySelectorAll("[data-copy]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const text = button.getAttribute("data-copy") || "";
+          try {
+            await navigator.clipboard.writeText(text);
+            button.textContent = "已复制";
+            if (status) status.textContent = text;
+            setTimeout(() => { button.textContent = button.getAttribute("data-label") || "复制命令"; }, 1600);
+          } catch (_error) {
+            if (status) status.textContent = text;
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

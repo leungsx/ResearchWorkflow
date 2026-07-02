@@ -133,6 +133,69 @@
     }
     .steps { margin: 0; padding-left: 20px; }
     .steps li { margin: 6px 0; }
+    .mode-switch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .mode-switch button {
+      min-height: 44px;
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+    .mode-switch button:hover,
+    .mode-switch button[aria-pressed="true"] {
+      border-color: #b9ccff;
+      background: #eef4ff;
+      color: #1d4ed8;
+    }
+    .cta-card {
+      border-left: 4px solid var(--blue);
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    }
+    .cta-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+      gap: 16px;
+      align-items: start;
+    }
+    .cta-title { margin: 4px 0 8px; font-size: 22px; }
+    .eyebrow {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .command-stack {
+      display: grid;
+      gap: 8px;
+    }
+    .inline-button.primary {
+      border-color: #1d4ed8;
+      background: #2563eb;
+      color: #fff;
+    }
+    .inline-button.primary:hover {
+      border-color: #1d4ed8;
+      background: #1d4ed8;
+      color: #fff;
+    }
+    .copy-feedback {
+      min-height: 20px;
+      color: var(--green);
+      font-size: 13px;
+    }
+    [hidden] { display: none !important; }
     table {
       display: block;
       width: 100%;
@@ -274,6 +337,7 @@
     footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
     @media (max-width: 840px) {
       .panel, .metric { grid-column: 1 / -1; }
+      .cta-layout { grid-template-columns: 1fr; }
       h1 { font-size: 28px; }
       .wrap { padding-left: 16px; padding-right: 16px; }
       .nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
@@ -318,20 +382,45 @@
   <main class="wrap" id="main-content">
 
     <section class="grid">
+      <section class="panel wide cta-card" data-mode="all reading writing evidence maintenance">
+        <div class="cta-layout">
+          <div>
+            <p class="eyebrow">Today's primary action</p>
+            <h2 class="cta-title"><a href="paper_reading/views/00-project-dashboard-dd8418ad.html">图书馆短视频相关研究：Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。</a></h2>
+            <p>来自项目状态的下一步建议。</p>
+          </div>
+          <div class="command-stack">
+            <a class="inline-button primary" href="paper_reading/views/00-project-dashboard-dd8418ad.html">打开入口</a>
+            <button type="button" class="inline-button" data-copy="open paper_reading/views/00-project-dashboard-dd8418ad.html" data-label="复制命令">复制命令</button><div class="copy-feedback" aria-live="polite"></div>
+            <code>open paper_reading/views/00-project-dashboard-dd8418ad.html</code>
+          </div>
+        </div>
+      </section>
+      <section class="panel wide" data-mode="all reading writing evidence maintenance">
+        <h2>工作模式</h2>
+        <div class="mode-switch" role="group" aria-label="工作模式筛选">
+          <button type="button" data-mode-button="all" aria-pressed="true">全部</button>
+          <button type="button" data-mode-button="reading" aria-pressed="false">阅读</button>
+          <button type="button" data-mode-button="writing" aria-pressed="false">写作</button>
+          <button type="button" data-mode-button="evidence" aria-pressed="false">证据</button>
+          <button type="button" data-mode-button="maintenance" aria-pressed="false">维护</button>
+        </div>
+      </section>
+
       <div class="metric"><b>4</b><span>论文精读 HTML</span></div>
       <div class="metric"><b>24</b><span>概念/方法知识卡</span></div>
       <div class="metric"><b>133/391</b><span>图谱节点/关系边</span></div>
-      <div class="metric"><b>0</b><span>今日应复习</span></div>
+      <div class="metric"><b>5</b><span>今日应复习</span></div>
 
       
-      <section class="panel wide">
+      <section class="panel wide" data-mode="reading">
         <h2>固定入口</h2>
         <p>以后每天只点同一个入口即可：<a href="paper_reading/today.html">今日精读入口</a>。</p>
         <p>当前会打开：<strong>2026-07-02 精读：图书馆短视频账号传播力研究</strong></p>
       </section>
 
 
-      <section class="panel wide">
+      <section class="panel wide" data-mode="maintenance evidence writing">
         <h2>系统健康与备份</h2>
         <div class="list">
           <div class="item"><a href="search/index.html">全局搜索入口</a><div class="meta">搜索论文、知识卡、项目文件、日志和图谱相关资产。</div></div>
@@ -344,14 +433,14 @@
           <div class="item green"><a href="projects/library_short_video/literature/evidence_locator_table.html">证据核验表</a><div class="meta">集中查看主张、文献、Reader block、页码和核验状态。</div></div>
           <div class="item amber"><a href="projects/library_short_video/evidence/page_verification_queue.html">页码级证据核验队列</a><div class="meta">按优先级列出 claim 到 source block、页码和 read_status 的核验任务。</div></div>
           <div class="item amber"><a href="projects/library_short_video/manuscript/writing_panel.html">论文写作推进面板</a><div class="meta">把已读文献转成研究问题、变量指标、机制链和可写段落。</div></div>
-          <div class="item rose"><a href="knowledge_cards/review_today.html">今日复习入口</a><div class="meta">0 个知识点今天需要主动回忆。</div></div>
+          <div class="item rose"><a href="knowledge_cards/review_today.html">今日复习入口</a><div class="meta">5 个知识点今天需要主动回忆。</div></div>
           <div class="item green"><a href="backups/index.html">备份索引</a><div class="meta">researchworkflow-critical-20260701-200737.zip</div></div>
           <div class="item amber"><a href="workflow_health.html">最近审计概览</a><div class="meta">vault/07_Codex_Logs/workflow_audits/2026-07-02-workflow-audit.md</div></div>
           <div class="item rose">最近文件归类清单<div class="meta">vault/07_Codex_Logs/file_sweeps/2026-07-02-file-sweep.md</div></div>
         </div>
       </section>
 
-      <section class="panel wide">
+      <section class="panel wide" data-mode="reading">
         <h2>今日使用顺序</h2>
         <ol class="steps">
           <li>早上从固定入口 <code>paper_reading/today.html</code> 进入，直接打开当天主读页。</li>
@@ -362,20 +451,20 @@
         </ol>
       </section>
 
-      <section class="panel">
+      <section class="panel" data-mode="reading">
         <h2>最近论文精读</h2>
         <div class="list"><div class="item green"><a href="paper_reading/2026-07-02-propagation-power-evaluation.html">2026-07-02 精读：图书馆短视频账号传播力研究</a><div class="meta">paper_reading/2026-07-02-propagation-power-evaluation.html</div></div>
 <div class="item green"><a href="paper_reading/2026-07-01-digital-reading-promotion.html">2026-07-01 精读：基于短视频营销的公共图书馆数字阅读推广策略研究</a><div class="meta">paper_reading/2026-07-01-digital-reading-promotion.html</div></div>
 <div class="item green"><a href="paper_reading/2026-06-30-aarrr-library-short-video.html">2026-06-30 精读：公共图书馆和高校图书馆短视频营销比较研究</a><div class="meta">paper_reading/2026-06-30-aarrr-library-short-video.html</div></div>
 <div class="item green"><a href="paper_reading/2026-06-29-sicas-public-library-short-video.html">2026-06-29 精读：基于SICAS模型的公共图书馆短视频营销策略研究</a><div class="meta">paper_reading/2026-06-29-sicas-public-library-short-video.html</div></div></div>
       </section>
-      <section class="panel">
+      <section class="panel" data-mode="reading">
         <h2>最近学习日志</h2>
         <div class="list"><div class="item amber"><a href="logs/2026-07-01.html">2026-07-01 学习日志</a><div class="meta">logs/2026-07-01.html</div></div>
 <div class="item amber"><a href="logs/2026-06-30.html">2026-06-30 学习日志</a><div class="meta">logs/2026-06-30.html</div></div>
 <div class="item amber"><a href="logs/2026-06-29.html">2026-06-29 学习日志</a><div class="meta">logs/2026-06-29.html</div></div></div>
       </section>
-      <section class="panel">
+      <section class="panel" data-mode="reading writing">
         <h2>最近知识卡</h2>
         <div class="list"><div class="item rose"><a href="knowledge_cards/views/concept-e98c8c55.html">服务价值</a><div class="meta">vault/02_Concepts/服务价值.md</div></div>
 <div class="item rose"><a href="knowledge_cards/views/concept-4358f2f5.html">平台互动-服务触达-阅读转化</a><div class="meta">vault/02_Concepts/平台互动-服务触达-阅读转化.md</div></div>
@@ -390,7 +479,7 @@
 <div class="item rose"><a href="knowledge_cards/views/concept-824dc24b.html">用户感知价值</a><div class="meta">vault/02_Concepts/用户感知价值.md</div></div>
 <div class="item rose"><a href="knowledge_cards/views/concept-7f8a8bb3.html">沉浸式内容</a><div class="meta">vault/02_Concepts/沉浸式内容.md</div></div></div>
       </section>
-      <section class="panel">
+      <section class="panel" data-mode="reading evidence">
         <h2>图谱高连接节点</h2>
         <table><thead><tr><th>节点</th><th>连接数</th></tr></thead><tbody><tr><td>SICAS模型</td><td>35</td></tr>
 <tr><td>library_short_video</td><td>35</td></tr>
@@ -407,5 +496,41 @@
 
   </main>
   <footer class="wrap">Generated by scripts/build_learning_dashboard.py.</footer>
+  <script>
+    (() => {
+      const feedback = new Map();
+      document.querySelectorAll("[data-copy]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const text = button.getAttribute("data-copy") || "";
+          try {
+            await navigator.clipboard.writeText(text);
+            button.textContent = "已复制";
+            clearTimeout(feedback.get(button));
+            feedback.set(button, setTimeout(() => { button.textContent = button.getAttribute("data-label") || "复制命令"; }, 1600));
+          } catch (_error) {
+            const target = button.nextElementSibling;
+            if (target && target.classList.contains("copy-feedback")) {
+              target.textContent = text;
+            }
+          }
+        });
+      });
+
+      const modeButtons = [...document.querySelectorAll("[data-mode-button]")];
+      const modeSections = [...document.querySelectorAll("[data-mode]")];
+      const setMode = (mode) => {
+        modeButtons.forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.getAttribute("data-mode-button") === mode));
+        });
+        modeSections.forEach((section) => {
+          const modes = (section.getAttribute("data-mode") || "").split(/\s+/);
+          section.hidden = mode !== "all" && !modes.includes(mode);
+        });
+        localStorage.setItem("rw-dashboard-mode", mode);
+      };
+      modeButtons.forEach((button) => button.addEventListener("click", () => setMode(button.getAttribute("data-mode-button") || "all")));
+      setMode(localStorage.getItem("rw-dashboard-mode") || "all");
+    })();
+  </script>
 </body>
 </html>

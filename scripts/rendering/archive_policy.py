@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from rendering.io import write_json_if_changed, write_text_if_changed
 from rendering.paths import (
     ARCHIVE_POLICY_HTML,
     ARCHIVE_POLICY_JSON,
@@ -257,12 +258,12 @@ def write_archive_policy_html(state: dict[str, Any]) -> None:
 </body>
 </html>
 """
-    ARCHIVE_POLICY_HTML.write_text(html_text, encoding="utf-8")
+    write_text_if_changed(ARCHIVE_POLICY_HTML, html_text)
 
 
 def write_archive_policy() -> tuple[Path, Path]:
     ARCHIVE_POLICY_JSON.parent.mkdir(parents=True, exist_ok=True)
     state = build_archive_policy()
-    ARCHIVE_POLICY_JSON.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_json_if_changed(ARCHIVE_POLICY_JSON, state)
     write_archive_policy_html(state)
     return ARCHIVE_POLICY_JSON, ARCHIVE_POLICY_HTML

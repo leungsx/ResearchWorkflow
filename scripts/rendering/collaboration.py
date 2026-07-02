@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from rendering.io import write_json_if_changed, write_text_if_changed
 from rendering.paths import (
     ACTION_QUEUE_JSON,
     COLLABORATION_HTML,
@@ -256,12 +257,12 @@ def write_collaboration_html(state: dict[str, Any]) -> None:
 </body>
 </html>
 """
-    COLLABORATION_HTML.write_text(html_text, encoding="utf-8")
+    write_text_if_changed(COLLABORATION_HTML, html_text)
 
 
 def write_collaboration_state() -> tuple[Path, Path]:
     COLLABORATION_JSON.parent.mkdir(parents=True, exist_ok=True)
     state = build_collaboration_state()
-    COLLABORATION_JSON.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_json_if_changed(COLLABORATION_JSON, state)
     write_collaboration_html(state)
     return COLLABORATION_JSON, COLLABORATION_HTML

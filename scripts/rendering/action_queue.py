@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from rendering.io import write_json_if_changed, write_text_if_changed
 from rendering.paths import (
     ACTION_QUEUE_HTML,
     ACTION_QUEUE_JSON,
@@ -219,12 +220,12 @@ def write_action_queue_html(queue: dict[str, Any]) -> None:
 </body>
 </html>
 """
-    ACTION_QUEUE_HTML.write_text(html_text, encoding="utf-8")
+    write_text_if_changed(ACTION_QUEUE_HTML, html_text)
 
 
 def write_action_queue(state: dict[str, Any] | None = None) -> tuple[Path, Path]:
     ACTION_QUEUE_JSON.parent.mkdir(parents=True, exist_ok=True)
     queue = build_action_queue(state)
-    ACTION_QUEUE_JSON.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_json_if_changed(ACTION_QUEUE_JSON, queue)
     write_action_queue_html(queue)
     return ACTION_QUEUE_JSON, ACTION_QUEUE_HTML

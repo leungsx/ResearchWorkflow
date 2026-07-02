@@ -11,6 +11,7 @@ import re
 from pathlib import Path
 from urllib.parse import quote
 
+from rendering.io import write_json_if_changed, write_text_if_changed
 from rendering.routes import paper_markdown_view_path
 from workflow_config import active_project_slug
 
@@ -434,11 +435,14 @@ def write_verification_json(path: Path, project_slug: str, rows: list[dict[str, 
         "summary": verification_summary(rows),
         "items": rows,
     }
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_json_if_changed(path, payload)
 
 
 def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, str]], csv_path: Path, json_path: Path) -> None:
     summary = verification_summary(rows)
+    rebuild_command = f"make manuscript-panel PROJECT={project_slug}"
+    gate_command = f"make evidence-gate PROJECT={project_slug}"
+    sync_command = f"make claim-evidence-sync PROJECT={project_slug}"
 
     def source_cell(row: dict[str, str]) -> str:
         label = html.escape(row["source_block_id"])
@@ -463,7 +467,8 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
         """
         for row in rows[:120]
     )
-    path.write_text(
+    write_text_if_changed(
+        path,
         f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -480,6 +485,12 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
     h2 {{ margin:0 0 12px; font-size:21px; }}
     a {{ color:var(--blue); text-decoration:none; }}
     .sub, span {{ color:var(--muted); }}
+    .toolbar {{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }}
+    .button {{ display:inline-flex; align-items:center; min-height:44px; padding:7px 11px; border:1px solid var(--line); border-radius:7px; background:#fff; color:var(--ink); font:inherit; font-size:14px; cursor:pointer; }}
+    .button.primary {{ border-color:#1d4ed8; background:#2563eb; color:#fff; }}
+    .button:hover {{ border-color:#b9ccff; background:#eef4ff; color:#1d4ed8; text-decoration:none; }}
+    .button.primary:hover {{ background:#1d4ed8; color:#fff; }}
+    .copy-feedback {{ min-height:20px; color:#16805d; font-size:13px; margin-top:8px; }}
     .grid {{ display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }}
     .metric, .panel {{ background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; box-shadow:var(--shadow); }}
     .metric {{ grid-column:span 3; }}
@@ -495,8 +506,17 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
 <body>
   <header><div class="wrap">
     <h1>页码级证据核验队列</h1>
-    <p class="sub">{html.escape(project_slug)} · Generated {html.escape(dt.datetime.now().isoformat(timespec='seconds'))}</p>
-    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a> · <a href="../manuscript/writing_panel.html">论文写作面板</a> · <a href="{html.escape(csv_path.name)}">CSV</a> · <a href="{html.escape(json_path.name)}">JSON</a></p>
+    <p class="sub">{html.escape(project_slug)} · Claim -> Source Block -> Page -> Read Status</p>
+    <div class="toolbar">
+      <a class="button primary" href="../../../study_dashboard.html">返回学习仪表盘</a>
+      <a class="button" href="../manuscript/writing_panel.html">论文写作面板</a>
+      <a class="button" href="{html.escape(csv_path.name)}">CSV</a>
+      <a class="button" href="{html.escape(json_path.name)}">JSON</a>
+      <button type="button" class="button" data-copy="{html.escape(rebuild_command)}" data-label="复制刷新命令">复制刷新命令</button>
+      <button type="button" class="button" data-copy="{html.escape(gate_command)}" data-label="复制门禁命令">复制门禁命令</button>
+      <button type="button" class="button" data-copy="{html.escape(sync_command)}" data-label="复制同步命令">复制同步命令</button>
+    </div>
+    <div class="copy-feedback" aria-live="polite"></div>
   </div></header>
   <main class="wrap">
     <section class="grid">
@@ -513,10 +533,27 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
       </section>
     </section>
   </main>
+  <script>
+    (() => {{
+      const status = document.querySelector(".copy-feedback");
+      document.querySelectorAll("[data-copy]").forEach((button) => {{
+        button.addEventListener("click", async () => {{
+          const text = button.getAttribute("data-copy") || "";
+          try {{
+            await navigator.clipboard.writeText(text);
+            button.textContent = "已复制";
+            if (status) status.textContent = text;
+            setTimeout(() => {{ button.textContent = button.getAttribute("data-label") || "复制命令"; }}, 1600);
+          }} catch (_error) {{
+            if (status) status.textContent = text;
+          }}
+        }});
+      }});
+    }})();
+  </script>
 </body>
 </html>
 """,
-        encoding="utf-8",
     )
 
 
@@ -541,7 +578,7 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
     lines = [
         "# Manuscript Production Panel",
         "",
-        f"Generated: {dt.datetime.now().isoformat(timespec='seconds')}",
+        "Generated by `scripts/build_manuscript_panel.py`.",
         f"Project: `{project_slug}`",
         "",
         "## Current Manuscript Direction",
@@ -734,6 +771,9 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
             body_parts.append(f"<p>{html.escape(line)}</p>")
     if in_table:
         body_parts.append("</tbody></table>")
+    rebuild_command = f"make manuscript-panel PROJECT={project_slug}"
+    gate_command = f"make evidence-gate PROJECT={project_slug}"
+    sync_command = f"make claim-evidence-sync PROJECT={project_slug}"
     return f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -750,6 +790,12 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
     h2 {{ margin:26px 0 10px; border-top:1px solid var(--line); padding-top:16px; font-size:21px; }}
     a {{ color:var(--blue); text-decoration:none; }}
     .sub {{ color:var(--muted); }}
+    .toolbar {{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }}
+    .button {{ display:inline-flex; align-items:center; min-height:44px; padding:7px 11px; border:1px solid var(--line); border-radius:7px; background:#fff; color:var(--ink); font:inherit; font-size:14px; cursor:pointer; }}
+    .button.primary {{ border-color:#1d4ed8; background:#2563eb; color:#fff; }}
+    .button:hover {{ border-color:#b9ccff; background:#eef4ff; color:#1d4ed8; text-decoration:none; }}
+    .button.primary:hover {{ background:#1d4ed8; color:#fff; }}
+    .copy-feedback {{ min-height:20px; color:#16805d; font-size:13px; margin-top:8px; }}
     .panel {{ background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:20px; box-shadow:var(--shadow); }}
     .bullet {{ margin-left:18px; }}
     .bullet::before {{ content:""; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--blue); margin:0 8px 2px -16px; }}
@@ -763,12 +809,37 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
 <body>
   <header><div class="wrap">
     <h1>论文写作推进面板</h1>
-    <p class="sub">{html.escape(project_slug)} · Generated {html.escape(dt.datetime.now().isoformat(timespec='seconds'))}</p>
-    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a> · <a href="../evidence/page_verification_queue.html">页码核验队列</a></p>
+    <p class="sub">{html.escape(project_slug)} · 研究问题、变量指标、证据链和段落队列。</p>
+    <div class="toolbar">
+      <a class="button primary" href="../../../study_dashboard.html">返回学习仪表盘</a>
+      <a class="button" href="../evidence/page_verification_queue.html">页码核验队列</a>
+      <button type="button" class="button" data-copy="{html.escape(rebuild_command)}" data-label="复制刷新命令">复制刷新命令</button>
+      <button type="button" class="button" data-copy="{html.escape(gate_command)}" data-label="复制门禁命令">复制门禁命令</button>
+      <button type="button" class="button" data-copy="{html.escape(sync_command)}" data-label="复制同步命令">复制同步命令</button>
+    </div>
+    <div class="copy-feedback" aria-live="polite"></div>
   </div></header>
   <main class="wrap"><article class="panel">
     {''.join(body_parts)}
   </article></main>
+  <script>
+    (() => {{
+      const status = document.querySelector(".copy-feedback");
+      document.querySelectorAll("[data-copy]").forEach((button) => {{
+        button.addEventListener("click", async () => {{
+          const text = button.getAttribute("data-copy") || "";
+          try {{
+            await navigator.clipboard.writeText(text);
+            button.textContent = "已复制";
+            if (status) status.textContent = text;
+            setTimeout(() => {{ button.textContent = button.getAttribute("data-label") || "复制命令"; }}, 1600);
+          }} catch (_error) {{
+            if (status) status.textContent = text;
+          }}
+        }});
+      }});
+    }})();
+  </script>
 </body>
 </html>
 """
@@ -795,10 +866,10 @@ def main() -> int:
     write_verification_json(queue_json, args.project, queue_rows)
     write_verification_html(queue_html, args.project, queue_rows, queue_csv, queue_json)
     trace = traceability_payload(args.project, project, queue_rows=queue_rows)
-    trace_path.write_text(json.dumps(trace, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_json_if_changed(trace_path, trace)
     md_text = render_md(args.project, project, trace=trace)
-    md_path.write_text(md_text + "\n", encoding="utf-8")
-    html_path.write_text(render_html(args.project, md_text, html_path, md_path), encoding="utf-8")
+    write_text_if_changed(md_path, md_text + "\n")
+    write_text_if_changed(html_path, render_html(args.project, md_text, html_path, md_path))
     print(f"Wrote page verification queue CSV: {queue_csv}")
     print(f"Wrote page verification queue JSON: {queue_json}")
     print(f"Wrote page verification queue HTML: {queue_html}")
