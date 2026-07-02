@@ -68,11 +68,14 @@ make workflow-test
 make workflow-render
 make workflow-audit-readonly
 make workflow-audit
+make workflow-audit-refresh
 ```
 
 - `workflow-render`：刷新总状态、行动队列、协作层和归档策略，有副作用。
 - `workflow-audit-readonly`：只读检查当前产物，只写审计报告和体检页。
-- `workflow-audit`：日常组合命令，先 render，再 readonly audit。
+- `workflow-audit`：日常只读审计入口。
+- `workflow-audit-refresh`：先 render，再 readonly audit。
+- 审计报告记录 `pre_refresh_state_hash` 和 `post_refresh_state_hash`，方便判断刷新是否改变状态层。
 
 ### 1.0.2 文献状态机
 
@@ -84,6 +87,24 @@ make lit-transition CITEKEY=cnki_2024_xxx FROM=skimmed TO=human-read REASON="Fin
 ```
 
 状态规则见 `docs/STATE_MACHINE.md`。
+
+### 1.0.3 文献矩阵、证据链、隐私和复现
+
+用途：检查矩阵字段、生成结构化 claim-evidence 表、扫描敏感文本，并记录可复现实验。
+
+```bash
+make literature-matrix-validate
+make literature-matrix-migrate
+make claim-evidence-links PROJECT=library_short_video
+make privacy-audit
+make experiment PROJECT=library_short_video NAME=pilot INPUTS="data/processed/input.csv" OUTPUTS="results/out.csv" SEED=42 CMD="python analysis/python/analysis.py"
+```
+
+- `literature-matrix-validate`：按 `schemas/literature_matrix.schema.yaml` 检查字段、必填项、状态枚举和重复 citekey。
+- `literature-matrix-migrate`：默认只报告字段差异；`APPLY=1` 时按 schema 补齐/重排字段。
+- `claim-evidence-links`：从 evidence locator 生成 `projects/<slug>/evidence/claim_evidence_links.csv`，给证据门禁和写作面板使用。
+- `privacy-audit`：扫描 Git 跟踪文本中的 secret-like 内容和敏感研究词；`STRICT=1` 时 warning 也会失败。
+- `experiment`：记录命令、Git commit、输入/输出 hash、pip freeze、随机种子、参数快照和 hypothesis ID。
 
 ### 1.1 基础环境
 

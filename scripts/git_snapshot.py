@@ -6,6 +6,8 @@ import datetime as dt
 import subprocess
 from pathlib import Path
 
+import privacy_audit
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -99,6 +101,23 @@ def guard_embedded_repositories() -> None:
         )
 
 
+def guard_sensitive_text(skip_privacy_audit: bool) -> None:
+    if skip_privacy_audit:
+        return
+    issues = privacy_audit.audit_paths()
+    failures = [issue for issue in issues if issue.status == "FAIL"]
+    warnings = [issue for issue in issues if issue.status == "WARN"]
+    if warnings:
+        print(f"Privacy audit warnings: {len(warnings)} potential sensitive text matches. Run `make privacy-audit` for details.")
+    if failures:
+        sample = "\n".join(f"- {issue.path}:{issue.line}: {issue.snippet}" for issue in failures[:20])
+        raise SystemExit(
+            "Refusing to snapshot because high-risk secret-like text was found:\n"
+            f"{sample}\n"
+            "Remove the secret or rerun privacy audit after confirming the repository privacy mode."
+        )
+
+
 def current_branch() -> str:
     result = run(["git", "branch", "--show-current"], check=False)
     branch = result.stdout.strip()
@@ -124,6 +143,7 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="Show what would be committed without staging or committing.")
     parser.add_argument("--allow-empty", action="store_true", help="Create a commit even when there are no changes.")
     parser.add_argument("--allow-risky", action="store_true", help="Allow large/binary files that are not ignored.")
+    parser.add_argument("--skip-privacy-audit", action="store_true", help="Skip tracked-text privacy scan before committing.")
     parser.add_argument("--max-file-mb", type=int, default=8, help="Abort if an unignored file is larger than this.")
     args = parser.parse_args()
 
@@ -135,6 +155,7 @@ def main() -> int:
 
     guard_risky_unignored_files(args.max_file_mb, args.allow_risky)
     guard_embedded_repositories()
+    guard_sensitive_text(args.skip_privacy_audit)
 
     if args.dry_run:
         changes = changed_paths()

@@ -1,9 +1,11 @@
+-include .env
+
 PYTHON ?= python3
 PYTHONDONTWRITEBYTECODE ?= 1
 export PYTHONDONTWRITEBYTECODE
 ACTIVE_PROJECT ?= $(shell PYTHONDONTWRITEBYTECODE=1 $(PYTHON) scripts/get_active_project.py)
 
-.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-ensure review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate fast-status workflow-policy workflow-render workflow-audit-readonly workflow-audit-refresh workflow-audit workflow-test workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate evidence-locators manuscript-panel incoming-triage lit-transition citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
+.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-ensure review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate literature-matrix-validate literature-matrix-migrate privacy-audit fast-status workflow-policy workflow-render workflow-audit-readonly workflow-audit-refresh workflow-audit workflow-test workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate evidence-locators claim-evidence-links manuscript-panel incoming-triage lit-transition experiment citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph learning-dashboard
 
 check:
 	$(PYTHON) scripts/check_environment.py
@@ -59,6 +61,15 @@ archive-policy:
 schema-validate:
 	$(PYTHON) scripts/validate_workflow_schemas.py
 
+literature-matrix-validate:
+	$(PYTHON) scripts/validate_literature_matrix.py $(if $(STRICT),--strict,)
+
+literature-matrix-migrate:
+	$(PYTHON) scripts/migrate_literature_matrix.py $(if $(APPLY),--apply,)
+
+privacy-audit:
+	$(PYTHON) scripts/privacy_audit.py $(if $(STRICT),--strict,)
+
 fast-status:
 	$(PYTHON) scripts/research_fastlane.py snapshot --project "$(PROJECT)" $(if $(TOPIC),--topic "$(TOPIC)",) $(if $(DATE),--date "$(DATE)",) $(if $(PRINT),--print,)
 
@@ -108,7 +119,7 @@ workflow-refresh-git:
 	$(MAKE) git-snapshot $(if $(DATE),DATE="$(DATE)",) $(if $(NOTE),NOTE="$(NOTE) audit refresh",) PUSH=1
 
 git-snapshot:
-	$(PYTHON) scripts/git_snapshot.py --init $(if $(DATE),--date "$(DATE)",) $(if $(NOTE),--note "$(NOTE)",) $(if $(PUSH),--push,) $(if $(DRY),--dry-run,) $(if $(ALLOW_RISKY),--allow-risky,)
+	$(PYTHON) scripts/git_snapshot.py --init $(if $(DATE),--date "$(DATE)",) $(if $(NOTE),--note "$(NOTE)",) $(if $(PUSH),--push,) $(if $(DRY),--dry-run,) $(if $(ALLOW_RISKY),--allow-risky,) $(if $(SKIP_PRIVACY),--skip-privacy-audit,)
 
 backfill:
 	$(PYTHON) scripts/backfill_project.py --project "$(PROJECT)" $(if $(APPLY),--apply,)
@@ -122,6 +133,9 @@ evidence-gate:
 evidence-locators:
 	$(PYTHON) scripts/build_evidence_locators.py --project "$(if $(PROJECT),$(PROJECT),$(ACTIVE_PROJECT))"
 
+claim-evidence-links:
+	$(PYTHON) scripts/build_claim_evidence_links.py --project "$(if $(PROJECT),$(PROJECT),$(ACTIVE_PROJECT))"
+
 manuscript-panel:
 	$(PYTHON) scripts/build_manuscript_panel.py --project "$(if $(PROJECT),$(PROJECT),$(ACTIVE_PROJECT))"
 
@@ -130,6 +144,9 @@ incoming-triage:
 
 lit-transition:
 	$(PYTHON) scripts/transition_literature_state.py --citekey "$(CITEKEY)" --to "$(TO)" $(if $(FROM),--from-status "$(FROM)",) $(if $(REASON),--reason "$(REASON)",) $(if $(EVIDENCE),--evidence "$(EVIDENCE)",) $(if $(PROJECT),--project "$(PROJECT)",) $(if $(DRY),--dry-run,)
+
+experiment:
+	$(PYTHON) scripts/run_experiment.py --project "$(if $(PROJECT),$(PROJECT),$(ACTIVE_PROJECT))" --name "$(NAME)" $(if $(HYPOTHESIS),--hypothesis-id "$(HYPOTHESIS)",) $(if $(SEED),--seed "$(SEED)",) $(if $(INPUTS),--inputs $(INPUTS),) $(if $(OUTPUTS),--outputs $(OUTPUTS),) $(if $(PARAMS),--params $(PARAMS),) $(if $(TIMEOUT_MIN),--timeout-min "$(TIMEOUT_MIN)",) -- $(CMD)
 
 citation-audit:
 	$(PYTHON) scripts/audit_references_gbt7714.py --project "$(PROJECT)" $(if $(STRICT),--fail-on-errors,)
@@ -261,7 +278,9 @@ obsidian-graph:
 learning-dashboard:
 	$(PYTHON) scripts/scan_incoming_pdfs.py --project "$(ACTIVE_PROJECT)"
 	$(PYTHON) scripts/build_evidence_locators.py --project "$(ACTIVE_PROJECT)"
+	$(PYTHON) scripts/build_claim_evidence_links.py --project "$(ACTIVE_PROJECT)"
 	$(PYTHON) scripts/build_manuscript_panel.py --project "$(ACTIVE_PROJECT)"
+	$(PYTHON) scripts/evidence_gate.py --project "$(ACTIVE_PROJECT)"
 	$(PYTHON) scripts/build_project_state.py --all
 	$(PYTHON) scripts/build_workflow_state.py
 	$(PYTHON) scripts/build_action_queue.py

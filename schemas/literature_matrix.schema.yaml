@@ -1,0 +1,43 @@
+version: 1.0
+primary_key: citekey
+field_order:
+  - citekey
+  - title
+  - year
+  - authors
+  - doi
+  - source
+  - source_database
+  - language
+  - publication_type
+  - cssci_status
+  - project_tags
+  - theory
+  - methods
+  - data
+  - core_findings
+  - limitations
+  - usable_quotes
+  - chinese_reference_translation
+  - target_journal_relevance
+  - read_status
+  - note_path
+  - pdf_path
+required_fields:
+  - citekey
+  - title
+  - read_status
+read_status_values:
+  - metadata-only
+  - unread
+  - fulltext-available
+  - reader-generated
+  - skimmed
+  - human-read
+  - verified
+  - claim-linked
+  - manuscript-cited
+  - discarded
+path_fields:
+  - note_path
+  - pdf_path

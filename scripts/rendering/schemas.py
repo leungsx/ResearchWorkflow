@@ -20,6 +20,11 @@ from rendering.paths import (
 )
 
 
+LITERATURE_MATRIX = ROOT / "library" / "literature_matrix.csv"
+LITERATURE_MATRIX_SCHEMA = ROOT / "schemas" / "literature_matrix.schema.yaml"
+CLAIM_EVIDENCE_LINKS_SCHEMA = ROOT / "schemas" / "claim_evidence_links.schema.yaml"
+
+
 @dataclass
 class SchemaIssue:
     path: str
@@ -89,6 +94,78 @@ def require_existing_path(value: Any, path: Path, location: str, issues: list[Sc
         return
     if not (ROOT / text).exists():
         add(issues, path, "FAIL", f"{location} 指向不存在的文件：{text}")
+
+
+def schema_list(path: Path, key: str) -> list[str]:
+    values: list[str] = []
+    current: str | None = None
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.split("#", 1)[0].rstrip()
+        if not line.strip():
+            continue
+        stripped = line.strip()
+        if not raw_line.startswith(" ") and ":" in stripped:
+            name, value = stripped.split(":", 1)
+            current = name.strip() if not value.strip() else None
+            continue
+        if current == key and stripped.startswith("- "):
+            values.append(stripped[2:].strip().strip("\"'"))
+    return values
+
+
+def validate_literature_matrix(path: Path, issues: list[SchemaIssue], checked: list[str]) -> None:
+    checked.append(rel(path))
+    if not path.exists():
+        add(issues, path, "FAIL", "literature matrix 缺失")
+        return
+    expected = schema_list(LITERATURE_MATRIX_SCHEMA, "field_order")
+    required = set(schema_list(LITERATURE_MATRIX_SCHEMA, "required_fields"))
+    statuses = set(schema_list(LITERATURE_MATRIX_SCHEMA, "read_status_values"))
+    with path.open(encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        fields = list(reader.fieldnames or [])
+        if fields != expected:
+            add(issues, path, "FAIL", "CSV 字段顺序或字段集合与 literature_matrix schema 不一致")
+        seen: set[str] = set()
+        rows = list(reader)
+    for index, row in enumerate(rows, start=2):
+        citekey = str(row.get("citekey", "")).strip()
+        if citekey in seen:
+            add(issues, path, "FAIL", f"第 {index} 行 citekey 重复：{citekey}")
+        elif citekey:
+            seen.add(citekey)
+        for field in required:
+            if not str(row.get(field, "")).strip():
+                add(issues, path, "FAIL", f"第 {index} 行必填字段为空：{field}")
+        status = str(row.get("read_status", "")).strip()
+        if status and status not in statuses:
+            add(issues, path, "FAIL", f"第 {index} 行 read_status 非法：{status}")
+
+
+def validate_claim_evidence_links(path: Path, issues: list[SchemaIssue], checked: list[str]) -> None:
+    checked.append(rel(path))
+    expected = schema_list(CLAIM_EVIDENCE_LINKS_SCHEMA, "field_order")
+    required = set(schema_list(CLAIM_EVIDENCE_LINKS_SCHEMA, "required_fields"))
+    if not path.exists():
+        add(issues, path, "FAIL", "claim_evidence_links.csv 缺失")
+        return
+    with path.open(encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        fields = list(reader.fieldnames or [])
+        if fields != expected:
+            add(issues, path, "FAIL", "CSV 字段顺序或字段集合与 claim_evidence_links schema 不一致")
+        rows = list(reader)
+    seen: set[tuple[str, str, str]] = set()
+    for index, row in enumerate(rows, start=2):
+        for field in required:
+            if not str(row.get(field, "")).strip():
+                add(issues, path, "FAIL", f"第 {index} 行必填字段为空：{field}")
+        key = (row.get("claim_id", ""), row.get("citekey", ""), row.get("source_block_id", ""))
+        if key in seen:
+            add(issues, path, "FAIL", f"第 {index} 行重复 claim/citekey/source_block_id：{key}")
+        seen.add(key)
+        if str(row.get("used_in_manuscript", "")).strip().lower() not in {"true", "false"}:
+            add(issues, path, "FAIL", f"第 {index} 行 used_in_manuscript 必须是 true/false")
 
 
 def validate_artifact_manifest(path: Path, issues: list[SchemaIssue], checked: list[str]) -> None:
@@ -366,6 +443,7 @@ def validate_workflow_schemas(include_audit_report: bool = True) -> SchemaReport
     checked: list[str] = []
     issues: list[SchemaIssue] = []
     validators = [
+        (LITERATURE_MATRIX, validate_literature_matrix),
         (ARTIFACT_MANIFEST, validate_artifact_manifest),
         (SEARCH_INDEX_JSON, validate_search_index),
         (REVIEW_STATE, validate_review_state),
@@ -378,6 +456,8 @@ def validate_workflow_schemas(include_audit_report: bool = True) -> SchemaReport
         validators.append((WORKFLOW_AUDIT_JSON, validate_audit_report))
     for path in sorted(PROJECTS.glob("*/project_state.json")):
         validators.append((path, validate_project_state))
+    for path in sorted(PROJECTS.glob("*/evidence/claim_evidence_links.csv")):
+        validators.append((path, validate_claim_evidence_links))
     for path, validator in validators:
         validator(path, issues, checked)
     return SchemaReport(checked_files=checked, issues=issues)

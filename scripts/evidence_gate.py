@@ -72,6 +72,31 @@ def material_files(project: Path) -> list[tuple[str, Path, bool]]:
     ]
 
 
+def claim_evidence_links(project: Path) -> Path:
+    return project / "evidence" / "claim_evidence_links.csv"
+
+
+def truthy(value: str) -> bool:
+    return value.strip().lower() in {"1", "true", "yes", "y", "是"}
+
+
+def structured_citekey_usages(project: Path, citekey: str) -> list[tuple[str, Path, bool]]:
+    path = claim_evidence_links(project)
+    if not citekey or not path.exists():
+        return []
+    usages: list[tuple[str, Path, bool]] = []
+    with path.open(encoding="utf-8-sig", newline="") as handle:
+        for row in csv.DictReader(handle):
+            if row.get("citekey", "").strip() != citekey:
+                continue
+            critical = truthy(row.get("used_in_manuscript", ""))
+            label = "structured claim-evidence link"
+            if row.get("claim_id"):
+                label += f" {row['claim_id']}"
+            usages.append((label, path, critical))
+    return usages
+
+
 def citekey_usages(project: Path, citekey: str) -> list[tuple[str, Path, bool]]:
     usages = []
     if not citekey:
@@ -79,6 +104,7 @@ def citekey_usages(project: Path, citekey: str) -> list[tuple[str, Path, bool]]:
     for label, path, critical in material_files(project):
         if citekey in read_text(path):
             usages.append((label, path, critical))
+    usages.extend(structured_citekey_usages(project, citekey))
     return usages
 
 

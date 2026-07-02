@@ -1,12 +1,14 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T14:57:08",
+  "generated_at": "2026-07-02T15:13:06",
   "date": "2026-07-02",
   "audit_mode": "readonly",
+  "pre_refresh_state_hash": "61d39c3dc20665c984799d23682b021aeda946a81f9b036847566460c7749d51",
+  "post_refresh_state_hash": "61d39c3dc20665c984799d23682b021aeda946a81f9b036847566460c7749d51",
   "summary": {
     "counts": {
-      "PASS": 18,
-      "WARN": 0,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "check_count": 18
@@ -80,13 +82,13 @@
       "area": "备份",
       "status": "PASS",
       "title": "最近备份可用",
-      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 18.8 小时前。"
+      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 19.1 小时前。"
     },
     {
       "area": "Git/异地备份",
-      "status": "PASS",
-      "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: cc18ec8 2026-07-02 14:56:47 +0800 Add workflow state machine and audit split"
+      "status": "WARN",
+      "title": "存在尚未提交的 Git 改动",
+      "detail": "152 个路径待快照： M .gitignore； M Makefile； M action_queue.html； M archive_policy.html； M docs/USABLE_FUNCTIONS_TEST_GUIDE.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html"
     },
     {
       "area": "Token/记忆",
@@ -104,7 +106,7 @@
       "area": "Schema",
       "status": "PASS",
       "title": "核心机器状态 schema 校验通过",
-      "detail": "10 个文件通过校验。"
+      "detail": "12 个文件通过校验。"
     },
     {
       "area": "行动队列",

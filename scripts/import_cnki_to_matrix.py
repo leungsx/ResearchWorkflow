@@ -8,36 +8,14 @@ import hashlib
 import re
 from pathlib import Path
 
+from literature_matrix_schema import matrix_fields
+
 
 ROOT = Path(__file__).resolve().parents[1]
 MATRIX = ROOT / "library" / "literature_matrix.csv"
 CNKI_DIR = ROOT / "library" / "cnki_exports"
 REPORT_DIR = CNKI_DIR / "import_reports"
-
-MATRIX_FIELDS = [
-    "citekey",
-    "title",
-    "year",
-    "authors",
-    "doi",
-    "source",
-    "source_database",
-    "language",
-    "publication_type",
-    "cssci_status",
-    "project_tags",
-    "theory",
-    "methods",
-    "data",
-    "core_findings",
-    "limitations",
-    "usable_quotes",
-    "chinese_reference_translation",
-    "target_journal_relevance",
-    "read_status",
-    "note_path",
-    "pdf_path",
-]
+MATRIX_FIELDS = matrix_fields()
 
 CJK_RE = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff]")
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import datetime as dt
+import hashlib
 import html
 import json
 import os
@@ -51,6 +52,7 @@ WORKFLOW_STATE_HTML = ROOT / "workflow_state.html"
 ACTION_QUEUE_HTML = ROOT / "action_queue.html"
 COLLABORATION_PAGE = COLLABORATION_HTML
 ARCHIVE_POLICY_PAGE = ARCHIVE_POLICY_HTML
+STATE_HASH_TARGETS = [GRAPH_DIR / "workflow_state.json", ACTION_QUEUE, COLLABORATION_STATE, ARCHIVE_POLICY]
 
 
 @dataclass
@@ -645,6 +647,17 @@ def status_counts(checks: list[Check]) -> dict[str, int]:
     return {status: sum(1 for check in checks if check.status == status) for status in ["PASS", "WARN", "FAIL"]}
 
 
+def state_bundle_hash() -> str:
+    digest = hashlib.sha256()
+    for path in STATE_HASH_TARGETS:
+        digest.update(rel(path).encode("utf-8"))
+        if path.exists():
+            digest.update(path.read_bytes())
+        else:
+            digest.update(b"<missing>")
+    return digest.hexdigest()
+
+
 def check_schema_validation(checks: list[Check]) -> None:
     report = validate_workflow_schemas()
     failures = [issue for issue in report.issues if issue.status == "FAIL"]
@@ -659,13 +672,15 @@ def check_schema_validation(checks: list[Check]) -> None:
         add(checks, "Schema", "PASS", "核心机器状态 schema 校验通过", f"{len(report.checked_files)} 个文件通过校验。")
 
 
-def audit_report_payload(day: dt.date, checks: list[Check], md_path: Path, html_path: Path, audit_mode: str) -> dict[str, object]:
+def audit_report_payload(day: dt.date, checks: list[Check], md_path: Path, html_path: Path, audit_mode: str, pre_state_hash: str, post_state_hash: str) -> dict[str, object]:
     counts = status_counts(checks)
     return {
         "schema_version": "1.0",
         "generated_at": dt.datetime.now().isoformat(timespec="seconds"),
         "date": day.isoformat(),
         "audit_mode": audit_mode,
+        "pre_refresh_state_hash": pre_state_hash,
+        "post_refresh_state_hash": post_state_hash,
         "summary": {
             "counts": counts,
             "check_count": len(checks),
@@ -686,20 +701,22 @@ def audit_report_payload(day: dt.date, checks: list[Check], md_path: Path, html_
     }
 
 
-def write_audit_json(day: dt.date, checks: list[Check], md_path: Path, html_path: Path, audit_mode: str) -> Path:
+def write_audit_json(day: dt.date, checks: list[Check], md_path: Path, html_path: Path, audit_mode: str, pre_state_hash: str, post_state_hash: str) -> Path:
     AUDIT_REPORT_JSON.parent.mkdir(parents=True, exist_ok=True)
-    payload = audit_report_payload(day, checks, md_path, html_path, audit_mode)
+    payload = audit_report_payload(day, checks, md_path, html_path, audit_mode, pre_state_hash, post_state_hash)
     AUDIT_REPORT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return AUDIT_REPORT_JSON
 
 
-def markdown_report(day: dt.date, checks: list[Check], audit_mode: str) -> str:
+def markdown_report(day: dt.date, checks: list[Check], audit_mode: str, pre_state_hash: str, post_state_hash: str) -> str:
     counts = status_counts(checks)
     lines = [
         f"# Workflow Audit - {day.isoformat()}",
         "",
         f"Generated: {dt.datetime.now().isoformat(timespec='seconds')}",
         f"Audit mode: `{audit_mode}`",
+        f"Pre-refresh state hash: `{pre_state_hash}`",
+        f"Post-refresh state hash: `{post_state_hash}`",
         f"Summary: PASS={counts['PASS']} WARN={counts['WARN']} FAIL={counts['FAIL']}",
         "",
         "## Checks",
@@ -820,26 +837,31 @@ def write_reports(day: dt.date, checks: list[Check], refresh_state: bool) -> tup
     md_path = AUDIT_DIR / f"{day.isoformat()}-workflow-audit.md"
     baseline_dirty_paths = len([line for line in git_command(["status", "--porcelain"]).stdout.splitlines() if line.strip()])
     audit_mode = "refresh_then_audit" if refresh_state else "readonly"
+    pre_state_hash = state_bundle_hash()
+    post_state_hash = pre_state_hash
 
     if refresh_state:
         render_state_outputs(checks, baseline_dirty_paths)
-    md_path.write_text(markdown_report(day, checks, audit_mode) + "\n", encoding="utf-8")
+        post_state_hash = state_bundle_hash()
+    md_path.write_text(markdown_report(day, checks, audit_mode, pre_state_hash, post_state_hash) + "\n", encoding="utf-8")
     HEALTH_HTML.write_text(html_report(day, checks, audit_mode), encoding="utf-8")
-    write_audit_json(day, checks, md_path, HEALTH_HTML, audit_mode)
+    write_audit_json(day, checks, md_path, HEALTH_HTML, audit_mode, pre_state_hash, post_state_hash)
 
     check_schema_validation(checks)
     if refresh_state:
         render_state_outputs(checks, baseline_dirty_paths)
+        post_state_hash = state_bundle_hash()
 
     check_action_queue(checks)
     check_collaboration_state(checks)
     check_archive_policy(checks)
     if refresh_state:
         render_state_outputs(checks, baseline_dirty_paths)
+        post_state_hash = state_bundle_hash()
 
-    md_path.write_text(markdown_report(day, checks, audit_mode) + "\n", encoding="utf-8")
+    md_path.write_text(markdown_report(day, checks, audit_mode, pre_state_hash, post_state_hash) + "\n", encoding="utf-8")
     HEALTH_HTML.write_text(html_report(day, checks, audit_mode), encoding="utf-8")
-    json_path = write_audit_json(day, checks, md_path, HEALTH_HTML, audit_mode)
+    json_path = write_audit_json(day, checks, md_path, HEALTH_HTML, audit_mode, pre_state_hash, post_state_hash)
     return md_path, HEALTH_HTML, json_path
 
 

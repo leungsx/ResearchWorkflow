@@ -7,6 +7,7 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Local runtime and temporary files
+.env
 codex/runtime/
 .tmp/
 .Rhistory

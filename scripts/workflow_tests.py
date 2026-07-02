@@ -16,6 +16,9 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from scan_incoming_pdfs import duplicate_key  # noqa: E402
 from transition_literature_state import parse_state_schema, transition_allowed  # noqa: E402
+from validate_literature_matrix import validate_matrix  # noqa: E402
+from privacy_audit import audit_paths  # noqa: E402
+from run_experiment import hash_target  # noqa: E402
 from workflow_config import active_project_slug, read_workflow_config  # noqa: E402
 
 
@@ -189,6 +192,53 @@ class WorkflowSmokeTests(unittest.TestCase):
         report_path = ROOT / "vault" / "13_Knowledge_Graph" / "workflow_audit_report.json"
         report = json.loads(report_path.read_text(encoding="utf-8"))
         self.assertIn(report.get("audit_mode"), {"readonly", "refresh_then_audit"})
+        self.assertRegex(str(report.get("pre_refresh_state_hash", "")), r"^[0-9a-f]{64}$")
+        self.assertRegex(str(report.get("post_refresh_state_hash", "")), r"^[0-9a-f]{64}$")
+
+    def test_literature_matrix_schema_has_no_failures(self) -> None:
+        _fields, issues = validate_matrix(ROOT / "library" / "literature_matrix.csv")
+        failures = [issue for issue in issues if issue.status == "FAIL"]
+        self.assertEqual([], failures)
+
+    def test_structured_claim_evidence_links_exist(self) -> None:
+        path = project_path("evidence", "claim_evidence_links.csv")
+        rows = csv_rows(path)
+        self.assertGreater(len(rows), 10)
+        self.assertEqual(
+            [
+                "claim_id",
+                "claim_text",
+                "citekey",
+                "evidence_type",
+                "source_block_id",
+                "page",
+                "locator_status",
+                "read_status",
+                "strength",
+                "risk",
+                "used_in_manuscript",
+                "source_path",
+            ],
+            list(rows[0].keys()),
+        )
+        self.assertTrue(all(row["used_in_manuscript"] in {"true", "false"} for row in rows))
+
+    def test_privacy_audit_has_no_secret_failures(self) -> None:
+        issues = audit_paths()
+        failures = [issue for issue in issues if issue.status == "FAIL"]
+        self.assertEqual([], failures[:10])
+
+    def test_experiment_hash_target_records_file_hash(self) -> None:
+        tmp = ROOT / ".tmp" / "workflow-test-input.txt"
+        tmp.parent.mkdir(exist_ok=True)
+        tmp.write_text("workflow test\n", encoding="utf-8")
+        try:
+            record = hash_target(tmp)
+            self.assertTrue(record["exists"])
+            self.assertEqual("file", record["kind"])
+            self.assertRegex(str(record["sha256"]), r"^[0-9a-f]{64}$")
+        finally:
+            tmp.unlink(missing_ok=True)
 
     def test_project_state_prioritizes_unread_incoming_candidates(self) -> None:
         state = json.loads(project_path("project_state.json").read_text(encoding="utf-8"))

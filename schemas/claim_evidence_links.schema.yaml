@@ -1,0 +1,27 @@
+version: 1.0
+primary_key:
+  - claim_id
+  - citekey
+  - source_block_id
+field_order:
+  - claim_id
+  - claim_text
+  - citekey
+  - evidence_type
+  - source_block_id
+  - page
+  - locator_status
+  - read_status
+  - strength
+  - risk
+  - used_in_manuscript
+  - source_path
+required_fields:
+  - claim_id
+  - claim_text
+  - citekey
+  - evidence_type
+  - source_block_id
+  - locator_status
+  - read_status
+  - used_in_manuscript
