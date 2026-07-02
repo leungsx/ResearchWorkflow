@@ -108,6 +108,7 @@ def asset_role_for(display_type: str) -> str:
         "archive_policy",
         "incoming_pdf_triage",
         "evidence_locator_table",
+        "page_verification_queue",
         "manuscript_writing_panel",
     }:
         return "core_entry"
@@ -208,6 +209,9 @@ def artifact_manifest_rows() -> list[dict[str, str]]:
         evidence = project / "literature" / "evidence_locator_table.html"
         if evidence.exists():
             add(project / "literature" / "evidence_locator_table.csv", evidence, "evidence_locator_table", f"{project.name} evidence locator table")
+        verification = project / "evidence" / "page_verification_queue.html"
+        if verification.exists():
+            add(project / "evidence" / "page_verification_queue.csv", verification, "page_verification_queue", f"{project.name} page verification queue")
         writing = project / "manuscript" / "writing_panel.html"
         if writing.exists():
             add(project / "manuscript" / "writing_panel.md", writing, "manuscript_writing_panel", f"{project.name} manuscript writing panel")

@@ -86,6 +86,7 @@ def user_html_pages() -> list[Path]:
         ROOT / "logs",
         project_path("literature"),
         project_path("manuscript"),
+        project_path("evidence"),
     ]:
         if directory.exists():
             pages.extend(sorted(directory.rglob("*.html")))
@@ -125,6 +126,7 @@ class WorkflowSmokeTests(unittest.TestCase):
             ROOT / "workflow_health.html",
             project_path("literature", "incoming_pdf_triage.html"),
             project_path("literature", "evidence_locator_table.html"),
+            project_path("evidence", "page_verification_queue.html"),
             project_path("manuscript", "writing_panel.html"),
         ]
         for page in required:
@@ -160,6 +162,7 @@ class WorkflowSmokeTests(unittest.TestCase):
             ROOT / "workflow_health.html",
             project_path("literature", "incoming_pdf_triage.html"),
             project_path("literature", "evidence_locator_table.html"),
+            project_path("evidence", "page_verification_queue.html"),
             project_path("manuscript", "writing_panel.html"),
         ]
         missing: list[str] = []
@@ -181,6 +184,7 @@ class WorkflowSmokeTests(unittest.TestCase):
             "knowledge_graph",
             "incoming_pdf_triage",
             "evidence_locator_table",
+            "page_verification_queue",
             "manuscript_writing_panel",
         }
         seen_types = {row["display_type"] for row in rows}
@@ -222,6 +226,24 @@ class WorkflowSmokeTests(unittest.TestCase):
             list(rows[0].keys()),
         )
         self.assertTrue(all(row["used_in_manuscript"] in {"true", "false"} for row in rows))
+
+    def test_page_verification_queue_connects_claims_to_sources(self) -> None:
+        csv_path = project_path("evidence", "page_verification_queue.csv")
+        json_path = project_path("evidence", "page_verification_queue.json")
+        html_path = project_path("evidence", "page_verification_queue.html")
+        rows = csv_rows(csv_path)
+        queue = json.loads(json_path.read_text(encoding="utf-8"))
+        self.assertTrue(html_path.exists())
+        self.assertGreater(len(rows), 10)
+        self.assertEqual("ResearchWorkflow.PageVerificationQueue.v1", queue["schema_version"])
+        self.assertEqual(len(rows), queue["summary"]["total_items"])
+        self.assertEqual(len(rows), len(queue["items"]))
+        self.assertIn("needs_page_locator", {row["verification_status"] for row in rows})
+        for field in ["claim_id", "citekey", "source_block_id", "page", "read_status", "next_action"]:
+            self.assertIn(field, rows[0])
+        html_text = read_text(html_path)
+        self.assertIn("Claim -> Source Block -> Page -> Read Status", html_text)
+        self.assertNotRegex(html_text, r'href="[^"]+\.md')
 
     def test_privacy_audit_has_no_secret_failures(self) -> None:
         issues = audit_paths()
@@ -284,10 +306,14 @@ class WorkflowSmokeTests(unittest.TestCase):
         self.assertIn("Variable And Indicator Evidence Trace", writing)
         self.assertIn("Paragraph Queue", writing)
         self.assertIn("Evidence Readiness", writing)
+        self.assertIn("Page Verification Queue", writing)
+        self.assertIn("Top Verification Tasks", writing)
         self.assertNotIn("<p>|", writing)
         trace = json.loads(project_path("manuscript", "writing_traceability.json").read_text(encoding="utf-8"))
         self.assertEqual("ResearchWorkflow.WritingTraceability.v1", trace["schema_version"])
         self.assertGreater(trace["summary"]["claim_link_rows"], 10)
+        self.assertGreater(trace["verification_queue_summary"]["total_items"], 10)
+        self.assertGreaterEqual(len(trace["top_verification_tasks"]), 3)
         self.assertGreaterEqual(len(trace["research_question_traces"]), 3)
         self.assertGreaterEqual(len(trace["variable_traces"]), 4)
         self.assertGreaterEqual(len(trace["paragraph_traces"]), 4)

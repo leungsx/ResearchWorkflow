@@ -1,6 +1,6 @@
 {
   "schema_version": "ResearchWorkflow.WritingTraceability.v1",
-  "generated_at": "2026-07-02T20:48:30",
+  "generated_at": "2026-07-02T21:03:02",
   "project": "library_short_video",
   "summary": {
     "claim_link_rows": 59,
@@ -9,6 +9,103 @@
     "page_pending_rows": 51,
     "human_ready_rows": 0
   },
+  "verification_queue_summary": {
+    "total_items": 59,
+    "needs_page_locator": 51,
+    "needs_page_check": 8,
+    "needs_human_read": 0,
+    "ready_for_manuscript_review": 0
+  },
+  "top_verification_tasks": [
+    {
+      "task_id": "verify-c001-cnki-2021-d35f8e895a-b0006",
+      "priority": "65",
+      "verification_status": "needs_page_locator",
+      "claim_id": "C001",
+      "citekey": "cnki_2021_d35f8e895a",
+      "source_block_id": "cnki_2021_d35f8e895a:B0006",
+      "page": "",
+      "read_status": "skimmed",
+      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+    },
+    {
+      "task_id": "verify-c001-cnki-2021-d35f8e895a-b0009",
+      "priority": "65",
+      "verification_status": "needs_page_locator",
+      "claim_id": "C001",
+      "citekey": "cnki_2021_d35f8e895a",
+      "source_block_id": "cnki_2021_d35f8e895a:B0009",
+      "page": "",
+      "read_status": "skimmed",
+      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+    },
+    {
+      "task_id": "verify-c001-cnki-2021-d35f8e895a-b0010",
+      "priority": "65",
+      "verification_status": "needs_page_locator",
+      "claim_id": "C001",
+      "citekey": "cnki_2021_d35f8e895a",
+      "source_block_id": "cnki_2021_d35f8e895a:B0010",
+      "page": "",
+      "read_status": "skimmed",
+      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+    },
+    {
+      "task_id": "verify-c001-cnki-2021-d35f8e895a-b0011",
+      "priority": "65",
+      "verification_status": "needs_page_locator",
+      "claim_id": "C001",
+      "citekey": "cnki_2021_d35f8e895a",
+      "source_block_id": "cnki_2021_d35f8e895a:B0011",
+      "page": "",
+      "read_status": "skimmed",
+      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+    },
+    {
+      "task_id": "verify-c002-cnki-2021-dfab60236e-b0004",
+      "priority": "65",
+      "verification_status": "needs_page_locator",
+      "claim_id": "C002",
+      "citekey": "cnki_2021_dfab60236e",
+      "source_block_id": "cnki_2021_dfab60236e:B0004",
+      "page": "",
+      "read_status": "skimmed",
+      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+    },
+    {
+      "task_id": "verify-c002-cnki-2021-dfab60236e-b0008",
+      "priority": "65",
+      "verification_status": "needs_page_locator",
+      "claim_id": "C002",
+      "citekey": "cnki_2021_dfab60236e",
+      "source_block_id": "cnki_2021_dfab60236e:B0008",
+      "page": "",
+      "read_status": "skimmed",
+      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+    },
+    {
+      "task_id": "verify-c002-cnki-2021-dfab60236e-b0010",
+      "priority": "65",
+      "verification_status": "needs_page_locator",
+      "claim_id": "C002",
+      "citekey": "cnki_2021_dfab60236e",
+      "source_block_id": "cnki_2021_dfab60236e:B0010",
+      "page": "",
+      "read_status": "skimmed",
+      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+    },
+    {
+      "task_id": "verify-c002-cnki-2021-dfab60236e-b0013",
+      "priority": "65",
+      "verification_status": "needs_page_locator",
+      "claim_id": "C002",
+      "citekey": "cnki_2021_dfab60236e",
+      "source_block_id": "cnki_2021_dfab60236e:B0013",
+      "page": "",
+      "read_status": "skimmed",
+      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+    }
+  ],
   "research_question_traces": [
     {
       "slot": "Main question",

@@ -315,6 +315,7 @@ def check_artifact_manifest(checks: list[Check]) -> None:
         "project_collaboration_data",
         "archive_policy",
         "archive_policy_data",
+        "page_verification_queue",
         "workflow_audit_data",
     }
     missing_types = sorted(required_types - display_types)

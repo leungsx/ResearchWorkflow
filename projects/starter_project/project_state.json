@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T20:48:31",
+  "generated_at": "2026-07-02T21:03:03",
   "project": {
     "slug": "starter_project",
     "title": "Starter Research Project",
@@ -18,6 +18,7 @@
     "literature_synthesis": "paper_reading/views/03-literature-synthesis-01206220.html",
     "incoming_pdf_triage": "",
     "evidence_locator_table": "",
+    "page_verification_queue": "",
     "manuscript_writing_panel": "",
     "review_today": "knowledge_cards/review_today.html",
     "search": "search/index.html",
@@ -31,6 +32,7 @@
     "literature_synthesis": "projects/starter_project/03_literature_synthesis.md",
     "incoming_pdf_triage": "",
     "evidence_locator_table": "",
+    "page_verification_queue": "",
     "manuscript_writing_panel": ""
   },
   "literature": {

@@ -1,6 +1,6 @@
 # Manuscript Production Panel
 
-Generated: 2026-07-02T20:48:30
+Generated: 2026-07-02T21:03:02
 Project: `library_short_video`
 
 ## Current Manuscript Direction
@@ -67,6 +67,29 @@ Project: `library_short_video`
 | Framework paragraph      | Introduce platform engagement -> service touchpoint -> reading-promotion outcome. | C013 (0/8 human-ready; 0/8 page-located)                                                                                     | cnki_2023_34348faa1e:B0005 / page pending / skimmed; cnki_2023_34348faa1e:B0006 / page pending / skimmed; cnki_2023_34348faa1e:B0007 / page pending / skimmed; +5 more | 0/8 human-ready; 0/8 page-located | Keep causal wording out until new data or verified source locators support it.        |
 | Variable paragraph       | Translate prior studies into candidate variables and indicators.                  | C004 (0/3 human-ready; 0/3 page-located); C003 (0/4 human-ready; 0/4 page-located); C001 (0/1 human-ready; 0/1 page-located) | cnki_2021_d35f8e895a:B0011 / page pending / skimmed; cnki_2021_d35f8e895a:B0012 / page pending / skimmed; cnki_2021_d35f8e895a:B0013 / page pending / skimmed; +5 more | 0/8 human-ready; 0/8 page-located | Split observable platform metrics from service-path indicators.                       |
 | Boundary paragraph       | State scope limits by library type, platform, time window, and evidence status.   | C012 (0/4 human-ready; 0/4 page-located); C001 (0/4 human-ready; 0/4 page-located)                                           | cnki_2021_3771e58987:B0005 / page pending / skimmed; cnki_2021_3771e58987:B0007 / page pending / skimmed; cnki_2021_3771e58987:B0009 / page pending / skimmed; +5 more | 0/8 human-ready; 0/8 page-located | Add 2024-2026 data before making current-platform claims.                             |
+
+## Page Verification Queue
+
+| Metric                      | Value |
+| --------------------------- | ----- |
+| Total verification tasks    | 59    |
+| Need page locator           | 51    |
+| Need page check             | 8     |
+| Need human read             | 0     |
+| Ready for manuscript review | 0     |
+
+## Top Verification Tasks
+
+| Task                                   | Claim | Source block               | Page | Read status | Next action                                                    |
+| -------------------------------------- | ----- | -------------------------- | ---- | ----------- | -------------------------------------------------------------- |
+| verify-c001-cnki-2021-d35f8e895a-b0006 | C001  | cnki_2021_d35f8e895a:B0006 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c001-cnki-2021-d35f8e895a-b0009 | C001  | cnki_2021_d35f8e895a:B0009 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c001-cnki-2021-d35f8e895a-b0010 | C001  | cnki_2021_d35f8e895a:B0010 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c001-cnki-2021-d35f8e895a-b0011 | C001  | cnki_2021_d35f8e895a:B0011 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c002-cnki-2021-dfab60236e-b0004 | C002  | cnki_2021_dfab60236e:B0004 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c002-cnki-2021-dfab60236e-b0008 | C002  | cnki_2021_dfab60236e:B0008 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c002-cnki-2021-dfab60236e-b0010 | C002  | cnki_2021_dfab60236e:B0010 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
+| verify-c002-cnki-2021-dfab60236e-b0013 | C002  | cnki_2021_dfab60236e:B0013 | 待补   | skimmed     | Open original PDF/Reader and fill exact page or table locator. |
 
 ## Next Writing Actions
 

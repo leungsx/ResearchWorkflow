@@ -298,13 +298,34 @@ def validate_writing_traceability(path: Path, issues: list[SchemaIssue], checked
     if not isinstance(payload, dict):
         add(issues, path, "FAIL", "顶层结构必须是对象")
         return
-    require_keys(payload, path, "root", ["schema_version", "generated_at", "project", "summary", "research_question_traces", "variable_traces", "paragraph_traces"], issues)
+    require_keys(
+        payload,
+        path,
+        "root",
+        ["schema_version", "generated_at", "project", "summary", "verification_queue_summary", "top_verification_tasks", "research_question_traces", "variable_traces", "paragraph_traces"],
+        issues,
+    )
     summary = payload.get("summary", {})
     if isinstance(summary, dict):
         for key in ["claim_link_rows", "unique_claims", "page_located_rows", "page_pending_rows", "human_ready_rows"]:
             require_type(summary, path, key, int, issues, "summary")
     else:
         add(issues, path, "FAIL", "summary 必须是对象")
+    queue_summary = payload.get("verification_queue_summary", {})
+    if isinstance(queue_summary, dict):
+        for key in ["total_items", "needs_page_locator", "needs_page_check", "needs_human_read", "ready_for_manuscript_review"]:
+            require_type(queue_summary, path, key, int, issues, "verification_queue_summary")
+    else:
+        add(issues, path, "FAIL", "verification_queue_summary 必须是对象")
+    top_tasks = payload.get("top_verification_tasks", [])
+    if not isinstance(top_tasks, list) or not top_tasks:
+        add(issues, path, "FAIL", "top_verification_tasks 必须是非空数组")
+    else:
+        for index, item in enumerate(top_tasks, start=1):
+            if not isinstance(item, dict):
+                add(issues, path, "FAIL", f"top_verification_tasks[{index}] 必须是对象")
+                continue
+            require_keys(item, path, f"top_verification_tasks[{index}]", ["task_id", "priority", "verification_status", "claim_id", "citekey", "source_block_id", "page", "read_status", "next_action"], issues)
     for list_key, required in [
         ("research_question_traces", ["slot", "question", "linked_claims", "source_trace", "readiness"]),
         ("variable_traces", ["layer", "candidate_indicators", "linked_claims", "source_trace", "boundary"]),
@@ -319,6 +340,61 @@ def validate_writing_traceability(path: Path, issues: list[SchemaIssue], checked
                 add(issues, path, "FAIL", f"{list_key}[{index}] 必须是对象")
                 continue
             require_keys(item, path, f"{list_key}[{index}]", required, issues)
+
+
+def validate_page_verification_queue(path: Path, issues: list[SchemaIssue], checked: list[str]) -> None:
+    payload = load_json(path, issues, checked)
+    if not isinstance(payload, dict):
+        add(issues, path, "FAIL", "顶层结构必须是对象")
+        return
+    require_keys(payload, path, "root", ["schema_version", "generated_at", "project", "summary", "items"], issues)
+    summary = payload.get("summary", {})
+    items = payload.get("items", [])
+    if isinstance(summary, dict):
+        for key in ["total_items", "needs_page_locator", "needs_page_check", "needs_human_read", "ready_for_manuscript_review"]:
+            require_type(summary, path, key, int, issues, "summary")
+    else:
+        add(issues, path, "FAIL", "summary 必须是对象")
+    if not isinstance(items, list) or not items:
+        add(issues, path, "FAIL", "items 必须是非空数组")
+        return
+    if isinstance(summary, dict) and summary.get("total_items") != len(items):
+        add(issues, path, "FAIL", f"summary.total_items 与 items 长度不一致：{summary.get('total_items')} / {len(items)}")
+    allowed_statuses = {"needs_page_locator", "needs_page_check", "needs_human_read", "ready_for_manuscript_review"}
+    required = [
+        "task_id",
+        "priority",
+        "verification_status",
+        "claim_id",
+        "claim_text",
+        "citekey",
+        "source_block_id",
+        "page",
+        "locator_status",
+        "read_status",
+        "used_in_manuscript",
+        "risk",
+        "source_path",
+        "reader_display_path",
+        "next_action",
+    ]
+    for index, item in enumerate(items, start=1):
+        if not isinstance(item, dict):
+            add(issues, path, "FAIL", f"items[{index}] 必须是对象")
+            continue
+        require_keys(item, path, f"items[{index}]", required, issues)
+        if str(item.get("verification_status", "")) not in allowed_statuses:
+            add(issues, path, "FAIL", f"items[{index}].verification_status 非法：{item.get('verification_status')}")
+        if not str(item.get("priority", "")).isdigit():
+            add(issues, path, "FAIL", f"items[{index}].priority 必须是数字字符串")
+        if str(item.get("used_in_manuscript", "")).lower() not in {"true", "false"}:
+            add(issues, path, "FAIL", f"items[{index}].used_in_manuscript 必须是 true/false")
+        display = str(item.get("reader_display_path", ""))
+        if display:
+            require_existing_html(display, path, f"items[{index}].reader_display_path", issues)
+        source = str(item.get("source_path", ""))
+        if source:
+            require_existing_path(source, path, f"items[{index}].source_path", issues)
 
 
 def validate_workflow_state(path: Path, issues: list[SchemaIssue], checked: list[str]) -> None:
@@ -486,6 +562,8 @@ def validate_workflow_schemas(include_audit_report: bool = True) -> SchemaReport
         validators.append((path, validate_project_state))
     for path in sorted(PROJECTS.glob("*/evidence/claim_evidence_links.csv")):
         validators.append((path, validate_claim_evidence_links))
+    for path in sorted(PROJECTS.glob("*/evidence/page_verification_queue.json")):
+        validators.append((path, validate_page_verification_queue))
     for path in sorted(PROJECTS.glob("*/manuscript/writing_traceability.json")):
         validators.append((path, validate_writing_traceability))
     for path, validator in validators:

@@ -6,14 +6,38 @@ import csv
 import datetime as dt
 import html
 import json
+import os
 import re
 from pathlib import Path
+from urllib.parse import quote
 
+from rendering.routes import paper_markdown_view_path
 from workflow_config import active_project_slug
 
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECTS = ROOT / "projects"
+READY_READ_STATUSES = {"human-read", "verified", "claim-linked", "manuscript-cited"}
+VERIFICATION_FIELDS = [
+    "task_id",
+    "priority",
+    "verification_status",
+    "claim_id",
+    "claim_text",
+    "citekey",
+    "title",
+    "source_block_id",
+    "page",
+    "locator_status",
+    "read_status",
+    "used_in_manuscript",
+    "risk",
+    "source_path",
+    "reader_display_path",
+    "source_map",
+    "snippet",
+    "next_action",
+]
 
 
 def clean(value: str) -> str:
@@ -25,6 +49,11 @@ def rel(path: Path) -> str:
         return path.relative_to(ROOT).as_posix()
     except ValueError:
         return str(path)
+
+
+def href(target: Path, from_file: Path) -> str:
+    relative = os.path.relpath(target, from_file.parent).replace(os.sep, "/")
+    return quote(relative, safe="/#:.?=&%-_")
 
 
 def read_text(path: Path) -> str:
@@ -71,6 +100,119 @@ def claim_links(project: Path) -> list[dict[str, str]]:
     return csv_rows(project / "evidence" / "claim_evidence_links.csv")
 
 
+def locator_rows(project: Path) -> list[dict[str, str]]:
+    return csv_rows(project / "literature" / "evidence_locator_table.csv")
+
+
+def locator_index(project: Path) -> dict[str, dict[str, str]]:
+    return {clean(row.get("source_id", "")): row for row in locator_rows(project) if clean(row.get("source_id", ""))}
+
+
+def truthy(value: str) -> bool:
+    return clean(value).lower() in {"1", "true", "yes", "y"}
+
+
+def slug(value: str) -> str:
+    text = re.sub(r"[^a-zA-Z0-9]+", "-", value).strip("-").lower()
+    return text or "item"
+
+
+def reader_display_path(source_path: str) -> str:
+    if not clean(source_path):
+        return ""
+    source = Path(source_path)
+    if not source.is_absolute():
+        source = ROOT / source
+    if not source.exists() or source.suffix != ".md":
+        return ""
+    display = paper_markdown_view_path(source)
+    return rel(display) if display.exists() else ""
+
+
+def verification_status(row: dict[str, str]) -> str:
+    page = clean(row.get("page", ""))
+    locator = clean(row.get("locator_status", ""))
+    read_status = clean(row.get("read_status", ""))
+    if not page:
+        return "needs_page_locator"
+    if locator == "page_located_needs_human_check":
+        return "needs_page_check"
+    if read_status not in READY_READ_STATUSES:
+        return "needs_human_read"
+    return "ready_for_manuscript_review"
+
+
+def verification_priority(row: dict[str, str]) -> int:
+    score = 10
+    status = verification_status(row)
+    if truthy(row.get("used_in_manuscript", "")):
+        score += 100
+    if status == "needs_page_locator":
+        score += 50
+    elif status == "needs_page_check":
+        score += 40
+    elif status == "needs_human_read":
+        score += 25
+    if "statistical" in clean(row.get("risk", "")).lower():
+        score += 15
+    if clean(row.get("strength", "")) == "candidate":
+        score += 5
+    return score
+
+
+def next_verification_action(status: str) -> str:
+    actions = {
+        "needs_page_locator": "Open original PDF/Reader and fill exact page or table locator.",
+        "needs_page_check": "Check the extracted page/table against the original PDF.",
+        "needs_human_read": "Read the source block manually before treating it as manuscript evidence.",
+        "ready_for_manuscript_review": "Ready for final manuscript wording and citation audit.",
+    }
+    return actions.get(status, "Review before use.")
+
+
+def verification_queue_rows(project: Path) -> list[dict[str, str]]:
+    locators = locator_index(project)
+    rows: list[dict[str, str]] = []
+    for row in claim_links(project):
+        source_id = clean(row.get("source_block_id", ""))
+        locator = locators.get(source_id, {})
+        status = verification_status(row)
+        rows.append(
+            {
+                "task_id": f"verify-{slug(clean(row.get('claim_id', '')))}-{slug(source_id)}",
+                "priority": str(verification_priority(row)),
+                "verification_status": status,
+                "claim_id": clean(row.get("claim_id", "")),
+                "claim_text": clean(row.get("claim_text", "")),
+                "citekey": clean(row.get("citekey", "")),
+                "title": clean(locator.get("title", "")),
+                "source_block_id": source_id,
+                "page": clean(row.get("page", "")),
+                "locator_status": clean(row.get("locator_status", "")),
+                "read_status": clean(row.get("read_status", "")),
+                "used_in_manuscript": clean(row.get("used_in_manuscript", "")).lower() or "false",
+                "risk": clean(row.get("risk", "")),
+                "source_path": clean(row.get("source_path", "")),
+                "reader_display_path": reader_display_path(clean(row.get("source_path", ""))),
+                "source_map": clean(locator.get("source_map", "")),
+                "snippet": clean(locator.get("snippet", "")),
+                "next_action": next_verification_action(status),
+            }
+        )
+    rows.sort(key=lambda item: (-int(item["priority"]), item["claim_id"], item["citekey"], item["source_block_id"]))
+    return rows
+
+
+def verification_summary(rows: list[dict[str, str]]) -> dict[str, int]:
+    return {
+        "total_items": len(rows),
+        "needs_page_locator": sum(1 for row in rows if row["verification_status"] == "needs_page_locator"),
+        "needs_page_check": sum(1 for row in rows if row["verification_status"] == "needs_page_check"),
+        "needs_human_read": sum(1 for row in rows if row["verification_status"] == "needs_human_read"),
+        "ready_for_manuscript_review": sum(1 for row in rows if row["verification_status"] == "ready_for_manuscript_review"),
+    }
+
+
 def group_claims(rows: list[dict[str, str]]) -> dict[str, list[dict[str, str]]]:
     grouped: dict[str, list[dict[str, str]]] = {}
     for row in rows:
@@ -86,9 +228,8 @@ def row_trace(row: dict[str, str]) -> str:
 
 
 def readiness(rows: list[dict[str, str]]) -> str:
-    accepted = {"human-read", "verified", "claim-linked", "manuscript-cited"}
     located = sum(1 for row in rows if clean(row.get("page", "")))
-    human_ready = sum(1 for row in rows if clean(row.get("read_status", "")) in accepted)
+    human_ready = sum(1 for row in rows if clean(row.get("read_status", "")) in READY_READ_STATUSES)
     return f"{human_ready}/{len(rows)} human-ready; {located}/{len(rows)} page-located"
 
 
@@ -138,11 +279,12 @@ def match_claim_rows(rows: list[dict[str, str]], keywords: list[str], limit: int
     return selected
 
 
-def traceability_payload(project_slug: str, project: Path) -> dict[str, object]:
+def traceability_payload(project_slug: str, project: Path, queue_rows: list[dict[str, str]] | None = None) -> dict[str, object]:
     rows = claim_links(project)
     grouped = group_claims(rows)
     located = sum(1 for row in rows if clean(row.get("page", "")))
-    human_ready = sum(1 for row in rows if clean(row.get("read_status", "")) in {"human-read", "verified", "claim-linked", "manuscript-cited"})
+    human_ready = sum(1 for row in rows if clean(row.get("read_status", "")) in READY_READ_STATUSES)
+    queue_rows = queue_rows if queue_rows is not None else verification_queue_rows(project)
     questions = current_questions(project)
     question_rules = [
         ("Main question", ["平台", "服务价值", "阅读推广", "传播力", "SICAS", "AARRR", "数字阅读"]),
@@ -252,10 +394,117 @@ def traceability_payload(project_slug: str, project: Path) -> dict[str, object]:
             "page_pending_rows": len(rows) - located,
             "human_ready_rows": human_ready,
         },
+        "verification_queue_summary": verification_summary(queue_rows),
+        "top_verification_tasks": [
+            {key: item[key] for key in ["task_id", "priority", "verification_status", "claim_id", "citekey", "source_block_id", "page", "read_status", "next_action"]}
+            for item in queue_rows[:8]
+        ],
         "research_question_traces": question_traces,
         "variable_traces": variable_traces,
         "paragraph_traces": paragraph_traces,
     }
+
+
+def write_verification_csv(path: Path, rows: list[dict[str, str]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=VERIFICATION_FIELDS, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def write_verification_json(path: Path, project_slug: str, rows: list[dict[str, str]]) -> None:
+    payload = {
+        "schema_version": "ResearchWorkflow.PageVerificationQueue.v1",
+        "generated_at": dt.datetime.now().isoformat(timespec="seconds"),
+        "project": project_slug,
+        "summary": verification_summary(rows),
+        "items": rows,
+    }
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, str]], csv_path: Path, json_path: Path) -> None:
+    summary = verification_summary(rows)
+
+    def source_cell(row: dict[str, str]) -> str:
+        label = html.escape(row["source_block_id"])
+        display = clean(row.get("reader_display_path", ""))
+        source_text = html.escape(row.get("source_path", ""))
+        if display:
+            link = href(ROOT / display, path)
+            return f'<a href="{link}"><code>{label}</code></a><br><span>{source_text}</span>'
+        return f"<code>{label}</code><br><span>{source_text}</span>"
+
+    table_rows = "\n".join(
+        f"""
+        <tr>
+          <td><code>{html.escape(row['claim_id'])}</code><br>{html.escape(row['claim_text'])}</td>
+          <td>{html.escape(row['title'] or row['citekey'])}<br><code>{html.escape(row['citekey'])}</code></td>
+          <td>{source_cell(row)}</td>
+          <td>{html.escape(row['page'] or '待补')}</td>
+          <td><code>{html.escape(row['verification_status'])}</code><br><span>{html.escape(row['read_status'])}</span></td>
+          <td>{html.escape(row['next_action'])}</td>
+          <td>{html.escape(row['snippet'])}</td>
+        </tr>
+        """
+        for row in rows[:120]
+    )
+    path.write_text(
+        f"""<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>页码级证据核验队列 - {html.escape(project_slug)}</title>
+  <style>
+    :root {{ --ink:#1e293b; --muted:#64748b; --line:#dbe4ee; --paper:#fff; --soft:#f8fafc; --blue:#2563eb; --shadow:0 10px 28px rgba(15,23,42,.06); }}
+    * {{ box-sizing:border-box; }}
+    body {{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",Arial,sans-serif; color:var(--ink); background:#f8fafc; line-height:1.62; }}
+    header {{ background:#fff; border-bottom:1px solid var(--line); }}
+    .wrap {{ max-width:1280px; margin:0 auto; padding:28px 22px; }}
+    h1 {{ margin:0 0 8px; font-size:34px; }}
+    h2 {{ margin:0 0 12px; font-size:21px; }}
+    a {{ color:var(--blue); text-decoration:none; }}
+    .sub, span {{ color:var(--muted); }}
+    .grid {{ display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }}
+    .metric, .panel {{ background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; box-shadow:var(--shadow); }}
+    .metric {{ grid-column:span 3; }}
+    .metric b {{ display:block; font-size:28px; }}
+    .panel {{ grid-column:1/-1; }}
+    table {{ width:100%; border-collapse:collapse; font-size:14px; }}
+    th, td {{ text-align:left; vertical-align:top; border-bottom:1px solid var(--line); padding:10px 8px; }}
+    th {{ color:var(--muted); background:#fbfdff; }}
+    code {{ background:#eef3f8; border:1px solid #d8e2ec; border-radius:5px; padding:1px 4px; }}
+    @media (max-width:900px) {{ .metric {{ grid-column:1/-1; }} table {{ display:block; overflow-x:auto; }} h1 {{ font-size:28px; }} }}
+  </style>
+</head>
+<body>
+  <header><div class="wrap">
+    <h1>页码级证据核验队列</h1>
+    <p class="sub">{html.escape(project_slug)} · Generated {html.escape(dt.datetime.now().isoformat(timespec='seconds'))}</p>
+    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a> · <a href="../manuscript/writing_panel.html">论文写作面板</a> · <a href="{html.escape(csv_path.name)}">CSV</a> · <a href="{html.escape(json_path.name)}">JSON</a></p>
+  </div></header>
+  <main class="wrap">
+    <section class="grid">
+      <div class="metric"><b>{summary['total_items']}</b><span>核验任务</span></div>
+      <div class="metric"><b>{summary['needs_page_locator']}</b><span>待补页码</span></div>
+      <div class="metric"><b>{summary['needs_page_check']}</b><span>待人工核页</span></div>
+      <div class="metric"><b>{summary['ready_for_manuscript_review']}</b><span>可进入写作审查</span></div>
+      <section class="panel">
+        <h2>Claim -> Source Block -> Page -> Read Status</h2>
+        <table>
+          <thead><tr><th>Claim</th><th>文献</th><th>Source block</th><th>页码</th><th>状态</th><th>下一步</th><th>证据片段</th></tr></thead>
+          <tbody>{table_rows or '<tr><td colspan="7">暂无待核验证据。</td></tr>'}</tbody>
+        </table>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
+""",
+        encoding="utf-8",
+    )
 
 
 def md_table(rows: list[list[str]]) -> list[str]:
@@ -275,6 +524,7 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
     rows, located, pending = evidence_summary(project)
     trace = trace or traceability_payload(project_slug, project)
     summary = trace["summary"]
+    queue_summary = trace["verification_queue_summary"]
     lines = [
         "# Manuscript Production Panel",
         "",
@@ -395,6 +645,36 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
             ]
         )
     )
+    lines.extend(["", "## Page Verification Queue", ""])
+    lines.extend(
+        md_table(
+            [
+                ["Metric", "Value"],
+                ["Total verification tasks", str(queue_summary["total_items"])],
+                ["Need page locator", str(queue_summary["needs_page_locator"])],
+                ["Need page check", str(queue_summary["needs_page_check"])],
+                ["Need human read", str(queue_summary["needs_human_read"])],
+                ["Ready for manuscript review", str(queue_summary["ready_for_manuscript_review"])],
+            ]
+        )
+    )
+    lines.extend(["", "## Top Verification Tasks", ""])
+    lines.extend(
+        md_table(
+            [["Task", "Claim", "Source block", "Page", "Read status", "Next action"]]
+            + [
+                [
+                    str(item["task_id"]),
+                    str(item["claim_id"]),
+                    str(item["source_block_id"]),
+                    str(item["page"] or "待补"),
+                    str(item["read_status"]),
+                    str(item["next_action"]),
+                ]
+                for item in trace["top_verification_tasks"]
+            ]
+        )
+    )
     lines.extend(
         [
             "",
@@ -470,7 +750,7 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
   <header><div class="wrap">
     <h1>论文写作推进面板</h1>
     <p class="sub">{html.escape(project_slug)} · Generated {html.escape(dt.datetime.now().isoformat(timespec='seconds'))}</p>
-    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a></p>
+    <p><a href="../../../study_dashboard.html">返回学习仪表盘</a> · <a href="../evidence/page_verification_queue.html">页码核验队列</a></p>
   </div></header>
   <main class="wrap"><article class="panel">
     {''.join(body_parts)}
@@ -493,11 +773,21 @@ def main() -> int:
     md_path = out_dir / "writing_panel.md"
     html_path = out_dir / "writing_panel.html"
     trace_path = out_dir / "writing_traceability.json"
-    trace = traceability_payload(args.project, project)
+    queue_rows = verification_queue_rows(project)
+    queue_csv = project / "evidence" / "page_verification_queue.csv"
+    queue_json = project / "evidence" / "page_verification_queue.json"
+    queue_html = project / "evidence" / "page_verification_queue.html"
+    write_verification_csv(queue_csv, queue_rows)
+    write_verification_json(queue_json, args.project, queue_rows)
+    write_verification_html(queue_html, args.project, queue_rows, queue_csv, queue_json)
+    trace = traceability_payload(args.project, project, queue_rows=queue_rows)
     trace_path.write_text(json.dumps(trace, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     md_text = render_md(args.project, project, trace=trace)
     md_path.write_text(md_text + "\n", encoding="utf-8")
     html_path.write_text(render_html(args.project, md_text, html_path, md_path), encoding="utf-8")
+    print(f"Wrote page verification queue CSV: {queue_csv}")
+    print(f"Wrote page verification queue JSON: {queue_json}")
+    print(f"Wrote page verification queue HTML: {queue_html}")
     print(f"Wrote manuscript traceability data: {trace_path}")
     print(f"Wrote manuscript panel markdown: {md_path}")
     print(f"Wrote manuscript panel HTML: {html_path}")

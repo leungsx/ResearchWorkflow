@@ -418,6 +418,7 @@ def build_state(project_slug: str) -> dict[str, Any]:
     literature_synthesis = project / "03_literature_synthesis.md"
     incoming_triage = project / "literature" / "incoming_pdf_triage.html"
     evidence_locator = project / "literature" / "evidence_locator_table.html"
+    verification_queue = project / "evidence" / "page_verification_queue.html"
     writing_panel = project / "manuscript" / "writing_panel.html"
 
     return {
@@ -440,6 +441,7 @@ def build_state(project_slug: str) -> dict[str, Any]:
             "literature_synthesis": html_view(literature_synthesis) if literature_synthesis.exists() else "",
             "incoming_pdf_triage": rel(incoming_triage) if incoming_triage.exists() else "",
             "evidence_locator_table": rel(evidence_locator) if evidence_locator.exists() else "",
+            "page_verification_queue": rel(verification_queue) if verification_queue.exists() else "",
             "manuscript_writing_panel": rel(writing_panel) if writing_panel.exists() else "",
             "review_today": rel(REVIEW_TODAY),
             "search": rel(SEARCH_INDEX_HTML),
@@ -453,6 +455,7 @@ def build_state(project_slug: str) -> dict[str, Any]:
             "literature_synthesis": rel(literature_synthesis) if literature_synthesis.exists() else "",
             "incoming_pdf_triage": rel(project / "literature" / "incoming_pdf_triage.md") if (project / "literature" / "incoming_pdf_triage.md").exists() else "",
             "evidence_locator_table": rel(project / "literature" / "evidence_locator_table.md") if (project / "literature" / "evidence_locator_table.md").exists() else "",
+            "page_verification_queue": rel(project / "evidence" / "page_verification_queue.csv") if (project / "evidence" / "page_verification_queue.csv").exists() else "",
             "manuscript_writing_panel": rel(project / "manuscript" / "writing_panel.md") if (project / "manuscript" / "writing_panel.md").exists() else "",
         },
         "literature": {

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T20:48:31",
+  "generated_at": "2026-07-02T21:03:03",
   "project": {
     "slug": "library_short_video",
     "title": "图书馆短视频相关研究",
@@ -18,6 +18,7 @@
     "literature_synthesis": "paper_reading/views/literature_synthesis.html",
     "incoming_pdf_triage": "projects/library_short_video/literature/incoming_pdf_triage.html",
     "evidence_locator_table": "projects/library_short_video/literature/evidence_locator_table.html",
+    "page_verification_queue": "projects/library_short_video/evidence/page_verification_queue.html",
     "manuscript_writing_panel": "projects/library_short_video/manuscript/writing_panel.html",
     "review_today": "knowledge_cards/review_today.html",
     "search": "search/index.html",
@@ -31,6 +32,7 @@
     "literature_synthesis": "projects/library_short_video/03_literature_synthesis.md",
     "incoming_pdf_triage": "projects/library_short_video/literature/incoming_pdf_triage.md",
     "evidence_locator_table": "projects/library_short_video/literature/evidence_locator_table.md",
+    "page_verification_queue": "projects/library_short_video/evidence/page_verification_queue.csv",
     "manuscript_writing_panel": "projects/library_short_video/manuscript/writing_panel.md"
   },
   "literature": {
@@ -366,7 +368,7 @@
     "artifact_manifest": "vault/13_Knowledge_Graph/artifact_manifest.csv",
     "manifest_path": "vault/13_Knowledge_Graph/artifact_manifest.csv",
     "search_index": "vault/13_Knowledge_Graph/search_index.json",
-    "project_related_entries": 51,
+    "project_related_entries": 52,
     "html_entries": [
       {
         "source_path": "study_dashboard.html",
