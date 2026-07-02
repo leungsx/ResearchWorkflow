@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-02T21:07:59",
+  "generated_at": "2026-07-02T21:35:58",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -96,7 +96,7 @@
         "area": "Git/异地备份",
         "status": "PASS",
         "title": "Git 本地和远程快照状态正常",
-        "detail": "upstream=origin/main；last commit: 7a5d455 2026-07-02 21:06:44 +0800 Refresh workflow state for verification queue"
+        "detail": "upstream=origin/main；last commit: 7530329 2026-07-02 21:08:10 +0800 Refresh clean workflow state after verification queue"
       },
       {
         "area": "Token/记忆",
@@ -120,7 +120,7 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "3 个开放行动。"
+        "detail": "2 个开放行动。"
       },
       {
         "area": "项目协作层",
