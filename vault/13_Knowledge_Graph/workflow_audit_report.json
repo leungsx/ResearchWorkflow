@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T19:34:20",
+  "generated_at": "2026-07-03T19:47:05",
   "date": "2026-07-03",
   "audit_mode": "readonly",
-  "pre_refresh_state_hash": "b6d9f1a4d7f37d00501b237f2e9e7f20ed700f38d75f670211e6a9bc3ac39c09",
-  "post_refresh_state_hash": "b6d9f1a4d7f37d00501b237f2e9e7f20ed700f38d75f670211e6a9bc3ac39c09",
+  "pre_refresh_state_hash": "d7d82d863d1fa68f024c14bdd97cf9b71390ce97720d8bfeda7a6453f47a3e36",
+  "post_refresh_state_hash": "d7d82d863d1fa68f024c14bdd97cf9b71390ce97720d8bfeda7a6453f47a3e36",
   "summary": {
     "counts": {
       "PASS": 16,
@@ -82,13 +82,13 @@
       "area": "备份",
       "status": "WARN",
       "title": "最近备份超过 36 小时",
-      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 47.4 小时前。"
+      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 47.7 小时前。"
     },
     {
       "area": "Git/异地备份",
       "status": "PASS",
       "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: 8bd5fb4 2026-07-03 19:33:52 +0800 Refresh workflow state after deep read UI update"
+      "detail": "upstream=origin/main；last commit: b1a4a2f 2026-07-03 19:46:44 +0800 Refresh workflow state after triage UI update"
     },
     {
       "area": "Token/记忆",
