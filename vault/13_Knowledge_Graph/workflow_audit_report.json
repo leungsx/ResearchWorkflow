@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T22:24:18",
+  "generated_at": "2026-07-03T22:25:07",
   "date": "2026-07-03",
   "audit_mode": "readonly",
   "pre_refresh_state_hash": "6ab60004c2a8c8e9ba8bb0230f268d4a3c5cb2dbaf4570ca3f0d29a0ffa72a41",
   "post_refresh_state_hash": "6ab60004c2a8c8e9ba8bb0230f268d4a3c5cb2dbaf4570ca3f0d29a0ffa72a41",
   "summary": {
     "counts": {
-      "PASS": 16,
-      "WARN": 2,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "check_count": 18
@@ -86,9 +86,9 @@
     },
     {
       "area": "Git/异地备份",
-      "status": "WARN",
-      "title": "存在尚未提交的 Git 改动",
-      "detail": "25 个路径待快照： M action_queue.html； M archive_policy.html； M docs/WORKFLOW_LAYERED_ARCHITECTURE.md； M paper_reading/views/evidence-gate-report-7607e392.html； M paper_reading/views/workflow_layered_architecture.html； M project_collaboration.html； M projects/library_short_video/literature/evidence_locator_table.html； M projects/library_short_video/literature/evidence_locator_table.md"
+      "status": "PASS",
+      "title": "Git 本地和远程快照状态正常",
+      "detail": "upstream=origin/main；last commit: f6f1409 2026-07-03 22:24:53 +0800 Add action priority bands"
     },
     {
       "area": "Token/记忆",

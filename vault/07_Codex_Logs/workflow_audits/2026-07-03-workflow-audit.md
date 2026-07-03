@@ -1,10 +1,10 @@
 # Workflow Audit - 2026-07-03
 
-Generated: 2026-07-03T22:24:18
+Generated: 2026-07-03T22:25:07
 Audit mode: `readonly`
 Pre-refresh state hash: `6ab60004c2a8c8e9ba8bb0230f268d4a3c5cb2dbaf4570ca3f0d29a0ffa72a41`
 Post-refresh state hash: `6ab60004c2a8c8e9ba8bb0230f268d4a3c5cb2dbaf4570ca3f0d29a0ffa72a41`
-Summary: PASS=16 WARN=2 FAIL=0
+Summary: PASS=17 WARN=1 FAIL=0
 
 ## Checks
 
@@ -21,7 +21,7 @@ Summary: PASS=16 WARN=2 FAIL=0
 | 项目状态 | PASS | 项目状态文件可供自动化读取 | 2 个项目。 |
 | 复习队列 | WARN | 存在到期复习项 | 5 项到期：传播力评价；平台互动-服务触达-阅读转化；熵权法；爆款指数；图书馆短视频内容质量评价 |
 | 备份 | PASS | 最近备份可用 | backups/researchworkflow-critical-20260703-200749.zip，约 2.3 小时前。 |
-| Git/异地备份 | WARN | 存在尚未提交的 Git 改动 | 25 个路径待快照： M action_queue.html； M archive_policy.html； M docs/WORKFLOW_LAYERED_ARCHITECTURE.md； M paper_reading/views/evidence-gate-report-7607e392.html； M paper_reading/views/workflow_layered_architecture.html； M project_collaboration.html； M projects/library_short_video/literature/evidence_locator_table.html； M projects/library_short_video/literature/evidence_locator_table.md |
+| Git/异地备份 | PASS | Git 本地和远程快照状态正常 | upstream=origin/main；last commit: f6f1409 2026-07-03 22:24:53 +0800 Add action priority bands |
 | Token/记忆 | PASS | 今日 compact summary 可作为默认启动上下文 | vault/07_Codex_Logs/compact_daily/2026-07-03-summary.md，约 107 words。 |
 | 文件卫生 | PASS | 未发现常见系统/缓存文件 | 工作区较干净。 |
 | Schema | PASS | 核心机器状态 schema 校验通过 | 15 个文件通过校验。 |
