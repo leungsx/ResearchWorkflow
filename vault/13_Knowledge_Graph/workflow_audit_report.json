@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T20:07:57",
+  "generated_at": "2026-07-03T20:08:51",
   "date": "2026-07-03",
   "audit_mode": "readonly",
   "pre_refresh_state_hash": "e15f519947d2ba83f2575b12becb900c3ac0a5d393f453ddcab852f23fc7ff67",
@@ -87,8 +87,8 @@
     {
       "area": "Git/异地备份",
       "status": "WARN",
-      "title": "存在尚未提交的 Git 改动",
-      "detail": "49 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M assets/app.css； M logs/index.html； M logs/views/2026-06-18-knowledge-edc7455a.html； M logs/views/2026-06-20-hook-model-132c5c65.html； M logs/views/2026-06-29-evening-close-631a6a14.html"
+      "title": "本地提交尚未推送到远程",
+      "detail": "ahead=1, behind=0；remote=https://github.com/leungsx/ResearchWorkflow.git"
     },
     {
       "area": "Token/记忆",
