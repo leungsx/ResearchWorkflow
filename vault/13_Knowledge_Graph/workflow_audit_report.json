@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T09:32:49",
+  "generated_at": "2026-07-03T18:40:55",
   "date": "2026-07-03",
   "audit_mode": "readonly",
-  "pre_refresh_state_hash": "305842f411248bcb1aa40287b08aded7a8d3c0cb8ec4d2aaccb9172ad912c329",
-  "post_refresh_state_hash": "305842f411248bcb1aa40287b08aded7a8d3c0cb8ec4d2aaccb9172ad912c329",
+  "pre_refresh_state_hash": "ba6544e23ed2ca794c0820b7e13b968b6af8ffdbd2de10caa37f2008aa9a93f2",
+  "post_refresh_state_hash": "ba6544e23ed2ca794c0820b7e13b968b6af8ffdbd2de10caa37f2008aa9a93f2",
   "summary": {
     "counts": {
       "PASS": 16,
@@ -82,13 +82,13 @@
       "area": "备份",
       "status": "WARN",
       "title": "最近备份超过 36 小时",
-      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 37.4 小时前。"
+      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 46.6 小时前。"
     },
     {
       "area": "Git/异地备份",
       "status": "PASS",
       "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: 56df06d 2026-07-03 09:32:14 +0800 Refresh workflow state after UI update"
+      "detail": "upstream=origin/main；last commit: d8ad1f9 2026-07-03 18:40:38 +0800 Refresh workflow state after usability update"
     },
     {
       "area": "Token/记忆",
@@ -112,7 +112,7 @@
       "area": "行动队列",
       "status": "PASS",
       "title": "行动队列可用且入口有效",
-      "detail": "11 个开放行动。"
+      "detail": "10 个开放行动。"
     },
     {
       "area": "项目协作层",
