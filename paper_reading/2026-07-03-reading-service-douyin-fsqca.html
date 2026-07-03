@@ -4,198 +4,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>2026-07-03 精读：公共图书馆阅读服务类抖音短视频传播效果</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --ink: #1f2933;
-      --muted: #5c6b7a;
-      --line: #d9e2ec;
-      --paper: #ffffff;
-      --soft: #f7fafc;
-      --blue: #1f5d99;
-      --green: #14775f;
-      --amber: #9b650c;
-      --rose: #a73755;
-      --slate: #314252;
-      --shadow: 0 10px 26px rgba(25, 39, 52, 0.07);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
-      color: var(--ink);
-      background: #f7fafc;
-      line-height: 1.64;
-    }
-    a { color: var(--blue); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { max-width: 1180px; margin: 0 auto; padding: 24px; }
-    header {
-      color: #f9fbfd;
-      background: linear-gradient(135deg, #253744 0%, #155f5a 56%, #8c6b28 100%);
-      border-bottom: 1px solid rgba(255,255,255,0.16);
-    }
-    .eyebrow {
-      display: inline-block;
-      padding: 5px 9px;
-      border: 1px solid rgba(255,255,255,0.24);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.1);
-      font-size: 12px;
-    }
-    h1 { margin: 14px 0 10px; font-size: 34px; line-height: 1.2; letter-spacing: 0; }
-    h2 { margin: 0 0 14px; font-size: 22px; letter-spacing: 0; }
-    h3 { margin: 0 0 9px; font-size: 17px; letter-spacing: 0; }
-    p { margin: 0 0 12px; }
-    .sub { max-width: 920px; color: rgba(249,251,253,0.92); }
-    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .nav a {
-      color: #f9fbfd;
-      border: 1px solid rgba(255,255,255,0.24);
-      background: rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 7px 11px;
-      font-size: 14px;
-    }
-    main.wrap { margin-top: -22px; }
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
-    .panel, .metric {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-    }
-    .panel { padding: 18px; }
-    .metric { padding: 16px; }
-    .span-12 { grid-column: 1 / -1; }
-    .span-8 { grid-column: span 8; }
-    .span-6 { grid-column: span 6; }
-    .span-4 { grid-column: span 4; }
-    .metric b { display: block; font-size: 28px; line-height: 1.1; color: var(--slate); }
-    .metric span { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; }
-    .meta {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 9px 18px;
-      margin-top: 10px;
-      font-size: 14px;
-    }
-    .meta div { padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
-    .label { display: block; margin-bottom: 3px; color: var(--muted); font-size: 12px; }
-    .tag {
-      display: inline-block;
-      margin: 0 7px 8px 0;
-      padding: 5px 9px;
-      background: #edf8f4;
-      color: var(--green);
-      border: 1px solid #cfe7de;
-      border-radius: 999px;
-      font-size: 13px;
-    }
-    .route, .cards, .glossary { display: grid; gap: 10px; }
-    .route-item, .card-link, .glossary div {
-      padding: 12px 13px;
-      border: 1px solid var(--line);
-      border-left: 4px solid var(--green);
-      border-radius: 0 8px 8px 0;
-      background: var(--soft);
-    }
-    .route-item strong, .card-link strong { display: block; margin-bottom: 4px; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
-    th { color: var(--muted); font-weight: 650; background: #fbfdff; }
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .step {
-      position: relative;
-      min-height: 166px;
-      padding: 14px;
-      border: 1px solid #cfe0e2;
-      border-radius: 8px;
-      background: #f8fbfb;
-    }
-    .step:not(:last-child)::after {
-      content: ">";
-      position: absolute;
-      right: -10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--green);
-      font-size: 20px;
-      font-weight: 700;
-    }
-    .num {
-      display: inline-flex;
-      width: 28px;
-      height: 28px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: var(--green);
-      color: #fff;
-      font-weight: 700;
-      margin-bottom: 9px;
-    }
-    .callout {
-      padding: 14px;
-      border: 1px solid #ead8a8;
-      border-radius: 8px;
-      background: #fff9eb;
-    }
-    .callout.warn { border-color: #efc2ce; background: #fff4f6; }
-    ul, ol { margin: 0; padding-left: 20px; }
-    li { margin: 7px 0; }
-    details {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--soft);
-      padding: 12px 14px;
-    }
-    details + details { margin-top: 10px; }
-    summary { cursor: pointer; font-weight: 650; }
-    .actions label { display: block; padding: 10px 0; border-bottom: 1px dashed var(--line); }
-    .actions input { margin-right: 8px; }
-    code {
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      background: #eef3f8;
-      border: 1px solid #d8e2ec;
-      border-radius: 5px;
-      padding: 1px 4px;
-      font-size: 0.92em;
-    }
-    .foot { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
-    @media (max-width: 920px) {
-      .span-8, .span-6, .span-4, .span-12, .metric { grid-column: 1 / -1; }
-      .flow { grid-template-columns: 1fr; }
-      .step:not(:last-child)::after { content: "v"; right: auto; left: 50%; top: auto; bottom: -19px; transform: translateX(-50%); }
-      h1 { font-size: 28px; }
-      .meta { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/app.css">
 </head>
 <body>
-  <header>
+  <a class="skip-link" href="#main-content">跳到正文</a>
+  <header class="site-header">
     <div class="wrap">
-      <span class="eyebrow">Daily Deep Read · 2026-07-03</span>
-      <h1>公共图书馆阅读服务类抖音短视频传播效果的影响因素研究</h1>
-      <p class="sub">今天读王磊 2025 这篇，是为了把项目从“账号传播力”推进到“阅读服务类短视频的传播效果机制”。它能补上当前主问题中最薄的一层：平台互动如何通过视频表现、内容价值和引流技巧形成可观察效果。</p>
-      <nav class="nav">
-        <a href="../study_dashboard.html">学习仪表盘</a>
-        <a href="today.html">今日固定入口</a>
+      <p class="page-kicker">ResearchWorkflow / 阅读</p>
+      <div class="page-heading">
+        <div>
+          <h1>公共图书馆阅读服务类抖音短视频传播效果的影响因素研究</h1>
+          <p class="sub">今天读王磊 2025 这篇，是为了把项目从“账号传播力”推进到“阅读服务类短视频的传播效果机制”。它能补上当前主问题中最薄的一层：平台互动如何通过视频表现、内容价值和引流技巧形成可观察效果。</p>
+          <p class="page-meta">每日精读 · 2026-07-03 · library_short_video</p>
+        </div>
+        <div class="page-primary-action">
+          <a class="button primary" href="views/paper-43265a51.html">打开 Reader</a>
+        </div>
+      </div>
+      <nav class="nav global-nav" aria-label="一级导航">
+        <a href="../study_dashboard.html">总览</a>
+        <a href="../action_queue.html">今日任务</a>
+        <a href="today.html" aria-current="page">阅读</a>
+        <a href="../projects/library_short_video/manuscript/writing_panel.html">写作</a>
+        <a href="../projects/library_short_video/evidence/page_verification_queue.html">证据</a>
+        <a href="../workflow_state.html">系统</a>
+      </nav>
+      <nav class="nav subnav" aria-label="阅读子导航">
+        <a href="today.html" aria-current="page">今日精读</a>
         <a href="index.html">论文归档</a>
-        <a href="../knowledge_cards/index.html">知识卡入口</a>
-        <a href="../knowledge_graph/index.html">知识图谱</a>
-        <a href="views/literature_review_workbench.html">文献综述工作台</a>
-        <a href="views/innovation_limitation_bank.html">创新局限台账</a>
+        <a href="../projects/library_short_video/literature/incoming_pdf_triage.html">PDF分拣</a>
+        <a href="../knowledge_cards/index.html">知识卡</a>
       </nav>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap deep-read" id="main-content">
     <section class="grid">
       <section class="panel span-8">
         <h2>题目与推荐理由</h2>

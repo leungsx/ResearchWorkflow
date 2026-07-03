@@ -361,6 +361,19 @@ class WorkflowSmokeTests(unittest.TestCase):
                 self.assertLessEqual(len(nav_links(text, "global-nav")), 6)
                 self.assertGreater(len(nav_links(text, "subnav")), 0)
 
+    def test_current_deep_read_page_uses_shared_workflow_shell(self) -> None:
+        page = ROOT / "paper_reading" / "2026-07-03-reading-service-douyin-fsqca.html"
+        text = read_text(page)
+        self.assertIn("../assets/app.css", text)
+        self.assertIn("ResearchWorkflow / 阅读", text)
+        self.assertIn('class="nav global-nav"', text)
+        self.assertIn('class="nav subnav"', text)
+        self.assertIn('class="wrap deep-read"', text)
+        self.assertIn("打开 Reader", text)
+        self.assertNotIn("<style>", text)
+        self.assertNotIn("Daily Deep Read", text)
+        self.assertNotIn("linear-gradient", text)
+
     def test_evidence_pages_expose_copy_commands(self) -> None:
         verification = read_text(project_path("evidence", "page_verification_queue.html"))
         writing = read_text(project_path("manuscript", "writing_panel.html"))
