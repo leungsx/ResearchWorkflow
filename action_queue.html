@@ -17,7 +17,7 @@
         <div>
           <h1>行动队列</h1>
           <p class="sub">按优先级排列今天最该处理的事项，先处理高价值学习和阻塞项。</p>
-          <p class="page-meta">Generated 2026-07-03T20:00:03</p>
+          <p class="page-meta">Generated 2026-07-03T20:19:00</p>
         </div>
         <div class="page-primary-action" hidden></div>
       </div>
@@ -50,6 +50,17 @@
       </div>
     </section>
 
+    <section class="panel wide page-guidance">
+      <div class="guidance-grid">
+        <div>
+          <h2>使用建议</h2>
+          <p><strong>这个页面用于：</strong>把审计提醒、到期复习和项目推进任务按优先级排成今天的处理顺序。</p>
+          <p><strong>建议先做：</strong>先完成今日主任务；不要从系统维护项开始，除非它是 FAIL 或阻塞写作。</p>
+          <p><strong>完成后去：</strong>完成一项后回到今日工作台，或运行 make daily 让任务队列重新排序。</p>
+        </div>
+        <div class="command-stack"><a class="inline-button primary" href="study_dashboard.html">打开今日工作台</a><button type="button" class="inline-button" data-copy="make daily" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span><code>make daily</code></div>
+      </div>
+    </section>
     <section class="metrics">
       <div class="metric"><b>10</b><span class="meta">开放行动</span></div>
       <div class="metric"><b>6</b><span class="meta">高优先级</span></div>
@@ -114,9 +125,9 @@
         <article class="action task-action">
           <div class="rank">#8</div>
           <div>
-            <h2><a href="workflow_health.html">处理提醒：最近备份超过 36 小时</a></h2>
-            <p>backups/researchworkflow-critical-20260701-200737.zip，约 47.7 小时前。</p>
-            <p class="meta">系统提醒 · 优先级 70 · 来源 备份</p>
+            <h2><a href="workflow_health.html">处理提醒：存在尚未提交的 Git 改动</a></h2>
+            <p>38 个路径待快照： M Makefile； M README.md； M action_queue.html； M archive_policy.html； M assets/app.css； M docs/UI_STYLE_GUIDE.md； M docs/USABLE_FUNCTIONS_TEST_GUIDE.md； M docs/USER_VISUAL_GUIDE.md</p>
+            <p class="meta">系统提醒 · 优先级 70 · 来源 Git/异地备份</p>
           </div>
         </article>
         <article class="action task-action">

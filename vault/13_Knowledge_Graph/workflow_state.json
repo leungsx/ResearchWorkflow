@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T20:05:48",
+  "generated_at": "2026-07-03T20:19:00",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -17,12 +17,12 @@
     "manifest_rows": 144,
     "search_entries": 144,
     "project_count": 2,
-    "git_dirty_paths": 45
+    "git_dirty_paths": 41
   },
   "audit": {
     "counts": {
-      "PASS": 16,
-      "WARN": 2,
+      "PASS": 15,
+      "WARN": 3,
       "FAIL": 0
     },
     "checks": [
@@ -88,15 +88,15 @@
       },
       {
         "area": "备份",
-        "status": "WARN",
-        "title": "最近备份超过 36 小时",
-        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 47.7 小时前。"
+        "status": "PASS",
+        "title": "最近备份可用",
+        "detail": "backups/researchworkflow-critical-20260703-200749.zip，约 0.2 小时前。"
       },
       {
         "area": "Git/异地备份",
-        "status": "PASS",
-        "title": "Git 本地和远程快照状态正常",
-        "detail": "upstream=origin/main；last commit: b1a4a2f 2026-07-03 19:46:44 +0800 Refresh workflow state after triage UI update"
+        "status": "WARN",
+        "title": "存在尚未提交的 Git 改动",
+        "detail": "38 个路径待快照： M Makefile； M README.md； M action_queue.html； M archive_policy.html； M assets/app.css； M docs/UI_STYLE_GUIDE.md； M docs/USABLE_FUNCTIONS_TEST_GUIDE.md； M docs/USER_VISUAL_GUIDE.md"
       },
       {
         "area": "Token/记忆",
@@ -106,9 +106,9 @@
       },
       {
         "area": "文件卫生",
-        "status": "PASS",
-        "title": "未发现常见系统/缓存文件",
-        "detail": "工作区较干净。"
+        "status": "WARN",
+        "title": "工作区存在系统/缓存文件",
+        "detail": "__pycache__=2；这些不会进入 file sweep，但可择机清理。"
       },
       {
         "area": "Schema",
@@ -120,19 +120,19 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "10 个开放行动。"
+        "detail": "9 个开放行动。"
       },
       {
-        "area": "项目协作层",
+        "area": "待我确认",
         "status": "PASS",
-        "title": "项目协作层可用",
+        "title": "待我确认可用",
         "detail": "2 个项目；user_waiting=3。"
       },
       {
-        "area": "自动归档策略",
+        "area": "备份与清理",
         "status": "PASS",
-        "title": "自动归档策略可用",
-        "detail": "backup=7, prune=0, cache=0"
+        "title": "备份与清理可用",
+        "detail": "backup=8, prune=0, cache=2"
       }
     ],
     "health_html": "workflow_health.html",
@@ -373,7 +373,7 @@
     "manifest": "vault/13_Knowledge_Graph/artifact_manifest.csv",
     "search_index": "vault/13_Knowledge_Graph/search_index.json",
     "backup_index": "backups/index.html",
-    "latest_backup": "backups/researchworkflow-critical-20260701-200737.zip",
+    "latest_backup": "backups/researchworkflow-critical-20260703-200749.zip",
     "action_queue": "vault/13_Knowledge_Graph/action_queue.json",
     "workflow_audit_report": "vault/13_Knowledge_Graph/workflow_audit_report.json",
     "project_collaboration": "vault/13_Knowledge_Graph/collaboration_state.json",

@@ -4,6 +4,7 @@ from __future__ import annotations
 import csv
 import json
 import re
+import subprocess
 import sys
 import unittest
 from html.parser import HTMLParser
@@ -428,6 +429,51 @@ class WorkflowSmokeTests(unittest.TestCase):
                 text = read_text(page)
                 self.assertIn(f"<title>{title}</title>", text)
                 self.assertRegex(text, rf"<h1>{re.escape(title)}</h1>")
+
+    def test_core_task_pages_include_usage_guidance(self) -> None:
+        pages = [
+            ROOT / "action_queue.html",
+            ROOT / "workflow_state.html",
+            ROOT / "workflow_health.html",
+            ROOT / "project_collaboration.html",
+            ROOT / "archive_policy.html",
+            project_path("literature", "incoming_pdf_triage.html"),
+            project_path("literature", "evidence_locator_table.html"),
+            project_path("evidence", "page_verification_queue.html"),
+            project_path("manuscript", "writing_panel.html"),
+        ]
+        for page in pages:
+            with self.subTest(page=page.relative_to(ROOT).as_posix()):
+                text = read_text(page)
+                self.assertIn('class="panel wide page-guidance"', text)
+                self.assertIn("这个页面用于：", text)
+                self.assertIn("建议先做：", text)
+                self.assertIn("完成后去：", text)
+
+    def test_rw_menu_exposes_task_first_commands(self) -> None:
+        result = subprocess.run(
+            [sys.executable, "scripts/rw.py"],
+            cwd=ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn("ResearchWorkflow 简易菜单", result.stdout)
+        self.assertIn("今天该做什么", result.stdout)
+        self.assertIn("核验证据页码", result.stdout)
+        self.assertIn("make daily", result.stdout)
+        command = subprocess.run(
+            [sys.executable, "scripts/rw.py", "--command", "5"],
+            cwd=ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+        self.assertEqual(0, command.returncode, command.stderr)
+        self.assertIn(f"make manuscript-panel PROJECT={ACTIVE_PROJECT}", command.stdout)
 
     def test_no_generated_page_inlines_full_design_system_css(self) -> None:
         offenders: list[str] = []

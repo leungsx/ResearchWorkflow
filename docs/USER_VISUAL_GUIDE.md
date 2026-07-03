@@ -7,13 +7,15 @@
 如果你只是想知道“我现在该点哪里、读什么、这些文件有什么用”，不要先读完整手册，先打开：
 
 ```text
-/Users/leung/ResearchWorkflow/vault/Home.md
+/Users/leung/ResearchWorkflow/study_dashboard.html
 ```
+
+这是“今日工作台”：页面顶部会告诉你今日主任务、推荐理由、打开入口、复制命令和完成后下一步。
 
 当前 `library_short_video` 项目的论文阅读入口是：
 
 ```text
-/Users/leung/ResearchWorkflow/projects/library_short_video/literature/reading_board.md
+/Users/leung/ResearchWorkflow/paper_reading/today.html
 ```
 
 如果只是复盘已读论文或继续共读，优先打开省 token 的论文上下文包：
@@ -26,6 +28,12 @@
 
 ```bash
 make fast-status PROJECT=library_short_video TOPIC="图书馆短视频相关研究" PRINT=1
+```
+
+如果只是想看菜单，不想记命令：
+
+```bash
+make rw
 ```
 
 架构说明见：

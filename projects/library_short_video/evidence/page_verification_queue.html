@@ -33,7 +33,18 @@
     </div>
   </header>
   <main class="wrap" id="main-content">
-<div class="toolbar">
+<section class="panel wide page-guidance">
+      <div class="guidance-grid">
+        <div>
+          <h2>使用建议</h2>
+          <p><strong>这个页面用于：</strong>补全主张、来源片段、页码、阅读状态和证据使用状态，防止写作时引用没有页码或未核验的证据。</p>
+          <p><strong>建议先做：</strong>优先处理已经进入正文或候选正文的证据；没有页码的条目先回 Reader/PDF 定位。</p>
+          <p><strong>完成后去：</strong>核完页码后回到写论文页面，把可用证据放进研究问题、变量指标和段落队列。</p>
+        </div>
+        <div class="command-stack"><a class="inline-button primary" href="../manuscript/writing_panel.html">去写论文</a><button type="button" class="inline-button" data-copy="make manuscript-panel PROJECT=library_short_video" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span><code>make manuscript-panel PROJECT=library_short_video</code></div>
+      </div>
+    </section>
+    <div class="toolbar">
       <a class="button primary" href="page_verification_queue.csv">CSV 数据</a>
       <a class="button" href="page_verification_queue.json">JSON 数据</a>
       <button type="button" class="button" data-copy="make manuscript-panel PROJECT=library_short_video" data-label="复制刷新命令">复制刷新命令</button>

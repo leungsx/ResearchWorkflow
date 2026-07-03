@@ -41,6 +41,14 @@ The standard header order is:
 
 Do not create pages that only show "返回学习仪表盘" without the standard shell.
 
+Core task pages should also include a `.page-guidance` panel near the top of the body. It answers three questions:
+
+1. `这个页面用于：...`
+2. `建议先做：...`
+3. `完成后去：...`
+
+The goal is fast orientation. Detailed professional terminology can stay in tables, notes, and metadata; the first screen should tell the user what to do next.
+
 ## Shared Assets
 
 Use shared assets:
@@ -59,6 +67,7 @@ Generated pages should link the CSS file instead of embedding a separate full st
 - Metadata: muted, small, never competing with the title.
 - Primary action: one obvious action per page when possible.
 - Copy-command buttons: secondary actions, grouped in the page body or advanced action area.
+- Task guidance: one purpose, one recommended first action, one next destination.
 - Navigation should scroll horizontally on narrow screens instead of wrapping into noisy multi-line bars.
 
 ## Component Classes
@@ -69,6 +78,7 @@ Common classes live in `assets/app.css`:
 - Cards: `.metric`, `.item`, `.action`, `.project`, `.check`
 - Navigation: `.global-nav`, `.subnav`
 - Actions: `.button`, `.inline-button`, `.toolbar`
+- Guidance: `.page-guidance`, `.guidance-grid`
 - Reading content: `.md-view`, `.source-path`, `.wikilink`
 - Status: `.status`, `.pass`, `.warn`, `.fail`
 
@@ -100,3 +110,4 @@ The workflow test suite should enforce:
 - Main user-facing pages link `assets/app.css`.
 - Context pages have a subnavigation.
 - Dashboard interaction JS lives in `assets/app.js`, not repeated inline across every generated page.
+- Core task pages include `.page-guidance` with purpose, first action, and next destination.

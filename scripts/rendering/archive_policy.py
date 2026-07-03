@@ -15,7 +15,7 @@ from rendering.paths import (
     WORKFLOW_AUDIT_JSON,
     WORKFLOW_HEALTH,
 )
-from rendering.ui import render_shell
+from rendering.ui import render_guidance, render_shell
 
 
 BACKUP_KEEP = 30
@@ -187,6 +187,15 @@ def write_archive_policy_html(state: dict[str, Any]) -> None:
     )
     policy_rows = "\n".join(f"<tr><th>{html.escape(str(key))}</th><td>{html.escape(str(value))}</td></tr>" for key, value in policy.items())
     body = f"""
+    {render_guidance(
+        purpose="查看备份、旧日志压缩和系统缓存候选，区分可再生成文件和必须保留的研究源资产。",
+        first="先看候选数量；只有明确知道影响范围时，才复制执行清理或 prune 命令。",
+        after="完成备份或清理后运行系统体检，确认没有入口、链接或 Git 同步问题。",
+        output=ARCHIVE_POLICY_HTML,
+        command="make workflow-backup",
+        action_label="打开系统体检",
+        action_target=WORKFLOW_HEALTH,
+    )}
     <section class="metrics">
       <div class="metric"><b>{summary.get("backup_count", 0)}</b><span class="meta">备份包</span></div>
       <div class="metric"><b>{summary.get("backup_prune_candidates", 0)}</b><span class="meta">可裁剪备份</span></div>

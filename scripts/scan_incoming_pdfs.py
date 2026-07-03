@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from rendering.io import write_json_if_changed, write_text_if_changed, write_text_preserving_generated_at
-from rendering.ui import render_shell
+from rendering.ui import render_guidance, render_shell
 from workflow_config import active_project_slug
 
 
@@ -342,6 +342,15 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
         for row in rows
     )
     body = f"""
+    {render_guidance(
+        purpose="把 incoming 文件夹里的 PDF/CAJ 先分成可入库、可建 Reader、重复件和外部对照，避免直接混入正式文献矩阵。",
+        first="优先处理“入库为稳定 PDF”和“生成 Reader”的高证据价值文献；重复件先保留一份，不自动删除。",
+        after="入库或生成 Reader 后回到今日精读，选择下一篇能补项目缺口的论文。",
+        output=path,
+        command=f"make incoming-triage PROJECT={project}",
+        action_label="打开今日精读",
+        action_target=ROOT / "paper_reading" / "today.html",
+    )}
     <section class="summary-grid" aria-label="PDF分拣摘要">{cards or '<div class="metric"><b>0</b><span>incoming 文件</span></div>'}</section>
     <section class="grid">
       <div class="panel table-panel">

@@ -6,6 +6,7 @@
   <title>找证据</title>
   <link rel="stylesheet" href="../../../assets/app.css">
 
+  <script src="../../../assets/app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到正文</a>
@@ -16,7 +17,7 @@
         <div>
           <h1>找证据</h1>
           <p class="sub">把综述主张连接到文献、来源片段和页码线索，作为正式引用前的定位工作台。</p>
-          <p class="page-meta">library_short_video · 生成时间 2026-07-03T20:05:47</p>
+          <p class="page-meta">library_short_video · 生成时间 2026-07-03T20:18:59</p>
         </div>
         <div class="page-primary-action"><a class="button primary" href="evidence_locator_table.csv">CSV 数据</a></div>
       </div>
@@ -32,7 +33,18 @@
     </div>
   </header>
   <main class="wrap" id="main-content">
-<section class="grid">
+<section class="panel wide page-guidance">
+      <div class="guidance-grid">
+        <div>
+          <h2>使用建议</h2>
+          <p><strong>这个页面用于：</strong>把综述主张连接到文献、Reader 来源片段和页码线索，形成正式引用前的证据定位表。</p>
+          <p><strong>建议先做：</strong>先看“页码待补”和已进入写作链的主张，决定哪些证据需要回原文核页。</p>
+          <p><strong>完成后去：</strong>完成定位后进入核页码，补齐可引用页码和阅读状态。</p>
+        </div>
+        <div class="command-stack"><a class="inline-button primary" href="../evidence/page_verification_queue.html">去核页码</a><button type="button" class="inline-button" data-copy="make evidence-locators PROJECT=library_short_video" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span><code>make evidence-locators PROJECT=library_short_video</code></div>
+      </div>
+    </section>
+    <section class="grid">
       <div class="metric"><b>59</b><span>证据定位行</span></div>
       <div class="metric"><b>8</b><span>已有页码</span></div>
       <div class="metric"><b>51</b><span>页码待补</span></div>

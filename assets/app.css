@@ -304,6 +304,8 @@ main.wrap { padding-top: 22px; }
 .cta-card { border-left: 4px solid var(--blue); background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%); }
 .cta-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px); gap: 16px; align-items: start; }
 .cta-title { margin: 4px 0 8px; font-size: 22px; }
+.page-guidance { border-left: 4px solid var(--green); }
+.guidance-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 320px); gap: 16px; align-items: start; }
 .task-candidates {
   margin-top: 16px;
   padding-top: 14px;
@@ -522,6 +524,7 @@ footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
   .panel, .metric { grid-column: 1 / -1; }
   .metrics, .columns, .checks { grid-template-columns: 1fr; }
   .cta-layout { grid-template-columns: 1fr; }
+  .guidance-grid { grid-template-columns: 1fr; }
   .page-heading { display: block; }
   h1 { font-size: 28px; }
   .wrap { padding-left: 16px; padding-right: 16px; }

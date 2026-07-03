@@ -60,6 +60,22 @@ make workflow-test
 
 这条命令只读当前产物，不刷新页面、不改 CSV、不提交 Git。每次运行 `make learning-dashboard`、`make incoming-triage` 或改展示层脚本后，建议先跑它，再跑 schema 和 audit。
 
+### 1.0.0 简易菜单与每日入口
+
+用途：不记长命令时快速知道今天该做什么、应该打开哪个 HTML 页面、该复制哪条命令。
+
+```bash
+make rw
+make rw COMMAND=5
+make daily
+make daily-git DATE=2026-07-03 NOTE="daily closeout"
+```
+
+- `make rw`：打印任务优先菜单，不执行副作用。
+- `make rw COMMAND=5`：只输出第 5 项命令，适合复制。
+- `make daily`：刷新数据层、页面层和只读审计。
+- `make daily-git`：在 `daily` 后增加备份和 Git 快照推送。
+
 ### 1.0.1 审计与渲染分层
 
 用途：把“刷新状态页”和“检查当前状态”分开。

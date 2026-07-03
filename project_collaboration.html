@@ -6,6 +6,7 @@
   <title>待我确认</title>
   <link rel="stylesheet" href="assets/app.css">
 
+  <script src="assets/app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到正文</a>
@@ -16,7 +17,7 @@
         <div>
           <h1>待我确认</h1>
           <p class="sub">集中查看需要你判断的事项、Codex 可继续推进的任务和项目入口。</p>
-          <p class="page-meta">Generated 2026-07-03T20:00:03</p>
+          <p class="page-meta">Generated 2026-07-03T20:19:00</p>
         </div>
         <div class="page-primary-action" hidden></div>
       </div>
@@ -34,7 +35,18 @@
     </div>
   </header>
   <main class="wrap" id="main-content">
-<section class="metrics">
+<section class="panel wide page-guidance">
+      <div class="guidance-grid">
+        <div>
+          <h2>使用建议</h2>
+          <p><strong>这个页面用于：</strong>把需要你人工判断的事项和 Codex 可以继续推进的事项分开，避免系统把主观决策自动执行。</p>
+          <p><strong>建议先做：</strong>先处理“用户待确认”；没有人工阻塞时，再让 Codex 推进下一篇阅读、证据或写作任务。</p>
+          <p><strong>完成后去：</strong>确认完决策后回到行动队列，让任务排序重新选择今日主任务。</p>
+        </div>
+        <div class="command-stack"><a class="inline-button primary" href="action_queue.html">打开行动队列</a><button type="button" class="inline-button" data-copy="make collaboration-state" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span><code>make collaboration-state</code></div>
+      </div>
+    </section>
+    <section class="metrics">
       <div class="metric"><b>2</b><span class="meta">项目</span></div>
       <div class="metric"><b>3</b><span class="meta">用户待确认</span></div>
       <div class="metric"><b>6</b><span class="meta">Codex 可推进</span></div>

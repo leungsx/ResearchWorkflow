@@ -6,6 +6,7 @@
   <title>备份与清理</title>
   <link rel="stylesheet" href="assets/app.css">
 
+  <script src="assets/app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到正文</a>
@@ -16,7 +17,7 @@
         <div>
           <h1>备份与清理</h1>
           <p class="sub">管理备份、日志压缩和缓存候选；只给出建议动作，不删除不确定研究文件。</p>
-          <p class="page-meta">Generated 2026-07-03T20:05:48</p>
+          <p class="page-meta">Generated 2026-07-03T20:18:14</p>
         </div>
         <div class="page-primary-action" hidden></div>
       </div>
@@ -34,8 +35,19 @@
     </div>
   </header>
   <main class="wrap" id="main-content">
-<section class="metrics">
-      <div class="metric"><b>7</b><span class="meta">备份包</span></div>
+<section class="panel wide page-guidance">
+      <div class="guidance-grid">
+        <div>
+          <h2>使用建议</h2>
+          <p><strong>这个页面用于：</strong>查看备份、旧日志压缩和系统缓存候选，区分可再生成文件和必须保留的研究源资产。</p>
+          <p><strong>建议先做：</strong>先看候选数量；只有明确知道影响范围时，才复制执行清理或 prune 命令。</p>
+          <p><strong>完成后去：</strong>完成备份或清理后运行系统体检，确认没有入口、链接或 Git 同步问题。</p>
+        </div>
+        <div class="command-stack"><a class="inline-button primary" href="workflow_health.html">打开系统体检</a><button type="button" class="inline-button" data-copy="make workflow-backup" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span><code>make workflow-backup</code></div>
+      </div>
+    </section>
+    <section class="metrics">
+      <div class="metric"><b>8</b><span class="meta">备份包</span></div>
       <div class="metric"><b>0</b><span class="meta">可裁剪备份</span></div>
       <div class="metric"><b>0</b><span class="meta">待压缩日志</span></div>
       <div class="metric"><b>2</b><span class="meta">缓存候选</span></div>

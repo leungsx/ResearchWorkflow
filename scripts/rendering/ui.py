@@ -163,6 +163,38 @@ def page_needs_app_js(body: str) -> bool:
     return "data-copy=" in body or "data-mode-button" in body or "data-mode=" in body
 
 
+def render_guidance(
+    *,
+    purpose: str,
+    first: str,
+    after: str,
+    output: Path,
+    command: str = "",
+    action_label: str = "",
+    action_target: Path | None = None,
+) -> str:
+    action_html = ""
+    if action_label and action_target:
+        action_html += f'<a class="inline-button primary" href="{href(action_target, output)}">{esc(action_label)}</a>'
+    if command:
+        action_html += (
+            f'<button type="button" class="inline-button" data-copy="{esc(command)}" data-label="复制命令">复制命令</button>'
+            '<span class="copy-feedback" aria-live="polite"></span>'
+            f"<code>{esc(command)}</code>"
+        )
+    return f"""<section class="panel wide page-guidance">
+      <div class="guidance-grid">
+        <div>
+          <h2>使用建议</h2>
+          <p><strong>这个页面用于：</strong>{esc(purpose)}</p>
+          <p><strong>建议先做：</strong>{esc(first)}</p>
+          <p><strong>完成后去：</strong>{esc(after)}</p>
+        </div>
+        <div class="command-stack">{action_html}</div>
+      </div>
+    </section>"""
+
+
 def render_shell(
     *,
     title: str,

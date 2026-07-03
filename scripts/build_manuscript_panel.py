@@ -13,7 +13,7 @@ from urllib.parse import quote
 
 from rendering.io import write_json_if_changed, write_text_if_changed
 from rendering.routes import paper_markdown_view_path
-from rendering.ui import render_shell
+from rendering.ui import render_guidance, render_shell
 from workflow_config import active_project_slug
 
 
@@ -534,6 +534,15 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
         for row in rows[:120]
     )
     body = f"""
+    {render_guidance(
+        purpose="补全主张、来源片段、页码、阅读状态和证据使用状态，防止写作时引用没有页码或未核验的证据。",
+        first="优先处理已经进入正文或候选正文的证据；没有页码的条目先回 Reader/PDF 定位。",
+        after="核完页码后回到写论文页面，把可用证据放进研究问题、变量指标和段落队列。",
+        output=path,
+        command=rebuild_command,
+        action_label="去写论文",
+        action_target=ROOT / "projects" / project_slug / "manuscript" / "writing_panel.html",
+    )}
     <div class="toolbar">
       <a class="button primary" href="{html.escape(csv_path.name)}">CSV 数据</a>
       <a class="button" href="{html.escape(json_path.name)}">JSON 数据</a>
@@ -789,6 +798,15 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
     gate_command = f"make evidence-gate PROJECT={project_slug}"
     sync_command = f"make claim-evidence-sync PROJECT={project_slug}"
     body = f"""
+    {render_guidance(
+        purpose="把已读文献转成研究问题、变量指标、证据链和可写段落，判断哪些内容已经能进入论文草稿。",
+        first="先看优先核验任务和段落队列；证据成熟度不足的段落不要直接写入正式稿。",
+        after="证据不足时去核页码；证据足够时再进入正文草稿和引用审计。",
+        output=html_path,
+        command=rebuild_command,
+        action_label="去核页码",
+        action_target=ROOT / "projects" / project_slug / "evidence" / "page_verification_queue.html",
+    )}
     <div class="toolbar">
       <a class="button primary" href="../evidence/page_verification_queue.html">核页码</a>
       <button type="button" class="button" data-copy="{html.escape(rebuild_command)}" data-label="复制刷新命令">复制刷新命令</button>

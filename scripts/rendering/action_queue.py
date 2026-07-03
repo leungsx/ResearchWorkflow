@@ -17,7 +17,7 @@ from rendering.paths import (
     WORKFLOW_STATE_HTML,
     WORKFLOW_STATE_JSON,
 )
-from rendering.ui import render_shell
+from rendering.ui import render_guidance, render_shell
 from rendering.workflow_state import build_workflow_state, read_json, rel
 
 
@@ -227,6 +227,15 @@ def write_action_queue_html(queue: dict[str, Any]) -> None:
     summary = queue.get("summary", {})
     body = f"""
     {primary_html}
+    {render_guidance(
+        purpose="把审计提醒、到期复习和项目推进任务按优先级排成今天的处理顺序。",
+        first="先完成今日主任务；不要从系统维护项开始，除非它是 FAIL 或阻塞写作。",
+        after="完成一项后回到今日工作台，或运行 make daily 让任务队列重新排序。",
+        output=ACTION_QUEUE_HTML,
+        command="make daily",
+        action_label="打开今日工作台",
+        action_target=ROOT / "study_dashboard.html",
+    )}
     <section class="metrics">
       <div class="metric"><b>{summary.get("total_open", 0)}</b><span class="meta">开放行动</span></div>
       <div class="metric"><b>{summary.get("high_priority", 0)}</b><span class="meta">高优先级</span></div>

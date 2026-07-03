@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from rendering.io import write_text_if_changed, write_text_preserving_generated_at
-from rendering.ui import render_shell
+from rendering.ui import render_guidance, render_shell
 from workflow_config import active_project_slug
 
 
@@ -319,6 +319,15 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
         for row in rows[:180]
     )
     body = f"""
+    {render_guidance(
+        purpose="把综述主张连接到文献、Reader 来源片段和页码线索，形成正式引用前的证据定位表。",
+        first="先看“页码待补”和已进入写作链的主张，决定哪些证据需要回原文核页。",
+        after="完成定位后进入核页码，补齐可引用页码和阅读状态。",
+        output=path,
+        command=f"make evidence-locators PROJECT={project}",
+        action_label="去核页码",
+        action_target=ROOT / "projects" / project / "evidence" / "page_verification_queue.html",
+    )}
     <section class="grid">
       <div class="metric"><b>{len(rows)}</b><span>证据定位行</span></div>
       <div class="metric"><b>{located}</b><span>已有页码</span></div>

@@ -6,6 +6,7 @@
   <title>PDF 分拣</title>
   <link rel="stylesheet" href="../../../assets/app.css">
 
+  <script src="../../../assets/app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到正文</a>
@@ -16,7 +17,7 @@
         <div>
           <h1>PDF 分拣</h1>
           <p class="sub">扫描 incoming 文件夹，判断匹配文献、项目缺口、证据价值和下一步动作。</p>
-          <p class="page-meta">library_short_video · Generated 2026-07-03T19:43:54</p>
+          <p class="page-meta">library_short_video · Generated 2026-07-03T20:18:59</p>
         </div>
         <div class="page-primary-action"><a class="button primary" href="incoming_pdf_triage.csv">CSV 数据</a></div>
       </div>
@@ -33,7 +34,18 @@
     </div>
   </header>
   <main class="wrap" id="main-content">
-<section class="summary-grid" aria-label="PDF分拣摘要"><div class="metric">
+<section class="panel wide page-guidance">
+      <div class="guidance-grid">
+        <div>
+          <h2>使用建议</h2>
+          <p><strong>这个页面用于：</strong>把 incoming 文件夹里的 PDF/CAJ 先分成可入库、可建 Reader、重复件和外部对照，避免直接混入正式文献矩阵。</p>
+          <p><strong>建议先做：</strong>优先处理“入库为稳定 PDF”和“生成 Reader”的高证据价值文献；重复件先保留一份，不自动删除。</p>
+          <p><strong>完成后去：</strong>入库或生成 Reader 后回到今日精读，选择下一篇能补项目缺口的论文。</p>
+        </div>
+        <div class="command-stack"><a class="inline-button primary" href="../../../paper_reading/today.html">打开今日精读</a><button type="button" class="inline-button" data-copy="make incoming-triage PROJECT=library_short_video" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span><code>make incoming-triage PROJECT=library_short_video</code></div>
+      </div>
+    </section>
+    <section class="summary-grid" aria-label="PDF分拣摘要"><div class="metric">
           <b>2</b>
           <span>补入矩阵或标外部</span>
         </div><div class="metric">

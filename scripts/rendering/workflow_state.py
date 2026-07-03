@@ -32,7 +32,7 @@ from rendering.paths import (
     WORKFLOW_STATE_JSON,
     csv_rows,
 )
-from rendering.ui import render_shell
+from rendering.ui import render_guidance, render_shell
 
 
 def rel(path: Path | str | None) -> str:
@@ -249,6 +249,15 @@ def write_workflow_state_html(state: dict[str, Any]) -> None:
     )
     action_items = "".join(f"<li>{html.escape(str(action))}</li>" for action in next_actions)
     body = f"""
+    {render_guidance(
+        purpose="快速查看系统健康、项目状态、到期复习和下一步建议，判断是否需要进入阅读、写作或系统维护。",
+        first="先看下一步列表和 FAIL/WARN；如果没有失败，优先进入行动队列处理今天任务。",
+        after="完成任务后运行 make daily，刷新状态页、工作台和只读审计。",
+        output=WORKFLOW_STATE_HTML,
+        command="make daily",
+        action_label="打开行动队列",
+        action_target=ACTION_QUEUE_HTML,
+    )}
     <section class="grid">
       <div class="metric"><b>{counts.get("manifest_rows", 0)}</b><span class="meta">manifest 条目</span></div>
       <div class="metric"><b>{counts.get("search_entries", 0)}</b><span class="meta">搜索条目</span></div>

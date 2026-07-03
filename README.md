@@ -64,9 +64,10 @@ CNKI/知网文献流程见 `docs/CNKI_WORKFLOW.md`。你通过自己的机构账
 
 ## 推荐工作流
 
-0. **每日入口**: 直接打开 `paper_reading/today.html` 阅读当天精读页；需要全局总览时打开 `study_dashboard.html`。
-0.1. **工作流体检**: 运行 `make workflow-audit`，查看 `workflow_health.html`，确认入口、图谱、镜像页、归档和备份状态。
-0.2. **日终维护**: 用户侧页面、证据状态或图谱变化后，运行 `make workflow-refresh-git DATE=<YYYY-MM-DD> NOTE="<说明>"`，顺序刷新图谱、仪表盘、备份、文件归类、压缩摘要、体检报告，并把可追踪文本资产提交/推送到私有 Git 远程。只做本地刷新时用 `make workflow-refresh`。
+0. **每日入口**: 先打开 `study_dashboard.html`，它现在是“今日工作台”，会显示今日主任务、候选任务、复制命令和完成后下一步。
+0.1. **简易菜单**: 不想记命令时运行 `make rw`；只想取某一项命令时用 `make rw COMMAND=5`。
+0.2. **轻量刷新**: 日常更新状态、页面和只读审计用 `make daily`。需要同时备份并推送到 Git 时再用 `make daily-git DATE=<YYYY-MM-DD> NOTE="<说明>"`。
+0.3. **系统体检**: 运行 `make workflow-audit-readonly`，查看 `workflow_health.html`，确认入口、图谱、镜像页、归档和备份状态。
 1. **知识补课**: 遇到不懂的概念或科研方法时，Codex 负责解释、举例、建卡、复习和入图谱。
 2. **想法孵化**: 用 Idea Lab 记录头脑风暴、前沿信号和 idea cards。
 3. **研究问题**: 在 `projects/<slug>/01_research_question.md` 收敛 RQ、变量、范围和预期贡献。

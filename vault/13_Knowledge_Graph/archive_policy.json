@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T20:05:48",
+  "generated_at": "2026-07-03T20:18:14",
   "entrypoint": "archive_policy.html",
   "summary": {
-    "backup_count": 7,
+    "backup_count": 8,
     "backup_prune_candidates": 0,
     "daily_log_count": 11,
     "compact_candidates": 0,
@@ -25,9 +25,9 @@
   },
   "backups": {
     "keep_newest": 30,
-    "count": 7,
-    "latest": "backups/researchworkflow-critical-20260701-200737.zip",
-    "latest_age_days": 2.0,
+    "count": 8,
+    "latest": "backups/researchworkflow-critical-20260703-200749.zip",
+    "latest_age_days": 0.01,
     "prune_candidates": []
   },
   "logs": {

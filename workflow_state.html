@@ -6,6 +6,7 @@
   <title>当前状态</title>
   <link rel="stylesheet" href="assets/app.css">
 
+  <script src="assets/app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到正文</a>
@@ -16,7 +17,7 @@
         <div>
           <h1>当前状态</h1>
           <p class="sub">聚合项目、复习、搜索、图谱和审计状态，作为系统模块的健康概览。</p>
-          <p class="page-meta">Generated 2026-07-03T20:05:48</p>
+          <p class="page-meta">Generated 2026-07-03T20:19:00</p>
         </div>
         <div class="page-primary-action" hidden></div>
       </div>
@@ -34,11 +35,22 @@
     </div>
   </header>
   <main class="wrap" id="main-content">
-<section class="grid">
+<section class="panel wide page-guidance">
+      <div class="guidance-grid">
+        <div>
+          <h2>使用建议</h2>
+          <p><strong>这个页面用于：</strong>快速查看系统健康、项目状态、到期复习和下一步建议，判断是否需要进入阅读、写作或系统维护。</p>
+          <p><strong>建议先做：</strong>先看下一步列表和 FAIL/WARN；如果没有失败，优先进入行动队列处理今天任务。</p>
+          <p><strong>完成后去：</strong>完成任务后运行 make daily，刷新状态页、工作台和只读审计。</p>
+        </div>
+        <div class="command-stack"><a class="inline-button primary" href="action_queue.html">打开行动队列</a><button type="button" class="inline-button" data-copy="make daily" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span><code>make daily</code></div>
+      </div>
+    </section>
+    <section class="grid">
       <div class="metric"><b>144</b><span class="meta">manifest 条目</span></div>
       <div class="metric"><b>144</b><span class="meta">搜索条目</span></div>
       <div class="metric"><b>5</b><span class="meta">到期复习</span></div>
-      <div class="metric"><b>0/2</b><span class="meta">FAIL/WARN</span></div>
+      <div class="metric"><b>0/3</b><span class="meta">FAIL/WARN</span></div>
 
       <section class="panel wide">
         <h2>下一步</h2>
@@ -55,7 +67,7 @@
       </section>
       <section class="panel">
         <h2>审计状态</h2>
-        <p><span class="status pass">PASS 16</span> <span class="status warn">WARN 2</span> <span class="status fail">FAIL 0</span></p>
+        <p><span class="status pass">PASS 15</span> <span class="status warn">WARN 3</span> <span class="status fail">FAIL 0</span></p>
         <p class="meta"><a href="workflow_health.html">打开系统体检</a></p>
       </section>
       <section class="panel wide">

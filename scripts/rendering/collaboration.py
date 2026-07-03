@@ -19,7 +19,7 @@ from rendering.paths import (
     WORKFLOW_HEALTH,
     WORKFLOW_STATE_HTML,
 )
-from rendering.ui import render_shell
+from rendering.ui import render_guidance, render_shell
 
 
 def rel(path: Path | str | None) -> str:
@@ -194,6 +194,15 @@ def write_collaboration_html(state: dict[str, Any]) -> None:
         for project in projects
     )
     body = f"""
+    {render_guidance(
+        purpose="把需要你人工判断的事项和 Codex 可以继续推进的事项分开，避免系统把主观决策自动执行。",
+        first="先处理“用户待确认”；没有人工阻塞时，再让 Codex 推进下一篇阅读、证据或写作任务。",
+        after="确认完决策后回到行动队列，让任务排序重新选择今日主任务。",
+        output=COLLABORATION_HTML,
+        command="make collaboration-state",
+        action_label="打开行动队列",
+        action_target=ROOT / "action_queue.html",
+    )}
     <section class="metrics">
       <div class="metric"><b>{summary.get("project_count", 0)}</b><span class="meta">项目</span></div>
       <div class="metric"><b>{summary.get("user_waiting", 0)}</b><span class="meta">用户待确认</span></div>

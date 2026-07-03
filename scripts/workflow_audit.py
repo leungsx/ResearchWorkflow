@@ -20,7 +20,7 @@ from rendering.archive_policy import write_archive_policy
 from rendering.collaboration import write_collaboration_state
 from rendering.paths import ARCHIVE_POLICY_HTML, ARCHIVE_POLICY_JSON, COLLABORATION_HTML, COLLABORATION_JSON, WORKFLOW_AUDIT_JSON
 from rendering.schemas import validate_workflow_schemas
-from rendering.ui import render_shell
+from rendering.ui import render_guidance, render_shell
 from rendering.workflow_state import write_workflow_state
 
 
@@ -757,6 +757,15 @@ def html_report(day: dt.date, checks: list[Check], audit_mode: str) -> str:
         for check in checks
     )
     body = f"""
+    {render_guidance(
+        purpose="检查入口、链接、图谱、搜索、复习队列、备份和 Git 同步状态是否可用。",
+        first="先看 FAIL；没有 FAIL 时只处理真实 WARN，例如到期复习或备份过期。",
+        after="处理完 WARN 后回到今日工作台或再次运行只读体检确认状态。",
+        output=HEALTH_HTML,
+        command="make workflow-audit-readonly",
+        action_label="打开今日工作台",
+        action_target=ROOT / "study_dashboard.html",
+    )}
     <section class="metrics">
       <div class="metric"><b>{counts['PASS']}</b><span>通过</span></div>
       <div class="metric"><b>{counts['WARN']}</b><span>提醒</span></div>
