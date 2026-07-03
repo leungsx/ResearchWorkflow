@@ -1,6 +1,6 @@
 {
   "schema_version": "ResearchWorkflow.WritingTraceability.v1",
-  "generated_at": "2026-07-02T21:32:22",
+  "generated_at": "2026-07-03T18:37:42",
   "project": "library_short_video",
   "summary": {
     "claim_link_rows": 59,
@@ -27,7 +27,7 @@
       "page": "",
       "read_status": "skimmed",
       "evidence_usage_status": "candidate",
-      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+      "next_action": "打开原文 PDF 或阅读包，补入准确页码或表格位置。"
     },
     {
       "task_id": "verify-c001-cnki-2021-d35f8e895a-b0009",
@@ -39,7 +39,7 @@
       "page": "",
       "read_status": "skimmed",
       "evidence_usage_status": "candidate",
-      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+      "next_action": "打开原文 PDF 或阅读包，补入准确页码或表格位置。"
     },
     {
       "task_id": "verify-c001-cnki-2021-d35f8e895a-b0010",
@@ -51,7 +51,7 @@
       "page": "",
       "read_status": "skimmed",
       "evidence_usage_status": "candidate",
-      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+      "next_action": "打开原文 PDF 或阅读包，补入准确页码或表格位置。"
     },
     {
       "task_id": "verify-c001-cnki-2021-d35f8e895a-b0011",
@@ -63,7 +63,7 @@
       "page": "",
       "read_status": "skimmed",
       "evidence_usage_status": "candidate",
-      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+      "next_action": "打开原文 PDF 或阅读包，补入准确页码或表格位置。"
     },
     {
       "task_id": "verify-c002-cnki-2021-dfab60236e-b0004",
@@ -75,7 +75,7 @@
       "page": "",
       "read_status": "skimmed",
       "evidence_usage_status": "candidate",
-      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+      "next_action": "打开原文 PDF 或阅读包，补入准确页码或表格位置。"
     },
     {
       "task_id": "verify-c002-cnki-2021-dfab60236e-b0008",
@@ -87,7 +87,7 @@
       "page": "",
       "read_status": "skimmed",
       "evidence_usage_status": "candidate",
-      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+      "next_action": "打开原文 PDF 或阅读包，补入准确页码或表格位置。"
     },
     {
       "task_id": "verify-c002-cnki-2021-dfab60236e-b0010",
@@ -99,7 +99,7 @@
       "page": "",
       "read_status": "skimmed",
       "evidence_usage_status": "candidate",
-      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+      "next_action": "打开原文 PDF 或阅读包，补入准确页码或表格位置。"
     },
     {
       "task_id": "verify-c002-cnki-2021-dfab60236e-b0013",
@@ -111,94 +111,94 @@
       "page": "",
       "read_status": "skimmed",
       "evidence_usage_status": "candidate",
-      "next_action": "Open original PDF/Reader and fill exact page or table locator."
+      "next_action": "打开原文 PDF 或阅读包，补入准确页码或表格位置。"
     }
   ],
   "research_question_traces": [
     {
-      "slot": "Main question",
-      "question": "Main question: How can visible platform engagement from library short videos be translated into observable service value in digital reading promotion?",
-      "linked_claims": "C011 (0/5 human-ready; 0/5 page-located); C012 (0/3 human-ready; 0/3 page-located)",
-      "source_trace": "cnki_2021_5530e86157:B0001 / page pending / skimmed; cnki_2021_5530e86157:B0003 / page pending / skimmed; cnki_2021_5530e86157:B0007 / page pending / skimmed; +5 more",
-      "readiness": "0/8 human-ready; 0/8 page-located"
+      "slot": "主问题",
+      "question": "主问题：可见的平台互动数据如何转化为数字阅读推广中可观察的图书馆服务价值？",
+      "linked_claims": "C011 (0/5 已人工确认；0/5 已定位页码); C012 (0/3 已人工确认；0/3 已定位页码)",
+      "source_trace": "cnki_2021_5530e86157:B0001 / 页码待补 / 已扫读；cnki_2021_5530e86157:B0003 / 页码待补 / 已扫读；cnki_2021_5530e86157:B0007 / 页码待补 / 已扫读；另有 5 条",
+      "readiness": "0/8 已人工确认；0/8 已定位页码"
     },
     {
-      "slot": "Sub-question 1",
-      "question": "Sub-question 1: Which content cues and service-design mechanisms move users from sense/interest into interaction, connection, and service action?",
-      "linked_claims": "C004 (0/3 human-ready; 0/3 page-located); C001 (0/4 human-ready; 0/4 page-located); C003 (0/1 human-ready; 0/1 page-located)",
-      "source_trace": "cnki_2021_d35f8e895a:B0011 / page pending / skimmed; cnki_2021_d35f8e895a:B0012 / page pending / skimmed; cnki_2021_d35f8e895a:B0013 / page pending / skimmed; +5 more",
-      "readiness": "0/8 human-ready; 0/8 page-located"
+      "slot": "子问题1",
+      "question": "子问题1：哪些内容线索和服务设计机制能推动用户从感知、兴趣走向互动、连接和服务行动？",
+      "linked_claims": "C004 (0/3 已人工确认；0/3 已定位页码); C001 (0/4 已人工确认；0/4 已定位页码); C003 (0/1 已人工确认；0/1 已定位页码)",
+      "source_trace": "cnki_2021_d35f8e895a:B0011 / 页码待补 / 已扫读；cnki_2021_d35f8e895a:B0012 / 页码待补 / 已扫读；cnki_2021_d35f8e895a:B0013 / 页码待补 / 已扫读；另有 5 条",
+      "readiness": "0/8 已人工确认；0/8 已定位页码"
     },
     {
-      "slot": "Sub-question 2",
-      "question": "Sub-question 2: How should service-value indicators vary across public libraries, university libraries, research-oriented libraries, and short-video platforms?",
-      "linked_claims": "C012 (0/4 human-ready; 0/4 page-located); C001 (0/4 human-ready; 0/4 page-located)",
-      "source_trace": "cnki_2021_3771e58987:B0005 / page pending / skimmed; cnki_2021_3771e58987:B0007 / page pending / skimmed; cnki_2021_3771e58987:B0009 / page pending / skimmed; +5 more",
-      "readiness": "0/8 human-ready; 0/8 page-located"
+      "slot": "子问题2",
+      "question": "子问题2：公共图书馆、高校图书馆、科研型图书馆及不同短视频平台的服务价值指标应如何区分？",
+      "linked_claims": "C012 (0/4 已人工确认；0/4 已定位页码); C001 (0/4 已人工确认；0/4 已定位页码)",
+      "source_trace": "cnki_2021_3771e58987:B0005 / 页码待补 / 已扫读；cnki_2021_3771e58987:B0007 / 页码待补 / 已扫读；cnki_2021_3771e58987:B0009 / 页码待补 / 已扫读；另有 5 条",
+      "readiness": "0/8 已人工确认；0/8 已定位页码"
     }
   ],
   "variable_traces": [
     {
-      "layer": "Platform engagement",
+      "layer": "平台互动层",
       "candidate_indicators": "粉丝量、发布量、点赞/评论/转发、爆款指数、DCI/传播力指数、标题/音乐/内容形式",
-      "linked_claims": "C004 (0/3 human-ready; 0/3 page-located); C003 (0/4 human-ready; 0/4 page-located); C001 (0/1 human-ready; 0/1 page-located)",
-      "source_trace": "cnki_2021_d35f8e895a:B0011 / page pending / skimmed; cnki_2021_d35f8e895a:B0012 / page pending / skimmed; cnki_2021_d35f8e895a:B0013 / page pending / skimmed; +5 more",
-      "boundary": "Can support visibility/interaction claims, not service-value claims alone."
+      "linked_claims": "C004 (0/3 已人工确认；0/3 已定位页码); C003 (0/4 已人工确认；0/4 已定位页码); C001 (0/1 已人工确认；0/1 已定位页码)",
+      "source_trace": "cnki_2021_d35f8e895a:B0011 / 页码待补 / 已扫读；cnki_2021_d35f8e895a:B0012 / 页码待补 / 已扫读；cnki_2021_d35f8e895a:B0013 / 页码待补 / 已扫读；另有 5 条",
+      "boundary": "可支持可见度和互动判断，但不能单独证明服务价值。"
     },
     {
-      "layer": "Service touchpoint",
+      "layer": "服务触点层",
       "candidate_indicators": "资源入口、活动入口、咨询/连接路径、线上线下转换、服务信息清晰度",
-      "linked_claims": "C011 (0/5 human-ready; 0/5 page-located); C009 (0/3 human-ready; 0/3 page-located)",
-      "source_trace": "cnki_2021_5530e86157:B0001 / page pending / skimmed; cnki_2021_5530e86157:B0003 / page pending / skimmed; cnki_2021_5530e86157:B0007 / page pending / skimmed; +5 more",
-      "boundary": "Needs observable service path or library-service outcome before manuscript use."
+      "linked_claims": "C011 (0/5 已人工确认；0/5 已定位页码); C009 (0/3 已人工确认；0/3 已定位页码)",
+      "source_trace": "cnki_2021_5530e86157:B0001 / 页码待补 / 已扫读；cnki_2021_5530e86157:B0003 / 页码待补 / 已扫读；cnki_2021_5530e86157:B0007 / 页码待补 / 已扫读；另有 5 条",
+      "boundary": "进入正文前需要可观察的服务路径或图书馆服务结果支撑。"
     },
     {
-      "layer": "Reading-promotion outcome",
+      "layer": "阅读推广成效层",
       "candidate_indicators": "阅读参与、资源访问、活动报名、读者反馈、知识传播效果、分享回流",
-      "linked_claims": "C013 (0/8 human-ready; 0/8 page-located)",
-      "source_trace": "cnki_2023_34348faa1e:B0005 / page pending / skimmed; cnki_2023_34348faa1e:B0006 / page pending / skimmed; cnki_2023_34348faa1e:B0007 / page pending / skimmed; +5 more",
-      "boundary": "Current corpus supports framework design; outcome measurement needs stronger data."
+      "linked_claims": "C013 (0/8 已人工确认；0/8 已定位页码)",
+      "source_trace": "cnki_2023_34348faa1e:B0005 / 页码待补 / 已扫读；cnki_2023_34348faa1e:B0006 / 页码待补 / 已扫读；cnki_2023_34348faa1e:B0007 / 页码待补 / 已扫读；另有 5 条",
+      "boundary": "当前文献可支持框架设计，成效测量仍需要更强数据。"
     },
     {
-      "layer": "Boundary and comparison",
+      "layer": "边界与比较层",
       "candidate_indicators": "馆型、平台类型、时间窗口、账号规模、公共馆/高校馆/科研型图书馆差异",
-      "linked_claims": "C012 (0/4 human-ready; 0/4 page-located); C001 (0/4 human-ready; 0/4 page-located)",
-      "source_trace": "cnki_2021_3771e58987:B0005 / page pending / skimmed; cnki_2021_3771e58987:B0007 / page pending / skimmed; cnki_2021_3771e58987:B0009 / page pending / skimmed; +5 more",
-      "boundary": "Do not generalize from one platform/time window to all library contexts."
+      "linked_claims": "C012 (0/4 已人工确认；0/4 已定位页码); C001 (0/4 已人工确认；0/4 已定位页码)",
+      "source_trace": "cnki_2021_3771e58987:B0005 / 页码待补 / 已扫读；cnki_2021_3771e58987:B0007 / 页码待补 / 已扫读；cnki_2021_3771e58987:B0009 / 页码待补 / 已扫读；另有 5 条",
+      "boundary": "不能把单一平台或单一时间窗口的结论外推到所有图书馆情境。"
     }
   ],
   "paragraph_traces": [
     {
-      "slot": "Literature gap paragraph",
-      "purpose": "Explain why platform visibility needs to be separated from library service value.",
-      "linked_claims": "C001 (0/4 human-ready; 0/4 page-located); C007 (0/3 human-ready; 0/3 page-located); C011 (0/1 human-ready; 0/1 page-located)",
-      "source_trace": "cnki_2021_d35f8e895a:B0006 / page pending / skimmed; cnki_2021_d35f8e895a:B0009 / page pending / skimmed; cnki_2021_d35f8e895a:B0010 / page pending / skimmed; +5 more",
-      "readiness": "0/8 human-ready; 0/8 page-located",
-      "next_action": "Verify page/table locators before turning this into a formal literature-review claim."
+      "slot": "文献缺口段",
+      "purpose": "说明为什么需要区分平台可见度和图书馆服务价值。",
+      "linked_claims": "C001 (0/4 已人工确认；0/4 已定位页码); C007 (0/3 已人工确认；0/3 已定位页码); C011 (0/1 已人工确认；0/1 已定位页码)",
+      "source_trace": "cnki_2021_d35f8e895a:B0006 / 页码待补 / 已扫读；cnki_2021_d35f8e895a:B0009 / 页码待补 / 已扫读；cnki_2021_d35f8e895a:B0010 / 页码待补 / 已扫读；另有 5 条",
+      "readiness": "0/8 已人工确认；0/8 已定位页码",
+      "next_action": "补齐页码或表格定位后，再写成正式综述判断。"
     },
     {
-      "slot": "Framework paragraph",
-      "purpose": "Introduce platform engagement -> service touchpoint -> reading-promotion outcome.",
-      "linked_claims": "C013 (0/8 human-ready; 0/8 page-located)",
-      "source_trace": "cnki_2023_34348faa1e:B0005 / page pending / skimmed; cnki_2023_34348faa1e:B0006 / page pending / skimmed; cnki_2023_34348faa1e:B0007 / page pending / skimmed; +5 more",
-      "readiness": "0/8 human-ready; 0/8 page-located",
-      "next_action": "Keep causal wording out until new data or verified source locators support it."
+      "slot": "框架段",
+      "purpose": "交代“平台互动-服务触点-阅读推广成效”的概念链。",
+      "linked_claims": "C013 (0/8 已人工确认；0/8 已定位页码)",
+      "source_trace": "cnki_2023_34348faa1e:B0005 / 页码待补 / 已扫读；cnki_2023_34348faa1e:B0006 / 页码待补 / 已扫读；cnki_2023_34348faa1e:B0007 / 页码待补 / 已扫读；另有 5 条",
+      "readiness": "0/8 已人工确认；0/8 已定位页码",
+      "next_action": "在新数据或页码级证据确认前，避免写成因果判断。"
     },
     {
-      "slot": "Variable paragraph",
-      "purpose": "Translate prior studies into candidate variables and indicators.",
-      "linked_claims": "C004 (0/3 human-ready; 0/3 page-located); C003 (0/4 human-ready; 0/4 page-located); C001 (0/1 human-ready; 0/1 page-located)",
-      "source_trace": "cnki_2021_d35f8e895a:B0011 / page pending / skimmed; cnki_2021_d35f8e895a:B0012 / page pending / skimmed; cnki_2021_d35f8e895a:B0013 / page pending / skimmed; +5 more",
-      "readiness": "0/8 human-ready; 0/8 page-located",
-      "next_action": "Split observable platform metrics from service-path indicators."
+      "slot": "变量段",
+      "purpose": "把既有研究转成可观察变量和候选指标。",
+      "linked_claims": "C004 (0/3 已人工确认；0/3 已定位页码); C003 (0/4 已人工确认；0/4 已定位页码); C001 (0/1 已人工确认；0/1 已定位页码)",
+      "source_trace": "cnki_2021_d35f8e895a:B0011 / 页码待补 / 已扫读；cnki_2021_d35f8e895a:B0012 / 页码待补 / 已扫读；cnki_2021_d35f8e895a:B0013 / 页码待补 / 已扫读；另有 5 条",
+      "readiness": "0/8 已人工确认；0/8 已定位页码",
+      "next_action": "把平台互动指标和服务路径指标分开表述。"
     },
     {
-      "slot": "Boundary paragraph",
-      "purpose": "State scope limits by library type, platform, time window, and evidence status.",
-      "linked_claims": "C012 (0/4 human-ready; 0/4 page-located); C001 (0/4 human-ready; 0/4 page-located)",
-      "source_trace": "cnki_2021_3771e58987:B0005 / page pending / skimmed; cnki_2021_3771e58987:B0007 / page pending / skimmed; cnki_2021_3771e58987:B0009 / page pending / skimmed; +5 more",
-      "readiness": "0/8 human-ready; 0/8 page-located",
-      "next_action": "Add 2024-2026 data before making current-platform claims."
+      "slot": "边界段",
+      "purpose": "说明馆型、平台、时间窗口和证据状态的外推边界。",
+      "linked_claims": "C012 (0/4 已人工确认；0/4 已定位页码); C001 (0/4 已人工确认；0/4 已定位页码)",
+      "source_trace": "cnki_2021_3771e58987:B0005 / 页码待补 / 已扫读；cnki_2021_3771e58987:B0007 / 页码待补 / 已扫读；cnki_2021_3771e58987:B0009 / 页码待补 / 已扫读；另有 5 条",
+      "readiness": "0/8 已人工确认；0/8 已定位页码",
+      "next_action": "补充 2024-2026 年数据后，再写当前平台判断。"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T09:30:21",
+  "generated_at": "2026-07-03T18:38:32",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -17,12 +17,12 @@
     "manifest_rows": 144,
     "search_entries": 144,
     "project_count": 2,
-    "git_dirty_paths": 0
+    "git_dirty_paths": 15
   },
   "audit": {
     "counts": {
-      "PASS": 14,
-      "WARN": 4,
+      "PASS": 16,
+      "WARN": 2,
       "FAIL": 0
     },
     "checks": [
@@ -90,13 +90,13 @@
         "area": "备份",
         "status": "WARN",
         "title": "最近备份超过 36 小时",
-        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 37.3 小时前。"
+        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 37.4 小时前。"
       },
       {
         "area": "Git/异地备份",
-        "status": "WARN",
-        "title": "存在尚未提交的 Git 改动",
-        "detail": "177 个路径待快照： M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-4358f2f5.html； M knowledge_cards/views/concept-44250b7b.html"
+        "status": "PASS",
+        "title": "Git 本地和远程快照状态正常",
+        "detail": "upstream=origin/main；last commit: 56df06d 2026-07-03 09:32:14 +0800 Refresh workflow state after UI update"
       },
       {
         "area": "Token/记忆",
@@ -106,9 +106,9 @@
       },
       {
         "area": "文件卫生",
-        "status": "WARN",
-        "title": "工作区存在系统/缓存文件",
-        "detail": "__pycache__=2；这些不会进入 file sweep，但可择机清理。"
+        "status": "PASS",
+        "title": "未发现常见系统/缓存文件",
+        "detail": "工作区较干净。"
       },
       {
         "area": "Schema",
@@ -132,7 +132,7 @@
         "area": "自动归档策略",
         "status": "PASS",
         "title": "自动归档策略可用",
-        "detail": "backup=7, prune=0, cache=2"
+        "detail": "backup=7, prune=0, cache=0"
       }
     ],
     "health_html": "workflow_health.html",

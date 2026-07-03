@@ -52,7 +52,7 @@ Generated pages should link the CSS file instead of embedding a separate full st
 
 ## Visual Rules
 
-- Desktop content width: default `1160px`.
+- Desktop content width: default `1240px`.
 - Border radius: `7px` to `8px`.
 - Button height: at least `40px`, preferably `44px`.
 - Current navigation item: light blue background, blue border, blue text.

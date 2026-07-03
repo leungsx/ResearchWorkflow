@@ -48,6 +48,71 @@ def clean(value: str) -> str:
     return re.sub(r"\s+", " ", value or "").strip()
 
 
+QUESTION_TRANSLATIONS = {
+    "How can visible platform engagement from library short videos be translated into observable service value in digital reading promotion?": "可见的平台互动数据如何转化为数字阅读推广中可观察的图书馆服务价值？",
+    "Which content cues and service-design mechanisms move users from sense/interest into interaction, connection, and service action?": "哪些内容线索和服务设计机制能推动用户从感知、兴趣走向互动、连接和服务行动？",
+    "How should service-value indicators vary across public libraries, university libraries, research-oriented libraries, and short-video platforms?": "公共图书馆、高校图书馆、科研型图书馆及不同短视频平台的服务价值指标应如何区分？",
+}
+READ_STATUS_LABELS = {
+    "metadata-only": "仅元数据",
+    "skimmed": "已扫读",
+    "source-grounded": "有来源笔记",
+    "human-read": "已人工精读",
+    "verified": "已核验",
+}
+USAGE_STATUS_LABELS = {
+    "candidate": "候选证据",
+    "claim-linked": "已连到主张",
+    "manuscript-cited": "已进入正文",
+    "submission-evidence": "投稿证据",
+}
+VERIFICATION_STATUS_LABELS = {
+    "needs_page_locator": "待补页码",
+    "needs_page_check": "待人工核页",
+    "needs_human_read": "待读原文确认",
+    "ready_for_manuscript_review": "可进入写作审查",
+}
+
+
+def zh_question(value: str) -> str:
+    text = clean(value)
+    prefixes = [
+        ("Main question:", "主问题："),
+        ("Sub-question 1:", "子问题1："),
+        ("Sub-question 2:", "子问题2："),
+        ("Research question:", "研究问题："),
+    ]
+    for prefix, zh_prefix in prefixes:
+        if text.startswith(prefix):
+            body = clean(text[len(prefix) :])
+            return zh_prefix + QUESTION_TRANSLATIONS.get(body, body)
+    return QUESTION_TRANSLATIONS.get(text, text)
+
+
+def zh_read_status(value: str) -> str:
+    text = clean(value)
+    return READ_STATUS_LABELS.get(text, text or "未知")
+
+
+def zh_usage_status(value: str) -> str:
+    text = clean(value)
+    return USAGE_STATUS_LABELS.get(text, text or "未标注")
+
+
+def zh_verification_status(value: str) -> str:
+    text = clean(value)
+    return VERIFICATION_STATUS_LABELS.get(text, text or "待核验")
+
+
+def verification_status_class(value: str) -> str:
+    text = clean(value)
+    if text == "ready_for_manuscript_review":
+        return "pass"
+    if text == "needs_human_read":
+        return "info"
+    return "warn"
+
+
 def rel(path: Path) -> str:
     try:
         return path.relative_to(ROOT).as_posix()
@@ -78,7 +143,7 @@ def current_questions(project: Path) -> list[str]:
     questions: list[str] = []
     for line in block.splitlines():
         if "question:" in line.lower() or line.startswith("Sub-question"):
-            questions.append(clean(line.lstrip("- ")))
+            questions.append(zh_question(line.lstrip("- ")))
     return questions[:4]
 
 
@@ -176,12 +241,12 @@ def verification_priority(row: dict[str, str]) -> int:
 
 def next_verification_action(status: str) -> str:
     actions = {
-        "needs_page_locator": "Open original PDF/Reader and fill exact page or table locator.",
-        "needs_page_check": "Check the extracted page/table against the original PDF.",
-        "needs_human_read": "Read the source block manually before treating it as manuscript evidence.",
-        "ready_for_manuscript_review": "Ready for final manuscript wording and citation audit.",
+        "needs_page_locator": "打开原文 PDF 或阅读包，补入准确页码或表格位置。",
+        "needs_page_check": "对照原文核查已抽取的页码或表格位置。",
+        "needs_human_read": "先人工阅读来源片段，再把它作为正文证据。",
+        "ready_for_manuscript_review": "可进入正文措辞和引用审计。",
     }
-    return actions.get(status, "Review before use.")
+    return actions.get(status, "使用前再核验一次。")
 
 
 def verification_queue_rows(project: Path) -> list[dict[str, str]]:
@@ -238,33 +303,33 @@ def group_claims(rows: list[dict[str, str]]) -> dict[str, list[dict[str, str]]]:
 
 
 def row_trace(row: dict[str, str]) -> str:
-    page = clean(row.get("page", "")) or "page pending"
-    return f"{clean(row.get('source_block_id', ''))} / {page} / {clean(row.get('read_status', ''))}"
+    page = clean(row.get("page", "")) or "页码待补"
+    return f"{clean(row.get('source_block_id', ''))} / {page} / {zh_read_status(row.get('read_status', ''))}"
 
 
 def readiness(rows: list[dict[str, str]]) -> str:
     located = sum(1 for row in rows if clean(row.get("page", "")))
     human_ready = sum(1 for row in rows if clean(row.get("read_status", "")) in READY_READ_STATUSES)
-    return f"{human_ready}/{len(rows)} human-ready; {located}/{len(rows)} page-located"
+    return f"{human_ready}/{len(rows)} 已人工确认；{located}/{len(rows)} 已定位页码"
 
 
 def claim_brief(rows: list[dict[str, str]], limit: int = 4) -> str:
     if not rows:
-        return "No linked claim yet"
+        return "暂无关联主张"
     grouped = group_claims(rows)
     labels = []
     for claim_id, claim_rows in list(grouped.items())[:limit]:
         labels.append(f"{claim_id} ({readiness(claim_rows)})")
     if len(grouped) > limit:
-        labels.append(f"+{len(grouped) - limit} more")
+        labels.append(f"另有 {len(grouped) - limit} 项")
     return "; ".join(labels)
 
 
 def source_trace(rows: list[dict[str, str]], limit: int = 3) -> str:
     traces = [row_trace(row) for row in rows[:limit]]
     if len(rows) > limit:
-        traces.append(f"+{len(rows) - limit} more")
-    return "; ".join(traces) if traces else "No source trace yet"
+        traces.append(f"另有 {len(rows) - limit} 条")
+    return "；".join(traces) if traces else "暂无来源线索"
 
 
 def match_claim_rows(rows: list[dict[str, str]], keywords: list[str], limit: int = 8) -> list[dict[str, str]]:
@@ -302,13 +367,13 @@ def traceability_payload(project_slug: str, project: Path, queue_rows: list[dict
     queue_rows = queue_rows if queue_rows is not None else verification_queue_rows(project)
     questions = current_questions(project)
     question_rules = [
-        ("Main question", ["平台", "服务价值", "阅读推广", "传播力", "SICAS", "AARRR", "数字阅读"]),
-        ("Sub-question 1", ["标题", "内容", "音乐", "互动", "行动", "SICAS", "Hook", "机制"]),
-        ("Sub-question 2", ["公共图书馆", "高校图书馆", "平台", "差异", "馆型", "比较", "AARRR"]),
+        ("主问题", ["平台", "服务价值", "阅读推广", "传播力", "SICAS", "AARRR", "数字阅读"]),
+        ("子问题1", ["标题", "内容", "音乐", "互动", "行动", "SICAS", "Hook", "机制"]),
+        ("子问题2", ["公共图书馆", "高校图书馆", "平台", "差异", "馆型", "比较", "AARRR"]),
     ]
     question_traces = []
     for index, question in enumerate(questions[:3]):
-        label, keywords = question_rules[index] if index < len(question_rules) else (f"Question {index + 1}", [])
+        label, keywords = question_rules[index] if index < len(question_rules) else (f"问题{index + 1}", [])
         matched = match_claim_rows(rows, keywords or [question], limit=8)
         question_traces.append(
             {
@@ -316,34 +381,34 @@ def traceability_payload(project_slug: str, project: Path, queue_rows: list[dict
                 "question": question,
                 "linked_claims": claim_brief(matched),
                 "source_trace": source_trace(matched),
-                "readiness": readiness(matched) if matched else "No linked claim yet",
+                "readiness": readiness(matched) if matched else "暂无关联主张",
             }
         )
 
     variable_rules = [
         {
-            "layer": "Platform engagement",
+            "layer": "平台互动层",
             "indicators": "粉丝量、发布量、点赞/评论/转发、爆款指数、DCI/传播力指数、标题/音乐/内容形式",
             "keywords": ["粉丝", "发布", "点赞", "评论", "转发", "爆款", "DCI", "传播力", "标题", "音乐", "内容"],
-            "boundary": "Can support visibility/interaction claims, not service-value claims alone.",
+            "boundary": "可支持可见度和互动判断，但不能单独证明服务价值。",
         },
         {
-            "layer": "Service touchpoint",
+            "layer": "服务触点层",
             "indicators": "资源入口、活动入口、咨询/连接路径、线上线下转换、服务信息清晰度",
             "keywords": ["服务", "触达", "资源", "活动", "咨询", "线上线下", "渠道", "互动营销", "数字阅读"],
-            "boundary": "Needs observable service path or library-service outcome before manuscript use.",
+            "boundary": "进入正文前需要可观察的服务路径或图书馆服务结果支撑。",
         },
         {
-            "layer": "Reading-promotion outcome",
+            "layer": "阅读推广成效层",
             "indicators": "阅读参与、资源访问、活动报名、读者反馈、知识传播效果、分享回流",
             "keywords": ["阅读", "服务价值", "行动", "分享", "资源", "活动", "知识传播", "SICAS"],
-            "boundary": "Current corpus supports framework design; outcome measurement needs stronger data.",
+            "boundary": "当前文献可支持框架设计，成效测量仍需要更强数据。",
         },
         {
-            "layer": "Boundary and comparison",
+            "layer": "边界与比较层",
             "indicators": "馆型、平台类型、时间窗口、账号规模、公共馆/高校馆/科研型图书馆差异",
             "keywords": ["公共图书馆", "高校图书馆", "馆型", "平台", "差异", "比较", "账号"],
-            "boundary": "Do not generalize from one platform/time window to all library contexts.",
+            "boundary": "不能把单一平台或单一时间窗口的结论外推到所有图书馆情境。",
         },
     ]
     variable_traces = []
@@ -361,28 +426,28 @@ def traceability_payload(project_slug: str, project: Path, queue_rows: list[dict
 
     paragraph_rules = [
         {
-            "slot": "Literature gap paragraph",
-            "purpose": "Explain why platform visibility needs to be separated from library service value.",
+            "slot": "文献缺口段",
+            "purpose": "说明为什么需要区分平台可见度和图书馆服务价值。",
             "keywords": ["服务价值", "传播力", "数字阅读", "平台", "互动"],
-            "next_action": "Verify page/table locators before turning this into a formal literature-review claim.",
+            "next_action": "补齐页码或表格定位后，再写成正式综述判断。",
         },
         {
-            "slot": "Framework paragraph",
-            "purpose": "Introduce platform engagement -> service touchpoint -> reading-promotion outcome.",
+            "slot": "框架段",
+            "purpose": "交代“平台互动-服务触点-阅读推广成效”的概念链。",
             "keywords": ["SICAS", "AARRR", "服务", "阅读推广", "行动", "分享"],
-            "next_action": "Keep causal wording out until new data or verified source locators support it.",
+            "next_action": "在新数据或页码级证据确认前，避免写成因果判断。",
         },
         {
-            "slot": "Variable paragraph",
-            "purpose": "Translate prior studies into candidate variables and indicators.",
+            "slot": "变量段",
+            "purpose": "把既有研究转成可观察变量和候选指标。",
             "keywords": ["粉丝", "点赞", "评论", "标题", "内容", "音乐", "爆款", "DCI"],
-            "next_action": "Split observable platform metrics from service-path indicators.",
+            "next_action": "把平台互动指标和服务路径指标分开表述。",
         },
         {
-            "slot": "Boundary paragraph",
-            "purpose": "State scope limits by library type, platform, time window, and evidence status.",
+            "slot": "边界段",
+            "purpose": "说明馆型、平台、时间窗口和证据状态的外推边界。",
             "keywords": ["公共图书馆", "高校图书馆", "平台", "比较", "差异", "时间"],
-            "next_action": "Add 2024-2026 data before making current-platform claims.",
+            "next_action": "补充 2024-2026 年数据后，再写当前平台判断。",
         },
     ]
     paragraph_traces = []
@@ -394,7 +459,7 @@ def traceability_payload(project_slug: str, project: Path, queue_rows: list[dict
                 "purpose": rule["purpose"],
                 "linked_claims": claim_brief(matched),
                 "source_trace": source_trace(matched),
-                "readiness": readiness(matched) if matched else "No linked claim yet",
+                "readiness": readiness(matched) if matched else "暂无关联主张",
                 "next_action": rule["next_action"],
             }
         )
@@ -461,7 +526,7 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
           <td>{html.escape(row['title'] or row['citekey'])}<br><code>{html.escape(row['citekey'])}</code></td>
           <td>{source_cell(row)}</td>
           <td>{html.escape(row['page'] or '待补')}</td>
-          <td><code>{html.escape(row['verification_status'])}</code><br><span>{html.escape(row['read_status'])} / {html.escape(row['evidence_usage_status'])}</span></td>
+          <td><span class="status-pill {verification_status_class(row['verification_status'])}">{html.escape(zh_verification_status(row['verification_status']))}</span><br><span>{html.escape(zh_read_status(row['read_status']))} / {html.escape(zh_usage_status(row['evidence_usage_status']))}</span></td>
           <td>{html.escape(row['next_action'])}</td>
           <td>{html.escape(row['snippet'])}</td>
         </tr>
@@ -470,8 +535,8 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
     )
     body = f"""
     <div class="toolbar">
-      <a class="button primary" href="{html.escape(csv_path.name)}">CSV</a>
-      <a class="button" href="{html.escape(json_path.name)}">JSON</a>
+      <a class="button primary" href="{html.escape(csv_path.name)}">CSV 数据</a>
+      <a class="button" href="{html.escape(json_path.name)}">JSON 数据</a>
       <button type="button" class="button" data-copy="{html.escape(rebuild_command)}" data-label="复制刷新命令">复制刷新命令</button>
       <button type="button" class="button" data-copy="{html.escape(gate_command)}" data-label="复制门禁命令">复制门禁命令</button>
       <button type="button" class="button" data-copy="{html.escape(sync_command)}" data-label="复制同步命令">复制同步命令</button>
@@ -482,24 +547,26 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
       <div class="metric"><b>{summary['needs_page_locator']}</b><span>待补页码</span></div>
       <div class="metric"><b>{summary['needs_page_check']}</b><span>待人工核页</span></div>
       <div class="metric"><b>{summary['ready_for_manuscript_review']}</b><span>可进入写作审查</span></div>
-      <section class="panel">
-        <h2>Claim -> Source Block -> Page -> Read Status</h2>
-        <table>
-          <thead><tr><th>Claim</th><th>文献</th><th>Source block</th><th>页码</th><th>状态</th><th>下一步</th><th>证据片段</th></tr></thead>
+      <section class="panel wide table-panel">
+        <h2>主张-来源片段-页码-阅读状态链</h2>
+        <div class="table-wrap">
+        <table class="data-table verification-table">
+          <thead><tr><th>主张</th><th>文献</th><th>来源片段</th><th>页码</th><th>核验状态</th><th>下一步</th><th>证据摘录</th></tr></thead>
           <tbody>{table_rows or '<tr><td colspan="7">暂无待核验证据。</td></tr>'}</tbody>
         </table>
+        </div>
       </section>
     </section>
 """
     html_text = render_shell(
         title="页码级证据核验队列",
-        subtitle="用于补全 Claim -> Source Block -> Page -> Read Status 链条，优先处理进入写作链的证据。",
+        subtitle="用于补全“主张-来源片段-页码-阅读状态”链条，优先处理进入写作链的证据。",
         current="页码核验",
         body=body,
         output=path,
         module="证据",
-        meta=f"{html.escape(project_slug)} · Claim -> Source Block -> Page -> Read Status",
-        footer="Generated by scripts/build_manuscript_panel.py.",
+        meta=f"{html.escape(project_slug)} · 主张-来源片段-页码-阅读状态",
+        footer="由 scripts/build_manuscript_panel.py 自动生成。",
     )
     write_text_if_changed(path, html_text)
 
@@ -523,12 +590,12 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
     summary = trace["summary"]
     queue_summary = trace["verification_queue_summary"]
     lines = [
-        "# Manuscript Production Panel",
+        "# 论文写作推进面板",
         "",
-        "Generated by `scripts/build_manuscript_panel.py`.",
-        f"Project: `{project_slug}`",
+        "由 `scripts/build_manuscript_panel.py` 自动生成。",
+        f"当前项目：`{project_slug}`",
         "",
-        "## Current Manuscript Direction",
+        "## 当前论文方向",
         "",
     ]
     if questions:
@@ -539,52 +606,52 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
     lines.extend(
         [
             "",
-            "## Working Conceptual Chain",
+            "## 工作概念链",
             "",
-            "`platform engagement -> service touchpoint -> reading-promotion outcome`",
+            "`平台互动 -> 服务触点 -> 阅读推广成效`",
             "",
-            "- SICAS explains the user path from sense/interest to action/share.",
-            "- AARRR organizes lifecycle indicators, but must be translated into library-service outcomes.",
-            "- Propagation-power metrics describe visibility and interaction; they do not alone prove service value.",
+            "- SICAS 用来解释用户从感知、兴趣到行动、分享的路径。",
+            "- AARRR 用来组织生命周期指标，但必须转译成图书馆服务结果。",
+            "- 传播力指标描述可见度和互动强度，不能单独证明服务价值。",
             "",
-            "## Variable And Indicator Draft",
+            "## 变量与指标草案",
             "",
         ]
     )
     lines.extend(
         md_table(
             [
-                ["Layer", "Candidate indicators", "Current evidence", "Risk before writing"],
-                ["Platform engagement", "粉丝量、发布量、点赞/评论/转发、爆款指数、DCI/传播力指数", "传播力评价、DCI、爆款指数相关 Readers", "容易把平台热度误写成服务价值"],
-                ["Service touchpoint", "资源入口、活动入口、咨询/连接路径、线上线下转换、服务信息清晰度", "SICAS、AARRR、数字阅读推广与营销策略文献", "服务触达仍需可观察指标"],
-                ["Reading outcome", "阅读参与、资源访问、活动报名、读者反馈、知识传播效果", "目前多为框架启发，直接证据不足", "需要后续数据或更强文献补证"],
-                ["Boundary", "馆型差异、平台差异、时间窗口、账号规模", "公共馆/高校馆比较、平台适配文献", "不能用单平台结论外推所有馆型"],
+                ["层级", "候选指标", "当前证据", "写作前风险"],
+                ["平台互动层", "粉丝量、发布量、点赞/评论/转发、爆款指数、DCI/传播力指数", "传播力评价、DCI、爆款指数相关阅读包", "容易把平台热度误写成服务价值"],
+                ["服务触点层", "资源入口、活动入口、咨询/连接路径、线上线下转换、服务信息清晰度", "SICAS、AARRR、数字阅读推广与营销策略文献", "服务触达仍需可观察指标"],
+                ["阅读成效层", "阅读参与、资源访问、活动报名、读者反馈、知识传播效果", "目前多为框架启发，直接证据不足", "需要后续数据或更强文献补证"],
+                ["边界层", "馆型差异、平台差异、时间窗口、账号规模", "公共馆/高校馆比较、平台适配文献", "不能用单平台结论外推所有馆型"],
             ]
         )
     )
     lines.extend(
         [
             "",
-            "## Claim Evidence Traceability",
+            "## 主张证据可追溯性",
             "",
         ]
     )
     lines.extend(
         md_table(
             [
-                ["Metric", "Value"],
-                ["Claim link rows", str(summary["claim_link_rows"])],
-                ["Unique claims", str(summary["unique_claims"])],
-                ["Page located rows", str(summary["page_located_rows"])],
-                ["Page pending rows", str(summary["page_pending_rows"])],
-                ["Human-ready rows", str(summary["human_ready_rows"])],
+                ["指标", "数值"],
+                ["主张-证据链接行", str(summary["claim_link_rows"])],
+                ["唯一主张数", str(summary["unique_claims"])],
+                ["已定位页码行", str(summary["page_located_rows"])],
+                ["待补页码行", str(summary["page_pending_rows"])],
+                ["已人工确认行", str(summary["human_ready_rows"])],
             ]
         )
     )
-    lines.extend(["", "## Research Question Evidence Trace", ""])
+    lines.extend(["", "## 研究问题证据追踪", ""])
     lines.extend(
         md_table(
-            [["Slot", "Research question", "Linked claims", "Source trace", "Readiness"]]
+            [["位置", "研究问题", "关联主张", "来源线索", "证据成熟度"]]
             + [
                 [
                     str(item["slot"]),
@@ -597,10 +664,10 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
             ]
         )
     )
-    lines.extend(["", "## Variable And Indicator Evidence Trace", ""])
+    lines.extend(["", "## 变量与指标证据追踪", ""])
     lines.extend(
         md_table(
-            [["Layer", "Candidate indicators", "Linked claims", "Source trace", "Boundary"]]
+            [["层级", "候选指标", "关联主张", "来源线索", "边界"]]
             + [
                 [
                     str(item["layer"]),
@@ -616,19 +683,19 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
     lines.extend(
         [
             "",
-            "## Evidence Readiness",
+            "## 证据成熟度",
             "",
-            f"- Locator rows: {rows}",
-            f"- Page located: {located}",
-            f"- Page pending: {pending}",
+            f"- 定位行数：{rows}",
+            f"- 已定位页码：{located}",
+            f"- 页码待补：{pending}",
             "",
-            "## Paragraph Queue",
+            "## 段落队列",
             "",
         ]
     )
     lines.extend(
         md_table(
-            [["Paragraph slot", "Purpose", "Linked claims", "Source trace", "Readiness", "Next action"]]
+            [["段落位置", "写作目的", "关联主张", "来源线索", "证据成熟度", "下一步"]]
             + [
                 [
                     str(item["slot"]),
@@ -642,31 +709,31 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
             ]
         )
     )
-    lines.extend(["", "## Page Verification Queue", ""])
+    lines.extend(["", "## 页码核验队列", ""])
     lines.extend(
         md_table(
             [
-                ["Metric", "Value"],
-                ["Total verification tasks", str(queue_summary["total_items"])],
-                ["Need page locator", str(queue_summary["needs_page_locator"])],
-                ["Need page check", str(queue_summary["needs_page_check"])],
-                ["Need human read", str(queue_summary["needs_human_read"])],
-                ["Ready for manuscript review", str(queue_summary["ready_for_manuscript_review"])],
+                ["指标", "数值"],
+                ["核验任务总数", str(queue_summary["total_items"])],
+                ["待补页码", str(queue_summary["needs_page_locator"])],
+                ["待人工核页", str(queue_summary["needs_page_check"])],
+                ["待读原文确认", str(queue_summary["needs_human_read"])],
+                ["可进入写作审查", str(queue_summary["ready_for_manuscript_review"])],
             ]
         )
     )
-    lines.extend(["", "## Top Verification Tasks", ""])
+    lines.extend(["", "## 优先核验任务", ""])
     lines.extend(
         md_table(
-            [["Task", "Claim", "Source block", "Page", "Read status", "Usage status", "Next action"]]
+            [["任务", "主张", "来源片段", "页码", "阅读状态", "使用状态", "下一步"]]
             + [
                 [
                     str(item["task_id"]),
                     str(item["claim_id"]),
                     str(item["source_block_id"]),
                     str(item["page"] or "待补"),
-                    str(item["read_status"]),
-                    str(item["evidence_usage_status"]),
+                    zh_read_status(str(item["read_status"])),
+                    zh_usage_status(str(item["evidence_usage_status"])),
                     str(item["next_action"]),
                 ]
                 for item in trace["top_verification_tasks"]
@@ -676,12 +743,12 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
     lines.extend(
         [
             "",
-            "## Next Writing Actions",
+            "## 下一步写作动作",
             "",
-            "- Verify page/table locators for the current evidence rows marked `page_pending`.",
-            "- Upgrade the strongest propagation/service-value papers from `skimmed` to `human-read` only after real reading.",
-            "- Fill `07_claim_evidence_map.md` with 3-5 draft claims before writing the introduction and literature review.",
-            "- Keep metadata-only papers out of manuscript claims until they have a Reader or full-text note.",
+            "- 先核验当前标为“页码待补”的证据行，补齐页码或表格定位。",
+            "- 只有真实读过原文后，才把最强的传播力/服务价值论文从“已扫读”升级为“已人工精读”。",
+            "- 写引言和综述前，先在 `07_claim_evidence_map.md` 中沉淀 3-5 条可写主张。",
+            "- 仅元数据论文不要进入正文主张，除非已经有阅读包或全文笔记。",
             "",
         ]
     )
@@ -697,7 +764,7 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
             continue
         if line.startswith("## "):
             if in_table:
-                body_parts.append("</tbody></table>")
+                body_parts.append("</tbody></table></div>")
                 in_table = False
             body_parts.append(f"<h2>{html.escape(line[3:])}</h2>")
         elif line.startswith("| ") and "---" in line:
@@ -710,14 +777,14 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
             cells = [html.escape(cell.strip()) for cell in line.strip().strip("|").split("|")]
             if not in_table:
                 header = "".join(f"<th>{cell}</th>" for cell in cells)
-                body_parts.append(f"<table><thead><tr>{header}</tr></thead><tbody>")
+                body_parts.append(f'<div class="table-wrap"><table class="data-table"><thead><tr>{header}</tr></thead><tbody>')
                 in_table = True
             else:
                 body_parts.append("<tr>" + "".join(f"<td>{cell}</td>" for cell in cells) + "</tr>")
         elif clean(line):
             body_parts.append(f"<p>{html.escape(line)}</p>")
     if in_table:
-        body_parts.append("</tbody></table>")
+        body_parts.append("</tbody></table></div>")
     rebuild_command = f"make manuscript-panel PROJECT={project_slug}"
     gate_command = f"make evidence-gate PROJECT={project_slug}"
     sync_command = f"make claim-evidence-sync PROJECT={project_slug}"
@@ -729,7 +796,7 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
       <button type="button" class="button" data-copy="{html.escape(sync_command)}" data-label="复制同步命令">复制同步命令</button>
     </div>
     <div class="copy-feedback" aria-live="polite"></div>
-    <article class="panel">
+    <article class="panel wide writing-panel">
     {''.join(body_parts)}
     </article>
 """
@@ -741,7 +808,7 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
         output=html_path,
         module="写作",
         meta=f"{html.escape(project_slug)} · 研究问题、变量指标、证据链和段落队列",
-        footer="Generated by scripts/build_manuscript_panel.py.",
+        footer="由 scripts/build_manuscript_panel.py 自动生成。",
     )
 
 

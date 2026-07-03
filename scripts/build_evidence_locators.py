@@ -19,10 +19,55 @@ from workflow_config import active_project_slug
 ROOT = Path(__file__).resolve().parents[1]
 PROJECTS = ROOT / "projects"
 MATRIX = ROOT / "library" / "literature_matrix.csv"
+LOCATOR_STATUS_LABELS = {
+    "page_pending": "页码待补",
+    "page_located_needs_human_check": "已定位，待人工核页",
+}
 
 
 def clean(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
+
+
+def locator_status_label(value: str) -> str:
+    text = clean(value)
+    return LOCATOR_STATUS_LABELS.get(text, text or "待定位")
+
+
+def locator_status_class(value: str) -> str:
+    return "info" if clean(value) == "page_located_needs_human_check" else "warn"
+
+
+def zh_boundary(value: str) -> str:
+    text = clean(value)
+    replacements = [
+        ("Source-grounded companion read", "有来源伴读笔记"),
+        ("Source-grounded guided skim", "有来源引导扫读"),
+        ("Source-grounded reader", "有来源阅读包"),
+        ("Source-grounded skim", "有来源扫读"),
+        ("not yet human-read or verified", "尚未人工精读或核验"),
+        ("no page numbers", "暂无页码"),
+        ("statistical claims need page/table check against original PDF", "统计类主张需要对照原始 PDF 核查页码或表格"),
+        ("statistical claims need table/page check against original", "统计类主张需要对照原文核查表格或页码"),
+        ("time-bound 2020-era claim", "仅适用于 2020 年前后情境"),
+        ("historical baseline only", "仅作为历史基线"),
+        ("no current-platform inference", "不能外推到当前平台"),
+        ("descriptive survey", "描述性调查"),
+        ("no causal effect model", "不能作为因果效应模型"),
+        ("popular-only sample and manual coding limit causal interpretation", "热门样本和人工编码限制了因果解释"),
+        ("descriptive strategy induction, not causal evidence", "描述性策略归纳，不是因果证据"),
+        ("descriptive comparison and strategy framework, not causal evidence", "描述性比较和策略框架，不是因果证据"),
+        ("page numbers and figure/table details still need original-PDF verification", "页码、图表细节仍需对照原始 PDF 核验"),
+        ("table/page locators pending", "表格或页码定位待补"),
+        ("supports platform-propagation layer only", "仅支持平台传播层判断"),
+        ("Do not cite until the block is checked against the original PDF", "对照原始 PDF 核查前不要用于正文引用"),
+        ("Reader block available", "已有阅读包片段"),
+        ("not yet tied to a manuscript claim", "尚未连接到正文主张"),
+    ]
+    for source, target in replacements:
+        text = text.replace(source, target)
+    text = text.replace("; ", "；").replace(". ", "。").rstrip(".")
+    return text or "待补证据边界"
 
 
 def rel(path: Path | str | None) -> str:
@@ -217,27 +262,27 @@ def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
 def write_md(path: Path, project: str, rows: list[dict[str, str]], csv_path: Path, html_path: Path) -> None:
     located = sum(1 for row in rows if row["page"])
     lines = [
-        f"# Evidence Locator Table - {project}",
+        f"# 证据定位表 - {project}",
         "",
-        f"Generated: {dt.datetime.now().isoformat(timespec='seconds')}",
+        f"生成时间：{dt.datetime.now().isoformat(timespec='seconds')}",
         f"CSV: `{rel(csv_path)}`",
         f"HTML: `{rel(html_path)}`",
         "",
-        "## Boundary",
+        "## 使用边界",
         "",
-        "- This is a locator and verification workbench, not final manuscript evidence.",
-        "- `page_located_needs_human_check` means the extractor found a page number, but the user still needs to verify against the original PDF.",
-        "- `page_pending` means the current Reader was created before page-aware extraction or came from a non-page-aware source.",
+        "- 这是定位与核验工作台，不是最终正文证据。",
+        "- 已定位，待人工核页：系统已找到页码，但仍需要你对照原始 PDF 人工确认。",
+        "- 页码待补：当前阅读包暂无页码线索，通常来自较早的非页码级抽取或非页码来源。",
         "",
-        "## Summary",
+        "## 摘要",
         "",
-        f"- Rows: {len(rows)}",
-        f"- Page located: {located}",
-        f"- Page pending: {len(rows) - located}",
+        f"- 总行数：{len(rows)}",
+        f"- 已定位页码：{located}",
+        f"- 页码待补：{len(rows) - located}",
         "",
-        "## Claim Locators",
+        "## 主张定位",
         "",
-        "| Claim | Citekey | Block | Page | Status | Boundary |",
+        "| 主张 | Citekey | 来源片段 | 页码 | 状态 | 边界 |",
         "|---|---|---|---:|---|---|",
     ]
     for row in rows[:120]:
@@ -249,8 +294,8 @@ def write_md(path: Path, project: str, rows: list[dict[str, str]], csv_path: Pat
                     f"`{row['citekey']}`",
                     f"`{row['block_id']}`",
                     row["page"] or "待补",
-                    row["locator_status"],
-                    row["boundary"].replace("|", "/")[:120],
+                    locator_status_label(row["locator_status"]),
+                    zh_boundary(row["boundary"]).replace("|", "/")[:120],
                 ]
             )
             + " |"
@@ -267,8 +312,8 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
           <td>{html.escape(row['title'] or row['citekey'])}<br><code>{html.escape(row['citekey'])}</code></td>
           <td><code>{html.escape(row['block_id'])}</code><br><span>{html.escape(row['source_id'])}</span></td>
           <td>{html.escape(row['page'] or '待补')}</td>
-          <td><code>{html.escape(row['locator_status'])}</code></td>
-          <td>{html.escape(row['boundary'])}</td>
+          <td><span class="status-pill {locator_status_class(row['locator_status'])}">{html.escape(locator_status_label(row['locator_status']))}</span></td>
+          <td>{html.escape(zh_boundary(row['boundary']))}</td>
         </tr>
         """
         for row in rows[:180]
@@ -278,25 +323,27 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
       <div class="metric"><b>{len(rows)}</b><span>证据定位行</span></div>
       <div class="metric"><b>{located}</b><span>已有页码</span></div>
       <div class="metric"><b>{len(rows) - located}</b><span>页码待补</span></div>
-      <section class="panel">
-        <h2>主张-证据-block-page</h2>
-        <table>
-          <thead><tr><th>主张</th><th>文献</th><th>Block</th><th>页码</th><th>核验状态</th><th>边界</th></tr></thead>
+      <section class="panel wide table-panel">
+        <h2>主张-证据-来源片段-页码</h2>
+        <div class="table-wrap">
+        <table class="data-table evidence-table">
+          <thead><tr><th>主张</th><th>文献</th><th>来源片段</th><th>页码</th><th>核验状态</th><th>边界</th></tr></thead>
           <tbody>{table_rows or '<tr><td colspan="6">暂无可定位证据。</td></tr>'}</tbody>
         </table>
+        </div>
       </section>
     </section>
 """
     html_text = render_shell(
         title="证据定位表",
-        subtitle="把综述主张连接到文献、source block 和页码线索，作为正式引用前的定位工作台。",
+        subtitle="把综述主张连接到文献、来源片段和页码线索，作为正式引用前的定位工作台。",
         current="证据定位",
         body=body,
         output=path,
         module="证据",
-        meta=f"{html.escape(project)} · Generated {html.escape(dt.datetime.now().isoformat(timespec='seconds'))}",
+        meta=f"{html.escape(project)} · 生成时间 {html.escape(dt.datetime.now().isoformat(timespec='seconds'))}",
         primary_action=f'<a class="button primary" href="{html.escape(csv_path.name)}">CSV 数据</a>',
-        footer="Generated by scripts/build_evidence_locators.py.",
+        footer="由 scripts/build_evidence_locators.py 自动生成。",
     )
     write_text_preserving_generated_at(path, html_text)
 
