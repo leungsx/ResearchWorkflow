@@ -1,20 +1,21 @@
 # 今日阅读看板 - 图书馆短视频相关研究
 
-Date: 2026-07-02
+Date: 2026-07-03
 Project: `library_short_video`
 
 ## 这张看板解决什么问题
 
 你不需要去猜“论文在哪里”“研讨卡是什么”“reader 怎么读”。这张看板把今天推荐文献的入口和用途放在一起。
 
-## 2026-07-02 当前主读
+## 2026-07-03 当前主读
 
 | 角色 | Citekey | 题名 | 阅读状态 | 今天为什么读 | 入口 |
 |---|---|---|---|---|---|
-| 主读 | `cnki_2021_645f03f388` | 图书馆短视频账号传播力研究——以省级公共图书馆为例 | `skimmed` | 补齐平台传播层指标：粉丝量、发布量、内容质量、总点赞量和爆款指数；同时明确传播力不能替代服务价值 | [HTML 精读页](/Users/leung/ResearchWorkflow/paper_reading/2026-07-02-propagation-power-evaluation.html) / [上下文包](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/context_packs/cnki_2021_645f03f388.md) / [Reader](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/cnki_2021_645f03f388/paper.md) / [论文笔记](/Users/leung/ResearchWorkflow/vault/01_Literature/cnki_2021_645f03f388.md) |
+| 主读 | `cnki_2025_ea327e3e1c` | 公共图书馆阅读服务类抖音短视频传播效果的影响因素研究 | `skimmed` | 补“阅读服务类短视频传播效果/服务价值指标”线：把平台互动从账号层推进到视频内容、标题、系列化和领读机制的组态路径 | [HTML 精读页](/Users/leung/ResearchWorkflow/paper_reading/2026-07-03-reading-service-douyin-fsqca.html) / [上下文包](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/context_packs/cnki_2025_ea327e3e1c.md) / [Reader](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/cnki_2025_ea327e3e1c/paper.md) / [论文笔记](/Users/leung/ResearchWorkflow/vault/01_Literature/cnki_2025_ea327e3e1c.md) |
+| 指标回顾 | `cnki_2021_645f03f388` | 图书馆短视频账号传播力研究——以省级公共图书馆为例 | `skimmed` | 对照传播力评价、熵权法和平台传播层，避免把 VCEI/传播力直接写成服务价值 | [HTML 精读页](/Users/leung/ResearchWorkflow/paper_reading/2026-07-02-propagation-power-evaluation.html) / [上下文包](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/context_packs/cnki_2021_645f03f388.md) / [Reader](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/cnki_2021_645f03f388/paper.md) / [论文笔记](/Users/leung/ResearchWorkflow/vault/01_Literature/cnki_2021_645f03f388.md) |
 | 框架回顾 | `cnki_2023_34348faa1e` | 基于SICAS模型的公共图书馆短视频营销策略研究 | `skimmed` | 对照用户感知、兴趣互动、连接沟通、行动、分享五阶段 | [论文笔记](/Users/leung/ResearchWorkflow/vault/01_Literature/cnki_2023_34348faa1e.md) / [Reader](/Users/leung/ResearchWorkflow/projects/library_short_video/literature/readers/cnki_2023_34348faa1e/paper.md) |
 | 指标回顾 | `cnki_2021_3771e58987` | 公共图书馆和高校图书馆短视频营销比较研究 | `skimmed` | 对照 AARRR、馆型差异和平台适配，避免把服务动作与阶段指标混在一起 | [论文笔记](/Users/leung/ResearchWorkflow/vault/01_Literature/cnki_2021_3771e58987.md) / [HTML 精读页](/Users/leung/ResearchWorkflow/paper_reading/2026-06-30-aarrr-library-short-video.html) |
-| 服务价值补读 | - | 公共图书馆阅读服务类抖音短视频传播效果的影响因素研究 | `incoming PDF` | 下一篇优先补“阅读服务类传播效果/服务价值指标”线 | [incoming 文件夹](/Users/leung/ResearchWorkflow/library/pdfs/library_short_video/incoming/) |
+| 下一篇候选 | - | 多模态视域下图书馆阅读推广短视频用户体验影响机制研究 | `incoming PDF` | 王磊 2025 仍缺用户感知变量；下一步优先补用户体验和多模态机制 | [incoming 文件夹](/Users/leung/ResearchWorkflow/library/pdfs/library_short_video/incoming/) |
 
 ## 2026-06-21 今日推荐
 
@@ -99,7 +100,7 @@ Reader 是“带证据定位的全文阅读材料”。目前 CNKI reader 主要
 - 可转化研究问题
 - 跨文献机会地图
 
-今天读完后，台账已有 9 张卡片。当前最有潜力的方向包括：
+今天读完后，台账已有 10 张已读论文卡片。当前最有潜力的方向包括：
 
 1. 平台互动指标与图书馆服务价值之间的断裂。
 2. Hook Model 与 ELM 是否能整合成图书馆短视频机制框架。
@@ -118,7 +119,8 @@ flowchart LR
     D --> E[杨达森等 2021: ELM 社会化账号大样本]
     E --> F[龚雪竹 2021: AARRR 公共馆/高校馆与三平台比较]
     F --> G[王兴兰/夏晓红 2021: 传播力评价与熵权法]
-    G --> H[下一步: 阅读服务效果/服务价值指标]
+    G --> H[王磊 2025: 阅读服务类视频 VCEI 与 fsQCA 组态]
+    H --> I[下一步: 用户体验/多模态服务转化指标]
 ```
 
 ## 读完之后去哪里看成果

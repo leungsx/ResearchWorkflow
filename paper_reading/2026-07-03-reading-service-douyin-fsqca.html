@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026-07-03 精读：公共图书馆阅读服务类抖音短视频传播效果</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #5c6b7a;
+      --line: #d9e2ec;
+      --paper: #ffffff;
+      --soft: #f7fafc;
+      --blue: #1f5d99;
+      --green: #14775f;
+      --amber: #9b650c;
+      --rose: #a73755;
+      --slate: #314252;
+      --shadow: 0 10px 26px rgba(25, 39, 52, 0.07);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+      color: var(--ink);
+      background: #f7fafc;
+      line-height: 1.64;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 24px; }
+    header {
+      color: #f9fbfd;
+      background: linear-gradient(135deg, #253744 0%, #155f5a 56%, #8c6b28 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.16);
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 5px 9px;
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      font-size: 12px;
+    }
+    h1 { margin: 14px 0 10px; font-size: 34px; line-height: 1.2; letter-spacing: 0; }
+    h2 { margin: 0 0 14px; font-size: 22px; letter-spacing: 0; }
+    h3 { margin: 0 0 9px; font-size: 17px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    .sub { max-width: 920px; color: rgba(249,251,253,0.92); }
+    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .nav a {
+      color: #f9fbfd;
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 7px 11px;
+      font-size: 14px;
+    }
+    main.wrap { margin-top: -22px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .panel, .metric {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .panel { padding: 18px; }
+    .metric { padding: 16px; }
+    .span-12 { grid-column: 1 / -1; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .metric b { display: block; font-size: 28px; line-height: 1.1; color: var(--slate); }
+    .metric span { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px 18px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .meta div { padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
+    .label { display: block; margin-bottom: 3px; color: var(--muted); font-size: 12px; }
+    .tag {
+      display: inline-block;
+      margin: 0 7px 8px 0;
+      padding: 5px 9px;
+      background: #edf8f4;
+      color: var(--green);
+      border: 1px solid #cfe7de;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .route, .cards, .glossary { display: grid; gap: 10px; }
+    .route-item, .card-link, .glossary div {
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--green);
+      border-radius: 0 8px 8px 0;
+      background: var(--soft);
+    }
+    .route-item strong, .card-link strong { display: block; margin-bottom: 4px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 650; background: #fbfdff; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .step {
+      position: relative;
+      min-height: 166px;
+      padding: 14px;
+      border: 1px solid #cfe0e2;
+      border-radius: 8px;
+      background: #f8fbfb;
+    }
+    .step:not(:last-child)::after {
+      content: ">";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--green);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .num {
+      display: inline-flex;
+      width: 28px;
+      height: 28px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+    .callout {
+      padding: 14px;
+      border: 1px solid #ead8a8;
+      border-radius: 8px;
+      background: #fff9eb;
+    }
+    .callout.warn { border-color: #efc2ce; background: #fff4f6; }
+    ul, ol { margin: 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      padding: 12px 14px;
+    }
+    details + details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 650; }
+    .actions label { display: block; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+    .actions input { margin-right: 8px; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef3f8;
+      border: 1px solid #d8e2ec;
+      border-radius: 5px;
+      padding: 1px 4px;
+      font-size: 0.92em;
+    }
+    .foot { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+    @media (max-width: 920px) {
+      .span-8, .span-6, .span-4, .span-12, .metric { grid-column: 1 / -1; }
+      .flow { grid-template-columns: 1fr; }
+      .step:not(:last-child)::after { content: "v"; right: auto; left: 50%; top: auto; bottom: -19px; transform: translateX(-50%); }
+      h1 { font-size: 28px; }
+      .meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <span class="eyebrow">Daily Deep Read · 2026-07-03</span>
+      <h1>公共图书馆阅读服务类抖音短视频传播效果的影响因素研究</h1>
+      <p class="sub">今天读王磊 2025 这篇，是为了把项目从“账号传播力”推进到“阅读服务类短视频的传播效果机制”。它能补上当前主问题中最薄的一层：平台互动如何通过视频表现、内容价值和引流技巧形成可观察效果。</p>
+      <nav class="nav">
+        <a href="../study_dashboard.html">学习仪表盘</a>
+        <a href="today.html">今日固定入口</a>
+        <a href="index.html">论文归档</a>
+        <a href="../knowledge_cards/index.html">知识卡入口</a>
+        <a href="../knowledge_graph/index.html">知识图谱</a>
+        <a href="views/literature_review_workbench.html">文献综述工作台</a>
+        <a href="views/innovation_limitation_bank.html">创新局限台账</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid">
+      <section class="panel span-8">
+        <h2>题目与推荐理由</h2>
+        <div class="meta">
+          <div><span class="label">作者</span>王磊</div>
+          <div><span class="label">年份 / 来源</span>2025 / 《数字图书馆论坛》21(3):75-84</div>
+          <div><span class="label">DOI</span><a href="https://doi.org/10.3772/j.issn.1673-2286.2025.03.008">10.3772/j.issn.1673-2286.2025.03.008</a></div>
+          <div><span class="label">当前项目角色</span>阅读服务短视频传播效果机制</div>
+          <div><span class="label">来源</span>本地 CNKI PDF；Reader 已生成 26 个 block</div>
+          <div><span class="label">证据边界</span>source-grounded skim；表格和页码写作前需回 PDF 核验</div>
+        </div>
+        <p>推荐理由：昨天的论文已经把账号层传播力拆成可计算指标，但仍然停留在“账号有没有扩散能力”。这篇把对象限定为阅读服务类短视频，并用 fsQCA 讨论多因素组合，更适合补“服务价值指标线”的前置机制。</p>
+        <p><span class="tag">阅读服务类短视频</span><span class="tag">VCEI</span><span class="tag">fsQCA</span><span class="tag">把关人理论</span><span class="tag">组态路径</span></p>
+      </section>
+
+      <aside class="panel span-4">
+        <h2>30 秒定位</h2>
+        <ol>
+          <li>它不是泛泛讲图书馆短视频，而是阅读服务类短视频。</li>
+          <li>它的结果变量是 VCEI，仍属于平台互动，不是服务转化。</li>
+          <li>它的价值在于把“什么因素有效”改成“哪些因素组合有效”。</li>
+        </ol>
+      </aside>
+
+      <div class="metric span-4"><b>11,529</b><span>国家图书馆与 29 个省级公共图书馆抖音号视频记录</span></div>
+      <div class="metric span-4"><b>6,350</b><span>用阅读相关关键词识别出的阅读服务类短视频</span></div>
+      <div class="metric span-4"><b>4</b><span>实现理想传播效果的条件组态</span></div>
+
+      <section class="panel span-12">
+        <h2>精读路线</h2>
+        <div class="route">
+          <div class="route-item"><strong>30 秒定位</strong>先把它放入项目：账号传播力之后，服务价值之前；它补的是阅读服务短视频的传播效果机制。</div>
+          <div class="route-item"><strong>核心内容</strong>看数据、VCEI、把关人理论条件、fsQCA 校准和 4 条组态路径。</div>
+          <div class="route-item"><strong>证据和边界</strong>记住 VCEI 仍是点赞、评论、分享合成的互动指标；20 个案例和人工赋值会限制外推。</div>
+          <div class="route-item"><strong>创新 / 局限 / 机会</strong>把“视频表现-内容-引流协同”转成你的内容编码表，再补服务触达与阅读转化数据。</div>
+        </div>
+      </section>
+
+      <section class="panel span-12">
+        <h2>方法流程图</h2>
+        <div class="flow" aria-label="研究方法流程">
+          <div class="step"><span class="num">1</span><h3>账号样本</h3><p>国家图书馆和 29 个省级公共图书馆抖音号。</p></div>
+          <div class="step"><span class="num">2</span><h3>视频数据</h3><p>清博 API 获取 2018-08-03 至 2024-07-11 的 11,529 条视频。</p></div>
+          <div class="step"><span class="num">3</span><h3>结果变量</h3><p>用点赞、评论、分享计算 VCEI，并筛出 20 个典型案例。</p></div>
+          <div class="step"><span class="num">4</span><h3>条件变量</h3><p>背景、视频表现、内容因素和引流技巧进入 fsQCA。</p></div>
+          <div class="step"><span class="num">5</span><h3>组态解释</h3><p>得到视频表现与背景驱动、视频表现与内容驱动、协同驱动三类路径。</p></div>
+        </div>
+      </section>
+
+      <section class="panel span-8">
+        <h2>核心证据逻辑</h2>
+        <table>
+          <thead><tr><th>问题</th><th>论文做法</th><th>可用于项目的判断</th><th>证据块</th></tr></thead>
+          <tbody>
+            <tr><td>阅读服务短视频是什么</td><td>用阅读相关关键词从全部视频中识别服务类内容。</td><td>项目需要先限定服务场景，不能把所有图书馆短视频混为一类。</td><td><code>B0008</code></td></tr>
+            <tr><td>传播效果如何量化</td><td>参考 DCI 互动系数构造 VCEI。</td><td>VCEI 可放在平台互动层，但不能替代服务价值。</td><td><code>B0004</code>, <code>B0008</code></td></tr>
+            <tr><td>哪些条件进入模型</td><td>背景、视频表现、内容因素、话题标签和标题技巧。</td><td>后续编码表可以按这三组变量展开。</td><td><code>B0005-B0007</code></td></tr>
+            <tr><td>核心结果是什么</td><td>4 个组态，整体覆盖度 0.525，整体一致性 0.986。</td><td>传播效果更像多路径组合，不宜写成单一因素决定。</td><td><code>B0011-B0012</code></td></tr>
+            <tr><td>主要边界是什么</td><td>20 个案例、人工赋值、缺少用户感知变量。</td><td>下一步应补用户体验和服务后台数据。</td><td><code>B0020-B0021</code></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <aside class="panel span-4">
+        <h2>关键要点</h2>
+        <ul>
+          <li>没有任何单一条件是理想传播效果的必要条件。</li>
+          <li>生动视频表现是所有组态反复出现的核心条件。</li>
+          <li>账号强时，背景传播力和视频表现可以共同驱动。</li>
+          <li>账号弱时，意外性、连续性、标题技巧和领读/体验分享更重要。</li>
+          <li>它解释的是互动传播，不是阅读服务结果。</li>
+        </ul>
+      </aside>
+
+      <section class="panel span-6">
+        <h2>三类路径</h2>
+        <details open>
+          <summary>视频表现与背景驱动型</summary>
+          <p>高传播力账号加上生动形象的视频表现，能提高用户接触和互动概率。适合解释头部馆或强账号为什么更容易获得传播效果。</p>
+        </details>
+        <details>
+          <summary>视频表现与内容驱动型</summary>
+          <p>账号传播力不佳时，视频表现和意外性内容成为核心。它提醒我们：弱账号不能只靠发得多，要提供新颖观点或稀缺书籍信息。</p>
+        </details>
+        <details>
+          <summary>视频、内容、引流技巧协同驱动型</summary>
+          <p>标题技巧、连续性内容和生动表现共同作用。这个路径最适合转化成当前项目的内容编码表。</p>
+        </details>
+      </section>
+
+      <section class="panel span-6">
+        <h2>术语表</h2>
+        <div class="glossary">
+          <div><strong>阅读服务类短视频</strong><br>以读物供给、阅读素养教育、辅助阅读和阅读推广为目标的视频内容。</div>
+          <div><strong>VCEI</strong><br>Video Communication Effect Index，用点赞、评论、分享合成单条视频传播效果。</div>
+          <div><strong>fsQCA</strong><br>模糊集定性比较分析，用于识别多条件组合通向同一结果的路径。</div>
+          <div><strong>把关人理论</strong><br>解释信息如何被选择、加工和传播；在短视频中可转化为热点、明确性、意外性、连续性等内容条件。</div>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>局限性</h2>
+        <div class="callout warn">
+          <ul>
+            <li>VCEI 仍是平台互动指标，不能证明阅读服务被使用。</li>
+            <li>20 个典型案例不足以覆盖所有馆型和平台差异。</li>
+            <li>标题技巧、明确性、意外性等条件依赖人工赋值。</li>
+            <li>用户感知、动机、能力、信息有用性和易用性没有进入模型。</li>
+            <li>写作前必须回 PDF 核验表格、公式和页码。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel span-6">
+        <h2>延伸阅读</h2>
+        <ul>
+          <li><code>cnki_2021_645f03f388</code>：账号传播力评价，适合放在平台传播层。</li>
+          <li><code>cnki_2021_d35f8e895a</code>：Hook Model 与图书馆短视频互动效果。</li>
+          <li><code>cnki_2021_dfab60236e</code>：社会化阅读推广账号的大样本 ELM 模型。</li>
+          <li><code>cnki_2021_5530e86157</code>：数字阅读推广服务动作。</li>
+          <li><code>多模态视域下图书馆阅读推广短视频用户体验影响机制研究_程秀峰.pdf</code>：下一步补用户体验和多模态机制。</li>
+        </ul>
+      </section>
+
+      <section class="panel span-8">
+        <h2>互动精读问题</h2>
+        <details open>
+          <summary>问题 1：为什么这篇不能证明“短视频提高了阅读服务价值”？</summary>
+          <p>因为结果变量 VCEI 来自点赞、评论和分享，只能说明平台互动传播。服务价值至少需要资源访问、活动参与、借阅、到馆、咨询或满意度等服务结果数据。</p>
+        </details>
+        <details>
+          <summary>问题 2：如果我要复用这篇方法，第一步应该删掉什么假设？</summary>
+          <p>删掉“单一因素决定传播效果”的假设。本文更接近复杂系统：不同条件组合可以通向同一结果。</p>
+        </details>
+        <details>
+          <summary>问题 3：这篇最适合转成我的哪类研究行动？</summary>
+          <p>最适合转成内容编码表和服务价值指标表：视频表现、内容因素和引流技巧做解释变量，VCEI 做平台互动结果，再另补服务触达与阅读转化结果。</p>
+        </details>
+      </section>
+
+      <aside class="panel span-4 actions">
+        <h2>今日行动清单</h2>
+        <label><input type="checkbox"> 先读论文笔记的“证据和边界”。</label>
+        <label><input type="checkbox"> 复述 VCEI 为什么不是服务价值。</label>
+        <label><input type="checkbox"> 把三类组态路径画进项目指标草图。</label>
+        <label><input type="checkbox"> 下一轮优先补用户体验/多模态机制文献。</label>
+      </aside>
+
+      <section class="panel span-12">
+        <h2>生成的知识资产</h2>
+        <div class="cards">
+          <div class="card-link"><strong>论文笔记</strong><code>vault/01_Literature/cnki_2025_ea327e3e1c.md</code></div>
+          <div class="card-link"><strong>概念卡</strong><code>阅读服务类短视频</code>、<code>把关人理论</code>、<code>视频表现-内容-引流协同</code></div>
+          <div class="card-link"><strong>方法卡</strong><code>VCEI视频传播效果指数</code>、<code>fsQCA模糊集定性比较分析</code></div>
+          <div class="card-link"><strong>项目连接</strong><code>projects/library_short_video/literature/literature_review_workbench.md</code>、<code>innovation_limitation_bank.md</code>、<code>03_literature_synthesis.md</code></div>
+        </div>
+      </section>
+
+      <section class="panel span-12 foot">
+        <h2>证据边界</h2>
+        <p>本页依据本地 PDF、Poppler 文本抽取和渲染页视觉核对生成。当前状态是 source-grounded skim，不是 verified。涉及表 2-表 6 的数值、公式和页码，正式写作前必须回原 PDF 逐项核验。</p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

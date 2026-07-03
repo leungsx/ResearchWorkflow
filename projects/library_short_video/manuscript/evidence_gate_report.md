@@ -1,6 +1,6 @@
 # Evidence Gate Report
 
-Generated: 2026-07-03T05:25:29
+Generated: 2026-07-03T09:28:47
 Project: `library_short_video`
 Matrix: `/Users/leung/ResearchWorkflow/library/literature_matrix.csv`
 
@@ -9,9 +9,9 @@ Matrix: `/Users/leung/ResearchWorkflow/library/literature_matrix.csv`
 | Metric | Value |
 |---|---:|
 | Status | PASS |
-| Literature matrix rows | 60 |
-| Project-tagged rows | 60 |
-| Citekeys used in project materials | 9 |
+| Literature matrix rows | 61 |
+| Project-tagged rows | 61 |
+| Citekeys used in project materials | 10 |
 | ERROR issues | 0 |
 | WARN issues | 0 |
 | INFO issues | 51 |

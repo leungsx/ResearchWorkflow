@@ -94,6 +94,13 @@ def user_html_pages() -> list[Path]:
     return sorted({path.resolve() for path in pages if path.exists()})
 
 
+def nav_links(text: str, class_name: str) -> list[str]:
+    match = re.search(rf'<nav class="nav {re.escape(class_name)}"[^>]*>(.*?)</nav>', text, re.S)
+    if not match:
+        return []
+    return re.findall(r"<a\b", match.group(1))
+
+
 class WorkflowSmokeTests(unittest.TestCase):
     def test_active_project_config_points_to_existing_project(self) -> None:
         config = read_workflow_config()
@@ -317,18 +324,41 @@ class WorkflowSmokeTests(unittest.TestCase):
 
     def test_dashboard_has_mode_switch_and_copy_actions(self) -> None:
         text = read_text(ROOT / "study_dashboard.html")
+        app_js = read_text(ROOT / "assets" / "app.js")
         self.assertIn("data-mode-button=\"reading\"", text)
         self.assertIn("data-mode-button=\"writing\"", text)
         self.assertIn("data-mode-button=\"evidence\"", text)
         self.assertIn("data-mode-button=\"maintenance\"", text)
         self.assertIn("data-copy=", text)
-        self.assertIn("rw-dashboard-mode", text)
+        self.assertIn("assets/app.js", text)
+        self.assertIn("rw-dashboard-mode", app_js)
 
     def test_plain_generated_card_does_not_load_dashboard_interaction_script(self) -> None:
         text = read_text(ROOT / "knowledge_cards" / "views" / "concept-sicas-e14df8c7.html")
         self.assertNotIn("rw-dashboard-mode", text)
         self.assertNotIn("data-mode-button=\"reading\"", text)
         self.assertNotIn('document.querySelectorAll("[data-copy]")', text)
+
+    def test_generated_pages_use_layered_navigation_and_shared_assets(self) -> None:
+        pages = [
+            ROOT / "study_dashboard.html",
+            ROOT / "action_queue.html",
+            ROOT / "workflow_state.html",
+            ROOT / "workflow_health.html",
+            ROOT / "project_collaboration.html",
+            ROOT / "archive_policy.html",
+            project_path("literature", "incoming_pdf_triage.html"),
+            project_path("literature", "evidence_locator_table.html"),
+            project_path("evidence", "page_verification_queue.html"),
+            project_path("manuscript", "writing_panel.html"),
+        ]
+        for page in pages:
+            with self.subTest(page=page):
+                text = read_text(page)
+                self.assertIn("assets/app.css", text)
+                self.assertIn("ResearchWorkflow /", text)
+                self.assertLessEqual(len(nav_links(text, "global-nav")), 6)
+                self.assertGreater(len(nav_links(text, "subnav")), 0)
 
     def test_evidence_pages_expose_copy_commands(self) -> None:
         verification = read_text(project_path("evidence", "page_verification_queue.html"))

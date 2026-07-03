@@ -1,6 +1,6 @@
 # Incoming PDF Triage - library_short_video
 
-Generated: 2026-07-02T21:32:22
+Generated: 2026-07-03T09:16:56
 CSV: `projects/library_short_video/literature/incoming_pdf_triage.csv`
 HTML: `projects/library_short_video/literature/incoming_pdf_triage.html`
 
@@ -19,10 +19,10 @@ HTML: `projects/library_short_video/literature/incoming_pdf_triage.html`
 | 我国省级公共图书馆抖音短视频运营现状与发展策略研究_胡海燕.pdf | `cnki_2022_dea116d7f1` | metadata-only | 待判断 | medium | `intake_to_stable_pdf` |
 | 公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析_曾群.pdf | `cnki_2022_e0a8336b38` | metadata-only | 传播力评价；机制解释 | medium-high | `intake_to_stable_pdf` |
 | 高校图书馆B站视频传播效果影响因素实证研究_丁大尉.pdf | `cnki_2023_82f69af538` | metadata-only | 传播力评价；机制解释 | medium-high | `intake_to_stable_pdf` |
-| 公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf | unmatched | unmatched | 传播力评价；服务价值指标；机制解释 | medium | `add_to_matrix_or_mark_external` |
 | 基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf | unmatched | unmatched | 传播力评价；机制解释 | medium | `add_to_matrix_or_mark_external` |
 | 多模态视域下图书馆阅读推广短视频用户体验影响机制研究_程秀峰.pdf | unmatched | unmatched | 服务价值指标；机制解释 | medium | `add_to_matrix_or_mark_external` |
 | 公共图书馆“抖音”短视频服务现状及发展策略研究_孙雨.pdf | `cnki_2021_7556aafa99` | skimmed | 服务价值指标 | high | `already_skimmed_keep_as_backup` |
+| 公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf | `cnki_2025_ea327e3e1c` | skimmed | 传播力评价；服务价值指标；机制解释 | high | `already_skimmed_keep_as_backup` |
 | 抖音阅读推广短视频传播效果影响因素研究_杨达森 (1).pdf | `cnki_2021_dfab60236e` | skimmed | 传播力评价；服务价值指标；机制解释 | high | `duplicate_keep_one_then_archive` |
 | 抖音阅读推广短视频传播效果影响因素研究_杨达森.pdf | `cnki_2021_dfab60236e` | skimmed | 传播力评价；服务价值指标；机制解释 | high | `already_skimmed_keep_as_backup` |
 | 传统戏剧类非遗短视频青少年观看意愿的影响因素——以皮影短视频为例_薛可.pdf | unmatched | unmatched | 机制解释 | medium | `external_comparison_or_ignore` |

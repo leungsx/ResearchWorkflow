@@ -1,12 +1,12 @@
 # Literature Synthesis
 
-Updated: 2026-07-02
+Updated: 2026-07-03
 
 ## Search Strings
 
 - CNKI search used on 2026-06-21: `主题：图书馆 * 短视频`
 - Date range: `2019-01-01` to `2026-06-21`
-- Current pilot corpus: CNKI learning set for `library_short_video`; 9 authorized originals, 9 discussion cards/readers, 9 source-grounded skimmed papers.
+- Current pilot corpus: CNKI learning set for `library_short_video`; 10 authorized originals/readers, 10 source-grounded skimmed papers.
 
 ## Inclusion Criteria
 
@@ -45,8 +45,11 @@ Updated: 2026-07-02
 - **Propagation-power evaluation / account-level indicators**
   - `cnki_2021_645f03f388` 王兴兰、夏晓红, 2021, `图书馆学研究`: constructs a provincial-public-library Douyin account dissemination-capability model using fan count, publication volume, video content quality, total likes, and hot-video index, with entropy-weighted scoring and Feigua-index comparison. Evidence status: source-grounded reader exists, page numbers pending.
   - This line is useful for the project's platform-propagation layer, but it must remain separate from service value and reading-promotion outcomes.
+- **Reading-service video communication configurations**
+  - `cnki_2025_ea327e3e1c` 王磊, 2025, `数字图书馆论坛`: focuses specifically on public-library reading-service Douyin videos, builds a VCEI outcome from platform interactions, selects 20 typical cases from 6,350 reading-service videos, and uses gatekeeper theory plus fsQCA to identify four configurations for ideal communication effects.
+  - This line is useful for the project's mechanism layer between account-level propagation and service-value measurement, but VCEI still measures platform interaction rather than resource access, activity participation, borrowing, consultation, or satisfaction.
 - **Pending clusters**
-  - Public-library service cases, short-video platform governance, and post-2023 multi-platform evidence still need cross-paper synthesis beyond the current 8-paper learning set.
+  - Public-library service cases, short-video platform governance, user-experience mechanisms, and post-2023 multi-platform evidence still need cross-paper synthesis beyond the current 10-paper learning set.
 
 ## Theory Map
 
@@ -80,6 +83,10 @@ Updated: 2026-07-02
   - `cnki_2021_645f03f388`: surveys 22 officially verified provincial public-library Douyin accounts as of 2020-10-30, then evaluates account dissemination capability with five indicators: fan count, publication volume, video content quality, total likes, and hot-video index.
   - Method details include content-quality scoring, manual normalization thresholds for extreme fan/like values, entropy-weighted indicator weights, weighted-sum ranking, six-level classification, and comparison with Feigua index.
   - Reusable design idea: this is a compact template for the "platform propagation" layer of an evaluation framework, but future work should add service-touchpoint and reading-conversion metrics.
+- **VCEI + fsQCA reading-service video configuration analysis**
+  - `cnki_2025_ea327e3e1c`: collects short-video data from the National Library of China and 29 provincial public libraries from 2018-08-03 to 2024-07-11, calculates VCEI from likes, comments, and shares using DCI-style coefficients, identifies 6,350 reading-service videos by title keywords, selects 20 typical cases, and calibrates conditions for fsQCA.
+  - Condition design includes account background, video presentation, topic hashtags, title technique, hot-topic relevance, unexpectedness, continuity, reader/guide presence, and personal experience sharing.
+  - Reusable design idea: this can become the project's content-mechanism template, but it should be paired with service-touchpoint and user-perception indicators before claiming service value.
 - **Head-account practice extraction / strategy induction**
   - `cnki_2021_5530e86157`: searches Douyin with `公共图书馆`, `阅读推广`, and `数字阅读`; after half-year dynamic tracking from 2020-05-01 to 2020-11-30, selects 90 public-library Douyin head accounts whose follower counts remained above 10,000 and analyzes 27,455 short videos.
   - Analysis dimensions include image scenes, IP marketing, brand planning, copywriting, interaction strategy, content, mode, and path. The method is descriptive practice extraction and strategy induction, not regression or causal identification.
@@ -111,6 +118,7 @@ Updated: 2026-07-02
 - **Traffic-service tension**: The popular-video paper shows that social hot events and strong emotion can drive high traffic, while the public-library survey warns against broad, vague, or over-entertaining content. Later research should distinguish traffic-effective content from library-mission-aligned service communication.
 - **Historical-baseline limitation**: The three companion papers are mainly 2019-2020 Douyin snapshots. They are excellent for field history and baseline diagnosis, but current claims require updated platform data.
 - **Reading coverage gap**: The project's current 9-paper learning set now has complete Codex-assisted source-grounded reading notes. The next gap is no longer propagation-power evaluation itself, but reading-service effect, service-value indicators, and newer multi-platform or post-2023 studies. Specific metadata-only candidates remain in the workbench only and must not be cited as evidence here until a source-grounded reader exists.
+- **Reading-service mechanism gap**: 王磊 2025 fills part of the reading-service effect gap with VCEI and fsQCA, but it explicitly leaves user perception and service conversion undermeasured. The next gap is user experience, information usefulness/ease of use, service touchpoints, and backend service outcomes.
 
 ## Current Research Question Shortlist
 
@@ -118,8 +126,8 @@ These questions are working candidates, not manuscript claims. The evidence base
 
 | Candidate | Research question | Method implied | Evidence base | Boundary |
 |---|---|---|---|---|
-| RQ-A | How can library short-video engagement be connected to observable service value in digital reading promotion? | Build a composite indicator framework that separates platform interaction, service touchpoint, and reading-promotion outcome. | SICAS path, AARRR lifecycle translation, Zhang 2021 digital-reading strategy, and existing engagement-index papers. | Current evidence supports framework building, not causal claims. |
-| RQ-B | Which content and service-design mechanisms move users from attention to interaction and then to service action? | Content analysis plus path coding across SICAS stages; later can be tested with platform and library service data. | Hook Model, ELM, SICAS, head-account practice extraction, and popular-content coding literature. | Needs new data or human verification before estimating effects. |
+| RQ-A | How can library short-video engagement be connected to observable service value in digital reading promotion? | Build a composite indicator framework that separates platform interaction, service touchpoint, and reading-promotion outcome. | SICAS path, AARRR lifecycle translation, Zhang 2021 digital-reading strategy, Wang 2025 VCEI/fsQCA, and existing engagement-index papers. | Current evidence supports framework building, not causal claims. |
+| RQ-B | Which content and service-design mechanisms move users from attention to interaction and then to service action? | Content analysis plus path coding across SICAS stages; later can be tested with platform and library service data. | Hook Model, ELM, SICAS, head-account practice extraction, popular-content coding literature, and Wang 2025 reading-service configurations. | Needs new data or human verification before estimating effects. |
 | RQ-C | How do library type and platform fit shape short-video strategy and evaluation indicators? | Comparative account survey by public/university/research library and Douyin/Kuaishou/Bilibili/video-platform context. | AARRR comparative paper, public-library surveys, historical Douyin baselines, and platform-fit concept cards. | Existing samples are 2019-2021 heavy; current-platform claims need 2024-2026 data. |
 
 ## Converged RQ Position
@@ -135,9 +143,9 @@ Two sub-questions should carry the empirical design:
 1. Which content cues and service-design mechanisms move users from sense/interest into interaction, connection, and service action?
 2. How should service-value indicators vary across public libraries, university libraries, research-oriented libraries, and different short-video platforms?
 
-This position keeps the existing literature together without over-claiming. Hook Model, ELM, DCI/C index, and popular-video content analysis supply the platform-interaction side; SICAS, AARRR, Zhang 2021 digital-reading promotion, and public-library service studies supply the service-path side. The manuscript still needs new or verified data before making causal claims.
+This position keeps the existing literature together without over-claiming. Hook Model, ELM, DCI/C index, VCEI/fsQCA, and popular-video content analysis supply the platform-interaction side; SICAS, AARRR, Zhang 2021 digital-reading promotion, and public-library service studies supply the service-path side. The manuscript still needs new or verified data before making causal claims.
 
-Next reading should prioritize `cnki_2021_d35f8e895a` because it has a converted PDF/Reader and directly operationalizes propagation and interaction through a C index. `cnki_2021_645f03f388` remains a useful propagation-power target but is still metadata-only.
+Next reading should prioritize the incoming multi-modal user-experience paper because Wang 2025 already fills the reading-service VCEI/fsQCA layer but leaves user perception and service conversion undermeasured.
 
 ## Evidence Table
 
@@ -157,3 +165,4 @@ Next reading should prioritize `cnki_2021_d35f8e895a` because it has a converted
 | 公共图书馆与高校图书馆短视频营销可以通过馆型差异、平台差异和 AARRR 用户生命周期共同分析。 | 文章保留 161 个公共图书馆机构认证账号和 18 个高校图书馆机构认证账号，比较抖音、快手、B站上的账号开设、视频/粉丝、增量、内容主题和拉新/促活/留存/收益策略。 | 龚雪竹, 2021, `cnki_2021_3771e58987`; reader blocks `B0005`, `B0007`, `B0009`-`B0016` | Source-grounded guided skim; descriptive comparison and strategy framework, not causal evidence. |
 | SICAS 可以作为图书馆短视频从感知到服务行动再到分享回流的过程组织框架。 | 11 个粉丝过万公共图书馆抖音账号的 DCI 与运营现状诊断，按 Sense、Interest & Interactive、Connect & Communicate、Action、Share 五阶段转译为策略。 | 刘青、郭嘉如, 2023, `cnki_2023_34348faa1e`; reader blocks `B0005-B0016` | Source-grounded skim; page numbers and figure/table details still need original-PDF verification. |
 | 图书馆短视频账号传播力可以用账号层多指标综合评价描述，但传播力不等于服务价值。 | 22 个官方认证省级公共图书馆抖音账号；指标包括粉丝量、发布量、视频内容质量、总点赞量和爆款指数；熵权法计算权重并与飞瓜指数比较。 | 王兴兰、夏晓红, 2021, `cnki_2021_645f03f388`; reader blocks `B0004-B0011` | Source-grounded skim; table/page locators pending; supports platform-propagation layer only. |
+| 阅读服务类短视频传播效果可以用 VCEI 和 fsQCA 分析多条件组态，但这仍是平台互动层证据。 | 国家图书馆和 29 个省级公共图书馆抖音号；11,529 条视频；6,350 条阅读服务类短视频；20 个典型案例；4 个理想传播效果组态。 | 王磊, 2025, `cnki_2025_ea327e3e1c`; reader blocks `B0003-B0015`, `B0020-B0021` | Source-grounded skim; table/page locators pending; VCEI cannot be treated as service value. |

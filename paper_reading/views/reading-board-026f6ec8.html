@@ -4,384 +4,36 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>今日阅读看板 - 图书馆短视频相关研究</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --ink: #1e293b;
-      --muted: #64748b;
-      --line: #dbe4ee;
-      --paper: #ffffff;
-      --soft: #f8fafc;
-      --blue: #2563eb;
-      --green: #16805d;
-      --amber: #a15c07;
-      --rose: #b4234b;
-      --ring: rgba(37, 99, 235, 0.34);
-      --shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
-      color: var(--ink);
-      background: #f8fafc;
-      line-height: 1.6;
-    }
-    header {
-      background: var(--paper);
-      border-bottom: 1px solid var(--line);
-    }
-    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
-    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
-    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
-    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
-    p { margin: 0 0 12px; }
-    a { color: var(--blue); text-decoration: none; text-underline-offset: 3px; }
-    a:hover { text-decoration: underline; }
-    a:focus-visible,
-    button:focus-visible,
-    select:focus-visible,
-    input:focus-visible {
-      outline: 3px solid var(--ring);
-      outline-offset: 2px;
-      border-radius: 7px;
-    }
-    .skip-link {
-      position: absolute;
-      left: 18px;
-      top: 10px;
-      z-index: 20;
-      transform: translateY(-140%);
-      background: var(--ink);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 7px;
-    }
-    .skip-link:focus { transform: translateY(0); }
-    .sub { color: var(--muted); max-width: 780px; }
-    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .nav a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-      padding: 7px 11px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font-size: 14px;
-      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
-    }
-    .nav a:hover {
-      border-color: #bfcee0;
-      background: #f8fbff;
-      text-decoration: none;
-    }
-    .nav a[aria-current="page"] {
-      border-color: #b9ccff;
-      background: #eef4ff;
-      color: #1d4ed8;
-      font-weight: 650;
-    }
-    main.wrap { padding-top: 22px; }
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
-    .panel {
-      grid-column: span 6;
-      min-width: 0;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-    .panel.wide { grid-column: 1 / -1; }
-    .metric {
-      grid-column: span 3;
-      min-width: 0;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-    }
-    .metric b { display: block; font-size: 28px; line-height: 1.1; }
-    .metric span { color: var(--muted); font-size: 13px; }
-    .list { display: grid; gap: 10px; min-width: 0; }
-    .item {
-      min-width: 0;
-      border-left: 3px solid var(--blue);
-      background: var(--soft);
-      padding: 10px 12px;
-      border-radius: 0 7px 7px 0;
-      transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
-    }
-    .item:hover {
-      background: #eef4ff;
-      transform: translateY(-1px);
-    }
-    .item.green { border-left-color: var(--green); }
-    .item.amber { border-left-color: var(--amber); }
-    .item.rose { border-left-color: var(--rose); }
-    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; overflow-wrap: anywhere; }
-    .empty {
-      color: var(--muted);
-      background: var(--soft);
-      border: 1px dashed var(--line);
-      border-radius: 8px;
-      padding: 14px;
-    }
-    .steps { margin: 0; padding-left: 20px; }
-    .steps li { margin: 6px 0; }
-    .mode-switch {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .mode-switch button {
-      min-height: 44px;
-      padding: 7px 12px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
-    }
-    .mode-switch button:hover,
-    .mode-switch button[aria-pressed="true"] {
-      border-color: #b9ccff;
-      background: #eef4ff;
-      color: #1d4ed8;
-    }
-    .cta-card {
-      border-left: 4px solid var(--blue);
-      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
-    }
-    .cta-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
-      gap: 16px;
-      align-items: start;
-    }
-    .cta-title { margin: 4px 0 8px; font-size: 22px; }
-    .eyebrow {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 650;
-      text-transform: uppercase;
-      letter-spacing: 0;
-    }
-    .command-stack {
-      display: grid;
-      gap: 8px;
-    }
-    .inline-button.primary {
-      border-color: #1d4ed8;
-      background: #2563eb;
-      color: #fff;
-    }
-    .inline-button.primary:hover {
-      border-color: #1d4ed8;
-      background: #1d4ed8;
-      color: #fff;
-    }
-    .copy-feedback {
-      min-height: 20px;
-      color: var(--green);
-      font-size: 13px;
-    }
-    [hidden] { display: none !important; }
-    table {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: auto;
-      border-collapse: collapse;
-      font-size: 14px;
-      -webkit-overflow-scrolling: touch;
-    }
-    thead, tbody, tr { width: 100%; }
-    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 9px 8px; vertical-align: top; }
-    th { color: var(--muted); font-weight: 650; background: #fbfdff; }
-    code {
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      background: #eef3f8;
-      border: 1px solid #d8e2ec;
-      border-radius: 5px;
-      padding: 1px 4px;
-      font-size: 0.92em;
-    }
-    pre {
-      overflow: auto;
-      white-space: pre-wrap;
-      background: #13202c;
-      color: #eef6ff;
-      border-radius: 8px;
-      padding: 14px;
-    }
-    pre code {
-      background: transparent;
-      border: 0;
-      color: inherit;
-      padding: 0;
-    }
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .toolbar a, .toolbar button {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      min-height: 44px;
-    }
-    .toolbar button.active {
-      border-color: var(--blue);
-      color: var(--blue);
-      background: #eef4ff;
-    }
-    .inline-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 7px 11px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
-    }
-    .review-mark { min-width: 112px; }
-    .inline-button:hover {
-      border-color: #b9ccff;
-      background: #eef4ff;
-      color: #1d4ed8;
-    }
-    .inline-button[disabled] {
-      cursor: not-allowed;
-      opacity: 0.58;
-    }
-    .review-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      margin: 0 0 14px;
-    }
-    .review-status {
-      min-height: 24px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .source-path {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 16px;
-      word-break: break-all;
-    }
-    .md-view {
-      max-width: 980px;
-      margin: 0 auto;
-    }
-    .md-view h1 { margin-top: 0; font-size: 28px; }
-    .md-view h2 {
-      margin-top: 28px;
-      padding-top: 10px;
-      border-top: 1px solid var(--line);
-    }
-    .md-view h3 { margin-top: 22px; }
-    .md-view ul, .md-view ol { padding-left: 22px; }
-    .md-view li { margin: 5px 0; }
-    .md-view blockquote {
-      margin: 14px 0;
-      padding: 10px 14px;
-      border-left: 4px solid var(--blue);
-      background: #f0f5ff;
-      color: #24384e;
-    }
-    .md-view table {
-      display: block;
-      overflow-x: auto;
-      white-space: normal;
-      margin: 12px 0 18px;
-    }
-    .wikilink {
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid #cdddeb;
-      background: #f4f8fb;
-      color: #1e5678;
-      border-radius: 999px;
-      padding: 0 7px;
-      font-size: 0.92em;
-    }
-    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
-    @media (max-width: 840px) {
-      .panel, .metric { grid-column: 1 / -1; }
-      .cta-layout { grid-template-columns: 1fr; }
-      h1 { font-size: 28px; }
-      .wrap { padding-left: 16px; padding-right: 16px; }
-      .nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
-      .nav a { flex: 0 0 auto; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-      }
-    }
-    </style>
+  <link rel="stylesheet" href="../../assets/app.css">
+
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到正文</a>
-  <header>
+  <header class="site-header">
     <div class="wrap">
-      <h1>今日阅读看板 - 图书馆短视频相关研究</h1>
-      <p class="sub">projects/library_short_video/literature/reading_board.md 的浏览器友好镜像页。</p>
-      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
-<a href="../today.html" aria-current="page">今日精读</a>
+      <p class="page-kicker">ResearchWorkflow / 阅读</p>
+      <div class="page-heading">
+        <div>
+          <h1>今日阅读看板 - 图书馆短视频相关研究</h1>
+          <p class="sub">projects/library_short_video/literature/reading_board.md 的浏览器友好镜像页。</p>
+          <p class="page-meta">当前项目：library_short_video</p>
+        </div>
+        <div class="page-primary-action" hidden></div>
+      </div>
+      <nav class="nav global-nav" aria-label="一级导航"><a href="../../study_dashboard.html">总览</a>
+<a href="../../action_queue.html">今日任务</a>
+<a href="../today.html" aria-current="page">阅读</a>
+<a href="../../projects/library_short_video/manuscript/writing_panel.html">写作</a>
+<a href="../../projects/library_short_video/evidence/page_verification_queue.html">证据</a>
+<a href="../../workflow_state.html">系统</a></nav>
+      <nav class="nav subnav" aria-label="阅读子导航"><a href="../today.html" aria-current="page">今日精读</a>
 <a href="../index.html">论文归档</a>
-<a href="../../knowledge_cards/index.html">知识卡</a>
-<a href="../../knowledge_cards/review_today.html">复习</a>
-<a href="../../knowledge_graph/index.html">知识图谱</a>
-<a href="../../search/index.html">搜索</a>
-<a href="../../logs/index.html">学习日志</a>
-<a href="../../workflow_state.html">总状态</a>
-<a href="../../action_queue.html">行动队列</a>
-<a href="../../project_collaboration.html">项目协作</a>
-<a href="../../archive_policy.html">归档策略</a>
-<a href="../../workflow_health.html">工作流体检</a>
 <a href="../../projects/library_short_video/literature/incoming_pdf_triage.html">PDF分拣</a>
-<a href="../../projects/library_short_video/literature/evidence_locator_table.html">证据定位</a>
-<a href="../../projects/library_short_video/evidence/page_verification_queue.html">页码核验</a>
-<a href="../../projects/library_short_video/manuscript/writing_panel.html">论文写作</a>
-<a href="vault-home.html">Vault 首页</a></nav>
+<a href="../../knowledge_cards/index.html">知识卡</a></nav>
     </div>
   </header>
   <main class="wrap" id="main-content">
-
-    <section class="grid">
+<section class="grid">
       <section class="panel wide">
         <div class="toolbar">
           <a href="../today.html">返回今日精读</a>
@@ -390,11 +42,11 @@
         <div class="source-path">源文件：projects/library_short_video/literature/reading_board.md</div>
         <article class="md-view">
 <h1>今日阅读看板 - 图书馆短视频相关研究</h1>
-<p>Date: 2026-07-02 Project: <code>library_short_video</code></p>
+<p>Date: 2026-07-03 Project: <code>library_short_video</code></p>
 <h2>这张看板解决什么问题</h2>
 <p>你不需要去猜“论文在哪里”“研讨卡是什么”“reader 怎么读”。这张看板把今天推荐文献的入口和用途放在一起。</p>
-<h2>2026-07-02 当前主读</h2>
-<table><thead><tr><th>角色</th><th>Citekey</th><th>题名</th><th>阅读状态</th><th>今天为什么读</th><th>入口</th></tr></thead><tbody><tr><td>主读</td><td><code>cnki_2021_645f03f388</code></td><td>图书馆短视频账号传播力研究——以省级公共图书馆为例</td><td><code>skimmed</code></td><td>补齐平台传播层指标：粉丝量、发布量、内容质量、总点赞量和爆款指数；同时明确传播力不能替代服务价值</td><td><a href="../2026-07-02-propagation-power-evaluation.html">HTML 精读页</a> / <a href="cnki-2021-645f03f388-0a001b11.html">上下文包</a> / <a href="paper-f2f9e4d9.html">Reader</a> / <a href="cnki-2021-645f03f388-609a8a67.html">论文笔记</a></td></tr><tr><td>框架回顾</td><td><code>cnki_2023_34348faa1e</code></td><td>基于SICAS模型的公共图书馆短视频营销策略研究</td><td><code>skimmed</code></td><td>对照用户感知、兴趣互动、连接沟通、行动、分享五阶段</td><td><a href="cnki_2023_34348faa1e-note.html">论文笔记</a> / <a href="cnki_2023_34348faa1e-reader.html">Reader</a></td></tr><tr><td>指标回顾</td><td><code>cnki_2021_3771e58987</code></td><td>公共图书馆和高校图书馆短视频营销比较研究</td><td><code>skimmed</code></td><td>对照 AARRR、馆型差异和平台适配，避免把服务动作与阶段指标混在一起</td><td><a href="cnki-2021-3771e58987-6c1b15ea.html">论文笔记</a> / <a href="../2026-06-30-aarrr-library-short-video.html">HTML 精读页</a></td></tr><tr><td>服务价值补读</td><td>-</td><td>公共图书馆阅读服务类抖音短视频传播效果的影响因素研究</td><td><code>incoming PDF</code></td><td>下一篇优先补“阅读服务类传播效果/服务价值指标”线</td><td><a href="directories/incoming-468da0bf.html">incoming 文件夹</a></td></tr></tbody></table>
+<h2>2026-07-03 当前主读</h2>
+<table><thead><tr><th>角色</th><th>Citekey</th><th>题名</th><th>阅读状态</th><th>今天为什么读</th><th>入口</th></tr></thead><tbody><tr><td>主读</td><td><code>cnki_2025_ea327e3e1c</code></td><td>公共图书馆阅读服务类抖音短视频传播效果的影响因素研究</td><td><code>skimmed</code></td><td>补“阅读服务类短视频传播效果/服务价值指标”线：把平台互动从账号层推进到视频内容、标题、系列化和领读机制的组态路径</td><td><a href="../2026-07-03-reading-service-douyin-fsqca.html">HTML 精读页</a> / <a href="cnki-2025-ea327e3e1c-0e300df4.html">上下文包</a> / <a href="paper-43265a51.html">Reader</a> / <a href="cnki-2025-ea327e3e1c-30ddb8f4.html">论文笔记</a></td></tr><tr><td>指标回顾</td><td><code>cnki_2021_645f03f388</code></td><td>图书馆短视频账号传播力研究——以省级公共图书馆为例</td><td><code>skimmed</code></td><td>对照传播力评价、熵权法和平台传播层，避免把 VCEI/传播力直接写成服务价值</td><td><a href="../2026-07-02-propagation-power-evaluation.html">HTML 精读页</a> / <a href="cnki-2021-645f03f388-0a001b11.html">上下文包</a> / <a href="paper-f2f9e4d9.html">Reader</a> / <a href="cnki-2021-645f03f388-609a8a67.html">论文笔记</a></td></tr><tr><td>框架回顾</td><td><code>cnki_2023_34348faa1e</code></td><td>基于SICAS模型的公共图书馆短视频营销策略研究</td><td><code>skimmed</code></td><td>对照用户感知、兴趣互动、连接沟通、行动、分享五阶段</td><td><a href="cnki_2023_34348faa1e-note.html">论文笔记</a> / <a href="cnki_2023_34348faa1e-reader.html">Reader</a></td></tr><tr><td>指标回顾</td><td><code>cnki_2021_3771e58987</code></td><td>公共图书馆和高校图书馆短视频营销比较研究</td><td><code>skimmed</code></td><td>对照 AARRR、馆型差异和平台适配，避免把服务动作与阶段指标混在一起</td><td><a href="cnki-2021-3771e58987-6c1b15ea.html">论文笔记</a> / <a href="../2026-06-30-aarrr-library-short-video.html">HTML 精读页</a></td></tr><tr><td>下一篇候选</td><td>-</td><td>多模态视域下图书馆阅读推广短视频用户体验影响机制研究</td><td><code>incoming PDF</code></td><td>王磊 2025 仍缺用户感知变量；下一步优先补用户体验和多模态机制</td><td><a href="directories/incoming-468da0bf.html">incoming 文件夹</a></td></tr></tbody></table>
 <h2>2026-06-21 今日推荐</h2>
 <table><thead><tr><th>角色</th><th>Citekey</th><th>题名</th><th>阅读状态</th><th>今天为什么读</th><th>入口</th></tr></thead><tbody><tr><td>快速状态</td><td>-</td><td>下一篇推荐/当前进度</td><td>-</td><td>只查下一步时用，避免完整归档和多文件联动</td><td><a href="library-short-video-fast-snapshot-d2e5e287.html">Fast snapshot</a></td></tr><tr><td>更新后主读</td><td><code>cnki_2021_3771e58987</code></td><td>公共图书馆和高校图书馆短视频营销比较研究</td><td><code>skimmed</code></td><td>高质量来源《大学图书馆学报》；公共馆/高校馆比较 + 抖音/快手/B站平台比较 + AARRR 生命周期框架</td><td><a href="cnki-2021-3771e58987-eb215045.html">上下文包</a> / <a href="paper-21739661.html">Reader</a> / <a href="cnki-2021-3771e58987-87a3a5e7.html">研讨卡</a></td></tr><tr><td>今日已完成</td><td><code>cnki_2021_5530e86157</code></td><td>基于短视频营销的公共图书馆数字阅读推广策略研究</td><td><code>skimmed</code></td><td>高被引高下载；把短视频营销转译为公共图书馆数字阅读推广的情感、渠道、互动三条服务路径</td><td><a href="cnki-2021-5530e86157-05cc0475.html">上下文包</a> / <a href="paper-495f8717.html">Reader</a> / <a href="cnki-2021-5530e86157-97f81afb.html">研讨卡</a></td></tr><tr><td>回顾锚点</td><td><code>cnki_2021_d35f8e895a</code></td><td>图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索</td><td><code>skimmed</code></td><td>与今日主读互补：一个偏互动影响因素，一个偏数字阅读推广服务策略</td><td><a href="cnki-2021-d35f8e895a-0586195d.html">上下文包</a> / <a href="paper-b30ed69c.html">Reader</a> / <a href="cnki-2021-d35f8e895a-b50b9659.html">研讨卡</a></td></tr><tr><td>下一篇候选</td><td><code>cnki_2020_5ca581e54f</code></td><td>公共图书馆短视频公众平台建设现状分析</td><td><code>metadata-only</code></td><td>现状基线补充；尚需合法全文和 reader</td><td><a href="2026-06-21-library-short-video-next-after-main-60f7e2b9.html">下一篇推荐报告</a></td></tr></tbody></table>
 <h2>2026-06-20 已完成推荐的 4 篇</h2>
@@ -442,7 +94,7 @@
 <li>可转化研究问题</li>
 <li>跨文献机会地图</li>
 </ul>
-<p>今天读完后，台账已有 9 张卡片。当前最有潜力的方向包括：</p>
+<p>今天读完后，台账已有 10 张已读论文卡片。当前最有潜力的方向包括：</p>
 <ol>
 <li>平台互动指标与图书馆服务价值之间的断裂。</li>
 <li>Hook Model 与 ELM 是否能整合成图书馆短视频机制框架。</li>
@@ -459,7 +111,8 @@
     D --&gt; E[杨达森等 2021: ELM 社会化账号大样本]
     E --&gt; F[龚雪竹 2021: AARRR 公共馆/高校馆与三平台比较]
     F --&gt; G[王兴兰/夏晓红 2021: 传播力评价与熵权法]
-    G --&gt; H[下一步: 阅读服务效果/服务价值指标]</code></pre>
+    G --&gt; H[王磊 2025: 阅读服务类视频 VCEI 与 fsQCA 组态]
+    H --&gt; I[下一步: 用户体验/多模态服务转化指标]</code></pre>
 <h2>读完之后去哪里看成果</h2>
 <table><thead><tr><th>成果</th><th>入口</th><th>用处</th></tr></thead><tbody><tr><td>今日完成情况</td><td><a href="2026-06-21-library-short-video-after-refresh-b3fd57a8.html">今日更新推荐报告</a></td><td>确认更新后主读和后续候选</td></tr><tr><td>5 篇快速复盘</td><td><a href="2026-06-20-five-paper-quick-recap-8b992799.html">2026-06-20-five-paper-quick-recap.md</a></td><td>快速理解已读 5 篇的角色、主线、共同缺口和选题方向</td></tr><tr><td>跨文献主线</td><td><a href="literature_synthesis.html">03_literature_synthesis.md</a></td><td>看项目综述如何逐步形成</td></tr><tr><td>文献综述工作台</td><td><a href="literature_review_workbench.html">literature_review_workbench.md</a></td><td>把已读文献整理成逐篇结论、逻辑分类、综述线索和阶段性论文工作总结</td></tr><tr><td>选题线索</td><td><a href="innovation_limitation_bank.html">innovation_limitation_bank.md</a></td><td>从创新和局限挖研究问题</td></tr><tr><td>证据安全</td><td><a href="evidence-gate-report-7607e392.html">evidence_gate_report.md</a></td><td>防止把未读文献误写成论文证据</td></tr></tbody></table>
 <h2>下一次怎么继续</h2>
@@ -474,9 +127,7 @@
         </article>
       </section>
     </section>
-
   </main>
   <footer class="wrap">Generated by scripts/build_learning_dashboard.py.</footer>
-
 </body>
 </html>

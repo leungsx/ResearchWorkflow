@@ -4,57 +4,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>行动队列</title>
-  <style>
-    :root { --ink:#1e293b; --muted:#64748b; --line:#dbe4ee; --paper:#fff; --soft:#f8fafc; --blue:#2563eb; --green:#16805d; --amber:#a15c07; --ring:rgba(37,99,235,.34); --shadow:0 10px 28px rgba(15,23,42,.06); }
-    * { box-sizing:border-box; }
-    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",Arial,sans-serif; color:var(--ink); background:#f8fafc; line-height:1.6; }
-    header { background:var(--paper); border-bottom:1px solid var(--line); }
-    .wrap { max-width:1120px; margin:0 auto; padding:28px 22px; }
-    h1 { margin:0 0 8px; font-size:34px; }
-    h2 { margin:0 0 6px; font-size:18px; }
-    a { color:var(--blue); text-decoration:none; text-underline-offset:3px; }
-    a:hover { text-decoration:underline; }
-    a:focus-visible { outline:3px solid var(--ring); outline-offset:2px; border-radius:7px; }
-    .skip-link { position:absolute; left:18px; top:10px; z-index:20; transform:translateY(-140%); background:var(--ink); color:#fff; padding:8px 12px; border-radius:7px; }
-    .skip-link:focus { transform:translateY(0); }
-    .sub,.meta { color:var(--muted); }
-    .nav { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
-    .nav a { min-height:40px; padding:7px 11px; border:1px solid var(--line); border-radius:7px; background:#fff; color:var(--ink); transition:background-color 160ms ease,border-color 160ms ease,color 160ms ease; }
-    .nav a:hover { border-color:#bfcee0; background:#f8fbff; text-decoration:none; }
-    .nav a[aria-current="page"] { border-color:#b9ccff; background:#eef4ff; color:#1d4ed8; font-weight:650; }
-    .metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:14px; }
-    .metric,.action { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; box-shadow:var(--shadow); }
-    .metric b { display:block; font-size:28px; line-height:1.1; }
-    .list { display:grid; gap:10px; }
-    .action { display:grid; grid-template-columns:52px 1fr; gap:12px; border-left:4px solid var(--blue); }
-    .rank { font-weight:700; color:var(--amber); }
-    @media (max-width:760px) { .metrics { grid-template-columns:1fr; } .action { grid-template-columns:1fr; } h1 { font-size:28px; } .wrap { padding-left:16px; padding-right:16px; } .nav { flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; } .nav a { flex:0 0 auto; } }
-    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; } }
-  </style>
+  <link rel="stylesheet" href="assets/app.css">
+
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到正文</a>
-  <header>
+  <header class="site-header">
     <div class="wrap">
-      <h1>行动队列</h1>
-      <p class="sub">Generated 2026-07-03T05:25:29 · 按优先级排列今天最该处理的事项。</p>
-      <nav class="nav">
-        <a href="action_queue.html" aria-current="page">行动队列</a>
-        <a href="workflow_state.html">工作流总状态</a>
-        <a href="knowledge_cards/review_today.html">今日复习</a>
-        <a href="paper_reading/today.html">今日精读</a>
-        <a href="search/index.html">全局搜索</a>
-        <a href="workflow_health.html">工作流体检</a>
-      </nav>
+      <p class="page-kicker">ResearchWorkflow / 今日任务</p>
+      <div class="page-heading">
+        <div>
+          <h1>行动队列</h1>
+          <p class="sub">按优先级排列今天最该处理的事项，先处理高价值学习和阻塞项。</p>
+          <p class="page-meta">Generated 2026-07-03T09:25:19</p>
+        </div>
+        <div class="page-primary-action" hidden></div>
+      </div>
+      <nav class="nav global-nav" aria-label="一级导航"><a href="study_dashboard.html">总览</a>
+<a href="action_queue.html" aria-current="page">今日任务</a>
+<a href="paper_reading/today.html">阅读</a>
+<a href="projects/library_short_video/manuscript/writing_panel.html">写作</a>
+<a href="projects/library_short_video/evidence/page_verification_queue.html">证据</a>
+<a href="workflow_state.html">系统</a></nav>
+      <nav class="nav subnav" aria-label="今日任务子导航"><a href="action_queue.html" aria-current="page">任务总览</a>
+<a href="knowledge_cards/review_today.html">今日复习</a>
+<a href="paper_reading/today.html">今日精读</a>
+<a href="projects/library_short_video/manuscript/writing_panel.html">写作推进</a></nav>
     </div>
   </header>
   <main class="wrap" id="main-content">
-    <section class="metrics">
-      <div class="metric"><b>9</b><span class="meta">开放行动</span></div>
+<section class="metrics">
+      <div class="metric"><b>11</b><span class="meta">开放行动</span></div>
       <div class="metric"><b>6</b><span class="meta">高优先级</span></div>
       <div class="metric"><b>4</b><span class="meta">行动类型</span></div>
     </section>
-    <section class="list">        <article class="action">
+    <section class="list">        <article class="action task-action">
           <div class="rank">#1</div>
           <div>
             <h2><a href="knowledge_cards/review_today.html">完成 5 个到期知识卡复习</a></h2>
@@ -62,7 +46,7 @@
             <p class="meta">review · priority 90 · vault/14_Review_Queue/review_state.json</p>
           </div>
         </article>
-        <article class="action">
+        <article class="action task-action">
           <div class="rank">#2</div>
           <div>
             <h2><a href="knowledge_cards/views/concept-44250b7b.html">复习：传播力评价</a></h2>
@@ -70,7 +54,7 @@
             <p class="meta">review_item · priority 80 · vault/02_Concepts/传播力评价.md</p>
           </div>
         </article>
-        <article class="action">
+        <article class="action task-action">
           <div class="rank">#3</div>
           <div>
             <h2><a href="knowledge_cards/views/method-e2773847.html">复习：图书馆短视频内容质量评价</a></h2>
@@ -78,7 +62,7 @@
             <p class="meta">review_item · priority 80 · vault/03_Methods/图书馆短视频内容质量评价.md</p>
           </div>
         </article>
-        <article class="action">
+        <article class="action task-action">
           <div class="rank">#4</div>
           <div>
             <h2><a href="knowledge_cards/views/concept-4358f2f5.html">复习：平台互动-服务触达-阅读转化</a></h2>
@@ -86,7 +70,7 @@
             <p class="meta">review_item · priority 80 · vault/02_Concepts/平台互动-服务触达-阅读转化.md</p>
           </div>
         </article>
-        <article class="action">
+        <article class="action task-action">
           <div class="rank">#5</div>
           <div>
             <h2><a href="knowledge_cards/views/method-91db7b6b.html">复习：熵权法</a></h2>
@@ -94,7 +78,7 @@
             <p class="meta">review_item · priority 80 · vault/03_Methods/熵权法.md</p>
           </div>
         </article>
-        <article class="action">
+        <article class="action task-action">
           <div class="rank">#6</div>
           <div>
             <h2><a href="knowledge_cards/views/method-579dd6c5.html">复习：爆款指数</a></h2>
@@ -102,7 +86,7 @@
             <p class="meta">review_item · priority 80 · vault/03_Methods/爆款指数.md</p>
           </div>
         </article>
-        <article class="action">
+        <article class="action task-action">
           <div class="rank">#7</div>
           <div>
             <h2><a href="workflow_health.html">处理提醒：存在到期复习项</a></h2>
@@ -110,16 +94,32 @@
             <p class="meta">audit_warn · priority 70 · 复习队列</p>
           </div>
         </article>
-        <article class="action">
+        <article class="action task-action">
           <div class="rank">#8</div>
+          <div>
+            <h2><a href="workflow_health.html">处理提醒：存在尚未提交的 Git 改动</a></h2>
+            <p>177 个路径待快照： M action_queue.html； M archive_policy.html； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-401f5cfe.html； M knowledge_cards/views/concept-4358f2f5.html； M knowledge_cards/views/concept-44250b7b.html</p>
+            <p class="meta">audit_warn · priority 70 · Git/异地备份</p>
+          </div>
+        </article>
+        <article class="action task-action">
+          <div class="rank">#9</div>
+          <div>
+            <h2><a href="workflow_health.html">处理提醒：最近备份超过 36 小时</a></h2>
+            <p>backups/researchworkflow-critical-20260701-200737.zip，约 37.3 小时前。</p>
+            <p class="meta">audit_warn · priority 70 · 备份</p>
+          </div>
+        </article>
+        <article class="action task-action">
+          <div class="rank">#10</div>
           <div>
             <h2><a href="paper_reading/views/00-project-dashboard-dd8418ad.html">图书馆短视频相关研究：Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。</a></h2>
             <p>来自项目状态的下一步建议。</p>
             <p class="meta">project · priority 60 · library_short_video</p>
           </div>
         </article>
-        <article class="action">
-          <div class="rank">#9</div>
+        <article class="action task-action">
+          <div class="rank">#11</div>
           <div>
             <h2><a href="paper_reading/views/00-project-dashboard-dd8418ad.html">图书馆短视频相关研究：下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。</a></h2>
             <p>来自项目状态的下一步建议。</p>
@@ -127,5 +127,6 @@
           </div>
         </article></section>
   </main>
+  <footer class="wrap">Generated by scripts/build_action_queue.py.</footer>
 </body>
 </html>

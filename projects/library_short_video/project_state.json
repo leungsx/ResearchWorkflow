@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T05:25:29",
+  "generated_at": "2026-07-03T09:28:47",
   "project": {
     "slug": "library_short_video",
     "title": "图书馆短视频相关研究",
@@ -36,35 +36,35 @@
     "manuscript_writing_panel": "projects/library_short_video/manuscript/writing_panel.md"
   },
   "literature": {
-    "matrix_rows": 60,
+    "matrix_rows": 61,
     "read_status_counts": {
       "metadata-only": 51,
-      "skimmed": 9
+      "skimmed": 10
     },
-    "recorded_full_texts": 9,
-    "reader_packages": 9,
-    "context_packs": 8,
+    "recorded_full_texts": 10,
+    "reader_packages": 10,
+    "context_packs": 9,
     "latest_recommendation": {
       "path": "projects/library_short_video/literature/daily_learning_state.json",
-      "last_updated": "2026-07-02T11:30:00",
+      "last_updated": "2026-07-03T09:00:00",
       "latest": {
-        "date": "2026-07-02",
-        "stage": "propagation_power_deep_read",
-        "primary": "cnki_2021_645f03f388",
+        "date": "2026-07-03",
+        "stage": "reading_service_effect_deep_read",
+        "primary": "cnki_2025_ea327e3e1c",
         "companions": [
-          "cnki_2021_d35f8e895a",
+          "cnki_2021_645f03f388",
           "cnki_2023_34348faa1e",
           "cnki_2021_5530e86157"
         ],
-        "output": "paper_reading/2026-07-02-propagation-power-evaluation.html",
-        "updated_at": "2026-07-02T11:30:00"
+        "output": "paper_reading/2026-07-03-reading-service-douyin-fsqca.html",
+        "updated_at": "2026-07-03T09:00:00"
       },
-      "history_count": 6
+      "history_count": 7
     },
     "latest_deep_read": {
-      "title": "2026-07-02 精读：图书馆短视频账号传播力研究",
-      "path": "paper_reading/2026-07-02-propagation-power-evaluation.html",
-      "updated_at": "2026-07-02T11:22:30"
+      "title": "2026-07-03 精读：公共图书馆阅读服务类抖音短视频传播效果",
+      "path": "paper_reading/2026-07-03-reading-service-douyin-fsqca.html",
+      "updated_at": "2026-07-03T09:10:37"
     },
     "next_reading_candidates": [
       {
@@ -163,8 +163,8 @@
       "html": "projects/library_short_video/literature/incoming_pdf_triage.html",
       "item_count": 24,
       "action_counts": {
-        "add_to_matrix_or_mark_external": 3,
-        "already_skimmed_keep_as_backup": 7,
+        "add_to_matrix_or_mark_external": 2,
+        "already_skimmed_keep_as_backup": 8,
         "duplicate_keep_one_then_archive": 3,
         "external_comparison_or_ignore": 6,
         "intake_to_stable_pdf": 5
@@ -236,19 +236,6 @@
           "next_action": "intake_to_stable_pdf"
         },
         {
-          "file_path": "library/pdfs/library_short_video/incoming/公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf",
-          "file_name": "公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf",
-          "matched_citekey": "",
-          "matched_title": "",
-          "read_status": "unmatched",
-          "has_pdf": "no",
-          "has_reader": "no",
-          "project_gap": "传播力评价；服务价值指标；机制解释",
-          "evidence_value": "medium",
-          "duplicate_group_size": "1",
-          "next_action": "add_to_matrix_or_mark_external"
-        },
-        {
           "file_path": "library/pdfs/library_short_video/incoming/基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf",
           "file_name": "基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf",
           "matched_citekey": "",
@@ -273,6 +260,19 @@
           "evidence_value": "medium",
           "duplicate_group_size": "1",
           "next_action": "add_to_matrix_or_mark_external"
+        },
+        {
+          "file_path": "library/pdfs/library_short_video/incoming/公共图书馆“抖音”短视频服务现状及发展策略研究_孙雨.pdf",
+          "file_name": "公共图书馆“抖音”短视频服务现状及发展策略研究_孙雨.pdf",
+          "matched_citekey": "cnki_2021_7556aafa99",
+          "matched_title": "公共图书馆“抖音”短视频服务现状及发展策略研究",
+          "read_status": "skimmed",
+          "has_pdf": "yes",
+          "has_reader": "yes",
+          "project_gap": "服务价值指标",
+          "evidence_value": "high",
+          "duplicate_group_size": "1",
+          "next_action": "already_skimmed_keep_as_backup"
         }
       ]
     }
@@ -293,7 +293,7 @@
   "review": {
     "due_count": 5,
     "overdue_count": 0,
-    "upcoming_7_count": 19,
+    "upcoming_7_count": 24,
     "queue_path": "vault/14_Review_Queue/review_queue.csv",
     "state_path": "vault/14_Review_Queue/review_state.json",
     "review_today": "knowledge_cards/review_today.html",
@@ -344,7 +344,7 @@
     "artifact_manifest": "vault/13_Knowledge_Graph/artifact_manifest.csv",
     "manifest_path": "vault/13_Knowledge_Graph/artifact_manifest.csv",
     "search_index": "vault/13_Knowledge_Graph/search_index.json",
-    "project_related_entries": 52,
+    "project_related_entries": 54,
     "html_entries": [
       {
         "source_path": "study_dashboard.html",

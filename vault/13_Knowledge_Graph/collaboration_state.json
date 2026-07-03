@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T05:25:29",
+  "generated_at": "2026-07-03T09:19:09",
   "entrypoint": "project_collaboration.html",
   "summary": {
     "project_count": 2,
     "user_waiting": 3,
     "codex_ready": 6,
-    "open_actions": 9
+    "open_actions": 11
   },
   "roles": {
     "user": [
@@ -34,13 +34,13 @@
       "status": "draft",
       "stage": "synthesis",
       "state_path": "projects/library_short_video/project_state.json",
-      "matrix_rows": 60,
-      "reader_packages": 9,
+      "matrix_rows": 61,
+      "reader_packages": 10,
       "review_due": 5,
       "latest_deep_read": {
-        "title": "2026-07-02 精读：图书馆短视频账号传播力研究",
-        "path": "paper_reading/2026-07-02-propagation-power-evaluation.html",
-        "updated_at": "2026-07-02T11:22:30"
+        "title": "2026-07-03 精读：公共图书馆阅读服务类抖音短视频传播效果",
+        "path": "paper_reading/2026-07-03-reading-service-douyin-fsqca.html",
+        "updated_at": "2026-07-03T09:10:37"
       },
       "entrypoints": {
         "dashboard": "paper_reading/views/00-project-dashboard-dd8418ad.html",
@@ -73,7 +73,7 @@
         "page_verification_queue": "projects/library_short_video/evidence/page_verification_queue.csv",
         "manuscript_writing_panel": "projects/library_short_video/manuscript/writing_panel.md"
       },
-      "artifact_count": 52
+      "artifact_count": 54
     },
     {
       "slug": "starter_project",

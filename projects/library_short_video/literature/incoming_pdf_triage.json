@@ -1,6 +1,6 @@
 {
   "schema_version": "ResearchWorkflow.IncomingTriage.v1",
-  "generated_at": "2026-07-02T21:32:22",
+  "generated_at": "2026-07-03T09:16:56",
   "item_count": 24,
   "items": [
     {
@@ -69,19 +69,6 @@
       "next_action": "intake_to_stable_pdf"
     },
     {
-      "file_path": "library/pdfs/library_short_video/incoming/公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf",
-      "file_name": "公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf",
-      "matched_citekey": "",
-      "matched_title": "",
-      "read_status": "unmatched",
-      "has_pdf": "no",
-      "has_reader": "no",
-      "project_gap": "传播力评价；服务价值指标；机制解释",
-      "evidence_value": "medium",
-      "duplicate_group_size": "1",
-      "next_action": "add_to_matrix_or_mark_external"
-    },
-    {
       "file_path": "library/pdfs/library_short_video/incoming/基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf",
       "file_name": "基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf",
       "matched_citekey": "",
@@ -116,6 +103,19 @@
       "has_pdf": "yes",
       "has_reader": "yes",
       "project_gap": "服务价值指标",
+      "evidence_value": "high",
+      "duplicate_group_size": "1",
+      "next_action": "already_skimmed_keep_as_backup"
+    },
+    {
+      "file_path": "library/pdfs/library_short_video/incoming/公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf",
+      "file_name": "公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf",
+      "matched_citekey": "cnki_2025_ea327e3e1c",
+      "matched_title": "公共图书馆阅读服务类抖音短视频传播效果的影响因素研究",
+      "read_status": "skimmed",
+      "has_pdf": "yes",
+      "has_reader": "yes",
+      "project_gap": "传播力评价；服务价值指标；机制解释",
       "evidence_value": "high",
       "duplicate_group_size": "1",
       "next_action": "already_skimmed_keep_as_backup"

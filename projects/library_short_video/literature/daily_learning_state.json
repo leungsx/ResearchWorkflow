@@ -72,7 +72,19 @@
       ],
       "output": "paper_reading/2026-07-02-propagation-power-evaluation.html",
       "updated_at": "2026-07-02T11:30:00"
+    },
+    {
+      "date": "2026-07-03",
+      "stage": "reading_service_effect_deep_read",
+      "primary": "cnki_2025_ea327e3e1c",
+      "companions": [
+        "cnki_2021_645f03f388",
+        "cnki_2023_34348faa1e",
+        "cnki_2021_5530e86157"
+      ],
+      "output": "paper_reading/2026-07-03-reading-service-douyin-fsqca.html",
+      "updated_at": "2026-07-03T09:00:00"
     }
   ],
-  "last_updated": "2026-07-02T11:30:00"
+  "last_updated": "2026-07-03T09:00:00"
 }

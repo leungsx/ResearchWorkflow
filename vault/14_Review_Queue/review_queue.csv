@@ -23,3 +23,8 @@ concept-platform-interaction-service-touchpoint-reading-conversion,平台互动-
 method-entropy-weight-method,熵权法,method,1,2026-07-03,熵权法为什么会给差异更大的指标更高权重？,/Users/leung/ResearchWorkflow/vault/03_Methods/熵权法.md,,0,learning
 method-viral-video-index,爆款指数,method,1,2026-07-03,爆款指数和总点赞量有什么区别？为什么它仍不能代表服务价值？,/Users/leung/ResearchWorkflow/vault/03_Methods/爆款指数.md,,0,learning
 method-library-short-video-content-quality-evaluation,图书馆短视频内容质量评价,method,1,2026-07-03,图书馆短视频内容质量评价应如何兼顾知识性、趣味性和服务相关性？,/Users/leung/ResearchWorkflow/vault/03_Methods/图书馆短视频内容质量评价.md,,0,learning
+concept-reading-service-short-video,阅读服务类短视频,concept,1,2026-07-04,阅读服务类短视频和普通图书馆宣传短视频有什么区别？,/Users/leung/ResearchWorkflow/vault/02_Concepts/阅读服务类短视频.md,,0,learning
+concept-gatekeeper-theory,把关人理论,concept,1,2026-07-04,把关人理论怎样帮助我把短视频内容转成可编码变量？,/Users/leung/ResearchWorkflow/vault/02_Concepts/把关人理论.md,,0,learning
+concept-video-content-drainage-synergy,视频表现-内容-引流协同,concept,1,2026-07-04,为什么视频表现、内容和引流技巧要作为组合而不是单变量看？,/Users/leung/ResearchWorkflow/vault/02_Concepts/视频表现-内容-引流协同.md,,0,learning
+method-vcei-video-communication-effect-index,VCEI视频传播效果指数,method,1,2026-07-04,VCEI 为什么只能放在平台互动层而不能直接代表服务价值？,/Users/leung/ResearchWorkflow/vault/03_Methods/VCEI视频传播效果指数.md,,0,learning
+method-fsqca,fsQCA模糊集定性比较分析,method,1,2026-07-04,fsQCA 和回归最大的解释差异是什么？,/Users/leung/ResearchWorkflow/vault/03_Methods/fsQCA模糊集定性比较分析.md,,0,learning

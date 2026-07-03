@@ -13,6 +13,7 @@ from urllib.parse import quote
 
 from rendering.io import write_json_if_changed, write_text_if_changed
 from rendering.routes import paper_markdown_view_path
+from rendering.ui import render_shell
 from workflow_config import active_project_slug
 
 
@@ -467,58 +468,15 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
         """
         for row in rows[:120]
     )
-    write_text_if_changed(
-        path,
-        f"""<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>页码级证据核验队列 - {html.escape(project_slug)}</title>
-  <style>
-    :root {{ --ink:#1e293b; --muted:#64748b; --line:#dbe4ee; --paper:#fff; --soft:#f8fafc; --blue:#2563eb; --shadow:0 10px 28px rgba(15,23,42,.06); }}
-    * {{ box-sizing:border-box; }}
-    body {{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",Arial,sans-serif; color:var(--ink); background:#f8fafc; line-height:1.62; }}
-    header {{ background:#fff; border-bottom:1px solid var(--line); }}
-    .wrap {{ max-width:1280px; margin:0 auto; padding:28px 22px; }}
-    h1 {{ margin:0 0 8px; font-size:34px; }}
-    h2 {{ margin:0 0 12px; font-size:21px; }}
-    a {{ color:var(--blue); text-decoration:none; }}
-    .sub, span {{ color:var(--muted); }}
-    .toolbar {{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }}
-    .button {{ display:inline-flex; align-items:center; min-height:44px; padding:7px 11px; border:1px solid var(--line); border-radius:7px; background:#fff; color:var(--ink); font:inherit; font-size:14px; cursor:pointer; }}
-    .button.primary {{ border-color:#1d4ed8; background:#2563eb; color:#fff; }}
-    .button:hover {{ border-color:#b9ccff; background:#eef4ff; color:#1d4ed8; text-decoration:none; }}
-    .button.primary:hover {{ background:#1d4ed8; color:#fff; }}
-    .copy-feedback {{ min-height:20px; color:#16805d; font-size:13px; margin-top:8px; }}
-    .grid {{ display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }}
-    .metric, .panel {{ background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:16px; box-shadow:var(--shadow); }}
-    .metric {{ grid-column:span 3; }}
-    .metric b {{ display:block; font-size:28px; }}
-    .panel {{ grid-column:1/-1; }}
-    table {{ width:100%; border-collapse:collapse; font-size:14px; }}
-    th, td {{ text-align:left; vertical-align:top; border-bottom:1px solid var(--line); padding:10px 8px; }}
-    th {{ color:var(--muted); background:#fbfdff; }}
-    code {{ background:#eef3f8; border:1px solid #d8e2ec; border-radius:5px; padding:1px 4px; }}
-    @media (max-width:900px) {{ .metric {{ grid-column:1/-1; }} table {{ display:block; overflow-x:auto; }} h1 {{ font-size:28px; }} }}
-  </style>
-</head>
-<body>
-  <header><div class="wrap">
-    <h1>页码级证据核验队列</h1>
-    <p class="sub">{html.escape(project_slug)} · Claim -> Source Block -> Page -> Read Status</p>
+    body = f"""
     <div class="toolbar">
-      <a class="button primary" href="../../../study_dashboard.html">返回学习仪表盘</a>
-      <a class="button" href="../manuscript/writing_panel.html">论文写作面板</a>
-      <a class="button" href="{html.escape(csv_path.name)}">CSV</a>
+      <a class="button primary" href="{html.escape(csv_path.name)}">CSV</a>
       <a class="button" href="{html.escape(json_path.name)}">JSON</a>
       <button type="button" class="button" data-copy="{html.escape(rebuild_command)}" data-label="复制刷新命令">复制刷新命令</button>
       <button type="button" class="button" data-copy="{html.escape(gate_command)}" data-label="复制门禁命令">复制门禁命令</button>
       <button type="button" class="button" data-copy="{html.escape(sync_command)}" data-label="复制同步命令">复制同步命令</button>
     </div>
     <div class="copy-feedback" aria-live="polite"></div>
-  </div></header>
-  <main class="wrap">
     <section class="grid">
       <div class="metric"><b>{summary['total_items']}</b><span>核验任务</span></div>
       <div class="metric"><b>{summary['needs_page_locator']}</b><span>待补页码</span></div>
@@ -532,29 +490,18 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
         </table>
       </section>
     </section>
-  </main>
-  <script>
-    (() => {{
-      const status = document.querySelector(".copy-feedback");
-      document.querySelectorAll("[data-copy]").forEach((button) => {{
-        button.addEventListener("click", async () => {{
-          const text = button.getAttribute("data-copy") || "";
-          try {{
-            await navigator.clipboard.writeText(text);
-            button.textContent = "已复制";
-            if (status) status.textContent = text;
-            setTimeout(() => {{ button.textContent = button.getAttribute("data-label") || "复制命令"; }}, 1600);
-          }} catch (_error) {{
-            if (status) status.textContent = text;
-          }}
-        }});
-      }});
-    }})();
-  </script>
-</body>
-</html>
-""",
+"""
+    html_text = render_shell(
+        title="页码级证据核验队列",
+        subtitle="用于补全 Claim -> Source Block -> Page -> Read Status 链条，优先处理进入写作链的证据。",
+        current="页码核验",
+        body=body,
+        output=path,
+        module="证据",
+        meta=f"{html.escape(project_slug)} · Claim -> Source Block -> Page -> Read Status",
+        footer="Generated by scripts/build_manuscript_panel.py.",
     )
+    write_text_if_changed(path, html_text)
 
 
 def md_table(rows: list[list[str]]) -> list[str]:
@@ -774,75 +721,28 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
     rebuild_command = f"make manuscript-panel PROJECT={project_slug}"
     gate_command = f"make evidence-gate PROJECT={project_slug}"
     sync_command = f"make claim-evidence-sync PROJECT={project_slug}"
-    return f"""<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>论文写作推进面板 - {html.escape(project_slug)}</title>
-  <style>
-    :root {{ --ink:#1e293b; --muted:#64748b; --line:#dbe4ee; --paper:#fff; --soft:#f8fafc; --blue:#2563eb; --shadow:0 10px 28px rgba(15,23,42,.06); }}
-    * {{ box-sizing:border-box; }}
-    body {{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",Arial,sans-serif; color:var(--ink); background:#f8fafc; line-height:1.65; }}
-    header {{ background:#fff; border-bottom:1px solid var(--line); }}
-    .wrap {{ max-width:980px; margin:0 auto; padding:28px 22px; }}
-    h1 {{ margin:0 0 8px; font-size:34px; }}
-    h2 {{ margin:26px 0 10px; border-top:1px solid var(--line); padding-top:16px; font-size:21px; }}
-    a {{ color:var(--blue); text-decoration:none; }}
-    .sub {{ color:var(--muted); }}
-    .toolbar {{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }}
-    .button {{ display:inline-flex; align-items:center; min-height:44px; padding:7px 11px; border:1px solid var(--line); border-radius:7px; background:#fff; color:var(--ink); font:inherit; font-size:14px; cursor:pointer; }}
-    .button.primary {{ border-color:#1d4ed8; background:#2563eb; color:#fff; }}
-    .button:hover {{ border-color:#b9ccff; background:#eef4ff; color:#1d4ed8; text-decoration:none; }}
-    .button.primary:hover {{ background:#1d4ed8; color:#fff; }}
-    .copy-feedback {{ min-height:20px; color:#16805d; font-size:13px; margin-top:8px; }}
-    .panel {{ background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:20px; box-shadow:var(--shadow); }}
-    .bullet {{ margin-left:18px; }}
-    .bullet::before {{ content:""; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--blue); margin:0 8px 2px -16px; }}
-    code {{ background:#eef3f8; border:1px solid #d8e2ec; border-radius:5px; padding:1px 4px; }}
-    table {{ width:100%; border-collapse:collapse; font-size:14px; margin:10px 0 18px; }}
-    th, td {{ text-align:left; vertical-align:top; border-bottom:1px solid var(--line); padding:9px 8px; }}
-    th {{ color:var(--muted); font-weight:650; background:#fbfdff; }}
-    @media (max-width:840px) {{ h1 {{ font-size:28px; }} table {{ display:block; overflow-x:auto; }} }}
-  </style>
-</head>
-<body>
-  <header><div class="wrap">
-    <h1>论文写作推进面板</h1>
-    <p class="sub">{html.escape(project_slug)} · 研究问题、变量指标、证据链和段落队列。</p>
+    body = f"""
     <div class="toolbar">
-      <a class="button primary" href="../../../study_dashboard.html">返回学习仪表盘</a>
-      <a class="button" href="../evidence/page_verification_queue.html">页码核验队列</a>
+      <a class="button primary" href="../evidence/page_verification_queue.html">页码核验队列</a>
       <button type="button" class="button" data-copy="{html.escape(rebuild_command)}" data-label="复制刷新命令">复制刷新命令</button>
       <button type="button" class="button" data-copy="{html.escape(gate_command)}" data-label="复制门禁命令">复制门禁命令</button>
       <button type="button" class="button" data-copy="{html.escape(sync_command)}" data-label="复制同步命令">复制同步命令</button>
     </div>
     <div class="copy-feedback" aria-live="polite"></div>
-  </div></header>
-  <main class="wrap"><article class="panel">
+    <article class="panel">
     {''.join(body_parts)}
-  </article></main>
-  <script>
-    (() => {{
-      const status = document.querySelector(".copy-feedback");
-      document.querySelectorAll("[data-copy]").forEach((button) => {{
-        button.addEventListener("click", async () => {{
-          const text = button.getAttribute("data-copy") || "";
-          try {{
-            await navigator.clipboard.writeText(text);
-            button.textContent = "已复制";
-            if (status) status.textContent = text;
-            setTimeout(() => {{ button.textContent = button.getAttribute("data-label") || "复制命令"; }}, 1600);
-          }} catch (_error) {{
-            if (status) status.textContent = text;
-          }}
-        }});
-      }});
-    }})();
-  </script>
-</body>
-</html>
+    </article>
 """
+    return render_shell(
+        title="论文写作推进面板",
+        subtitle="把已读文献转成研究问题、变量指标、证据链和可写段落。",
+        current="论文写作面板",
+        body=body,
+        output=html_path,
+        module="写作",
+        meta=f"{html.escape(project_slug)} · 研究问题、变量指标、证据链和段落队列",
+        footer="Generated by scripts/build_manuscript_panel.py.",
+    )
 
 
 def main() -> int:

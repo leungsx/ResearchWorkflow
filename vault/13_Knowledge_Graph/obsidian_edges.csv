@@ -100,6 +100,19 @@ Source,Target,Type,Weight,Label
 2026-07-02-propagation-power-evaluation-paper,服务价值,Directed,1,obsidian_link
 2026-07-02-propagation-power-evaluation-paper,熵权法,Directed,1,obsidian_link
 2026-07-02-propagation-power-evaluation-paper,爆款指数,Directed,1,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,SICAS模型,Directed,1,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,VCEI视频传播效果指数,Directed,5,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,cnki_2021_645f03f388,Directed,1,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,cnki_2025_ea327e3e1c,Directed,7,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,fsQCA模糊集定性比较分析,Directed,4,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,传播力评价,Directed,1,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,公共图书馆阅读服务类抖音短视频传播效果的影响因素研究,Directed,1,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,内容分析法,Directed,1,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,平台互动-服务触达-阅读转化,Directed,1,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,把关人理论,Directed,3,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,数字阅读推广,Directed,1,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,视频表现-内容-引流协同,Directed,5,obsidian_link
+2026-07-03-reading-service-douyin-fsqca-paper,阅读服务类短视频,Directed,4,obsidian_link
 AARRR 漏斗模型,ELM 精细加工可能性模型,Directed,1,obsidian_link
 AARRR 漏斗模型,Hook Model 上瘾模型,Directed,1,obsidian_link
 AARRR 漏斗模型,SICAS模型,Directed,2,obsidian_link
@@ -142,6 +155,14 @@ SICAS模型,library_short_video,Directed,1,obsidian_link
 SICAS模型,描述性账号调查,Directed,1,obsidian_link
 SICAS模型,用户感知价值,Directed,1,obsidian_link
 SICAS模型,软营销,Directed,1,obsidian_link
+VCEI视频传播效果指数,DCI传播力指数,Directed,2,obsidian_link
+VCEI视频传播效果指数,cnki_2025_ea327e3e1c,Directed,2,obsidian_link
+VCEI视频传播效果指数,fsQCA模糊集定性比较分析,Directed,2,obsidian_link
+VCEI视频传播效果指数,传播力评价,Directed,1,obsidian_link
+VCEI视频传播效果指数,内容分析法,Directed,1,obsidian_link
+VCEI视频传播效果指数,平台互动-服务触达-阅读转化,Directed,2,obsidian_link
+VCEI视频传播效果指数,服务价值,Directed,1,obsidian_link
+VCEI视频传播效果指数,阅读服务类短视频,Directed,1,obsidian_link
 cnki_2021_3771e58987,2026-06-30-aarrr-paper,Directed,1,obsidian_link
 cnki_2021_3771e58987,2026-06-30-evening-close,Directed,1,obsidian_link
 cnki_2021_3771e58987,AARRR 漏斗模型,Directed,4,obsidian_link
@@ -222,6 +243,34 @@ cnki_2023_34348faa1e,沉浸式内容,Directed,2,obsidian_link
 cnki_2023_34348faa1e,用户感知价值,Directed,2,obsidian_link
 cnki_2023_34348faa1e,精神激励,Directed,1,obsidian_link
 cnki_2023_34348faa1e,软营销,Directed,2,obsidian_link
+cnki_2025_ea327e3e1c,2026-07-03-reading-service-douyin-fsqca-paper,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,DCI传播力指数,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,VCEI视频传播效果指数,Directed,5,obsidian_link
+cnki_2025_ea327e3e1c,cnki_2021_5530e86157,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,cnki_2021_645f03f388,Directed,2,obsidian_link
+cnki_2025_ea327e3e1c,cnki_2021_d35f8e895a,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,cnki_2021_dfab60236e,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,cnki_2023_34348faa1e,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,fsQCA模糊集定性比较分析,Directed,4,obsidian_link
+cnki_2025_ea327e3e1c,library_short_video,Directed,2,obsidian_link
+cnki_2025_ea327e3e1c,传播力评价,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,内容分析法,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,图书馆短视频多平台复测,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,图书馆短视频服务价值框架,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,多模态视域下图书馆阅读推广短视频用户体验影响机制研究,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,平台互动-服务触达-阅读转化,Directed,2,obsidian_link
+cnki_2025_ea327e3e1c,平台传播-服务结果复合指标,Directed,1,obsidian_link
+cnki_2025_ea327e3e1c,把关人理论,Directed,3,obsidian_link
+cnki_2025_ea327e3e1c,服务价值,Directed,2,obsidian_link
+cnki_2025_ea327e3e1c,视频表现-内容-引流协同,Directed,4,obsidian_link
+cnki_2025_ea327e3e1c,阅读服务类短视频,Directed,5,obsidian_link
+fsQCA模糊集定性比较分析,VCEI视频传播效果指数,Directed,2,obsidian_link
+fsQCA模糊集定性比较分析,cnki_2025_ea327e3e1c,Directed,2,obsidian_link
+fsQCA模糊集定性比较分析,内容分析法,Directed,2,obsidian_link
+fsQCA模糊集定性比较分析,把关人理论,Directed,1,obsidian_link
+fsQCA模糊集定性比较分析,描述性账号调查,Directed,1,obsidian_link
+fsQCA模糊集定性比较分析,视频表现-内容-引流协同,Directed,1,obsidian_link
+fsQCA模糊集定性比较分析,阅读服务类短视频,Directed,1,obsidian_link
 library_short_video,AARRR 漏斗模型,Directed,1,obsidian_link
 library_short_video,DCI传播力指数,Directed,1,obsidian_link
 library_short_video,SICAS模型,Directed,1,obsidian_link
@@ -306,6 +355,14 @@ library_short_video,馆型差异,Directed,1,obsidian_link
 情感营销,服务价值,Directed,1,obsidian_link
 情感营销,沉浸式内容,Directed,1,obsidian_link
 情感营销,用户感知价值,Directed,1,obsidian_link
+把关人理论,SICAS模型,Directed,1,obsidian_link
+把关人理论,cnki_2025_ea327e3e1c,Directed,2,obsidian_link
+把关人理论,fsQCA模糊集定性比较分析,Directed,1,obsidian_link
+把关人理论,内容分析法,Directed,1,obsidian_link
+把关人理论,数字阅读推广,Directed,1,obsidian_link
+把关人理论,用户感知价值,Directed,1,obsidian_link
+把关人理论,视频表现-内容-引流协同,Directed,1,obsidian_link
+把关人理论,阅读服务类短视频,Directed,1,obsidian_link
 描述性账号调查,SICAS模型,Directed,1,obsidian_link
 描述性账号调查,cnki_2023_34348faa1e,Directed,2,obsidian_link
 描述性账号调查,library_short_video,Directed,1,obsidian_link
@@ -376,12 +433,30 @@ library_short_video,馆型差异,Directed,1,obsidian_link
 网络调查法,平台适配,Directed,2,obsidian_link
 网络调查法,描述性账号调查,Directed,1,obsidian_link
 网络调查法,馆型差异,Directed,2,obsidian_link
+视频表现-内容-引流协同,SICAS模型,Directed,1,obsidian_link
+视频表现-内容-引流协同,VCEI视频传播效果指数,Directed,1,obsidian_link
+视频表现-内容-引流协同,cnki_2025_ea327e3e1c,Directed,2,obsidian_link
+视频表现-内容-引流协同,fsQCA模糊集定性比较分析,Directed,1,obsidian_link
+视频表现-内容-引流协同,内容分析法,Directed,1,obsidian_link
+视频表现-内容-引流协同,平台互动-服务触达-阅读转化,Directed,1,obsidian_link
+视频表现-内容-引流协同,把关人理论,Directed,1,obsidian_link
+视频表现-内容-引流协同,服务价值,Directed,1,obsidian_link
+视频表现-内容-引流协同,阅读服务类短视频,Directed,1,obsidian_link
 软营销,SICAS模型,Directed,2,obsidian_link
 软营销,cnki_2023_34348faa1e,Directed,1,obsidian_link
 软营销,library_short_video,Directed,1,obsidian_link
 软营销,描述性账号调查,Directed,1,obsidian_link
 软营销,沉浸式内容,Directed,1,obsidian_link
 软营销,用户感知价值,Directed,1,obsidian_link
+阅读服务类短视频,VCEI视频传播效果指数,Directed,1,obsidian_link
+阅读服务类短视频,cnki_2025_ea327e3e1c,Directed,2,obsidian_link
+阅读服务类短视频,fsQCA模糊集定性比较分析,Directed,1,obsidian_link
+阅读服务类短视频,library_short_video,Directed,1,obsidian_link
+阅读服务类短视频,内容分析法,Directed,1,obsidian_link
+阅读服务类短视频,平台互动-服务触达-阅读转化,Directed,2,obsidian_link
+阅读服务类短视频,数字阅读推广,Directed,1,obsidian_link
+阅读服务类短视频,服务价值,Directed,1,obsidian_link
+阅读服务类短视频,视频表现-内容-引流协同,Directed,1,obsidian_link
 馆型差异,AARRR 漏斗模型,Directed,1,obsidian_link
 馆型差异,cnki_2021_3771e58987,Directed,2,obsidian_link
 馆型差异,library_short_video,Directed,1,obsidian_link

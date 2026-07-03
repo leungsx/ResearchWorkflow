@@ -116,9 +116,9 @@ flowchart TD
 
 - Project: `library_short_video`
 - Topic: 图书馆短视频相关研究
-- 当前状态：CNKI 项目矩阵 60 条，9 篇授权全文/Reader，9 篇 source-grounded skimmed，并已补出 SICAS、AARRR、数字阅读推广服务转化与传播力评价 4 篇论文精读 HTML。
-- 今日任务：把王兴兰、夏晓红 2021 的传播力评价指标放入“平台传播-服务触达-阅读转化”框架，继续收敛服务价值指标。
-- 下一步：优先精读 incoming 中的阅读服务类传播效果或多模态用户体验文献，补“服务价值指标”线。
+- 当前状态：CNKI 项目矩阵 61 条，10 篇授权全文/Reader，10 篇 source-grounded skimmed，并已补出 SICAS、AARRR、数字阅读推广服务转化、传播力评价和阅读服务类 VCEI/fsQCA 5 篇论文精读 HTML。
+- 今日任务：把王磊 2025 的阅读服务类短视频 VCEI 与 fsQCA 组态放入“平台互动-服务触达-阅读转化”框架，明确它只支撑平台互动机制。
+- 下一步：优先精读 incoming 中的多模态用户体验或服务转化文献，补“用户感知/服务价值指标”线。
 
 ## 常用自然语言
 

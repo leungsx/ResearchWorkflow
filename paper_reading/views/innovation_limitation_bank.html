@@ -4,384 +4,36 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>创新-局限-机会台账</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --ink: #1e293b;
-      --muted: #64748b;
-      --line: #dbe4ee;
-      --paper: #ffffff;
-      --soft: #f8fafc;
-      --blue: #2563eb;
-      --green: #16805d;
-      --amber: #a15c07;
-      --rose: #b4234b;
-      --ring: rgba(37, 99, 235, 0.34);
-      --shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
-      color: var(--ink);
-      background: #f8fafc;
-      line-height: 1.6;
-    }
-    header {
-      background: var(--paper);
-      border-bottom: 1px solid var(--line);
-    }
-    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
-    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
-    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
-    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
-    p { margin: 0 0 12px; }
-    a { color: var(--blue); text-decoration: none; text-underline-offset: 3px; }
-    a:hover { text-decoration: underline; }
-    a:focus-visible,
-    button:focus-visible,
-    select:focus-visible,
-    input:focus-visible {
-      outline: 3px solid var(--ring);
-      outline-offset: 2px;
-      border-radius: 7px;
-    }
-    .skip-link {
-      position: absolute;
-      left: 18px;
-      top: 10px;
-      z-index: 20;
-      transform: translateY(-140%);
-      background: var(--ink);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 7px;
-    }
-    .skip-link:focus { transform: translateY(0); }
-    .sub { color: var(--muted); max-width: 780px; }
-    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .nav a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-      padding: 7px 11px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font-size: 14px;
-      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
-    }
-    .nav a:hover {
-      border-color: #bfcee0;
-      background: #f8fbff;
-      text-decoration: none;
-    }
-    .nav a[aria-current="page"] {
-      border-color: #b9ccff;
-      background: #eef4ff;
-      color: #1d4ed8;
-      font-weight: 650;
-    }
-    main.wrap { padding-top: 22px; }
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
-    .panel {
-      grid-column: span 6;
-      min-width: 0;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-    .panel.wide { grid-column: 1 / -1; }
-    .metric {
-      grid-column: span 3;
-      min-width: 0;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-    }
-    .metric b { display: block; font-size: 28px; line-height: 1.1; }
-    .metric span { color: var(--muted); font-size: 13px; }
-    .list { display: grid; gap: 10px; min-width: 0; }
-    .item {
-      min-width: 0;
-      border-left: 3px solid var(--blue);
-      background: var(--soft);
-      padding: 10px 12px;
-      border-radius: 0 7px 7px 0;
-      transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
-    }
-    .item:hover {
-      background: #eef4ff;
-      transform: translateY(-1px);
-    }
-    .item.green { border-left-color: var(--green); }
-    .item.amber { border-left-color: var(--amber); }
-    .item.rose { border-left-color: var(--rose); }
-    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; overflow-wrap: anywhere; }
-    .empty {
-      color: var(--muted);
-      background: var(--soft);
-      border: 1px dashed var(--line);
-      border-radius: 8px;
-      padding: 14px;
-    }
-    .steps { margin: 0; padding-left: 20px; }
-    .steps li { margin: 6px 0; }
-    .mode-switch {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .mode-switch button {
-      min-height: 44px;
-      padding: 7px 12px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
-    }
-    .mode-switch button:hover,
-    .mode-switch button[aria-pressed="true"] {
-      border-color: #b9ccff;
-      background: #eef4ff;
-      color: #1d4ed8;
-    }
-    .cta-card {
-      border-left: 4px solid var(--blue);
-      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
-    }
-    .cta-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
-      gap: 16px;
-      align-items: start;
-    }
-    .cta-title { margin: 4px 0 8px; font-size: 22px; }
-    .eyebrow {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 650;
-      text-transform: uppercase;
-      letter-spacing: 0;
-    }
-    .command-stack {
-      display: grid;
-      gap: 8px;
-    }
-    .inline-button.primary {
-      border-color: #1d4ed8;
-      background: #2563eb;
-      color: #fff;
-    }
-    .inline-button.primary:hover {
-      border-color: #1d4ed8;
-      background: #1d4ed8;
-      color: #fff;
-    }
-    .copy-feedback {
-      min-height: 20px;
-      color: var(--green);
-      font-size: 13px;
-    }
-    [hidden] { display: none !important; }
-    table {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: auto;
-      border-collapse: collapse;
-      font-size: 14px;
-      -webkit-overflow-scrolling: touch;
-    }
-    thead, tbody, tr { width: 100%; }
-    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 9px 8px; vertical-align: top; }
-    th { color: var(--muted); font-weight: 650; background: #fbfdff; }
-    code {
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      background: #eef3f8;
-      border: 1px solid #d8e2ec;
-      border-radius: 5px;
-      padding: 1px 4px;
-      font-size: 0.92em;
-    }
-    pre {
-      overflow: auto;
-      white-space: pre-wrap;
-      background: #13202c;
-      color: #eef6ff;
-      border-radius: 8px;
-      padding: 14px;
-    }
-    pre code {
-      background: transparent;
-      border: 0;
-      color: inherit;
-      padding: 0;
-    }
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .toolbar a, .toolbar button {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      min-height: 44px;
-    }
-    .toolbar button.active {
-      border-color: var(--blue);
-      color: var(--blue);
-      background: #eef4ff;
-    }
-    .inline-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 7px 11px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
-    }
-    .review-mark { min-width: 112px; }
-    .inline-button:hover {
-      border-color: #b9ccff;
-      background: #eef4ff;
-      color: #1d4ed8;
-    }
-    .inline-button[disabled] {
-      cursor: not-allowed;
-      opacity: 0.58;
-    }
-    .review-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      margin: 0 0 14px;
-    }
-    .review-status {
-      min-height: 24px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .source-path {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 16px;
-      word-break: break-all;
-    }
-    .md-view {
-      max-width: 980px;
-      margin: 0 auto;
-    }
-    .md-view h1 { margin-top: 0; font-size: 28px; }
-    .md-view h2 {
-      margin-top: 28px;
-      padding-top: 10px;
-      border-top: 1px solid var(--line);
-    }
-    .md-view h3 { margin-top: 22px; }
-    .md-view ul, .md-view ol { padding-left: 22px; }
-    .md-view li { margin: 5px 0; }
-    .md-view blockquote {
-      margin: 14px 0;
-      padding: 10px 14px;
-      border-left: 4px solid var(--blue);
-      background: #f0f5ff;
-      color: #24384e;
-    }
-    .md-view table {
-      display: block;
-      overflow-x: auto;
-      white-space: normal;
-      margin: 12px 0 18px;
-    }
-    .wikilink {
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid #cdddeb;
-      background: #f4f8fb;
-      color: #1e5678;
-      border-radius: 999px;
-      padding: 0 7px;
-      font-size: 0.92em;
-    }
-    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
-    @media (max-width: 840px) {
-      .panel, .metric { grid-column: 1 / -1; }
-      .cta-layout { grid-template-columns: 1fr; }
-      h1 { font-size: 28px; }
-      .wrap { padding-left: 16px; padding-right: 16px; }
-      .nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
-      .nav a { flex: 0 0 auto; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-      }
-    }
-    </style>
+  <link rel="stylesheet" href="../../assets/app.css">
+
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到正文</a>
-  <header>
+  <header class="site-header">
     <div class="wrap">
-      <h1>创新-局限-机会台账</h1>
-      <p class="sub">当前项目创新、局限与后续机会的浏览版。</p>
-      <nav class="nav"><a href="../../study_dashboard.html">总览</a>
-<a href="../today.html" aria-current="page">今日精读</a>
+      <p class="page-kicker">ResearchWorkflow / 阅读</p>
+      <div class="page-heading">
+        <div>
+          <h1>创新-局限-机会台账</h1>
+          <p class="sub">当前项目创新、局限与后续机会的浏览版。</p>
+          <p class="page-meta">当前项目：library_short_video</p>
+        </div>
+        <div class="page-primary-action" hidden></div>
+      </div>
+      <nav class="nav global-nav" aria-label="一级导航"><a href="../../study_dashboard.html">总览</a>
+<a href="../../action_queue.html">今日任务</a>
+<a href="../today.html" aria-current="page">阅读</a>
+<a href="../../projects/library_short_video/manuscript/writing_panel.html">写作</a>
+<a href="../../projects/library_short_video/evidence/page_verification_queue.html">证据</a>
+<a href="../../workflow_state.html">系统</a></nav>
+      <nav class="nav subnav" aria-label="阅读子导航"><a href="../today.html" aria-current="page">今日精读</a>
 <a href="../index.html">论文归档</a>
-<a href="../../knowledge_cards/index.html">知识卡</a>
-<a href="../../knowledge_cards/review_today.html">复习</a>
-<a href="../../knowledge_graph/index.html">知识图谱</a>
-<a href="../../search/index.html">搜索</a>
-<a href="../../logs/index.html">学习日志</a>
-<a href="../../workflow_state.html">总状态</a>
-<a href="../../action_queue.html">行动队列</a>
-<a href="../../project_collaboration.html">项目协作</a>
-<a href="../../archive_policy.html">归档策略</a>
-<a href="../../workflow_health.html">工作流体检</a>
 <a href="../../projects/library_short_video/literature/incoming_pdf_triage.html">PDF分拣</a>
-<a href="../../projects/library_short_video/literature/evidence_locator_table.html">证据定位</a>
-<a href="../../projects/library_short_video/evidence/page_verification_queue.html">页码核验</a>
-<a href="../../projects/library_short_video/manuscript/writing_panel.html">论文写作</a>
-<a href="vault-home.html">Vault 首页</a></nav>
+<a href="../../knowledge_cards/index.html">知识卡</a></nav>
     </div>
   </header>
   <main class="wrap" id="main-content">
-
-    <section class="grid">
+<section class="grid">
       <section class="panel wide">
         <div class="toolbar">
           <a href="../today.html">返回今日精读</a>
@@ -405,7 +57,26 @@
 <h3>局限性类型</h3>
 <table><thead><tr><th>类型</th><th>含义</th><th>后续可转化方向</th></tr></thead><tbody><tr><td>指标替代问题</td><td>点赞、评论、分享等平台互动不能直接代表图书馆服务价值</td><td>构造“传播效果 + 服务价值”复合指标</td></tr><tr><td>样本外推问题</td><td>样本平台、账号类型、时间窗口有限</td><td>做跨平台、跨馆型、跨时段比较</td></tr><tr><td>因果识别问题</td><td>观察性数据只能说明相关或差异，不能直接证明因果</td><td>加入准实验、时间序列、A/B 或匹配设计</td></tr><tr><td>变量遗漏问题</td><td>音乐、剪辑、主持人、主题、算法推荐等变量未充分量化</td><td>引入多模态特征和更细编码</td></tr><tr><td>平台时代漂移</td><td>早期抖音规则、内容生态与当前平台环境不同</td><td>更新到 2024-2026 数据重新检验</td></tr><tr><td>图书馆转化不足</td><td>外部社交号或商业号经验不能直接等同于图书馆实践</td><td>建立图书馆专属样本和实践验证</td></tr></tbody></table>
 <h2>跨文献机会地图</h2>
-<table><thead><tr><th>机会编号</th><th>来源局限/创新</th><th>可转化研究方向</th><th>当前优先级</th><th>需要补的证据</th></tr></thead><tbody><tr><td>O-001</td><td>两篇 2021 年文献都以点赞、评论、分享衡量传播效果</td><td>构建图书馆短视频“平台互动-服务触达-阅读转化”复合评价指标</td><td>高</td><td>找到图书馆服务转化、阅读推广效果评价、社媒影响力评价相关文献</td></tr><tr><td>O-002</td><td>Hook Model 与 ELM 分别解释触发/酬赏和中心/边缘线索</td><td>比较或整合“上瘾模型 + ELM”，形成图书馆短视频内容说服与互动机制框架</td><td>高</td><td>补 ELM、Hook Model 在图情/政务/健康传播中的应用文献</td></tr><tr><td>O-003</td><td>官方图书馆账号样本与社会化阅读账号样本结论不完全一致</td><td>做图书馆账号与社会化阅读推广账号的对照研究，识别哪些机制可迁移</td><td>高</td><td>收集同一时期或新时期的两类账号数据</td></tr><tr><td>O-004</td><td>早期样本集中于 2020-2021 年抖音生态</td><td>使用 2024-2026 数据复测，判断短视频平台成熟后影响因素是否变化</td><td>中高</td><td>补当前平台规则、账号活跃度、短视频样本</td></tr><tr><td>O-005</td><td>变量主要是人工编码或文本/图像单项提取</td><td>建立多模态变量表：文本、画面、音频、人物、剪辑节奏、主题和评论语义</td><td>中高</td><td>补多模态传播效果、短视频内容分析方法文献</td></tr><tr><td>O-006</td><td>研究多停留在运营建议，缺少图书馆实际服务改进验证</td><td>设计面向图书馆账号的内容优化实验或行动研究</td><td>中</td><td>需要馆方数据、发布权限或历史运营数据</td></tr><tr><td>O-007</td><td>伴读文献显示图书馆账号存在开通、规划、团队、内容、互动等成熟度差异</td><td>构建图书馆短视频服务成熟度或运营能力评价框架</td><td>中高</td><td>补数字图书馆服务成熟度、新媒体运营能力评价文献</td></tr><tr><td>O-008</td><td>热门视频规律强调热点/情绪/名人效应，公共图书馆服务文献警惕内容宽泛和过度娱乐化</td><td>区分“流量有效”与“图书馆使命一致”的短视频内容机制</td><td>高</td><td>补公共文化服务价值、阅读推广质量和短视频伦理/形象治理文献</td></tr><tr><td>O-009</td><td>张承 2021 将短视频营销转译为情感、渠道、互动三条数字阅读推广策略，但缺少效果检验</td><td>构建“情感共鸣-渠道触达-互动参与-服务转化”的公共图书馆短视频服务路径模型</td><td>高</td><td>补数字阅读推广评价、服务触达、用户参与和线上线下转化指标文献</td></tr><tr><td>O-010</td><td>王兴兰、夏晓红 2021 将省级公共图书馆账号传播力做成熵权法综合评价，但仍缺服务结果指标</td><td>构建“平台传播-服务触达-阅读转化”分层指标框架，避免用传播力替代服务价值</td><td>高</td><td>补服务价值、阅读推广效果、资源访问、活动参与和馆方后台数据文献</td></tr></tbody></table>
+<table><thead><tr><th>机会编号</th><th>来源局限/创新</th><th>可转化研究方向</th><th>当前优先级</th><th>需要补的证据</th></tr></thead><tbody><tr><td>O-001</td><td>两篇 2021 年文献都以点赞、评论、分享衡量传播效果</td><td>构建图书馆短视频“平台互动-服务触达-阅读转化”复合评价指标</td><td>高</td><td>找到图书馆服务转化、阅读推广效果评价、社媒影响力评价相关文献</td></tr><tr><td>O-002</td><td>Hook Model 与 ELM 分别解释触发/酬赏和中心/边缘线索</td><td>比较或整合“上瘾模型 + ELM”，形成图书馆短视频内容说服与互动机制框架</td><td>高</td><td>补 ELM、Hook Model 在图情/政务/健康传播中的应用文献</td></tr><tr><td>O-003</td><td>官方图书馆账号样本与社会化阅读账号样本结论不完全一致</td><td>做图书馆账号与社会化阅读推广账号的对照研究，识别哪些机制可迁移</td><td>高</td><td>收集同一时期或新时期的两类账号数据</td></tr><tr><td>O-004</td><td>早期样本集中于 2020-2021 年抖音生态</td><td>使用 2024-2026 数据复测，判断短视频平台成熟后影响因素是否变化</td><td>中高</td><td>补当前平台规则、账号活跃度、短视频样本</td></tr><tr><td>O-005</td><td>变量主要是人工编码或文本/图像单项提取</td><td>建立多模态变量表：文本、画面、音频、人物、剪辑节奏、主题和评论语义</td><td>中高</td><td>补多模态传播效果、短视频内容分析方法文献</td></tr><tr><td>O-006</td><td>研究多停留在运营建议，缺少图书馆实际服务改进验证</td><td>设计面向图书馆账号的内容优化实验或行动研究</td><td>中</td><td>需要馆方数据、发布权限或历史运营数据</td></tr><tr><td>O-007</td><td>伴读文献显示图书馆账号存在开通、规划、团队、内容、互动等成熟度差异</td><td>构建图书馆短视频服务成熟度或运营能力评价框架</td><td>中高</td><td>补数字图书馆服务成熟度、新媒体运营能力评价文献</td></tr><tr><td>O-008</td><td>热门视频规律强调热点/情绪/名人效应，公共图书馆服务文献警惕内容宽泛和过度娱乐化</td><td>区分“流量有效”与“图书馆使命一致”的短视频内容机制</td><td>高</td><td>补公共文化服务价值、阅读推广质量和短视频伦理/形象治理文献</td></tr><tr><td>O-009</td><td>张承 2021 将短视频营销转译为情感、渠道、互动三条数字阅读推广策略，但缺少效果检验</td><td>构建“情感共鸣-渠道触达-互动参与-服务转化”的公共图书馆短视频服务路径模型</td><td>高</td><td>补数字阅读推广评价、服务触达、用户参与和线上线下转化指标文献</td></tr><tr><td>O-010</td><td>王兴兰、夏晓红 2021 将省级公共图书馆账号传播力做成熵权法综合评价，但仍缺服务结果指标</td><td>构建“平台传播-服务触达-阅读转化”分层指标框架，避免用传播力替代服务价值</td><td>高</td><td>补服务价值、阅读推广效果、资源访问、活动参与和馆方后台数据文献</td></tr><tr><td>O-011</td><td>王磊 2025 将阅读服务类短视频传播效果拆成 VCEI 与多条件组态，但仍缺用户感知和服务转化变量</td><td>构建“内容组态 -&gt; 平台互动 -&gt; 服务触达/阅读转化”的两阶段机制模型</td><td>高</td><td>补多模态用户体验、信息有用性/易用性、馆方后台服务数据或用户调查</td></tr></tbody></table>
+<h3><code>cnki_2025_ea327e3e1c</code> - 公共图书馆阅读服务类抖音短视频传播效果的影响因素研究</h3>
+<ul>
+<li>Source: 数字图书馆论坛, 2025</li>
+<li>DOI: <code>10.3772/j.issn.1673-2286.2025.03.008</code></li>
+<li>Read status: <code>skimmed</code></li>
+<li>Reader: <code>projects/library_short_video/literature/readers/cnki_2025_ea327e3e1c/paper.md</code></li>
+<li>证据边界: source-grounded guided skim；表 2-表 6 的数值、公式和页码写作前需回 PDF 视觉页核验；VCEI 是平台互动指标，不是服务价值指标。</li>
+</ul>
+<h4>可复用创新点</h4>
+<table><thead><tr><th>类型</th><th>创新点</th><th>证据定位</th><th>可迁移价值</th><th>机会编号</th></tr></thead><tbody><tr><td>对象/场景拓展</td><td>将研究对象收窄为公共图书馆阅读服务类抖音短视频</td><td><code>B0001</code>, <code>B0008</code></td><td>帮助当前项目从泛泛短视频运营转向阅读服务场景</td><td>O-001, O-011</td></tr><tr><td>变量/测量设计</td><td>设计 VCEI，用点赞、评论、分享合成单条视频传播效果</td><td><code>B0004</code>, <code>B0008</code></td><td>可作为“平台互动”层的单条视频结果变量</td><td>O-010, O-011</td></tr><tr><td>理论/模型引入</td><td>用把关人理论将内容条件操作化为跟热点、明确性、意外性、连续性、领读人、个人体验分享等</td><td><code>B0005-B0007</code></td><td>可转成后续内容分析编码表</td><td>O-005, O-011</td></tr><tr><td>方法/技术路径</td><td>用 fsQCA 分析多条件组态，而不是只检验单一变量</td><td><code>B0011-B0012</code>, <code>B0014-B0015</code></td><td>适合解释复杂内容机制和多路径传播</td><td>O-011</td></tr><tr><td>实践策略转译</td><td>将组态结果转为账号营销、新颖内容、优化表现、标题技巧和系列视频建议</td><td><code>B0017-B0019</code></td><td>可对接图书馆短视频内容策略设计</td><td>O-006, O-011</td></tr></tbody></table>
+<h4>关键局限性</h4>
+<table><thead><tr><th>类型</th><th>局限性</th><th>证据定位</th><th>可转化研究或改进点</th><th>优先级</th></tr></thead><tbody><tr><td>指标替代问题</td><td>VCEI 仍由点赞、评论、分享构成，不能代表服务触达或阅读转化</td><td><code>B0004</code>, <code>B0020</code></td><td>将 VCEI 作为平台互动层，再补服务数据</td><td>高</td></tr><tr><td>样本外推问题</td><td>样本来自国家图书馆和 29 个省级公共图书馆，不代表高校馆、基层馆、科研型图书馆或多平台</td><td><code>B0004</code></td><td>分馆型、分平台扩展样本</td><td>中高</td></tr><tr><td>变量主观性</td><td>多个条件需要人工赋值，作者承认会带来偏差</td><td><code>B0007</code>, <code>B0020</code></td><td>用 NLP、图像识别和双人编码提高复现性</td><td>高</td></tr><tr><td>用户感知缺口</td><td>仅使用平台客观数据，缺少信息有用性、易用性、浏览动机等用户自我报告变量</td><td><code>B0020-B0021</code></td><td>补用户体验、多模态机制或结构方程模型</td><td>高</td></tr><tr><td>因果识别边界</td><td>fsQCA 说明条件组合与结果的集合关系，不能替代干预或纵向因果证据</td><td><code>B0011-B0015</code></td><td>后续可做时间序列、准实验或行动研究</td><td>中高</td></tr></tbody></table>
+<h4>可转化研究问题</h4>
+<ul>
+<li>RQ-020: 阅读服务类短视频的 VCEI 高组态，是否也能预测服务入口点击、资源访问或活动参与？</li>
+<li>RQ-021: 生动视频表现、意外性内容和标题技巧在公共馆、高校馆、科研型图书馆之间是否具有不同权重？</li>
+<li>RQ-022: 用户感知有用性和易用性加入后，fsQCA 的核心条件是否会从平台呈现转向服务价值感知？</li>
+<li>RQ-023: 机器赋值的内容特征能否复现人工编码下的阅读服务类短视频组态路径？</li>
+</ul>
 <h3><code>cnki_2021_645f03f388</code> - 图书馆短视频账号传播力研究——以省级公共图书馆为例</h3>
 <ul>
 <li>Source: 图书馆学研究, 2021</li>
@@ -584,9 +255,7 @@
         </article>
       </section>
     </section>
-
   </main>
   <footer class="wrap">Generated by scripts/build_learning_dashboard.py.</footer>
-
 </body>
 </html>

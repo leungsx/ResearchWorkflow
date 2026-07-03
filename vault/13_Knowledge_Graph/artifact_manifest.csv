@@ -11,13 +11,16 @@ vault/02_Concepts/传播力评价.md,markdown,knowledge_cards/views/concept-4425
 vault/02_Concepts/平台互动-服务触达-阅读转化.md,markdown,knowledge_cards/views/concept-4358f2f5.html,concept_card_view,平台互动-服务触达-阅读转化,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/平台适配.md,markdown,knowledge_cards/views/concept-53b320d5.html,concept_card_view,平台适配,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/情感营销.md,markdown,knowledge_cards/views/concept-d7b1f9e6.html,concept_card_view,情感营销,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/把关人理论.md,markdown,knowledge_cards/views/concept-81d3579f.html,concept_card_view,把关人理论,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/数字阅读推广.md,markdown,knowledge_cards/views/concept-b0f48f34.html,concept_card_view,数字阅读推广,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/方向链.md,markdown,knowledge_cards/views/concept-e068f0fc.html,concept_card_view,方向链,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/服务价值.md,markdown,knowledge_cards/views/concept-e98c8c55.html,concept_card_view,服务价值,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/沉浸式内容.md,markdown,knowledge_cards/views/concept-7f8a8bb3.html,concept_card_view,沉浸式内容,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/渠道营销.md,markdown,knowledge_cards/views/concept-401f5cfe.html,concept_card_view,渠道营销,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/用户感知价值.md,markdown,knowledge_cards/views/concept-824dc24b.html,concept_card_view,用户感知价值,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/视频表现-内容-引流协同.md,markdown,knowledge_cards/views/concept-34f2bfeb.html,concept_card_view,视频表现-内容-引流协同,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/软营销.md,markdown,knowledge_cards/views/concept-841db0d5.html,concept_card_view,软营销,Knowledge,make learning-dashboard,mirror_view
+vault/02_Concepts/阅读服务类短视频.md,markdown,knowledge_cards/views/concept-6ad0bbf9.html,concept_card_view,阅读服务类短视频,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/馆型差异.md,markdown,knowledge_cards/views/concept-1c7d1e51.html,concept_card_view,馆型差异,Knowledge,make learning-dashboard,mirror_view
 study_dashboard.html,html,study_dashboard.html,dashboard,ResearchWorkflow 学习仪表盘,Presentation,make learning-dashboard,core_entry
 library/pdfs/library_short_video,directory,paper_reading/views/directories/library-short-video-8b015fe8.html,directory_view,library_short_video,Source,make learning-dashboard,mirror_view
@@ -48,6 +51,7 @@ vault/12_Learning_Log/sessions/2026-06-30-evening-close.md,markdown,logs/views/2
 vault/12_Learning_Log/sessions/2026-07-01-digital-reading-promotion-paper.md,markdown,logs/views/2026-07-01-digital-reading-promotion-paper-83676eb0.html,log_view,Learning Session - 数字阅读推广服务转化论文精读,Knowledge,make learning-dashboard,mirror_view
 vault/12_Learning_Log/sessions/2026-07-01-evening-close.md,markdown,logs/views/2026-07-01-evening-close-35b4d344.html,log_view,Learning Session - 2026-07-01 Evening Close,Knowledge,make learning-dashboard,mirror_view
 vault/12_Learning_Log/sessions/2026-07-02-propagation-power-evaluation-paper.md,markdown,logs/views/2026-07-02-propagation-power-evaluation-paper-7d398028.html,log_view,Learning Session - 2026-07-02 传播力评价论文精读,Knowledge,make learning-dashboard,mirror_view
+vault/12_Learning_Log/sessions/2026-07-03-reading-service-douyin-fsqca-paper.md,markdown,logs/views/2026-07-03-reading-service-douyin-fsqca-paper-d0fb8608.html,log_view,Learning Session - 阅读服务类短视频传播效果组态论文精读,Knowledge,make learning-dashboard,mirror_view
 logs/index.html,html,logs/index.html,logs_index,学习日志入口,Presentation,make learning-dashboard,core_entry
 projects/library_short_video/manuscript/writing_panel.md,markdown,projects/library_short_video/manuscript/writing_panel.html,manuscript_writing_panel,library_short_video manuscript writing panel,Knowledge,make learning-dashboard,core_entry
 codex/OPERATING_PROTOCOL.md,markdown,paper_reading/views/operating-protocol-7492396d.html,markdown_view,Codex-First Research Operating Protocol,Orchestration/QA,make learning-dashboard,mirror_view
@@ -68,6 +72,7 @@ projects/library_short_video/literature/context_packs/cnki_2021_645f03f388.md,ma
 projects/library_short_video/literature/context_packs/cnki_2021_7556aafa99.md,markdown,paper_reading/views/cnki-2021-7556aafa99-1f5b3fc2.html,markdown_view,论文带读上下文包 - 公共图书馆“抖音”短视频服务现状及发展策略研究,Knowledge,make learning-dashboard,mirror_view
 projects/library_short_video/literature/context_packs/cnki_2021_d35f8e895a.md,markdown,paper_reading/views/cnki-2021-d35f8e895a-0586195d.html,markdown_view,论文带读上下文包 - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索,Knowledge,make learning-dashboard,mirror_view
 projects/library_short_video/literature/context_packs/cnki_2021_dfab60236e.md,markdown,paper_reading/views/cnki-2021-dfab60236e-d1ec0ae6.html,markdown_view,论文带读上下文包 - 抖音阅读推广短视频传播效果影响因素研究,Knowledge,make learning-dashboard,mirror_view
+projects/library_short_video/literature/context_packs/cnki_2025_ea327e3e1c.md,markdown,paper_reading/views/cnki-2025-ea327e3e1c-0e300df4.html,markdown_view,论文带读上下文包 - 公共图书馆阅读服务类抖音短视频传播效果的影响因素研究,Knowledge,make learning-dashboard,mirror_view
 projects/library_short_video/literature/innovation_limitation_bank.md,markdown,paper_reading/views/innovation_limitation_bank.html,markdown_view,创新-局限-机会台账,Knowledge,make learning-dashboard,mirror_view
 projects/library_short_video/literature/literature_review_workbench.md,markdown,paper_reading/views/literature_review_workbench.html,markdown_view,文献综述工作台,Knowledge,make learning-dashboard,mirror_view
 projects/library_short_video/literature/readers/README.md,markdown,paper_reading/views/readme-184a812b.html,markdown_view,Paper Reader Packages,Source,make learning-dashboard,mirror_view
@@ -80,6 +85,7 @@ projects/library_short_video/literature/readers/cnki_2021_7556aafa99/paper.md,ma
 projects/library_short_video/literature/readers/cnki_2021_d35f8e895a/paper.md,markdown,paper_reading/views/paper-b30ed69c.html,markdown_view,Source-Grounded Reader - 图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索,Source,make learning-dashboard,mirror_view
 projects/library_short_video/literature/readers/cnki_2021_dfab60236e/paper.md,markdown,paper_reading/views/paper-8448cb0c.html,markdown_view,Source-Grounded Reader - 抖音阅读推广短视频传播效果影响因素研究,Source,make learning-dashboard,mirror_view
 projects/library_short_video/literature/readers/cnki_2023_34348faa1e/paper.md,markdown,paper_reading/views/cnki_2023_34348faa1e-reader.html,markdown_view,Source-Grounded Reader,Source,make learning-dashboard,mirror_view
+projects/library_short_video/literature/readers/cnki_2025_ea327e3e1c/paper.md,markdown,paper_reading/views/paper-43265a51.html,markdown_view,Source-Grounded Reader - 公共图书馆阅读服务类抖音短视频传播效果的影响因素研究,Source,make learning-dashboard,mirror_view
 projects/library_short_video/literature/reading_board.md,markdown,paper_reading/views/reading-board-026f6ec8.html,markdown_view,今日阅读看板 - 图书馆短视频相关研究,Knowledge,make learning-dashboard,mirror_view
 projects/library_short_video/literature/recaps/2026-06-20-five-paper-quick-recap.md,markdown,paper_reading/views/2026-06-20-five-paper-quick-recap-8b992799.html,markdown_view,5 篇已读论文快速复盘 - 图书馆短视频相关研究,Knowledge,make learning-dashboard,mirror_view
 projects/library_short_video/manuscript/evidence_gate_report.md,markdown,paper_reading/views/evidence-gate-report-7607e392.html,markdown_view,Evidence Gate Report,Knowledge,make learning-dashboard,mirror_view
@@ -90,6 +96,7 @@ vault/01_Literature/cnki_2021_3771e58987.md,markdown,paper_reading/views/cnki-20
 vault/01_Literature/cnki_2021_5530e86157.md,markdown,paper_reading/views/cnki-2021-5530e86157-96644c0b.html,markdown_view,基于短视频营销的公共图书馆数字阅读推广策略研究,Knowledge,make learning-dashboard,mirror_view
 vault/01_Literature/cnki_2021_645f03f388.md,markdown,paper_reading/views/cnki-2021-645f03f388-609a8a67.html,markdown_view,图书馆短视频账号传播力研究——以省级公共图书馆为例,Knowledge,make learning-dashboard,mirror_view
 vault/01_Literature/cnki_2023_34348faa1e.md,markdown,paper_reading/views/cnki_2023_34348faa1e-note.html,markdown_view,Obsidian 论文笔记,Knowledge,make learning-dashboard,mirror_view
+vault/01_Literature/cnki_2025_ea327e3e1c.md,markdown,paper_reading/views/cnki-2025-ea327e3e1c-30ddb8f4.html,markdown_view,公共图书馆阅读服务类抖音短视频传播效果的影响因素研究,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/SICAS模型.md,markdown,paper_reading/views/sicas-model-concept.html,markdown_view,知识卡：SICAS 模型,Knowledge,make learning-dashboard,mirror_view
 vault/03_Methods/DCI传播力指数.md,markdown,paper_reading/views/dci-index-method.html,markdown_view,方法卡：DCI 传播力指数,Knowledge,make learning-dashboard,mirror_view
 vault/15_CNKI_Frontier/daily_recommendations/2026-06-20-library_short_video.md,markdown,paper_reading/views/2026-06-20-library-short-video.html,markdown_view,2026-06-20 CNKI 每日推荐,Knowledge,make learning-dashboard,mirror_view
@@ -107,6 +114,8 @@ vault/15_CNKI_Frontier/paper_briefs/cnki_2022_efd2209e07.md,markdown,paper_readi
 vault/15_CNKI_Frontier/paper_briefs/cnki_2023_34348faa1e.md,markdown,paper_reading/views/cnki-2023-34348faa1e-8ca7c248.html,markdown_view,论文研讨卡 - 基于SICAS模型的公共图书馆短视频营销策略研究,Knowledge,make learning-dashboard,mirror_view
 vault/Home.md,markdown,paper_reading/views/vault-home.html,markdown_view,Vault 首页,Knowledge,make learning-dashboard,mirror_view
 vault/03_Methods/DCI传播力指数.md,markdown,knowledge_cards/views/method-dci-48f2a84e.html,method_card_view,DCI传播力指数,Knowledge,make learning-dashboard,mirror_view
+vault/03_Methods/VCEI视频传播效果指数.md,markdown,knowledge_cards/views/method-vcei-79321a16.html,method_card_view,VCEI视频传播效果指数,Knowledge,make learning-dashboard,mirror_view
+vault/03_Methods/fsQCA模糊集定性比较分析.md,markdown,knowledge_cards/views/method-fsqca-5c32e3b6.html,method_card_view,fsQCA模糊集定性比较分析,Knowledge,make learning-dashboard,mirror_view
 vault/03_Methods/内容分析法.md,markdown,knowledge_cards/views/method-4dc0db40.html,method_card_view,内容分析法,Knowledge,make learning-dashboard,mirror_view
 vault/03_Methods/图书馆短视频内容质量评价.md,markdown,knowledge_cards/views/method-e2773847.html,method_card_view,图书馆短视频内容质量评价,Knowledge,make learning-dashboard,mirror_view
 vault/03_Methods/头部账号实践提炼.md,markdown,knowledge_cards/views/method-e92ba575.html,method_card_view,头部账号实践提炼,Knowledge,make learning-dashboard,mirror_view
@@ -120,6 +129,7 @@ paper_reading/2026-06-29-sicas-public-library-short-video.html,html,paper_readin
 paper_reading/2026-06-30-aarrr-library-short-video.html,html,paper_reading/2026-06-30-aarrr-library-short-video.html,paper_page,2026-06-30 精读：公共图书馆和高校图书馆短视频营销比较研究,Presentation,make learning-dashboard,generated_view
 paper_reading/2026-07-01-digital-reading-promotion.html,html,paper_reading/2026-07-01-digital-reading-promotion.html,paper_page,2026-07-01 精读：基于短视频营销的公共图书馆数字阅读推广策略研究,Presentation,make learning-dashboard,generated_view
 paper_reading/2026-07-02-propagation-power-evaluation.html,html,paper_reading/2026-07-02-propagation-power-evaluation.html,paper_page,2026-07-02 精读：图书馆短视频账号传播力研究,Presentation,make learning-dashboard,generated_view
+paper_reading/2026-07-03-reading-service-douyin-fsqca.html,html,paper_reading/2026-07-03-reading-service-douyin-fsqca.html,paper_page,2026-07-03 精读：公共图书馆阅读服务类抖音短视频传播效果,Presentation,make learning-dashboard,generated_view
 paper_reading/today.html,html,paper_reading/today.html,paper_today_entry,今日精读入口,Presentation,make learning-dashboard,core_entry
 project_collaboration.html,html,project_collaboration.html,project_collaboration,项目协作层,Presentation,make learning-dashboard,core_entry
 vault/13_Knowledge_Graph/collaboration_state.json,json,project_collaboration.html,project_collaboration_data,Project collaboration state,Knowledge,make learning-dashboard,source_data

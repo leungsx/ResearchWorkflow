@@ -20,6 +20,7 @@ from rendering.archive_policy import write_archive_policy
 from rendering.collaboration import write_collaboration_state
 from rendering.paths import ARCHIVE_POLICY_HTML, ARCHIVE_POLICY_JSON, COLLABORATION_HTML, COLLABORATION_JSON, WORKFLOW_AUDIT_JSON
 from rendering.schemas import validate_workflow_schemas
+from rendering.ui import render_shell
 from rendering.workflow_state import write_workflow_state
 
 
@@ -755,75 +756,24 @@ def html_report(day: dt.date, checks: list[Check], audit_mode: str) -> str:
         </article>"""
         for check in checks
     )
-    return f"""<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ResearchWorkflow 体检</title>
-  <style>
-    :root {{ --ink:#182026; --muted:#65717d; --line:#d9e2ea; --paper:#fff; --bg:#f4f7fa; --pass:#16805d; --warn:#a15c07; --fail:#b4234b; --blue:#2463eb; }}
-    * {{ box-sizing:border-box; }}
-    body {{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",Arial,sans-serif; color:var(--ink); background:radial-gradient(circle at top right, rgba(36,99,235,.11), transparent 28%), var(--bg); line-height:1.55; }}
-    header {{ background:#102033; color:#f8fbff; }}
-    .wrap {{ max-width:1180px; margin:0 auto; padding:26px 22px; }}
-    h1 {{ margin:0 0 8px; font-size:34px; }}
-    h2 {{ margin:0 0 8px; font-size:18px; }}
-    p {{ margin:0 0 10px; }}
-    a {{ color:var(--blue); text-decoration:none; }}
-    .sub {{ color:rgba(248,251,255,.82); }}
-    .nav {{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }}
-    .nav a {{ color:#f8fbff; border:1px solid rgba(255,255,255,.18); border-radius:999px; padding:7px 12px; background:rgba(255,255,255,.08); }}
-    .metrics {{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:20px 0; }}
-    .metric, .check {{ background:var(--paper); border:1px solid var(--line); border-radius:14px; box-shadow:0 10px 26px rgba(16,24,40,.05); }}
-    .metric {{ padding:18px; }}
-    .metric b {{ display:block; font-size:32px; line-height:1; }}
-    .metric span {{ color:var(--muted); }}
-    .checks {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }}
-    .check {{ padding:16px; border-left:6px solid var(--line); }}
-    .check.pass {{ border-left-color:var(--pass); }}
-    .check.warn {{ border-left-color:var(--warn); }}
-    .check.fail {{ border-left-color:var(--fail); }}
-    .status {{ display:inline-flex; padding:2px 8px; border-radius:999px; background:#eef2f7; color:var(--muted); font-size:12px; font-weight:700; }}
-    .pass .status {{ background:#eaf7f1; color:var(--pass); }}
-    .warn .status {{ background:#fff5e6; color:var(--warn); }}
-    .fail .status {{ background:#ffecef; color:var(--fail); }}
-    .area {{ color:var(--muted); font-size:13px; }}
-    footer {{ color:var(--muted); font-size:12px; }}
-    @media (max-width: 860px) {{ .metrics, .checks {{ grid-template-columns:1fr; }} h1 {{ font-size:28px; }} }}
-  </style>
-</head>
-<body>
-  <header>
-    <div class="wrap">
-      <h1>ResearchWorkflow 体检</h1>
-      <p class="sub">Generated {dt.datetime.now().strftime("%Y-%m-%d %H:%M")} · mode={html.escape(audit_mode)} · PASS={counts['PASS']} WARN={counts['WARN']} FAIL={counts['FAIL']}</p>
-      <nav class="nav">
-        <a href="study_dashboard.html">总览</a>
-        <a href="paper_reading/today.html">今日精读</a>
-        <a href="knowledge_cards/review_today.html">今日复习</a>
-        <a href="knowledge_graph/index.html">知识图谱</a>
-        <a href="search/index.html">全局搜索</a>
-        <a href="workflow_state.html">总状态</a>
-        <a href="action_queue.html">行动队列</a>
-        <a href="project_collaboration.html">项目协作</a>
-        <a href="archive_policy.html">归档策略</a>
-        <a href="logs/index.html">学习日志</a>
-      </nav>
-    </div>
-  </header>
-  <main class="wrap">
+    body = f"""
     <section class="metrics">
       <div class="metric"><b>{counts['PASS']}</b><span>通过</span></div>
       <div class="metric"><b>{counts['WARN']}</b><span>提醒</span></div>
       <div class="metric"><b>{counts['FAIL']}</b><span>失败</span></div>
     </section>
     <section class="checks">{cards}</section>
-  </main>
-  <footer class="wrap">Run <code>make workflow-audit</code> to refresh this page.</footer>
-</body>
-</html>
 """
+    return render_shell(
+        title="ResearchWorkflow 体检",
+        subtitle="检查入口、链接、镜像页、搜索、复习队列和系统状态是否可用。",
+        current="工作流体检",
+        body=body,
+        output=HEALTH_HTML,
+        module="系统",
+        meta=f"Generated {dt.datetime.now().strftime('%Y-%m-%d %H:%M')} · mode={html.escape(audit_mode)} · PASS={counts['PASS']} WARN={counts['WARN']} FAIL={counts['FAIL']}",
+        footer="Run make workflow-audit to refresh this page.",
+    )
 
 
 def render_state_outputs(checks: list[Check], baseline_dirty_paths: int) -> None:

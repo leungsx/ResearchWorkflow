@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T05:25:29",
+  "generated_at": "2026-07-03T09:28:47",
   "project": {
     "slug": "starter_project",
     "title": "Starter Research Project",
@@ -73,7 +73,7 @@
   "review": {
     "due_count": 5,
     "overdue_count": 0,
-    "upcoming_7_count": 19,
+    "upcoming_7_count": 24,
     "queue_path": "vault/14_Review_Queue/review_queue.csv",
     "state_path": "vault/14_Review_Queue/review_state.json",
     "review_today": "knowledge_cards/review_today.html",
