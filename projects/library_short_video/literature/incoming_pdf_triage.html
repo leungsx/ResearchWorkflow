@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Incoming PDF 分拣</title>
+  <title>PDF 分拣</title>
   <link rel="stylesheet" href="../../../assets/app.css">
 
 </head>
@@ -14,9 +14,9 @@
       <p class="page-kicker">ResearchWorkflow / 阅读</p>
       <div class="page-heading">
         <div>
-          <h1>Incoming PDF 分拣</h1>
+          <h1>PDF 分拣</h1>
           <p class="sub">扫描 incoming 文件夹，判断匹配文献、项目缺口、证据价值和下一步动作。</p>
-          <p class="page-meta">library_short_video · Generated 2026-07-03T09:26:35</p>
+          <p class="page-meta">library_short_video · Generated 2026-07-03T19:43:54</p>
         </div>
         <div class="page-primary-action"><a class="button primary" href="incoming_pdf_triage.csv">CSV 数据</a></div>
       </div>
@@ -33,205 +33,222 @@
     </div>
   </header>
   <main class="wrap" id="main-content">
-<section class="grid"><div class="metric"><b>2</b><span>add_to_matrix_or_mark_external</span></div><div class="metric"><b>8</b><span>already_skimmed_keep_as_backup</span></div><div class="metric"><b>3</b><span>duplicate_keep_one_then_archive</span></div><div class="metric"><b>6</b><span>external_comparison_or_ignore</span></div><div class="metric"><b>5</b><span>intake_to_stable_pdf</span></div></section>
+<section class="summary-grid" aria-label="PDF分拣摘要"><div class="metric">
+          <b>2</b>
+          <span>补入矩阵或标外部</span>
+        </div><div class="metric">
+          <b>8</b>
+          <span>已略读，保留备份</span>
+        </div><div class="metric">
+          <b>3</b>
+          <span>重复件，保留一份</span>
+        </div><div class="metric">
+          <b>6</b>
+          <span>外部对照或忽略</span>
+        </div><div class="metric">
+          <b>5</b>
+          <span>入库为稳定 PDF</span>
+        </div></section>
     <section class="grid">
-      <div class="panel">
+      <div class="panel table-panel">
         <h2>分拣结果</h2>
-        <table>
-          <thead><tr><th>文件</th><th>匹配文献</th><th>阅读状态</th><th>项目缺口</th><th>证据价值</th><th>建议动作</th></tr></thead>
-          <tbody><tr>
-          <td><strong>公共图书馆短视频公众平台建设现状分析_曾一昕.pdf</strong><br><span>library/pdfs/library_short_video/incoming/公共图书馆短视频公众平台建设现状分析_曾一昕.pdf</span></td>
+        <div class="table-wrap">
+          <table class="data-table incoming-table">
+            <thead><tr><th>文件</th><th>匹配文献</th><th>阅读状态</th><th>项目缺口</th><th>证据价值</th><th>建议动作</th></tr></thead>
+            <tbody><tr>
+          <td><strong>公共图书馆短视频公众平台建设现状分析_曾一昕.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/公共图书馆短视频公众平台建设现状分析_曾一昕.pdf</span></td>
           <td>公共图书馆短视频公众平台建设现状分析<br><code>cnki_2020_5ca581e54f</code></td>
-          <td>metadata-only</td>
+          <td><span class="status-pill info">仅有元数据</span></td>
           <td>服务价值指标</td>
-          <td>high</td>
-          <td><code>intake_to_stable_pdf</code></td>
+          <td><span class="status-pill pass">高</span></td>
+          <td><span class="status-pill">入库为稳定 PDF</span></td>
         </tr>
 <tr>
-          <td><strong>我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析_隋鑫.pdf</strong><br><span>library/pdfs/library_short_video/incoming/我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析_隋鑫.pdf</span></td>
+          <td><strong>我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析_隋鑫.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析_隋鑫.pdf</span></td>
           <td>我国省级公共图书馆短视频服务运营探析——基于抖音App的数据分析<br><code>cnki_2021_2ba9195a8a</code></td>
-          <td>metadata-only</td>
+          <td><span class="status-pill info">仅有元数据</span></td>
           <td>服务价值指标</td>
-          <td>high</td>
-          <td><code>intake_to_stable_pdf</code></td>
+          <td><span class="status-pill pass">高</span></td>
+          <td><span class="status-pill">入库为稳定 PDF</span></td>
         </tr>
 <tr>
-          <td><strong>我国省级公共图书馆抖音短视频运营现状与发展策略研究_胡海燕.pdf</strong><br><span>library/pdfs/library_short_video/incoming/我国省级公共图书馆抖音短视频运营现状与发展策略研究_胡海燕.pdf</span></td>
+          <td><strong>我国省级公共图书馆抖音短视频运营现状与发展策略研究_胡海燕.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/我国省级公共图书馆抖音短视频运营现状与发展策略研究_胡海燕.pdf</span></td>
           <td>我国省级公共图书馆抖音短视频运营现状与发展策略研究<br><code>cnki_2022_dea116d7f1</code></td>
-          <td>metadata-only</td>
+          <td><span class="status-pill info">仅有元数据</span></td>
           <td>待判断</td>
-          <td>medium</td>
-          <td><code>intake_to_stable_pdf</code></td>
+          <td><span class="status-pill info">中</span></td>
+          <td><span class="status-pill">入库为稳定 PDF</span></td>
         </tr>
 <tr>
-          <td><strong>公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析_曾群.pdf</strong><br><span>library/pdfs/library_short_video/incoming/公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析_曾群.pdf</span></td>
+          <td><strong>公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析_曾群.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析_曾群.pdf</span></td>
           <td>公共图书馆短视频传播效果影响因素组态路径研究——基于120个案例的模糊集定性比较分析<br><code>cnki_2022_e0a8336b38</code></td>
-          <td>metadata-only</td>
+          <td><span class="status-pill info">仅有元数据</span></td>
           <td>传播力评价；机制解释</td>
-          <td>medium-high</td>
-          <td><code>intake_to_stable_pdf</code></td>
+          <td><span class="status-pill pass">中高</span></td>
+          <td><span class="status-pill">入库为稳定 PDF</span></td>
         </tr>
 <tr>
-          <td><strong>高校图书馆B站视频传播效果影响因素实证研究_丁大尉.pdf</strong><br><span>library/pdfs/library_short_video/incoming/高校图书馆B站视频传播效果影响因素实证研究_丁大尉.pdf</span></td>
+          <td><strong>高校图书馆B站视频传播效果影响因素实证研究_丁大尉.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/高校图书馆B站视频传播效果影响因素实证研究_丁大尉.pdf</span></td>
           <td>高校图书馆B站视频传播效果影响因素实证研究<br><code>cnki_2023_82f69af538</code></td>
-          <td>metadata-only</td>
+          <td><span class="status-pill info">仅有元数据</span></td>
           <td>传播力评价；机制解释</td>
-          <td>medium-high</td>
-          <td><code>intake_to_stable_pdf</code></td>
+          <td><span class="status-pill pass">中高</span></td>
+          <td><span class="status-pill">入库为稳定 PDF</span></td>
         </tr>
 <tr>
-          <td><strong>基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf</strong><br><span>library/pdfs/library_short_video/incoming/基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf</span></td>
+          <td><strong>基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/基于媒介传播效果框架的图书馆短视频评论文本分析_陈信.pdf</span></td>
           <td>未匹配<br><code>unmatched</code></td>
-          <td>unmatched</td>
+          <td><span class="status-pill info">未匹配</span></td>
           <td>传播力评价；机制解释</td>
-          <td>medium</td>
-          <td><code>add_to_matrix_or_mark_external</code></td>
+          <td><span class="status-pill info">中</span></td>
+          <td><span class="status-pill">补入矩阵或标外部</span></td>
         </tr>
 <tr>
-          <td><strong>多模态视域下图书馆阅读推广短视频用户体验影响机制研究_程秀峰.pdf</strong><br><span>library/pdfs/library_short_video/incoming/多模态视域下图书馆阅读推广短视频用户体验影响机制研究_程秀峰.pdf</span></td>
+          <td><strong>多模态视域下图书馆阅读推广短视频用户体验影响机制研究_程秀峰.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/多模态视域下图书馆阅读推广短视频用户体验影响机制研究_程秀峰.pdf</span></td>
           <td>未匹配<br><code>unmatched</code></td>
-          <td>unmatched</td>
+          <td><span class="status-pill info">未匹配</span></td>
           <td>服务价值指标；机制解释</td>
-          <td>medium</td>
-          <td><code>add_to_matrix_or_mark_external</code></td>
+          <td><span class="status-pill info">中</span></td>
+          <td><span class="status-pill">补入矩阵或标外部</span></td>
         </tr>
 <tr>
-          <td><strong>公共图书馆“抖音”短视频服务现状及发展策略研究_孙雨.pdf</strong><br><span>library/pdfs/library_short_video/incoming/公共图书馆“抖音”短视频服务现状及发展策略研究_孙雨.pdf</span></td>
+          <td><strong>公共图书馆“抖音”短视频服务现状及发展策略研究_孙雨.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/公共图书馆“抖音”短视频服务现状及发展策略研究_孙雨.pdf</span></td>
           <td>公共图书馆“抖音”短视频服务现状及发展策略研究<br><code>cnki_2021_7556aafa99</code></td>
-          <td>skimmed</td>
+          <td><span class="status-pill info">已略读</span></td>
           <td>服务价值指标</td>
-          <td>high</td>
-          <td><code>already_skimmed_keep_as_backup</code></td>
+          <td><span class="status-pill pass">高</span></td>
+          <td><span class="status-pill">已略读，保留备份</span></td>
         </tr>
 <tr>
-          <td><strong>公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf</strong><br><span>library/pdfs/library_short_video/incoming/公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf</span></td>
+          <td><strong>公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/公共图书馆阅读服务类抖音短视频传播效果的影响因素研究_王磊.pdf</span></td>
           <td>公共图书馆阅读服务类抖音短视频传播效果的影响因素研究<br><code>cnki_2025_ea327e3e1c</code></td>
-          <td>skimmed</td>
+          <td><span class="status-pill info">已略读</span></td>
           <td>传播力评价；服务价值指标；机制解释</td>
-          <td>high</td>
-          <td><code>already_skimmed_keep_as_backup</code></td>
+          <td><span class="status-pill pass">高</span></td>
+          <td><span class="status-pill">已略读，保留备份</span></td>
         </tr>
 <tr>
-          <td><strong>抖音阅读推广短视频传播效果影响因素研究_杨达森 (1).pdf</strong><br><span>library/pdfs/library_short_video/incoming/抖音阅读推广短视频传播效果影响因素研究_杨达森 (1).pdf</span></td>
+          <td><strong>抖音阅读推广短视频传播效果影响因素研究_杨达森 (1).pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/抖音阅读推广短视频传播效果影响因素研究_杨达森 (1).pdf</span></td>
           <td>抖音阅读推广短视频传播效果影响因素研究<br><code>cnki_2021_dfab60236e</code></td>
-          <td>skimmed</td>
+          <td><span class="status-pill info">已略读</span></td>
           <td>传播力评价；服务价值指标；机制解释</td>
-          <td>high</td>
-          <td><code>duplicate_keep_one_then_archive</code></td>
+          <td><span class="status-pill pass">高</span></td>
+          <td><span class="status-pill">重复件，保留一份</span></td>
         </tr>
 <tr>
-          <td><strong>抖音阅读推广短视频传播效果影响因素研究_杨达森.pdf</strong><br><span>library/pdfs/library_short_video/incoming/抖音阅读推广短视频传播效果影响因素研究_杨达森.pdf</span></td>
+          <td><strong>抖音阅读推广短视频传播效果影响因素研究_杨达森.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/抖音阅读推广短视频传播效果影响因素研究_杨达森.pdf</span></td>
           <td>抖音阅读推广短视频传播效果影响因素研究<br><code>cnki_2021_dfab60236e</code></td>
-          <td>skimmed</td>
+          <td><span class="status-pill info">已略读</span></td>
           <td>传播力评价；服务价值指标；机制解释</td>
-          <td>high</td>
-          <td><code>already_skimmed_keep_as_backup</code></td>
+          <td><span class="status-pill pass">高</span></td>
+          <td><span class="status-pill">已略读，保留备份</span></td>
         </tr>
 <tr>
-          <td><strong>传统戏剧类非遗短视频青少年观看意愿的影响因素——以皮影短视频为例_薛可.pdf</strong><br><span>library/pdfs/library_short_video/incoming/传统戏剧类非遗短视频青少年观看意愿的影响因素——以皮影短视频为例_薛可.pdf</span></td>
+          <td><strong>传统戏剧类非遗短视频青少年观看意愿的影响因素——以皮影短视频为例_薛可.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/传统戏剧类非遗短视频青少年观看意愿的影响因素——以皮影短视频为例_薛可.pdf</span></td>
           <td>未匹配<br><code>unmatched</code></td>
-          <td>unmatched</td>
+          <td><span class="status-pill info">未匹配</span></td>
           <td>机制解释</td>
-          <td>medium</td>
-          <td><code>external_comparison_or_ignore</code></td>
+          <td><span class="status-pill info">中</span></td>
+          <td><span class="status-pill">外部对照或忽略</span></td>
         </tr>
 <tr>
-          <td><strong>政务短视频公众参与的影响因素研究——以“共青团中央”政务抖音号为例_陈强.pdf</strong><br><span>library/pdfs/library_short_video/incoming/政务短视频公众参与的影响因素研究——以“共青团中央”政务抖音号为例_陈强.pdf</span></td>
+          <td><strong>政务短视频公众参与的影响因素研究——以“共青团中央”政务抖音号为例_陈强.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/政务短视频公众参与的影响因素研究——以“共青团中央”政务抖音号为例_陈强.pdf</span></td>
           <td>未匹配<br><code>unmatched</code></td>
-          <td>unmatched</td>
+          <td><span class="status-pill info">未匹配</span></td>
           <td>机制解释</td>
-          <td>medium</td>
-          <td><code>external_comparison_or_ignore</code></td>
+          <td><span class="status-pill info">中</span></td>
+          <td><span class="status-pill">外部对照或忽略</span></td>
         </tr>
 <tr>
-          <td><strong>档案短视频传播效果的影响因素_杨达森 (1).pdf</strong><br><span>library/pdfs/library_short_video/incoming/档案短视频传播效果的影响因素_杨达森 (1).pdf</span></td>
+          <td><strong>档案短视频传播效果的影响因素_杨达森 (1).pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/档案短视频传播效果的影响因素_杨达森 (1).pdf</span></td>
           <td>未匹配<br><code>unmatched</code></td>
-          <td>unmatched</td>
+          <td><span class="status-pill info">未匹配</span></td>
           <td>传播力评价；机制解释</td>
-          <td>medium</td>
-          <td><code>duplicate_keep_one_then_archive</code></td>
+          <td><span class="status-pill info">中</span></td>
+          <td><span class="status-pill">重复件，保留一份</span></td>
         </tr>
 <tr>
-          <td><strong>档案短视频传播效果的影响因素_杨达森.pdf</strong><br><span>library/pdfs/library_short_video/incoming/档案短视频传播效果的影响因素_杨达森.pdf</span></td>
+          <td><strong>档案短视频传播效果的影响因素_杨达森.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/档案短视频传播效果的影响因素_杨达森.pdf</span></td>
           <td>未匹配<br><code>unmatched</code></td>
-          <td>unmatched</td>
+          <td><span class="status-pill info">未匹配</span></td>
           <td>传播力评价；机制解释</td>
-          <td>medium</td>
-          <td><code>external_comparison_or_ignore</code></td>
+          <td><span class="status-pill info">中</span></td>
+          <td><span class="status-pill">外部对照或忽略</span></td>
         </tr>
 <tr>
-          <td><strong>面向短视频平台的非遗信息搜寻行为影响因素研究——基于层次回归和模糊集定性比较方法_徐孝娟.pdf</strong><br><span>library/pdfs/library_short_video/incoming/面向短视频平台的非遗信息搜寻行为影响因素研究——基于层次回归和模糊集定性比较方法_徐孝娟.pdf</span></td>
+          <td><strong>面向短视频平台的非遗信息搜寻行为影响因素研究——基于层次回归和模糊集定性比较方法_徐孝娟.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/面向短视频平台的非遗信息搜寻行为影响因素研究——基于层次回归和模糊集定性比较方法_徐孝娟.pdf</span></td>
           <td>未匹配<br><code>unmatched</code></td>
-          <td>unmatched</td>
+          <td><span class="status-pill info">未匹配</span></td>
           <td>机制解释</td>
-          <td>medium</td>
-          <td><code>external_comparison_or_ignore</code></td>
+          <td><span class="status-pill info">中</span></td>
+          <td><span class="status-pill">外部对照或忽略</span></td>
         </tr>
 <tr>
-          <td><strong>高校共青团抖音短视频传播效果影响因素实证研究——基于全国100所高校共青团抖音号的内容分析_黄艳__.pdf</strong><br><span>library/pdfs/library_short_video/incoming/高校共青团抖音短视频传播效果影响因素实证研究——基于全国100所高校共青团抖音号的内容分析_黄艳__.pdf</span></td>
+          <td><strong>高校共青团抖音短视频传播效果影响因素实证研究——基于全国100所高校共青团抖音号的内容分析_黄艳__.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/高校共青团抖音短视频传播效果影响因素实证研究——基于全国100所高校共青团抖音号的内容分析_黄艳__.pdf</span></td>
           <td>未匹配<br><code>unmatched</code></td>
-          <td>unmatched</td>
+          <td><span class="status-pill info">未匹配</span></td>
           <td>传播力评价；机制解释</td>
-          <td>medium</td>
-          <td><code>external_comparison_or_ignore</code></td>
+          <td><span class="status-pill info">中</span></td>
+          <td><span class="status-pill">外部对照或忽略</span></td>
         </tr>
 <tr>
-          <td><strong>图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索_高晓晶.pdf</strong><br><span>library/pdfs/library_short_video/incoming/图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索_高晓晶.pdf</span></td>
+          <td><strong>图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索_高晓晶.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索_高晓晶.pdf</span></td>
           <td>图书馆短视频传播及互动效果影响因素模型及实证分析——基于“上瘾模型”的探索<br><code>cnki_2021_d35f8e895a</code></td>
-          <td>skimmed</td>
+          <td><span class="status-pill info">已略读</span></td>
           <td>传播力评价；机制解释</td>
-          <td>medium-high</td>
-          <td><code>already_skimmed_keep_as_backup</code></td>
+          <td><span class="status-pill pass">中高</span></td>
+          <td><span class="status-pill">已略读，保留备份</span></td>
         </tr>
 <tr>
-          <td><strong>图书馆短视频账号传播力研究——以省级公共图书馆为例_王兴兰.pdf</strong><br><span>library/pdfs/library_short_video/incoming/图书馆短视频账号传播力研究——以省级公共图书馆为例_王兴兰.pdf</span></td>
+          <td><strong>图书馆短视频账号传播力研究——以省级公共图书馆为例_王兴兰.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/图书馆短视频账号传播力研究——以省级公共图书馆为例_王兴兰.pdf</span></td>
           <td>图书馆短视频账号传播力研究——以省级公共图书馆为例<br><code>cnki_2021_645f03f388</code></td>
-          <td>skimmed</td>
+          <td><span class="status-pill info">已略读</span></td>
           <td>传播力评价；机制解释</td>
-          <td>medium-high</td>
-          <td><code>already_skimmed_keep_as_backup</code></td>
+          <td><span class="status-pill pass">中高</span></td>
+          <td><span class="status-pill">已略读，保留备份</span></td>
         </tr>
 <tr>
-          <td><strong>公共图书馆和高校图书馆短视频营销比较研究_龚雪竹 (1).pdf</strong><br><span>library/pdfs/library_short_video/incoming/公共图书馆和高校图书馆短视频营销比较研究_龚雪竹 (1).pdf</span></td>
+          <td><strong>公共图书馆和高校图书馆短视频营销比较研究_龚雪竹 (1).pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/公共图书馆和高校图书馆短视频营销比较研究_龚雪竹 (1).pdf</span></td>
           <td>公共图书馆和高校图书馆短视频营销比较研究<br><code>cnki_2021_3771e58987</code></td>
-          <td>skimmed</td>
+          <td><span class="status-pill info">已略读</span></td>
           <td>待判断</td>
-          <td>review</td>
-          <td><code>duplicate_keep_one_then_archive</code></td>
+          <td><span class="status-pill warn">待复核</span></td>
+          <td><span class="status-pill">重复件，保留一份</span></td>
         </tr>
 <tr>
-          <td><strong>公共图书馆和高校图书馆短视频营销比较研究_龚雪竹.pdf</strong><br><span>library/pdfs/library_short_video/incoming/公共图书馆和高校图书馆短视频营销比较研究_龚雪竹.pdf</span></td>
+          <td><strong>公共图书馆和高校图书馆短视频营销比较研究_龚雪竹.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/公共图书馆和高校图书馆短视频营销比较研究_龚雪竹.pdf</span></td>
           <td>公共图书馆和高校图书馆短视频营销比较研究<br><code>cnki_2021_3771e58987</code></td>
-          <td>skimmed</td>
+          <td><span class="status-pill info">已略读</span></td>
           <td>待判断</td>
-          <td>review</td>
-          <td><code>already_skimmed_keep_as_backup</code></td>
+          <td><span class="status-pill warn">待复核</span></td>
+          <td><span class="status-pill">已略读，保留备份</span></td>
         </tr>
 <tr>
-          <td><strong>图书馆热门短视频内容规律探究——基于抖音平台的实证研究_沈丽红.pdf</strong><br><span>library/pdfs/library_short_video/incoming/图书馆热门短视频内容规律探究——基于抖音平台的实证研究_沈丽红.pdf</span></td>
+          <td><strong>图书馆热门短视频内容规律探究——基于抖音平台的实证研究_沈丽红.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/图书馆热门短视频内容规律探究——基于抖音平台的实证研究_沈丽红.pdf</span></td>
           <td>图书馆热门短视频内容规律探究——基于抖音平台的实证研究<br><code>cnki_2020_2a150c6df8</code></td>
-          <td>skimmed</td>
+          <td><span class="status-pill info">已略读</span></td>
           <td>待判断</td>
-          <td>review</td>
-          <td><code>already_skimmed_keep_as_backup</code></td>
+          <td><span class="status-pill warn">待复核</span></td>
+          <td><span class="status-pill">已略读，保留备份</span></td>
         </tr>
 <tr>
-          <td><strong>图书馆短视频发展现状、问题与对策分析——以抖音平台为例_王海燕.pdf</strong><br><span>library/pdfs/library_short_video/incoming/图书馆短视频发展现状、问题与对策分析——以抖音平台为例_王海燕.pdf</span></td>
+          <td><strong>图书馆短视频发展现状、问题与对策分析——以抖音平台为例_王海燕.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/图书馆短视频发展现状、问题与对策分析——以抖音平台为例_王海燕.pdf</span></td>
           <td>图书馆短视频发展现状、问题与对策分析——以抖音平台为例<br><code>cnki_2020_64b4f881c9</code></td>
-          <td>skimmed</td>
+          <td><span class="status-pill info">已略读</span></td>
           <td>待判断</td>
-          <td>review</td>
-          <td><code>already_skimmed_keep_as_backup</code></td>
+          <td><span class="status-pill warn">待复核</span></td>
+          <td><span class="status-pill">已略读，保留备份</span></td>
         </tr>
 <tr>
-          <td><strong>政务短视频如何爆发影响力_基于政务抖音号的内容分析_王程伟.pdf</strong><br><span>library/pdfs/library_short_video/incoming/政务短视频如何爆发影响力_基于政务抖音号的内容分析_王程伟.pdf</span></td>
+          <td><strong>政务短视频如何爆发影响力_基于政务抖音号的内容分析_王程伟.pdf</strong><br><span class="source-path">library/pdfs/library_short_video/incoming/政务短视频如何爆发影响力_基于政务抖音号的内容分析_王程伟.pdf</span></td>
           <td>未匹配<br><code>unmatched</code></td>
-          <td>unmatched</td>
+          <td><span class="status-pill info">未匹配</span></td>
           <td>待判断</td>
-          <td>unknown</td>
-          <td><code>external_comparison_or_ignore</code></td>
+          <td><span class="status-pill warn">待判断</span></td>
+          <td><span class="status-pill">外部对照或忽略</span></td>
         </tr></tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </section>
   </main>

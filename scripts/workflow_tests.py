@@ -315,6 +315,18 @@ class WorkflowSmokeTests(unittest.TestCase):
                 self.assertGreater(int(row["duplicate_group_size"]), 1)
                 self.assertEqual("duplicate_keep_one_then_archive", row["next_action"])
 
+    def test_incoming_triage_html_uses_readable_table_layout(self) -> None:
+        text = read_text(project_path("literature", "incoming_pdf_triage.html"))
+        self.assertIn("<h1>PDF 分拣</h1>", text)
+        self.assertNotIn("<h1>Incoming PDF 分拣</h1>", text)
+        self.assertIn('class="summary-grid"', text)
+        self.assertIn('class="panel table-panel"', text)
+        self.assertIn('class="table-wrap"', text)
+        self.assertIn('class="data-table incoming-table"', text)
+        self.assertIn("入库为稳定 PDF", text)
+        self.assertIn("已略读，保留备份", text)
+        self.assertIn("外部对照或忽略", text)
+
     def test_review_page_has_writeback_controls_and_fallback_command(self) -> None:
         text = read_text(ROOT / "knowledge_cards" / "review_today.html")
         self.assertIn("class=\"inline-button review-mark\"", text)

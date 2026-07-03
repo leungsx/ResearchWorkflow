@@ -29,6 +29,35 @@ GAP_TERMS = {
 
 EXTERNAL_TERMS = ["非遗", "政务", "共青团", "档案", "皮影"]
 
+ACTION_LABELS = {
+    "candidate_for_deep_read": "候选精读",
+    "build_reader": "生成 Reader",
+    "intake_to_stable_pdf": "入库为稳定 PDF",
+    "add_to_matrix_or_mark_external": "补入矩阵或标外部",
+    "manual_check_topic_fit": "人工判断主题",
+    "already_read_keep_as_backup": "已读，保留备份",
+    "already_skimmed_keep_as_backup": "已略读，保留备份",
+    "duplicate_keep_one_then_archive": "重复件，保留一份",
+    "external_comparison_or_ignore": "外部对照或忽略",
+}
+
+READ_STATUS_LABELS = {
+    "metadata-only": "仅有元数据",
+    "unread": "未读",
+    "skimmed": "已略读",
+    "human-read": "已精读",
+    "verified": "已核验",
+    "unmatched": "未匹配",
+}
+
+EVIDENCE_VALUE_LABELS = {
+    "high": "高",
+    "medium-high": "中高",
+    "medium": "中",
+    "review": "待复核",
+    "unknown": "待判断",
+}
+
 
 def clean(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
@@ -160,6 +189,18 @@ def evidence_value(row: dict[str, str] | None, tags: list[str]) -> str:
     return "review"
 
 
+def display_label(value: str, labels: dict[str, str]) -> str:
+    return labels.get(value, value or "待判断")
+
+
+def evidence_status_class(value: str) -> str:
+    if value in {"high", "medium-high"}:
+        return "pass"
+    if value in {"unknown", "review"}:
+        return "warn"
+    return "info"
+
+
 def build_rows(project: str, explicit_incoming: Path | None) -> list[dict[str, str]]:
     rows = project_rows(project)
     files = incoming_files(project, explicit_incoming)
@@ -281,36 +322,41 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
     for row in rows:
         action_counts[row["next_action"]] = action_counts.get(row["next_action"], 0) + 1
     cards = "".join(
-        f'<div class="metric"><b>{count}</b><span>{html.escape(action)}</span></div>'
+        f"""<div class="metric">
+          <b>{count}</b>
+          <span>{html.escape(display_label(action, ACTION_LABELS))}</span>
+        </div>"""
         for action, count in sorted(action_counts.items(), key=lambda item: item[0])
     )
     table_rows = "\n".join(
         f"""
         <tr>
-          <td><strong>{html.escape(row['file_name'])}</strong><br><span>{html.escape(row['file_path'])}</span></td>
+          <td><strong>{html.escape(row['file_name'])}</strong><br><span class="source-path">{html.escape(row['file_path'])}</span></td>
           <td>{html.escape(row['matched_title'] or '未匹配')}<br><code>{html.escape(row['matched_citekey'] or 'unmatched')}</code></td>
-          <td>{html.escape(row['read_status'])}</td>
+          <td><span class="status-pill info">{html.escape(display_label(row['read_status'], READ_STATUS_LABELS))}</span></td>
           <td>{html.escape(row['project_gap'])}</td>
-          <td>{html.escape(row['evidence_value'])}</td>
-          <td><code>{html.escape(row['next_action'])}</code></td>
+          <td><span class="status-pill {evidence_status_class(row['evidence_value'])}">{html.escape(display_label(row['evidence_value'], EVIDENCE_VALUE_LABELS))}</span></td>
+          <td><span class="status-pill">{html.escape(display_label(row['next_action'], ACTION_LABELS))}</span></td>
         </tr>
         """.strip()
         for row in rows
     )
     body = f"""
-    <section class="grid">{cards or '<div class="metric"><b>0</b><span>incoming 文件</span></div>'}</section>
+    <section class="summary-grid" aria-label="PDF分拣摘要">{cards or '<div class="metric"><b>0</b><span>incoming 文件</span></div>'}</section>
     <section class="grid">
-      <div class="panel">
+      <div class="panel table-panel">
         <h2>分拣结果</h2>
-        <table>
-          <thead><tr><th>文件</th><th>匹配文献</th><th>阅读状态</th><th>项目缺口</th><th>证据价值</th><th>建议动作</th></tr></thead>
-          <tbody>{table_rows or '<tr><td colspan="6">暂无 incoming 文件。</td></tr>'}</tbody>
-        </table>
+        <div class="table-wrap">
+          <table class="data-table incoming-table">
+            <thead><tr><th>文件</th><th>匹配文献</th><th>阅读状态</th><th>项目缺口</th><th>证据价值</th><th>建议动作</th></tr></thead>
+            <tbody>{table_rows or '<tr><td colspan="6">暂无 incoming 文件。</td></tr>'}</tbody>
+          </table>
+        </div>
       </div>
     </section>
 """
     html_text = render_shell(
-        title="Incoming PDF 分拣",
+        title="PDF 分拣",
         subtitle="扫描 incoming 文件夹，判断匹配文献、项目缺口、证据价值和下一步动作。",
         current="PDF分拣",
         body=body,

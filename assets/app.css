@@ -189,6 +189,19 @@ main.wrap { padding-top: 22px; }
 .verification-table th:nth-child(5), .verification-table td:nth-child(5) { width: 12%; }
 .verification-table th:nth-child(6), .verification-table td:nth-child(6) { width: 14%; }
 .verification-table th:nth-child(7), .verification-table td:nth-child(7) { width: 14%; }
+.incoming-table { min-width: 1180px; }
+.incoming-table th:nth-child(1), .incoming-table td:nth-child(1) { width: 28%; }
+.incoming-table th:nth-child(2), .incoming-table td:nth-child(2) { width: 24%; }
+.incoming-table th:nth-child(3), .incoming-table td:nth-child(3) { width: 10%; }
+.incoming-table th:nth-child(4), .incoming-table td:nth-child(4) { width: 14%; }
+.incoming-table th:nth-child(5), .incoming-table td:nth-child(5) { width: 8%; }
+.incoming-table th:nth-child(6), .incoming-table td:nth-child(6) { width: 16%; }
+.incoming-table .source-path {
+  display: block;
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+}
 .writing-panel { max-width: none; }
 .writing-panel .data-table { min-width: 1040px; }
 .status-pill {
@@ -209,6 +222,13 @@ main.wrap { padding-top: 22px; }
 .metric b { display: block; font-size: 28px; line-height: 1.1; }
 .metric span { color: var(--muted); font-size: 13px; }
 .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 14px; }
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.summary-grid .metric { grid-column: auto; }
 .list { display: grid; gap: 10px; min-width: 0; }
 .item {
   border-left: 3px solid var(--blue);
