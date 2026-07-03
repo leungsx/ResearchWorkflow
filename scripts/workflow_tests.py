@@ -365,8 +365,25 @@ class WorkflowSmokeTests(unittest.TestCase):
         self.assertIn("打开入口", text)
         self.assertIn("复制命令", text)
         self.assertIn("完成后：", text)
-        self.assertIn("优先级", text)
+        self.assertIn("P0/P1 任务", text)
+        self.assertIn("P1 今日学习/阅读", text)
         self.assertNotIn("priority ", text)
+
+    def test_action_queue_uses_p0_to_p3_priority_bands(self) -> None:
+        queue = json.loads((ROOT / "vault" / "13_Knowledge_Graph" / "action_queue.json").read_text(encoding="utf-8"))
+        actions = queue["actions"]
+        self.assertGreater(len(actions), 0)
+        self.assertIn("by_priority_band", queue["summary"])
+        band_order = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
+        previous = -1
+        for action in actions:
+            with self.subTest(action=action["id"]):
+                self.assertIn(action["priority_band"], band_order)
+                self.assertIn(action["priority_band"], action["priority_label"])
+                self.assertTrue(action["priority_reason"])
+                current = band_order[action["priority_band"]]
+                self.assertGreaterEqual(current, previous)
+                previous = current
 
     def test_learning_dashboard_source_uses_shared_shell_contract(self) -> None:
         text = read_text(ROOT / "scripts" / "build_learning_dashboard.py")

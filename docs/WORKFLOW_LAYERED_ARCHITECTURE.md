@@ -204,9 +204,10 @@ Generated assets 是脚本生成的浏览和索引文件：
 
 行动队列应满足：
 
-- 每个行动包含 `kind`、`priority`、`title`、`reason`、`entrypoint`、`source` 和 `status`。
+- 每个行动包含 `kind`、`priority`、`priority_band`、`priority_label`、`priority_reason`、`title`、`reason`、`entrypoint`、`source` 和 `status`。
 - `entrypoint` 必须指向存在的 HTML 展示页。
-- 优先级顺序：审计 FAIL、到期复习、重点知识卡、审计 WARN、项目下一步建议。
+- 优先级层级固定为 `P0` 阻塞写作/投稿、`P1` 今日学习/阅读、`P2` 项目成熟度、`P3` 系统维护。
+- 排序先按 `priority_band`，再按数字 `priority`、`kind` 和标题稳定排序。
 - 重点知识卡只有在存在真正到期复习时进入行动队列；未来 7 天复习项只在复习页展示，不应提前变成待办。
 - 行动队列从 `workflow_state.json` 派生，不替代项目状态、复习状态或审计报告。
 

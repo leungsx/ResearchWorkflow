@@ -459,9 +459,11 @@ def validate_action_queue(path: Path, issues: list[SchemaIssue], checked: list[s
         if not isinstance(action, dict):
             add(issues, path, "FAIL", f"actions[{index}] 必须是对象")
             continue
-        require_keys(action, path, f"actions[{index}]", ["id", "kind", "priority", "title", "reason", "entrypoint", "status", "rank"], issues)
+        require_keys(action, path, f"actions[{index}]", ["id", "kind", "priority", "priority_band", "priority_label", "priority_reason", "title", "reason", "entrypoint", "status", "rank"], issues)
         require_type(action, path, "priority", int, issues, f"actions[{index}]")
         require_type(action, path, "rank", int, issues, f"actions[{index}]")
+        if action.get("priority_band") not in {"P0", "P1", "P2", "P3"}:
+            add(issues, path, "FAIL", f"actions[{index}].priority_band 必须是 P0/P1/P2/P3")
         require_existing_html(action.get("entrypoint"), path, f"actions[{index}].entrypoint", issues)
 
 

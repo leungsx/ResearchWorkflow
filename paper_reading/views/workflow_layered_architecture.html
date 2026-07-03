@@ -174,9 +174,10 @@
 <p><code>vault/13_Knowledge_Graph/action_queue.json</code> 是结构化开放行动队列；<code>action_queue.html</code> 是用户侧默认入口。</p>
 <p>行动队列应满足：</p>
 <ul>
-<li>每个行动包含 <code>kind</code>、<code>priority</code>、<code>title</code>、<code>reason</code>、<code>entrypoint</code>、<code>source</code> 和 <code>status</code>。</li>
+<li>每个行动包含 <code>kind</code>、<code>priority</code>、<code>priority_band</code>、<code>priority_label</code>、<code>priority_reason</code>、<code>title</code>、<code>reason</code>、<code>entrypoint</code>、<code>source</code> 和 <code>status</code>。</li>
 <li><code>entrypoint</code> 必须指向存在的 HTML 展示页。</li>
-<li>优先级顺序：审计 FAIL、到期复习、重点知识卡、审计 WARN、项目下一步建议。</li>
+<li>优先级层级固定为 <code>P0</code> 阻塞写作/投稿、<code>P1</code> 今日学习/阅读、<code>P2</code> 项目成熟度、<code>P3</code> 系统维护。</li>
+<li>排序先按 <code>priority_band</code>，再按数字 <code>priority</code>、<code>kind</code> 和标题稳定排序。</li>
 <li>重点知识卡只有在存在真正到期复习时进入行动队列；未来 7 天复习项只在复习页展示，不应提前变成待办。</li>
 <li>行动队列从 <code>workflow_state.json</code> 派生，不替代项目状态、复习状态或审计报告。</li>
 </ul>

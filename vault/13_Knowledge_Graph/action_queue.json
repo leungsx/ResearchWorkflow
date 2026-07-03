@@ -1,23 +1,31 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T20:19:00",
+  "generated_at": "2026-07-03T22:22:39",
   "source_state": "vault/13_Knowledge_Graph/workflow_state.json",
   "entrypoint": "action_queue.html",
   "summary": {
-    "total_open": 10,
+    "total_open": 9,
     "high_priority": 6,
     "by_kind": {
       "review": 1,
       "review_item": 5,
-      "audit_warn": 2,
-      "project": 2
+      "project": 2,
+      "audit_warn": 1
+    },
+    "by_priority_band": {
+      "P1": 6,
+      "P2": 2,
+      "P3": 1
     }
   },
   "actions": [
     {
-      "id": "review-3-完成-5-个到期知识卡复习",
+      "id": "review-2-完成-5-个到期知识卡复习",
       "kind": "review",
       "priority": 90,
+      "priority_band": "P1",
+      "priority_label": "P1 今日学习/阅读",
+      "priority_reason": "今天应完成的学习、阅读或主动回忆任务。",
       "title": "完成 5 个到期知识卡复习",
       "reason": "先主动回忆，再打开知识卡核对概念、误区和研究用法。",
       "entrypoint": "knowledge_cards/review_today.html",
@@ -26,9 +34,12 @@
       "rank": 1
     },
     {
-      "id": "review_item-4-复习-传播力评价",
+      "id": "review_item-3-复习-传播力评价",
       "kind": "review_item",
       "priority": 80,
+      "priority_band": "P1",
+      "priority_label": "P1 今日学习/阅读",
+      "priority_reason": "今天应完成的学习、阅读或主动回忆任务。",
       "title": "复习：传播力评价",
       "reason": "传播力评价为什么不能等同于图书馆服务价值？",
       "entrypoint": "knowledge_cards/views/concept-44250b7b.html",
@@ -37,9 +48,12 @@
       "rank": 2
     },
     {
-      "id": "review_item-5-复习-图书馆短视频内容质量评价",
+      "id": "review_item-4-复习-图书馆短视频内容质量评价",
       "kind": "review_item",
       "priority": 80,
+      "priority_band": "P1",
+      "priority_label": "P1 今日学习/阅读",
+      "priority_reason": "今天应完成的学习、阅读或主动回忆任务。",
       "title": "复习：图书馆短视频内容质量评价",
       "reason": "图书馆短视频内容质量评价应如何兼顾知识性、趣味性和服务相关性？",
       "entrypoint": "knowledge_cards/views/method-e2773847.html",
@@ -48,9 +62,12 @@
       "rank": 3
     },
     {
-      "id": "review_item-6-复习-平台互动-服务触达-阅读转化",
+      "id": "review_item-5-复习-平台互动-服务触达-阅读转化",
       "kind": "review_item",
       "priority": 80,
+      "priority_band": "P1",
+      "priority_label": "P1 今日学习/阅读",
+      "priority_reason": "今天应完成的学习、阅读或主动回忆任务。",
       "title": "复习：平台互动-服务触达-阅读转化",
       "reason": "平台互动、服务触达、阅读转化三层分别应该放哪些指标？",
       "entrypoint": "knowledge_cards/views/concept-4358f2f5.html",
@@ -59,9 +76,12 @@
       "rank": 4
     },
     {
-      "id": "review_item-7-复习-熵权法",
+      "id": "review_item-6-复习-熵权法",
       "kind": "review_item",
       "priority": 80,
+      "priority_band": "P1",
+      "priority_label": "P1 今日学习/阅读",
+      "priority_reason": "今天应完成的学习、阅读或主动回忆任务。",
       "title": "复习：熵权法",
       "reason": "熵权法为什么会给差异更大的指标更高权重？",
       "entrypoint": "knowledge_cards/views/method-91db7b6b.html",
@@ -70,9 +90,12 @@
       "rank": 5
     },
     {
-      "id": "review_item-8-复习-爆款指数",
+      "id": "review_item-7-复习-爆款指数",
       "kind": "review_item",
       "priority": 80,
+      "priority_band": "P1",
+      "priority_label": "P1 今日学习/阅读",
+      "priority_reason": "今天应完成的学习、阅读或主动回忆任务。",
       "title": "复习：爆款指数",
       "reason": "爆款指数和总点赞量有什么区别？为什么它仍不能代表服务价值？",
       "entrypoint": "knowledge_cards/views/method-579dd6c5.html",
@@ -81,48 +104,46 @@
       "rank": 6
     },
     {
-      "id": "audit_warn-1-处理提醒-存在到期复习项",
-      "kind": "audit_warn",
-      "priority": 70,
-      "title": "处理提醒：存在到期复习项",
-      "reason": "5 项到期：传播力评价；平台互动-服务触达-阅读转化；熵权法；爆款指数；图书馆短视频内容质量评价",
-      "entrypoint": "workflow_health.html",
-      "source": "复习队列",
-      "status": "open",
-      "rank": 7
-    },
-    {
-      "id": "audit_warn-2-处理提醒-存在尚未提交的-git-改动",
-      "kind": "audit_warn",
-      "priority": 70,
-      "title": "处理提醒：存在尚未提交的 Git 改动",
-      "reason": "38 个路径待快照： M Makefile； M README.md； M action_queue.html； M archive_policy.html； M assets/app.css； M docs/UI_STYLE_GUIDE.md； M docs/USABLE_FUNCTIONS_TEST_GUIDE.md； M docs/USER_VISUAL_GUIDE.md",
-      "entrypoint": "workflow_health.html",
-      "source": "Git/异地备份",
-      "status": "open",
-      "rank": 8
-    },
-    {
-      "id": "project-9-图书馆短视频相关研究-incoming-分拣建议-先把-公共图书馆短视频公众平台建设",
+      "id": "project-8-图书馆短视频相关研究-incoming-分拣建议-先把-公共图书馆短视频公众平台建设",
       "kind": "project",
       "priority": 60,
+      "priority_band": "P2",
+      "priority_label": "P2 项目成熟度",
+      "priority_reason": "推进主项目成熟度，但通常不阻塞当天启动。",
       "title": "图书馆短视频相关研究：Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。",
       "reason": "来自项目状态的下一步建议。",
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 9
+      "rank": 7
     },
     {
-      "id": "project-10-图书馆短视频相关研究-下一篇阅读优先选择已有-pdf-reader-且能推进传播力评",
+      "id": "project-9-图书馆短视频相关研究-下一篇阅读优先选择已有-pdf-reader-且能推进传播力评",
       "kind": "project",
       "priority": 60,
+      "priority_band": "P2",
+      "priority_label": "P2 项目成熟度",
+      "priority_reason": "推进主项目成熟度，但通常不阻塞当天启动。",
       "title": "图书馆短视频相关研究：下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。",
       "reason": "来自项目状态的下一步建议。",
       "entrypoint": "paper_reading/views/00-project-dashboard-dd8418ad.html",
       "source": "library_short_video",
       "status": "open",
-      "rank": 10
+      "rank": 8
+    },
+    {
+      "id": "audit_warn-1-处理提醒-存在到期复习项",
+      "kind": "audit_warn",
+      "priority": 30,
+      "priority_band": "P3",
+      "priority_label": "P3 系统维护",
+      "priority_reason": "系统维护或提醒，除非失败，否则放在学习和项目任务之后。",
+      "title": "处理提醒：存在到期复习项",
+      "reason": "5 项到期：传播力评价；平台互动-服务触达-阅读转化；熵权法；爆款指数；图书馆短视频内容质量评价",
+      "entrypoint": "workflow_health.html",
+      "source": "复习队列",
+      "status": "open",
+      "rank": 9
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T20:19:00",
+  "generated_at": "2026-07-03T22:22:39",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -17,12 +17,12 @@
     "manifest_rows": 144,
     "search_entries": 144,
     "project_count": 2,
-    "git_dirty_paths": 41
+    "git_dirty_paths": 9
   },
   "audit": {
     "counts": {
-      "PASS": 15,
-      "WARN": 3,
+      "PASS": 17,
+      "WARN": 1,
       "FAIL": 0
     },
     "checks": [
@@ -94,9 +94,9 @@
       },
       {
         "area": "Git/异地备份",
-        "status": "WARN",
-        "title": "存在尚未提交的 Git 改动",
-        "detail": "38 个路径待快照： M Makefile； M README.md； M action_queue.html； M archive_policy.html； M assets/app.css； M docs/UI_STYLE_GUIDE.md； M docs/USABLE_FUNCTIONS_TEST_GUIDE.md； M docs/USER_VISUAL_GUIDE.md"
+        "status": "PASS",
+        "title": "Git 本地和远程快照状态正常",
+        "detail": "upstream=origin/main；last commit: 4c0f807 2026-07-03 20:20:25 +0800 Add task guidance and workflow menu"
       },
       {
         "area": "Token/记忆",
@@ -106,9 +106,9 @@
       },
       {
         "area": "文件卫生",
-        "status": "WARN",
-        "title": "工作区存在系统/缓存文件",
-        "detail": "__pycache__=2；这些不会进入 file sweep，但可择机清理。"
+        "status": "PASS",
+        "title": "未发现常见系统/缓存文件",
+        "detail": "工作区较干净。"
       },
       {
         "area": "Schema",
@@ -120,7 +120,7 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "9 个开放行动。"
+        "detail": "10 个开放行动。"
       },
       {
         "area": "待我确认",

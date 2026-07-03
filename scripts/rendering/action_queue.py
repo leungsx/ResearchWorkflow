@@ -30,18 +30,55 @@ ACTION_KIND_LABELS = {
     "continue": "继续推进",
 }
 
+PRIORITY_BAND_LABELS = {
+    "P0": "P0 阻塞写作/投稿",
+    "P1": "P1 今日学习/阅读",
+    "P2": "P2 项目成熟度",
+    "P3": "P3 系统维护",
+}
+
+PRIORITY_BAND_ORDER = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
+
 
 def action_id(kind: str, title: str, index: int) -> str:
     safe = "".join(char.lower() if char.isalnum() else "-" for char in title)[:42].strip("-")
     return f"{kind}-{index + 1}-{safe or 'item'}"
 
 
-def add_action(actions: list[dict[str, Any]], *, kind: str, priority: int, title: str, reason: str, entrypoint: str, source: str = "") -> None:
+def classify_action(kind: str, title: str, reason: str, source: str) -> tuple[str, str]:
+    text = f"{title} {reason} {source}"
+    if kind == "audit_fail" or any(term in text for term in ["ERROR", "FAIL", "投稿", "正文", "证据门禁", "evidence gate"]):
+        return "P0", "阻塞写作、引用或投稿前审查，必须先处理。"
+    if kind in {"review", "review_item", "continue"}:
+        return "P1", "今天应完成的学习、阅读或主动回忆任务。"
+    if kind == "project":
+        return "P2", "推进主项目成熟度，但通常不阻塞当天启动。"
+    return "P3", "系统维护或提醒，除非失败，否则放在学习和项目任务之后。"
+
+
+def priority_for_band(band: str, kind: str) -> int:
+    base = {"P0": 100, "P1": 80, "P2": 60, "P3": 30}.get(band, 30)
+    boost = {
+        "audit_fail": 0,
+        "review": 10,
+        "review_item": 0,
+        "project": 0,
+        "audit_warn": 0,
+        "continue": 5,
+    }.get(kind, 0)
+    return base + boost
+
+
+def add_action(actions: list[dict[str, Any]], *, kind: str, title: str, reason: str, entrypoint: str, source: str = "") -> None:
+    priority_band, priority_reason = classify_action(kind, title, reason, source)
     actions.append(
         {
             "id": action_id(kind, title, len(actions)),
             "kind": kind,
-            "priority": priority,
+            "priority": priority_for_band(priority_band, kind),
+            "priority_band": priority_band,
+            "priority_label": PRIORITY_BAND_LABELS[priority_band],
+            "priority_reason": priority_reason,
             "title": title,
             "reason": reason,
             "entrypoint": entrypoint,
@@ -62,7 +99,6 @@ def build_action_queue(state: dict[str, Any] | None = None) -> dict[str, Any]:
             add_action(
                 actions,
                 kind="audit_fail",
-                priority=100,
                 title=f"修复审计失败：{check.get('title', '')}",
                 reason=check.get("detail", ""),
                 entrypoint=rel(WORKFLOW_HEALTH),
@@ -72,7 +108,6 @@ def build_action_queue(state: dict[str, Any] | None = None) -> dict[str, Any]:
             add_action(
                 actions,
                 kind="audit_warn",
-                priority=70,
                 title=f"处理提醒：{check.get('title', '')}",
                 reason=check.get("detail", ""),
                 entrypoint=rel(WORKFLOW_HEALTH),
@@ -86,7 +121,6 @@ def build_action_queue(state: dict[str, Any] | None = None) -> dict[str, Any]:
         add_action(
             actions,
             kind="review",
-            priority=90,
             title=f"完成 {review_summary.get('due_count')} 个到期知识卡复习",
             reason="先主动回忆，再打开知识卡核对概念、误区和研究用法。",
             entrypoint=rel(REVIEW_TODAY),
@@ -96,7 +130,6 @@ def build_action_queue(state: dict[str, Any] | None = None) -> dict[str, Any]:
             add_action(
                 actions,
                 kind="review_item",
-                priority=80,
                 title=f"复习：{item.get('title', '')}",
                 reason=item.get("prompt", ""),
                 entrypoint=item.get("display_path", rel(REVIEW_TODAY)),
@@ -111,7 +144,6 @@ def build_action_queue(state: dict[str, Any] | None = None) -> dict[str, Any]:
             add_action(
                 actions,
                 kind="project",
-                priority=60,
                 title=f"{project.get('title', slug)}：{action}",
                 reason="来自项目状态的下一步建议。",
                 entrypoint=project.get("dashboard_html") or rel(WORKFLOW_STATE_HTML),
@@ -122,18 +154,27 @@ def build_action_queue(state: dict[str, Any] | None = None) -> dict[str, Any]:
         add_action(
             actions,
             kind="continue",
-            priority=40,
             title="从今日精读或全局搜索继续推进",
             reason="当前没有阻塞性审计项或到期复习。",
             entrypoint=rel(SEARCH_INDEX_HTML),
         )
 
-    actions.sort(key=lambda item: (-int(item.get("priority", 0)), item.get("kind", ""), item.get("title", "")))
+    actions.sort(
+        key=lambda item: (
+            PRIORITY_BAND_ORDER.get(str(item.get("priority_band", "P3")), 9),
+            -int(item.get("priority", 0)),
+            item.get("kind", ""),
+            item.get("title", ""),
+        )
+    )
     for index, action in enumerate(actions, start=1):
         action["rank"] = index
     by_kind: dict[str, int] = {}
+    by_priority_band: dict[str, int] = {}
     for action in actions:
         by_kind[action["kind"]] = by_kind.get(action["kind"], 0) + 1
+        band = str(action.get("priority_band", "P3"))
+        by_priority_band[band] = by_priority_band.get(band, 0) + 1
     return {
         "schema_version": "1.0",
         "generated_at": dt.datetime.now().isoformat(timespec="seconds"),
@@ -141,8 +182,9 @@ def build_action_queue(state: dict[str, Any] | None = None) -> dict[str, Any]:
         "entrypoint": rel(ACTION_QUEUE_HTML),
         "summary": {
             "total_open": len(actions),
-            "high_priority": sum(1 for action in actions if int(action.get("priority", 0)) >= 80),
+            "high_priority": sum(1 for action in actions if action.get("priority_band") in {"P0", "P1"}),
             "by_kind": by_kind,
+            "by_priority_band": by_priority_band,
         },
         "actions": actions,
     }
@@ -219,7 +261,8 @@ def write_action_queue_html(queue: dict[str, Any]) -> None:
           <div>
             <h2><a href="{href_for(str(action.get("entrypoint", "")))}">{html.escape(str(action.get("title", "")))}</a></h2>
             <p>{html.escape(str(action.get("reason", "")))}</p>
-            <p class="meta">{html.escape(action_kind_label(action.get("kind", "")))} · 优先级 {action.get("priority", "")} · 来源 {html.escape(str(action.get("source", "") or "系统生成"))}</p>
+            <p class="meta">{html.escape(str(action.get("priority_label", "")))} · {html.escape(action_kind_label(action.get("kind", "")))} · 来源 {html.escape(str(action.get("source", "") or "系统生成"))}</p>
+            <p class="meta">{html.escape(str(action.get("priority_reason", "")))}</p>
           </div>
         </article>"""
         for action in actions
@@ -238,8 +281,9 @@ def write_action_queue_html(queue: dict[str, Any]) -> None:
     )}
     <section class="metrics">
       <div class="metric"><b>{summary.get("total_open", 0)}</b><span class="meta">开放行动</span></div>
-      <div class="metric"><b>{summary.get("high_priority", 0)}</b><span class="meta">高优先级</span></div>
+      <div class="metric"><b>{summary.get("high_priority", 0)}</b><span class="meta">P0/P1 任务</span></div>
       <div class="metric"><b>{len(summary.get("by_kind", {}))}</b><span class="meta">行动类型</span></div>
+      <div class="metric"><b>{len(summary.get("by_priority_band", {}))}</b><span class="meta">优先级层级</span></div>
     </section>
     <section class="list">{rows}</section>
 """
