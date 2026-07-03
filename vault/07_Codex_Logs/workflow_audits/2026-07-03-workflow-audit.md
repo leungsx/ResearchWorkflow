@@ -1,9 +1,9 @@
 # Workflow Audit - 2026-07-03
 
-Generated: 2026-07-03T18:40:55
+Generated: 2026-07-03T19:34:20
 Audit mode: `readonly`
-Pre-refresh state hash: `ba6544e23ed2ca794c0820b7e13b968b6af8ffdbd2de10caa37f2008aa9a93f2`
-Post-refresh state hash: `ba6544e23ed2ca794c0820b7e13b968b6af8ffdbd2de10caa37f2008aa9a93f2`
+Pre-refresh state hash: `b6d9f1a4d7f37d00501b237f2e9e7f20ed700f38d75f670211e6a9bc3ac39c09`
+Post-refresh state hash: `b6d9f1a4d7f37d00501b237f2e9e7f20ed700f38d75f670211e6a9bc3ac39c09`
 Summary: PASS=16 WARN=2 FAIL=0
 
 ## Checks
@@ -20,8 +20,8 @@ Summary: PASS=16 WARN=2 FAIL=0
 | 复习状态 | PASS | 复习状态快照与队列一致 | total=29, due=5, focus=5 |
 | 项目状态 | PASS | 项目状态文件可供自动化读取 | 2 个项目。 |
 | 复习队列 | WARN | 存在到期复习项 | 5 项到期：传播力评价；平台互动-服务触达-阅读转化；熵权法；爆款指数；图书馆短视频内容质量评价 |
-| 备份 | WARN | 最近备份超过 36 小时 | backups/researchworkflow-critical-20260701-200737.zip，约 46.6 小时前。 |
-| Git/异地备份 | PASS | Git 本地和远程快照状态正常 | upstream=origin/main；last commit: d8ad1f9 2026-07-03 18:40:38 +0800 Refresh workflow state after usability update |
+| 备份 | WARN | 最近备份超过 36 小时 | backups/researchworkflow-critical-20260701-200737.zip，约 47.4 小时前。 |
+| Git/异地备份 | PASS | Git 本地和远程快照状态正常 | upstream=origin/main；last commit: 8bd5fb4 2026-07-03 19:33:52 +0800 Refresh workflow state after deep read UI update |
 | Token/记忆 | PASS | 今日 compact summary 可作为默认启动上下文 | vault/07_Codex_Logs/compact_daily/2026-07-03-summary.md，约 107 words。 |
 | 文件卫生 | PASS | 未发现常见系统/缓存文件 | 工作区较干净。 |
 | Schema | PASS | 核心机器状态 schema 校验通过 | 15 个文件通过校验。 |
