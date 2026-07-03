@@ -113,7 +113,7 @@ def shell(title: str, subtitle: str, current: str, body: str, output: Path) -> s
 
 def copy_button(command: str, label: str = "复制命令") -> str:
     return (
-        f'<button type="button" class="inline-button" data-copy="{esc(command)}" data-label="{esc(label)}">{esc(label)}</button>'
+        f'<button type="button" class="button secondary" data-copy="{esc(command)}" data-label="{esc(label)}">{esc(label)}</button>'
         '<div class="copy-feedback" aria-live="polite"></div>'
     )
 
@@ -133,7 +133,7 @@ def dashboard_command_for_action(action: dict[str, object]) -> str:
 def dashboard_next_step_for_action(action: dict[str, object]) -> str:
     kind = str(action.get("kind", ""))
     if kind == "review":
-        return "完成后：进入今日精读，或打开页码核验处理写作证据。"
+        return "完成后：进入今日精读，或打开论文模块核验写作证据。"
     if kind == "review_item":
         return "完成后：回到今日复习入口，继续处理下一张到期知识卡。"
     if kind.startswith("audit"):
@@ -177,7 +177,7 @@ def dashboard_top_action(out: Path) -> str:
     link = href(target, out)
     candidates = dashboard_candidate_tasks(out, actions[1:4])
     return f"""
-      <section class="panel wide cta-card" data-mode="all reading writing evidence maintenance">
+      <section class="panel wide cta-card" data-mode="all reading paper maintenance">
         <div class="cta-layout">
           <div>
             <p class="eyebrow">今日主任务</p>
@@ -186,9 +186,8 @@ def dashboard_top_action(out: Path) -> str:
             <p class="meta">{esc(dashboard_next_step_for_action(action))}</p>
           </div>
           <div class="command-stack">
-            <a class="inline-button primary" href="{link}">打开入口</a>
+            <a class="button primary" href="{link}">打开入口</a>
             {copy_button(command)}
-            <code>{esc(command)}</code>
           </div>
         </div>
         <div class="task-candidates">
@@ -203,13 +202,12 @@ def mode_switch() -> str:
     buttons = [
         ("all", "全部"),
         ("reading", "阅读"),
-        ("writing", "写作"),
-        ("evidence", "证据"),
+        ("paper", "论文"),
         ("maintenance", "维护"),
     ]
     return (
         """
-      <section class="panel wide" data-mode="all reading writing evidence maintenance">
+      <section class="panel wide" data-mode="all reading paper maintenance">
         <h2>工作模式</h2>
         <div class="mode-switch" role="group" aria-label="工作模式筛选">
 """
@@ -328,11 +326,11 @@ def build_dashboard() -> None:
         <h2>最近学习日志</h2>
         {item_list(log_pages, out, "amber")}
       </section>
-      <section class="panel" data-mode="reading writing">
+      <section class="panel" data-mode="reading paper">
         <h2>最近知识卡</h2>
         {item_list((concepts + methods)[:12], out, "rose")}
       </section>
-      <section class="panel" data-mode="reading evidence">
+      <section class="panel" data-mode="reading paper">
         <h2>图谱高连接节点</h2>
         {top_nodes_table(top_nodes)}
       </section>

@@ -24,8 +24,7 @@
       <nav class="nav global-nav" aria-label="一级导航"><a href="study_dashboard.html" aria-current="page">总览</a>
 <a href="action_queue.html">今日任务</a>
 <a href="paper_reading/today.html">阅读</a>
-<a href="projects/library_short_video/manuscript/writing_panel.html">写作</a>
-<a href="projects/library_short_video/evidence/page_verification_queue.html">证据</a>
+<a href="projects/library_short_video/manuscript/writing_panel.html">论文</a>
 <a href="workflow_state.html">系统</a></nav>
       <nav class="nav subnav" aria-label="总览子导航"><a href="study_dashboard.html" aria-current="page">总览首页</a>
 <a href="paper_reading/today.html">今日精读</a>
@@ -37,18 +36,17 @@
   </header>
   <main class="wrap" id="main-content">
 <section class="grid">
-      <section class="panel wide cta-card" data-mode="all reading writing evidence maintenance">
+      <section class="panel wide cta-card" data-mode="all reading paper maintenance">
         <div class="cta-layout">
           <div>
             <p class="eyebrow">今日主任务</p>
             <h2 class="cta-title"><a href="knowledge_cards/review_today.html">完成 5 个到期知识卡复习</a></h2>
             <p>先主动回忆，再打开知识卡核对概念、误区和研究用法。</p>
-            <p class="meta">完成后：进入今日精读，或打开页码核验处理写作证据。</p>
+            <p class="meta">完成后：进入今日精读，或打开论文模块核验写作证据。</p>
           </div>
           <div class="command-stack">
-            <a class="inline-button primary" href="knowledge_cards/review_today.html">打开入口</a>
-            <button type="button" class="inline-button" data-copy="make review-server-ensure" data-label="复制命令">复制命令</button><div class="copy-feedback" aria-live="polite"></div>
-            <code>make review-server-ensure</code>
+            <a class="button primary" href="knowledge_cards/review_today.html">打开入口</a>
+            <button type="button" class="button secondary" data-copy="make review-server-ensure" data-label="复制命令">复制命令</button><div class="copy-feedback" aria-live="polite"></div>
           </div>
         </div>
         <div class="task-candidates">
@@ -67,13 +65,12 @@
             </div></div>
         </div>
       </section>
-      <section class="panel wide" data-mode="all reading writing evidence maintenance">
+      <section class="panel wide" data-mode="all reading paper maintenance">
         <h2>工作模式</h2>
         <div class="mode-switch" role="group" aria-label="工作模式筛选">
           <button type="button" data-mode-button="all" aria-pressed="true">全部</button>
           <button type="button" data-mode-button="reading" aria-pressed="false">阅读</button>
-          <button type="button" data-mode-button="writing" aria-pressed="false">写作</button>
-          <button type="button" data-mode-button="evidence" aria-pressed="false">证据</button>
+          <button type="button" data-mode-button="paper" aria-pressed="false">论文</button>
           <button type="button" data-mode-button="maintenance" aria-pressed="false">维护</button>
         </div>
       </section>
@@ -140,7 +137,7 @@
 <div class="item amber"><a href="logs/2026-06-30.html">2026-06-30 学习日志</a><div class="meta">logs/2026-06-30.html</div></div>
 <div class="item amber"><a href="logs/2026-06-29.html">2026-06-29 学习日志</a><div class="meta">logs/2026-06-29.html</div></div></div>
       </section>
-      <section class="panel" data-mode="reading writing">
+      <section class="panel" data-mode="reading paper">
         <h2>最近知识卡</h2>
         <div class="list"><div class="item rose"><a href="knowledge_cards/views/concept-34f2bfeb.html">视频表现-内容-引流协同</a><div class="meta">vault/02_Concepts/视频表现-内容-引流协同.md</div></div>
 <div class="item rose"><a href="knowledge_cards/views/concept-81d3579f.html">把关人理论</a><div class="meta">vault/02_Concepts/把关人理论.md</div></div>
@@ -155,7 +152,7 @@
 <div class="item rose"><a href="knowledge_cards/views/concept-1c7d1e51.html">馆型差异</a><div class="meta">vault/02_Concepts/馆型差异.md</div></div>
 <div class="item rose"><a href="knowledge_cards/views/concept-53b320d5.html">平台适配</a><div class="meta">vault/02_Concepts/平台适配.md</div></div></div>
       </section>
-      <section class="panel" data-mode="reading evidence">
+      <section class="panel" data-mode="reading paper">
         <h2>图谱高连接节点</h2>
         <table><thead><tr><th>节点</th><th>连接数</th></tr></thead><tbody><tr><td>服务价值</td><td>39</td></tr>
 <tr><td>SICAS模型</td><td>38</td></tr>

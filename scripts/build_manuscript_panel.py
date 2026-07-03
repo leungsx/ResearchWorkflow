@@ -13,7 +13,7 @@ from urllib.parse import quote
 
 from rendering.io import write_json_if_changed, write_text_if_changed
 from rendering.routes import paper_markdown_view_path
-from rendering.ui import render_guidance, render_shell
+from rendering.ui import render_advanced_actions, render_guidance, render_shell
 from workflow_config import active_project_slug
 
 
@@ -68,8 +68,8 @@ USAGE_STATUS_LABELS = {
 }
 VERIFICATION_STATUS_LABELS = {
     "needs_page_locator": "待补页码",
-    "needs_page_check": "待人工核页",
-    "needs_human_read": "待读原文确认",
+    "needs_page_check": "待核页",
+    "needs_human_read": "待人工阅读",
     "ready_for_manuscript_review": "可进入写作审查",
 }
 
@@ -516,19 +516,19 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
         source_text = html.escape(row.get("source_path", ""))
         if display:
             link = href(ROOT / display, path)
-            return f'<a href="{link}"><code>{label}</code></a><br><span>{source_text}</span>'
-        return f"<code>{label}</code><br><span>{source_text}</span>"
+            return f'<a href="{link}"><span class="code-badge">{label}</span></a><br><span class="table-muted">{source_text}</span>'
+        return f'<span class="code-badge">{label}</span><br><span class="table-muted">{source_text}</span>'
 
     table_rows = "\n".join(
         f"""
         <tr>
-          <td><code>{html.escape(row['claim_id'])}</code><br>{html.escape(row['claim_text'])}</td>
-          <td>{html.escape(row['title'] or row['citekey'])}<br><code>{html.escape(row['citekey'])}</code></td>
+          <td><span class="code-badge">{html.escape(row['claim_id'])}</span><div class="text-clamp long">{html.escape(row['claim_text'])}</div></td>
+          <td><div class="text-clamp two">{html.escape(row['title'] or row['citekey'])}</div><span class="code-badge">{html.escape(row['citekey'])}</span></td>
           <td>{source_cell(row)}</td>
-          <td>{html.escape(row['page'] or '待补')}</td>
-          <td><span class="status-pill {verification_status_class(row['verification_status'])}">{html.escape(zh_verification_status(row['verification_status']))}</span><br><span>{html.escape(zh_read_status(row['read_status']))} / {html.escape(zh_usage_status(row['evidence_usage_status']))}</span></td>
-          <td>{html.escape(row['next_action'])}</td>
-          <td>{html.escape(row['snippet'])}</td>
+          <td><span class="status-pill neutral">{html.escape(row['page'] or '待补')}</span></td>
+          <td><span class="status-pill {verification_status_class(row['verification_status'])}">{html.escape(zh_verification_status(row['verification_status']))}</span><br><span class="table-muted">{html.escape(zh_read_status(row['read_status']))} / {html.escape(zh_usage_status(row['evidence_usage_status']))}</span></td>
+          <td><div class="text-clamp">{html.escape(row['next_action'])}</div></td>
+          <td><div class="text-clamp">{html.escape(row['snippet'])}</div></td>
         </tr>
         """
         for row in rows[:120]
@@ -543,14 +543,11 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
         action_label="去写论文",
         action_target=ROOT / "projects" / project_slug / "manuscript" / "writing_panel.html",
     )}
-    <div class="toolbar">
-      <a class="button primary" href="{html.escape(csv_path.name)}">CSV 数据</a>
-      <a class="button" href="{html.escape(json_path.name)}">JSON 数据</a>
-      <button type="button" class="button" data-copy="{html.escape(rebuild_command)}" data-label="复制刷新命令">复制刷新命令</button>
-      <button type="button" class="button" data-copy="{html.escape(gate_command)}" data-label="复制门禁命令">复制门禁命令</button>
-      <button type="button" class="button" data-copy="{html.escape(sync_command)}" data-label="复制同步命令">复制同步命令</button>
-    </div>
-    <div class="copy-feedback" aria-live="polite"></div>
+    {render_advanced_actions(
+        output=path,
+        copy_commands=[("复制门禁命令", gate_command), ("复制同步命令", sync_command)],
+        links=[("CSV 数据", csv_path), ("JSON 数据", json_path)],
+    )}
     <section class="grid">
       <div class="metric"><b>{summary['total_items']}</b><span>核验任务</span></div>
       <div class="metric"><b>{summary['needs_page_locator']}</b><span>待补页码</span></div>
@@ -573,7 +570,7 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
         current="核页码",
         body=body,
         output=path,
-        module="证据",
+        module="论文",
         meta=f"{html.escape(project_slug)} · 主张-来源片段-页码-阅读状态",
         footer="由 scripts/build_manuscript_panel.py 自动生成。",
     )
@@ -771,6 +768,8 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
     for line in lines:
         if line.startswith("# "):
             continue
+        if line.startswith("由 `scripts/") or line.startswith("当前项目："):
+            continue
         if line.startswith("## "):
             if in_table:
                 body_parts.append("</tbody></table></div>")
@@ -786,7 +785,7 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
             cells = [html.escape(cell.strip()) for cell in line.strip().strip("|").split("|")]
             if not in_table:
                 header = "".join(f"<th>{cell}</th>" for cell in cells)
-                body_parts.append(f'<div class="table-wrap"><table class="data-table"><thead><tr>{header}</tr></thead><tbody>')
+                body_parts.append(f'<div class="table-wrap"><table class="data-table writing-table"><thead><tr>{header}</tr></thead><tbody>')
                 in_table = True
             else:
                 body_parts.append("<tr>" + "".join(f"<td>{cell}</td>" for cell in cells) + "</tr>")
@@ -807,13 +806,10 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
         action_label="去核页码",
         action_target=ROOT / "projects" / project_slug / "evidence" / "page_verification_queue.html",
     )}
-    <div class="toolbar">
-      <a class="button primary" href="../evidence/page_verification_queue.html">核页码</a>
-      <button type="button" class="button" data-copy="{html.escape(rebuild_command)}" data-label="复制刷新命令">复制刷新命令</button>
-      <button type="button" class="button" data-copy="{html.escape(gate_command)}" data-label="复制门禁命令">复制门禁命令</button>
-      <button type="button" class="button" data-copy="{html.escape(sync_command)}" data-label="复制同步命令">复制同步命令</button>
-    </div>
-    <div class="copy-feedback" aria-live="polite"></div>
+    {render_advanced_actions(
+        output=html_path,
+        copy_commands=[("复制门禁命令", gate_command), ("复制同步命令", sync_command)],
+    )}
     <article class="panel wide writing-panel">
     {''.join(body_parts)}
     </article>
@@ -824,7 +820,7 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
         current="写论文",
         body=body,
         output=html_path,
-        module="写作",
+        module="论文",
         meta=f"{html.escape(project_slug)} · 研究问题、变量指标、证据链和段落队列",
         footer="由 scripts/build_manuscript_panel.py 自动生成。",
     )

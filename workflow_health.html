@@ -17,15 +17,14 @@
         <div>
           <h1>系统体检</h1>
           <p class="sub">检查入口、链接、镜像页、搜索、复习队列和系统状态是否可用。</p>
-          <p class="page-meta">Generated 2026-07-03 22:25 · mode=readonly · PASS=17 WARN=1 FAIL=0</p>
+          <p class="page-meta">Generated 2026-07-03 22:41 · mode=readonly · PASS=16 WARN=2 FAIL=0</p>
         </div>
         <div class="page-primary-action" hidden></div>
       </div>
       <nav class="nav global-nav" aria-label="一级导航"><a href="study_dashboard.html">总览</a>
 <a href="action_queue.html">今日任务</a>
 <a href="paper_reading/today.html">阅读</a>
-<a href="projects/library_short_video/manuscript/writing_panel.html">写作</a>
-<a href="projects/library_short_video/evidence/page_verification_queue.html">证据</a>
+<a href="projects/library_short_video/manuscript/writing_panel.html">论文</a>
 <a href="workflow_state.html" aria-current="page">系统</a></nav>
       <nav class="nav subnav" aria-label="系统子导航"><a href="workflow_state.html">当前状态</a>
 <a href="workflow_health.html" aria-current="page">系统体检</a>
@@ -37,18 +36,18 @@
   <main class="wrap" id="main-content">
 <section class="panel wide page-guidance">
       <div class="guidance-grid">
-        <div>
+        <div class="guidance-copy">
           <h2>使用建议</h2>
-          <p><strong>这个页面用于：</strong>检查入口、链接、图谱、搜索、复习队列、备份和 Git 同步状态是否可用。</p>
-          <p><strong>建议先做：</strong>先看 FAIL；没有 FAIL 时只处理真实 WARN，例如到期复习或备份过期。</p>
-          <p><strong>完成后去：</strong>处理完 WARN 后回到今日工作台或再次运行只读体检确认状态。</p>
+          <p><strong>这个页面用于：</strong><span>检查入口、链接、图谱、搜索、复习队列、备份和 Git 同步状态是否可用。</span></p>
+          <p><strong>建议先做：</strong><span>先看 FAIL；没有 FAIL 时只处理真实 WARN，例如到期复习或备份过期。</span></p>
+          <p><strong>完成后去：</strong><span>处理完 WARN 后回到今日工作台或再次运行只读体检确认状态。</span></p>
         </div>
-        <div class="command-stack"><a class="inline-button primary" href="study_dashboard.html">打开今日工作台</a><button type="button" class="inline-button" data-copy="make workflow-audit-readonly" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span><code>make workflow-audit-readonly</code></div>
+        <div class="command-stack"><a class="button primary" href="study_dashboard.html">打开今日工作台</a><button type="button" class="button secondary" data-copy="make workflow-audit-readonly" data-label="复制刷新命令">复制刷新命令</button><span class="copy-feedback" aria-live="polite"></span></div>
       </div>
     </section>
     <section class="metrics">
-      <div class="metric"><b>17</b><span>通过</span></div>
-      <div class="metric"><b>1</b><span>提醒</span></div>
+      <div class="metric"><b>16</b><span>通过</span></div>
+      <div class="metric"><b>2</b><span>提醒</span></div>
       <div class="metric"><b>0</b><span>失败</span></div>
     </section>
     <section class="checks">        <article class="check pass">
@@ -115,13 +114,13 @@
           <div class="status">PASS</div>
           <h2>最近备份可用</h2>
           <p class="area">备份</p>
-          <p>backups/researchworkflow-critical-20260703-200749.zip，约 2.3 小时前。</p>
+          <p>backups/researchworkflow-critical-20260703-200749.zip，约 2.6 小时前。</p>
         </article>
-        <article class="check pass">
-          <div class="status">PASS</div>
-          <h2>Git 本地和远程快照状态正常</h2>
+        <article class="check warn">
+          <div class="status">WARN</div>
+          <h2>存在尚未提交的 Git 改动</h2>
           <p class="area">Git/异地备份</p>
-          <p>upstream=origin/main；last commit: f6f1409 2026-07-03 22:24:53 +0800 Add action priority bands</p>
+          <p>145 个路径待快照： M action_queue.html； M archive_policy.html； M assets/app.css； M docs/UI_STYLE_GUIDE.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-34f2bfeb.html</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>

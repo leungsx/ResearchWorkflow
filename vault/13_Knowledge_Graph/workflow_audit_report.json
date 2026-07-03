@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T22:25:07",
+  "generated_at": "2026-07-03T22:41:54",
   "date": "2026-07-03",
   "audit_mode": "readonly",
-  "pre_refresh_state_hash": "6ab60004c2a8c8e9ba8bb0230f268d4a3c5cb2dbaf4570ca3f0d29a0ffa72a41",
-  "post_refresh_state_hash": "6ab60004c2a8c8e9ba8bb0230f268d4a3c5cb2dbaf4570ca3f0d29a0ffa72a41",
+  "pre_refresh_state_hash": "0e4fab9d317e15d820cdf625e625a085ab2ec3eac5c0477a2cc2aa679b9fe20e",
+  "post_refresh_state_hash": "0e4fab9d317e15d820cdf625e625a085ab2ec3eac5c0477a2cc2aa679b9fe20e",
   "summary": {
     "counts": {
-      "PASS": 17,
-      "WARN": 1,
+      "PASS": 16,
+      "WARN": 2,
       "FAIL": 0
     },
     "check_count": 18
@@ -82,13 +82,13 @@
       "area": "备份",
       "status": "PASS",
       "title": "最近备份可用",
-      "detail": "backups/researchworkflow-critical-20260703-200749.zip，约 2.3 小时前。"
+      "detail": "backups/researchworkflow-critical-20260703-200749.zip，约 2.6 小时前。"
     },
     {
       "area": "Git/异地备份",
-      "status": "PASS",
-      "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: f6f1409 2026-07-03 22:24:53 +0800 Add action priority bands"
+      "status": "WARN",
+      "title": "存在尚未提交的 Git 改动",
+      "detail": "145 个路径待快照： M action_queue.html； M archive_policy.html； M assets/app.css； M docs/UI_STYLE_GUIDE.md； M knowledge_cards/index.html； M knowledge_cards/review_today.html； M knowledge_cards/views/concept-1c7d1e51.html； M knowledge_cards/views/concept-34f2bfeb.html"
     },
     {
       "area": "Token/记忆",

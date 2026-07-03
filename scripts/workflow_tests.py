@@ -7,6 +7,7 @@ import re
 import subprocess
 import sys
 import unittest
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlparse
@@ -100,6 +101,16 @@ def nav_links(text: str, class_name: str) -> list[str]:
     if not match:
         return []
     return re.findall(r"<a\b", match.group(1))
+
+
+def nav_labels(text: str, class_name: str) -> list[str]:
+    match = re.search(rf'<nav class="nav {re.escape(class_name)}"[^>]*>(.*?)</nav>', text, re.S)
+    if not match:
+        return []
+    labels = []
+    for raw in re.findall(r"<a\b[^>]*>(.*?)</a>", match.group(1), re.S):
+        labels.append(unescape(re.sub(r"<[^>]+>", "", raw)).strip())
+    return labels
 
 
 class WorkflowSmokeTests(unittest.TestCase):
@@ -340,8 +351,9 @@ class WorkflowSmokeTests(unittest.TestCase):
         text = read_text(ROOT / "study_dashboard.html")
         app_js = read_text(ROOT / "assets" / "app.js")
         self.assertIn("data-mode-button=\"reading\"", text)
-        self.assertIn("data-mode-button=\"writing\"", text)
-        self.assertIn("data-mode-button=\"evidence\"", text)
+        self.assertIn("data-mode-button=\"paper\"", text)
+        self.assertNotIn("data-mode-button=\"writing\"", text)
+        self.assertNotIn("data-mode-button=\"evidence\"", text)
         self.assertIn("data-mode-button=\"maintenance\"", text)
         self.assertIn("data-copy=", text)
         self.assertIn("assets/app.js", text)
@@ -427,8 +439,45 @@ class WorkflowSmokeTests(unittest.TestCase):
                 self.assertIn('class="site-header"', text)
                 self.assertIn('class="nav global-nav"', text)
                 self.assertIn('class="nav subnav"', text)
-                self.assertLessEqual(len(nav_links(text, "global-nav")), 6)
+                self.assertEqual(["总览", "今日任务", "阅读", "论文", "系统"], nav_labels(text, "global-nav"))
+                self.assertEqual(5, len(nav_links(text, "global-nav")))
                 self.assertGreater(len(nav_links(text, "subnav")), 0)
+
+    def test_paper_module_pages_share_consistent_subnav(self) -> None:
+        pages = [
+            project_path("manuscript", "writing_panel.html"),
+            project_path("literature", "evidence_locator_table.html"),
+            project_path("evidence", "page_verification_queue.html"),
+        ]
+        expected_prefix = ["写论文", "找证据", "核页码"]
+        subnavs: list[list[str]] = []
+        for page in pages:
+            with self.subTest(page=page.relative_to(ROOT).as_posix()):
+                text = read_text(page)
+                self.assertIn("ResearchWorkflow / 论文", text)
+                labels = nav_labels(text, "subnav")
+                self.assertEqual(expected_prefix, labels[:3])
+                self.assertNotIn("ResearchWorkflow / 写作", text)
+                self.assertNotIn("ResearchWorkflow / 证据", text)
+                subnavs.append(labels)
+        self.assertTrue(all(labels == subnavs[0] for labels in subnavs))
+
+    def test_core_pages_use_shared_css_without_large_inline_styles(self) -> None:
+        pages = [
+            ROOT / "study_dashboard.html",
+            ROOT / "action_queue.html",
+            ROOT / "workflow_state.html",
+            ROOT / "workflow_health.html",
+            project_path("literature", "incoming_pdf_triage.html"),
+            project_path("literature", "evidence_locator_table.html"),
+            project_path("evidence", "page_verification_queue.html"),
+            project_path("manuscript", "writing_panel.html"),
+        ]
+        for page in pages:
+            with self.subTest(page=page.relative_to(ROOT).as_posix()):
+                text = read_text(page)
+                self.assertIn("assets/app.css", text)
+                self.assertNotRegex(text, r"<style\b")
 
     def test_core_entry_titles_are_task_oriented(self) -> None:
         expected = {

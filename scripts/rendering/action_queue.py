@@ -230,7 +230,7 @@ def next_step_for_action(action: dict[str, Any]) -> str:
 
 def copy_button(command: str) -> str:
     escaped = html.escape(command, quote=True)
-    return f'<button class="inline-button" type="button" data-copy="{escaped}" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span>'
+    return f'<button class="button secondary" type="button" data-copy="{escaped}" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span>'
 
 
 def write_action_queue_html(queue: dict[str, Any]) -> None:
@@ -248,9 +248,8 @@ def write_action_queue_html(queue: dict[str, Any]) -> None:
           <p class="meta">{html.escape(next_step_for_action(primary) if primary else "完成后：回到今日工作台选择下一项。")}</p>
         </div>
         <div class="command-stack">
-          <a class="inline-button primary" href="{href_for(primary_entry)}">打开入口</a>
+          <a class="button primary" href="{href_for(primary_entry)}">打开入口</a>
           {copy_button(primary_command)}
-          <code>{html.escape(primary_command)}</code>
         </div>
       </div>
     </section>
@@ -276,8 +275,6 @@ def write_action_queue_html(queue: dict[str, Any]) -> None:
         after="完成一项后回到今日工作台，或运行 make daily 让任务队列重新排序。",
         output=ACTION_QUEUE_HTML,
         command="make daily",
-        action_label="打开今日工作台",
-        action_target=ROOT / "study_dashboard.html",
     )}
     <section class="metrics">
       <div class="metric"><b>{summary.get("total_open", 0)}</b><span class="meta">开放行动</span></div>

@@ -24,13 +24,11 @@
       <nav class="nav global-nav" aria-label="一级导航"><a href="study_dashboard.html">总览</a>
 <a href="action_queue.html" aria-current="page">今日任务</a>
 <a href="paper_reading/today.html">阅读</a>
-<a href="projects/library_short_video/manuscript/writing_panel.html">写作</a>
-<a href="projects/library_short_video/evidence/page_verification_queue.html">证据</a>
+<a href="projects/library_short_video/manuscript/writing_panel.html">论文</a>
 <a href="workflow_state.html">系统</a></nav>
       <nav class="nav subnav" aria-label="今日任务子导航"><a href="action_queue.html" aria-current="page">任务总览</a>
 <a href="knowledge_cards/review_today.html">今日复习</a>
-<a href="paper_reading/today.html">今日精读</a>
-<a href="projects/library_short_video/manuscript/writing_panel.html">写作推进</a></nav>
+<a href="paper_reading/today.html">今日精读</a></nav>
     </div>
   </header>
   <main class="wrap" id="main-content">
@@ -43,22 +41,21 @@
           <p class="meta">完成后：继续今日精读，或进入核页码补齐写作证据。</p>
         </div>
         <div class="command-stack">
-          <a class="inline-button primary" href="knowledge_cards/review_today.html">打开入口</a>
-          <button class="inline-button" type="button" data-copy="make review-server-ensure" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span>
-          <code>make review-server-ensure</code>
+          <a class="button primary" href="knowledge_cards/review_today.html">打开入口</a>
+          <button class="button secondary" type="button" data-copy="make review-server-ensure" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span>
         </div>
       </div>
     </section>
 
     <section class="panel wide page-guidance">
       <div class="guidance-grid">
-        <div>
+        <div class="guidance-copy">
           <h2>使用建议</h2>
-          <p><strong>这个页面用于：</strong>把审计提醒、到期复习和项目推进任务按优先级排成今天的处理顺序。</p>
-          <p><strong>建议先做：</strong>先完成今日主任务；不要从系统维护项开始，除非它是 FAIL 或阻塞写作。</p>
-          <p><strong>完成后去：</strong>完成一项后回到今日工作台，或运行 make daily 让任务队列重新排序。</p>
+          <p><strong>这个页面用于：</strong><span>把审计提醒、到期复习和项目推进任务按优先级排成今天的处理顺序。</span></p>
+          <p><strong>建议先做：</strong><span>先完成今日主任务；不要从系统维护项开始，除非它是 FAIL 或阻塞写作。</span></p>
+          <p><strong>完成后去：</strong><span>完成一项后回到今日工作台，或运行 make daily 让任务队列重新排序。</span></p>
         </div>
-        <div class="command-stack"><a class="inline-button primary" href="study_dashboard.html">打开今日工作台</a><button type="button" class="inline-button" data-copy="make daily" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span><code>make daily</code></div>
+        <div class="command-stack"><button type="button" class="button secondary" data-copy="make daily" data-label="复制刷新命令">复制刷新命令</button><span class="copy-feedback" aria-live="polite"></span></div>
       </div>
     </section>
     <section class="metrics">

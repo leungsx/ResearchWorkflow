@@ -44,15 +44,14 @@ def existing(target: Path) -> bool:
 
 def global_nav_items() -> list[NavItem]:
     writing = active_project_path("manuscript", "writing_panel.html")
-    evidence = active_project_path("evidence", "page_verification_queue.html")
-    if not evidence.exists():
-        evidence = active_project_path("literature", "evidence_locator_table.html")
+    paper = writing if writing.exists() else active_project_path("literature", "evidence_locator_table.html")
+    if not paper.exists():
+        paper = active_project_path("evidence", "page_verification_queue.html")
     return [
         NavItem("总览", ROOT / "study_dashboard.html", ("总览首页", "学习仪表盘")),
         NavItem("今日任务", ROOT / "action_queue.html", ("行动队列", "任务总览")),
         NavItem("阅读", PAPER_READING / "today.html", ("今日精读", "论文归档", "知识卡", "PDF分拣")),
-        NavItem("写作", writing if writing.exists() else WORKFLOW_STATE_HTML, ("论文写作", "论文写作面板")),
-        NavItem("证据", evidence if evidence.exists() else WORKFLOW_STATE_HTML, ("证据定位", "页码核验", "主张证据表")),
+        NavItem("论文", paper if paper.exists() else WORKFLOW_STATE_HTML, ("论文写作", "论文写作面板", "写作", "证据", "证据定位", "页码核验", "主张证据表")),
         NavItem("系统", WORKFLOW_STATE_HTML, ("工作流状态", "总状态", "工作流体检", "项目协作", "归档策略", "学习日志")),
     ]
 
@@ -75,14 +74,20 @@ def module_for(current: str) -> str:
         "知识卡": "阅读",
         "PDF分拣": "阅读",
         "Reader": "阅读",
-        "论文写作": "写作",
-        "论文写作面板": "写作",
-        "写论文": "写作",
-        "证据定位": "证据",
-        "找证据": "证据",
-        "页码核验": "证据",
-        "核页码": "证据",
-        "主张证据表": "证据",
+        "论文": "论文",
+        "论文写作": "论文",
+        "论文写作面板": "论文",
+        "写作": "论文",
+        "写论文": "论文",
+        "证据": "论文",
+        "证据定位": "论文",
+        "找证据": "论文",
+        "页码核验": "论文",
+        "核页码": "论文",
+        "主张证据表": "论文",
+        "查引用": "论文",
+        "引用审计": "论文",
+        "投稿包": "论文",
         "工作流状态": "系统",
         "总状态": "系统",
         "当前状态": "系统",
@@ -104,6 +109,8 @@ def subnav_items(module: str) -> list[NavItem]:
     evidence_locator = active_project_path("literature", "evidence_locator_table.html")
     verification = active_project_path("evidence", "page_verification_queue.html")
     writing = active_project_path("manuscript", "writing_panel.html")
+    citation_audit = active_project_path("manuscript", "citation_audit_gbt7714.html")
+    submission_index = active_project_path("submission_package", "index.html")
     vault_home = PAPER_VIEWS / "vault-home.html"
     items: dict[str, list[NavItem]] = {
         "总览": [
@@ -118,7 +125,6 @@ def subnav_items(module: str) -> list[NavItem]:
             NavItem("任务总览", ROOT / "action_queue.html", ("今日任务", "行动队列")),
             NavItem("今日复习", REVIEW_TODAY, ("复习",)),
             NavItem("今日精读", PAPER_READING / "today.html"),
-            NavItem("写作推进", writing, ("论文写作", "论文写作面板")),
         ],
         "阅读": [
             NavItem("今日精读", PAPER_READING / "today.html"),
@@ -126,15 +132,12 @@ def subnav_items(module: str) -> list[NavItem]:
             NavItem("PDF分拣", incoming),
             NavItem("知识卡", KNOWLEDGE_CARDS / "index.html"),
         ],
-        "写作": [
+        "论文": [
             NavItem("写论文", writing, ("论文写作", "论文写作面板")),
-            NavItem("核页码", verification, ("页码核验",)),
-            NavItem("找证据", evidence_locator, ("证据定位",)),
-        ],
-        "证据": [
             NavItem("找证据", evidence_locator, ("证据定位",)),
             NavItem("核页码", verification, ("页码核验",)),
-            NavItem("写论文", writing, ("写作核验", "论文写作", "论文写作面板")),
+            NavItem("查引用", citation_audit, ("引用审计",)),
+            NavItem("投稿包", submission_index),
         ],
         "系统": [
             NavItem("当前状态", WORKFLOW_STATE_HTML, ("总状态", "工作流状态")),
@@ -175,24 +178,49 @@ def render_guidance(
 ) -> str:
     action_html = ""
     if action_label and action_target:
-        action_html += f'<a class="inline-button primary" href="{href(action_target, output)}">{esc(action_label)}</a>'
+        action_html += f'<a class="button primary" href="{href(action_target, output)}">{esc(action_label)}</a>'
     if command:
         action_html += (
-            f'<button type="button" class="inline-button" data-copy="{esc(command)}" data-label="复制命令">复制命令</button>'
+            f'<button type="button" class="button secondary" data-copy="{esc(command)}" data-label="复制刷新命令">复制刷新命令</button>'
             '<span class="copy-feedback" aria-live="polite"></span>'
-            f"<code>{esc(command)}</code>"
         )
     return f"""<section class="panel wide page-guidance">
       <div class="guidance-grid">
-        <div>
+        <div class="guidance-copy">
           <h2>使用建议</h2>
-          <p><strong>这个页面用于：</strong>{esc(purpose)}</p>
-          <p><strong>建议先做：</strong>{esc(first)}</p>
-          <p><strong>完成后去：</strong>{esc(after)}</p>
+          <p><strong>这个页面用于：</strong><span>{esc(purpose)}</span></p>
+          <p><strong>建议先做：</strong><span>{esc(first)}</span></p>
+          <p><strong>完成后去：</strong><span>{esc(after)}</span></p>
         </div>
         <div class="command-stack">{action_html}</div>
       </div>
     </section>"""
+
+
+def render_advanced_actions(
+    *,
+    output: Path,
+    copy_commands: list[tuple[str, str]] | None = None,
+    links: list[tuple[str, Path]] | None = None,
+) -> str:
+    copy_commands = copy_commands or []
+    links = links or []
+    if not copy_commands and not links:
+        return ""
+    items: list[str] = []
+    for label, command in copy_commands:
+        items.append(
+            f'<button type="button" class="button ghost" data-copy="{esc(command)}" data-label="{esc(label)}">{esc(label)}</button>'
+        )
+    for label, target in links:
+        items.append(f'<a class="button ghost" href="{href(target, output)}">{esc(label)}</a>')
+    return (
+        '<details class="advanced-actions">'
+        '<summary>高级操作</summary>'
+        '<div class="advanced-action-list">'
+        + "\n".join(items)
+        + '</div><span class="copy-feedback" aria-live="polite"></span></details>'
+    )
 
 
 def render_shell(

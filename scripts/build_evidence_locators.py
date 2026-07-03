@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from rendering.io import write_text_if_changed, write_text_preserving_generated_at
-from rendering.ui import render_guidance, render_shell
+from rendering.ui import render_advanced_actions, render_guidance, render_shell
 from workflow_config import active_project_slug
 
 
@@ -21,7 +21,7 @@ PROJECTS = ROOT / "projects"
 MATRIX = ROOT / "library" / "literature_matrix.csv"
 LOCATOR_STATUS_LABELS = {
     "page_pending": "页码待补",
-    "page_located_needs_human_check": "已定位，待人工核页",
+    "page_located_needs_human_check": "页码待核",
 }
 
 
@@ -308,12 +308,12 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
     table_rows = "\n".join(
         f"""
         <tr>
-          <td>{html.escape(row['claim'])}<br><span>{html.escape(row['evidence_summary'])}</span></td>
-          <td>{html.escape(row['title'] or row['citekey'])}<br><code>{html.escape(row['citekey'])}</code></td>
-          <td><code>{html.escape(row['block_id'])}</code><br><span>{html.escape(row['source_id'])}</span></td>
-          <td>{html.escape(row['page'] or '待补')}</td>
+          <td><div class="text-clamp long">{html.escape(row['claim'])}</div><span class="table-muted">{html.escape(row['evidence_summary'])}</span></td>
+          <td><div class="text-clamp two">{html.escape(row['title'] or row['citekey'])}</div><span class="code-badge">{html.escape(row['citekey'])}</span></td>
+          <td><span class="code-badge">{html.escape(row['block_id'])}</span><br><span class="table-muted">{html.escape(row['source_id'])}</span></td>
+          <td><span class="status-pill neutral">{html.escape(row['page'] or '待补')}</span></td>
           <td><span class="status-pill {locator_status_class(row['locator_status'])}">{html.escape(locator_status_label(row['locator_status']))}</span></td>
-          <td>{html.escape(zh_boundary(row['boundary']))}</td>
+          <td><div class="text-clamp">{html.escape(zh_boundary(row['boundary']))}</div></td>
         </tr>
         """
         for row in rows[:180]
@@ -327,6 +327,10 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
         command=f"make evidence-locators PROJECT={project}",
         action_label="去核页码",
         action_target=ROOT / "projects" / project / "evidence" / "page_verification_queue.html",
+    )}
+    {render_advanced_actions(
+        output=path,
+        links=[("CSV 数据", csv_path)],
     )}
     <section class="grid">
       <div class="metric"><b>{len(rows)}</b><span>证据定位行</span></div>
@@ -349,9 +353,8 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
         current="找证据",
         body=body,
         output=path,
-        module="证据",
+        module="论文",
         meta=f"{html.escape(project)} · 生成时间 {html.escape(dt.datetime.now().isoformat(timespec='seconds'))}",
-        primary_action=f'<a class="button primary" href="{html.escape(csv_path.name)}">CSV 数据</a>',
         footer="由 scripts/build_evidence_locators.py 自动生成。",
     )
     write_text_preserving_generated_at(path, html_text)
