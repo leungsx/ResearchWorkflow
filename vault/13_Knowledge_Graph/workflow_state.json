@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T18:40:17",
+  "generated_at": "2026-07-03T19:33:26",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -90,13 +90,13 @@
         "area": "备份",
         "status": "WARN",
         "title": "最近备份超过 36 小时",
-        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 37.4 小时前。"
+        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 46.6 小时前。"
       },
       {
         "area": "Git/异地备份",
         "status": "PASS",
         "title": "Git 本地和远程快照状态正常",
-        "detail": "upstream=origin/main；last commit: 56df06d 2026-07-03 09:32:14 +0800 Refresh workflow state after UI update"
+        "detail": "upstream=origin/main；last commit: d8ad1f9 2026-07-03 18:40:38 +0800 Refresh workflow state after usability update"
       },
       {
         "area": "Token/记忆",
@@ -120,7 +120,7 @@
         "area": "行动队列",
         "status": "PASS",
         "title": "行动队列可用且入口有效",
-        "detail": "11 个开放行动。"
+        "detail": "10 个开放行动。"
       },
       {
         "area": "项目协作层",
