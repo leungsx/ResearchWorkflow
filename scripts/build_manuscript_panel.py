@@ -559,9 +559,9 @@ def write_verification_html(path: Path, project_slug: str, rows: list[dict[str, 
     </section>
 """
     html_text = render_shell(
-        title="页码级证据核验队列",
-        subtitle="用于补全“主张-来源片段-页码-阅读状态”链条，优先处理进入写作链的证据。",
-        current="页码核验",
+        title="核页码",
+        subtitle="补全主张、来源片段、页码和阅读状态，优先处理已经进入写作链的证据。",
+        current="核页码",
         body=body,
         output=path,
         module="证据",
@@ -590,7 +590,7 @@ def render_md(project_slug: str, project: Path, trace: dict[str, object] | None 
     summary = trace["summary"]
     queue_summary = trace["verification_queue_summary"]
     lines = [
-        "# 论文写作推进面板",
+        "# 写论文",
         "",
         "由 `scripts/build_manuscript_panel.py` 自动生成。",
         f"当前项目：`{project_slug}`",
@@ -790,7 +790,7 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
     sync_command = f"make claim-evidence-sync PROJECT={project_slug}"
     body = f"""
     <div class="toolbar">
-      <a class="button primary" href="../evidence/page_verification_queue.html">页码核验队列</a>
+      <a class="button primary" href="../evidence/page_verification_queue.html">核页码</a>
       <button type="button" class="button" data-copy="{html.escape(rebuild_command)}" data-label="复制刷新命令">复制刷新命令</button>
       <button type="button" class="button" data-copy="{html.escape(gate_command)}" data-label="复制门禁命令">复制门禁命令</button>
       <button type="button" class="button" data-copy="{html.escape(sync_command)}" data-label="复制同步命令">复制同步命令</button>
@@ -801,9 +801,9 @@ def render_html(project_slug: str, md_text: str, html_path: Path, md_path: Path)
     </article>
 """
     return render_shell(
-        title="论文写作推进面板",
+        title="写论文",
         subtitle="把已读文献转成研究问题、变量指标、证据链和可写段落。",
-        current="论文写作面板",
+        current="写论文",
         body=body,
         output=html_path,
         module="写作",

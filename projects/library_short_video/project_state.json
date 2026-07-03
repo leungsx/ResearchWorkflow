@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T18:38:31",
+  "generated_at": "2026-07-03T20:05:48",
   "project": {
     "slug": "library_short_video",
     "title": "图书馆短视频相关研究",
@@ -64,7 +64,7 @@
     "latest_deep_read": {
       "title": "2026-07-03 精读：公共图书馆阅读服务类抖音短视频传播效果",
       "path": "paper_reading/2026-07-03-reading-service-douyin-fsqca.html",
-      "updated_at": "2026-07-03T09:10:37"
+      "updated_at": "2026-07-03T19:26:59"
     },
     "next_reading_candidates": [
       {

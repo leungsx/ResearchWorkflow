@@ -304,6 +304,11 @@ main.wrap { padding-top: 22px; }
 .cta-card { border-left: 4px solid var(--blue); background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%); }
 .cta-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px); gap: 16px; align-items: start; }
 .cta-title { margin: 4px 0 8px; font-size: 22px; }
+.task-candidates {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
 .eyebrow {
   margin: 0;
   color: var(--muted);

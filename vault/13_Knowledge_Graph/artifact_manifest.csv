@@ -1,7 +1,7 @@
 source_path,source_type,display_path,display_type,title,layer,generated_by,asset_role
 action_queue.html,html,action_queue.html,action_queue,行动队列,Presentation,make learning-dashboard,core_entry
 vault/13_Knowledge_Graph/action_queue.json,json,action_queue.html,action_queue_data,Action queue,Knowledge,make learning-dashboard,source_data
-archive_policy.html,html,archive_policy.html,archive_policy,自动归档策略,Presentation,make learning-dashboard,core_entry
+archive_policy.html,html,archive_policy.html,archive_policy,备份与清理,Presentation,make learning-dashboard,core_entry
 vault/13_Knowledge_Graph/archive_policy.json,json,archive_policy.html,archive_policy_data,Archive policy,Knowledge,make learning-dashboard,source_data
 vault/02_Concepts/AARRR 漏斗模型.md,markdown,knowledge_cards/views/concept-aarrr-bf76ae6c.html,concept_card_view,AARRR 漏斗模型,Knowledge,make learning-dashboard,mirror_view
 vault/02_Concepts/Hook Model 上瘾模型.md,markdown,knowledge_cards/views/concept-hook-model-878dcbb7.html,concept_card_view,Hook Model 上瘾模型,Knowledge,make learning-dashboard,mirror_view
@@ -131,7 +131,7 @@ paper_reading/2026-07-01-digital-reading-promotion.html,html,paper_reading/2026-
 paper_reading/2026-07-02-propagation-power-evaluation.html,html,paper_reading/2026-07-02-propagation-power-evaluation.html,paper_page,2026-07-02 精读：图书馆短视频账号传播力研究,Presentation,make learning-dashboard,generated_view
 paper_reading/2026-07-03-reading-service-douyin-fsqca.html,html,paper_reading/2026-07-03-reading-service-douyin-fsqca.html,paper_page,2026-07-03 精读：公共图书馆阅读服务类抖音短视频传播效果,Presentation,make learning-dashboard,generated_view
 paper_reading/today.html,html,paper_reading/today.html,paper_today_entry,今日精读入口,Presentation,make learning-dashboard,core_entry
-project_collaboration.html,html,project_collaboration.html,project_collaboration,项目协作层,Presentation,make learning-dashboard,core_entry
+project_collaboration.html,html,project_collaboration.html,project_collaboration,待我确认,Presentation,make learning-dashboard,core_entry
 vault/13_Knowledge_Graph/collaboration_state.json,json,project_collaboration.html,project_collaboration_data,Project collaboration state,Knowledge,make learning-dashboard,source_data
 projects/library_short_video/project_state.json,json,paper_reading/views/00-project-dashboard-dd8418ad.html,project_state,library_short_video project state,Knowledge,make learning-dashboard,generated_view
 projects/starter_project/project_state.json,json,paper_reading/views/00-project-dashboard-b90a4a93.html,project_state,starter_project project state,Knowledge,make learning-dashboard,generated_view
@@ -141,5 +141,5 @@ knowledge_cards/review_today.html,html,knowledge_cards/review_today.html,review_
 search/index.html,html,search/index.html,search,全局搜索入口,Presentation,make learning-dashboard,core_entry
 vault/13_Knowledge_Graph/search_index.json,json,search/index.html,search_index,Search index,Knowledge,make learning-dashboard,source_data
 vault/13_Knowledge_Graph/workflow_audit_report.json,json,workflow_health.html,workflow_audit_data,Workflow audit report,Knowledge,make learning-dashboard,source_data
-workflow_state.html,html,workflow_state.html,workflow_state,工作流总状态,Presentation,make learning-dashboard,core_entry
+workflow_state.html,html,workflow_state.html,workflow_state,当前状态,Presentation,make learning-dashboard,core_entry
 vault/13_Knowledge_Graph/workflow_state.json,json,workflow_state.html,workflow_state_data,Workflow state,Knowledge,make learning-dashboard,source_data

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T19:46:20",
+  "generated_at": "2026-07-03T20:00:03",
   "source_state": "vault/13_Knowledge_Graph/workflow_state.json",
   "entrypoint": "action_queue.html",
   "summary": {
@@ -96,7 +96,7 @@
       "kind": "audit_warn",
       "priority": 70,
       "title": "处理提醒：最近备份超过 36 小时",
-      "reason": "backups/researchworkflow-critical-20260701-200737.zip，约 47.4 小时前。",
+      "reason": "backups/researchworkflow-critical-20260701-200737.zip，约 47.7 小时前。",
       "entrypoint": "workflow_health.html",
       "source": "备份",
       "status": "open",

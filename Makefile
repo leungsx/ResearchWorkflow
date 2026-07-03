@@ -5,7 +5,7 @@ PYTHONDONTWRITEBYTECODE ?= 1
 export PYTHONDONTWRITEBYTECODE
 ACTIVE_PROJECT ?= $(shell PYTHONDONTWRITEBYTECODE=1 $(PYTHON) scripts/get_active_project.py)
 
-.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-ensure review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate literature-matrix-validate literature-matrix-migrate privacy-audit fast-status workflow-policy workflow-render workflow-audit-readonly workflow-audit-refresh workflow-audit workflow-test workflow-backup workflow-backup-prune workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate evidence-locators claim-evidence-links claim-evidence-sync manuscript-panel incoming-triage lit-transition experiment citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph data-refresh page-render learning-dashboard
+.PHONY: check new status project-state review-state review-studied review-studied-due review-server review-server-start review-server-ensure review-server-stop review-server-status search-index workflow-state action-queue collaboration-state archive-policy schema-validate literature-matrix-validate literature-matrix-migrate privacy-audit fast-status workflow-policy workflow-render workflow-audit-readonly workflow-audit-refresh workflow-audit workflow-test workflow-backup workflow-backup-prune daily daily-git workflow-refresh workflow-refresh-git git-snapshot backfill backfill-all evidence-gate evidence-locators claim-evidence-links claim-evidence-sync manuscript-panel incoming-triage lit-transition experiment citation-audit submission-package search import-matrix import-cnki cnki-frontier cnki-daily cnki-handoff cnki-intake cnki-download cnki-batch-download cnki-restock insight-bank paper-brief paper-reader paper-context caj-convert download extract gephi passport home reading-board lit-workbench typora typora-project codex-start codex-event codex-close-fast codex-close-standard codex-close-deep codex-weekly codex-sweep codex-compact codex-compact-all codex-context-index codex-context-audit idea-start idea-status compare-results knowledge-status obsidian-graph data-refresh page-render learning-dashboard
 
 check:
 	$(PYTHON) scripts/check_environment.py
@@ -99,6 +99,16 @@ workflow-backup:
 
 workflow-backup-prune:
 	$(PYTHON) scripts/workflow_backup.py --prune-only --keep "$(KEEP)"
+
+daily:
+	$(MAKE) data-refresh
+	$(MAKE) page-render
+	$(MAKE) workflow-audit-readonly $(if $(DATE),DATE="$(DATE)",) $(if $(STRICT),STRICT=1,)
+
+daily-git:
+	$(MAKE) daily $(if $(DATE),DATE="$(DATE)",) $(if $(STRICT),STRICT=1,)
+	$(MAKE) workflow-backup $(if $(DATE),DATE="$(DATE)",) $(if $(NOTE),NOTE="$(NOTE)",)
+	$(MAKE) git-snapshot $(if $(DATE),DATE="$(DATE)",) $(if $(NOTE),NOTE="$(NOTE)",) PUSH=1
 
 workflow-refresh:
 	$(MAKE) review-server-ensure

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ResearchWorkflow 体检</title>
+  <title>系统体检</title>
   <link rel="stylesheet" href="assets/app.css">
 
 </head>
@@ -14,9 +14,9 @@
       <p class="page-kicker">ResearchWorkflow / 系统</p>
       <div class="page-heading">
         <div>
-          <h1>ResearchWorkflow 体检</h1>
+          <h1>系统体检</h1>
           <p class="sub">检查入口、链接、镜像页、搜索、复习队列和系统状态是否可用。</p>
-          <p class="page-meta">Generated 2026-07-03 19:47 · mode=readonly · PASS=16 WARN=2 FAIL=0</p>
+          <p class="page-meta">Generated 2026-07-03 20:07 · mode=readonly · PASS=16 WARN=2 FAIL=0</p>
         </div>
         <div class="page-primary-action" hidden></div>
       </div>
@@ -26,10 +26,10 @@
 <a href="projects/library_short_video/manuscript/writing_panel.html">写作</a>
 <a href="projects/library_short_video/evidence/page_verification_queue.html">证据</a>
 <a href="workflow_state.html" aria-current="page">系统</a></nav>
-      <nav class="nav subnav" aria-label="系统子导航"><a href="workflow_state.html">工作流状态</a>
-<a href="workflow_health.html" aria-current="page">工作流体检</a>
-<a href="archive_policy.html">归档策略</a>
-<a href="project_collaboration.html">项目协作</a>
+      <nav class="nav subnav" aria-label="系统子导航"><a href="workflow_state.html">当前状态</a>
+<a href="workflow_health.html" aria-current="page">系统体检</a>
+<a href="archive_policy.html">备份与清理</a>
+<a href="project_collaboration.html">待我确认</a>
 <a href="logs/index.html">学习日志</a></nav>
     </div>
   </header>
@@ -99,17 +99,17 @@
           <p class="area">复习队列</p>
           <p>5 项到期：传播力评价；平台互动-服务触达-阅读转化；熵权法；爆款指数；图书馆短视频内容质量评价</p>
         </article>
-        <article class="check warn">
-          <div class="status">WARN</div>
-          <h2>最近备份超过 36 小时</h2>
-          <p class="area">备份</p>
-          <p>backups/researchworkflow-critical-20260701-200737.zip，约 47.7 小时前。</p>
-        </article>
         <article class="check pass">
           <div class="status">PASS</div>
-          <h2>Git 本地和远程快照状态正常</h2>
+          <h2>最近备份可用</h2>
+          <p class="area">备份</p>
+          <p>backups/researchworkflow-critical-20260703-200749.zip，约 0.0 小时前。</p>
+        </article>
+        <article class="check warn">
+          <div class="status">WARN</div>
+          <h2>存在尚未提交的 Git 改动</h2>
           <p class="area">Git/异地备份</p>
-          <p>upstream=origin/main；last commit: b1a4a2f 2026-07-03 19:46:44 +0800 Refresh workflow state after triage UI update</p>
+          <p>49 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M assets/app.css； M logs/index.html； M logs/views/2026-06-18-knowledge-edc7455a.html； M logs/views/2026-06-20-hook-model-132c5c65.html； M logs/views/2026-06-29-evening-close-631a6a14.html</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
@@ -137,15 +137,15 @@
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
-          <h2>项目协作层可用</h2>
-          <p class="area">项目协作层</p>
+          <h2>待我确认可用</h2>
+          <p class="area">待我确认</p>
           <p>2 个项目；user_waiting=3。</p>
         </article>
         <article class="check pass">
           <div class="status">PASS</div>
-          <h2>自动归档策略可用</h2>
-          <p class="area">自动归档策略</p>
-          <p>backup=7, prune=0, cache=0</p>
+          <h2>备份与清理可用</h2>
+          <p class="area">备份与清理</p>
+          <p>backup=7, prune=0, cache=2</p>
         </article></section>
   </main>
   <footer class="wrap">Run make workflow-audit to refresh this page.</footer>

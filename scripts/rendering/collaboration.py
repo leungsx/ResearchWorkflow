@@ -203,9 +203,9 @@ def write_collaboration_html(state: dict[str, Any]) -> None:
     <section class="list">{cards or '<div class="panel">暂无项目状态。</div>'}</section>
 """
     html_text = render_shell(
-        title="项目协作层",
-        subtitle="把用户决策、Codex 可执行事项和项目入口放在同一页。",
-        current="项目协作",
+        title="待我确认",
+        subtitle="集中查看需要你判断的事项、Codex 可继续推进的任务和项目入口。",
+        current="待我确认",
         body=body,
         output=COLLABORATION_HTML,
         module="系统",

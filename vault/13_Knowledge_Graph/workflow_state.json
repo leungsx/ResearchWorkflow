@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T19:46:20",
+  "generated_at": "2026-07-03T20:05:48",
   "entrypoints": {
     "study_dashboard": "study_dashboard.html",
     "today": "paper_reading/today.html",
@@ -17,7 +17,7 @@
     "manifest_rows": 144,
     "search_entries": 144,
     "project_count": 2,
-    "git_dirty_paths": 0
+    "git_dirty_paths": 45
   },
   "audit": {
     "counts": {
@@ -90,13 +90,13 @@
         "area": "备份",
         "status": "WARN",
         "title": "最近备份超过 36 小时",
-        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 47.4 小时前。"
+        "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 47.7 小时前。"
       },
       {
         "area": "Git/异地备份",
         "status": "PASS",
         "title": "Git 本地和远程快照状态正常",
-        "detail": "upstream=origin/main；last commit: 8bd5fb4 2026-07-03 19:33:52 +0800 Refresh workflow state after deep read UI update"
+        "detail": "upstream=origin/main；last commit: b1a4a2f 2026-07-03 19:46:44 +0800 Refresh workflow state after triage UI update"
       },
       {
         "area": "Token/记忆",
@@ -252,7 +252,7 @@
       "latest_deep_read": {
         "title": "2026-07-03 精读：公共图书馆阅读服务类抖音短视频传播效果",
         "path": "paper_reading/2026-07-03-reading-service-douyin-fsqca.html",
-        "updated_at": "2026-07-03T09:10:37"
+        "updated_at": "2026-07-03T19:26:59"
       },
       "next_reading_candidates": [
         {

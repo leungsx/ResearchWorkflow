@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T19:47:05",
+  "generated_at": "2026-07-03T20:07:57",
   "date": "2026-07-03",
   "audit_mode": "readonly",
-  "pre_refresh_state_hash": "d7d82d863d1fa68f024c14bdd97cf9b71390ce97720d8bfeda7a6453f47a3e36",
-  "post_refresh_state_hash": "d7d82d863d1fa68f024c14bdd97cf9b71390ce97720d8bfeda7a6453f47a3e36",
+  "pre_refresh_state_hash": "e15f519947d2ba83f2575b12becb900c3ac0a5d393f453ddcab852f23fc7ff67",
+  "post_refresh_state_hash": "e15f519947d2ba83f2575b12becb900c3ac0a5d393f453ddcab852f23fc7ff67",
   "summary": {
     "counts": {
       "PASS": 16,
@@ -80,15 +80,15 @@
     },
     {
       "area": "备份",
-      "status": "WARN",
-      "title": "最近备份超过 36 小时",
-      "detail": "backups/researchworkflow-critical-20260701-200737.zip，约 47.7 小时前。"
+      "status": "PASS",
+      "title": "最近备份可用",
+      "detail": "backups/researchworkflow-critical-20260703-200749.zip，约 0.0 小时前。"
     },
     {
       "area": "Git/异地备份",
-      "status": "PASS",
-      "title": "Git 本地和远程快照状态正常",
-      "detail": "upstream=origin/main；last commit: b1a4a2f 2026-07-03 19:46:44 +0800 Refresh workflow state after triage UI update"
+      "status": "WARN",
+      "title": "存在尚未提交的 Git 改动",
+      "detail": "49 个路径待快照： M Makefile； M action_queue.html； M archive_policy.html； M assets/app.css； M logs/index.html； M logs/views/2026-06-18-knowledge-edc7455a.html； M logs/views/2026-06-20-hook-model-132c5c65.html； M logs/views/2026-06-29-evening-close-631a6a14.html"
     },
     {
       "area": "Token/记忆",
@@ -115,16 +115,16 @@
       "detail": "10 个开放行动。"
     },
     {
-      "area": "项目协作层",
+      "area": "待我确认",
       "status": "PASS",
-      "title": "项目协作层可用",
+      "title": "待我确认可用",
       "detail": "2 个项目；user_waiting=3。"
     },
     {
-      "area": "自动归档策略",
+      "area": "备份与清理",
       "status": "PASS",
-      "title": "自动归档策略可用",
-      "detail": "backup=7, prune=0, cache=0"
+      "title": "备份与清理可用",
+      "detail": "backup=7, prune=0, cache=2"
     }
   ]
 }

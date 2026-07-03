@@ -6,6 +6,7 @@
   <title>行动队列</title>
   <link rel="stylesheet" href="assets/app.css">
 
+  <script src="assets/app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到正文</a>
@@ -16,7 +17,7 @@
         <div>
           <h1>行动队列</h1>
           <p class="sub">按优先级排列今天最该处理的事项，先处理高价值学习和阻塞项。</p>
-          <p class="page-meta">Generated 2026-07-03T19:46:20</p>
+          <p class="page-meta">Generated 2026-07-03T20:00:03</p>
         </div>
         <div class="page-primary-action" hidden></div>
       </div>
@@ -33,7 +34,23 @@
     </div>
   </header>
   <main class="wrap" id="main-content">
-<section class="metrics">
+<section class="panel wide cta-card">
+      <div class="cta-layout">
+        <div>
+          <p class="eyebrow">今日主任务</p>
+          <h2 class="cta-title"><a href="knowledge_cards/review_today.html">完成 5 个到期知识卡复习</a></h2>
+          <p>先主动回忆，再打开知识卡核对概念、误区和研究用法。</p>
+          <p class="meta">完成后：继续今日精读，或进入核页码补齐写作证据。</p>
+        </div>
+        <div class="command-stack">
+          <a class="inline-button primary" href="knowledge_cards/review_today.html">打开入口</a>
+          <button class="inline-button" type="button" data-copy="make review-server-ensure" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span>
+          <code>make review-server-ensure</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics">
       <div class="metric"><b>10</b><span class="meta">开放行动</span></div>
       <div class="metric"><b>6</b><span class="meta">高优先级</span></div>
       <div class="metric"><b>4</b><span class="meta">行动类型</span></div>
@@ -43,7 +60,7 @@
           <div>
             <h2><a href="knowledge_cards/review_today.html">完成 5 个到期知识卡复习</a></h2>
             <p>先主动回忆，再打开知识卡核对概念、误区和研究用法。</p>
-            <p class="meta">review · priority 90 · vault/14_Review_Queue/review_state.json</p>
+            <p class="meta">复习任务 · 优先级 90 · 来源 vault/14_Review_Queue/review_state.json</p>
           </div>
         </article>
         <article class="action task-action">
@@ -51,7 +68,7 @@
           <div>
             <h2><a href="knowledge_cards/views/concept-44250b7b.html">复习：传播力评价</a></h2>
             <p>传播力评价为什么不能等同于图书馆服务价值？</p>
-            <p class="meta">review_item · priority 80 · vault/02_Concepts/传播力评价.md</p>
+            <p class="meta">知识卡复习 · 优先级 80 · 来源 vault/02_Concepts/传播力评价.md</p>
           </div>
         </article>
         <article class="action task-action">
@@ -59,7 +76,7 @@
           <div>
             <h2><a href="knowledge_cards/views/method-e2773847.html">复习：图书馆短视频内容质量评价</a></h2>
             <p>图书馆短视频内容质量评价应如何兼顾知识性、趣味性和服务相关性？</p>
-            <p class="meta">review_item · priority 80 · vault/03_Methods/图书馆短视频内容质量评价.md</p>
+            <p class="meta">知识卡复习 · 优先级 80 · 来源 vault/03_Methods/图书馆短视频内容质量评价.md</p>
           </div>
         </article>
         <article class="action task-action">
@@ -67,7 +84,7 @@
           <div>
             <h2><a href="knowledge_cards/views/concept-4358f2f5.html">复习：平台互动-服务触达-阅读转化</a></h2>
             <p>平台互动、服务触达、阅读转化三层分别应该放哪些指标？</p>
-            <p class="meta">review_item · priority 80 · vault/02_Concepts/平台互动-服务触达-阅读转化.md</p>
+            <p class="meta">知识卡复习 · 优先级 80 · 来源 vault/02_Concepts/平台互动-服务触达-阅读转化.md</p>
           </div>
         </article>
         <article class="action task-action">
@@ -75,7 +92,7 @@
           <div>
             <h2><a href="knowledge_cards/views/method-91db7b6b.html">复习：熵权法</a></h2>
             <p>熵权法为什么会给差异更大的指标更高权重？</p>
-            <p class="meta">review_item · priority 80 · vault/03_Methods/熵权法.md</p>
+            <p class="meta">知识卡复习 · 优先级 80 · 来源 vault/03_Methods/熵权法.md</p>
           </div>
         </article>
         <article class="action task-action">
@@ -83,7 +100,7 @@
           <div>
             <h2><a href="knowledge_cards/views/method-579dd6c5.html">复习：爆款指数</a></h2>
             <p>爆款指数和总点赞量有什么区别？为什么它仍不能代表服务价值？</p>
-            <p class="meta">review_item · priority 80 · vault/03_Methods/爆款指数.md</p>
+            <p class="meta">知识卡复习 · 优先级 80 · 来源 vault/03_Methods/爆款指数.md</p>
           </div>
         </article>
         <article class="action task-action">
@@ -91,15 +108,15 @@
           <div>
             <h2><a href="workflow_health.html">处理提醒：存在到期复习项</a></h2>
             <p>5 项到期：传播力评价；平台互动-服务触达-阅读转化；熵权法；爆款指数；图书馆短视频内容质量评价</p>
-            <p class="meta">audit_warn · priority 70 · 复习队列</p>
+            <p class="meta">系统提醒 · 优先级 70 · 来源 复习队列</p>
           </div>
         </article>
         <article class="action task-action">
           <div class="rank">#8</div>
           <div>
             <h2><a href="workflow_health.html">处理提醒：最近备份超过 36 小时</a></h2>
-            <p>backups/researchworkflow-critical-20260701-200737.zip，约 47.4 小时前。</p>
-            <p class="meta">audit_warn · priority 70 · 备份</p>
+            <p>backups/researchworkflow-critical-20260701-200737.zip，约 47.7 小时前。</p>
+            <p class="meta">系统提醒 · 优先级 70 · 来源 备份</p>
           </div>
         </article>
         <article class="action task-action">
@@ -107,7 +124,7 @@
           <div>
             <h2><a href="paper_reading/views/00-project-dashboard-dd8418ad.html">图书馆短视频相关研究：Incoming 分拣建议：先把《公共图书馆短视频公众平台建设现状分析》入库为稳定全文，再生成 Reader。</a></h2>
             <p>来自项目状态的下一步建议。</p>
-            <p class="meta">project · priority 60 · library_short_video</p>
+            <p class="meta">项目推进 · 优先级 60 · 来源 library_short_video</p>
           </div>
         </article>
         <article class="action task-action">
@@ -115,7 +132,7 @@
           <div>
             <h2><a href="paper_reading/views/00-project-dashboard-dd8418ad.html">图书馆短视频相关研究：下一篇阅读优先选择已有 PDF/Reader 且能推进传播力评价或服务价值指标的文献。</a></h2>
             <p>来自项目状态的下一步建议。</p>
-            <p class="meta">project · priority 60 · library_short_video</p>
+            <p class="meta">项目推进 · 优先级 60 · 来源 library_short_video</p>
           </div>
         </article></section>
   </main>

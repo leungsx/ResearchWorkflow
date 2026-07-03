@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-07-03T18:38:32",
+  "generated_at": "2026-07-03T20:00:03",
   "entrypoint": "project_collaboration.html",
   "summary": {
     "project_count": 2,
@@ -40,7 +40,7 @@
       "latest_deep_read": {
         "title": "2026-07-03 精读：公共图书馆阅读服务类抖音短视频传播效果",
         "path": "paper_reading/2026-07-03-reading-service-douyin-fsqca.html",
-        "updated_at": "2026-07-03T09:10:37"
+        "updated_at": "2026-07-03T19:26:59"
       },
       "entrypoints": {
         "dashboard": "paper_reading/views/00-project-dashboard-dd8418ad.html",

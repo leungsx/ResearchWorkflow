@@ -21,6 +21,16 @@ from rendering.ui import render_shell
 from rendering.workflow_state import build_workflow_state, read_json, rel
 
 
+ACTION_KIND_LABELS = {
+    "audit_fail": "审计失败",
+    "audit_warn": "系统提醒",
+    "review": "复习任务",
+    "review_item": "知识卡复习",
+    "project": "项目推进",
+    "continue": "继续推进",
+}
+
+
 def action_id(kind: str, title: str, index: int) -> str:
     safe = "".join(char.lower() if char.isalnum() else "-" for char in title)[:42].strip("-")
     return f"{kind}-{index + 1}-{safe or 'item'}"
@@ -146,21 +156,77 @@ def href_for(path: str) -> str:
     return html.escape(path, quote=True)
 
 
+def action_kind_label(kind: object) -> str:
+    return ACTION_KIND_LABELS.get(str(kind), str(kind))
+
+
+def copy_command_for_action(action: dict[str, Any]) -> str:
+    kind = str(action.get("kind", ""))
+    source = str(action.get("source", ""))
+    entrypoint = str(action.get("entrypoint", "action_queue.html")) or "action_queue.html"
+    if kind.startswith("audit"):
+        return "make workflow-audit-readonly"
+    if kind in {"review", "review_item"}:
+        return "make review-server-ensure"
+    if kind == "project" and source:
+        return f"make project-state PROJECT={source}"
+    return f"open {entrypoint}"
+
+
+def next_step_for_action(action: dict[str, Any]) -> str:
+    kind = str(action.get("kind", ""))
+    if kind == "review":
+        return "完成后：继续今日精读，或进入核页码补齐写作证据。"
+    if kind == "review_item":
+        return "完成后：回到今日复习，继续下一张知识卡。"
+    if kind.startswith("audit"):
+        return "完成后：重新运行系统体检，确认提醒是否消失。"
+    if kind == "project":
+        return "完成后：打开写论文或找证据，把结果沉淀到项目工作台。"
+    return "完成后：回到今日工作台选择下一项。"
+
+
+def copy_button(command: str) -> str:
+    escaped = html.escape(command, quote=True)
+    return f'<button class="inline-button" type="button" data-copy="{escaped}" data-label="复制命令">复制命令</button><span class="copy-feedback" aria-live="polite"></span>'
+
+
 def write_action_queue_html(queue: dict[str, Any]) -> None:
     actions = queue.get("actions", [])
+    primary = actions[0] if actions else {}
+    primary_entry = str(primary.get("entrypoint", "paper_reading/today.html"))
+    primary_command = copy_command_for_action(primary) if primary else "make daily"
+    primary_html = f"""
+    <section class="panel wide cta-card">
+      <div class="cta-layout">
+        <div>
+          <p class="eyebrow">今日主任务</p>
+          <h2 class="cta-title"><a href="{href_for(primary_entry)}">{html.escape(str(primary.get("title", "从今日精读继续推进")))}</a></h2>
+          <p>{html.escape(str(primary.get("reason", "当前没有阻塞项；优先继续阅读、复习或核验证据。")))}</p>
+          <p class="meta">{html.escape(next_step_for_action(primary) if primary else "完成后：回到今日工作台选择下一项。")}</p>
+        </div>
+        <div class="command-stack">
+          <a class="inline-button primary" href="{href_for(primary_entry)}">打开入口</a>
+          {copy_button(primary_command)}
+          <code>{html.escape(primary_command)}</code>
+        </div>
+      </div>
+    </section>
+"""
     rows = "\n".join(
         f"""        <article class="action task-action">
           <div class="rank">#{action.get("rank", "")}</div>
           <div>
             <h2><a href="{href_for(str(action.get("entrypoint", "")))}">{html.escape(str(action.get("title", "")))}</a></h2>
             <p>{html.escape(str(action.get("reason", "")))}</p>
-            <p class="meta">{html.escape(str(action.get("kind", "")))} · priority {action.get("priority", "")} · {html.escape(str(action.get("source", "")))}</p>
+            <p class="meta">{html.escape(action_kind_label(action.get("kind", "")))} · 优先级 {action.get("priority", "")} · 来源 {html.escape(str(action.get("source", "") or "系统生成"))}</p>
           </div>
         </article>"""
         for action in actions
     )
     summary = queue.get("summary", {})
     body = f"""
+    {primary_html}
     <section class="metrics">
       <div class="metric"><b>{summary.get("total_open", 0)}</b><span class="meta">开放行动</span></div>
       <div class="metric"><b>{summary.get("high_priority", 0)}</b><span class="meta">高优先级</span></div>

@@ -478,14 +478,14 @@ def check_action_queue(checks: list[Check]) -> None:
 def check_collaboration_state(checks: list[Check]) -> None:
     payload = read_json(COLLABORATION_STATE)
     if not isinstance(payload, dict):
-        add(checks, "项目协作层", "FAIL", "collaboration_state.json 缺失或不是合法 JSON", rel(COLLABORATION_STATE))
+        add(checks, "待我确认", "FAIL", "collaboration_state.json 缺失或不是合法 JSON", rel(COLLABORATION_STATE))
         return
-    if not COLLABORATION_PAGE.exists() or "项目协作层" not in read_text(COLLABORATION_PAGE):
-        add(checks, "项目协作层", "FAIL", "项目协作 HTML 入口缺失或内容异常", rel(COLLABORATION_PAGE))
+    if not COLLABORATION_PAGE.exists() or "待我确认" not in read_text(COLLABORATION_PAGE):
+        add(checks, "待我确认", "FAIL", "待我确认 HTML 入口缺失或内容异常", rel(COLLABORATION_PAGE))
         return
     projects = payload.get("projects", [])
     if not isinstance(projects, list):
-        add(checks, "项目协作层", "FAIL", "collaboration_state.projects 不是数组", rel(COLLABORATION_STATE))
+        add(checks, "待我确认", "FAIL", "collaboration_state.projects 不是数组", rel(COLLABORATION_STATE))
         return
     bad_targets: list[str] = []
     for project in projects:
@@ -496,30 +496,30 @@ def check_collaboration_state(checks: list[Check]) -> None:
                 bad_targets.append(f"{project.get('slug', '')}.{key} -> {path}")
     summary = payload.get("summary", {})
     if summary.get("project_count") != len(projects):
-        add(checks, "项目协作层", "FAIL", "协作层项目计数不一致", f"project_count={summary.get('project_count')}, actual={len(projects)}")
+        add(checks, "待我确认", "FAIL", "待确认项目计数不一致", f"project_count={summary.get('project_count')}, actual={len(projects)}")
     elif bad_targets:
-        add(checks, "项目协作层", "FAIL", "协作层存在失效或非 HTML 入口", "；".join(bad_targets[:8]))
+        add(checks, "待我确认", "FAIL", "存在失效或非 HTML 入口", "；".join(bad_targets[:8]))
     else:
-        add(checks, "项目协作层", "PASS", "项目协作层可用", f"{len(projects)} 个项目；user_waiting={summary.get('user_waiting', 0)}。")
+        add(checks, "待我确认", "PASS", "待我确认可用", f"{len(projects)} 个项目；user_waiting={summary.get('user_waiting', 0)}。")
 
 
 def check_archive_policy(checks: list[Check]) -> None:
     payload = read_json(ARCHIVE_POLICY)
     if not isinstance(payload, dict):
-        add(checks, "自动归档策略", "FAIL", "archive_policy.json 缺失或不是合法 JSON", rel(ARCHIVE_POLICY))
+        add(checks, "备份与清理", "FAIL", "archive_policy.json 缺失或不是合法 JSON", rel(ARCHIVE_POLICY))
         return
-    if not ARCHIVE_POLICY_PAGE.exists() or "自动归档策略" not in read_text(ARCHIVE_POLICY_PAGE):
-        add(checks, "自动归档策略", "FAIL", "自动归档策略 HTML 入口缺失或内容异常", rel(ARCHIVE_POLICY_PAGE))
+    if not ARCHIVE_POLICY_PAGE.exists() or "备份与清理" not in read_text(ARCHIVE_POLICY_PAGE):
+        add(checks, "备份与清理", "FAIL", "备份与清理 HTML 入口缺失或内容异常", rel(ARCHIVE_POLICY_PAGE))
         return
     summary = payload.get("summary", {})
     actions = payload.get("actions", [])
     if not isinstance(actions, list) or not actions:
-        add(checks, "自动归档策略", "FAIL", "归档策略缺少建议动作", rel(ARCHIVE_POLICY))
+        add(checks, "备份与清理", "FAIL", "缺少建议动作", rel(ARCHIVE_POLICY))
     elif "backup_count" not in summary or "cache_candidates" not in summary:
-        add(checks, "自动归档策略", "FAIL", "归档策略 summary 缺少关键计数", rel(ARCHIVE_POLICY))
+        add(checks, "备份与清理", "FAIL", "summary 缺少关键计数", rel(ARCHIVE_POLICY))
     else:
         detail = f"backup={summary.get('backup_count', 0)}, prune={summary.get('backup_prune_candidates', 0)}, cache={summary.get('cache_candidates', 0)}"
-        add(checks, "自动归档策略", "PASS", "自动归档策略可用", detail)
+        add(checks, "备份与清理", "PASS", "备份与清理可用", detail)
 
 
 def check_review_queue(checks: list[Check], day: dt.date) -> None:
@@ -765,9 +765,9 @@ def html_report(day: dt.date, checks: list[Check], audit_mode: str) -> str:
     <section class="checks">{cards}</section>
 """
     return render_shell(
-        title="ResearchWorkflow 体检",
+        title="系统体检",
         subtitle="检查入口、链接、镜像页、搜索、复习队列和系统状态是否可用。",
-        current="工作流体检",
+        current="系统体检",
         body=body,
         output=HEALTH_HTML,
         module="系统",

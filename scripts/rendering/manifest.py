@@ -166,10 +166,10 @@ def artifact_manifest_rows() -> list[dict[str, str]]:
         (KNOWLEDGE_GRAPH / "index.html", "knowledge_graph", "知识图谱入口"),
         (SEARCH_INDEX_HTML, "search", "全局搜索入口"),
         (HTML_LOGS / "index.html", "logs_index", "学习日志入口"),
-        (WORKFLOW_STATE_HTML, "workflow_state", "工作流总状态"),
+        (WORKFLOW_STATE_HTML, "workflow_state", "当前状态"),
         (ACTION_QUEUE_HTML, "action_queue", "行动队列"),
-        (COLLABORATION_HTML, "project_collaboration", "项目协作层"),
-        (ARCHIVE_POLICY_HTML, "archive_policy", "自动归档策略"),
+        (COLLABORATION_HTML, "project_collaboration", "待我确认"),
+        (ARCHIVE_POLICY_HTML, "archive_policy", "备份与清理"),
     ]:
         if source.exists():
             add(source, source, display_type, title)

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ResearchWorkflow 学习仪表盘</title>
+  <title>今日工作台</title>
   <link rel="stylesheet" href="assets/app.css">
 
   <script src="assets/app.js" defer></script>
@@ -15,8 +15,8 @@
       <p class="page-kicker">ResearchWorkflow / 总览</p>
       <div class="page-heading">
         <div>
-          <h1>ResearchWorkflow 学习仪表盘</h1>
-          <p class="sub">论文精读、知识卡、知识图谱和学习日志的统一入口。</p>
+          <h1>今日工作台</h1>
+          <p class="sub">打开后先看今日主任务，再选择候选任务；系统维护入口默认降级。</p>
           <p class="page-meta">当前项目：library_short_video</p>
         </div>
         <div class="page-primary-action" hidden></div>
@@ -40,15 +40,31 @@
       <section class="panel wide cta-card" data-mode="all reading writing evidence maintenance">
         <div class="cta-layout">
           <div>
-            <p class="eyebrow">Today's primary action</p>
+            <p class="eyebrow">今日主任务</p>
             <h2 class="cta-title"><a href="knowledge_cards/review_today.html">完成 5 个到期知识卡复习</a></h2>
             <p>先主动回忆，再打开知识卡核对概念、误区和研究用法。</p>
+            <p class="meta">完成后：进入今日精读，或打开页码核验处理写作证据。</p>
           </div>
           <div class="command-stack">
             <a class="inline-button primary" href="knowledge_cards/review_today.html">打开入口</a>
             <button type="button" class="inline-button" data-copy="make review-server-ensure" data-label="复制命令">复制命令</button><div class="copy-feedback" aria-live="polite"></div>
             <code>make review-server-ensure</code>
           </div>
+        </div>
+        <div class="task-candidates">
+          <h3>接下来可以做</h3>
+          <div class="list"><div class="item">
+              <a href="knowledge_cards/views/concept-44250b7b.html">复习：传播力评价</a>
+              <div class="meta">传播力评价为什么不能等同于图书馆服务价值？</div>
+            </div>
+<div class="item">
+              <a href="knowledge_cards/views/method-e2773847.html">复习：图书馆短视频内容质量评价</a>
+              <div class="meta">图书馆短视频内容质量评价应如何兼顾知识性、趣味性和服务相关性？</div>
+            </div>
+<div class="item">
+              <a href="knowledge_cards/views/concept-4358f2f5.html">复习：平台互动-服务触达-阅读转化</a>
+              <div class="meta">平台互动、服务触达、阅读转化三层分别应该放哪些指标？</div>
+            </div></div>
         </div>
       </section>
       <section class="panel wide" data-mode="all reading writing evidence maintenance">
@@ -75,24 +91,28 @@
       </section>
 
 
-      <section class="panel wide" data-mode="maintenance evidence writing">
-        <h2>系统健康与备份</h2>
-        <div class="list">
+      <section class="panel wide" data-mode="maintenance">
+        <h2>系统工具</h2>
+        <p class="meta">出问题或日终收敛时再看；日常优先处理上方主任务和候选任务。</p>
+        <details>
+          <summary>展开系统状态、备份和维护入口</summary>
+          <div class="list">
           <div class="item"><a href="search/index.html">全局搜索入口</a><div class="meta">搜索论文、知识卡、项目文件、日志和图谱相关资产。</div></div>
-          <div class="item green"><a href="workflow_state.html">工作流总状态</a><div class="meta">聚合项目、复习、搜索、图谱和审计状态。</div></div>
+          <div class="item green"><a href="workflow_state.html">当前状态</a><div class="meta">聚合项目、复习、搜索、图谱和审计状态。</div></div>
           <div class="item amber"><a href="action_queue.html">行动队列</a><div class="meta">按优先级排列今天最该处理的事项。</div></div>
-          <div class="item green"><a href="project_collaboration.html">项目协作层</a><div class="meta">查看用户待确认、Codex 可推进和项目入口。</div></div>
-          <div class="item amber"><a href="archive_policy.html">自动归档策略</a><div class="meta">查看备份、日志、生成页和缓存文件的归档策略。</div></div>
-          <div class="item"><a href="workflow_health.html">工作流体检页</a><div class="meta">检查入口、链接、镜像页、图谱、归档、复习队列和备份。</div></div>
-          <div class="item green"><a href="projects/library_short_video/literature/incoming_pdf_triage.html">Incoming PDF 分拣</a><div class="meta">扫描 incoming 全文，匹配矩阵并建议入库、建 Reader 或归档重复件。</div></div>
-          <div class="item green"><a href="projects/library_short_video/literature/evidence_locator_table.html">证据核验表</a><div class="meta">集中查看主张、文献、Reader block、页码和核验状态。</div></div>
-          <div class="item amber"><a href="projects/library_short_video/evidence/page_verification_queue.html">页码级证据核验队列</a><div class="meta">按优先级列出 claim 到 source block、页码和 read_status 的核验任务。</div></div>
-          <div class="item amber"><a href="projects/library_short_video/manuscript/writing_panel.html">论文写作推进面板</a><div class="meta">把已读文献转成研究问题、变量指标、机制链和可写段落。</div></div>
+          <div class="item green"><a href="project_collaboration.html">待我确认</a><div class="meta">查看用户待确认、Codex 可推进和项目入口。</div></div>
+          <div class="item amber"><a href="archive_policy.html">备份与清理</a><div class="meta">查看备份、日志、生成页和缓存文件的归档策略。</div></div>
+          <div class="item"><a href="workflow_health.html">系统体检</a><div class="meta">检查入口、链接、镜像页、图谱、归档、复习队列和备份。</div></div>
+          <div class="item green"><a href="projects/library_short_video/literature/incoming_pdf_triage.html">PDF 分拣</a><div class="meta">扫描 incoming 全文，匹配矩阵并建议入库、建 Reader 或归档重复件。</div></div>
+          <div class="item green"><a href="projects/library_short_video/literature/evidence_locator_table.html">找证据</a><div class="meta">集中查看主张、文献、Reader block、页码和核验状态。</div></div>
+          <div class="item amber"><a href="projects/library_short_video/evidence/page_verification_queue.html">核页码</a><div class="meta">按优先级列出 claim 到 source block、页码和 read_status 的核验任务。</div></div>
+          <div class="item amber"><a href="projects/library_short_video/manuscript/writing_panel.html">写论文</a><div class="meta">把已读文献转成研究问题、变量指标、机制链和可写段落。</div></div>
           <div class="item rose"><a href="knowledge_cards/review_today.html">今日复习入口</a><div class="meta">5 个知识点今天需要主动回忆。</div></div>
           <div class="item green"><a href="backups/index.html">备份索引</a><div class="meta">researchworkflow-critical-20260701-200737.zip</div></div>
           <div class="item amber"><a href="workflow_health.html">最近审计概览</a><div class="meta">vault/07_Codex_Logs/workflow_audits/2026-07-03-workflow-audit.md</div></div>
           <div class="item rose">最近文件归类清单<div class="meta">vault/07_Codex_Logs/file_sweeps/2026-07-03-file-sweep.md</div></div>
-        </div>
+          </div>
+        </details>
       </section>
 
       <section class="panel wide" data-mode="reading">

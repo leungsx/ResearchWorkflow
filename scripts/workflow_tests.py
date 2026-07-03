@@ -346,6 +346,42 @@ class WorkflowSmokeTests(unittest.TestCase):
         self.assertIn("assets/app.js", text)
         self.assertIn("rw-dashboard-mode", app_js)
 
+    def test_learning_dashboard_is_today_workbench(self) -> None:
+        text = read_text(ROOT / "study_dashboard.html")
+        self.assertIn("<title>今日工作台</title>", text)
+        self.assertIn("今日主任务", text)
+        self.assertIn("接下来可以做", text)
+        self.assertIn("完成后：", text)
+        self.assertIn("展开系统状态、备份和维护入口", text)
+        self.assertIn("系统工具", text)
+        self.assertIn("data-copy=", text)
+        self.assertNotIn("ResearchWorkflow 学习仪表盘", text)
+        self.assertNotIn("Today's primary action", text)
+
+    def test_action_queue_starts_with_primary_task(self) -> None:
+        text = read_text(ROOT / "action_queue.html")
+        self.assertIn("今日主任务", text)
+        self.assertIn("打开入口", text)
+        self.assertIn("复制命令", text)
+        self.assertIn("完成后：", text)
+        self.assertIn("优先级", text)
+        self.assertNotIn("priority ", text)
+
+    def test_learning_dashboard_source_uses_shared_shell_contract(self) -> None:
+        text = read_text(ROOT / "scripts" / "build_learning_dashboard.py")
+        self.assertIn("from rendering.ui import render_shell", text)
+        self.assertIn("return render_shell(", text)
+        self.assertNotIn("def common_css", text)
+        self.assertNotIn("def page_script", text)
+
+    def test_makefile_exposes_lightweight_daily_targets(self) -> None:
+        text = read_text(ROOT / "Makefile")
+        self.assertRegex(text, r"(?m)^daily:\n")
+        self.assertRegex(text, r"(?m)^daily-git:\n")
+        self.assertIn("$(MAKE) data-refresh", text)
+        self.assertIn("$(MAKE) page-render", text)
+        self.assertIn("workflow-audit-readonly", text)
+
     def test_plain_generated_card_does_not_load_dashboard_interaction_script(self) -> None:
         text = read_text(ROOT / "knowledge_cards" / "views" / "concept-sicas-e14df8c7.html")
         self.assertNotIn("rw-dashboard-mode", text)
@@ -370,8 +406,38 @@ class WorkflowSmokeTests(unittest.TestCase):
                 text = read_text(page)
                 self.assertIn("assets/app.css", text)
                 self.assertIn("ResearchWorkflow /", text)
+                self.assertIn('class="site-header"', text)
+                self.assertIn('class="nav global-nav"', text)
+                self.assertIn('class="nav subnav"', text)
                 self.assertLessEqual(len(nav_links(text, "global-nav")), 6)
                 self.assertGreater(len(nav_links(text, "subnav")), 0)
+
+    def test_core_entry_titles_are_task_oriented(self) -> None:
+        expected = {
+            ROOT / "study_dashboard.html": "今日工作台",
+            ROOT / "workflow_state.html": "当前状态",
+            ROOT / "workflow_health.html": "系统体检",
+            ROOT / "project_collaboration.html": "待我确认",
+            ROOT / "archive_policy.html": "备份与清理",
+            project_path("literature", "evidence_locator_table.html"): "找证据",
+            project_path("evidence", "page_verification_queue.html"): "核页码",
+            project_path("manuscript", "writing_panel.html"): "写论文",
+        }
+        for page, title in expected.items():
+            with self.subTest(page=page.relative_to(ROOT).as_posix()):
+                text = read_text(page)
+                self.assertIn(f"<title>{title}</title>", text)
+                self.assertRegex(text, rf"<h1>{re.escape(title)}</h1>")
+
+    def test_no_generated_page_inlines_full_design_system_css(self) -> None:
+        offenders: list[str] = []
+        for page in user_html_pages():
+            text = read_text(page)
+            for block in re.findall(r"<style\b[^>]*>(.*?)</style>", text, re.S | re.I):
+                line_count = len(block.splitlines())
+                if line_count > 240:
+                    offenders.append(f"{page.relative_to(ROOT)} has {line_count} style lines")
+        self.assertEqual([], offenders)
 
     def test_current_deep_read_page_uses_shared_workflow_shell(self) -> None:
         page = ROOT / "paper_reading" / "2026-07-03-reading-service-douyin-fsqca.html"

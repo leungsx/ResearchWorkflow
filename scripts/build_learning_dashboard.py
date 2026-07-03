@@ -100,408 +100,6 @@ def graph_counts() -> tuple[int, int, list[tuple[str, int]]]:
     return len(nodes), len(edges), counter.most_common(10)
 
 
-def common_css() -> str:
-    return """
-    :root {
-      color-scheme: light;
-      --ink: #1e293b;
-      --muted: #64748b;
-      --line: #dbe4ee;
-      --paper: #ffffff;
-      --soft: #f8fafc;
-      --blue: #2563eb;
-      --green: #16805d;
-      --amber: #a15c07;
-      --rose: #b4234b;
-      --ring: rgba(37, 99, 235, 0.34);
-      --shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
-      color: var(--ink);
-      background: #f8fafc;
-      line-height: 1.6;
-    }
-    header {
-      background: var(--paper);
-      border-bottom: 1px solid var(--line);
-    }
-    .wrap { max-width: 1160px; margin: 0 auto; padding: 28px 22px; }
-    h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; }
-    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
-    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
-    p { margin: 0 0 12px; }
-    a { color: var(--blue); text-decoration: none; text-underline-offset: 3px; }
-    a:hover { text-decoration: underline; }
-    a:focus-visible,
-    button:focus-visible,
-    select:focus-visible,
-    input:focus-visible {
-      outline: 3px solid var(--ring);
-      outline-offset: 2px;
-      border-radius: 7px;
-    }
-    .skip-link {
-      position: absolute;
-      left: 18px;
-      top: 10px;
-      z-index: 20;
-      transform: translateY(-140%);
-      background: var(--ink);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 7px;
-    }
-    .skip-link:focus { transform: translateY(0); }
-    .sub { color: var(--muted); max-width: 780px; }
-    .nav { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-    .nav a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-      padding: 7px 11px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font-size: 14px;
-      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
-    }
-    .nav a:hover {
-      border-color: #bfcee0;
-      background: #f8fbff;
-      text-decoration: none;
-    }
-    .nav a[aria-current="page"] {
-      border-color: #b9ccff;
-      background: #eef4ff;
-      color: #1d4ed8;
-      font-weight: 650;
-    }
-    main.wrap { padding-top: 22px; }
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
-    .panel {
-      grid-column: span 6;
-      min-width: 0;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-    .panel.wide { grid-column: 1 / -1; }
-    .metric {
-      grid-column: span 3;
-      min-width: 0;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-    }
-    .metric b { display: block; font-size: 28px; line-height: 1.1; }
-    .metric span { color: var(--muted); font-size: 13px; }
-    .list { display: grid; gap: 10px; min-width: 0; }
-    .item {
-      min-width: 0;
-      border-left: 3px solid var(--blue);
-      background: var(--soft);
-      padding: 10px 12px;
-      border-radius: 0 7px 7px 0;
-      transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
-    }
-    .item:hover {
-      background: #eef4ff;
-      transform: translateY(-1px);
-    }
-    .item.green { border-left-color: var(--green); }
-    .item.amber { border-left-color: var(--amber); }
-    .item.rose { border-left-color: var(--rose); }
-    .meta { color: var(--muted); font-size: 13px; margin-top: 4px; overflow-wrap: anywhere; }
-    .empty {
-      color: var(--muted);
-      background: var(--soft);
-      border: 1px dashed var(--line);
-      border-radius: 8px;
-      padding: 14px;
-    }
-    .steps { margin: 0; padding-left: 20px; }
-    .steps li { margin: 6px 0; }
-    .mode-switch {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .mode-switch button {
-      min-height: 44px;
-      padding: 7px 12px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
-    }
-    .mode-switch button:hover,
-    .mode-switch button[aria-pressed="true"] {
-      border-color: #b9ccff;
-      background: #eef4ff;
-      color: #1d4ed8;
-    }
-    .cta-card {
-      border-left: 4px solid var(--blue);
-      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
-    }
-    .cta-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
-      gap: 16px;
-      align-items: start;
-    }
-    .cta-title { margin: 4px 0 8px; font-size: 22px; }
-    .eyebrow {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 650;
-      text-transform: uppercase;
-      letter-spacing: 0;
-    }
-    .command-stack {
-      display: grid;
-      gap: 8px;
-    }
-    .inline-button.primary {
-      border-color: #1d4ed8;
-      background: #2563eb;
-      color: #fff;
-    }
-    .inline-button.primary:hover {
-      border-color: #1d4ed8;
-      background: #1d4ed8;
-      color: #fff;
-    }
-    .copy-feedback {
-      min-height: 20px;
-      color: var(--green);
-      font-size: 13px;
-    }
-    [hidden] { display: none !important; }
-    table {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: auto;
-      border-collapse: collapse;
-      font-size: 14px;
-      -webkit-overflow-scrolling: touch;
-    }
-    thead, tbody, tr { width: 100%; }
-    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 9px 8px; vertical-align: top; }
-    th { color: var(--muted); font-weight: 650; background: #fbfdff; }
-    code {
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      background: #eef3f8;
-      border: 1px solid #d8e2ec;
-      border-radius: 5px;
-      padding: 1px 4px;
-      font-size: 0.92em;
-    }
-    pre {
-      overflow: auto;
-      white-space: pre-wrap;
-      background: #13202c;
-      color: #eef6ff;
-      border-radius: 8px;
-      padding: 14px;
-    }
-    pre code {
-      background: transparent;
-      border: 0;
-      color: inherit;
-      padding: 0;
-    }
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .toolbar a, .toolbar button {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      min-height: 44px;
-    }
-    .toolbar button.active {
-      border-color: var(--blue);
-      color: var(--blue);
-      background: #eef4ff;
-    }
-    .inline-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 7px 11px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-      font-size: 14px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
-    }
-    .review-mark { min-width: 112px; }
-    .inline-button:hover {
-      border-color: #b9ccff;
-      background: #eef4ff;
-      color: #1d4ed8;
-    }
-    .inline-button[disabled] {
-      cursor: not-allowed;
-      opacity: 0.58;
-    }
-    .review-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      margin: 0 0 14px;
-    }
-    .review-status {
-      min-height: 24px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .source-path {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 16px;
-      word-break: break-all;
-    }
-    .md-view {
-      max-width: 980px;
-      margin: 0 auto;
-    }
-    .md-view h1 { margin-top: 0; font-size: 28px; }
-    .md-view h2 {
-      margin-top: 28px;
-      padding-top: 10px;
-      border-top: 1px solid var(--line);
-    }
-    .md-view h3 { margin-top: 22px; }
-    .md-view ul, .md-view ol { padding-left: 22px; }
-    .md-view li { margin: 5px 0; }
-    .md-view blockquote {
-      margin: 14px 0;
-      padding: 10px 14px;
-      border-left: 4px solid var(--blue);
-      background: #f0f5ff;
-      color: #24384e;
-    }
-    .md-view table {
-      display: block;
-      overflow-x: auto;
-      white-space: normal;
-      margin: 12px 0 18px;
-    }
-    .wikilink {
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid #cdddeb;
-      background: #f4f8fb;
-      color: #1e5678;
-      border-radius: 999px;
-      padding: 0 7px;
-      font-size: 0.92em;
-    }
-    footer { color: var(--muted); font-size: 12px; padding: 12px 0 24px; }
-    @media (max-width: 840px) {
-      .panel, .metric { grid-column: 1 / -1; }
-      .cta-layout { grid-template-columns: 1fr; }
-      h1 { font-size: 28px; }
-      .wrap { padding-left: 16px; padding-right: 16px; }
-      .nav { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
-      .nav a { flex: 0 0 auto; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-      }
-    }
-    """
-
-
-def page_script(body: str) -> str:
-    blocks: list[str] = []
-    if "data-copy=" in body:
-        blocks.append(
-            """
-      const feedback = new Map();
-      document.querySelectorAll("[data-copy]").forEach((button) => {
-        button.addEventListener("click", async () => {
-          const text = button.getAttribute("data-copy") || "";
-          try {
-            await navigator.clipboard.writeText(text);
-            button.textContent = "已复制";
-            clearTimeout(feedback.get(button));
-            feedback.set(button, setTimeout(() => { button.textContent = button.getAttribute("data-label") || "复制命令"; }, 1600));
-          } catch (_error) {
-            const target = button.nextElementSibling;
-            if (target && target.classList.contains("copy-feedback")) {
-              target.textContent = text;
-            }
-          }
-        });
-      });"""
-        )
-    if "data-mode-button" in body or "data-mode=" in body:
-        blocks.append(
-            """
-      const modeButtons = [...document.querySelectorAll("[data-mode-button]")];
-      const modeSections = [...document.querySelectorAll("[data-mode]")];
-      const setMode = (mode) => {
-        modeButtons.forEach((button) => {
-          button.setAttribute("aria-pressed", String(button.getAttribute("data-mode-button") === mode));
-        });
-        modeSections.forEach((section) => {
-          const modes = (section.getAttribute("data-mode") || "").split(/\\s+/);
-          section.hidden = mode !== "all" && !modes.includes(mode);
-        });
-        localStorage.setItem("rw-dashboard-mode", mode);
-      };
-      modeButtons.forEach((button) => button.addEventListener("click", () => setMode(button.getAttribute("data-mode-button") || "all")));
-      setMode(localStorage.getItem("rw-dashboard-mode") || "all");"""
-        )
-    if not blocks:
-        return ""
-    return """
-  <script>
-    (() => {
-%s
-    })();
-  </script>""" % "\n".join(blocks)
-
-
 def shell(title: str, subtitle: str, current: str, body: str, output: Path) -> str:
     return render_shell(
         title=title,
@@ -532,29 +130,70 @@ def dashboard_command_for_action(action: dict[str, object]) -> str:
     return "make learning-dashboard"
 
 
+def dashboard_next_step_for_action(action: dict[str, object]) -> str:
+    kind = str(action.get("kind", ""))
+    if kind == "review":
+        return "完成后：进入今日精读，或打开页码核验处理写作证据。"
+    if kind == "review_item":
+        return "完成后：回到今日复习入口，继续处理下一张到期知识卡。"
+    if kind.startswith("audit"):
+        return "完成后：重新运行体检，确认 WARN/FAIL 是否消失。"
+    if kind in {"writing", "project"}:
+        return "完成后：回到写作面板，把结果沉淀到研究问题、变量或段落队列。"
+    return "完成后：返回今日工作台，选择下一个候选任务。"
+
+
+def dashboard_target_for_action(action: dict[str, object], fallback: Path) -> Path:
+    entrypoint = str(action.get("entrypoint", ""))
+    if not entrypoint or "://" in entrypoint:
+        return fallback
+    target = ROOT / entrypoint
+    return target if target.exists() else fallback
+
+
+def dashboard_candidate_tasks(out: Path, actions: list[dict[str, object]]) -> str:
+    if not actions:
+        return '<div class="empty">当前没有候选任务；可以从今日精读或写作面板继续。</div>'
+    items: list[str] = []
+    for action in actions[:3]:
+        target = dashboard_target_for_action(action, PAPER_READING / "today.html")
+        items.append(
+            f"""<div class="item">
+              <a href="{href(target, out)}">{esc(str(action.get("title", "继续推进任务")))}</a>
+              <div class="meta">{esc(str(action.get("reason", "根据行动队列排序生成。")))}</div>
+            </div>"""
+        )
+    return '<div class="list">' + "\n".join(items) + "</div>"
+
+
 def dashboard_top_action(out: Path) -> str:
     queue = read_json(ACTION_QUEUE_JSON, {})
     actions = queue.get("actions", []) if isinstance(queue, dict) else []
     action = actions[0] if actions else {}
     title = str(action.get("title", "从今日精读入口继续推进"))
     reason = str(action.get("reason", "当前没有阻塞项；优先继续阅读、复习或核验证据。"))
-    entrypoint = str(action.get("entrypoint", href(PAPER_READING / "today.html", out)))
-    target = ROOT / entrypoint if entrypoint and "://" not in entrypoint else PAPER_READING / "today.html"
+    target = dashboard_target_for_action(action, PAPER_READING / "today.html")
     command = dashboard_command_for_action(action) if action else f"open {href(PAPER_READING / 'today.html', out)}"
-    link = href(target, out) if target.exists() else esc(entrypoint or "paper_reading/today.html")
+    link = href(target, out)
+    candidates = dashboard_candidate_tasks(out, actions[1:4])
     return f"""
       <section class="panel wide cta-card" data-mode="all reading writing evidence maintenance">
         <div class="cta-layout">
           <div>
-            <p class="eyebrow">Today's primary action</p>
+            <p class="eyebrow">今日主任务</p>
             <h2 class="cta-title"><a href="{link}">{esc(title)}</a></h2>
             <p>{esc(reason)}</p>
+            <p class="meta">{esc(dashboard_next_step_for_action(action))}</p>
           </div>
           <div class="command-stack">
             <a class="inline-button primary" href="{link}">打开入口</a>
             {copy_button(command)}
             <code>{esc(command)}</code>
           </div>
+        </div>
+        <div class="task-candidates">
+          <h3>接下来可以做</h3>
+          {candidates}
         </div>
       </section>
 """
@@ -646,24 +285,28 @@ def build_dashboard() -> None:
 
       {today_panel}
 
-      <section class="panel wide" data-mode="maintenance evidence writing">
-        <h2>系统健康与备份</h2>
-        <div class="list">
+      <section class="panel wide" data-mode="maintenance">
+        <h2>系统工具</h2>
+        <p class="meta">出问题或日终收敛时再看；日常优先处理上方主任务和候选任务。</p>
+        <details>
+          <summary>展开系统状态、备份和维护入口</summary>
+          <div class="list">
           <div class="item"><a href="{href(SEARCH_INDEX_HTML, out)}">全局搜索入口</a><div class="meta">搜索论文、知识卡、项目文件、日志和图谱相关资产。</div></div>
-          <div class="item green"><a href="{href(WORKFLOW_STATE_HTML, out)}">工作流总状态</a><div class="meta">聚合项目、复习、搜索、图谱和审计状态。</div></div>
+          <div class="item green"><a href="{href(WORKFLOW_STATE_HTML, out)}">当前状态</a><div class="meta">聚合项目、复习、搜索、图谱和审计状态。</div></div>
           <div class="item amber"><a href="{href(ACTION_QUEUE_HTML, out)}">行动队列</a><div class="meta">按优先级排列今天最该处理的事项。</div></div>
-          <div class="item green"><a href="{href(COLLABORATION_HTML, out)}">项目协作层</a><div class="meta">查看用户待确认、Codex 可推进和项目入口。</div></div>
-          <div class="item amber"><a href="{href(ARCHIVE_POLICY_HTML, out)}">自动归档策略</a><div class="meta">查看备份、日志、生成页和缓存文件的归档策略。</div></div>
-          <div class="item"><a href="{href(WORKFLOW_HEALTH, out)}">工作流体检页</a><div class="meta">检查入口、链接、镜像页、图谱、归档、复习队列和备份。</div></div>
-          {f'<div class="item green"><a href="{href(incoming_page, out)}">Incoming PDF 分拣</a><div class="meta">扫描 incoming 全文，匹配矩阵并建议入库、建 Reader 或归档重复件。</div></div>' if incoming_page.exists() else ''}
-          {f'<div class="item green"><a href="{href(evidence_page, out)}">证据核验表</a><div class="meta">集中查看主张、文献、Reader block、页码和核验状态。</div></div>' if evidence_page.exists() else ''}
-          {f'<div class="item amber"><a href="{href(verification_page, out)}">页码级证据核验队列</a><div class="meta">按优先级列出 claim 到 source block、页码和 read_status 的核验任务。</div></div>' if verification_page.exists() else ''}
-          {f'<div class="item amber"><a href="{href(writing_page, out)}">论文写作推进面板</a><div class="meta">把已读文献转成研究问题、变量指标、机制链和可写段落。</div></div>' if writing_page.exists() else ''}
+          <div class="item green"><a href="{href(COLLABORATION_HTML, out)}">待我确认</a><div class="meta">查看用户待确认、Codex 可推进和项目入口。</div></div>
+          <div class="item amber"><a href="{href(ARCHIVE_POLICY_HTML, out)}">备份与清理</a><div class="meta">查看备份、日志、生成页和缓存文件的归档策略。</div></div>
+          <div class="item"><a href="{href(WORKFLOW_HEALTH, out)}">系统体检</a><div class="meta">检查入口、链接、镜像页、图谱、归档、复习队列和备份。</div></div>
+          {f'<div class="item green"><a href="{href(incoming_page, out)}">PDF 分拣</a><div class="meta">扫描 incoming 全文，匹配矩阵并建议入库、建 Reader 或归档重复件。</div></div>' if incoming_page.exists() else ''}
+          {f'<div class="item green"><a href="{href(evidence_page, out)}">找证据</a><div class="meta">集中查看主张、文献、Reader block、页码和核验状态。</div></div>' if evidence_page.exists() else ''}
+          {f'<div class="item amber"><a href="{href(verification_page, out)}">核页码</a><div class="meta">按优先级列出 claim 到 source block、页码和 read_status 的核验任务。</div></div>' if verification_page.exists() else ''}
+          {f'<div class="item amber"><a href="{href(writing_page, out)}">写论文</a><div class="meta">把已读文献转成研究问题、变量指标、机制链和可写段落。</div></div>' if writing_page.exists() else ''}
           <div class="item rose"><a href="{href(REVIEW_TODAY, out)}">今日复习入口</a><div class="meta">{len(due)} 个知识点今天需要主动回忆。</div></div>
           <div class="item green">{f'<a href="{href(BACKUP_INDEX, out)}">备份索引</a>' if BACKUP_INDEX.exists() else '备份索引'}<div class="meta">{esc(latest_backup.name if latest_backup else '尚未生成备份；运行 make workflow-backup。')}</div></div>
           <div class="item amber"><a href="{href(WORKFLOW_HEALTH, out)}">最近审计概览</a><div class="meta">{esc(str(latest_audit.relative_to(ROOT)) if latest_audit else '运行 make workflow-audit 后生成。')}</div></div>
           <div class="item rose">最近文件归类清单<div class="meta">{esc(str(latest_sweep.relative_to(ROOT)) if latest_sweep else '运行 make codex-sweep 后生成。')}</div></div>
-        </div>
+          </div>
+        </details>
       </section>
 
       <section class="panel wide" data-mode="reading">
@@ -695,7 +338,7 @@ def build_dashboard() -> None:
       </section>
     </section>
 """
-    write_text_if_changed(out, shell("ResearchWorkflow 学习仪表盘", "论文精读、知识卡、知识图谱和学习日志的统一入口。", "总览", body, out))
+    write_text_if_changed(out, shell("今日工作台", "打开后先看今日主任务，再选择候选任务；系统维护入口默认降级。", "总览", body, out))
 
 
 def top_nodes_table(top_nodes: list[tuple[str, int]]) -> str:

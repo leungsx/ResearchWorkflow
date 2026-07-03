@@ -271,7 +271,7 @@ def write_workflow_state_html(state: dict[str, Any]) -> None:
       <section class="panel">
         <h2>审计状态</h2>
         <p><span class="status pass">PASS {audit.get("PASS", 0)}</span> <span class="status warn">WARN {audit.get("WARN", 0)}</span> <span class="status fail">FAIL {audit.get("FAIL", 0)}</span></p>
-        <p class="meta"><a href="workflow_health.html">打开工作流体检页</a></p>
+        <p class="meta"><a href="workflow_health.html">打开系统体检</a></p>
       </section>
       <section class="panel wide">
         <h2>项目状态</h2>
@@ -280,9 +280,9 @@ def write_workflow_state_html(state: dict[str, Any]) -> None:
     </section>
     """
     html_text = render_shell(
-        title="工作流总状态",
+        title="当前状态",
         subtitle="聚合项目、复习、搜索、图谱和审计状态，作为系统模块的健康概览。",
-        current="工作流状态",
+        current="当前状态",
         body=body,
         output=WORKFLOW_STATE_HTML,
         module="系统",

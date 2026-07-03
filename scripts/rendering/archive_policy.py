@@ -205,9 +205,9 @@ def write_archive_policy_html(state: dict[str, Any]) -> None:
     </section>
 """
     html_text = render_shell(
-        title="自动归档策略",
+        title="备份与清理",
         subtitle="管理备份、日志压缩和缓存候选；只给出建议动作，不删除不确定研究文件。",
-        current="归档策略",
+        current="备份与清理",
         body=body,
         output=ARCHIVE_POLICY_HTML,
         module="系统",

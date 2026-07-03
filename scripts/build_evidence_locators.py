@@ -262,7 +262,7 @@ def write_csv(path: Path, rows: list[dict[str, str]]) -> None:
 def write_md(path: Path, project: str, rows: list[dict[str, str]], csv_path: Path, html_path: Path) -> None:
     located = sum(1 for row in rows if row["page"])
     lines = [
-        f"# 证据定位表 - {project}",
+        f"# 找证据 - {project}",
         "",
         f"生成时间：{dt.datetime.now().isoformat(timespec='seconds')}",
         f"CSV: `{rel(csv_path)}`",
@@ -335,9 +335,9 @@ def write_html(path: Path, project: str, rows: list[dict[str, str]], csv_path: P
     </section>
 """
     html_text = render_shell(
-        title="证据定位表",
+        title="找证据",
         subtitle="把综述主张连接到文献、来源片段和页码线索，作为正式引用前的定位工作台。",
-        current="证据定位",
+        current="找证据",
         body=body,
         output=path,
         module="证据",

@@ -1,4 +1,4 @@
-# 论文写作推进面板
+# 写论文
 
 由 `scripts/build_manuscript_panel.py` 自动生成。
 当前项目：`library_short_video`
